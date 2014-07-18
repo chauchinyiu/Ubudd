@@ -1,0 +1,83 @@
+//
+//  WUAddGroupController.m
+//  WhazzUpp
+//
+//  Created by Sahil.Khanna on 09/06/14.
+//  Copyright (c) 2014 C2Call GmbH. All rights reserved.
+//
+
+#import "WUAddGroupController.h"
+#import "../WUChatController.h"
+
+#define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
+#define kGroupImage_UseCamera @"Use Camera"
+
+@implementation WUAddGroupController
+
+#pragma mark - UIViewController Delegate
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    btnGroupImage.imageView.layer.cornerRadius = 40.0;
+    btnGroupImage.imageView.layer.masksToBounds = YES;
+    
+    [self setAddGroupAction:^(NSString *groupid) {
+        if ([self.parentController respondsToSelector:@selector(setCreatedGroupId:)]) {
+            [self.parentController performSelector:@selector(setCreatedGroupId:) withObject:groupid];
+            
+            if (btnGroupImage.imageView.image) {
+                SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
+                [group setGroupImage:btnGroupImage.imageView.image withCompletionHandler:nil];
+            }
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+}
+
+#pragma mark - UIButton Action
+- (IBAction)btnPhotoTapped:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select photo" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        [actionSheet addButtonWithTitle:kGroupImage_SelectFromCameraRoll];
+    }
+    
+    if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [actionSheet addButtonWithTitle:kGroupImage_UseCamera];
+        }
+    }
+    
+    [actionSheet addButtonWithTitle:@"Cancel"];
+    actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
+    
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+}
+
+#pragma mark - UIActionSheet Delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.allowsEditing = YES;
+    imagePickerController.delegate = self;
+    
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kGroupImage_SelectFromCameraRoll]) {
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }
+    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kGroupImage_UseCamera]) {
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+        imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+        imagePickerController.showsCameraControls = YES;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UIImagePickerController Delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [btnGroupImage setImage:[info objectForKey:@"UIImagePickerControllerEditedImage"] forState:UIControlStateNormal];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+@end

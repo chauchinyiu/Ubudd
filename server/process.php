@@ -38,7 +38,7 @@ class MyAPI extends API {
         $rand = rand(100000, 999999);
 
         $message = $client->account->messages->create(array(
-            'To' => "+85291251658",
+            'To' => $args['msisdn'],
             'From' => "+19063563715",
             'Body' => "Your verification code for login into Ubudd: " . $rand,
         ));

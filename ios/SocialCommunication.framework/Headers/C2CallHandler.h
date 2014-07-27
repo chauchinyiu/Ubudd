@@ -140,6 +140,7 @@
 -(void) refreshContacts;
 -(void) refreshCallHistory;
 -(void) refreshMessageHistory;
+-(void) refreshGroupHistory:(NSString *) groupid forDays:(int) days;
 -(void) refreshUser;
 -(void) refreshUserCredits;
 -(void) refreshUnconfirmedInvites;
@@ -163,6 +164,9 @@
 -(void) removeChatHistory:(NSString *)friendid;
 -(void) callInfo:(NSMutableDictionary *)p;
 -(void) getPriceForNumber:(NSString *) number;
+-(NSDictionary *) getApplicationCredits;
+-(BOOL) redeemVoucher:(NSString *) voucher withContentType:(NSString *) ctype;
+-(BOOL) chargeApplicationCredit:(double) value forTransactionId:(NSString *) tid;
 -(DDXMLDocument *) getAffiliateInfo;
 -(void) startC2CallHandler;
 -(void) stopC2CallHandler;

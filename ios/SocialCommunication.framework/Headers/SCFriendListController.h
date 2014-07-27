@@ -8,7 +8,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SCAdTableViewController.h"
+#import "SCDataTableViewController.h"
 
 typedef enum {
     SCFriendFilter_NONE,        // Show All
@@ -40,7 +40,7 @@ typedef enum {
  
  */
 
-@interface SCFriendListController : SCAdTableViewController
+@interface SCFriendListController : SCDataTableViewController
 
 /** @name Properties */
 /** Highlighted Cell Background Color. 

@@ -108,11 +108,25 @@
  */
 -(int) missedCallsForContact:(NSString *) contact;
 
+/** Returns the list of the last 20 contacts the user has been in touch with
+ 
+ @return Array of userids
+ */
+-(NSArray *) recentContacts;
+
 /** Manually reset the missed calls indication for a contact
  
  @param contact - Userid of the contact. 
  */
 -(void) resetMissedCallsForContact:(NSString *) contact;
+
+/** Save additional phone numbers for a friend contact
+ 
+ @param number - The phone number
+ @param numberType - Valid types are : "NT_WORK", "NT_MOBILE", "NT_HOME", "NT_OTHER"
+ @param contact - email address of the friend contact
+ */
+-(void) setNumber:(NSString *) number ofType:(NSString *) numberType forContact:(NSString *) contact;
 
 /** Removes a NSManagedObject from the Database.
  
@@ -180,6 +194,15 @@
  */
 -(NSFetchRequest *) fetchRequestForFriendlist:(BOOL) sortByFirstname;
 
+/** Gets a predefined NSFetchRequest an MOC2CallUser object
+ 
+ Use this NSFetchRequest with NSFetchedResultsController to get automatic updates on that specific user.
+ 
+ @see SCDataTableViewController and WhazzUpp Sample Code for more details on how to use NSFetchRequests
+ 
+ @return NSFetchedRequest
+ */
+-(NSFetchRequest *) fetchRequestForUserWithObjectId:(NSManagedObjectID *) objid;
 
 /** Sets a fetch size limit on a given fetch request.
  

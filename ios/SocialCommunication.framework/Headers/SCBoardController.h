@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "SCAdTableViewController.h"
+#import "SCDataTableViewController.h"
 
 typedef enum {
     SCBoardMessageFilter_NONE,
@@ -22,7 +22,7 @@ typedef enum {
 } SCBoardMessageFilterType;
 
 
-@class MOC2CallUser, MessageCell;
+@class MOC2CallUser, MessageCell, MOC2CallEvent, C2TapImageView;
 
 
 /** Presents the standard C2Call SDK Message Board Controller.
@@ -38,7 +38,7 @@ The BoardController shows MOC2CallEvent Items (Chat History and Call History) in
  
  */
 
-@interface SCBoardController : SCAdTableViewController
+@interface SCBoardController : SCDataTableViewController
 
 /** @name Outlets */
 /** Show previous messages button.
@@ -72,14 +72,6 @@ The BoardController shows MOC2CallEvent Items (Chat History and Call History) in
 @property(nonatomic, strong) IBOutlet UILabel               *labelFilterInfo;
 
 /** @name Properties */
-
-/** NSFetchedResultsController for UITableView Data
- 
- The Results of fetchedResultsController are objects of class MOC2CallEvent
- 
- */
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-
 /** Targetuserid (can be userId of phone number).
 
  Shows only messages of the defined friend or phone number contact.
@@ -258,5 +250,46 @@ The BoardController shows MOC2CallEvent Items (Chat History and Call History) in
  @param sender - The initiator of the action
  */
 -(IBAction)composeAction:(id)sender;
+
+/** Returns the Image of the current user as thumbnail
+ @return userimage
+ */
+-(UIImage *) ownUserImage;
+
+/** Returns the Image of the current contact
+ @return contact image or avatar image
+ */
+-(UIImage *) imageForElement:(MOC2CallEvent *) elem;
+
+/** Set a specific action for a touch on the user image
+ 
+ This method will be called by configure cell methods
+ Overwrite this method if you want to set a specific action for a touch on the user image
+ 
+ @param imageView - The Userimage view
+ @param elem - The corresponding MOC2CallEvent
+ */
+-(void) setUserImageAction:(C2TapImageView *) imageView forElement:(MOC2CallEvent *) elem;
+
+/** Set the subitted status icon
+ 
+ This method will be called by configure cell methods
+ Overwrite this method if you want to set a specific submitted status icon
+ 
+ @param cell - The current cell to configure
+ @param messageStatus - The submission status
+ */
+-(void) setSubmittedStatusIcon:(MessageCell *) cell forStatus:(int) messageStatus;
+
+/** Set the retransmit action
+ 
+ This method will be called by configure cell methods
+ Overwrite this method if you want to set a specific retransmit action
+ 
+ @param cell - The current cell to configure
+ @param key - The Rich Media Key
+ @param userid - The target userid
+ */
+-(void) setRetransmitActionForCell:(MessageCell *) cell withKey:(NSString *) key andUserid:(NSString *) userid;
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHu-d7-mRP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0sJ-qu-8NN">
     <dependencies>
         <deployment version="1536" defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -1489,577 +1489,6 @@ asdfsdfg</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ga4-Xx-SgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1860" y="2200"/>
-        </scene>
-        <!--Dial Pad Controller - Keyboard-->
-        <scene sceneID="NvX-Sn-PS7">
-            <objects>
-                <viewController storyboardIdentifier="SCDialPadController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rHu-d7-mRP" customClass="SCDialPadController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1tR-nh-Ykg"/>
-                        <viewControllerLayoutGuide type="bottom" id="zhl-oj-80b"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Pzh-cV-FEt" userLabel="DialPad (New)">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXq-rs-yHy" userLabel="InfoView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_dial_numberfield.png" translatesAutoresizingMaskIntoConstraints="NO" id="JLg-F5-LdZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="97" id="efm-oJ-IVp"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_number_info.png" translatesAutoresizingMaskIntoConstraints="NO" id="iq9-XS-6JQ">
-                                        <rect key="frame" x="0.0" y="97" width="320" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="FjH-yw-7nn"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_current_credits.png" translatesAutoresizingMaskIntoConstraints="NO" id="xLN-6s-9pQ">
-                                        <rect key="frame" x="98" y="2" width="124" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="124" id="RaO-DM-qqM"/>
-                                            <constraint firstAttribute="height" constant="20" id="u5p-Dh-foe"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="BDq-RN-MxD" userLabel="userCredit">
-                                        <rect key="frame" x="114" y="2" width="92" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="92" id="ABT-dE-OnT"/>
-                                            <constraint firstAttribute="height" constant="20" id="ZLq-d8-Ou2"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="CC : USA    AC : 408" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="E3r-he-hbt">
-                                        <rect key="frame" x="5" y="102" width="253" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="253" id="fGG-hU-nrW"/>
-                                            <constraint firstAttribute="height" constant="18" id="zDK-ZY-vPE"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.74000000953674316" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0fe-aR-vWz">
-                                        <rect key="frame" x="264" y="13" width="57" height="74"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="74" id="SKX-Qe-Der"/>
-                                            <constraint firstAttribute="width" constant="57" id="XQd-wB-cQc"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="ico_sms_white_24x24.png">
-                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="smsAction:" destination="rHu-d7-mRP" eventType="touchUpInside" id="YPJ-1g-bFc"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="" lineBreakMode="headTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="UnQ-su-ZVj">
-                                        <rect key="frame" x="40" y="30" width="216" height="39"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="216" id="Qwf-0R-S3k"/>
-                                            <constraint firstAttribute="height" constant="39" id="Zmq-3T-l7k"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="32"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpy-01-ctG">
-                                        <rect key="frame" x="3" y="35" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="biJ-N6-Cmc"/>
-                                            <constraint firstAttribute="width" constant="30" id="mLS-Gi-tk5"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="lupe.png">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="chooseCountry:" destination="rHu-d7-mRP" eventType="touchUpInside" id="VwP-h9-ppc"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="DLa-ke-KUA" userLabel="priceInfoLabel">
-                                        <rect key="frame" x="40" y="80" width="229" height="17"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="17" id="R0r-tK-TDH"/>
-                                            <constraint firstAttribute="width" constant="229" id="sBW-9e-B3x"/>
-                                        </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="fpy-01-ctG" firstAttribute="top" secondItem="fXq-rs-yHy" secondAttribute="top" constant="35" id="8Kh-8E-1Ov"/>
-                                    <constraint firstItem="BDq-RN-MxD" firstAttribute="top" secondItem="fXq-rs-yHy" secondAttribute="top" constant="2" id="FMo-Zt-tMR"/>
-                                    <constraint firstAttribute="trailing" secondItem="JLg-F5-LdZ" secondAttribute="trailing" id="Oc0-ck-7aa"/>
-                                    <constraint firstItem="E3r-he-hbt" firstAttribute="leading" secondItem="fXq-rs-yHy" secondAttribute="leading" constant="5" id="S9G-BE-FQw"/>
-                                    <constraint firstAttribute="bottom" secondItem="iq9-XS-6JQ" secondAttribute="bottom" id="U0H-qh-Yyn"/>
-                                    <constraint firstItem="fpy-01-ctG" firstAttribute="leading" secondItem="fXq-rs-yHy" secondAttribute="leading" constant="3" id="Xvk-U4-yuw"/>
-                                    <constraint firstAttribute="centerX" secondItem="BDq-RN-MxD" secondAttribute="centerX" id="Y56-Ge-LPe"/>
-                                    <constraint firstItem="UnQ-su-ZVj" firstAttribute="leading" secondItem="fpy-01-ctG" secondAttribute="trailing" constant="7" id="aIM-FB-Xm7"/>
-                                    <constraint firstItem="JLg-F5-LdZ" firstAttribute="top" secondItem="fXq-rs-yHy" secondAttribute="top" id="ccW-ER-IyW"/>
-                                    <constraint firstAttribute="trailing" secondItem="0fe-aR-vWz" secondAttribute="trailing" constant="-1" id="d3D-0g-orv"/>
-                                    <constraint firstItem="JLg-F5-LdZ" firstAttribute="leading" secondItem="fXq-rs-yHy" secondAttribute="leading" id="gdH-bb-Gaw"/>
-                                    <constraint firstAttribute="trailing" secondItem="iq9-XS-6JQ" secondAttribute="trailing" id="h6l-Yr-2CH"/>
-                                    <constraint firstItem="iq9-XS-6JQ" firstAttribute="leading" secondItem="fXq-rs-yHy" secondAttribute="leading" id="hhN-h8-B4G"/>
-                                    <constraint firstItem="UnQ-su-ZVj" firstAttribute="top" secondItem="BDq-RN-MxD" secondAttribute="bottom" constant="8" id="jsn-zE-vJu"/>
-                                    <constraint firstItem="iq9-XS-6JQ" firstAttribute="top" secondItem="DLa-ke-KUA" secondAttribute="bottom" id="k4F-pg-OFr"/>
-                                    <constraint firstItem="DLa-ke-KUA" firstAttribute="leading" secondItem="fXq-rs-yHy" secondAttribute="leading" constant="40" id="mCn-VZ-Hfr"/>
-                                    <constraint firstAttribute="height" constant="123" id="nqv-Jq-j0q"/>
-                                    <constraint firstItem="xLN-6s-9pQ" firstAttribute="top" secondItem="fXq-rs-yHy" secondAttribute="top" constant="2" id="o6h-xH-Gok"/>
-                                    <constraint firstAttribute="bottom" secondItem="E3r-he-hbt" secondAttribute="bottom" constant="3" id="oIf-86-nPr"/>
-                                    <constraint firstAttribute="centerX" secondItem="xLN-6s-9pQ" secondAttribute="centerX" id="q80-05-qvs"/>
-                                    <constraint firstItem="0fe-aR-vWz" firstAttribute="top" secondItem="fXq-rs-yHy" secondAttribute="top" constant="13" id="ytQ-gH-oGX"/>
-                                </constraints>
-                            </view>
-                            <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-EN-aWN" userLabel="KeyboardView" customClass="SCGridLayoutView">
-                                <rect key="frame" x="0.0" y="123" width="321" height="445"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hii-Xc-t9l" userLabel="Dial Button 1" customClass="SCDialButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z1.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="1"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="R7q-Ya-8ab"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="bge-vc-vqc"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDh-Qd-mbA" userLabel="Dial Button 2" customClass="SCDialButton">
-                                        <rect key="frame" x="107" y="0.0" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z2.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="2"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="ABC"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="fUR-YS-bQr"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="FR1-lf-OoR"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfO-iH-g1W" userLabel="Dial Button 3" customClass="SCDialButton">
-                                        <rect key="frame" x="214" y="0.0" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z3.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="3"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="DEF"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="HZW-KW-ryV"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="jTy-Gh-Mso"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJf-Ik-lFs" userLabel="Dial Button 4" customClass="SCDialButton">
-                                        <rect key="frame" x="0.0" y="58" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z4.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="4"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="GHI"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="RsB-54-xuS"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="RhK-zr-Wco"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfE-q9-rUL" userLabel="Dial Button 5" customClass="SCDialButton">
-                                        <rect key="frame" x="107" y="58" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z5.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="5"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="JKL"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="skt-ca-ewr"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="AA5-zT-Gbf"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HVV-jv-2s4" userLabel="Dial Button 6" customClass="SCDialButton">
-                                        <rect key="frame" x="214" y="58" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z6.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="6"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="MNO"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="4tE-7F-oNH"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="gox-d8-nrS"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYM-Ki-hfp" userLabel="Dial Button 7" customClass="SCDialButton">
-                                        <rect key="frame" x="0.0" y="116" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z7.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="7"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="PQRS"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="V6M-D6-9Bo"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="abK-IX-G6o"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oz5-fe-25S" userLabel="Dial Button 8" customClass="SCDialButton">
-                                        <rect key="frame" x="107" y="116" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z8.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="8"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="TUV"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="aHp-er-2uO"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="8II-YD-Vhl"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQT-kP-TBN" userLabel="Dial Button 9" customClass="SCDialButton">
-                                        <rect key="frame" x="214" y="116" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z9.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="9"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="WXYZ"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="cA6-la-JKZ"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="dfb-qc-r28"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNP-qA-jrw" userLabel="Dial Button +" customClass="SCDialButton">
-                                        <rect key="frame" x="0.0" y="174" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="ziffer_plus.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled" image="ziffer_1.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="ziffer_1.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" image="ziffer_plus_h.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="+"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="kRJ-cf-zP5"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="Qm4-Da-ggj"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQb-DU-3Jg" userLabel="Dial Button 0" customClass="SCDialButton">
-                                        <rect key="frame" x="107" y="174" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                        <state key="normal" image="z0.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="0"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="8cM-NK-evr"/>
-                                            <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="27i-qm-i6q"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ZP-fI-kFS" userLabel="Dial Button DEL" customClass="SCDialButton">
-                                        <rect key="frame" x="214" y="174" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
-                                        <state key="normal" image="icon_delet_number.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isDeleteButton" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="del:" destination="rHu-d7-mRP" eventType="touchUpInside" id="qDC-LW-cFE"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPm-PT-Pyh" userLabel="Dial Button ADD" customClass="SCDialButton">
-                                        <rect key="frame" x="0.0" y="232" width="105" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
-                                        <state key="normal" title="" image="icon_add_contact.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" title="">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isAddContactButton" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="showPicker:" destination="rHu-d7-mRP" eventType="touchUpInside" id="uIP-iO-kpY"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsF-Rg-oyx" userLabel="Dial Button CALL" customClass="SCDialButton">
-                                        <rect key="frame" x="107" y="232" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="24"/>
-                                        <state key="normal" image="icon_call.png" backgroundImage="btn_dial_call_n.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="bg_dialpad_normal_02.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCallButton" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="Call"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="callNumber:" destination="rHu-d7-mRP" eventType="touchUpInside" id="zhp-YK-UZj"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WUY-1C-FRj" userLabel="Dial Button HELP" customClass="SCDialButton">
-                                        <rect key="frame" x="214" y="232" width="107" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
-                                        <state key="normal" image="icon_assist.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" title="">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="?"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="showDialAssistant:" destination="rHu-d7-mRP" eventType="touchUpInside" id="gxU-iZ-ked"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="numColumns">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalSpacing">
-                                        <integer key="value" value="0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="verticalSpacing">
-                                        <integer key="value" value="0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.20000000000000001" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="fXq-rs-yHy" firstAttribute="top" secondItem="1tR-nh-Ykg" secondAttribute="bottom" id="9PH-l7-tLJ"/>
-                            <constraint firstItem="zhl-oj-80b" firstAttribute="top" secondItem="Drh-EN-aWN" secondAttribute="bottom" id="PL9-fC-LV5"/>
-                            <constraint firstAttribute="trailing" secondItem="fXq-rs-yHy" secondAttribute="trailing" id="VwZ-IX-HqD"/>
-                            <constraint firstItem="fXq-rs-yHy" firstAttribute="leading" secondItem="Pzh-cV-FEt" secondAttribute="leading" id="WXK-RQ-F3G"/>
-                            <constraint firstItem="Drh-EN-aWN" firstAttribute="top" secondItem="fXq-rs-yHy" secondAttribute="bottom" id="pF2-oW-YPh"/>
-                            <constraint firstItem="Drh-EN-aWN" firstAttribute="leading" secondItem="Pzh-cV-FEt" secondAttribute="leading" id="qtt-lI-dod"/>
-                            <constraint firstAttribute="trailing" secondItem="Drh-EN-aWN" secondAttribute="trailing" constant="-1" id="rrO-Bz-cZL"/>
-                        </constraints>
-                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                        <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Keyboard" image="ico_footer_dialpad_01.png" id="ISc-yU-xNe"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="commentField" destination="E3r-he-hbt" id="67Y-SV-0bb"/>
-                        <outlet property="flagButton" destination="fpy-01-ctG" id="e1X-xw-xF8"/>
-                        <outlet property="infoView" destination="fXq-rs-yHy" id="j6T-IR-ul7"/>
-                        <outlet property="keyboardView" destination="Drh-EN-aWN" id="enc-ca-o9x"/>
-                        <outlet property="numberField" destination="UnQ-su-ZVj" id="Bta-pJ-hmS"/>
-                        <outlet property="priceInfoLabel" destination="DLa-ke-KUA" id="9cc-dl-iGu"/>
-                        <outlet property="smsButton" destination="0fe-aR-vWz" id="qTS-WJ-y0I"/>
-                        <outlet property="userCredit" destination="BDq-RN-MxD" id="p0j-Lj-ibQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cH8-nP-aDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="336" y="176"/>
         </scene>
         <!--Group Detail Header Controller-->
         <scene sceneID="ceu-Sc-5g2">
@@ -4406,11 +3835,9 @@ Please try again later.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="LVG-fw-wiZ"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpOutside" id="YqS-vv-ln8"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpInside" id="p1v-01-wIl"/>
                                     <action selector="startToneEvent:" destination="fhB-us-Gu6" eventType="touchDown" id="tGw-ky-dI2"/>
-                                    <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="qL9-HT-wfr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EM2-ch-Jnv" userLabel="Dial Button 4">
@@ -4457,11 +3884,9 @@ Please try again later.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="iDZ-8t-IXe"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpOutside" id="5m1-Ia-9Rk"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpInside" id="vCk-an-ceP"/>
                                     <action selector="startToneEvent:" destination="fhB-us-Gu6" eventType="touchDown" id="3Jr-S3-zoI"/>
-                                    <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="b6z-hC-aDF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hic-b8-Vfu" userLabel="Dial Button 6">
@@ -4482,11 +3907,9 @@ Please try again later.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="ZOR-Ce-MvH"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpOutside" id="qvP-Vo-KBU"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpInside" id="vC3-7V-Sa3"/>
                                     <action selector="startToneEvent:" destination="fhB-us-Gu6" eventType="touchDown" id="VaI-X9-cmB"/>
-                                    <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="8lI-67-BWs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXN-Jo-rbQ" userLabel="Dial Button 7">
@@ -4510,11 +3933,9 @@ Please try again later.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="YK5-0r-iK5"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpInside" id="23R-br-0e5"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpOutside" id="V0z-nD-3aj"/>
                                     <action selector="startToneEvent:" destination="fhB-us-Gu6" eventType="touchDown" id="Y3l-h9-VfC"/>
-                                    <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="iiq-vj-5Hj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z10-vN-x6b" userLabel="Dial Button 8">
@@ -4535,11 +3956,9 @@ Please try again later.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="6wo-1a-bzS"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpInside" id="EJ4-pK-pdU"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpOutside" id="aRO-kT-yJE"/>
                                     <action selector="startToneEvent:" destination="fhB-us-Gu6" eventType="touchDown" id="QyS-1U-2hM"/>
-                                    <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="Fz6-Gx-ltn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3n9-wh-fLD" userLabel="Dial Button 9">
@@ -4560,11 +3979,9 @@ Please try again later.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="fQg-YL-CFC"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpInside" id="Sne-7m-lFx"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpOutside" id="bsp-1w-o52"/>
                                     <action selector="startToneEvent:" destination="fhB-us-Gu6" eventType="touchDown" id="BNh-Mb-AQB"/>
-                                    <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="n7g-pL-P3f"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H35-9n-gtF" userLabel="Dial Button +">
@@ -4609,11 +4026,9 @@ Please try again later.</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="dial:" destination="rHu-d7-mRP" eventType="touchUpInside" id="CGx-js-wTT"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpInside" id="9Rv-v9-6qY"/>
                                     <action selector="endToneEvent:" destination="fhB-us-Gu6" eventType="touchUpOutside" id="MG0-41-ULo"/>
                                     <action selector="startToneEvent:" destination="fhB-us-Gu6" eventType="touchDown" id="InI-SI-eT3"/>
-                                    <action selector="touchTone:" destination="rHu-d7-mRP" eventType="touchUpInside" id="fCX-xV-9CJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVn-wQ-99i" userLabel="Dial Button DEL">
@@ -9744,6 +9159,581 @@ Remove search filter?</string>
             </objects>
             <point key="canvasLocation" x="1506" y="11809"/>
         </scene>
+        <!--Dial Pad Controller - Keyboard-->
+        <scene sceneID="HQe-kZ-r1U">
+            <objects>
+                <viewController storyboardIdentifier="SCDialPadController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="P6o-w6-e57" customClass="SCDialPadController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lv0-iY-FKh"/>
+                        <viewControllerLayoutGuide type="bottom" id="BC6-tR-CQY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="63b-Wf-IhB" userLabel="DialPad (New)">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PD3-70-oK1" userLabel="InfoView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_dial_numberfield.png" translatesAutoresizingMaskIntoConstraints="NO" id="P61-rp-GbI">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="97" id="6TS-Ax-LMq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_number_info.png" translatesAutoresizingMaskIntoConstraints="NO" id="zyX-nG-fVr">
+                                        <rect key="frame" x="0.0" y="97" width="320" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="ApS-Ai-Znu"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_current_credits.png" translatesAutoresizingMaskIntoConstraints="NO" id="rBx-pB-gAc">
+                                        <rect key="frame" x="98" y="2" width="124" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Biw-Y4-APU"/>
+                                            <constraint firstAttribute="width" constant="124" id="ePL-4y-eHE"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="flh-4h-2te" userLabel="userCredit">
+                                        <rect key="frame" x="114" y="2" width="92" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="92" id="Rin-Wb-gek"/>
+                                            <constraint firstAttribute="height" constant="20" id="oyB-Oa-wJE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="CC : USA    AC : 408" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="8mE-SK-y0J">
+                                        <rect key="frame" x="5" y="102" width="253" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="F03-KD-aXQ"/>
+                                            <constraint firstAttribute="width" constant="253" id="nKp-vn-r04"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.74000000953674316" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJx-XL-9Xw">
+                                        <rect key="frame" x="264" y="13" width="57" height="74"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="57" id="Moa-9l-1T7"/>
+                                            <constraint firstAttribute="height" constant="74" id="xfa-TH-UsJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                        <state key="normal" image="ico_sms_white_24x24.png">
+                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="smsAction:" destination="P6o-w6-e57" eventType="touchUpInside" id="qfF-kg-IKC"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="" lineBreakMode="headTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="k46-nA-OeI">
+                                        <rect key="frame" x="40" y="30" width="216" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="216" id="Zgp-o1-qOR"/>
+                                            <constraint firstAttribute="height" constant="39" id="kdr-7F-jKp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="32"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chp-nP-VUI">
+                                        <rect key="frame" x="3" y="35" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="OaR-J1-VV3"/>
+                                            <constraint firstAttribute="width" constant="30" id="ion-Nd-0uS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                        <state key="normal" image="lupe.png">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="chooseCountry:" destination="P6o-w6-e57" eventType="touchUpInside" id="026-er-vAF"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="VsX-8c-P2u" userLabel="priceInfoLabel">
+                                        <rect key="frame" x="40" y="80" width="229" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="229" id="1Ic-Sp-bIl"/>
+                                            <constraint firstAttribute="height" constant="17" id="76q-aU-ont"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="rBx-pB-gAc" firstAttribute="top" secondItem="PD3-70-oK1" secondAttribute="top" constant="2" id="9d7-DQ-Zv6"/>
+                                    <constraint firstItem="k46-nA-OeI" firstAttribute="leading" secondItem="Chp-nP-VUI" secondAttribute="trailing" constant="7" id="DO6-M2-bdc"/>
+                                    <constraint firstAttribute="centerX" secondItem="rBx-pB-gAc" secondAttribute="centerX" id="G83-Zc-yMh"/>
+                                    <constraint firstAttribute="trailing" secondItem="zyX-nG-fVr" secondAttribute="trailing" id="Gos-zc-U4F"/>
+                                    <constraint firstItem="Chp-nP-VUI" firstAttribute="leading" secondItem="PD3-70-oK1" secondAttribute="leading" constant="3" id="IgY-Wm-hW2"/>
+                                    <constraint firstItem="iJx-XL-9Xw" firstAttribute="top" secondItem="PD3-70-oK1" secondAttribute="top" constant="13" id="Igb-9I-cJf"/>
+                                    <constraint firstItem="8mE-SK-y0J" firstAttribute="leading" secondItem="PD3-70-oK1" secondAttribute="leading" constant="5" id="NHQ-VU-Wa1"/>
+                                    <constraint firstItem="P61-rp-GbI" firstAttribute="top" secondItem="PD3-70-oK1" secondAttribute="top" id="Nco-4J-en7"/>
+                                    <constraint firstItem="flh-4h-2te" firstAttribute="top" secondItem="PD3-70-oK1" secondAttribute="top" constant="2" id="Nnz-1r-Xx6"/>
+                                    <constraint firstItem="Chp-nP-VUI" firstAttribute="top" secondItem="PD3-70-oK1" secondAttribute="top" constant="35" id="OxF-Wh-LCd"/>
+                                    <constraint firstAttribute="trailing" secondItem="P61-rp-GbI" secondAttribute="trailing" id="Xzy-cf-wV3"/>
+                                    <constraint firstItem="VsX-8c-P2u" firstAttribute="leading" secondItem="PD3-70-oK1" secondAttribute="leading" constant="40" id="dTt-Ww-ugO"/>
+                                    <constraint firstAttribute="height" constant="123" id="dgj-Ba-C2h"/>
+                                    <constraint firstAttribute="trailing" secondItem="iJx-XL-9Xw" secondAttribute="trailing" constant="-1" id="f4E-VK-hIu"/>
+                                    <constraint firstAttribute="bottom" secondItem="zyX-nG-fVr" secondAttribute="bottom" id="fey-pv-cAA"/>
+                                    <constraint firstItem="k46-nA-OeI" firstAttribute="top" secondItem="flh-4h-2te" secondAttribute="bottom" constant="8" id="l9S-SU-dN0"/>
+                                    <constraint firstItem="zyX-nG-fVr" firstAttribute="leading" secondItem="PD3-70-oK1" secondAttribute="leading" id="nrG-hD-6Qm"/>
+                                    <constraint firstAttribute="centerX" secondItem="flh-4h-2te" secondAttribute="centerX" id="tLY-sZ-Lbi"/>
+                                    <constraint firstItem="P61-rp-GbI" firstAttribute="leading" secondItem="PD3-70-oK1" secondAttribute="leading" id="wGa-ry-NTG"/>
+                                    <constraint firstAttribute="bottom" secondItem="8mE-SK-y0J" secondAttribute="bottom" constant="3" id="wqG-hy-FV9"/>
+                                    <constraint firstItem="zyX-nG-fVr" firstAttribute="top" secondItem="VsX-8c-P2u" secondAttribute="bottom" id="zD7-Dk-IlY"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCz-Id-bQc" userLabel="BottomView">
+                                <rect key="frame" x="0.0" y="123" width="320" height="445"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3K-Kr-dpK" userLabel="KeyboardView">
+                                        <rect key="frame" x="0.0" y="82" width="320" height="282"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mys-Ei-5Do" userLabel="Dial Button 1" customClass="SCDialButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z1.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="1"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="dOK-gY-C6v"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="f0H-wj-Mp4"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPY-n9-vJL" userLabel="Dial Button 2" customClass="SCDialButton">
+                                                <rect key="frame" x="107" y="0.0" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z2.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="2"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="ABC"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="c8V-CW-toP"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="6X0-Eb-7eJ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NhK-hs-k5O" userLabel="Dial Button 3" customClass="SCDialButton">
+                                                <rect key="frame" x="214" y="0.0" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z3.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="3"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="DEF"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="beO-M0-ai3"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="X8q-GJ-nzh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6e-sY-NaD" userLabel="Dial Button 4" customClass="SCDialButton">
+                                                <rect key="frame" x="0.0" y="58" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z4.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="4"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="GHI"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="VIg-gd-gna"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="Y93-E3-Npp"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RrF-hH-Dhk" userLabel="Dial Button 5" customClass="SCDialButton">
+                                                <rect key="frame" x="107" y="58" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z5.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="5"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="JKL"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="wIt-kr-q0v"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="Wzv-eL-2l6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bn-Zd-u3F" userLabel="Dial Button 6" customClass="SCDialButton">
+                                                <rect key="frame" x="214" y="58" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z6.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="6"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="MNO"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="CHf-6G-Bta"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="CF0-ju-sGa"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e1-mM-hC6" userLabel="Dial Button 7" customClass="SCDialButton">
+                                                <rect key="frame" x="0.0" y="116" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z7.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="7"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="PQRS"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="u3Y-jj-Oge"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="pck-5h-4BB"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nm1-Jr-JHJ" userLabel="Dial Button 8" customClass="SCDialButton">
+                                                <rect key="frame" x="107" y="116" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z8.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="8"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="TUV"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="3iE-Wr-7qA"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="WKK-I2-5gr"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pk-Qe-lGb" userLabel="Dial Button 9" customClass="SCDialButton">
+                                                <rect key="frame" x="214" y="116" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z9.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="9"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="smallText" value="WXYZ"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="O1f-3g-kj5"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="Ab0-7J-Us3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g25-PC-rty" userLabel="Dial Button +" customClass="SCDialButton">
+                                                <rect key="frame" x="0.0" y="174" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="ziffer_plus.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled" image="ziffer_1.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected" image="ziffer_1.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" image="ziffer_plus_h.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="+"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="JJe-S6-biV"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="Baq-cm-jtP"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrH-cO-mkV" userLabel="Dial Button 0" customClass="SCDialButton">
+                                                <rect key="frame" x="107" y="174" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                                <state key="normal" image="z0.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="0"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dial:" destination="P6o-w6-e57" eventType="touchUpInside" id="Ryl-67-vkk"/>
+                                                    <action selector="touchTone:" destination="P6o-w6-e57" eventType="touchUpInside" id="RJD-6P-p7G"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgh-RA-A2y" userLabel="Dial Button DEL" customClass="SCDialButton">
+                                                <rect key="frame" x="214" y="174" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
+                                                <state key="normal" image="icon_delet_number.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isDeleteButton" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="del:" destination="P6o-w6-e57" eventType="touchUpInside" id="g3c-cJ-ldU"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dS3-I4-WTK" userLabel="Dial Button ADD" customClass="SCDialButton">
+                                                <rect key="frame" x="0.0" y="232" width="105" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
+                                                <state key="normal" title="" image="icon_add_contact.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" title="">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isAddContactButton" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="showPicker:" destination="P6o-w6-e57" eventType="touchUpInside" id="7pw-34-Cdz"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJh-fF-qBo" userLabel="Dial Button CALL" customClass="SCDialButton">
+                                                <rect key="frame" x="107" y="232" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="24"/>
+                                                <state key="normal" image="icon_call.png" backgroundImage="btn_dial_call_n.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" backgroundImage="bg_dialpad_normal_02.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCallButton" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="Call"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="callNumber:" destination="P6o-w6-e57" eventType="touchUpInside" id="HXE-Wj-Kc2"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="dHY-FZ-jLC" userLabel="Dial Button HELP" customClass="SCDialButton">
+                                                <rect key="frame" x="214" y="232" width="107" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
+                                                <state key="normal" image="icon_assist.png">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" title="">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="numberText" value="?"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="showDialAssistant:" destination="P6o-w6-e57" eventType="touchUpInside" id="PoK-nv-0qb"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="0UU-zx-nq8"/>
+                                            <constraint firstAttribute="height" constant="282" id="F1a-9U-VTd"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.49803924560000001" green="0.49803924560000001" blue="0.49803924560000001" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="U3K-Kr-dpK" secondAttribute="centerX" id="9b5-SX-fM6"/>
+                                    <constraint firstAttribute="centerY" secondItem="U3K-Kr-dpK" secondAttribute="centerY" id="x4V-Q2-fcp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.40000000000000002" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OCz-Id-bQc" secondAttribute="trailing" id="51P-05-Dye"/>
+                            <constraint firstItem="PD3-70-oK1" firstAttribute="leading" secondItem="63b-Wf-IhB" secondAttribute="leading" id="6NB-67-knQ"/>
+                            <constraint firstAttribute="trailing" secondItem="PD3-70-oK1" secondAttribute="trailing" id="FVs-vH-sO0"/>
+                            <constraint firstItem="OCz-Id-bQc" firstAttribute="top" secondItem="PD3-70-oK1" secondAttribute="bottom" id="ODR-f0-BZh"/>
+                            <constraint firstItem="OCz-Id-bQc" firstAttribute="leading" secondItem="63b-Wf-IhB" secondAttribute="leading" id="l6a-eN-wwB"/>
+                            <constraint firstItem="BC6-tR-CQY" firstAttribute="top" secondItem="OCz-Id-bQc" secondAttribute="bottom" id="sAZ-0C-QlN"/>
+                            <constraint firstItem="PD3-70-oK1" firstAttribute="top" secondItem="lv0-iY-FKh" secondAttribute="bottom" id="wyY-m4-yOa"/>
+                        </constraints>
+                        <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                        <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                        <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <tabBarItem key="tabBarItem" title="Keyboard" image="ico_footer_dialpad_01.png" id="6Hb-oO-Amp"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="commentField" destination="8mE-SK-y0J" id="Tuj-EU-gfU"/>
+                        <outlet property="flagButton" destination="Chp-nP-VUI" id="DY8-hh-dIF"/>
+                        <outlet property="infoView" destination="PD3-70-oK1" id="IU6-Og-wqK"/>
+                        <outlet property="keyboardView" destination="U3K-Kr-dpK" id="VzC-WV-daq"/>
+                        <outlet property="numberField" destination="k46-nA-OeI" id="hAb-Q8-a0W"/>
+                        <outlet property="priceInfoLabel" destination="VsX-8c-P2u" id="Ofl-wM-UQs"/>
+                        <outlet property="smsButton" destination="iJx-XL-9Xw" id="eXb-js-Pez"/>
+                        <outlet property="userCredit" destination="flh-4h-2te" id="YaE-PN-bFg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0mT-NV-hgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="372" y="253"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AddContact2-24x24.png" width="30" height="30"/>
@@ -9859,13 +9849,13 @@ Remove search filter?</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="RRF-Bo-3Ka"/>
-        <segue reference="TfF-kn-Iej"/>
         <segue reference="XYO-8a-ZXB"/>
+        <segue reference="hDv-Zp-8lC"/>
+        <segue reference="dYh-Uy-CrV"/>
+        <segue reference="TfF-kn-Iej"/>
         <segue reference="psS-ES-eTF"/>
+        <segue reference="RRF-Bo-3Ka"/>
         <segue reference="uQf-xh-J9y"/>
-        <segue reference="p96-wb-qOH"/>
-        <segue reference="GNG-di-A0l"/>
         <segue reference="cXP-qr-CSY"/>
     </inferredMetricsTieBreakers>
 </document>

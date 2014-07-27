@@ -86,6 +86,20 @@
  */
 @property(nonatomic, strong) NSString *phoneOther;
 
+
+/** Is facebook login
+ @return YES : User has logged-in via facebook / NO : Regular login
+ */
+-(BOOL) useFacebook;
+
+/** Reload User Profile Data from Server (async operation)
+ */
+-(void) refreshUserProfile;
+
+/** Reload User Credit Data from Server (async operation)
+ */
+-(void) refreshUserCredits;
+
 /** Saves changes to the server.
  */
 -(void) saveUserProfile;

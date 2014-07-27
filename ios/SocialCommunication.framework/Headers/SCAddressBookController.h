@@ -16,6 +16,10 @@
  It uses the ABAddressBook API but implements its own user interface allowing a better customization.
  
 */
-@interface SCAddressBookController : SCAdTableViewController
+@interface SCAddressBookController : UITableViewController
+
+@property(nonatomic) ABAddressBookRef       addressBook;
+
+-(BOOL) refreshAddressBook;
 
 @end

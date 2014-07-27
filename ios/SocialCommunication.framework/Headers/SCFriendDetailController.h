@@ -8,7 +8,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SCAdTableViewController.h"
+#import "SCDataTableViewController.h"
 
 @class NSManagedObjectID, UDConnectionCell, UDUserInfoCell, MOC2CallUser, UDPhoneCell;
 
@@ -20,7 +20,7 @@
  Please use showFriendDetailForUserid: from UIViewController+SCCustomViewController.h to present this controller programmatically.
  
  */
-@interface SCFriendDetailController : SCAdTableViewController
+@interface SCFriendDetailController : SCDataTableViewController
 
 /** @name Outlets */
 /** UIView containing the controls for Add Phone Number. */

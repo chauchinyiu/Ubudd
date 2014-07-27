@@ -142,13 +142,13 @@
             imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
             
             [self captureMediaFromImagePicker:imagePicker andCompleteAction:^(NSString *key) {
-                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid];
+                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
             }];
             //[self presentModalViewController:imagePicker animated:YES];
         }];
     }
     
-    if ([SIPHandler standardHandler].state == SH_STATE_IDLE) {
+    if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             [cv addChoiceWithName:NSLocalizedString(@"Take Photo or Video", @"Choice Title") andSubTitle:NSLocalizedString(@"Use Camera", @"Button") andIcon:[UIImage imageNamed:@"ico_cam-24x24.png"] andCompletion:^{
 
@@ -159,7 +159,7 @@
                 imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, kUTTypeMovie, nil];
                 imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
                 [self captureMediaFromImagePicker:imagePicker andCompleteAction:^(NSString *key) {
-                    [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid];
+                    [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
                 }];
             }];
         }
@@ -170,19 +170,19 @@
             
             [self requestLocation:^(NSString *key) {
                 DLog(@"submitLocation: %@ / %@", key, self.targetUserid);
-                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid];
+                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
             }];
         }];
         
     }
     
-    if ([SIPHandler standardHandler].state == SH_STATE_IDLE) {
+    if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
         if ([[AVAudioSession sharedInstance] inputIsAvailable]) {
             [cv addChoiceWithName:NSLocalizedString(@"Submit Voice Mail", @"Choice Title") andSubTitle:NSLocalizedString(@"Record a voice message", @"Button") andIcon:[UIImage imageNamed:@"ico_mic.png"] andCompletion:^{
                 
                 [self recordVoiceMail:^(NSString *key) {
                     DLog(@"submitVoiceMail: %@ / %@", key, self.targetUserid);
-                    [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid];
+                    [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
                 }];
             }];
         }

@@ -70,6 +70,8 @@
     Userid          - The friends userid
     OnlineStatus    - The friends OnlineStatus
     UserType        - The friends User Type (0 = normal friend, 2 = group)
+    CallerId        - The friends phone number for calls
+    DIDNumber       - The friends C2Call SDK Number
     NT_WORK         - The work phone number
     NT_MOBILE       - The mobile phone number
     NT_HOME         - The home phone number

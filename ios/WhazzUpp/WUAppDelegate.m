@@ -60,9 +60,6 @@
 #pragma mark - UIApplication Delegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    self.affiliateid = @"85E2C59D145CF178239";
-//    self.secret = @"2ac4a179259106db95c13c03e55373aa";
-    
     self.affiliateid = @"143BF14733A8F380";
     self.secret = @"e883a183dc5ea85b7388319193781c42";
 

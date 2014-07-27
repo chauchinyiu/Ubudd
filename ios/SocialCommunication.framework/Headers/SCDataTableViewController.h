@@ -8,6 +8,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+
 #import "SCAdTableViewController.h"
 /** SCDataTableViewController is an abstract base class for TableViews presenting C2Call SDK CoreData Elements.
  
@@ -71,7 +73,7 @@
     @end
  
  */
-@interface SCDataTableViewController : SCAdTableViewController
+@interface SCDataTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 
 /** @name Abstract Methods */
 /** Abstract method fetchRequest.
@@ -87,6 +89,10 @@ Please return one of the pre-defined fetchRequest from SCDataManager here:
  @return The fetchRequest
  */
 -(NSFetchRequest *) fetchRequest;
+
+/** NSFetchedResultsController Initialization
+ */
+-(void) initFetchedResultsController;
 
 /** Configure your UITableViewCell subclass.
  
@@ -125,6 +131,10 @@ Please return one of the pre-defined fetchRequest from SCDataManager here:
  If this key path is not the same as that specified by the first sort descriptor in fetchRequest, they must generate the same relative orderings. For example, the first sort descriptor in fetchRequest might specify the key for a persistent property; sectionNameKeyPath might specify a key for a transient property derived from the persistent property.
  */
 @property(nonatomic, strong) NSString       *sectionNameKeyPath;
+
+/** Don't do row updates, just notify content changes
+ */
+@property(nonatomic) BOOL                   useDidChangeContentOnly;
 
 /** NSFetchedResultsController will be created automatically on ViewController initialization.
  */

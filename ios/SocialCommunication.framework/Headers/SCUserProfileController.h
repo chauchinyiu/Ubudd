@@ -3,7 +3,7 @@
 //  C2CallPhone
 //
 //  Created by Michael Knecht on 11.05.13.
-//  Copyright 2013 C2Call GmbH. All rights reserved.
+//  Copyright 2013,2014 C2Call GmbH. All rights reserved.
 //
 //
 

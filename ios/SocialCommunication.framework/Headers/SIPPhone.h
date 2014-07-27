@@ -313,6 +313,23 @@ typedef enum {
  */
 -(void) callNumber:(NSString *) number;
 
+/** Convert a local number into international number format
+ 
+ Based on the vailable information from country and local area, 
+ local numbers will be converted into internaltional number format 
+ starting with +<countrycode><Areacode><number>
+ 
+ @param number - Local number (e.g. (408) 123456)
+ @return international number (e.g. +1408123456)
+ */
+-(NSString *) normalizeNumber:(NSString *) number;
+
+/** Check whether the given number is a valid phone number
+ 
+ @return YES / NO
+ */
+-(BOOL) isValidNumber:(NSString *) number;
+
 /** Calls another C2Call Service user or group via VoIP call.
  
  Every C2Call user can be addressed by his email address or his C2Call UserId.
@@ -474,6 +491,15 @@ typedef enum {
  @param userid - receiver userid
  */
 -(void) submitEvent:(NSString *)event withMessage:(NSString *)msg toUser:(NSString *) userid;
+
+/** Submitting a isTyping Event to target userid.
+ 
+ This event will be fired by SCChatController if the user is typing.
+ The event should only be fired every 2 seconds while a user is typing
+ 
+ @param userid - target userid
+*/
+-(void) submitTypingEventToUser:(NSString *) userid;
 
 /** Extract the message body from event data
  

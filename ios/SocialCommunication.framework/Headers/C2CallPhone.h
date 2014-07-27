@@ -275,6 +275,12 @@ typedef enum {
  */
 -(NSString *) nameForUserid:(NSString *) userid;
 
+/** Check whether a given userid is actually a group.
+ 
+ @return YES / NO
+*/
+-(BOOL) isGroupUser:(NSString *) userid;
+
 /** Register Apple Push Notification Token.
  
  The C2Call Backend Service needs the push notification token in order to sumit push notifications to your app.
@@ -421,6 +427,21 @@ typedef enum {
  */
 -(NSArray *) activeMembersInGroupCall;
 
+/** Provides a list of Userid's for the current active members in a Group Call.
+ 
+ @param groupid - groupid of the group
+ @return List of userids
+ */
+-(NSArray *) activeMembersInCallForGroup:(NSString *) groupid;
+
+/** Return the video status of an active group call
+ 
+ @param groupid - groupid of the group
+ @return YES: Video call / NO: Audio call
+ */
+-(BOOL) activeVideoCallForGroup:(NSString *) groupid;
+
+
 /** Provides Userid or Phone Number of the remote party in the current active call.
  @return Userid or Phone Number
  */
@@ -552,6 +573,14 @@ typedef enum {
  @return YES encryption is enabled, NO else.
  */
 -(BOOL) encryptionEnabledForAccount;
+
+/** Is encryption enabled for target user
+ 
+ This method checks whether a message can be encrypted for a specific target user.
+ 
+ @return YES encryption is enabled, NO else.
+ */
+-(BOOL) canEncryptMessageForTarget:(NSString *) targetUserid;
 
 /** Is the local certificate valid for this account
 
@@ -862,6 +891,17 @@ typedef enum {
  */
 -(BOOL) submitRichMessage:(NSString *) richMessageKey message:(NSString *) messageText toTarget:(NSString *) target preferEncrytion:(BOOL)sendEncrypted;
 
+/** Share a Rich Media Message on facebook.
+ 
+ In case the user has logged in via facebook, a rich media message of type text, image, video and location can be 
+ shared on facebook.
+ 
+ @param message - The message text
+ @param richMediaKey - The rich media attachment
+ @return YES - Message has been shared / NO - No facebook login or wrong attachment
+*/
+-(BOOL) shareMessageOnFacebook:(NSString *) message usingAttachment:(NSString *) mediaKey;
+
 // Rich Media Object Functions
 /**---------------------------------------------------------------------------------------
  * @name Rich Media Object Functions
@@ -896,6 +936,24 @@ typedef enum {
  
  */
 -(BOOL) hasObjectForKey:(NSString *) key;
+
+/** Check whether a rich media file for a given rich media key is currently downloading.
+ 
+ @param key - rich message key of the media file
+ 
+ @return YES - Download in progress / NO - No Download
+ 
+ */
+-(BOOL) downloadStatusForKey:(NSString *) key;
+
+/** Check whether a download of a rich media file for a given rich media key has failed.
+ 
+ @param key - rich message key of the media file
+ 
+ @return YES - Last download failed / NO
+ 
+ */
+-(BOOL) failedDownloadStatusForKey:(NSString *) key;
 
 /** UIImage for a given rich media key.
  
@@ -939,6 +997,35 @@ typedef enum {
  */
 -(NSURL *) mediaUrlForKey:(NSString *) key;
 
+/** Return the duration for a media object if available.
+ 
+ Duration is available for video and audio files
+ 
+ @param key - rich message key of the media file
+ 
+ @return duration as string
+ 
+ */
+-(NSString *) durationForKey:(NSString *) key;
+
+/** Return the mime type for a given mediakey
+ 
+ @param key - rich message key of the media file
+ 
+ @return mimetype
+ 
+ */
+-(NSString *) contentTypeForKey:(NSString *) mediaKey;
+
+
+/** Return the file name for a given media key
+ 
+ @param key - rich message key of the media file
+ 
+ @return filename
+ 
+ */
+-(NSString *) nameForKey:(NSString *) mediaKey;
 
 /** Thumbnail Image for a given rich media key.
  
@@ -972,6 +1059,17 @@ typedef enum {
  
  */
 -(SCRichMediaType) mediaTypeForKey:(NSString *) key;
+
+/** Save an image or video to photo album.
+ 
+ 
+ @param mediaKey - rich message key of the media file
+ @param handler - completion handler which will be called after the media object has been stored.
+ 
+ @return YES: OK / NO: Invalid Media Object
+ 
+ */
+-(BOOL) saveToAlbum:(NSString *) mediaKey withCompletionHandler:(void (^)(NSURL *assetURL, NSError *error)) handler;
 
 // Friend Finder
 /**---------------------------------------------------------------------------------------
@@ -1015,6 +1113,25 @@ typedef enum {
 /** Reload the Message History from Server
  */
 -(void) reloadMessageHistory;
+
+/** Load the Group History from Server
+ 
+ If a user joins a group, he will not automatically receive the group message history for that group, only new messages after he joined will be presented.
+ Older messages needs to be explicitely retrieved. This method retrieves the messages of the past 7 days.
+ 
+ @param groupid - Groupid of the group
+ */
+-(void) loadGroupHistory:(NSString *) groupid;
+
+/** Load the Group History from Server for days
+ 
+ If a user joins a group, he will not automatically receive the group message history for that group, only new messages after he joined will be presented.
+ Older messages needs to be explicitely retrieved. This method retrieves the messages of the past "number of days" days.
+ 
+ @param groupid - Groupid of the group
+ @param days - Number of days to retrieve the group messages for.
+ */
+-(void) loadGroupHistory:(NSString *) groupid forDays:(int) days;
 
 /** Reload the Call History from Server
  */
@@ -1065,6 +1182,19 @@ typedef enum {
  * @name Manage User Credits
  *  ---------------------------------------------------------------------------------------
  */
+
+/** Query Price Information for a specific number
+ 
+ The price information will be queried ansychronously 
+ Please register an NSNofication observer for @"PriceInfoEvent"
+ 
+ @number - Phone number in international format 
+ @isSMS - YES : Query the prices for sending SMS / NO : query the price for phone calls
+ */
+
+-(void) queryPriceForNumber:(NSString *) number isSMS:(BOOL) isSMS;
+
+
 /** Adds Credit to the users account to use paid services like PSTN calls or SMS/Text messages.
  
  For all paid services inside C2Call SDK, the application user is required having credit on his account, as all paid transactions will be directly charged to the App user account.
@@ -1082,6 +1212,60 @@ typedef enum {
  */
 -(BOOL) addCredit:(NSString *)valueInCent currency:(NSString *) currency transactionid:(NSString *) tid receipt:(NSData *) receipt;
 
+/** Get application credits for the current user
+ 
+ C2Call SDK supports different types of credits for users.
+ - C2Call credits to charge the user for calls and SMS into mobile phone and pstn networks
+ - Application credits - to charge the user for application internal services. 
+ 
+ The Application credits are completely under control of the application developer and be freely added
+ to the users account and charge accordingly for internal application services.
+ 
+ getApplicationCredits returns a dictionary with the following keys:
+ 
+    CreditValue - NSNumber with the actual credit value (double)
+    Currency - The currency for the credit value
+    CreditString - The localized string representation of the credit value and currency
+ 
+ @return The credit dictionary or nil if no application credit is available.
+ */
+-(NSDictionary *) getApplicationCredits;
+
+/** Redeem a voucher for C2Call Credit
+
+ Voucher Codes for different credit values can be provided by C2Call.
+ 
+ @param voucher - Voucher Code to redeem
+ @return YES - success / NO - failure
+ */
+-(BOOL) redeemVoucher:(NSString *) voucher;
+
+/** Redeem a voucher for Application Credit
+ 
+ Voucher Codes for different credit values can be provided by C2Call.
+ 
+ @param voucher - Voucher Code to redeem
+ @return YES - success / NO - failure
+ */
+-(BOOL) redeemApplicationVoucher:(NSString *) voucher;
+
+/** Charge the user for a service provided by the Application
+ 
+ The amount will be deducted from the users application credit.
+ 
+ @param value - Amount to charge the user, 0.03 will charge 3 cents
+ @param tid - Application definable transactionid, should be unique
+ @return YES - success / NO - failure
+ */
+-(BOOL) chargeApplicationCredit:(double) value forTransactionId:(NSString *) tid;
+
+/** Return the URL for C2Call Phone Number Service
+ 
+ Get an US Phone number as virtual number 
+ 
+ @return URL for C2Call Number service
+ */
+-(NSString *) urlForC2CallNumber;
 
 /**---------------------------------------------------------------------------------------
  * @name Static Methods
@@ -1094,5 +1278,20 @@ typedef enum {
  */
 
 +(C2CallPhone *) currentPhone;
+
+/** Set the default country code
+ The default country code will be used to convert a local number into international number format
+ 
+ @param cc - The Country Code (e.g. "+1")
+ */
++(void) setDefaultCountryCode:(NSString *)cc;
+
+/** Set the default area code
+ The default area code will be used to convert a local number into international number format
+ 
+ @param ac - The Area Code (e.g. "408")
+ */
+
++(void) setDefaultAreaCode:(NSString *)ac;
 
 @end

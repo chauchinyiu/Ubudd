@@ -187,6 +187,38 @@
  */
 -(void) capturePreviewImageWithCompletionHandler:(void (^)(UIImage *image, NSError *error))handler;
 
+
+/** Experimental, for internal use only
+ 
+ Directly transfer YUV encoded data
+ 
+ @param yPtr - ptr to Y data
+ @param uPtr - ptr to U data
+ @param vPtr - ptr to V data
+ @param width - image width
+ @param height - image height
+ @param rotate - [0 .. 3] : rotate image 0, 90, 180 and 270 degrees
+ */
+
+-(void) encodeAndTransferYUV:(UInt8 *) yPtr u:(UInt8 *)uPtr v:(UInt8 *)vPtr width:(int) width height:(int) height rotate:(int) rotate;
+
+/** Returns the next decoded video frame in YUV420 format
+ 
+ The method will wait for the next frame and returns it in YUV420 format including size and rotation metadata
+ 
+ Dictionary Keys:
+    frame : NSData - The Frame data
+    width : NSNumber - Image width
+    height : NSNumber - Image height
+    rotation : NSNumber - Rotation Value (0 - 3)
+ 
+ IMPORTANT: Process the frame data before retrieving the next frame.
+ The data buffer takes always only one frame and will be overwritten with the next frame
+ 
+ @return dictionary with frame data or nil
+ */
+-(NSDictionary *) getDecodedVideoFrame;
+
 /** @name Static Methods */
 /** Returns a share instance of SCMediaManager.
  

@@ -44,7 +44,7 @@ class MyAPI extends API {
         ));
 
         if (mysql_num_rows($verifyEmailRes) > 0) {
-            $updateVerificationNumberQry = "update ver_number = '" . $rand . "' where msisdn = '" . $args['msisdn'] . "'";
+            $updateVerificationNumberQry = "update register set ver_number = '" . $rand . "' where msisdn = '" . $args['msisdn'] . "'";
             mysql_query($updateVerificationNumberQry, $this->db->conn);
 
             return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));

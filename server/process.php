@@ -65,7 +65,7 @@ class MyAPI extends API {
         $verifyRow = mysql_fetch_assoc($verifyEmailRes);
 
         if ($verifyRow['ver_number'] == $args['number']) {
-            $updateVerificationNumberQry = "update ver_number = '' where msisdn = '" . $args['msisdn'] . "'";
+            $updateVerificationNumberQry = "update register set ver_number = '' where msisdn = '" . $args['msisdn'] . "'";
             mysql_update($updateVerificationNumberQry, $this->db->conn);
             return array('error' => 0, 'message' => 'Verified Successfully');
         } else {

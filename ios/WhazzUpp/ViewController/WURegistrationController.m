@@ -141,6 +141,10 @@
     self.phoneNumber.textContent.text = [CommonMethods trimText:self.phoneNumber.textContent.text];
     
     if (self.phoneNumber.textContent.text.length > 0) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@-%@", lblCountryCode.text, self.phoneNumber.textContent.text] forKey:@"msidn"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         RegisterUserDTO *registerUserDTO = [[RegisterUserDTO alloc] init];
         registerUserDTO.msisdn = [NSString stringWithFormat:@"%@-%@", lblCountryCode.text, self.phoneNumber.textContent.text];
         registerUserDTO.model = [self model];

@@ -12,6 +12,7 @@
 #import "Reachability.h"
 #import "CommonMethods.h"
 #import "User.h"
+#import "../DataModel/VerifyUser.h"
 
 @interface WebserviceHandler()
 
@@ -57,15 +58,24 @@
     switch (method) {
         case METHOD__REGISTER:
             responseBase = [[User alloc] init];
+            
+            
+         
+            break;
+        case METHOD_VERIFICATIONCODE:
+            responseBase = [[VerifyUser alloc] init];
             break;
         default:
             break;
     }
     
+    
     [responseBase unwrapMessage:response];
     
     if ([target respondsToSelector:action])
         [target performSelector:action withObject:responseBase withObject:nil];
+    
+    
 }
 
 @end

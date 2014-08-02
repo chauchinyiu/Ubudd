@@ -18,6 +18,9 @@
 + (NSMutableURLRequest *)registerUser:(RequestBase *)parameter {
     return [NSMutableURLRequest requestWithURL:[self serviceURL:@"register"]];
 }
++ (NSMutableURLRequest *)verifyUser:(RequestBase *)parameter {
+    return [NSMutableURLRequest requestWithURL:[self serviceURL:@"verifyUser"]];
+}
 
 + (NSMutableURLRequest *)requestForMethod:(ServiceMethod)method parameter:(RequestBase *)parameter {
     NSMutableURLRequest *request = nil;
@@ -26,8 +29,8 @@
         case METHOD__REGISTER:
             request = [self registerUser:parameter];
             break;
-        case METHOD__PURCHASE:
-            //soapMessage = [self purchase:parameter];
+        case METHOD_VERIFICATIONCODE:
+            request = [self verifyUser:parameter];
             break;
         default:
             break;

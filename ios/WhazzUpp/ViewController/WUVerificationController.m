@@ -8,6 +8,12 @@
 
 #import "WUVerificationController.h"
 #import "../Helper/Constant.h"
+#import "WebserviceHandler.h"
+#import "ServiceURL.h"
+#import "ResponseBase.h"
+#import "CommonMethods.h"
+#import "../Helper/DataModel/VerifyUser.h"
+#import "../Helper/Webservice/RequestDTO/VerifyUserDTO.h"
 
 @implementation WUVerificationController
 
@@ -24,5 +30,43 @@
     
     [txtCode becomeFirstResponder];
 }
+-(IBAction)nextButtonClicked:(id)sender{
+    
+    if (txtCode.text.length > 0) {
+        
+        
+        NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
+        
+        
+        VerifyUserDTO *verifyUserDTO = [[VerifyUserDTO alloc] init];
+        verifyUserDTO.msisdn = msdin;
+        verifyUserDTO.number = txtCode.text;
+
+      
+        
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_VERIFICATIONCODE parameter:verifyUserDTO target:self action:@selector(verificationCodeResponse:error:)];
+         
+        
+        //[self performSegueWithIdentifier:@"WUUserProfileControllerSegue" sender:nil];
+    }
+    
+   
+}
+#pragma mark - Webservice Response
+- (void)verificationCodeResponse:(ResponseBase *)response error:(NSError *)error {
+    [CommonMethods showLoading:NO title:nil message:nil];
+    
+    VerifyUser *user = (VerifyUser *)response;
+    
+    if (error)
+        [CommonMethods showAlertWithTitle:@"Registration Error" message:[error localizedDescription] delegate:nil];
+    else if (user.errorCode == 1)
+        [CommonMethods showAlertWithTitle:@"Registration Error" message:user.message delegate:nil];
+    else {
+        [self performSegueWithIdentifier:@"WUUserProfileControllerSegue" sender:nil];
+    }
+}
+
 
 @end

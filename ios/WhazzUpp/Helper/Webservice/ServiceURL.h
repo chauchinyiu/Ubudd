@@ -18,6 +18,7 @@ enum ServiceMethod {
     METHOD__SIGNATURE_COUNT,
     METHOD__GET_PDF,
     METHOD__DELETE_FILE,
+    METHOD_VERIFICATIONCODE,
 } typedef ServiceMethod;
 
 @interface ServiceURL : NSObject

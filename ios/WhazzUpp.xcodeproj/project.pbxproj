@@ -1096,6 +1096,8 @@
 		97A45CBE175BEBA800320AE6 /* WUChatHistoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A45CBD175BEBA800320AE6 /* WUChatHistoryController.m */; };
 		97AFCF7217801CD0005A8D49 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97AFCF7017801CAD005A8D49 /* CoreText.framework */; };
 		97AFCF8D1780213E005A8D49 /* R1PhotoEffectsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97AFCF8C1780213E005A8D49 /* R1PhotoEffectsSDK.a */; };
+		CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C003198C8D3500D22BFE /* VerifyUser.m */; };
+		CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2235,6 +2237,10 @@
 		97A45CBD175BEBA800320AE6 /* WUChatHistoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUChatHistoryController.m; sourceTree = "<group>"; };
 		97AFCF7017801CAD005A8D49 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		97AFCF8C1780213E005A8D49 /* R1PhotoEffectsSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = R1PhotoEffectsSDK.a; sourceTree = "<group>"; };
+		CE30C003198C8D3500D22BFE /* VerifyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyUser.m; sourceTree = "<group>"; };
+		CE30C005198C8D4100D22BFE /* VerifyUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUser.h; sourceTree = "<group>"; };
+		CE30C006198C8D7000D22BFE /* VerifyUserDTO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUserDTO.h; sourceTree = "<group>"; };
+		CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyUserDTO.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3334,6 +3340,8 @@
 		1733A0A8193674640064E97A /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				CE30C005198C8D4100D22BFE /* VerifyUser.h */,
+				CE30C003198C8D3500D22BFE /* VerifyUser.m */,
 				1733A0A9193674DA0064E97A /* ResponseBase.h */,
 				1733A0AA193674DA0064E97A /* ResponseBase.m */,
 				1733A0AC1936750D0064E97A /* User.h */,
@@ -3345,6 +3353,8 @@
 		1733A0AF193675770064E97A /* RequestDTO */ = {
 			isa = PBXGroup;
 			children = (
+				CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */,
+				CE30C006198C8D7000D22BFE /* VerifyUserDTO.h */,
 				1733A0B01936759D0064E97A /* RequestBase.h */,
 				1733A0B11936759D0064E97A /* RequestBase.m */,
 				1733A0B6193676AC0064E97A /* DTOHeaders.h */,
@@ -4624,6 +4634,8 @@
 				97995401175B5587001F2D52 /* main.m in Sources */,
 				97995405175B5587001F2D52 /* WUAppDelegate.m in Sources */,
 				17046E83194A3FB300034F9F /* WUVerificationController.m in Sources */,
+				CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */,
+				CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */,
 				17E7F1BA193BCC8700015AF6 /* WUUserProfileController.m in Sources */,
 				97A45CAE175B630B00320AE6 /* WUChatController.m in Sources */,
 				1733A0B9193677050064E97A /* RegisterUserDTO.m in Sources */,
@@ -4712,8 +4724,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: 3Embed Software Technologies private limited (5A693V6KR5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: 3Embed Software Technologies private limited (5A693V6KR5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4728,8 +4740,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ED26821D-4765-40AE-A12F-6572E476B4AF";
+				PROVISIONING_PROFILE = "5ea64900-1f57-4813-b992-6c5ebcf96197";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7s armv7 arm64";
 			};
 			name = Debug;
 		};
@@ -4745,18 +4758,20 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: 3Embed Software Technologies private limited (5A693V6KR5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: 3Embed Software Technologies private limited (5A693V6KR5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "ED26821D-4765-40AE-A12F-6572E476B4AF";
+				PROVISIONING_PROFILE = "5ea64900-1f57-4813-b992-6c5ebcf96197";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7s armv7 arm64";
 			};
 			name = Release;
 		};
@@ -4791,7 +4806,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5ea64900-1f57-4813-b992-6c5ebcf96197";
-				VALID_ARCHS = armv7;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4826,7 +4842,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5ea64900-1f57-4813-b992-6c5ebcf96197";
-				VALID_ARCHS = armv7;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

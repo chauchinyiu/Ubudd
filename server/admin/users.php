@@ -180,7 +180,7 @@ $_SESSION['session'] = time() + 60 * 60;
                 <!-- Page Header -->
                 <div class="page-header page-header-block">
                     <div class="page-header-section">
-                        <h4 class="title semibold">Sup Users</h4>
+                        <h4 class="title semibold">Ubudd Users</h4>
                     </div>
                 </div>
                 <!-- Page Header -->
@@ -225,9 +225,9 @@ $_SESSION['session'] = time() + 60 * 60;
                                         </form>
                                         <!--</div>-->
                                     </div>
-<!--                                    <form action="" method="post" style="display: inline;/* height: 0px; */" title="Archive CSV">
+                                    <form action="" method="post" style="display: inline;/* height: 0px; */" title="Archive CSV">
                                         <button type="button" id="delete_user" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
-                                    </form>-->
+                                    </form>
                                 </div>
                             </div>
                             <!--/ panel toolbar wrapper -->
@@ -272,7 +272,7 @@ $_SESSION['session'] = time() + 60 * 60;
                                             ?>
                                             <tr id="user<?php echo $user['msisdn']; ?>">
                                                 <th width="3%" class="text-center">
-                                                    <input  class="checkbox custom-checkbox" type="checkbox" value="<?php echo $user['Entity_Id']; ?>" />  
+                                                    <input  class="checkbox custom-checkbox" type="checkbox" value="<?php echo $user['msisdn']; ?>" />  
                                                 </th>
                                                 <th><?php echo $user['msisdn']; ?></th>
                                                 <th><?php echo $user['brand']; ?></th>

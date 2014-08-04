@@ -49,7 +49,7 @@ $_SESSION['session'] = time() + 60 * 60;
         <!-- START META SECTION -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Sup - Web Dashboard</title>
+        <title>Ubudd - Web Dashboard</title>
         <meta name="author" content="pampersdry.info">
         <meta name="description" content="Adminre is a clean and flat admin theme build with Slim framework and Twig template engine.">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
@@ -309,7 +309,7 @@ $_SESSION['session'] = time() + 60 * 60;
         <!-- Library script : mandatory -->
 
         <script>
-            var base_url = "http://108.166.190.172:81/tinderclone/sup/admin";
+            var base_url = "http://128.199.145.104/admin";
 
         </script>
 

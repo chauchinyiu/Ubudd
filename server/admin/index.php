@@ -13,7 +13,7 @@ if(isset($_REQUEST['error'])){
         <!-- START META SECTION -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Datum - Web Dashboard</title>
+        <title>Ubudd - Web Dashboard</title>
         <meta name="author" content="pampersdry.info">
         <meta name="description" content="Adminre is a clean and flat admin theme build with Slim framework and Twig template engine.">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">

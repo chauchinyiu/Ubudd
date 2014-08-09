@@ -29,8 +29,15 @@ class MyAPI extends API {
         if ($args['msisdn'] == '' || $args['brand'] == '' || $args['model'] == '' || $args['os'] == '' || $args['uid'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
-        $verifyEmailQry = "select email from register where email = '" . $args['msisdn'] . "@mobifyi.com'";
-        $verifyEmailRes = mysql_query($verifyEmailQry, $this->db->conn);
+
+		$stmt = $this->db->conn2->prepare("select email from register where email = ?");
+		$stmt->bind_param('s', $userId);
+		$userId = $args['msisdn'] . "@mobifyi.com";
+		$stmt->execute();
+		$stmt->bind_result($verifyEmailRes);
+
+        //$verifyEmailQry = "select email from register where email = '" . $args['msisdn'] . "@mobifyi.com'";
+        //$verifyEmailRes = mysql_query($verifyEmailQry, $this->db->conn);
 
         $account_sid = 'AC5cf3e259d9f0842517d370885e914aff';
         $auth_token = '6573f29127cac058d60422c565e5d32e';
@@ -42,15 +49,34 @@ class MyAPI extends API {
             'From' => "+19063563715",
             'Body' => "Your verification code for login into Ubudd: " . $rand,
         ));
+        
 
-        if (mysql_num_rows($verifyEmailRes) > 0) {
-            $updateVerificationNumberQry = "update register set ver_number = '" . $rand . "' where msisdn = '" . $args['msisdn'] . "'";
-            mysql_query($updateVerificationNumberQry, $this->db->conn);
-
+        if ($stmt->fetch()) {
+	        $stmt->close();
+			$stmt = $this->db->conn2->prepare("update register set ver_number = ? where msisdn = ?");
+			$stmt->bind_param('ss', $rand, $userId);
+			$userId = $args['msisdn'];
+			$stmt->execute();
+			$stmt->close();
+            //$updateVerificationNumberQry = "update register set ver_number = '" . $rand . "' where msisdn = '" . $args['msisdn'] . "'";
+            //mysql_query($updateVerificationNumberQry, $this->db->conn);
             return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         } else {
-            $insertQry = "insert into register values('" . $args['msisdn'] . "','" . $args['brand'] . "','" . $args['model'] . "','" . $args['os'] . "','" . $args['uid'] . "','" . $args['msisdn'] . "@mobifyi.com" . "','" . $args['msisdn'] . "','" . $rand . "', '-1', '', '999', '999', '', '0')";
-            mysql_query($insertQry, $this->db->conn);
+	        $stmt->close();
+			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0')");
+			$stmt->bind_param('ssssssss', $userId, $brand, $model, $os, $uid, $email, $pwd, $rand);
+			$userId = $args['msisdn'];
+			$brand = $args['brand'];
+			$model = $args['model'];
+			$os = $args['os'];
+			$uid = $args['uid'];
+			$email = $args['msisdn'] . "@mobifyi.com";
+			$pwd = $args['msisdn'];
+			$stmt->execute();
+			$stmt->close();
+
+            //$insertQry = "insert into register values('" . $args['msisdn'] . "','" . $args['brand'] . "','" . $args['model'] . "','" . $args['os'] . "','" . $args['uid'] . "','" . $args['msisdn'] . "@mobifyi.com" . "','" . $args['msisdn'] . "','" . $rand . "', '-1', '', '999', '999', '', '0')";
+            //mysql_query($insertQry, $this->db->conn);
             return array('error' => 0, 'message' => 'Signup successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         }
     }
@@ -60,13 +86,25 @@ class MyAPI extends API {
         if ($args['msisdn'] == '' || $args['number'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
-        $verifyEmailQry = "select ver_number from register where email = '" . $args['msisdn'] . "@mobifyi.com'";
-        $verifyEmailRes = mysql_query($verifyEmailQry, $this->db->conn);
-        $verifyRow = mysql_fetch_assoc($verifyEmailRes);
+		$stmt = $this->db->conn2->prepare("select ver_number from register where email = ?");
+		$stmt->bind_param('s', $userId);
+		$userId = $args['msisdn'] . "@mobifyi.com";
+		$stmt->execute();
+		$verifyEmailRes = $stmt->get_result();
+
+
+        //$verifyEmailQry = "select ver_number from register where email = '" . $args['msisdn'] . "@mobifyi.com'";
+        //$verifyEmailRes = mysql_query($verifyEmailQry, $this->db->conn);
+        $verifyRow = mysqli_fetch_assoc($verifyEmailRes);
 
         if ($verifyRow['ver_number'] == $args['number']) {
-            $updateVerificationNumberQry = "update register set ver_number = '' where msisdn = '" . $args['msisdn'] . "'";
-            mysql_update($updateVerificationNumberQry, $this->db->conn);
+			$stmt = $this->db->conn2->prepare("update register set ver_number = '' where msisdn = ?");
+			$stmt->bind_param('s', $userId);
+			$userId = $args['msisdn'];
+			$stmt->execute();
+        	$stmt->close();
+            //$updateVerificationNumberQry = "update register set ver_number = '' where msisdn = '" . $args['msisdn'] . "'";
+            //mysql_update($updateVerificationNumberQry, $this->db->conn);
             return array('error' => 0, 'message' => 'Verified Successfully');
         } else {
             return array('error' => 1, 'message' => 'Verification failed');

@@ -99,19 +99,14 @@ $_SESSION['session'] = time() + 60 * 60;
                 <!-- START Left nav -->
                 <ul class="nav navbar-nav navbar-left">
                     <div class="navbar-form navbar-left">
-                        <form action="users.php" accept-charset="utf-8" method="GET" id="myform">                        <div class="has-icon">
+                        <form action="users.php" accept-charset="utf-8" method="GET" id="myform">
+                            <div class="has-icon">
 
                                 <input type="text" name="q" class="form-control" placeholder="Search user...">
                                 <i type="submit" class="ico-search form-control-icon"></i>
                             </div>
                         </form>
-
-
-
-
                     </div>
-
-
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -220,14 +215,14 @@ $_SESSION['session'] = time() + 60 * 60;
                                                                                     <button type="button" class="btn btn-sm btn-default"><i class="ico-upload22"></i></button>
                                                                                 </div>-->
                                         <!--<div style="float:left;margin-left: 3px;" title="Archive CSV">-->
-                                        <form action="" method="post" style="display: inline;/* height: 0px; */" title="Archive CSV">
+                                        <form action="" method="post" style="display: inline;/* height: 0px; */" title="Manage User">
                                             <button type="submit" name="getCsv" class="btn btn-sm btn-default" value=""><i class="ico-archive2"></i></button>
+                	                        <button type="button" id="delete_user" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
+                    	                    <button type="button" id="enable_user" class="btn btn-sm">Enable</button>
+                	                        <button type="button" id="disable_user" class="btn btn-sm">Disable</button>
                                         </form>
                                         <!--</div>-->
                                     </div>
-                                    <form action="" method="post" style="display: inline;/* height: 0px; */" title="Archive CSV">
-                                        <button type="button" id="delete_user" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
-                                    </form>
                                 </div>
                             </div>
                             <!--/ panel toolbar wrapper -->
@@ -243,8 +238,8 @@ $_SESSION['session'] = time() + 60 * 60;
                                             <th>Msisdn</th>
                                             <th>Brand</th>
                                             <th>Model</th>
-                                            <th>Email</th>
                                             <th width="10%">Os</th>
+                                            <th>Disabled</th>
                                             <!--<th width="20%"></th>-->
                                         </tr>
                                     </thead>
@@ -261,24 +256,24 @@ $_SESSION['session'] = time() + 60 * 60;
                                         $total = 0;
 
                                         if (isset($_REQUEST['q'])) {
-                                            $getUsersQry = "select msisdn,brand,model,email,os,count(*) as total from register where msisdn like '%" . $_REQUEST['q'] . "%' or  ios like '%" . $_REQUEST['q'] . "%' or  Email like '%" . $_REQUEST['q'] . "%'  or  model like '%" . $_REQUEST['q'] . "%' limit 0," . $size;
+                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled,count(*) as total from register where msisdn like '%" . $_REQUEST['q'] . "%' or  ios like '%" . $_REQUEST['q'] . "%' or  Email like '%" . $_REQUEST['q'] . "%'  or  model like '%" . $_REQUEST['q'] . "%' limit 0," . $size;
                                         } else {
 
-                                            $getUsersQry = "select msisdn,brand,model,email,os,(select count(*) from register) as total from register limit " . $start . "," . $size;
+                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled,(select count(*) from register) as total from register limit " . $start . "," . $size;
                                         }
                                         $getUsersRes = mysql_query($getUsersQry, $db->conn);
                                         while ($user = mysql_fetch_assoc($getUsersRes)) {
                                             $total = $user['total'];
                                             ?>
-                                            <tr id="user<?php echo $user['msisdn']; ?>">
+                                            <tr id="user<?php echo str_replace('-', 'b', str_replace('+', 'a', $user['msisdn'])); ?>">
                                                 <th width="3%" class="text-center">
                                                     <input  class="checkbox custom-checkbox" type="checkbox" value="<?php echo $user['msisdn']; ?>" />  
                                                 </th>
                                                 <th><?php echo $user['msisdn']; ?></th>
                                                 <th><?php echo $user['brand']; ?></th>
                                                 <th><?php echo $user['model']; ?></th>
-                                                <th><?php echo $user['email']; ?></th>
                                                 <th width="10%"><?php echo $user['os']; ?></th>
+                                                <th id="disableCol<?php echo str_replace('-', 'b', str_replace('+', 'a', $user['msisdn'])); ?>"><?php if($user['disabled'] == 1) echo("Y");?></th>
                                                 <!--<th width="20%"></th>-->
                                             </tr>
                                         <?php } ?>
@@ -321,6 +316,7 @@ $_SESSION['session'] = time() + 60 * 60;
 
         <script type="text/javascript">
             $(document).ready(function() {
+                            
                 $('#delete_user').click(function() {
                     var dis = $(this);
                     var count = 0;
@@ -331,7 +327,7 @@ $_SESSION['session'] = time() + 60 * 60;
                     }).get();
 
                     if (count == 0) {
-                        $('#error-span').text('Please select atleast one user in the list.');
+                        $('#error-span').text('Please select at least one user in the list.');
                     } else if (count > 0) {
                         if (confirm('Are you sure to delete checked user(s)?')) {
                             $.ajax({
@@ -343,9 +339,8 @@ $_SESSION['session'] = time() + 60 * 60;
                                     alert(result.message);
                                     if (result.flag == 0) {
                                         $('.custom-checkbox').each(function() {
-
                                             if ($(this).is(':checked') == true) {
-                                                $('#user' + $(this).val()).remove();
+                                                $('#user' + ($(this).val()).replace('+','a').replace('-','b')).remove();
                                             }
                                         });
                                     }
@@ -354,6 +349,73 @@ $_SESSION['session'] = time() + 60 * 60;
                         }
                     }
                 });
+                
+                $('#enable_user').click(function() {
+                    var dis = $(this);
+                    var count = 0;
+
+                    var values = $('input:checkbox:checked.custom-checkbox').map(function() {
+                        count++;
+                        return this.value;
+                    }).get();
+
+                    if (count == 0) {
+                        $('#error-span').text('Please select at least one user in the list.');
+                    } else if (count > 0) {
+                        if (confirm('Are you sure to enable checked user(s)?')) {
+                            $.ajax({
+                                type: "POST",
+                                url: "enableUser.php",
+                                data: {item_type: 1, item_list: values},
+                                dataType: "JSON",
+                                success: function(result) {
+                                    alert(result.message);
+                                    if (result.flag == 0) {
+                                        $('.custom-checkbox').each(function() {
+                                            if ($(this).is(':checked') == true) {
+                                                $('#disableCol' + ($(this).val()).replace('+','a').replace('-','b')).html('');
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                $('#disable_user').click(function() {
+                    var dis = $(this);
+                    var count = 0;
+
+                    var values = $('input:checkbox:checked.custom-checkbox').map(function() {
+                        count++;
+                        return this.value;
+                    }).get();
+
+                    if (count == 0) {
+                        $('#error-span').text('Please select at least one user in the list.');
+                    } else if (count > 0) {
+                        if (confirm('Are you sure to disable checked user(s)?')) {
+                            $.ajax({
+                                type: "POST",
+                                url: "disableUser.php",
+                                data: {item_type: 1, item_list: values},
+                                dataType: "JSON",
+                                success: function(result) {
+                                    alert(result.message);
+                                    if (result.flag == 0) {
+                                        $('.custom-checkbox').each(function() {
+                                            if ($(this).is(':checked') == true) {
+                                                $('#disableCol' + ($(this).val()).replace('+','a').replace('-','b')).html('Y');
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+                
             });
         </script>
         <!-- App and page level script -->

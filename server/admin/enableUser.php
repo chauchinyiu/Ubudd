@@ -20,23 +20,17 @@ if (isset($_REQUEST['item_type'])) {
 	$errorCnt = 0;
 	$successCnt = 0;
 	for ($i = 0; $i < $count; $i++) {
-		$stmt = $db->conn2->prepare("delete from register where msisdn = ?");
-		$stmt->bind_param('is', $userId);
-		$trueVal = 1;
+	
+		$stmt = $db->conn2->prepare("update register set Disabled = ? where msisdn = ?");
+		$stmt->bind_param('is', $trueVal, $userId);
+		$trueVal = 0;
 		$userId = $list[$i];
 
 		$stmt->execute();
 		$stmt->close();
-
-		$stmt = $db->conn2->prepare("delete from groupMember where memberID = ?");
-		$stmt->bind_param('s', $userId);
-		$trueVal = 1;
-		$userId = $list[$i];
-
-		$stmt->execute();
-		$stmt->close();	
+	
 	}    
-	$result = array('flag' => 0, 'message' => "User(s) deleted");	
+	$result = array('flag' => 0, 'message' => "User(s) enabled");	
 	echo json_encode($result);
 }
 ?>

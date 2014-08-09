@@ -49,7 +49,7 @@ class MyAPI extends API {
 
             return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         } else {
-            $insertQry = "insert into register values('" . $args['msisdn'] . "','" . $args['brand'] . "','" . $args['model'] . "','" . $args['os'] . "','" . $args['uid'] . "','" . $args['msisdn'] . "@mobifyi.com" . "','" . $args['msisdn'] . "','" . $rand . "', '-1', '', '999', '999', '')";
+            $insertQry = "insert into register values('" . $args['msisdn'] . "','" . $args['brand'] . "','" . $args['model'] . "','" . $args['os'] . "','" . $args['uid'] . "','" . $args['msisdn'] . "@mobifyi.com" . "','" . $args['msisdn'] . "','" . $rand . "', '-1', '', '999', '999', '', '0')";
             mysql_query($insertQry, $this->db->conn);
             return array('error' => 0, 'message' => 'Signup successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         }

@@ -12,25 +12,26 @@ $db = new ConDB();
 if (isset($_REQUEST['getCsv'])) {
 
     $output = "";
-    $sql = mysql_query("select * from register", $db->conn);
-    $columns_total = mysql_num_fields($sql);
+    $res = $db->conn2->query("select * from register");
+    $columns_total = $db->conn2->field_count;
 
 // Get The Field Name
 
     for ($i = 0; $i < $columns_total; $i++) {
-        $heading = mysql_field_name($sql, $i);
-        $output .= '"' . $heading . '",';
+        $heading = $res->fetch_field_direct($i);
+        $output .= '"' . $heading->name . '",';
     }
     $output .="\n";
 
 // Get Records from the table
 
-    while ($row = mysql_fetch_array($sql)) {
+    while ($row = $res->fetch_row()) {
         for ($i = 0; $i < $columns_total; $i++) {
-            $output .='"' . $row["$i"] . '",';
+            $output .='"' . $row[$i] . '",';
         }
         $output .="\n";
     }
+    $res->close();
 
 // Download the file
 
@@ -256,14 +257,14 @@ $_SESSION['session'] = time() + 60 * 60;
                                         $total = 0;
 
                                         if (isset($_REQUEST['q'])) {
-                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled,count(*) as total from register where msisdn like '%" . $_REQUEST['q'] . "%' or  ios like '%" . $_REQUEST['q'] . "%' or  Email like '%" . $_REQUEST['q'] . "%'  or  model like '%" . $_REQUEST['q'] . "%' limit 0," . $size;
+                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled from register where msisdn like '%" . $_REQUEST['q'] . "%' or  os like '%" . $_REQUEST['q'] . "%' or  Email like '%" . $_REQUEST['q'] . "%'  or  model like '%" . $_REQUEST['q'] . "%' limit " . $start . "," . $size;
                                         } else {
-
-                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled,(select count(*) from register) as total from register limit " . $start . "," . $size;
+                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled from register limit " . $start . "," . $size;
                                         }
-                                        $getUsersRes = mysql_query($getUsersQry, $db->conn);
-                                        while ($user = mysql_fetch_assoc($getUsersRes)) {
-                                            $total = $user['total'];
+                                        $getUsersRes = $db->conn2->query($getUsersQry);
+                                        $total = $getUsersRes->num_rows;
+                                        
+                                        while ($user = $getUsersRes->fetch_assoc()) {
                                             ?>
                                             <tr id="user<?php echo str_replace('-', 'b', str_replace('+', 'a', $user['msisdn'])); ?>">
                                                 <th width="3%" class="text-center">

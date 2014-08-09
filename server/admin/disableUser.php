@@ -19,17 +19,14 @@ if (isset($_REQUEST['item_type'])) {
 	$count = count($list);
 	$errorCnt = 0;
 	$successCnt = 0;
-	for ($i = 0; $i < $count; $i++) {
-	
-		$stmt = $db->conn2->prepare("update register set Disabled = ? where msisdn = ?");
-		$stmt->bind_param('is', $trueVal, $userId);
+	$stmt = $db->conn2->prepare("update register set Disabled = ? where msisdn = ?");
+	$stmt->bind_param('is', $trueVal, $userId);
+	for ($i = 0; $i < $count; $i++) {	
 		$trueVal = 1;
 		$userId = $list[$i];
-
 		$stmt->execute();
-		$stmt->close();
-	
 	}    
+	$stmt->close();
 	
 	$result = array('flag' => 0, 'message' => "User(s) disabled");	
 	echo json_encode($result);

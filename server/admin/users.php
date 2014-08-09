@@ -12,7 +12,12 @@ $db = new ConDB();
 if (isset($_REQUEST['getCsv'])) {
 
     $output = "";
-    $res = $db->conn2->query("select * from register");
+    if($_REQUEST['getCsv'] == ""){
+	    $res = $db->conn2->query("select * from register");
+    }
+    else{
+	    $res = $db->conn2->query("select * from register where msisdn like '%" . $_REQUEST['getCsv'] . "%' or  os like '%" . $_REQUEST['getCsv'] . "%' or  Email like '%" . $_REQUEST['getCsv'] . "%'  or  model like '%" . $_REQUEST['getCsv'] . "%'");
+    }
     $columns_total = $db->conn2->field_count;
 
 // Get The Field Name
@@ -217,7 +222,18 @@ $_SESSION['session'] = time() + 60 * 60;
                                                                                 </div>-->
                                         <!--<div style="float:left;margin-left: 3px;" title="Archive CSV">-->
                                         <form action="" method="post" style="display: inline;/* height: 0px; */" title="Manage User">
-                                            <button type="submit" name="getCsv" class="btn btn-sm btn-default" value=""><i class="ico-archive2"></i></button>
+                                        	<?php
+	                                        	if (isset($_REQUEST['q'])) {
+	                                        		?>
+		                                            <button type="submit" name="getCsv" class="btn btn-sm btn-default" value="<?php echo $_REQUEST['q']; ?>"><i class="ico-archive2"></i></button>
+	                                        		<?php
+	                                        	}
+	                                        	else{
+	                                        		?>
+		                                            <button type="submit" name="getCsv" class="btn btn-sm btn-default" value=""><i class="ico-archive2"></i></button>                                    	
+		                                            <?php
+	                                        	}
+                                        	?>
                 	                        <button type="button" id="delete_user" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
                     	                    <button type="button" id="enable_user" class="btn btn-sm">Enable</button>
                 	                        <button type="button" id="disable_user" class="btn btn-sm">Disable</button>

@@ -10,6 +10,13 @@
 #import "CommonMethods.h"
 #import <SocialCommunication/SCDataManager.h>
 
+#import "WebserviceHandler.h"
+#import "ServiceURL.h"
+#import "ResponseBase.h"
+
+#import "Helper/DataModel/UpdateAPNSToken.h"
+#import "Helper/Webservice/RequestDTO/UpdateAPNSTokenDTO.h"
+
 @interface WUAppDelegate ()
 
 @property (nonatomic, strong) NSString *coreDataFile;
@@ -118,9 +125,19 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     [[C2CallPhone currentPhone] registerAPS:deviceToken];
+    
+    NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
+    UpdateAPNSTokenDTO *updateAPNSTokenDTO = [[UpdateAPNSTokenDTO alloc] init];
+    updateAPNSTokenDTO.msisdn = msdin;
+    updateAPNSTokenDTO.token = deviceToken;
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_UPDATE_APNS_TOKEN parameter:updateAPNSTokenDTO target:self action:@selector(updateAPNSTokenResponse:error:)];
+    
+    
 }
 
-    
+
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     NSLog(@"Failed to get token, error: %@", error);

@@ -21,6 +21,11 @@
 + (NSMutableURLRequest *)verifyUser:(RequestBase *)parameter {
     return [NSMutableURLRequest requestWithURL:[self serviceURL:@"verifyUser"]];
 }
++ (NSMutableURLRequest *)updateAPNSToken:(RequestBase *)parameter {
+    return [NSMutableURLRequest requestWithURL:[self serviceURL:@"updateAPNSToken"]];
+}
+
+
 
 + (NSMutableURLRequest *)requestForMethod:(ServiceMethod)method parameter:(RequestBase *)parameter {
     NSMutableURLRequest *request = nil;
@@ -31,6 +36,9 @@
             break;
         case METHOD_VERIFICATIONCODE:
             request = [self verifyUser:parameter];
+            break;
+        case METHOD_UPDATE_APNS_TOKEN:
+            request = [self updateAPNSToken:parameter];
             break;
         default:
             break;

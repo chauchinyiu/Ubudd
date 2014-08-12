@@ -36,9 +36,6 @@ class MyAPI extends API {
 		$stmt->execute();
 		$stmt->bind_result($verifyEmailRes);
 
-        //$verifyEmailQry = "select email from register where email = '" . $args['msisdn'] . "@mobifyi.com'";
-        //$verifyEmailRes = mysql_query($verifyEmailQry, $this->db->conn);
-
         $account_sid = 'AC5cf3e259d9f0842517d370885e914aff';
         $auth_token = '6573f29127cac058d60422c565e5d32e';
         $client = new Services_Twilio($account_sid, $auth_token);
@@ -63,7 +60,7 @@ class MyAPI extends API {
             return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         } else {
 	        $stmt->close();
-			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0')");
+			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL)");
 			$stmt->bind_param('ssssssss', $userId, $brand, $model, $os, $uid, $email, $pwd, $rand);
 			$userId = $args['msisdn'];
 			$brand = $args['brand'];
@@ -109,6 +106,21 @@ class MyAPI extends API {
         } else {
             return array('error' => 1, 'message' => 'Verification failed');
         }
+    }
+
+
+    protected function updateAPNSToken($args) {
+
+        if ($args['msisdn'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("update register set apnsToken = ? where email = ?");
+		$stmt->bind_param('ss', $token, $userId);
+		$token = $args['token'];
+		$userId = $args['msisdn'] . "@mobifyi.com";
+		$stmt->execute();
+		$stmt->close();
+		return array('error' => 0, 'message' => 'Token updated');
     }
 
 }

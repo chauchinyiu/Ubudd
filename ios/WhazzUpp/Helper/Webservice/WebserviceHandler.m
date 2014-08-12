@@ -12,7 +12,8 @@
 #import "Reachability.h"
 #import "CommonMethods.h"
 #import "User.h"
-#import "../DataModel/VerifyUser.h"
+#import "VerifyUser.h"
+#import "UpdateAPNSToken.h"
 
 @interface WebserviceHandler()
 
@@ -58,12 +59,12 @@
     switch (method) {
         case METHOD__REGISTER:
             responseBase = [[User alloc] init];
-            
-            
-         
             break;
         case METHOD_VERIFICATIONCODE:
             responseBase = [[VerifyUser alloc] init];
+            break;
+        case METHOD_UPDATE_APNS_TOKEN:
+            responseBase = [[UpdateAPNSToken alloc] init];
             break;
         default:
             break;

@@ -1098,6 +1098,8 @@
 		97AFCF8D1780213E005A8D49 /* R1PhotoEffectsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97AFCF8C1780213E005A8D49 /* R1PhotoEffectsSDK.a */; };
 		CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C003198C8D3500D22BFE /* VerifyUser.m */; };
 		CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */; };
+		CE5462221999C86000E91636 /* UpdateAPNSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462211999C86000E91636 /* UpdateAPNSToken.m */; };
+		CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2241,6 +2243,10 @@
 		CE30C005198C8D4100D22BFE /* VerifyUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUser.h; sourceTree = "<group>"; };
 		CE30C006198C8D7000D22BFE /* VerifyUserDTO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUserDTO.h; sourceTree = "<group>"; };
 		CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyUserDTO.m; sourceTree = "<group>"; };
+		CE5462201999C86000E91636 /* UpdateAPNSToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAPNSToken.h; sourceTree = "<group>"; };
+		CE5462211999C86000E91636 /* UpdateAPNSToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSToken.m; sourceTree = "<group>"; };
+		CE5462231999C96000E91636 /* UpdateAPNSTokenDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAPNSTokenDTO.h; sourceTree = "<group>"; };
+		CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSTokenDTO.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3346,6 +3352,8 @@
 				1733A0AA193674DA0064E97A /* ResponseBase.m */,
 				1733A0AC1936750D0064E97A /* User.h */,
 				1733A0AD1936750D0064E97A /* User.m */,
+				CE5462201999C86000E91636 /* UpdateAPNSToken.h */,
+				CE5462211999C86000E91636 /* UpdateAPNSToken.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -3360,6 +3368,8 @@
 				1733A0B6193676AC0064E97A /* DTOHeaders.h */,
 				1733A0B7193677050064E97A /* RegisterUserDTO.h */,
 				1733A0B8193677050064E97A /* RegisterUserDTO.m */,
+				CE5462231999C96000E91636 /* UpdateAPNSTokenDTO.h */,
+				CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */,
 			);
 			path = RequestDTO;
 			sourceTree = "<group>";
@@ -4645,6 +4655,7 @@
 				173060E019277F6B0018EE25 /* C2CallDataModel.xcdatamodeld in Sources */,
 				97A45CBE175BEBA800320AE6 /* WUChatHistoryController.m in Sources */,
 				972F3E1E175CA5250006DEF6 /* WUFavoritesViewController.m in Sources */,
+				CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */,
 				1733A09D19366D720064E97A /* RequestBuilder.m in Sources */,
 				972F453E175CB75F0006DEF6 /* WUContactDetailController.m in Sources */,
 				17A1D68F1927ED3700B28792 /* WULoginController.m in Sources */,
@@ -4660,6 +4671,7 @@
 				1730630D19277F6B0018EE25 /* myshader.fsh in Sources */,
 				17019C541944E4AE00ABFB90 /* WUAddGroupController.m in Sources */,
 				1733A0A7193671500064E97A /* Reachability.m in Sources */,
+				CE5462221999C86000E91636 /* UpdateAPNSToken.m in Sources */,
 				97230C24176F0AEF009E7CE4 /* WULogoutController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

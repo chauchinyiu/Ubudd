@@ -13,7 +13,14 @@
 - (NSDictionary *)dictionaryRepresentation {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     [dictionary setObject:self.msisdn forKey:@"msisdn"];
-    [dictionary setObject:self.token.base64Encoding forKey:@"token"];
+    
+    NSMutableString     *hexString  = [NSMutableString stringWithCapacity:64];
+    const unsigned char *dataBuffer = (const unsigned char *)(self.token.bytes);
+    for (int i = 0; i < 32; ++i)
+    {
+        [hexString appendFormat:@"%02x", (unsigned int)dataBuffer[i]];
+    }
+    [dictionary setObject:hexString forKey:@"token"];
     
     return dictionary;
 }

@@ -241,6 +241,7 @@ $_SESSION['session'] = time() + 60 * 60;
                 	                        <button type="button" id="delete_user" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
                     	                    <button type="button" id="enable_user" class="btn btn-sm">Enable</button>
                 	                        <button type="button" id="disable_user" class="btn btn-sm">Disable</button>
+                	                        <button type="button" id="test_apns_user" class="btn btn-sm">Test APNS</button>
                                         </form>
                                         <!--</div>-->
                                     </div>
@@ -434,6 +435,32 @@ $_SESSION['session'] = time() + 60 * 60;
                                             }
                                         });
                                     }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                $('#test_apns_user').click(function() {
+                    var dis = $(this);
+                    var count = 0;
+
+                    var values = $('input:checkbox:checked.custom-checkbox').map(function() {
+                        count++;
+                        return this.value;
+                    }).get();
+
+                    if (count == 0) {
+                        $('#error-span').text('Please select at least one user in the list.');
+                    } else if (count > 0) {
+                        if (confirm('Are you sure to test notifying checked user(s)?')) {
+                            $.ajax({
+                                type: "POST",
+                                url: "notifyUser.php",
+                                data: {item_type: 1, item_list: values},
+                                dataType: "JSON",
+                                success: function(result) {
+                                    alert(result.message);
                                 }
                             });
                         }

@@ -9,46 +9,6 @@ require '../Models/ConDB.php';
 
 $db = new ConDB();
 
-if (isset($_REQUEST['getCsv'])) {
-
-    $output = "";
-    if($_REQUEST['getCsv'] == ""){
-	    $res = $db->conn2->query("select * from register");
-    }
-    else{
-	    $res = $db->conn2->query("select * from register where msisdn like '%" . $_REQUEST['getCsv'] . "%' or  os like '%" . $_REQUEST['getCsv'] . "%' or  Email like '%" . $_REQUEST['getCsv'] . "%'  or  model like '%" . $_REQUEST['getCsv'] . "%'");
-    }
-    $columns_total = $db->conn2->field_count;
-
-// Get The Field Name
-
-    for ($i = 0; $i < $columns_total; $i++) {
-        $heading = $res->fetch_field_direct($i);
-        $output .= '"' . $heading->name . '",';
-    }
-    $output .="\n";
-
-// Get Records from the table
-
-    while ($row = $res->fetch_row()) {
-        for ($i = 0; $i < $columns_total; $i++) {
-            $output .='"' . $row[$i] . '",';
-        }
-        $output .="\n";
-    }
-    $res->close();
-
-// Download the file
-
-    $filename = "myFile.csv";
-    header('Content-type: application/csv');
-    header('Content-Disposition: attachment; filename=' . $filename);
-
-    echo $output;
-    exit;
-}
-
-
 $_SESSION['session'] = time() + 60 * 60;
 ?>
 <html class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths responsejs "><!-- START Head --><head>
@@ -103,17 +63,6 @@ $_SESSION['session'] = time() + 60 * 60;
             <!-- START Toolbar -->
             <div class="navbar-toolbar clearfix">
                 <!-- START Left nav -->
-                <ul class="nav navbar-nav navbar-left">
-                    <div class="navbar-form navbar-left">
-                        <form action="users.php" accept-charset="utf-8" method="GET" id="myform">
-                            <div class="has-icon">
-
-                                <input type="text" name="q" class="form-control" placeholder="Search user...">
-                                <i type="submit" class="ico-search form-control-icon"></i>
-                            </div>
-                        </form>
-                    </div>
-                </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Profile dropdown -->
@@ -164,11 +113,11 @@ $_SESSION['session'] = time() + 60 * 60;
                         <li>
                             <a href="chatgroup.php"><span class="figure"><i class="ico-user"></i></span>
                                 <span class="text">All Chat Groups</span></a>                        
-                        </li>
+                        </li>         
                         <li>
                             <a href="interests.php"><span class="figure"><i class="ico-user"></i></span>
                                 <span class="text">All Interests</span></a>                        
-                        </li>
+                        </li>                                       
                         <li>
                             <a href="settings.php"><span class="figure"><i class="ico-settings"></i></span>
                                 <span class="text">Settings</span></a>                        
@@ -189,7 +138,7 @@ $_SESSION['session'] = time() + 60 * 60;
                 <!-- Page Header -->
                 <div class="page-header page-header-block">
                     <div class="page-header-section">
-                        <h4 class="title semibold">Ubudd Users</h4>
+                        <h4 class="title semibold">Ubudd Interests</h4>
                     </div>
                 </div>
                 <!-- Page Header -->
@@ -201,7 +150,7 @@ $_SESSION['session'] = time() + 60 * 60;
                         <div class="panel panel-primary">
                             <!-- panel heading/header -->
                             <div class="panel-heading">
-                                <h3 class="panel-title"><span class="panel-icon mr5"><i class="ico-table22"></i></span>All the users</h3>
+                                <h3 class="panel-title"><span class="panel-icon mr5"><i class="ico-table22"></i></span>All the interests</h3>
                                 <!-- panel toolbar -->
                                 <div class="panel-toolbar text-right">
                                     <!-- option -->
@@ -230,22 +179,7 @@ $_SESSION['session'] = time() + 60 * 60;
                                                                                 </div>-->
                                         <!--<div style="float:left;margin-left: 3px;" title="Archive CSV">-->
                                         <form action="" method="post" style="display: inline;/* height: 0px; */" title="Manage User">
-                                        	<?php
-	                                        	if (isset($_REQUEST['q'])) {
-	                                        		?>
-		                                            <button type="submit" name="getCsv" class="btn btn-sm btn-default" value="<?php echo $_REQUEST['q']; ?>"><i class="ico-archive2"></i></button>
-	                                        		<?php
-	                                        	}
-	                                        	else{
-	                                        		?>
-		                                            <button type="submit" name="getCsv" class="btn btn-sm btn-default" value=""><i class="ico-archive2"></i></button>                                    	
-		                                            <?php
-	                                        	}
-                                        	?>
-                	                        <button type="button" id="delete_user" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
-                    	                    <button type="button" id="enable_user" class="btn btn-sm">Enable</button>
-                	                        <button type="button" id="disable_user" class="btn btn-sm">Disable</button>
-                	                        <button type="button" id="test_apns_user" class="btn btn-sm">Test APNS</button>
+                	                        <button type="button" id="delete_interest" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
                                         </form>
                                         <!--</div>-->
                                     </div>
@@ -261,16 +195,15 @@ $_SESSION['session'] = time() + 60 * 60;
                                         <tr>
                                             <th width="3%" class="text-center"><i class="ico-long-arrow-down"></i></th>
 
-                                            <th>Msisdn</th>
-                                            <th>Brand</th>
-                                            <th>Model</th>
-                                            <th width="10%">Os</th>
-                                            <th>Disabled</th>
+                                            <th>Interest ID</th>
+                                            <th>Interest Name</th>
+                                            <!--<th>Edit</th>-->
                                             <!--<th width="20%"></th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
+                                        
                                         if (isset($_REQUEST['page']))
                                             $page = $_REQUEST['page'];
                                         else
@@ -281,30 +214,24 @@ $_SESSION['session'] = time() + 60 * 60;
 
                                         $total = 0;
 
-                                        if (isset($_REQUEST['q'])) {
-                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled from register where msisdn like '%" . $_REQUEST['q'] . "%' or  os like '%" . $_REQUEST['q'] . "%' or  Email like '%" . $_REQUEST['q'] . "%'  or  model like '%" . $_REQUEST['q'] . "%' limit " . $start . "," . $size;
-                                        } else {
-                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled from register limit " . $start . "," . $size;
-                                        }
-                                        if (isset($_POST['gid'])) {
-                                            $getUsersQry = "select r.msisdn,r.brand,r.model,r.email,r.os,r.disabled from register r inner join groupMember g on r.msisdn = g.memberID where g.groupID = '" . $_POST['gid'] . "' limit " . $start . "," . $size;                            
-                                        }
-                                        $getUsersRes = $db->conn2->query($getUsersQry);
-                                        $total = $getUsersRes->num_rows;
-                                        
-                                        while ($user = $getUsersRes->fetch_assoc()) {
+                                        $getQry = "select interestID, interestName from interestBase ";
+                                        $res = $db->conn2->query($getQry);
+                                        $total = $res->num_rows;
+                                        while ($interest = $res->fetch_assoc()) {
                                             ?>
-                                            <tr id="user<?php echo str_replace('-', 'b', str_replace('+', 'a', $user['msisdn'])); ?>">
+                                            <tr id="interest<?php echo $interest['interestID']; ?>">
                                                 <th width="3%" class="text-center">
-                                                    <input  class="checkbox custom-checkbox" type="checkbox" value="<?php echo $user['msisdn']; ?>" />  
+                                                    <input  class="checkbox custom-checkbox" type="checkbox" value="<?php echo $interest['interestID']; ?>" />  
                                                 </th>
-                                                <th><?php echo $user['msisdn']; ?></th>
-                                                <th><?php echo $user['brand']; ?></th>
-                                                <th><?php echo $user['model']; ?></th>
-                                                <th width="10%"><?php echo $user['os']; ?></th>
-                                                <th id="disableCol<?php echo str_replace('-', 'b', str_replace('+', 'a', $user['msisdn'])); ?>"><?php if($user['disabled'] == 1) echo("Y");?></th>
-                                                <!--<th width="20%"></th>-->
+                                                <th><?php echo $interest['interestID']; ?></th>
+                                                <th><?php echo $interest['interestName']; ?></th>
+                                                <!--
+                                                <th>
+                                                	<button type="button" id="editInterest" onclick="editInterest('<?php echo $interest['interestID']; ?>')" class="btn btn-sm btn-default" >Edit</button>
+                                        		</th>
+                                        		-->
                                             </tr>
+                                            
                                         <?php } ?>
                                     </tbody>
                                 </table>
@@ -326,6 +253,11 @@ $_SESSION['session'] = time() + 60 * 60;
             <!-- START To Top Scroller -->
             <a href="#" class="totop animation" data-toggle="waypoints totop" data-marker="#main" data-showanim="bounceIn" data-hideanim="bounceOut" data-offset="-50%"><i class="ico-angle-up"></i></a>
             <!--/ END To Top Scroller -->
+            
+            <div>
+            	<input type="text" id="interest_name" class="form-control" placeholder="Interest name...">
+                <button type="button" id="add_interest" class="btn btn-sm">Add</button>
+            </div>
         </section>
         <!--/ END Template Main -->
 
@@ -344,9 +276,28 @@ $_SESSION['session'] = time() + 60 * 60;
         <!--/ Library script -->
 
         <script type="text/javascript">
+            function editInterest(interestID){
+        		alert(interestID);
+        	};
+        
             $(document).ready(function() {
-                            
-                $('#delete_user').click(function() {
+                $('#add_interest').click(function() {
+					$.ajax({
+						type: "POST",
+						url: "addInterest.php",
+						data: {interest_name: document.getElementById("interest_name").value},
+						dataType: "JSON",
+						success: function(result) {
+							alert(result.message);
+							if (result.flag == 0) {
+								window.location.reload();
+							}
+						}
+					});
+					
+					
+                });                            
+                $('#delete_interest').click(function() {
                     var dis = $(this);
                     var count = 0;
 
@@ -356,12 +307,12 @@ $_SESSION['session'] = time() + 60 * 60;
                     }).get();
 
                     if (count == 0) {
-                        $('#error-span').text('Please select at least one user in the list.');
+                        $('#error-span').text('Please select at least one interest in the list.');
                     } else if (count > 0) {
-                        if (confirm('Are you sure to delete checked user(s)?')) {
+                        if (confirm('Are you sure to delete checked interest(s)?')) {
                             $.ajax({
                                 type: "POST",
-                                url: "deleteUser.php",
+                                url: "deleteInterest.php",
                                 data: {item_type: 1, item_list: values},
                                 dataType: "JSON",
                                 success: function(result) {
@@ -369,102 +320,10 @@ $_SESSION['session'] = time() + 60 * 60;
                                     if (result.flag == 0) {
                                         $('.custom-checkbox').each(function() {
                                             if ($(this).is(':checked') == true) {
-                                                $('#user' + ($(this).val()).replace('+','a').replace('-','b')).remove();
+                                                $('#interest' + ($(this).val())).remove();
                                             }
                                         });
                                     }
-                                }
-                            });
-                        }
-                    }
-                });
-                
-                $('#enable_user').click(function() {
-                    var dis = $(this);
-                    var count = 0;
-
-                    var values = $('input:checkbox:checked.custom-checkbox').map(function() {
-                        count++;
-                        return this.value;
-                    }).get();
-
-                    if (count == 0) {
-                        $('#error-span').text('Please select at least one user in the list.');
-                    } else if (count > 0) {
-                        if (confirm('Are you sure to enable checked user(s)?')) {
-                            $.ajax({
-                                type: "POST",
-                                url: "enableUser.php",
-                                data: {item_type: 1, item_list: values},
-                                dataType: "JSON",
-                                success: function(result) {
-                                    alert(result.message);
-                                    if (result.flag == 0) {
-                                        $('.custom-checkbox').each(function() {
-                                            if ($(this).is(':checked') == true) {
-                                                $('#disableCol' + ($(this).val()).replace('+','a').replace('-','b')).html('');
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
-
-                $('#disable_user').click(function() {
-                    var dis = $(this);
-                    var count = 0;
-
-                    var values = $('input:checkbox:checked.custom-checkbox').map(function() {
-                        count++;
-                        return this.value;
-                    }).get();
-
-                    if (count == 0) {
-                        $('#error-span').text('Please select at least one user in the list.');
-                    } else if (count > 0) {
-                        if (confirm('Are you sure to disable checked user(s)?')) {
-                            $.ajax({
-                                type: "POST",
-                                url: "disableUser.php",
-                                data: {item_type: 1, item_list: values},
-                                dataType: "JSON",
-                                success: function(result) {
-                                    alert(result.message);
-                                    if (result.flag == 0) {
-                                        $('.custom-checkbox').each(function() {
-                                            if ($(this).is(':checked') == true) {
-                                                $('#disableCol' + ($(this).val()).replace('+','a').replace('-','b')).html('Y');
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
-
-                $('#test_apns_user').click(function() {
-                    var dis = $(this);
-                    var count = 0;
-
-                    var values = $('input:checkbox:checked.custom-checkbox').map(function() {
-                        count++;
-                        return this.value;
-                    }).get();
-
-                    if (count == 0) {
-                        $('#error-span').text('Please select at least one user in the list.');
-                    } else if (count > 0) {
-                        if (confirm('Are you sure to test notifying checked user(s)?')) {
-                            $.ajax({
-                                type: "POST",
-                                url: "notifyUser.php",
-                                data: {item_type: 1, item_list: values},
-                                dataType: "JSON",
-                                success: function(result) {
-                                    alert(result.message);
                                 }
                             });
                         }

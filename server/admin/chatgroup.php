@@ -124,7 +124,11 @@ $_SESSION['session'] = time() + 60 * 60;
                         <li>
                             <a href="chatgroup.php"><span class="figure"><i class="ico-user"></i></span>
                                 <span class="text">All Chat Groups</span></a>                        
-                        </li>                        
+                        </li>         
+                        <li>
+                            <a href="interests.php"><span class="figure"><i class="ico-user"></i></span>
+                                <span class="text">All Interests</span></a>                        
+                        </li>                                       
                         <li>
                             <a href="settings.php"><span class="figure"><i class="ico-settings"></i></span>
                                 <span class="text">Settings</span></a>                        

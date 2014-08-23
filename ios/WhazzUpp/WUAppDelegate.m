@@ -44,15 +44,20 @@
 
 - (void)customizeUI {
     if ([CommonMethods osVersion] < 7.0) {
-        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:25.0/255.0 green:129.0/255.0 blue:153.0/255.0 alpha:1.0]];
+        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:255.0/255.0 green:216.0/255.0 blue:0.0/255.0 alpha:1.0]];
         
-        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:25.0/255.0 green:129.0/255.0 blue:153.0/255.0 alpha:1.0]];
+        [[UITabBar appearance] setTintColor:[UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0]];
     }
     else {
-        [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor whiteColor]}];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:255.0/255.0 green:216.0/255.0 blue:0.0/255.0 alpha:1.0]];
         
-        [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
+        [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0]];
     }
+    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor blackColor]}];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
+
+
 }
 
 - (void)registerPushNotifications {

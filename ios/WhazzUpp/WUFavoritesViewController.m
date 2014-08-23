@@ -69,7 +69,7 @@
         if (![userDefaults boolForKey:kUserDefault_isWelcomeComplete])
             [self performSegueWithIdentifier:@"WUUserVerificationControllerSegue" sender:self];
         else
-            [[C2CallPhone currentPhone] transferAddressBook:NO];
+            [[C2CallPhone currentPhone] transferAddressBook:YES];
     }
 }
 

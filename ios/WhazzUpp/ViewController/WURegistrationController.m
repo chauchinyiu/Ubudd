@@ -151,6 +151,8 @@
         registerUserDTO.brand = @"Apple";
         registerUserDTO.uid = [UIDevice currentDevice].identifierForVendor.UUIDString;
         registerUserDTO.os = [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion];
+        registerUserDTO.countryCode = lblCountryCode.text;
+        registerUserDTO.phoneNo = self.phoneNumber.textContent.text;
         
         [self registerUserRequest:registerUserDTO];
     }

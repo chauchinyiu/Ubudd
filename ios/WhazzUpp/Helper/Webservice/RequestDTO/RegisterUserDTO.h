@@ -10,6 +10,6 @@
 
 @interface RegisterUserDTO : RequestBase
 
-@property (nonatomic, strong) NSString *msisdn, *model, *uid, *os, *brand;
+@property (nonatomic, strong) NSString *msisdn, *model, *uid, *os, *brand, *countryCode, *phoneNo;
 
 @end

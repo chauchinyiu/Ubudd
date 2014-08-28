@@ -89,6 +89,8 @@
     
     [self customizeUI];
 
+    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"showTestCall"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

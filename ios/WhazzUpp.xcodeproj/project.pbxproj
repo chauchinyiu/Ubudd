@@ -1100,6 +1100,7 @@
 		CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */; };
 		CE5462221999C86000E91636 /* UpdateAPNSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462211999C86000E91636 /* UpdateAPNSToken.m */; };
 		CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */; };
+		CE5E292D19AEEB860042736C /* WUAddressbookController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5E292C19AEEB860042736C /* WUAddressbookController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2247,6 +2248,8 @@
 		CE5462211999C86000E91636 /* UpdateAPNSToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSToken.m; sourceTree = "<group>"; };
 		CE5462231999C96000E91636 /* UpdateAPNSTokenDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAPNSTokenDTO.h; sourceTree = "<group>"; };
 		CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSTokenDTO.m; sourceTree = "<group>"; };
+		CE5E292B19AEEB860042736C /* WUAddressbookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUAddressbookController.h; sourceTree = "<group>"; };
+		CE5E292C19AEEB860042736C /* WUAddressbookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUAddressbookController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3393,6 +3396,8 @@
 				17E8762F194A56D400786419 /* WUWelcomeController.m */,
 				17FD053D195907840061938A /* WUTellFriendController.h */,
 				17FD053E195907840061938A /* WUTellFriendController.m */,
+				CE5E292B19AEEB860042736C /* WUAddressbookController.h */,
+				CE5E292C19AEEB860042736C /* WUAddressbookController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4644,6 +4649,7 @@
 				97995401175B5587001F2D52 /* main.m in Sources */,
 				97995405175B5587001F2D52 /* WUAppDelegate.m in Sources */,
 				17046E83194A3FB300034F9F /* WUVerificationController.m in Sources */,
+				CE5E292D19AEEB860042736C /* WUAddressbookController.m in Sources */,
 				CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */,
 				CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */,
 				17E7F1BA193BCC8700015AF6 /* WUUserProfileController.m in Sources */,
@@ -4752,7 +4758,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5ea64900-1f57-4813-b992-6c5ebcf96197";
+				PROVISIONING_PROFILE = "52620554-c2f0-4503-ae8e-cbbd5b5b9eb0";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7s armv7 arm64";
 			};
@@ -4780,7 +4786,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "5ea64900-1f57-4813-b992-6c5ebcf96197";
+				PROVISIONING_PROFILE = "52620554-c2f0-4503-ae8e-cbbd5b5b9eb0";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7s armv7 arm64";

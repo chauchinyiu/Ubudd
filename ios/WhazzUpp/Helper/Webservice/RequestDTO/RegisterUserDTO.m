@@ -17,6 +17,8 @@
     [dictionary setObject:self.os forKey:@"os"];
     [dictionary setObject:self.uid forKey:@"uid"];
     [dictionary setObject:self.msisdn forKey:@"msisdn"];
+    [dictionary setObject:self.countryCode forKey:@"countryCode"];
+    [dictionary setObject:self.phoneNo forKey:@"phoneNo"];
     
     return dictionary;
 }

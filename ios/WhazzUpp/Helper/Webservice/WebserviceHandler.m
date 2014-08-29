@@ -14,6 +14,8 @@
 #import "User.h"
 #import "VerifyUser.h"
 #import "UpdateAPNSToken.h"
+#import "UpdateUserField.h"
+#import "DataResponse.h"
 
 @interface WebserviceHandler()
 
@@ -66,6 +68,13 @@
         case METHOD_UPDATE_APNS_TOKEN:
             responseBase = [[UpdateAPNSToken alloc] init];
             break;
+        case METHOD_UPDATE_USER_FIELD:
+            responseBase = [[UpdateUserField alloc] init];
+            break;
+        case METHOD_DATA_REQUEST:
+            responseBase = [[DataResponse alloc] init];
+            break;
+            
         default:
             break;
     }

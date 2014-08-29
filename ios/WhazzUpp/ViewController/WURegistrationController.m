@@ -143,6 +143,9 @@
     if (self.phoneNumber.textContent.text.length > 0) {
         
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@%@", lblCountryCode.text, self.phoneNumber.textContent.text] forKey:@"msidn"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithString:lblCountryCode.text] forKey:@"countryCode"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithString:self.phoneNumber.textContent.text] forKey:@"phoneNo"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@%@", lblCountryCode.text, self.phoneNumber.textContent.text] forKey:@"msidn"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         RegisterUserDTO *registerUserDTO = [[RegisterUserDTO alloc] init];

@@ -24,11 +24,18 @@
 + (NSMutableURLRequest *)updateAPNSToken:(RequestBase *)parameter {
     return [NSMutableURLRequest requestWithURL:[self serviceURL:@"updateAPNSToken"]];
 }
++ (NSMutableURLRequest *)updateUserField:(RequestBase *)parameter {
+    return [NSMutableURLRequest requestWithURL:[self serviceURL:@"updateUserField"]];
+}
++ (NSMutableURLRequest *)updateRequestData:(RequestBase *)parameter Name:(NSString*)name{
+    return [NSMutableURLRequest requestWithURL:[self serviceURL:name]];
+}
 
 
 
 + (NSMutableURLRequest *)requestForMethod:(ServiceMethod)method parameter:(RequestBase *)parameter {
     NSMutableURLRequest *request = nil;
+    NSDictionary *dict = [parameter dictionaryRepresentation];
     
     switch (method) {
         case METHOD__REGISTER:
@@ -39,6 +46,12 @@
             break;
         case METHOD_UPDATE_APNS_TOKEN:
             request = [self updateAPNSToken:parameter];
+            break;
+        case METHOD_UPDATE_USER_FIELD:
+            request = [self updateUserField:parameter];
+            break;
+        case METHOD_DATA_REQUEST:
+            request = [self updateRequestData:parameter Name:[dict valueForKey:@"requestName"]];
             break;
         default:
             break;

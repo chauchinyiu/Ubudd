@@ -12,6 +12,8 @@ enum ServiceMethod {
     METHOD__REGISTER = 1,
     METHOD_VERIFICATIONCODE,
     METHOD_UPDATE_APNS_TOKEN,
+    METHOD_UPDATE_USER_FIELD,
+    METHOD_DATA_REQUEST,
 } typedef ServiceMethod;
 
 @interface ServiceURL : NSObject

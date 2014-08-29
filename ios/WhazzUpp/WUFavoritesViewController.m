@@ -82,10 +82,8 @@
 #pragma mark fetchRequest
 
 -(NSFetchRequest *) fetchRequest {
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0 AND not (userid in %@)", [NSArray arrayWithObjects:@"9bc2858f1194dc1c107", nil]];
-//    return [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
-    return [[SCDataManager instance] fetchRequestForFriendlist:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(userType == 0 OR userType == 2) AND callmeLink == 0"];
+    return [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
 }
 
 #pragma mark Configure Cell

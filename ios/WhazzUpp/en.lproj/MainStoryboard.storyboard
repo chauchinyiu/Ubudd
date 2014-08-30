@@ -3561,12 +3561,6 @@ Please try again later.</string>
                                 <action selector="close:" destination="mIK-nM-8TN" id="ci2-l4-Bgl"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Call" style="plain" id="3Ch-5r-P1a">
-                            <color key="tintColor" red="0.33673469389999999" green="0.26115034619999999" blue="0.18054848239999999" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="btnCallTapped" destination="mIK-nM-8TN" id="5Wd-5N-FLz"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>

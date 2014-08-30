@@ -84,8 +84,8 @@
 
     [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:70./255. green:188./255. blue:255./255. alpha:0.69]];
     [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:115./255. green:223./255. blue:81./255. alpha:0.69]];
-    [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_IN_WHAZZUPP];
-    [[SCBubbleViewOut appearance] setBubbleTypeOut:SC_BUBBLE_OUT_WHAZZUPP];
+    [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_IN_IOS7];
+    [[SCBubbleViewOut appearance] setBubbleTypeOut:SC_BUBBLE_OUT_IOS7];
     
     [self customizeUI];
         
@@ -140,8 +140,6 @@
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_UPDATE_APNS_TOKEN parameter:updateAPNSTokenDTO target:self action:@selector(updateAPNSTokenResponse:error:)];
-    
-    
 }
 
 

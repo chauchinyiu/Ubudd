@@ -62,14 +62,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     if ([userDefaults boolForKey:kUserDefault_isUserRegistered]) {
         if (![userDefaults boolForKey:kUserDefault_isWelcomeComplete])
             [self performSegueWithIdentifier:@"WUUserVerificationControllerSegue" sender:self];
-        else
-            [[C2CallPhone currentPhone] transferAddressBook:YES];
+        else{
+            [[C2CallPhone currentPhone] transferAddressBook:NO];
+            [self refetchResults];
+        }
     }
     [self.tableView reloadData];
 }

@@ -13,7 +13,7 @@
 
 @implementation WUFavoritesCell
 
-@synthesize nameLabel, statusLabel, onlineLabel;
+@synthesize nameLabel, statusLabel, onlineLabel, userBtn;
 
 @end
 
@@ -102,6 +102,7 @@
         favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
         favocell.statusLabel.text = user.userStatus? user.userStatus : @"Hi there, I'm using Sup?";
         
+        [favocell.userBtn setTag:indexPath.row];
         UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
         
         if (image) {
@@ -149,6 +150,11 @@
         [self refetchResults];
         [tableView reloadData];
     }
+}
+
+-(IBAction)showFriendInfo:(id)sender{
+    MOC2CallUser *user = [[[[self.fetchedResultsController sections] objectAtIndex:0] objects] objectAtIndex:[sender tag]];
+    [self showFriendDetailForUserid:user.userid];
 }
 
 -(IBAction)toggleEditing:(id)sender

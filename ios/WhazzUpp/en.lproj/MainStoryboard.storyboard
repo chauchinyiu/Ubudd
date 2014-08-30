@@ -318,6 +318,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOy-na-s8Y" userLabel="userImage">
                                             <rect key="frame" x="8" y="7" width="55" height="55"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="55" id="qx1-5d-rQU"/>
                                                 <constraint firstAttribute="width" constant="55" id="w58-zx-Vjy"/>
@@ -429,11 +430,11 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUFavoritesCell" rowHeight="45" id="Xrn-a2-DaS" customClass="WUFavoritesCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUFavoritesCell" rowHeight="45" id="Xrn-a2-DaS" customClass="WUFavoritesCell">
                                 <rect key="frame" x="0.0" y="66" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xrn-a2-DaS" id="HoC-db-o1F">
-                                    <rect key="frame" x="0.0" y="0.0" width="253" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="hmJ-6H-ben" userLabel="nameLabel">
@@ -447,7 +448,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mobile" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlZ-hx-W9R" userLabel="onlineLabel">
-                                            <rect key="frame" x="198" y="11" width="55" height="21"/>
+                                            <rect key="frame" x="210" y="11" width="55" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="55" id="O0P-Ob-YPy"/>
@@ -468,17 +469,27 @@
                                             <color key="textColor" red="0.63921568627450975" green="0.63921568627450975" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="single_avatar_ico.png" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-wk-wg9">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-wk-wg9">
                                             <rect key="frame" x="5" y="7" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N62-ig-ToQ">
+                                            <rect key="frame" x="281" y="7" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="Info_icon.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="showFriendInfo:" destination="eij-QV-GO5" eventType="touchUpInside" id="Ynq-dT-7NB"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="iKK-wN-8R3" secondAttribute="bottom" id="Dnq-5q-mk6"/>
                                         <constraint firstItem="iKK-wN-8R3" firstAttribute="leading" secondItem="HoC-db-o1F" secondAttribute="leading" constant="43" id="DzW-v3-OsA"/>
                                         <constraint firstItem="hmJ-6H-ben" firstAttribute="leading" secondItem="HoC-db-o1F" secondAttribute="leading" constant="43" id="Euo-c0-yh5"/>
-                                        <constraint firstAttribute="trailing" secondItem="DlZ-hx-W9R" secondAttribute="trailing" id="QtB-Ga-f7q"/>
+                                        <constraint firstAttribute="trailing" secondItem="DlZ-hx-W9R" secondAttribute="trailing" constant="55" id="QtB-Ga-f7q"/>
                                         <constraint firstItem="hmJ-6H-ben" firstAttribute="top" secondItem="HoC-db-o1F" secondAttribute="top" constant="3" id="YOQ-9M-ze3"/>
                                         <constraint firstItem="DlZ-hx-W9R" firstAttribute="top" secondItem="HoC-db-o1F" secondAttribute="top" constant="11" id="hjI-LE-VRK"/>
                                     </constraints>
@@ -488,6 +499,7 @@
                                     <outlet property="nameLabel" destination="hmJ-6H-ben" id="Fke-M4-bHB"/>
                                     <outlet property="onlineLabel" destination="DlZ-hx-W9R" id="Xye-iq-zno"/>
                                     <outlet property="statusLabel" destination="iKK-wN-8R3" id="0Kj-h5-wE9"/>
+                                    <outlet property="userBtn" destination="N62-ig-ToQ" id="ops-Ea-gWd"/>
                                     <outlet property="userImg" destination="dZR-wk-wg9" id="UcD-FW-PT4"/>
                                 </connections>
                             </tableViewCell>
@@ -1366,7 +1378,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="98"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="single_avatar_ico.png" translatesAutoresizingMaskIntoConstraints="NO" id="Car-HX-dvU">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Car-HX-dvU">
                                             <rect key="frame" x="15" y="6" width="73" height="82"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spF-dc-D2F">
@@ -1526,7 +1538,7 @@ asdfsdfg</string>
                                                     <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="single_avatar_ico.png" translatesAutoresizingMaskIntoConstraints="NO" id="QNK-9g-EhY">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="QNK-9g-EhY">
                                                     <rect key="frame" x="7" y="4" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -1766,7 +1778,7 @@ asdfsdfg</string>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="single_avatar_ico.png" id="dOA-7k-zaN">
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="btn_ico_avatar.png" id="dOA-7k-zaN">
                                             <rect key="frame" x="15" y="0.0" width="43" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
@@ -5245,7 +5257,7 @@ Remove search filter?</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="single_avatar_ico.png" translatesAutoresizingMaskIntoConstraints="NO" id="0SA-hf-ZOI" customClass="C2TapImageView">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="0SA-hf-ZOI" customClass="C2TapImageView">
                                             <rect key="frame" x="20" y="26" width="70" height="70"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -7732,6 +7744,7 @@ All rights reserved</string>
         <image name="Edit.png" width="20" height="20"/>
         <image name="Edit_blue.png" width="20" height="20"/>
         <image name="FaceBook-16x16.png" width="16" height="16"/>
+        <image name="Info_icon.png" width="30" height="30"/>
         <image name="MSG_bubble_blue_line.png" width="1" height="16"/>
         <image name="about_sup_logo_bg" width="320" height="256"/>
         <image name="about_sup_textfield_bottom" width="297" height="44"/>
@@ -7797,7 +7810,6 @@ All rights reserved</string>
         <image name="signupscreen_lastname_tab" width="190" height="43"/>
         <image name="signupscreen_profile_image_boader" width="62" height="62"/>
         <image name="signupscreen_text_tab" width="282" height="45"/>
-        <image name="single_avatar_ico.png" width="44" height="44"/>
         <image name="text-field" width="484" height="89"/>
         <image name="welcome_bg" width="320" height="480"/>
         <image name="welcome_box" width="212" height="206"/>
@@ -7811,9 +7823,9 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="n4d-a3-pqy"/>
-        <segue reference="gEM-cP-vpS"/>
+        <segue reference="DAE-Aq-bKb"/>
         <segue reference="XEP-pC-k3p"/>
         <segue reference="p90-nP-FHg"/>
+        <segue reference="n4d-a3-pqy"/>
     </inferredMetricsTieBreakers>
 </document>

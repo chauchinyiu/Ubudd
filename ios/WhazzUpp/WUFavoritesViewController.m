@@ -13,7 +13,7 @@
 
 @implementation WUFavoritesCell
 
-@synthesize nameLabel, statusLabel, onlineLabel;
+@synthesize nameLabel, statusLabel, onlineLabel, userBtn;
 
 @end
 
@@ -71,6 +71,7 @@
         else
             [[C2CallPhone currentPhone] transferAddressBook:YES];
     }
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,35 +83,61 @@
 #pragma mark fetchRequest
 
 -(NSFetchRequest *) fetchRequest {
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0 AND not (userid in %@)", [NSArray arrayWithObjects:@"9bc2858f1194dc1c107", nil]];
-//    return [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
-    return [[SCDataManager instance] fetchRequestForFriendlist:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(userType == 0 OR userType == 2) AND callmeLink == 0"];
+    return [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
 }
 
 #pragma mark Configure Cell
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return favoritesCellHeight;
+    MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]
+       || user.userType.intValue == 2){
+        return favoritesCellHeight;
+    }
+    else{
+        return 0;
+    }
 }
 
 -(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    if ([cell isKindOfClass:[WUFavoritesCell class]]) {
-        WUFavoritesCell *favocell = (WUFavoritesCell *) cell;
-        favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
-        favocell.statusLabel.text = user.userStatus? user.userStatus : @"Hi there, I'm using Sup?";
-        
-        UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
-        
-        if (image) {
-            favocell.userImg.image = image;
-            favocell.userImg.layer.cornerRadius = 15.0;
-            favocell.userImg.layer.masksToBounds = YES;
+    if([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]){
+        if ([cell isKindOfClass:[WUFavoritesCell class]]) {
+            WUFavoritesCell *favocell = (WUFavoritesCell *) cell;
+            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
+            favocell.statusLabel.text = user.userStatus? user.userStatus : @"Hi there, I'm using Sup?";
+            
+            [favocell.userBtn setTag:indexPath.row];
+            UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
+            
+            if (image) {
+                favocell.userImg.image = image;
+                favocell.userImg.layer.cornerRadius = 15.0;
+                favocell.userImg.layer.masksToBounds = YES;
+            }
         }
+    }
+    else if(user.userType.intValue == 2){
+        if ([cell isKindOfClass:[WUFavoritesCell class]]) {
+            WUFavoritesCell *favocell = (WUFavoritesCell *) cell;
+            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
+            favocell.statusLabel.text = user.userStatus? user.userStatus : @"Ubudd Group";
+            
+            [favocell.userBtn setTag:indexPath.row];
+            UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
+            
+            if (image) {
+                favocell.userImg.image = image;
+                favocell.userImg.layer.cornerRadius = 15.0;
+                favocell.userImg.layer.masksToBounds = YES;
+            }
+        }
+    }
+    else{
+        [cell setHidden:YES];
     }
 }
 
@@ -147,10 +174,24 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [[SCDataManager instance] removeDatabaseObject:user];
+        if(user.userType.intValue == 2){
+            [[SCDataManager instance] removeDatabaseObject:user];
+        }
+        else{
+            int favCnt = [[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
+            favCnt--;
+            [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:user.userid];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
         [self refetchResults];
         [tableView reloadData];
     }
+}
+
+-(IBAction)showFriendInfo:(id)sender{
+    MOC2CallUser *user = [[[[self.fetchedResultsController sections] objectAtIndex:0] objects] objectAtIndex:[sender tag]];
+    [self showFriendDetailForUserid:user.userid];
 }
 
 -(IBAction)toggleEditing:(id)sender

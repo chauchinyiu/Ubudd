@@ -143,6 +143,9 @@
     if (self.phoneNumber.textContent.text.length > 0) {
         
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@%@", lblCountryCode.text, self.phoneNumber.textContent.text] forKey:@"msidn"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithString:lblCountryCode.text] forKey:@"countryCode"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithString:self.phoneNumber.textContent.text] forKey:@"phoneNo"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@%@", lblCountryCode.text, self.phoneNumber.textContent.text] forKey:@"msidn"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         RegisterUserDTO *registerUserDTO = [[RegisterUserDTO alloc] init];
@@ -151,6 +154,8 @@
         registerUserDTO.brand = @"Apple";
         registerUserDTO.uid = [UIDevice currentDevice].identifierForVendor.UUIDString;
         registerUserDTO.os = [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion];
+        registerUserDTO.countryCode = lblCountryCode.text;
+        registerUserDTO.phoneNo = self.phoneNumber.textContent.text;
         
         [self registerUserRequest:registerUserDTO];
     }

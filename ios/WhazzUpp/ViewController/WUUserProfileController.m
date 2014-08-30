@@ -9,6 +9,10 @@
 #import "WUUserProfileController.h"
 #import "CommonMethods.h"
 #import "WUAppDelegate.h"
+#import "UpdateUserFieldDTO.h"
+#import "UpdateUserField.h"
+#import "WebServiceHandler.h"
+
 
 #define kProfileImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kProfileImage_UseCamera @"Use Camera"
@@ -65,6 +69,18 @@
         [userProfile saveUserProfileWithCompletionHandler:^(BOOL success) {
             
             [CommonMethods showLoading:NO title:nil message:nil];
+            
+            //update c2call id to server
+            NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
+            UpdateUserFieldDTO *updateUserFieldDTO = [[UpdateUserFieldDTO alloc] init];
+            updateUserFieldDTO.msisdn = msdin;
+            updateUserFieldDTO.field = @"c2CallID";
+            updateUserFieldDTO.value = [[SCUserProfile currentUser] userid];
+
+            
+            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+            [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
+            
             
             if ([self.userDefaults boolForKey:kUserDefault_isWelcomeComplete])
                 [CommonMethods showAlertWithTitle:nil message:@"Profile updated" delegate:nil];

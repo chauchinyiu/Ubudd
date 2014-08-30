@@ -7,13 +7,13 @@
 //
 
 #import "WUVerificationController.h"
-#import "../Helper/Constant.h"
+#import "Constant.h"
 #import "WebserviceHandler.h"
 #import "ServiceURL.h"
 #import "ResponseBase.h"
 #import "CommonMethods.h"
-#import "../Helper/DataModel/VerifyUser.h"
-#import "../Helper/Webservice/RequestDTO/VerifyUserDTO.h"
+#import "VerifyUser.h"
+#import "VerifyUserDTO.h"
 
 @implementation WUVerificationController
 

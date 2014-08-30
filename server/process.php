@@ -26,7 +26,7 @@ class MyAPI extends API {
 
     protected function register($args) {
 //echo 2;
-        if ($args['msisdn'] == '' || $args['brand'] == '' || $args['model'] == '' || $args['os'] == '' || $args['uid'] == '')
+        if ($args['msisdn'] == '' || $args['brand'] == '' || $args['model'] == '' || $args['os'] == '' || $args['uid'] == '' || $args['countryCode'] == '' || $args['phoneNo'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
 
@@ -60,8 +60,8 @@ class MyAPI extends API {
             return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         } else {
 	        $stmt->close();
-			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL)");
-			$stmt->bind_param('ssssssss', $userId, $brand, $model, $os, $uid, $email, $pwd, $rand);
+			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL, ?, ?, '')");
+			$stmt->bind_param('ssssssssss', $userId, $brand, $model, $os, $uid, $email, $pwd, $rand, $countryCode, $phoneNo);
 			$userId = $args['msisdn'];
 			$brand = $args['brand'];
 			$model = $args['model'];
@@ -69,6 +69,8 @@ class MyAPI extends API {
 			$uid = $args['uid'];
 			$email = $args['msisdn'] . "@mobifyi.com";
 			$pwd = $args['msisdn'];
+			$countryCode = $args['countryCode'];
+			$phoneNo = $args['phoneNo'];
 			$stmt->execute();
 			$stmt->close();
 
@@ -121,6 +123,20 @@ class MyAPI extends API {
 		$stmt->execute();
 		$stmt->close();
 		return array('error' => 0, 'message' => 'Token updated');
+    }
+
+    protected function updateUserField($args) {
+
+        if ($args['msisdn'] == '' || $args['field'] == '' || $args['value'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("update register set " . $args['field'] . " = ? where email = ?");
+		$stmt->bind_param('ss', $value, $userId);
+		$value = $args['value'];
+		$userId = $args['msisdn'] . "@mobifyi.com";
+		$stmt->execute();
+		$stmt->close();
+		return array('error' => 0, 'message' => $args['field'] . ' updated');
     }
 
 }

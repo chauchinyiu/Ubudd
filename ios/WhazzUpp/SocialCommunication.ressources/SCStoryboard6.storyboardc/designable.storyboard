@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="oZe-TI-2of">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="oZe-TI-2of">
     <dependencies>
         <deployment version="1536" defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -7681,9 +7681,9 @@ Remove search filter?</string>
         <image name="ico_footer_phonebook_contacts_01.png" width="30" height="30"/>
         <image name="ico_friendcaller-color.png" width="24" height="24"/>
         <image name="ico_front_kamera.png" width="43" height="26"/>
-        <image name="ico_group.png" width="97" height="71"/>
+        <image name="ico_group.png" width="30" height="30"/>
         <image name="ico_hangup.png" width="30" height="30"/>
-        <image name="ico_micro.png" width="86" height="52"/>
+        <image name="ico_micro.png" width="30" height="30"/>
         <image name="ico_micro_mute.png" width="30" height="30"/>
         <image name="ico_msg_blue_50x50.png" width="25" height="25"/>
         <image name="ico_msg_cam.png" width="16" height="9"/>
@@ -7710,7 +7710,7 @@ Remove search filter?</string>
         <image name="icon_call.png" width="34" height="36"/>
         <image name="icon_delet_number.png" width="90" height="60"/>
         <image name="img_add_attachement.png" width="43" height="43"/>
-        <image name="img_add_profile_picture.png" width="61" height="57"/>
+        <image name="img_add_profile_picture.png" width="53" height="50"/>
         <image name="img_connection_ok.png" width="22" height="19"/>
         <image name="img_mic.png" width="30" height="30"/>
         <image name="img_star.png" width="23" height="23"/>

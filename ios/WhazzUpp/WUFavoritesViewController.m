@@ -108,7 +108,7 @@
         if ([cell isKindOfClass:[WUFavoritesCell class]]) {
             WUFavoritesCell *favocell = (WUFavoritesCell *) cell;
             favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
-            favocell.statusLabel.text = user.userStatus? user.userStatus : @"Hi there, I'm using Sup?";
+            favocell.statusLabel.text = user.userStatus? user.userStatus : @"Hi there, I'm using Ubudd?";
             
             [favocell.userBtn setTag:indexPath.row];
             UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];

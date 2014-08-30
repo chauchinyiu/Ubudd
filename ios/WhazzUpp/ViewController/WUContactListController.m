@@ -19,7 +19,7 @@
 
 @implementation WUAddressBookCell
 
-@synthesize nameLabel, statusLabel;
+@synthesize nameLabel, statusLabel, addButton;
 
 @end
 
@@ -80,6 +80,17 @@
     ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     [ubuddUsers performFetch:nil];
 
+    //count fav
+    int favCnt = 0;
+    for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
+        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]) {
+            favCnt++;
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
@@ -196,7 +207,18 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return favoritesCellHeight;
+    if (indexPath.section == 0) {
+        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
+        if(user.userType.intValue == 2){
+            return 0;
+        }
+        else{
+            return favoritesCellHeight;
+        }
+    }
+    else{
+        return favoritesCellHeight;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -207,22 +229,28 @@
 
         MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
 
-        favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
-        if([[NSUserDefaults standardUserDefaults] boolForKey:[[C2CallPhone currentPhone] nameForUserid:user.userid]]){
-            favocell.statusLabel.text = @"Added to favorites";
+        if(user.userType.intValue == 2){
+            [favocell setHidden:YES];
         }
         else{
-            favocell.statusLabel.text = @"Using Ubudd";
-        }
-        
-        UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
+            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
+            if([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]){
+                favocell.statusLabel.text = @"Added to favorites";
+                [favocell.addButton setHidden:YES];
+            }
+            else{
+                favocell.statusLabel.text = @"Using Ubudd";
+                favocell.addButton.tag = indexPath.row;
+            }
             
-        if (image) {
-            favocell.userImg.image = image;
-            favocell.userImg.layer.cornerRadius = 15.0;
-            favocell.userImg.layer.masksToBounds = YES;
+            UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
+                
+            if (image) {
+                favocell.userImg.image = image;
+                favocell.userImg.layer.cornerRadius = 15.0;
+                favocell.userImg.layer.masksToBounds = YES;
+            }
         }
-        
     }
     else{
         ABRecordRef record = (__bridge ABRecordRef)([addressListSection objectAtIndex:indexPath.row]);
@@ -250,10 +278,24 @@
         
         favocell.statusLabel.text = phone;
         [favocell.userImg setHidden:YES];
+        [favocell.addButton setHidden:YES];
     }
  
  
     return favocell;
+}
+
+-(IBAction)addToFriend:(id)sender{
+     MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
+    int favCnt = [[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
+    favCnt++;
+    [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:user.userid];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
+    favocell.statusLabel.text = @"Added to favorites";
+    [favocell.addButton setHidden:YES];
 }
 
 

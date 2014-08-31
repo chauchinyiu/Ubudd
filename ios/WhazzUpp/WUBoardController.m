@@ -48,35 +48,35 @@
     [super configureCell:cell atIndexPath:indexPath];
     if ([cell isKindOfClass:[MessageCellOutStream class]]) {
         MessageCellOutStream *c = (MessageCellOutStream*)cell;
-        [c.headline setText:[[SCUserProfile currentUser] firstname]];
+        [c.headline setText:@"me"];
     }
     if ([cell isKindOfClass:[ImageCellOutStream class]]) {
         ImageCellOutStream *c = (ImageCellOutStream*)cell;
-        [c.headline setText:[[SCUserProfile currentUser] firstname]];
+        [c.headline setText:@"me"];
     }
     if ([cell isKindOfClass:[LocationCellOutStream class]]) {
         LocationCellOutStream *c = (LocationCellOutStream*)cell;
-        [c.headline setText:[[SCUserProfile currentUser] firstname]];
+        [c.headline setText:@"me"];
     }
     if ([cell isKindOfClass:[AudioCellOutStream class]]) {
         AudioCellOutStream *c = (AudioCellOutStream*)cell;
-        [c.headline setText:[[SCUserProfile currentUser] firstname]];
+        [c.headline setText:@"me"];
     }
     if ([cell isKindOfClass:[VideoCellOutStream class]]) {
         VideoCellOutStream *c = (VideoCellOutStream*)cell;
-        [c.headline setText:[[SCUserProfile currentUser] firstname]];
+        [c.headline setText:@"me"];
     }
     if ([cell isKindOfClass:[FriendCellOutStream class]]) {
         FriendCellOutStream *c = (FriendCellOutStream*)cell;
-        [c.headline setText:[[SCUserProfile currentUser] firstname]];
+        [c.headline setText:@"me"];
     }
     if ([cell isKindOfClass:[ContactCellOutStream class]]) {
         ContactCellOutStream *c = (ContactCellOutStream*)cell;
-        [c.headline setText:[[SCUserProfile currentUser] firstname]];
+        [c.headline setText:@"me"];
     }
     if ([cell isKindOfClass:[CallCellOutStream class]]) {
         CallCellOutStream *c = (CallCellOutStream*)cell;
-        [c.headline setText:[[SCUserProfile currentUser] firstname]];
+        [c.headline setText:@"me"];
     }
 
 }

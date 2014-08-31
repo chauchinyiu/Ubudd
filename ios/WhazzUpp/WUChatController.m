@@ -134,12 +134,7 @@ typedef enum : NSUInteger {
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, kUTTypeMovie, nil];
             imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-            
-            [self captureMediaFromImagePicker:imagePicker andCompleteAction:^(NSString *key) {
-                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-            }];
-            
-            //[self presentViewController:imagePicker animated:YES completion:nil];
+            [self presentViewController:imagePicker animated:YES completion:nil];
         }
         else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_TakePhotoOrVideo]) {
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -148,10 +143,7 @@ typedef enum : NSUInteger {
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
             imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, kUTTypeMovie, nil];
             imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-            
-            [self captureMediaFromImagePicker:imagePicker andCompleteAction:^(NSString *key) {
-                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-            }];
+            [self presentViewController:imagePicker animated:YES completion:nil];
         }
         else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_SubmitLocation]) {
             [self requestLocation:^(NSString *key) {
@@ -168,5 +160,36 @@ typedef enum : NSUInteger {
         }
     }
 }
+
+#pragma mark - UIImagePickerControllerDelegate
+
+// This method is called when an image has been chosen from the library or taken from the camera.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+
+     [[C2CallPhone currentPhone] submitImage:image withQuality:UIImagePickerControllerQualityTypeMedium andMessage:nil toTarget:self.targetUserid withCompletionHandler:^(BOOL success, NSString *richMediaKey, NSError *error) {
+         //TODO MingKei, please take care of the error handling and successful
+         
+         if(success)
+         {
+             NSLog(@"success");
+         }
+         else
+         {
+            NSLog(@"error");
+         }
+          [self dismissViewControllerAnimated:YES completion:NULL];
+     }];
+
+  
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 @end

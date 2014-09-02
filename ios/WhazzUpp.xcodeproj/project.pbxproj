@@ -1096,6 +1096,7 @@
 		97A45CBE175BEBA800320AE6 /* WUChatHistoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A45CBD175BEBA800320AE6 /* WUChatHistoryController.m */; };
 		97AFCF7217801CD0005A8D49 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97AFCF7017801CAD005A8D49 /* CoreText.framework */; };
 		97AFCF8D1780213E005A8D49 /* R1PhotoEffectsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97AFCF8C1780213E005A8D49 /* R1PhotoEffectsSDK.a */; };
+		CE01E46E19B5AC41003A0289 /* WUUserSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01E46D19B5AC41003A0289 /* WUUserSelectionController.m */; };
 		CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C003198C8D3500D22BFE /* VerifyUser.m */; };
 		CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */; };
 		CE5462221999C86000E91636 /* UpdateAPNSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462211999C86000E91636 /* UpdateAPNSToken.m */; };
@@ -2251,6 +2252,8 @@
 		97A45CBD175BEBA800320AE6 /* WUChatHistoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUChatHistoryController.m; sourceTree = "<group>"; };
 		97AFCF7017801CAD005A8D49 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		97AFCF8C1780213E005A8D49 /* R1PhotoEffectsSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = R1PhotoEffectsSDK.a; sourceTree = "<group>"; };
+		CE01E46C19B5AC41003A0289 /* WUUserSelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUUserSelectionController.h; sourceTree = "<group>"; };
+		CE01E46D19B5AC41003A0289 /* WUUserSelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUUserSelectionController.m; sourceTree = "<group>"; };
 		CE30C003198C8D3500D22BFE /* VerifyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyUser.m; sourceTree = "<group>"; };
 		CE30C005198C8D4100D22BFE /* VerifyUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUser.h; sourceTree = "<group>"; };
 		CE30C006198C8D7000D22BFE /* VerifyUserDTO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUserDTO.h; sourceTree = "<group>"; };
@@ -3443,6 +3446,8 @@
 				CE7194BE19AF7F2A001B28A0 /* WUContactListController.m */,
 				CED5F1C719B5760700DF8772 /* WUNewChatViewController.h */,
 				CED5F1C819B5760700DF8772 /* WUNewChatViewController.m */,
+				CE01E46C19B5AC41003A0289 /* WUUserSelectionController.h */,
+				CE01E46D19B5AC41003A0289 /* WUUserSelectionController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4738,6 +4743,7 @@
 				CE787B1619B030EF00A0BD19 /* DataResponse.m in Sources */,
 				1730630D19277F6B0018EE25 /* myshader.fsh in Sources */,
 				17019C541944E4AE00ABFB90 /* WUAddGroupController.m in Sources */,
+				CE01E46E19B5AC41003A0289 /* WUUserSelectionController.m in Sources */,
 				1733A0A7193671500064E97A /* Reachability.m in Sources */,
 				CE5462221999C86000E91636 /* UpdateAPNSToken.m in Sources */,
 				97230C24176F0AEF009E7CE4 /* WULogoutController.m in Sources */,

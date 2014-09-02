@@ -1730,7 +1730,7 @@ asdfsdfg</string>
                         <color key="barTintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Mqp-9r-GYy" kind="relationship" relationship="rootViewController" id="o5P-Va-E8Z"/>
+                        <segue destination="Mqp-9r-GYy" kind="relationship" relationship="rootViewController" id="lYw-rR-8z6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4rD-NL-sCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1740,7 +1740,7 @@ asdfsdfg</string>
         <!--User Selection Controller - Select Friends-->
         <scene sceneID="t17-L8-zmQ">
             <objects>
-                <tableViewController storyboardIdentifier="SCUserSelectionController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mqp-9r-GYy" customClass="SCUserSelectionController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SCUserSelectionController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mqp-9r-GYy" customClass="WUUserSelectionController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rdC-4k-yfb">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1756,7 +1756,7 @@ asdfsdfg</string>
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SCUserCell" textLabel="Y2K-0P-7Ho" detailTextLabel="iSk-14-Oeh" imageView="dOA-7k-zaN" style="IBUITableViewCellStyleSubtitle" id="PEv-dN-M5h">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SCUserCell" textLabel="Y2K-0P-7Ho" detailTextLabel="iSk-14-Oeh" imageView="dOA-7k-zaN" style="IBUITableViewCellStyleSubtitle" id="PEv-dN-M5h" customClass="WUUserSelectCell">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEv-dN-M5h" id="yak-Mx-DE4">
@@ -1784,6 +1784,10 @@ asdfsdfg</string>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="subTitleLabel" destination="iSk-14-Oeh" id="ElT-BM-OIu"/>
+                                    <outlet property="titleLabel" destination="Y2K-0P-7Ho" id="lFf-Xm-iVU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -7940,9 +7944,9 @@ All rights reserved</string>
     <inferredMetricsTieBreakers>
         <segue reference="bqz-UJ-YGf"/>
         <segue reference="n4d-a3-pqy"/>
-        <segue reference="ZrM-q5-zCU"/>
-        <segue reference="Lkj-dH-5d3"/>
+        <segue reference="l4c-f0-WTn"/>
         <segue reference="p90-nP-FHg"/>
         <segue reference="XEP-pC-k3p"/>
+        <segue reference="ZrM-q5-zCU"/>
     </inferredMetricsTieBreakers>
 </document>

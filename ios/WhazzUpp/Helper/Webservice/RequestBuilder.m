@@ -30,6 +30,9 @@
 + (NSMutableURLRequest *)updateRequestData:(RequestBase *)parameter Name:(NSString*)name{
     return [NSMutableURLRequest requestWithURL:[self serviceURL:name]];
 }
++ (NSMutableURLRequest *)verifyC2CallID:(RequestBase *)parameter {
+    return [NSMutableURLRequest requestWithURL:[self serviceURL:@"verifyC2CallID"]];
+}
 
 
 
@@ -52,6 +55,9 @@
             break;
         case METHOD_DATA_REQUEST:
             request = [self updateRequestData:parameter Name:[dict valueForKey:@"requestName"]];
+            break;
+        case METHOD_VERIFY_C2CALLID:
+            request = [self verifyC2CallID:parameter];
             break;
         default:
             break;

@@ -1050,24 +1050,6 @@
             </objects>
             <point key="canvasLocation" x="1497" y="4144"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="g8H-TT-sb4">
-            <objects>
-                <viewController id="79b-o3-3zp" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Pkp-dr-Vo5"/>
-                        <viewControllerLayoutGuide type="bottom" id="cYT-hm-rL3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="R22-8A-HTq">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6N8-Mr-JkZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1497" y="4837"/>
-        </scene>
         <!--Group Detail Controller - Group Info-->
         <scene sceneID="p3H-vW-6rX">
             <objects>
@@ -7460,7 +7442,7 @@ Remove search filter?</string>
                                 <rect key="frame" x="54" y="198" width="212" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <string key="text">Enjoy a lifetime
-of SUP 
+of Ubudd 
 service</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

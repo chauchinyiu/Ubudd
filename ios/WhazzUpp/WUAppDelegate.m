@@ -14,8 +14,8 @@
 #import "ServiceURL.h"
 #import "ResponseBase.h"
 
-#import "Helper/DataModel/UpdateAPNSToken.h"
-#import "Helper/Webservice/RequestDTO/UpdateAPNSTokenDTO.h"
+#import "UpdateAPNSToken.h"
+#import "UpdateAPNSTokenDTO.h"
 
 @interface WUAppDelegate ()
 

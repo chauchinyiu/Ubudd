@@ -16,6 +16,7 @@
 #import "UpdateAPNSToken.h"
 #import "UpdateUserField.h"
 #import "DataResponse.h"
+#import "VerifyC2CallID.h"
 
 @interface WebserviceHandler()
 
@@ -73,6 +74,9 @@
             break;
         case METHOD_DATA_REQUEST:
             responseBase = [[DataResponse alloc] init];
+            break;
+        case METHOD_VERIFY_C2CALLID:
+            responseBase = [[VerifyC2CallID alloc] init];
             break;
             
         default:

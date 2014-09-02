@@ -139,6 +139,26 @@ class MyAPI extends API {
 		return array('error' => 0, 'message' => $args['field'] . ' updated');
     }
 
+    protected function verifyC2CallID($args) {
+
+        if ($args['c2CallID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("select c2CallID from register where c2CallID = ?");
+		$stmt->bind_param('s', $c2CallID);
+		$c2CallID = $args['c2CallID'];
+		$stmt->execute();
+		$verifyRes = $stmt->get_result();
+
+        $verifyRow = mysqli_fetch_assoc($verifyRes);
+
+        if ($verifyRow['c2CallID'] == $args['c2CallID']) {
+            return array('error' => 0, 'message' => 'Verified Successfully', 'c2CallID' => $args['c2CallID'], 'resultCode' => 1);
+        } else {
+            return array('error' => 1, 'message' => 'Verification failed', 'c2CallID' => $args['c2CallID'], 'resultCode' => 0);
+        }
+    }
+
 }
 
 if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {

@@ -14,6 +14,7 @@
 #import "CommonMethods.h"
 #import "DataResponse.h"
 #import "DataRequest.h"
+#import "ResponseHandler.h"
 
 #import "DBHandler.h"
 
@@ -27,6 +28,7 @@
     CGFloat favoritesCellHeight;
     NSMutableArray *addressListSection;
     NSFetchedResultsController *ubuddUsers;
+    ResponseHandler *resHandler;
 }
 @end
 
@@ -45,6 +47,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    resHandler = [[ResponseHandler alloc] init];
 
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                               reuseIdentifier:@"WUAddressBookCell"];
@@ -87,6 +91,12 @@
         if ([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]) {
             favCnt++;
         }
+        if(user.userType.intValue != 2){
+            //verify the c2call id with our server
+            if(![resHandler c2CallIDVerified:user.userid]){
+                [resHandler verifyC2CallID:user.userid];
+            }
+        }
     }
     [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -122,8 +132,11 @@
             
             for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
                 MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
-                if ([phone isEqualToString: user.ownNumber]) {
-                    hasUbudd = true;
+                //filter verified c2callID only
+                if([resHandler c2CallIDPassed:user.userid]){
+                    if ([phone isEqualToString: user.ownNumber]) {
+                        hasUbudd = true;
+                    }
                 }
             }
         }
@@ -131,7 +144,7 @@
             [addressListSection addObject:(__bridge id)(record)];
         }
     }
-    
+    [self.tableView reloadData];
     /*
     
     NSUInteger phoneCnt = 0;
@@ -169,17 +182,6 @@
     */
 }
 
-- (void)dataRequestResponse:(ResponseBase *)response error:(NSError *)error {
-    DataResponse *data = (DataResponse *)response;
-    
-    if (error)
-        [CommonMethods showAlertWithTitle:@"Registration Error" message:[error localizedDescription] delegate:nil];
-    else {
-        
-    }
-}
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -212,6 +214,9 @@
         if(user.userType.intValue == 2){
             return 0;
         }
+        else if(![resHandler c2CallIDPassed:user.userid]){
+            return 0;
+        }
         else{
             return favoritesCellHeight;
         }
@@ -230,6 +235,9 @@
         MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
 
         if(user.userType.intValue == 2){
+            [favocell setHidden:YES];
+        }
+        else if(![resHandler c2CallIDPassed:user.userid]){
             [favocell setHidden:YES];
         }
         else{

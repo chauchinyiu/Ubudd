@@ -1105,6 +1105,9 @@
 		CE787B1319B027BE00A0BD19 /* UpdateUserFieldDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE787B1219B027BE00A0BD19 /* UpdateUserFieldDTO.m */; };
 		CE787B1619B030EF00A0BD19 /* DataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CE787B1519B030EF00A0BD19 /* DataResponse.m */; };
 		CE787B1919B032FD00A0BD19 /* DataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE787B1819B032FD00A0BD19 /* DataRequest.m */; };
+		CED5F1C019B555AA00DF8772 /* VerifyC2CallID.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */; };
+		CED5F1C319B5560900DF8772 /* VerifyC2CallIDDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C219B5560900DF8772 /* VerifyC2CallIDDTO.m */; };
+		CED5F1C619B558B300DF8772 /* ResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C519B558B300DF8772 /* ResponseHandler.m */; };
 		CEEFF0F119B1678A00B59179 /* Info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEFF0F019B1678A00B59179 /* Info_icon.png */; };
 		CEEFF0F319B1679200B59179 /* Info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEFF0F219B1679200B59179 /* Info_icon@2x.png */; };
 		CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEFF0FB19B19EE000B59179 /* WUBoardController.m */; };
@@ -2265,6 +2268,12 @@
 		CE787B1519B030EF00A0BD19 /* DataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataResponse.m; sourceTree = "<group>"; };
 		CE787B1719B032FD00A0BD19 /* DataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRequest.h; sourceTree = "<group>"; };
 		CE787B1819B032FD00A0BD19 /* DataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataRequest.m; sourceTree = "<group>"; };
+		CED5F1BE19B555AA00DF8772 /* VerifyC2CallID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyC2CallID.h; sourceTree = "<group>"; };
+		CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyC2CallID.m; sourceTree = "<group>"; };
+		CED5F1C119B5560900DF8772 /* VerifyC2CallIDDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyC2CallIDDTO.h; sourceTree = "<group>"; };
+		CED5F1C219B5560900DF8772 /* VerifyC2CallIDDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyC2CallIDDTO.m; sourceTree = "<group>"; };
+		CED5F1C419B558B300DF8772 /* ResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseHandler.h; sourceTree = "<group>"; };
+		CED5F1C519B558B300DF8772 /* ResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseHandler.m; sourceTree = "<group>"; };
 		CEEFF0F019B1678A00B59179 /* Info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Info_icon.png; sourceTree = "<group>"; };
 		CEEFF0F219B1679200B59179 /* Info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Info_icon@2x.png"; sourceTree = "<group>"; };
 		CEEFF0FA19B19EE000B59179 /* WUBoardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUBoardController.h; sourceTree = "<group>"; };
@@ -3380,6 +3389,8 @@
 				CE787B0F19B0277E00A0BD19 /* UpdateUserField.m */,
 				CE787B1419B030EF00A0BD19 /* DataResponse.h */,
 				CE787B1519B030EF00A0BD19 /* DataResponse.m */,
+				CED5F1BE19B555AA00DF8772 /* VerifyC2CallID.h */,
+				CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -3400,6 +3411,8 @@
 				CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */,
 				CE787B1719B032FD00A0BD19 /* DataRequest.h */,
 				CE787B1819B032FD00A0BD19 /* DataRequest.m */,
+				CED5F1C119B5560900DF8772 /* VerifyC2CallIDDTO.h */,
+				CED5F1C219B5560900DF8772 /* VerifyC2CallIDDTO.m */,
 			);
 			path = RequestDTO;
 			sourceTree = "<group>";
@@ -3440,6 +3453,8 @@
 				17EF4A63192A8C7300E36286 /* CommonMethods.h */,
 				17EF4A64192A8C7300E36286 /* CommonMethods.m */,
 				17C556061946546500D6132E /* Constant.h */,
+				CED5F1C419B558B300DF8772 /* ResponseHandler.h */,
+				CED5F1C519B558B300DF8772 /* ResponseHandler.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -4678,6 +4693,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17F9C1B9193A5FAB002CC76E /* WULaunchScreenController.m in Sources */,
+				CED5F1C019B555AA00DF8772 /* VerifyC2CallID.m in Sources */,
 				CE787B1319B027BE00A0BD19 /* UpdateUserFieldDTO.m in Sources */,
 				1733A0AE1936750D0064E97A /* User.m in Sources */,
 				97995401175B5587001F2D52 /* main.m in Sources */,
@@ -4690,6 +4706,7 @@
 				CE7194BF19AF7F2A001B28A0 /* WUContactListController.m in Sources */,
 				1733A0B9193677050064E97A /* RegisterUserDTO.m in Sources */,
 				170C61F91937D3CD00E25EC7 /* WURegistrationController.m in Sources */,
+				CED5F1C319B5560900DF8772 /* VerifyC2CallIDDTO.m in Sources */,
 				1733A09A19366BC60064E97A /* WebserviceHandler.m in Sources */,
 				CE787B1919B032FD00A0BD19 /* DataRequest.m in Sources */,
 				17FD053F195907840061938A /* WUTellFriendController.m in Sources */,
@@ -4698,6 +4715,7 @@
 				972F3E1E175CA5250006DEF6 /* WUFavoritesViewController.m in Sources */,
 				CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */,
 				1733A09D19366D720064E97A /* RequestBuilder.m in Sources */,
+				CED5F1C619B558B300DF8772 /* ResponseHandler.m in Sources */,
 				972F453E175CB75F0006DEF6 /* WUContactDetailController.m in Sources */,
 				CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */,
 				17A1D68F1927ED3700B28792 /* WULoginController.m in Sources */,

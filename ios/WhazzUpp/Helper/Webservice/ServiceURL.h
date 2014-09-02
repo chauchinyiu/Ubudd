@@ -14,6 +14,7 @@ enum ServiceMethod {
     METHOD_UPDATE_APNS_TOKEN,
     METHOD_UPDATE_USER_FIELD,
     METHOD_DATA_REQUEST,
+    METHOD_VERIFY_C2CALLID,
 } typedef ServiceMethod;
 
 @interface ServiceURL : NSObject

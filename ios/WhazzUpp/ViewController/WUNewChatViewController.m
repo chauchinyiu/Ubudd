@@ -68,6 +68,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
+    [resHandler verifyNewC2CallID];
     [self.tableView reloadData];
 }
 
@@ -131,6 +132,10 @@
                 favocell.userImg.layer.cornerRadius = 15.0;
                 favocell.userImg.layer.masksToBounds = YES;
             }
+            else{
+                favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
+            }
+            
         }
     }
     else{

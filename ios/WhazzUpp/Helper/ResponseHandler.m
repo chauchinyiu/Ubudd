@@ -13,8 +13,47 @@
 
 #import "VerifyC2CallID.h"
 #import "VerifyC2CallIDDTO.h"
+#import "DBHandler.h"
+
+@interface ResponseHandler (){
+    NSFetchedResultsController *ubuddUsers;
+}
+@end
 
 @implementation ResponseHandler
+@synthesize managedObjectContext = _managedObjectContext;
+
+-(id)init{
+    self.managedObjectContext = [DBHandler context];
+    return self;
+}
+
+-(void)verifyNewC2CallID{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(userType == 0 OR userType == 2) AND callmeLink == 0"];
+    NSFetchRequest *fetch = [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
+    
+    ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    [ubuddUsers performFetch:nil];
+    
+    //count fav
+    int favCnt = 0;
+    for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
+        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]) {
+            favCnt++;
+        }
+        if(user.userType.intValue != 2){
+            //verify the c2call id with our server
+            if(![self c2CallIDVerified:user.userid]){
+                [self verifyC2CallID:user.userid];
+            }
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+
+}
 
 -(void)verifyC2CallID:(NSString*)c2CallID{
     VerifyC2CallIDDTO *vDTO = [[VerifyC2CallIDDTO alloc] init];

@@ -10,7 +10,9 @@
 
 @interface ResponseHandler : NSObject
 -(void)verifyC2CallID:(NSString*)c2CallID;
+-(void)verifyNewC2CallID;
 -(BOOL)c2CallIDVerified:(NSString*)c2CallID;
 -(BOOL)c2CallIDPassed:(NSString*)c2CallID;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

@@ -158,7 +158,7 @@
             if ([user.userType intValue] == 2) {
                 histcell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
             } else {
-                histcell.userImage.image = [UIImage imageNamed:@"single_avatar_ico.png"];
+                histcell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
             }
         }
 

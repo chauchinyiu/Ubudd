@@ -1108,6 +1108,7 @@
 		CED5F1C019B555AA00DF8772 /* VerifyC2CallID.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */; };
 		CED5F1C319B5560900DF8772 /* VerifyC2CallIDDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C219B5560900DF8772 /* VerifyC2CallIDDTO.m */; };
 		CED5F1C619B558B300DF8772 /* ResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C519B558B300DF8772 /* ResponseHandler.m */; };
+		CED5F1C919B5760700DF8772 /* WUNewChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C819B5760700DF8772 /* WUNewChatViewController.m */; };
 		CEEFF0F119B1678A00B59179 /* Info_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEFF0F019B1678A00B59179 /* Info_icon.png */; };
 		CEEFF0F319B1679200B59179 /* Info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEFF0F219B1679200B59179 /* Info_icon@2x.png */; };
 		CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEFF0FB19B19EE000B59179 /* WUBoardController.m */; };
@@ -2274,6 +2275,8 @@
 		CED5F1C219B5560900DF8772 /* VerifyC2CallIDDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyC2CallIDDTO.m; sourceTree = "<group>"; };
 		CED5F1C419B558B300DF8772 /* ResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseHandler.h; sourceTree = "<group>"; };
 		CED5F1C519B558B300DF8772 /* ResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseHandler.m; sourceTree = "<group>"; };
+		CED5F1C719B5760700DF8772 /* WUNewChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUNewChatViewController.h; sourceTree = "<group>"; };
+		CED5F1C819B5760700DF8772 /* WUNewChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUNewChatViewController.m; sourceTree = "<group>"; };
 		CEEFF0F019B1678A00B59179 /* Info_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Info_icon.png; sourceTree = "<group>"; };
 		CEEFF0F219B1679200B59179 /* Info_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Info_icon@2x.png"; sourceTree = "<group>"; };
 		CEEFF0FA19B19EE000B59179 /* WUBoardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUBoardController.h; sourceTree = "<group>"; };
@@ -3438,6 +3441,8 @@
 				17FD053E195907840061938A /* WUTellFriendController.m */,
 				CE7194BD19AF7F2A001B28A0 /* WUContactListController.h */,
 				CE7194BE19AF7F2A001B28A0 /* WUContactListController.m */,
+				CED5F1C719B5760700DF8772 /* WUNewChatViewController.h */,
+				CED5F1C819B5760700DF8772 /* WUNewChatViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4717,6 +4722,7 @@
 				1733A09D19366D720064E97A /* RequestBuilder.m in Sources */,
 				CED5F1C619B558B300DF8772 /* ResponseHandler.m in Sources */,
 				972F453E175CB75F0006DEF6 /* WUContactDetailController.m in Sources */,
+				CED5F1C919B5760700DF8772 /* WUNewChatViewController.m in Sources */,
 				CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */,
 				17A1D68F1927ED3700B28792 /* WULoginController.m in Sources */,
 				17E87630194A56D400786419 /* WUWelcomeController.m in Sources */,

@@ -1493,9 +1493,17 @@ asdfsdfg</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="eyu-YO-41x">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="fQ6-Hd-NR4" id="LjR-pn-43L"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUAddressBookCell" id="xG0-mS-oHv" customClass="WUAddressBookCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xG0-mS-oHv" id="pWA-TU-EUs">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1570,8 +1578,20 @@ asdfsdfg</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contact" id="qee-nZ-dq6"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="2yP-XE-LBT" id="F4a-bD-gnJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ukw-VW-SZt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="2yP-XE-LBT">
+                    <connections>
+                        <outlet property="delegate" destination="fQ6-Hd-NR4" id="Ww6-Xp-7gY"/>
+                        <outlet property="searchBar" destination="eyu-YO-41x" id="3Op-KK-pfi"/>
+                        <outlet property="searchContentsController" destination="fQ6-Hd-NR4" id="Wsl-AL-giR"/>
+                        <outlet property="searchResultsDataSource" destination="fQ6-Hd-NR4" id="eba-WU-KFi"/>
+                        <outlet property="searchResultsDelegate" destination="fQ6-Hd-NR4" id="080-jI-ggR"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1791" y="351"/>
         </scene>
@@ -7953,11 +7973,11 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="bqz-UJ-YGf"/>
         <segue reference="n4d-a3-pqy"/>
-        <segue reference="l4c-f0-WTn"/>
+        <segue reference="bqz-UJ-YGf"/>
+        <segue reference="Lkj-dH-5d3"/>
+        <segue reference="ZrM-q5-zCU"/>
         <segue reference="p90-nP-FHg"/>
         <segue reference="XEP-pC-k3p"/>
-        <segue reference="ZrM-q5-zCU"/>
     </inferredMetricsTieBreakers>
 </document>

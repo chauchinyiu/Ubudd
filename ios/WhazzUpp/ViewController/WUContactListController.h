@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *userImg;
 @property (nonatomic, weak) IBOutlet UIButton *addButton;
 @property (nonatomic, weak) IBOutlet UIButton *chatButton;
+@property (nonatomic, weak) IBOutlet UISearchDisplayController *searchController;
 
 @end
 @interface WUContactListController : UITableViewController

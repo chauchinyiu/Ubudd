@@ -29,6 +29,7 @@
     NSMutableArray *addressListSection;
     NSFetchedResultsController *ubuddUsers;
     ResponseHandler *resHandler;
+    BOOL inSearch;
 }
 @end
 
@@ -78,7 +79,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(userType == 0 OR userType == 2) AND callmeLink == 0"];
+    inSearch = NO;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0"];
     NSFetchRequest *fetch = [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
     
     ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
@@ -193,7 +195,12 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    if(inSearch){
+        return 1;
+    }
+    else{
+        return 2;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -228,7 +235,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WUAddressBookCell *favocell = (WUAddressBookCell *)[tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
+    WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
 
     if (indexPath.section == 0) {
 
@@ -249,6 +256,7 @@
             else{
                 favocell.statusLabel.text = @"Using Ubudd";
                 favocell.addButton.tag = indexPath.row;
+                [favocell.addButton setHidden:NO];
             }
             favocell.chatButton.tag = indexPath.row;
             
@@ -303,7 +311,13 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:user.userid];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
+    WUAddressBookCell *favocell;
+    if(inSearch){
+        favocell= (WUAddressBookCell *)[self.searchDisplayController.searchResultsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
+    }
+    else{
+        favocell= (WUAddressBookCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
+    }
     favocell.statusLabel.text = @"Added to favorites";
     [favocell.addButton setHidden:YES];
 }
@@ -363,4 +377,74 @@
 }
 */
 
+#pragma mark SearchDisplayController Delegate
+
+-(void) refetchResults
+{
+    [ubuddUsers performFetch:nil];
+    [self.tableView reloadData];
+}
+
+-(void) setTextFilterForText:(NSString *) text
+{
+    NSFetchRequest *fetch = [ubuddUsers fetchRequest];
+    
+    //    NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"displayName contains[cd] %@ OR email contains[cd] %@", text, text];
+    
+    
+    NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0 AND not (userid in %@) AND displayName contains[cd] %@", [NSArray arrayWithObjects:@"9bc2858f1194dc1c107", nil], text];
+    
+    [fetch setPredicate:textFilter];
+}
+
+-(void) removeTextFilter
+{
+    NSFetchRequest *fetch = [ubuddUsers fetchRequest];
+    [fetch setPredicate:nil];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self setTextFilterForText:searchString];
+    [self refetchResults];
+    
+    // Return NO, as the search will be done in the background
+    return YES;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    [self setTextFilterForText:[self.searchDisplayController.searchBar text]];
+    [self refetchResults];
+    
+    // Return NO, as the search will be done in the background
+    return YES;
+}
+
+- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    inSearch = YES;
+}
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
+{
+    [self removeTextFilter];
+    [self refetchResults];
+    
+    inSearch = NO;
+    
+    return;
+}
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)_tableView
+{
+}
+
+
+
 @end
+

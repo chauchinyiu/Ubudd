@@ -9,6 +9,12 @@
 #import "WUWelcomeController.h"
 #import "Constant.h"
 #import "../WUAppDelegate.h"
+#import "ResponseHandler.h"
+
+@interface WUWelcomeController(){
+    ResponseHandler *resHandler;
+}
+@end
 
 @implementation WUWelcomeController
 
@@ -22,6 +28,11 @@
     
     WUAppDelegate *appDelegate = (WUAppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate registerPushNotifications];
+    
+    
+    resHandler = [[ResponseHandler alloc] init];
+    [resHandler verifyNewC2CallID];
+    
 }
 
 #pragma mark - UIViewController Delegate

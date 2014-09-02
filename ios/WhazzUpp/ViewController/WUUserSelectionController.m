@@ -63,7 +63,7 @@
     for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
         MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
         if(user.userType.intValue != 2){
-            if ([user.displayName isEqualToString:userName] && [user.email isEqualToString:email] ) {
+            if ([[[C2CallPhone currentPhone] nameForUserid:user.userid] isEqualToString:userName] && [user.email isEqualToString:email] ) {
                 if ([resHandler c2CallIDPassed:user.userid]) {
                     hasValid = YES;
                 }

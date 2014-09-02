@@ -1516,7 +1516,7 @@ asdfsdfg</string>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Q1Q-I6-mwb" userLabel="statusLabel">
-                                                    <rect key="frame" x="45" y="19" width="175" height="24"/>
+                                                    <rect key="frame" x="45" y="20" width="175" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="175" id="0y8-1U-sO2"/>
@@ -1533,20 +1533,31 @@ asdfsdfg</string>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMt-H6-Ok2">
-                                            <rect key="frame" x="213" y="7" width="87" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMt-H6-Ok2">
+                                            <rect key="frame" x="270" y="5" width="40" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="+Favorites">
+                                            <state key="normal" image="btn_add_phonenumber.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
                                                 <action selector="addToFriend:" destination="fQ6-Hd-NR4" eventType="touchUpInside" id="5fE-N7-zNR"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6NH-ms-ane">
+                                            <rect key="frame" x="211" y="9" width="60" height="23"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="ico_msg_blue_50x50.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="chatWithFriend:" destination="fQ6-Hd-NR4" eventType="touchUpInside" id="Be5-pF-x21"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="addButton" destination="fMt-H6-Ok2" id="wZG-wd-61c"/>
+                                    <outlet property="chatButton" destination="6NH-ms-ane" id="ge1-ba-SHY"/>
                                     <outlet property="nameLabel" destination="Tbb-6I-evR" id="hVm-KS-Rk9"/>
                                     <outlet property="statusLabel" destination="Q1Q-I6-mwb" id="yKp-YM-cls"/>
                                     <outlet property="userImg" destination="QNK-9g-EhY" id="zD6-gx-2Ut"/>

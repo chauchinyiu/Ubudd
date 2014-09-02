@@ -14,6 +14,7 @@
 @property(nonatomic, weak) IBOutlet UILabel     *nameLabel, *statusLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *userImg;
 @property (nonatomic, weak) IBOutlet UIButton *addButton;
+@property (nonatomic, weak) IBOutlet UIButton *chatButton;
 
 @end
 @interface WUContactListController : UITableViewController

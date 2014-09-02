@@ -5,7 +5,7 @@
 //  Created by Ming Kei Wong on 28/8/14.
 //  Copyright (c) 2014年 3Embed Technologies. All rights reserved.
 //
-
+#import <SocialCommunication/UIViewController+SCCustomViewController.h>
 #import "WUContactListController.h"
 #import "WUFavoritesViewController.h"
 #import "WebserviceHandler.h"
@@ -20,7 +20,7 @@
 
 @implementation WUAddressBookCell
 
-@synthesize nameLabel, statusLabel, addButton;
+@synthesize nameLabel, statusLabel, addButton, chatButton;
 
 @end
 
@@ -250,6 +250,7 @@
                 favocell.statusLabel.text = @"Using Ubudd";
                 favocell.addButton.tag = indexPath.row;
             }
+            favocell.chatButton.tag = indexPath.row;
             
             UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
                 
@@ -287,6 +288,7 @@
         favocell.statusLabel.text = phone;
         [favocell.userImg setHidden:YES];
         [favocell.addButton setHidden:YES];
+        [favocell.chatButton setHidden:YES];
     }
  
  
@@ -304,6 +306,11 @@
     WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
     favocell.statusLabel.text = @"Added to favorites";
     [favocell.addButton setHidden:YES];
+}
+
+-(IBAction)chatWithFriend:(id)sender{
+    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
+    [self showChatForUserid:user.userid];
 }
 
 

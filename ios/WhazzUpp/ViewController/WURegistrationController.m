@@ -16,6 +16,7 @@
 
 @implementation WURegistrationController
 
+
 #pragma mark - Other Methods
 - (NSString *)countryCode {
     NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"country_code" ofType:@"json"]];
@@ -118,12 +119,19 @@
     
     User *user = (User *)response;
     
-    if (error)
+    if (error){
         [CommonMethods showAlertWithTitle:@"Registration Error" message:[error localizedDescription] delegate:nil];
-    else if (user.errorCode)
+        [btnDone setEnabled:YES];
+    }
+    else if (user.errorCode){
         [CommonMethods showAlertWithTitle:@"Registration Error" message:user.message delegate:nil];
-    else if (!user.email || !user.password)
+        [btnDone setEnabled:YES];
+
+    }
+    else if (!user.email || !user.password){
         [CommonMethods showAlertWithTitle:@"Registration Error" message:@"Failed to register. Please try again" delegate:nil];
+        [btnDone setEnabled:YES];        
+    }
     else {
         self.firstName.text = @" ";
         self.lastName.text = @" ";
@@ -138,6 +146,7 @@
 
 #pragma mark - UIButton Action
 - (IBAction)btnDoneTapped {
+    [btnDone setEnabled:NO];
     self.phoneNumber.textContent.text = [CommonMethods trimText:self.phoneNumber.textContent.text];
     
     if (self.phoneNumber.textContent.text.length > 0) {

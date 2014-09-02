@@ -993,6 +993,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="btnDone" destination="5ej-BK-ZYy" id="ivV-V4-C1n"/>
                         <outlet property="country" destination="iGD-Xb-5TK" id="okz-Ht-LqH"/>
                         <outlet property="countryBG" destination="0sy-kX-R5u" id="BYJ-u6-Szj"/>
                         <outlet property="email" destination="2pP-ny-Mdw" id="jlk-zh-VKd"/>

@@ -11,6 +11,7 @@
 @interface WURegistrationController : SCRegistrationController {
     IBOutlet UILabel *lblCountryCode;
     IBOutlet UIImageView *countryBG;
+    IBOutlet UIBarButtonItem *btnDone;
 }
 
 - (IBAction)btnDoneTapped;

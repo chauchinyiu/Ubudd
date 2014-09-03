@@ -267,6 +267,8 @@
                 favocell.userImg.layer.cornerRadius = 15.0;
                 favocell.userImg.layer.masksToBounds = YES;
             }
+            [favocell.chatButton setHidden:NO];
+            
         }
     }
     else{

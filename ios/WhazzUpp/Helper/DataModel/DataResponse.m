@@ -13,7 +13,6 @@
 - (void)unwrapMessage:(NSDictionary *)message {
     self.errorCode = [[message objectForKey:@"error"] intValue];
     self.message = [message objectForKey:@"message"];
-    
-    self.data = [message objectForKey:@"data"];
+    self.data = message;
 }
 @end

@@ -159,6 +159,40 @@ class MyAPI extends API {
         }
     }
 
+    protected function readInterest($args) {
+
+        if ($args['lang'] == ''){
+			$stmt = $this->db->conn2->prepare("select interestID, interestName from interestBase ");
+		}
+		else{
+			$sql = "select b.interestID, b.interestName, c.displayText "
+					."from interestBase b left join interestCat c ON b.interestID = c.interestID AND c.languageCode = ?"; 
+			$stmt = $this->db->conn2->prepare($sql);
+			$stmt->bind_param('s', $lang);
+			$lang = $args['lang'];		
+		}
+		$stmt->execute();
+		$res = $stmt->get_result();
+		$rowCnt = 0;
+		$interestArray = array();
+		while($row = mysqli_fetch_assoc($res)){
+			$interestArray['id' . $rowCnt] = $row['interestID'];
+			if($args['lang'] == ''){
+				$interestArray['name' . $rowCnt] = $row['interestName'];
+			}
+			else if($row['displayText'] == ''){
+				$interestArray['name' . $rowCnt] = $row['interestName'];
+			}
+			else{
+				$interestArray['name' . $rowCnt] = $row['displayText'];
+			}
+			$rowCnt++;
+		}
+		$interestArray['rowCnt'] = $rowCnt;
+		$interestArray['error'] = 0;
+		$interestArray['message'] = 'Verified Successfully';
+        return $interestArray;
+    }
 }
 
 if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {

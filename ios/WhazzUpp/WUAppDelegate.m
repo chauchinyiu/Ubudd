@@ -16,6 +16,9 @@
 
 #import "UpdateAPNSToken.h"
 #import "UpdateAPNSTokenDTO.h"
+#import "DataRequest.h"
+#import "DataResponse.h"
+
 
 @interface WUAppDelegate ()
 
@@ -39,8 +42,52 @@
         
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF endswith[c] %@", @".sqlite"];
         self.coreDataFile = [files filteredArrayUsingPredicate:predicate].firstObject;
+        
+        [self readInterests];
     }
 }
+
+-(void)readInterests{
+    NSError *error = nil;
+
+    //clean all old interest
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Interest" inManagedObjectContext:self.managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    for (int i = 0; i < result.count; i++) {
+        NSManagedObject *interest = (NSManagedObject *)[result objectAtIndex:i];
+        [self.managedObjectContext deleteObject:interest];
+        [interest.managedObjectContext save:&error];
+    }
+    
+    //read new set from server
+    DataRequest *dataRequest = [[DataRequest alloc] init];
+    dataRequest.requestName = @"readInterest";
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readInterestResponse:error:)];
+    
+}
+
+- (void)readInterestResponse:(ResponseBase *)response error:(NSError *)error {
+    DataResponse *res = (DataResponse *)response;
+    
+    if (error){
+        
+    }
+    else {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Interest" inManagedObjectContext:self.managedObjectContext];
+        
+        int rowCnt = [[res.data objectForKey:@"rowCnt"] integerValue];
+        for (int i = 0; i < rowCnt; i++) {
+            NSManagedObject *interest = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
+            [interest setValue:[res.data objectForKey:[NSString stringWithFormat: @"id%d", i]] forKey:@"id"];
+            [interest setValue:[res.data objectForKey:[NSString stringWithFormat: @"name%d", i]] forKey:@"interestName"];
+            [interest.managedObjectContext save:nil];
+        }
+    }
+}
+
 
 - (void)customizeUI {
     if ([CommonMethods osVersion] < 7.0) {
@@ -142,6 +189,8 @@
     [serviceHandler execute:METHOD_UPDATE_APNS_TOKEN parameter:updateAPNSTokenDTO target:self action:@selector(updateAPNSTokenResponse:error:)];
 }
 
+- (void)updateAPNSTokenResponse:(ResponseBase *)response error:(NSError *)error {
+}
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {

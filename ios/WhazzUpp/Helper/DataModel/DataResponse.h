@@ -9,6 +9,6 @@
 #import "ResponseBase.h"
 
 @interface DataResponse : ResponseBase
-@property (nonatomic, strong) NSData *data;
+@property (nonatomic, strong) NSDictionary *data;
 
 @end

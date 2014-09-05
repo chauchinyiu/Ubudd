@@ -128,6 +128,12 @@
     [super applicationDidBecomeActive:application];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([SCDataManager instance].isDataInitialized){
+        NSDate* lastupdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"interestRefreshTime"];
+        if ([lastupdate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedAscending) {
+            [[ResponseHandler instance] readInterests];
+        }
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

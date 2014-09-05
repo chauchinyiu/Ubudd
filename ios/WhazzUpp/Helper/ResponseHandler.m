@@ -138,6 +138,9 @@ static ResponseHandler *myInstance;
             [interest setValue:[res.data objectForKey:[NSString stringWithFormat: @"name%d", i]] forKey:@"interestName"];
             [interest.managedObjectContext save:&dberror];
         }
+        //save time stamp
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"interestRefreshTime"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

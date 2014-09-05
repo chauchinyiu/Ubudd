@@ -46,7 +46,7 @@
 {
     [super viewDidLoad];
     
-    resHandler = [[ResponseHandler alloc] init];
+    resHandler = [ResponseHandler instance];
     self.cellIdentifier = @"WUNewChatCell";
         
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];

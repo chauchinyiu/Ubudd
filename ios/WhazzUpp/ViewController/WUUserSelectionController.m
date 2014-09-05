@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    resHandler = [[ResponseHandler alloc] init];
+    resHandler = [ResponseHandler instance];
     self.managedObjectContext = [DBHandler context];
 }
 

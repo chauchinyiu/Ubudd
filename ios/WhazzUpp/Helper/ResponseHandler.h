@@ -13,6 +13,8 @@
 -(void)verifyNewC2CallID;
 -(BOOL)c2CallIDVerified:(NSString*)c2CallID;
 -(BOOL)c2CallIDPassed:(NSString*)c2CallID;
+-(void)readInterests;
++(ResponseHandler*) instance;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

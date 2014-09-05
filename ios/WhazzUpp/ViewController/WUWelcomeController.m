@@ -30,7 +30,7 @@
     [appDelegate registerPushNotifications];
     
     
-    resHandler = [[ResponseHandler alloc] init];
+    resHandler = [ResponseHandler instance];
     [resHandler verifyNewC2CallID];
     
 }

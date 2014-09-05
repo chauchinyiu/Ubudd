@@ -49,7 +49,7 @@
 {
     [super viewDidLoad];
 
-    resHandler = [[ResponseHandler alloc] init];
+    resHandler = [ResponseHandler instance];
 
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                               reuseIdentifier:@"WUAddressBookCell"];

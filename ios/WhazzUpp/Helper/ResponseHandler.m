@@ -13,6 +13,8 @@
 
 #import "VerifyC2CallID.h"
 #import "VerifyC2CallIDDTO.h"
+#import "DataRequest.h"
+#import "DataResponse.h"
 #import "DBHandler.h"
 
 @interface ResponseHandler (){
@@ -23,9 +25,18 @@
 @implementation ResponseHandler
 @synthesize managedObjectContext = _managedObjectContext;
 
+static ResponseHandler *myInstance;
+
 -(id)init{
     self.managedObjectContext = [DBHandler context];
     return self;
+}
+
++(ResponseHandler*) instance{
+    if (myInstance == nil) {
+        myInstance = [[ResponseHandler alloc] init];
+    }
+    return myInstance;
 }
 
 -(void)verifyNewC2CallID{
@@ -89,6 +100,45 @@
         return ([[NSUserDefaults standardUserDefaults] integerForKey:keyName] == 1);
     }
     return NO;
+}
+
+-(void)readInterests{
+    //read from server
+    DataRequest *dataRequest = [[DataRequest alloc] init];
+    dataRequest.requestName = @"readInterest";
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readInterestResponse:error:)];
+    
+}
+
+- (void)readInterestResponse:(ResponseBase *)response error:(NSError *)error {
+    DataResponse *res = (DataResponse *)response;
+    
+    if (error){
+        
+    }
+    else {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Interest" inManagedObjectContext:self.managedObjectContext];
+        NSError *dberror = nil;
+        
+        //clean all old interest
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:entityDescription];
+        NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&dberror];
+        for (int i = 0; i < result.count; i++) {
+            NSManagedObject *interest = (NSManagedObject *)[result objectAtIndex:i];
+            [self.managedObjectContext deleteObject:interest];
+            [interest.managedObjectContext save:&dberror];
+        }
+        
+        int rowCnt = [[res.data objectForKey:@"rowCnt"] integerValue];
+        for (int i = 0; i < rowCnt; i++) {
+            NSManagedObject *interest = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
+            [interest setValue:[res.data objectForKey:[NSString stringWithFormat: @"id%d", i]] forKey:@"id"];
+            [interest setValue:[res.data objectForKey:[NSString stringWithFormat: @"name%d", i]] forKey:@"interestName"];
+            [interest.managedObjectContext save:&dberror];
+        }
+    }
 }
 
 @end

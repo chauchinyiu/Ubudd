@@ -1651,14 +1651,14 @@ asdfsdfg</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Xy6-HX-VL6">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="113"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yvF-2Q-nOD">
-                                    <rect key="frame" x="120" y="16" width="80" height="82"/>
+                                    <rect key="frame" x="20" y="16" width="80" height="82"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" backgroundImage="signupscreen_profile_image_boader">
+                                    <state key="normal" backgroundImage="btn_ico_avatar_group.png">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -1669,42 +1669,99 @@ asdfsdfg</string>
                                         <action selector="btnPhotoTapped:" destination="tY9-Si-6JS" eventType="touchUpInside" id="nyV-Nk-JoH"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Let's talk about:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7r-7w-Rtm">
+                                    <rect key="frame" x="120" y="16" width="161" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="yJl-MG-HFA">
+                                    <rect key="frame" x="120" y="35" width="180" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Topic" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OyP-AK-Yhh">
+                                    <rect key="frame" x="120" y="40" width="180" height="19"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
+                                    <connections>
+                                        <action selector="txtTopicDone" destination="tY9-Si-6JS" eventType="editingDidEndOnExit" id="cjx-H9-Ojv"/>
+                                        <outlet property="delegate" destination="tY9-Si-6JS" id="rvW-ej-FBm"/>
+                                    </connections>
+                                </textField>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="2g0-YE-fk9">
+                                    <rect key="frame" x="20" y="106" width="280" height="26"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Topic Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XaT-L3-v5h">
+                                    <rect key="frame" x="20" y="101" width="280" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
+                                    <connections>
+                                        <action selector="txtTopic2Done" destination="tY9-Si-6JS" eventType="editingDidEndOnExit" id="ggj-ej-703"/>
+                                    </connections>
+                                </textField>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="Bdx-F2-EJf">
+                                    <rect key="frame" x="20" y="140" width="280" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82u-DS-meh">
+                                    <rect key="frame" x="20" y="139" width="280" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <state key="normal" title="Interest">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="Jaz-Pe-n8k" kind="push" identifier="Interest" id="mZ1-Vt-wje"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="3mj-fS-b28">
+                                    <rect key="frame" x="281" y="140" width="12" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="IzB-4K-5SV">
+                                    <rect key="frame" x="20" y="177" width="280" height="28"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Sub-interest" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qWm-T9-vFa">
+                                    <rect key="frame" x="20" y="175" width="280" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
+                                    <connections>
+                                        <action selector="txtSubInterestDone" destination="tY9-Si-6JS" eventType="editingDidEndOnExit" id="neG-A5-BWW"/>
+                                    </connections>
+                                </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupNameCell" id="dyF-0c-W3C" customClass="SCGroupNameCell">
-                                <rect key="frame" x="0.0" y="135" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="238" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dyF-0c-W3C" id="BbB-6o-ncP">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAy-HQ-Ogd">
-                                            <rect key="frame" x="79" y="7" width="221" height="30"/>
+                                            <rect key="frame" x="296" y="7" width="4" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="textColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
-                                            <connections>
-                                                <action selector="createGroup:" destination="tY9-Si-6JS" eventType="editingDidEndOnExit" id="wQs-re-Lhy"/>
-                                                <outlet property="delegate" destination="tY9-Si-6JS" id="ebo-au-euz"/>
-                                            </connections>
                                         </textField>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIx-rN-5de">
-                                            <rect key="frame" x="20" y="10" width="51" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="groupName" destination="uAy-HQ-Ogd" id="Vxo-xQ-0H8"/>
+                                    <outlet property="groupName" destination="uAy-HQ-Ogd" id="dbq-vt-mvC"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupAddMembersCell" id="Tjd-J4-Dci" customClass="SCGroupAddMembersCell">
-                                <rect key="frame" x="0.0" y="179" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="282" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tjd-J4-Dci" id="ZZq-Zv-m3L">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1717,7 +1774,7 @@ asdfsdfg</string>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssc-2X-FWd">
-                                            <rect key="frame" x="274" y="8" width="22" height="22"/>
+                                            <rect key="frame" x="278" y="12" width="22" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1745,7 +1802,7 @@ asdfsdfg</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GroupMemberCell" textLabel="9i9-ld-Bis" detailTextLabel="fYf-Xy-POp" imageView="1I5-gT-AaX" style="IBUITableViewCellStyleSubtitle" id="tqs-0H-d0d">
-                                <rect key="frame" x="0.0" y="223" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="326" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tqs-0H-d0d" id="oWk-y4-lOZ">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -1784,13 +1841,17 @@ asdfsdfg</string>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="qae-qU-EOP">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="createGroup:" destination="tY9-Si-6JS" id="45m-zY-aKG"/>
+                                <action selector="createGroup:" destination="tY9-Si-6JS" id="PTI-TN-IJp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="btnGroupImage" destination="yvF-2Q-nOD" id="2aE-hT-Hf2"/>
+                        <outlet property="btnInterest" destination="82u-DS-meh" id="xfR-BY-TjL"/>
+                        <outlet property="txtSubInterest" destination="qWm-T9-vFa" id="vMN-9m-Q8j"/>
+                        <outlet property="txtTopic" destination="OyP-AK-Yhh" id="49A-8u-jOm"/>
+                        <outlet property="txtTopic2" destination="XaT-L3-v5h" id="xdr-vm-pTu"/>
                         <segue destination="mIK-nM-8TN" kind="push" identifier="SCChatControllerSegue" id="l4c-f0-WTn"/>
                     </connections>
                 </tableViewController>
@@ -8043,6 +8104,7 @@ All rights reserved</string>
         <image name="btn_grey _big.png" width="220" height="32"/>
         <image name="btn_grey_middle.png" width="120" height="32"/>
         <image name="btn_ico_avatar.png" width="44" height="44"/>
+        <image name="btn_ico_avatar_group.png" width="44" height="44"/>
         <image name="btn_ico_video_dark.png" width="14" height="9"/>
         <image name="btn_send_message_dark_blue.png" width="36" height="28"/>
         <image name="btn_send_message_grey.png" width="66" height="28"/>
@@ -8105,8 +8167,9 @@ All rights reserved</string>
     <inferredMetricsTieBreakers>
         <segue reference="n4d-a3-pqy"/>
         <segue reference="bqz-UJ-YGf"/>
-        <segue reference="Lkj-dH-5d3"/>
         <segue reference="ZrM-q5-zCU"/>
+        <segue reference="mZ1-Vt-wje"/>
+        <segue reference="l4c-f0-WTn"/>
         <segue reference="p90-nP-FHg"/>
         <segue reference="XEP-pC-k3p"/>
     </inferredMetricsTieBreakers>

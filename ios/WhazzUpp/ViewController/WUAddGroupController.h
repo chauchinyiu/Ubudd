@@ -7,13 +7,23 @@
 //
 
 #import <SocialCommunication/SocialCommunication.h>
+#import "WUInterestViewController.h"
 
-@interface WUAddGroupController : SCAddGroupController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface WUAddGroupController : SCAddGroupController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate> {
     IBOutlet UIButton *btnGroupImage;
+    
+    IBOutlet UITextField *txtTopic;
+    IBOutlet UITextField *txtTopic2;
+    IBOutlet UIButton *btnInterest;
+    IBOutlet UITextField *txtSubInterest;
+    
 }
 
 @property (nonatomic, strong) id parentController;
 
 - (IBAction)btnPhotoTapped:(id)sender;
+- (IBAction)txtSubInterestDone;
+- (IBAction)txtTopicDone;
+- (IBAction)txtTopic2Done;
 
 @end

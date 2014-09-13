@@ -7,10 +7,17 @@
 //
 
 #import "WUAddGroupController.h"
-#import "../WUChatController.h"
+#import "WUChatController.h"
+#import "SocialCommunication/SCGroupNameCell.h"
+
 
 #define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kGroupImage_UseCamera @"Use Camera"
+
+@interface WUAddGroupController (){
+    int interestID;
+}
+@end
 
 @implementation WUAddGroupController
 
@@ -79,5 +86,54 @@
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return 0;
+    }
+    else{
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+}
+
+- (IBAction)txtSubInterestDone{
+    [txtSubInterest resignFirstResponder];
+}
+
+- (IBAction)txtTopicDone{
+    [txtTopic resignFirstResponder];
+}
+
+- (IBAction)txtTopic2Done{
+    [txtTopic2 resignFirstResponder];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"interest"]) {
+        WUInterestViewController *cvc = (WUInterestViewController *)[segue destinationViewController];
+        cvc.delegate = self;
+    }
+    else{
+        [super prepareForSegue:segue sender:sender];
+    }
+}
+
+-(void)selectedInerestID:(int) i withName:(NSString*) name;{
+    interestID = i;
+    [btnInterest setTitle:name forState:UIControlStateNormal];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        SCGroupNameCell* cell = (SCGroupNameCell*)[super tableView:tableView cellForRowAtIndexPath:indexPath];
+        [cell.groupName setHidden:YES];
+        return cell;
+    }
+    else{
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
+}
+
+
 
 @end

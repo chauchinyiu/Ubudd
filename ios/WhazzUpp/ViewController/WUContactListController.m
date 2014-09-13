@@ -130,6 +130,7 @@
             // Remove all formatting symbols that might be in both phone number being compared
             NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
             phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
+            phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
          
             
             for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {

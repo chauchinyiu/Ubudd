@@ -60,7 +60,7 @@ class MyAPI extends API {
             return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         } else {
 	        $stmt->close();
-			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL, ?, ?, '')");
+			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL, ?, ?, '', NULL, NULL)");
 			$stmt->bind_param('ssssssssss', $userId, $brand, $model, $os, $uid, $email, $pwd, $rand, $countryCode, $phoneNo);
 			$userId = $args['msisdn'];
 			$brand = $args['brand'];
@@ -193,6 +193,27 @@ class MyAPI extends API {
 		$interestArray['message'] = 'Verified Successfully';
         return $interestArray;
     }
+    
+    protected function addressBookCheck($args) {
+		$phoneCnt = $args['PhoneCnt'];
+
+		$stmt = $this->db->conn2->prepare("select c2CallID from register where email = ?");
+		$stmt->bind_param('s', $email);
+		
+		$resArray = array();
+		for($i = 0; $i < $phoneCnt; $i++){
+			$email = $args['PHONE'.i].'@mobifyi.com';
+			$stmt->execute();
+			$res = $stmt->get_result();
+        	$row = mysqli_fetch_assoc($verifyRes);
+			$resArray['id' . $i] = $row['c2CallID'];
+		}
+		
+		$resArray['rowCnt'] = $i;
+		$resArray['error'] = 0;
+		$resArray['message'] = 'Verified Successfully';
+        return $resArray;
+    }    
 }
 
 if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {

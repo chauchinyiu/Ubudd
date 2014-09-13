@@ -132,6 +132,7 @@
         NSDate* lastupdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"interestRefreshTime"];
         if ([lastupdate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedAscending) {
             [[ResponseHandler instance] readInterests];
+            [[ResponseHandler instance] checkPhoneNumber];
         }
     }
 }

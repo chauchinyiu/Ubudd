@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHu-d7-mRP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHu-d7-mRP">
     <dependencies>
         <deployment version="1536" defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Call Status Controller-->
@@ -1481,6 +1481,7 @@ asdfsdfg</string>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="500"/>
                     <connections>
                         <outlet property="prompt" destination="plD-qt-OaR" id="yDP-xo-Itv"/>
                     </connections>
@@ -2207,6 +2208,7 @@ asdfsdfg</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="159"/>
                     <connections>
                         <outlet property="editGroupName" destination="2ax-aM-5hC" id="oUg-OA-kIA"/>
                         <outlet property="groupName" destination="3uC-ss-gal" id="c5x-xS-X7s"/>

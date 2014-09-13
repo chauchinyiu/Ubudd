@@ -14,6 +14,8 @@
 -(BOOL)c2CallIDVerified:(NSString*)c2CallID;
 -(BOOL)c2CallIDPassed:(NSString*)c2CallID;
 -(void)readInterests;
+-(void)checkPhoneNumber;
+-(NSString*)getInterestNameForID:(int) intID;
 +(ResponseHandler*) instance;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

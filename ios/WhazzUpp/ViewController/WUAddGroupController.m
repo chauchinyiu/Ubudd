@@ -9,6 +9,9 @@
 #import "WUAddGroupController.h"
 #import "WUChatController.h"
 #import "SocialCommunication/SCGroupNameCell.h"
+#import "AddChatGroupDTO.h"
+#import "WebserviceHandler.h"
+#import "ResponseBase.h"
 
 
 #define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
@@ -36,10 +39,29 @@
                 SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
                 [group setGroupImage:btnGroupImage.imageView.image withCompletionHandler:nil];
             }
+            
+            //update c2call id and other details to server
+            NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
+            
+            AddChatGroupDTO *addChatGroupDTO = [[AddChatGroupDTO alloc] init];
+            addChatGroupDTO.topicDescription = txtTopic2.text;
+            addChatGroupDTO.groupAdmin = msdin;
+            addChatGroupDTO.interestID = [NSString stringWithFormat:@"%d", interestID];
+            addChatGroupDTO.interestDescription = txtSubInterest.text;
+            addChatGroupDTO.c2CallID = groupid;
+            
+            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+            [serviceHandler execute:METHOD_ADD_CHAT_GROUP parameter:addChatGroupDTO target:self action:@selector(addChatGroupResponse:error:)];
+
+            
         }
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }
+
+- (void)addChatGroupResponse:(ResponseBase *)response error:(NSError *)error{
+}
+
 
 #pragma mark - UIButton Action
 - (IBAction)btnPhotoTapped:(id)sender {
@@ -109,7 +131,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([[segue identifier] isEqualToString:@"interest"]) {
+    if ([[segue identifier] isEqualToString:@"Interest"]) {
         WUInterestViewController *cvc = (WUInterestViewController *)[segue destinationViewController];
         cvc.delegate = self;
     }

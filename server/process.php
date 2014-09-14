@@ -159,6 +159,39 @@ class MyAPI extends API {
         }
     }
 
+    protected function addChatGroup($args) {
+        if ($args['groupAdmin'] == '' || $args['c2CallID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+
+			$stmt = $this->db->conn2->prepare("insert into chatGroup " 
+			. "(topicDescription, groupAdmin, interestID, interestDescription, locationLag, locationLong, locationName, Disabled, c2CallID) "
+			. "values(?, ?, ?, ?, '999', '999', '', 0, ?)");
+			$stmt->bind_param('sssss', $topicDescription, $groupAdmin, $interestID, $interestDescription, $c2CallID);
+			$topicDescription = $args['topicDescription'];
+			$groupAdmin = $args['groupAdmin'];
+			$interestID = $args['interestID'];
+			$interestDescription = $args['interestDescription'];
+			$c2CallID = $args['c2CallID'];
+
+			$stmt->execute();
+			$stmt->close();
+
+			$stmt = $this->db->conn2->prepare("select id from chatGroup where c2CallID = ?");
+			$stmt->bind_param('s', $c2CallID);
+			$c2CallID = $args['c2CallID'];
+			$stmt->execute();
+			$verifyRes = $stmt->get_result();
+
+			$verifyRow = mysqli_fetch_assoc($verifyRes);
+
+			if ($verifyRow['id'] > 0) {
+				return array('error' => 0, 'message' => 'Insert Successfully', 'id' => $verifyRow['id']);
+			} else {
+				return array('error' => 1, 'message' => 'Insert failed');
+			}
+    }
+
     protected function readInterest($args) {
 
         if ($args['lang'] == ''){

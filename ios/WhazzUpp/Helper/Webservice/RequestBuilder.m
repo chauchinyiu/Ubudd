@@ -33,6 +33,9 @@
 + (NSMutableURLRequest *)verifyC2CallID:(RequestBase *)parameter {
     return [NSMutableURLRequest requestWithURL:[self serviceURL:@"verifyC2CallID"]];
 }
++ (NSMutableURLRequest *)addChatGroup:(RequestBase *)parameter {
+    return [NSMutableURLRequest requestWithURL:[self serviceURL:@"addChatGroup"]];
+}
 
 
 
@@ -58,6 +61,9 @@
             break;
         case METHOD_VERIFY_C2CALLID:
             request = [self verifyC2CallID:parameter];
+            break;
+        case METHOD_ADD_CHAT_GROUP:
+            request = [self addChatGroup:parameter];
             break;
         default:
             break;

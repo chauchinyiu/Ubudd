@@ -73,6 +73,7 @@
             responseBase = [[UpdateUserField alloc] init];
             break;
         case METHOD_DATA_REQUEST:
+        case METHOD_ADD_CHAT_GROUP:
             responseBase = [[DataResponse alloc] init];
             break;
         case METHOD_VERIFY_C2CALLID:

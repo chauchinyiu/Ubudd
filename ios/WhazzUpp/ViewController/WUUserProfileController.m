@@ -220,6 +220,9 @@
     }
 }
 
+- (void)updateUserFieldResponse:(ResponseBase *)response error:(NSError *)error{
+}
+
 - (IBAction)btnProfileImageTapped {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select photo" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     

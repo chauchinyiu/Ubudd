@@ -15,6 +15,7 @@ enum ServiceMethod {
     METHOD_UPDATE_USER_FIELD,
     METHOD_DATA_REQUEST,
     METHOD_VERIFY_C2CALLID,
+    METHOD_ADD_CHAT_GROUP,
 } typedef ServiceMethod;
 
 @interface ServiceURL : NSObject

@@ -15,6 +15,7 @@
 #import "DataResponse.h"
 #import "DataRequest.h"
 #import "ResponseHandler.h"
+#import "WUBoardController.h"
 
 #import "DBHandler.h"
 
@@ -27,9 +28,11 @@
 @interface WUContactListController (){
     CGFloat favoritesCellHeight;
     NSMutableArray *addressListSection;
+    NSMutableArray *addressSearch;
     NSFetchedResultsController *ubuddUsers;
     ResponseHandler *resHandler;
     BOOL inSearch;
+    NSString* searchStr;
 }
 @end
 
@@ -148,41 +151,7 @@
         }
     }
     [self.tableView reloadData];
-    /*
-    
-    NSUInteger phoneCnt = 0;
-    NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
-    [dictionary setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"countryCode"] forKey:@"countryCode"];
-    
-    //build phone list to send to server
-    for(NSUInteger loop= 0 ; loop < totalContacts; loop++){
-         ABRecordRef record = (__bridge ABRecordRef)[allPeople objectAtIndex:loop]; // get address book record
-        NSNumber* rid = [NSNumber numberWithInt:(int)ABRecordGetRecordID(record)];
-        
-        ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
-        // If the contact has multiple phone numbers, iterate on each of them
-        for (int i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
-            NSString *phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
-            
-            // Remove all formatting symbols that might be in both phone number being compared
-            NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
-            phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
-            
-            //add to dictionary
-            [dictionary setObject:rid forKey:[NSString stringWithFormat:@"ID%d", phoneCnt]];
-            [dictionary setObject:phone forKey:[NSString stringWithFormat:@"PHONE%d", phoneCnt]];
-            phoneCnt++;
-        }
-        [dictionary setObject:[NSNumber numberWithInt:phoneCnt] forKey:@"PhoneCnt"];
-    }
-    
-    DataRequest *request = [[DataRequest alloc] init];
-    request.requestName = @"AddressBookCheck";
-    request.values = dictionary;
-    
-    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-    [serviceHandler execute:METHOD_DATA_REQUEST parameter:request target:self action:@selector(dataRequestResponse:error:)];
-    */
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -196,12 +165,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    if(inSearch){
-        return 1;
-    }
-    else{
-        return 2;
-    }
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -211,7 +175,12 @@
         return [[[[ubuddUsers sections] objectAtIndex:0] objects] count];
     }
     else{
-        return [addressListSection count];
+        if (inSearch) {
+            return [addressSearch count];
+        }
+        else{
+            return [addressListSection count];
+        }
     }
 }
 
@@ -273,7 +242,13 @@
         }
     }
     else{
-        ABRecordRef record = (__bridge ABRecordRef)([addressListSection objectAtIndex:indexPath.row]);
+        ABRecordRef record;
+        if (inSearch) {
+            record = (__bridge ABRecordRef)([addressSearch objectAtIndex:indexPath.row]);
+        }
+        else{
+            record = (__bridge ABRecordRef)([addressListSection objectAtIndex:indexPath.row]);
+        }
         NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
         NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
         NSString * fullName;
@@ -327,6 +302,12 @@
 
 -(IBAction)chatWithFriend:(id)sender{
     MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
+    if ([user.userType intValue] == 2) {
+        [WUBoardController setIsGroup:YES];
+    } else {
+        [WUBoardController setIsGroup:NO];
+    }
+    
     [self showChatForUserid:user.userid];
 }
 
@@ -385,11 +366,33 @@
 -(void) refetchResults
 {
     [ubuddUsers performFetch:nil];
+    addressSearch = [[NSMutableArray alloc] init];
+    for (int i = 0; i < addressListSection.count; i++) {
+        ABRecordRef record = (__bridge ABRecordRef)([addressListSection objectAtIndex:i]);
+        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+        NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+        NSString * fullName;
+        if (lastName == nil) {
+            fullName = firstName;
+        }
+        else if (firstName == nil) {
+            fullName = lastName;
+        }
+        else{
+            fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        }
+        if ([fullName rangeOfString:searchStr].location == NSNotFound) {
+        }
+        else{
+            [addressSearch addObject:[addressListSection objectAtIndex:i]];
+        }
+    }
     [self.tableView reloadData];
 }
 
 -(void) setTextFilterForText:(NSString *) text
 {
+    searchStr = text;
     NSFetchRequest *fetch = [ubuddUsers fetchRequest];
     
     //    NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"displayName contains[cd] %@ OR email contains[cd] %@", text, text];
@@ -432,10 +435,11 @@
 
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
+    inSearch = NO;
+
     [self removeTextFilter];
     [self refetchResults];
     
-    inSearch = NO;
     
     return;
 }

@@ -37,6 +37,9 @@
     [self.country.contentView sendSubviewToBack:countryBG];
     self.country.textLabel.backgroundColor = [UIColor clearColor];
     
+    [self setRegisterDoneAction:^(void){
+        [self performSegueWithIdentifier:@"VerificationSegue" sender:self];
+    }];
 
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -170,4 +173,11 @@
     }
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"VerificationSegue"]) {
+    }
+    else{
+        [super prepareForSegue:segue sender:sender];
+    }
+}
 @end

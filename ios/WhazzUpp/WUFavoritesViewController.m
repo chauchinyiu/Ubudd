@@ -10,6 +10,7 @@
 #import <SocialCommunication/UIViewController+SCCustomViewController.h>
 #import <SocialCommunication/debug.h>
 #import "DBHandler.h"
+#import "WUBoardController.h"
 
 @implementation WUFavoritesCell
 
@@ -60,18 +61,13 @@
     favoritesCellHeight = cell.frame.size.height;
 }
 
+
+
 - (void)viewDidAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    if ([userDefaults boolForKey:kUserDefault_isUserRegistered]) {
-        if (![userDefaults boolForKey:kUserDefault_isWelcomeComplete])
-            [self performSegueWithIdentifier:@"WUUserVerificationControllerSegue" sender:self];
-        else{
-            [[C2CallPhone currentPhone] transferAddressBook:NO];
-            [self refetchResults];
-        }
-    }
+    [[C2CallPhone currentPhone] transferAddressBook:NO];
+    [self refetchResults];
     [self.tableView reloadData];
 }
 
@@ -152,7 +148,13 @@
     MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
-    
+
+    if ([user.userType intValue] == 2) {
+        [WUBoardController setIsGroup:YES];
+    } else {
+        [WUBoardController setIsGroup:NO];
+    }
+
     [self showChatForUserid:user.userid];
 }
 

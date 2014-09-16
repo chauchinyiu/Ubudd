@@ -11,6 +11,7 @@
 #import <SocialCommunication/debug.h>
 #import "DBHandler.h"
 #import "ResponseHandler.h"
+#import "WUBoardController.h"
 
 @implementation WUNewChatCell
 
@@ -138,6 +139,11 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
     
+    if ([user.userType intValue] == 2) {
+        [WUBoardController setIsGroup:YES];
+    } else {
+        [WUBoardController setIsGroup:NO];
+    }
     [self showChatForUserid:user.userid];
 }
 

@@ -14,6 +14,7 @@
 #import "CommonMethods.h"
 #import "VerifyUser.h"
 #import "VerifyUserDTO.h"
+#import "ResponseHandler.h"
 
 @implementation WUVerificationController
 
@@ -29,6 +30,8 @@
     self.navigationItem.hidesBackButton = YES;
     
     [txtCode becomeFirstResponder];
+    [[ResponseHandler instance] readInterests];
+
 }
 -(IBAction)nextButtonClicked:(id)sender{
     

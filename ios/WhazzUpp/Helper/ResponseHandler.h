@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@interface interestDat : NSObject
+@property int interestID;
+@property(strong, nonatomic) NSString *interestName;
+@end
+
 @interface ResponseHandler : NSObject
 -(void)verifyC2CallID:(NSString*)c2CallID;
 -(void)verifyNewC2CallID;
@@ -18,5 +23,6 @@
 -(NSString*)getInterestNameForID:(int) intID;
 +(ResponseHandler*) instance;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSMutableArray *interestList;
 
 @end

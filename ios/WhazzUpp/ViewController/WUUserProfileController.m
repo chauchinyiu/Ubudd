@@ -269,8 +269,10 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    WUInterestViewController *cvc = (WUInterestViewController *)[segue destinationViewController];
-    cvc.delegate = self;
+    if ([segue.identifier isEqualToString:@"SelectInterest"]) {
+        WUInterestViewController *cvc = (WUInterestViewController *)[segue destinationViewController];
+        cvc.delegate = self;        
+    }
 }
 
 -(void)selectedInerestID:(int) i withName:(NSString*) name;{

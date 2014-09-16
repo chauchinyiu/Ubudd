@@ -10,4 +10,6 @@
 
 @interface WUBoardController : SCBoardController
 
++(void)setIsGroup:(BOOL)b;
+
 @end

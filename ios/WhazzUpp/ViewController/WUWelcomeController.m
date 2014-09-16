@@ -22,6 +22,11 @@
 - (IBAction)btnContinueTapped {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefault_isWelcomeComplete];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UITabBarController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"InitController"];
+    [[UIApplication sharedApplication].keyWindow setRootViewController:rootViewController];
+    
     [self.navigationController popToRootViewControllerAnimated:NO];
     
     [[C2CallPhone currentPhone] transferAddressBook:NO];

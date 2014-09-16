@@ -38,8 +38,6 @@
 		<string>remote-notification</string>
 		<string>voip</string>
 	</array>
-	<key>UIMainStoryboardFile</key>
-	<string>MainStoryboard</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

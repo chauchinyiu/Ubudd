@@ -8,6 +8,7 @@
 
 #import "WUInterestViewController.h"
 #import "DBHandler.h"
+#import "ResponseHandler.h"
 
 @implementation WUInterestCell
 
@@ -45,6 +46,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
+    /*
     self.managedObjectContext = [DBHandler context];
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Interest" inManagedObjectContext:self.managedObjectContext];
@@ -54,7 +56,8 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
     result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&dberror];
-
+*/
+    result = [[NSArray alloc] initWithArray:[ResponseHandler instance].interestList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,13 +86,21 @@
     WUInterestCell *cell = (WUInterestCell*)[tableView dequeueReusableCellWithIdentifier:@"WUInterestCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    [cell.nameLabel setText:((interestDat *)[result objectAtIndex:indexPath.row]).interestName];
+
+    /*
     [cell.nameLabel setText:[((NSManagedObject *)[result objectAtIndex:indexPath.row]) valueForKey:@"interestName"]];
+    */
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    /*
     [self.delegate selectedInerestID:((NSNumber*)[((NSManagedObject *)[result objectAtIndex:indexPath.row]) valueForKey:@"id"]).intValue
                             withName:(NSString*)[((NSManagedObject *)[result objectAtIndex:indexPath.row]) valueForKey:@"interestName"]];
+     */
+    [self.delegate selectedInerestID:((interestDat *)[result objectAtIndex:indexPath.row]).interestID
+                            withName:((interestDat *)[result objectAtIndex:indexPath.row]).interestName];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -12,6 +12,7 @@
 #import <SocialCommunication/C2TapImageView.h>
 
 #import <SocialCommunication/UIViewController+SCCustomViewController.h>
+#import "WUBoardController.h"
 
 @implementation WUFriendDetailController
 
@@ -35,6 +36,11 @@
     }
     
     MOC2CallUser *user = [self currentUser];
+    if ([user.userType intValue] == 2) {
+        [WUBoardController setIsGroup:YES];
+    } else {
+        [WUBoardController setIsGroup:NO];
+    }
     [self showChatForUserid:user.userid];
 }
 

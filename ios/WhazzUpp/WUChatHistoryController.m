@@ -11,6 +11,7 @@
 #import <SocialCommunication/debug.h>
 #import "ViewController/WUAddGroupController.h"
 #import "WUChatController.h"
+#import "WUBoardController.h"
 
 @implementation WUChatHistoryCell
 
@@ -179,7 +180,12 @@
     MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
-    
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
+    if ([user.userType intValue] == 2) {
+        [WUBoardController setIsGroup:YES];
+    } else {
+        [WUBoardController setIsGroup:NO];
+    }
     [self showChatForUserid:chathist.contact];
 }
 

@@ -17,6 +17,13 @@
 #import "DataResponse.h"
 #import "DBHandler.h"
 
+@implementation interestDat
+@synthesize interestID;
+@synthesize interestName;
+@end
+
+
+
 @interface ResponseHandler (){
     NSFetchedResultsController *ubuddUsers;
 }
@@ -24,11 +31,11 @@
 
 @implementation ResponseHandler
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize interestList = _interestList;
 
 static ResponseHandler *myInstance;
 
 -(id)init{
-    self.managedObjectContext = [DBHandler context];
     return self;
 }
 
@@ -40,6 +47,8 @@ static ResponseHandler *myInstance;
 }
 
 -(void)verifyNewC2CallID{
+    self.managedObjectContext = [DBHandler context];
+
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(userType == 0 OR userType == 2) AND callmeLink == 0"];
     NSFetchRequest *fetch = [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
     
@@ -118,25 +127,13 @@ static ResponseHandler *myInstance;
         
     }
     else {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Interest" inManagedObjectContext:self.managedObjectContext];
-        NSError *dberror = nil;
-        
-        //clean all old interest
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:entityDescription];
-        NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&dberror];
-        for (int i = 0; i < result.count; i++) {
-            NSManagedObject *interest = (NSManagedObject *)[result objectAtIndex:i];
-            [self.managedObjectContext deleteObject:interest];
-            [interest.managedObjectContext save:&dberror];
-        }
-        
+        self.interestList = [[NSMutableArray alloc] init];
         int rowCnt = [[res.data objectForKey:@"rowCnt"] integerValue];
         for (int i = 0; i < rowCnt; i++) {
-            NSManagedObject *interest = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
-            [interest setValue:[res.data objectForKey:[NSString stringWithFormat: @"id%d", i]] forKey:@"id"];
-            [interest setValue:[res.data objectForKey:[NSString stringWithFormat: @"name%d", i]] forKey:@"interestName"];
-            [interest.managedObjectContext save:&dberror];
+            interestDat *objint = [[interestDat alloc] init];
+            objint.interestID = [(NSNumber*)[res.data objectForKey:[NSString stringWithFormat: @"id%d", i]] intValue];
+            objint.interestName = [res.data objectForKey:[NSString stringWithFormat: @"name%d", i]];
+            [self.interestList addObject:objint];
         }
         //save time stamp
         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"interestRefreshTime"];
@@ -145,18 +142,10 @@ static ResponseHandler *myInstance;
 }
 
 -(NSString*)getInterestNameForID:(int) intID{
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Interest" inManagedObjectContext:self.managedObjectContext];
-    NSError *dberror = nil;
     NSString* resultName = @"";
-    
-    //clean all old interest
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:entityDescription];
-    NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:&dberror];
-    for (int i = 0; i < result.count; i++) {
-        NSManagedObject *interest = (NSManagedObject *)[result objectAtIndex:i];
-        if (((NSNumber*)[interest valueForKey:@"id"]).intValue == intID) {
-            resultName = (NSString*)[interest valueForKey:@"interestName"];
+    for (int i = 0; i < self.interestList.count; i++) {
+        if (((interestDat*)[self.interestList objectAtIndex:i]).interestID == intID) {
+            resultName = ((interestDat*)[self.interestList objectAtIndex:i]).interestName;
         }
     }
     return resultName;
@@ -164,6 +153,7 @@ static ResponseHandler *myInstance;
 
 
 -(void)checkPhoneNumber{
+    self.managedObjectContext = [DBHandler context];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0"];
     NSFetchRequest *fetch = [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
     

@@ -18,6 +18,9 @@
 #import "UpdateAPNSTokenDTO.h"
 #import "ResponseHandler.h"
 
+#import "WUFavoritesViewController.h"
+#import "WURegistrationController.h"
+
 
 @interface WUAppDelegate ()
 
@@ -45,7 +48,6 @@
         [[ResponseHandler instance] readInterests];
     }
 }
-
 
 
 
@@ -79,6 +81,7 @@
 #pragma mark - UIApplication Delegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.useOnlineStatusPrompt = NO;
     self.affiliateid = @"143BF14733A8F380";
     self.secret = @"e883a183dc5ea85b7388319193781c42";
 
@@ -89,16 +92,50 @@
     
     self.usePhotoEffects = SC_PHOTO_USERCHOICE;
 
-    [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:70./255. green:188./255. blue:255./255. alpha:0.69]];
-    [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:115./255. green:223./255. blue:81./255. alpha:0.69]];
+    [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:255./255. green:255./255. blue:0./255. alpha:1.]];
+    [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:1.]];
     [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_IN_IOS7];
     [[SCBubbleViewOut appearance] setBubbleTypeOut:SC_BUBBLE_OUT_IOS7];
+    
     
     [self customizeUI];
         
     [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"showTestCall"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIViewController *viewController;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if ([userDefaults boolForKey:kUserDefault_isUserRegistered]) {
+        if (![userDefaults boolForKey:kUserDefault_isWelcomeComplete]){
+            viewController = [storyboard instantiateViewControllerWithIdentifier:@"VerificationViewController"];
+        }
+        else{
+            viewController = [storyboard instantiateViewControllerWithIdentifier:@"InitController"];
+            
+        }
+    }
+    else{
+        viewController = [storyboard instantiateViewControllerWithIdentifier:@"RegistrationViewController"];
+    
+    }
+
+    
+    self.window.rootViewController = viewController;
+    [self.window makeKeyAndVisible];
+
+    
+    
+
+   
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
+    
+    
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

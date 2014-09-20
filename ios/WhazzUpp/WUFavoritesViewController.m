@@ -29,11 +29,9 @@
 #pragma mark - Other Methods
 - (void)customizeUI {
     [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_favorite_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_favorite_icon_off"]];
-    
-    [[[self.tabBarController.viewControllers objectAtIndex:1] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_status_icon_off"]];
-    
-    [[[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_off"]];
-    
+    [[[self.tabBarController.viewControllers objectAtIndex:1] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_off"]];
+    [[[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_status_icon_off"]];
+   
     [[[self.tabBarController.viewControllers objectAtIndex:3] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_off"]];
     
     [[[self.tabBarController.viewControllers objectAtIndex:4] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_more_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_more_icon_off"]];

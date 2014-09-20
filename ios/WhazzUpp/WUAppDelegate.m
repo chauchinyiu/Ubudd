@@ -49,7 +49,10 @@
     }
 }
 
-
+-(BOOL)useOnlineStatusPrompt
+{
+    return NO;
+}
 
 - (void)customizeUI {
     if ([CommonMethods osVersion] < 7.0) {
@@ -84,7 +87,7 @@
     self.useOnlineStatusPrompt = NO;
     self.affiliateid = @"143BF14733A8F380";
     self.secret = @"e883a183dc5ea85b7388319193781c42";
-
+  
     
 #ifdef __DEBUG
     self.useSandboxMode = YES;
@@ -97,7 +100,7 @@
     [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_IN_IOS7];
     [[SCBubbleViewOut appearance] setBubbleTypeOut:SC_BUBBLE_OUT_IOS7];
     
-    
+
     [self customizeUI];
         
     [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"showTestCall"];
@@ -130,7 +133,7 @@
 
     
     
-
+ 
    
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
     
@@ -306,4 +309,8 @@
     return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
+-(void) waitIndicatorConnectingToService
+{
+    NSLog(@"stupid fucking c2call architecture design");
+}
 @end

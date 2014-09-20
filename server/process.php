@@ -159,6 +159,32 @@ class MyAPI extends API {
         }
     }
 
+    protected function readUserInfo($args) {
+
+        if ($args['c2CallID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, dob, gender from register where c2CallID = ?");
+		$stmt->bind_param('s', $c2CallID);
+		$c2CallID = $args['c2CallID'];
+		$stmt->execute();
+		$verifyRes = $stmt->get_result();
+
+        $verifyRow = mysqli_fetch_assoc($verifyRes);
+
+        if ($verifyRow['c2CallID'] == $args['c2CallID']) {
+            return array('error' => 0, 'message' => 'Read Successfully', 
+            'interestID' => $verifyRow['interestID'], 
+            'interestDescription' => $verifyRow['interestDescription'], 
+            'dob' => $verifyRow['dob'],
+            'gender' => $verifyRow['gender'],
+            'resultCode' => 1);
+        } else {
+            return array('error' => 1, 'message' => 'Read failed', 'resultCode' => 0);
+        }
+    }
+
+
     protected function addChatGroup($args) {
         if ($args['groupAdmin'] == '' || $args['c2CallID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
@@ -193,6 +219,31 @@ class MyAPI extends API {
 			} else {
 				return array('error' => 1, 'message' => 'Insert failed');
 			}
+    }
+
+    protected function readGroupInfo($args) {
+
+        if ($args['c2CallID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, topicDescription, locationName from chatGroup where c2CallID = ?");
+		$stmt->bind_param('s', $c2CallID);
+		$c2CallID = $args['c2CallID'];
+		$stmt->execute();
+		$verifyRes = $stmt->get_result();
+
+        $verifyRow = mysqli_fetch_assoc($verifyRes);
+
+        if ($verifyRow['c2CallID'] == $args['c2CallID']) {
+            return array('error' => 0, 'message' => 'Read Successfully', 
+            'interestID' => $verifyRow['interestID'], 
+            'interestDescription' => $verifyRow['interestDescription'], 
+            'topicDescription' => $verifyRow['topicDescription'],
+            'locationName' => $verifyRow['locationName'],
+            'resultCode' => 1);
+        } else {
+            return array('error' => 1, 'message' => 'Read failed', 'resultCode' => 0);
+        }
     }
 
     protected function readInterest($args) {

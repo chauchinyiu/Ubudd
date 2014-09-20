@@ -55,6 +55,11 @@
 
 - (void)serviceResponse:(NSData *)responseData error:(NSError *)error {
     NSError *_error = nil;
+    
+    if (responseData == nil) {
+        return;
+    }
+    
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&_error];
     
     ResponseBase *responseBase = nil;

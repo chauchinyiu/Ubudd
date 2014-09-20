@@ -17,6 +17,9 @@
     [dictionary setObject:self.interestID forKey:@"interestID"];
     [dictionary setObject:self.interestDescription forKey:@"interestDescription"];
     [dictionary setObject:self.c2CallID forKey:@"c2CallID"];
+    [dictionary setObject:self.location forKey:@"location"];
+    [dictionary setObject:[NSNumber numberWithFloat:self.latCoord] forKey:@"latCoord"];
+    [dictionary setObject:[NSNumber numberWithFloat:self.longCoord] forKey:@"longCoord"];
     
     return dictionary;
 }

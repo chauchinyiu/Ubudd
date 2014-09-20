@@ -1107,6 +1107,7 @@
 		CE787B1619B030EF00A0BD19 /* DataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CE787B1519B030EF00A0BD19 /* DataResponse.m */; };
 		CE787B1919B032FD00A0BD19 /* DataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE787B1819B032FD00A0BD19 /* DataRequest.m */; };
 		CE871B4F19C58BFF006B05B6 /* AddChatGroupDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE871B4E19C58BFF006B05B6 /* AddChatGroupDTO.m */; };
+		CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE885CD219CBE1A800F8004C /* WULocationSearchController.m */; };
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
 		CED5F1C019B555AA00DF8772 /* VerifyC2CallID.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */; };
 		CED5F1C319B5560900DF8772 /* VerifyC2CallIDDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C219B5560900DF8772 /* VerifyC2CallIDDTO.m */; };
@@ -2276,6 +2277,8 @@
 		CE787B1819B032FD00A0BD19 /* DataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataRequest.m; sourceTree = "<group>"; };
 		CE871B4D19C58BFF006B05B6 /* AddChatGroupDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddChatGroupDTO.h; sourceTree = "<group>"; };
 		CE871B4E19C58BFF006B05B6 /* AddChatGroupDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddChatGroupDTO.m; sourceTree = "<group>"; };
+		CE885CD119CBE1A800F8004C /* WULocationSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WULocationSearchController.h; sourceTree = "<group>"; };
+		CE885CD219CBE1A800F8004C /* WULocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WULocationSearchController.m; sourceTree = "<group>"; };
 		CE9CFF7A19C29E1E004DC699 /* WUInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUInterestViewController.h; sourceTree = "<group>"; };
 		CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUInterestViewController.m; sourceTree = "<group>"; };
 		CED5F1BE19B555AA00DF8772 /* VerifyC2CallID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyC2CallID.h; sourceTree = "<group>"; };
@@ -3458,6 +3461,8 @@
 				CE01E46D19B5AC41003A0289 /* WUUserSelectionController.m */,
 				CE9CFF7A19C29E1E004DC699 /* WUInterestViewController.h */,
 				CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */,
+				CE885CD119CBE1A800F8004C /* WULocationSearchController.h */,
+				CE885CD219CBE1A800F8004C /* WULocationSearchController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4734,6 +4739,7 @@
 				17FD053F195907840061938A /* WUTellFriendController.m in Sources */,
 				173060E019277F6B0018EE25 /* C2CallDataModel.xcdatamodeld in Sources */,
 				97A45CBE175BEBA800320AE6 /* WUChatHistoryController.m in Sources */,
+				CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */,
 				972F3E1E175CA5250006DEF6 /* WUFavoritesViewController.m in Sources */,
 				CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */,
 				1733A09D19366D720064E97A /* RequestBuilder.m in Sources */,
@@ -4903,8 +4909,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "071f7715-d789-4fe0-8734-03fb8abac652";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "071f7715-d789-4fe0-8734-03fb8abac652";
+				PROVISIONING_PROFILE = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -4939,8 +4945,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "071f7715-d789-4fe0-8734-03fb8abac652";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "071f7715-d789-4fe0-8734-03fb8abac652";
+				PROVISIONING_PROFILE = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

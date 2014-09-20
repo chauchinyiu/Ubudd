@@ -113,6 +113,11 @@ static BOOL isGroup = YES;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                 attributes:underlineAttribute];
+        
+        
         [(SCBubbleViewIn*)(c.bubbleView) setTextColor:[UIColor blackColor]];
         [(SCBubbleViewIn*)(c.bubbleView) setTextFont:[UIFont systemFontOfSize:18]];
     }
@@ -122,42 +127,63 @@ static BOOL isGroup = YES;
         [c.messageImage setFrame:CGRectMake(c.messageImage.frame.origin.x, c.messageImage.frame.origin.y, 100, 100) ];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                    attributes:underlineAttribute];
     }
     if ([cell isKindOfClass:[LocationCellInStream class]]) {
         LocationCellInStream *c = (LocationCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                    attributes:underlineAttribute];
     }
     if ([cell isKindOfClass:[AudioCellInStream class]]) {
         AudioCellInStream *c = (AudioCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                    attributes:underlineAttribute];
     }
     if ([cell isKindOfClass:[VideoCellInStream class]]) {
         VideoCellInStream *c = (VideoCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                    attributes:underlineAttribute];
     }
     if ([cell isKindOfClass:[FriendCellInStream class]]) {
         FriendCellInStream *c = (FriendCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                    attributes:underlineAttribute];
     }
     if ([cell isKindOfClass:[ContactCellInStream class]]) {
         ContactCellInStream *c = (ContactCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                    attributes:underlineAttribute];
     }
     if ([cell isKindOfClass:[CallCellInStream class]]) {
         CallCellInStream *c = (CallCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                    attributes:underlineAttribute];
     }
 
 }

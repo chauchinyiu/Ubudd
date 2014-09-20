@@ -8,14 +8,17 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 #import "WUInterestViewController.h"
+#import "WULocationSearchController.h"
 
-@interface WUAddGroupController : SCAddGroupController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate> {
+@interface WUAddGroupController : SCAddGroupController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+    WUInterestViewControllerDelegate, WULocationSelectControllerDelegate> {
     IBOutlet UIButton *btnGroupImage;
     
     IBOutlet UITextField *txtTopic;
     IBOutlet UITextField *txtTopic2;
     IBOutlet UIButton *btnInterest;
     IBOutlet UITextField *txtSubInterest;
+    IBOutlet UIButton *btnLocation;
     
 }
 

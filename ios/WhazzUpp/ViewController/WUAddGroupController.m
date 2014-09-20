@@ -19,6 +19,7 @@
 
 @interface WUAddGroupController (){
     int interestID;
+    CLLocationCoordinate2D loc;
 }
 @end
 
@@ -30,6 +31,8 @@
     
     btnGroupImage.imageView.layer.cornerRadius = 40.0;
     btnGroupImage.imageView.layer.masksToBounds = YES;
+    loc.latitude = 999;
+    loc.longitude = 999;
     
     [self setAddGroupAction:^(NSString *groupid) {
         if ([self.parentController respondsToSelector:@selector(setCreatedGroupId:)]) {
@@ -49,6 +52,9 @@
             addChatGroupDTO.interestID = [NSString stringWithFormat:@"%d", interestID];
             addChatGroupDTO.interestDescription = txtSubInterest.text;
             addChatGroupDTO.c2CallID = groupid;
+            addChatGroupDTO.location = btnLocation.titleLabel.text;
+            addChatGroupDTO.latCoord = loc.latitude;
+            addChatGroupDTO.longCoord = loc.longitude;
             
             WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
             [serviceHandler execute:METHOD_ADD_CHAT_GROUP parameter:addChatGroupDTO target:self action:@selector(addChatGroupResponse:error:)];
@@ -135,6 +141,10 @@
         WUInterestViewController *cvc = (WUInterestViewController *)[segue destinationViewController];
         cvc.delegate = self;
     }
+    else if ([[segue identifier] isEqualToString:@"LocationSearch"]) {
+        WULocationSearchController *cvc = (WULocationSearchController *)[segue destinationViewController];
+        cvc.delegate = self;
+    }
     else{
         [super prepareForSegue:segue sender:sender];
     }
@@ -144,6 +154,12 @@
     interestID = i;
     [btnInterest setTitle:name forState:UIControlStateNormal];
 }
+
+-(void)selectedLocationWithCoord:(CLLocationCoordinate2D)coord typedName:(NSString*)typedname{
+    loc = coord;
+    [btnLocation setTitle:typedname forState:UIControlStateNormal];
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {

@@ -38,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.userInfoCell.userImage.layer.cornerRadius = 35.0;
+    self.userInfoCell.userImage.layer.cornerRadius = 45.0;
     self.userInfoCell.userImage.layer.masksToBounds = YES;
 
     //read from server

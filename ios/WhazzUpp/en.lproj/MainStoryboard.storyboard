@@ -952,7 +952,7 @@
         <!--Group Detail Controller - Group Info-->
         <scene sceneID="p3H-vW-6rX">
             <objects>
-                <tableViewController storyboardIdentifier="SCGroupDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ydp-b9-UdG" customClass="SCGroupDetailController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SCGroupDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ydp-b9-UdG" customClass="WUGroupDetailController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xWO-91-URW">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1033,43 +1033,40 @@
         <!--Group Detail Header Controller-->
         <scene sceneID="YfJ-ha-9wl">
             <objects>
-                <viewController storyboardIdentifier="SCGroupDetailHeaderController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QZl-UZ-VxB" customClass="SCGroupDetailHeaderController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SCGroupDetailHeaderController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QZl-UZ-VxB" customClass="WUGroupDetailHeaderController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wg4-Qf-BBJ"/>
                         <viewControllerLayoutGuide type="bottom" id="t4h-5w-BXB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SrJ-Yg-6zD" userLabel="headerView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="310"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="bg_group_details.png" translatesAutoresizingMaskIntoConstraints="NO" id="r7r-KL-9ef">
-                                <rect key="frame" x="10" y="5" width="301" height="94"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" image="img_add_profile_picture.png" translatesAutoresizingMaskIntoConstraints="NO" id="wIc-X6-TDU" customClass="C2TapImageView">
-                                <rect key="frame" x="20" y="14" width="70" height="71"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" image="btn_ico_avatar_group.png" translatesAutoresizingMaskIntoConstraints="NO" id="wIc-X6-TDU" customClass="C2TapImageView">
+                                <rect key="frame" x="20" y="14" width="85" height="86"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Group Name" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="R1N-An-KM8" userLabel="labelGroupName">
-                                <rect key="frame" x="101" y="14" width="170" height="21"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
+                                <rect key="frame" x="125" y="15" width="170" height="21"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c48-5t-pS7" userLabel="tfGroupName">
-                                <rect key="frame" x="101" y="14" width="170" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <rect key="frame" x="125" y="16" width="170" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="endEditGroupName:" destination="QZl-UZ-VxB" eventType="editingDidEndOnExit" id="o3h-xm-VCY"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="WVL-ju-Nfy" userLabel="labelGroupStatus">
-                                <rect key="frame" x="101" y="42" width="188" height="19"/>
+                                <rect key="frame" x="101" y="87" width="188" height="19"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <color key="textColor" cyan="0.44999998810000003" magenta="0.0" yellow="1" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDr-GC-SRi" userLabel="btnEdit">
-                                <rect key="frame" x="269" y="5" width="40" height="40"/>
+                                <rect key="frame" x="280" y="8" width="40" height="40"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="Edit_blue.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1083,7 +1080,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Akp-Gh-e8g" userLabel="btnCall">
-                                <rect key="frame" x="125" y="107" width="70" height="42"/>
+                                <rect key="frame" x="125" y="245" width="70" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <state key="normal" image="ico_call_blue_50x50.png">
@@ -1104,7 +1101,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c20-BZ-ah9" userLabel="btnChat">
-                                <rect key="frame" x="230" y="107" width="70" height="42"/>
+                                <rect key="frame" x="230" y="245" width="70" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <state key="normal" image="ico_msg_blue_50x50.png">
@@ -1125,7 +1122,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dN-VC-UO9" userLabel="btnVideo">
-                                <rect key="frame" x="20" y="107" width="70" height="42"/>
+                                <rect key="frame" x="20" y="245" width="70" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
                                 <state key="normal" image="ico_cam_blue_50x50.png">
@@ -1145,6 +1142,49 @@
                                     <action selector="callVideo:" destination="QZl-UZ-VxB" eventType="touchUpInside" id="evh-X9-UWg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="175" translatesAutoresizingMaskIntoConstraints="NO" id="YUg-zA-AFD">
+                                <rect key="frame" x="125" y="52" width="175" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interest:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKy-H6-QwB">
+                                <rect key="frame" x="20" y="125" width="73" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sub-interest:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJr-YI-zJN">
+                                <rect key="frame" x="20" y="154" width="107" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOD-k5-FBs">
+                                <rect key="frame" x="85" y="125" width="215" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dl-vW-hkG">
+                                <rect key="frame" x="120" y="154" width="180" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXD-P0-toZ">
+                                <rect key="frame" x="20" y="183" width="73" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrM-M0-bqG">
+                                <rect key="frame" x="101" y="183" width="199" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1153,12 +1193,16 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="159"/>
+                    <size key="freeformSize" width="320" height="310"/>
                     <connections>
                         <outlet property="editGroupName" destination="sDr-GC-SRi" id="Qu0-Fm-cOG"/>
                         <outlet property="groupName" destination="R1N-An-KM8" id="qpp-Pp-oXX"/>
                         <outlet property="groupStatus" destination="WVL-ju-Nfy" id="QC0-bv-LXS"/>
                         <outlet property="imageButton" destination="wIc-X6-TDU" id="PLC-mM-5SV"/>
+                        <outlet property="lblInterest" destination="AOD-k5-FBs" id="kOS-6H-kqe"/>
+                        <outlet property="lblLocation" destination="wrM-M0-bqG" id="sIZ-F3-B85"/>
+                        <outlet property="lblSubinterest" destination="1Dl-vW-hkG" id="CZb-wv-BFK"/>
+                        <outlet property="lblTopicDesc" destination="YUg-zA-AFD" id="dTo-0O-3HJ"/>
                         <outlet property="tfGroupName" destination="c48-5t-pS7" id="esL-Cu-S09"/>
                     </connections>
                 </viewController>
@@ -7150,7 +7194,6 @@ All rights reserved</string>
         <image name="about_vertical_line@2x" width="44" height="44"/>
         <image name="bg_audio_bar.png" width="244" height="60"/>
         <image name="bg_current_credits.png" width="124" height="20"/>
-        <image name="bg_group_details.png" width="301" height="94"/>
         <image name="bg_msg_placeholder.png" width="321" height="218"/>
         <image name="bg_sms.png" width="320" height="135"/>
         <image name="bg_sms_text_field.png" width="280" height="92"/>
@@ -7191,7 +7234,6 @@ All rights reserved</string>
         <image name="ico_vcard.png" width="65" height="65"/>
         <image name="ico_voice_msg.png" width="65" height="65"/>
         <image name="img_add_attachement.png" width="43" height="43"/>
-        <image name="img_add_profile_picture.png" width="53" height="50"/>
         <image name="img_star.png" width="23" height="23"/>
         <image name="messagechatscreen_add_image_off" width="32" height="32"/>
         <image name="messagechatscreen_add_image_on" width="32" height="32"/>

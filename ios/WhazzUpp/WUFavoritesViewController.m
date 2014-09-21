@@ -166,7 +166,7 @@
         [self showGroupDetailForGroupid:user.userid];
     } else {
         [self showFriendDetailForUserid:user.userid];
-    }
+    } 
 }
 
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -195,7 +195,11 @@
 
 -(IBAction)showFriendInfo:(id)sender{
     MOC2CallUser *user = [[[[self.fetchedResultsController sections] objectAtIndex:0] objects] objectAtIndex:[sender tag]];
-    [self showFriendDetailForUserid:user.userid];
+    if ([user.userType intValue] == 2) {
+        [self showGroupDetailForGroupid:user.userid];
+    } else {
+        [self showFriendDetailForUserid:user.userid];
+    }
 }
 
 -(IBAction)toggleEditing:(id)sender

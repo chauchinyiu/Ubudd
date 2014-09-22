@@ -79,6 +79,7 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     
     self.tabBarController.tabBar.hidden = YES;
+    [self.submitButton setImage:nil forState:UIControlStateHighlighted];
     
     if (self.sendWelcomeText) {
         self.chatInput.text = @"Welcome!";
@@ -96,6 +97,7 @@ typedef enum : NSUInteger {
         [self showFriendDetailForUserid:self.targetUserid];
     }
 }
+
 
 -(void) handleTypingEvent:(NSString *) fromUserid
 {

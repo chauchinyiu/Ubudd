@@ -5,7 +5,7 @@
 //  Created by Ming Kei Wong on 30/8/14.
 //  Copyright (c) 2014年 3Embed Technologies. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
 #import "WUBoardController.h"
 #import "SocialCommunication/MessageCellOutStream.h"
 #import "SocialCommunication/ImageCellOutStream.h"
@@ -52,6 +52,18 @@ static BOOL isGroup = YES;
     // Dispose of any resources that can be recreated.
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell* cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[MessageCellOutStream class]]) {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath] * 1.1;
+    }
+    else if ([cell isKindOfClass:[MessageCellInStream class]]) {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath] * 1.25 + 30;
+    }
+    else{
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+}
 
 
 -(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath

@@ -3113,7 +3113,7 @@ asdfsdfg</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WJ-gv-KsO" userLabel="richMediaButton">
-                                                <rect key="frame" x="7" y="2" width="34" height="34"/>
+                                                <rect key="frame" x="7" y="3" width="34" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="WJJ-Bi-qQI"/>
                                                     <constraint firstAttribute="width" constant="34" id="WPp-GQ-SRY"/>
@@ -3137,7 +3137,7 @@ asdfsdfg</string>
                                             <constraint firstItem="UNi-Fv-k3H" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" constant="2" id="6T0-6X-vOE"/>
                                             <constraint firstItem="tu1-rG-kf5" firstAttribute="leading" secondItem="3WJ-gv-KsO" secondAttribute="trailing" constant="11" id="6sd-QB-F2t"/>
                                             <constraint firstAttribute="trailing" secondItem="Q0T-d6-NbB" secondAttribute="trailing" constant="12" id="EqB-0Q-MJs"/>
-                                            <constraint firstItem="3WJ-gv-KsO" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" constant="2" id="KLQ-4c-i6b"/>
+                                            <constraint firstItem="3WJ-gv-KsO" firstAttribute="bottom" secondItem="41u-fV-1Vn" secondAttribute="bottom" constant="-1" id="KLQ-4c-i6b"/>
                                             <constraint firstAttribute="trailing" secondItem="Zgd-il-c8N" secondAttribute="trailing" constant="11" id="LTU-ra-OXN"/>
                                             <constraint firstItem="3WJ-gv-KsO" firstAttribute="leading" secondItem="41u-fV-1Vn" secondAttribute="leading" constant="7" id="SwL-MZ-hEj"/>
                                             <constraint firstItem="Zgd-il-c8N" firstAttribute="leading" secondItem="tu1-rG-kf5" secondAttribute="trailing" constant="5" id="bby-U1-lJT"/>
@@ -7235,8 +7235,8 @@ All rights reserved</string>
         <image name="ico_voice_msg.png" width="65" height="65"/>
         <image name="img_add_attachement.png" width="43" height="43"/>
         <image name="img_star.png" width="23" height="23"/>
-        <image name="messagechatscreen_add_image_off" width="32" height="32"/>
-        <image name="messagechatscreen_add_image_on" width="32" height="32"/>
+        <image name="messagechatscreen_add_image_off" width="23" height="23"/>
+        <image name="messagechatscreen_add_image_on" width="23" height="23"/>
         <image name="messagechatscreen_send_btn_on" width="40" height="29"/>
         <image name="phonenumber_arrow" width="10" height="16"/>
         <image name="popover_new.png" width="216" height="110"/>

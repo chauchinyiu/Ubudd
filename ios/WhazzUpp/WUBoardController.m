@@ -55,10 +55,26 @@ static BOOL isGroup = YES;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[MessageCellOutStream class]]) {
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath] * 1.1;
+        MessageCellOutStream *c = (MessageCellOutStream*)cell;
+        SCBubbleViewOut* view = (SCBubbleViewOut*)(c.bubbleView);
+        
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 80, 9999);
+        CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
+                                        constrainedToSize:maximumSize
+                                            lineBreakMode:NSLineBreakByWordWrapping];
+        
+        return myStringSize.height + (isGroup? 30 : 18);
     }
     else if ([cell isKindOfClass:[MessageCellInStream class]]) {
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath] * 1.25 + 30;
+        MessageCellInStream *c = (MessageCellInStream*)cell;
+        SCBubbleViewIn* view = (SCBubbleViewIn*)(c.bubbleView);
+        
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 80, 9999);
+        CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
+                                        constrainedToSize:maximumSize
+                                            lineBreakMode:NSLineBreakByWordWrapping];
+        
+        return myStringSize.height + (isGroup? 30 : 18);
     }
     else{
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -74,8 +90,24 @@ static BOOL isGroup = YES;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
-        [(SCBubbleViewOut*)(c.bubbleView) setTextColor:[UIColor blackColor]];
-        [(SCBubbleViewOut*)(c.bubbleView) setTextFont:[UIFont systemFontOfSize:18]];
+        SCBubbleViewOut* view = (SCBubbleViewOut*)(c.bubbleView);
+        [view setTextColor:[UIColor blackColor]];
+        [view setTextFont:[UIFont systemFontOfSize:18]];
+        [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 80, 9999);
+        CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
+                                   constrainedToSize:maximumSize
+                                       lineBreakMode:NSLineBreakByWordWrapping];
+        
+        NSString* conStr = [NSString stringWithFormat:@"H:[view(==%f)]", myStringSize.width + 30];
+        NSArray* cstin = [NSLayoutConstraint constraintsWithVisualFormat:conStr options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
+        [view removeConstraint:view.width];
+        [view addConstraints:cstin];
+        if (!isGroup) {
+            [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
+        }
+        
     }
     if ([cell isKindOfClass:[ImageCellOutStream class]]) {
         ImageCellOutStream *c = (ImageCellOutStream*)cell;
@@ -130,8 +162,23 @@ static BOOL isGroup = YES;
                                                                  attributes:underlineAttribute];
         
         
-        [(SCBubbleViewIn*)(c.bubbleView) setTextColor:[UIColor blackColor]];
-        [(SCBubbleViewIn*)(c.bubbleView) setTextFont:[UIFont systemFontOfSize:18]];
+        SCBubbleViewIn* view = (SCBubbleViewIn*)(c.bubbleView);
+        [view setTextColor:[UIColor blackColor]];
+        [view setTextFont:[UIFont systemFontOfSize:18]];
+        [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 80, 9999);
+        CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
+                                        constrainedToSize:maximumSize
+                                            lineBreakMode:NSLineBreakByWordWrapping];
+        
+        NSString* conStr = [NSString stringWithFormat:@"H:[view(==%f)]", myStringSize.width + 30];
+        NSArray* cstin = [NSLayoutConstraint constraintsWithVisualFormat:conStr options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
+        [view removeConstraint:view.width];
+        [view addConstraints:cstin];
+        if (!isGroup) {
+            [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
+        }
     }
     if ([cell isKindOfClass:[ImageCellInStream class]]) {
         ImageCellInStream *c = (ImageCellInStream*)cell;

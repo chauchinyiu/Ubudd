@@ -100,7 +100,6 @@
     [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_IN_IOS7];
     [[SCBubbleViewOut appearance] setBubbleTypeOut:SC_BUBBLE_OUT_IOS7];
     
-
     [self customizeUI];
         
     [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"showTestCall"];

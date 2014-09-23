@@ -113,6 +113,10 @@
                 favocell.userImg.layer.cornerRadius = 15.0;
                 favocell.userImg.layer.masksToBounds = YES;
             }
+            else{
+                favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+            }
+            
         }
     }
     else if(user.userType.intValue == 2){

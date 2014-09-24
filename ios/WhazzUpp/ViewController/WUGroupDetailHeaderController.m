@@ -46,6 +46,9 @@
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readGroupInfo:error:)];
+    
+    [self.editGroupName setHidden:YES];
+    [self.groupStatus setHidden:YES];
 }
 
 - (void)readGroupInfo:(ResponseBase *)response error:(NSError *)error {

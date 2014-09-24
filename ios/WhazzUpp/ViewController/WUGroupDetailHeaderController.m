@@ -38,7 +38,9 @@
     // Do any additional setup after loading the view.
     //read from server
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    [dictionary setObject:self.group.groupid forKey:@"c2CallID"];
+    if (self.group.groupid != nil) {
+        [dictionary setObject:self.group.groupid forKey:@"c2CallID"];
+    }
     
     DataRequest *dataRequest = [[DataRequest alloc] init];
     dataRequest.requestName = @"readGroupInfo";

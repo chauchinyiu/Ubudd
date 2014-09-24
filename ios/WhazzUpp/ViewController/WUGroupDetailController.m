@@ -44,6 +44,17 @@
     }
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[SCGroupMemberCell class]]) {
+        SCGroupMemberCell *c = (SCGroupMemberCell*)cell;
+        if (![c.textLabel.textColor isEqual:[UIColor colorWithWhite:0 alpha:1 ]]) {
+            [c.textLabel setText:[c.textLabel.text stringByAppendingString:@"(Group Admin)"]];
+        }
+    }
+    return cell;
+}
+
 /*
 #pragma mark - Navigation
 

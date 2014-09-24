@@ -63,11 +63,11 @@
             </objects>
             <point key="canvasLocation" x="633" y="374"/>
         </scene>
-        <!--Navigation Controller - History-->
+        <!--Navigation Controller - Chats-->
         <scene sceneID="w03-71-7ws">
             <objects>
                 <navigationController definesPresentationContext="YES" id="JH9-o7-13T" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="History" id="c1W-kW-GhH"/>
+                    <tabBarItem key="tabBarItem" title="Chats" id="c1W-kW-GhH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KLG-R5-ZAv">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.098039215690000001" green="0.50588235290000005" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -317,7 +317,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXm-qi-exZ">
-                                    <rect key="frame" x="210" y="7" width="102" height="31"/>
+                                    <rect key="frame" x="0.0" y="7" width="102" height="31"/>
                                     <state key="normal" title="Add Group">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -326,7 +326,7 @@
                                         <segue destination="tY9-Si-6JS" kind="push" id="FNr-RP-ILw"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAV-8P-oJ1">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAV-8P-oJ1">
                                     <rect key="frame" x="8" y="7" width="168" height="31"/>
                                     <state key="normal" title="Multiple Receiver">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

@@ -54,11 +54,12 @@ static BOOL isGroup = YES;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    [super configureCell:cell atIndexPath:indexPath];
     if ([cell isKindOfClass:[MessageCellOutStream class]]) {
         MessageCellOutStream *c = (MessageCellOutStream*)cell;
         SCBubbleViewOut* view = (SCBubbleViewOut*)(c.bubbleView);
         
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 80, 9999);
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 90, 9999);
         CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
                                         constrainedToSize:maximumSize
                                             lineBreakMode:NSLineBreakByWordWrapping];
@@ -69,7 +70,7 @@ static BOOL isGroup = YES;
         MessageCellInStream *c = (MessageCellInStream*)cell;
         SCBubbleViewIn* view = (SCBubbleViewIn*)(c.bubbleView);
         
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 80, 9999);
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 90, 9999);
         CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
                                         constrainedToSize:maximumSize
                                             lineBreakMode:NSLineBreakByWordWrapping];
@@ -95,64 +96,65 @@ static BOOL isGroup = YES;
         [view setTextFont:[UIFont systemFontOfSize:18]];
         [view setTranslatesAutoresizingMaskIntoConstraints:NO];
         
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 80, 9999);
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 90, 9999);
         CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
                                    constrainedToSize:maximumSize
                                        lineBreakMode:NSLineBreakByWordWrapping];
         
-        NSString* conStr = [NSString stringWithFormat:@"H:[view(==%f)]", myStringSize.width + 30];
+        NSString* conStr = [NSString stringWithFormat:@"H:[view(==%d)]", (int)roundf(myStringSize.width + 30)];
         NSArray* cstin = [NSLayoutConstraint constraintsWithVisualFormat:conStr options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
         [view removeConstraint:view.width];
+        [view setWidth:[cstin objectAtIndex:0]];
         [view addConstraints:cstin];
         if (!isGroup) {
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
         }
         
     }
-    if ([cell isKindOfClass:[ImageCellOutStream class]]) {
+    else if ([cell isKindOfClass:[ImageCellOutStream class]]) {
         ImageCellOutStream *c = (ImageCellOutStream*)cell;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
     }
-    if ([cell isKindOfClass:[LocationCellOutStream class]]) {
+    else if ([cell isKindOfClass:[LocationCellOutStream class]]) {
         LocationCellOutStream *c = (LocationCellOutStream*)cell;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
     }
-    if ([cell isKindOfClass:[AudioCellOutStream class]]) {
+    else if ([cell isKindOfClass:[AudioCellOutStream class]]) {
         AudioCellOutStream *c = (AudioCellOutStream*)cell;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
     }
-    if ([cell isKindOfClass:[VideoCellOutStream class]]) {
+    else if ([cell isKindOfClass:[VideoCellOutStream class]]) {
         VideoCellOutStream *c = (VideoCellOutStream*)cell;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
     }
-    if ([cell isKindOfClass:[FriendCellOutStream class]]) {
+    else if ([cell isKindOfClass:[FriendCellOutStream class]]) {
         FriendCellOutStream *c = (FriendCellOutStream*)cell;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
     }
-    if ([cell isKindOfClass:[ContactCellOutStream class]]) {
+    else if ([cell isKindOfClass:[ContactCellOutStream class]]) {
         ContactCellOutStream *c = (ContactCellOutStream*)cell;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
     }
-    if ([cell isKindOfClass:[CallCellOutStream class]]) {
+    else if ([cell isKindOfClass:[CallCellOutStream class]]) {
         CallCellOutStream *c = (CallCellOutStream*)cell;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
     }
     
-    if ([cell isKindOfClass:[MessageCellInStream class]]) {
+    else if ([cell isKindOfClass:[MessageCellInStream class]]) {
         MessageCellInStream *c = (MessageCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
@@ -167,20 +169,21 @@ static BOOL isGroup = YES;
         [view setTextFont:[UIFont systemFontOfSize:18]];
         [view setTranslatesAutoresizingMaskIntoConstraints:NO];
         
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 80, 9999);
+        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 90, 9999);
         CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
                                         constrainedToSize:maximumSize
                                             lineBreakMode:NSLineBreakByWordWrapping];
         
-        NSString* conStr = [NSString stringWithFormat:@"H:[view(==%f)]", myStringSize.width + 30];
+        NSString* conStr = [NSString stringWithFormat:@"H:[view(==%d)]", (int)roundf(myStringSize.width + 30)];
         NSArray* cstin = [NSLayoutConstraint constraintsWithVisualFormat:conStr options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
         [view removeConstraint:view.width];
+        [view setWidth:[cstin objectAtIndex:0]];
         [view addConstraints:cstin];
         if (!isGroup) {
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
         }
     }
-    if ([cell isKindOfClass:[ImageCellInStream class]]) {
+    else if ([cell isKindOfClass:[ImageCellInStream class]]) {
         ImageCellInStream *c = (ImageCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.messageImage setFrame:CGRectMake(c.messageImage.frame.origin.x, c.messageImage.frame.origin.y, 100, 100) ];
@@ -190,7 +193,7 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
     }
-    if ([cell isKindOfClass:[LocationCellInStream class]]) {
+    else if ([cell isKindOfClass:[LocationCellInStream class]]) {
         LocationCellInStream *c = (LocationCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
@@ -199,7 +202,7 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
     }
-    if ([cell isKindOfClass:[AudioCellInStream class]]) {
+    else if ([cell isKindOfClass:[AudioCellInStream class]]) {
         AudioCellInStream *c = (AudioCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
@@ -208,7 +211,7 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
     }
-    if ([cell isKindOfClass:[VideoCellInStream class]]) {
+    else if ([cell isKindOfClass:[VideoCellInStream class]]) {
         VideoCellInStream *c = (VideoCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
@@ -217,7 +220,7 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
     }
-    if ([cell isKindOfClass:[FriendCellInStream class]]) {
+    else if ([cell isKindOfClass:[FriendCellInStream class]]) {
         FriendCellInStream *c = (FriendCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
@@ -226,7 +229,7 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
     }
-    if ([cell isKindOfClass:[ContactCellInStream class]]) {
+    else if ([cell isKindOfClass:[ContactCellInStream class]]) {
         ContactCellInStream *c = (ContactCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
@@ -235,7 +238,7 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
     }
-    if ([cell isKindOfClass:[CallCellInStream class]]) {
+    else if ([cell isKindOfClass:[CallCellInStream class]]) {
         CallCellInStream *c = (CallCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];

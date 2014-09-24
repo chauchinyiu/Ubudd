@@ -155,4 +155,11 @@
     [self showChatForUserid:user.userid];
 }
 
+-(IBAction)phoneCall:(id)sender{
+    MOC2CallUser *user = [self currentUser];
+    NSString* phoneNumber = [@"telprompt://" stringByAppendingString:user.ownNumber];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+}
+
+
 @end

@@ -73,7 +73,6 @@ static BOOL isGroup = YES;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    [super configureCell:cell atIndexPath:indexPath];
     if ([cell isKindOfClass:[MessageCellOutStream class]]) {
         MessageCellOutStream *c = (MessageCellOutStream*)cell;
         SCBubbleViewOut* view = (SCBubbleViewOut*)(c.bubbleView);

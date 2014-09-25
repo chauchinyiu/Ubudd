@@ -148,6 +148,8 @@
         [CommonMethods showAlertWithTitle:@"Enter Details" message:@"Display Name cannot be empty" delegate:nil];
     }
     else {
+        [self dismissKeyboard];
+        
         [CommonMethods showLoading:YES title:nil message:@"Saving"];
         
         SCUserProfile *userProfile = [SCUserProfile currentUser];
@@ -218,6 +220,13 @@
                 [self performSegueWithIdentifier:@"WUWelcomeControllerSegue" sender:self];
         }];
     }
+}
+
+-(void) dismissKeyboard
+{
+    [txtSubInterest resignFirstResponder];
+    [txtDisplayName  resignFirstResponder];
+    [txtDateofBirth resignFirstResponder];
 }
 
 - (void)updateUserFieldResponse:(ResponseBase *)response error:(NSError *)error{

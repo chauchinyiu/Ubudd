@@ -64,8 +64,9 @@ static BOOL isGroup = YES;
 
 - (void)keywordShown:(NSNotification *)notification
 {
-    NSLog(@"%d number row %d section", [self.tableView numberOfRowsInSection:8], self.tableView.numberOfSections);
-    NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:([self.tableView numberOfRowsInSection:0] - 1) inSection:8];
+ 
+    NSInteger lastSection = self.tableView.numberOfSections - 1 ;
+    NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:([self.tableView numberOfRowsInSection:lastSection] - 1) inSection:lastSection];
     [[self tableView] scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
 }

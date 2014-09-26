@@ -8,14 +8,16 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 #import "WUInterestViewController.h"
+#import "WUStatusSelectController.h"
 
-@interface WUUserProfileController : SCUserProfileController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate> {
+@interface WUUserProfileController : SCUserProfileController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WUStatusSelectControllerDelegate > {
     IBOutlet UITextField *txtDisplayName;
     IBOutlet UIButton *btnProfileImage;
     IBOutlet UITextField *txtDateofBirth;
     IBOutlet UIButton *btnGender;
     IBOutlet UIButton *btnInterest;
     IBOutlet UITextField *txtSubInterest;
+    IBOutlet UIButton *btnStatus;
 }
 
 - (IBAction)btnSaveTapped;

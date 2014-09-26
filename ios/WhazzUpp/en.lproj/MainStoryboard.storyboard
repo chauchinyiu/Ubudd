@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -1858,7 +1858,7 @@ asdfsdfg</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m3g-jR-lF8" userLabel="imageNameView">
-                                                    <rect key="frame" x="0.0" y="11" width="320" height="291"/>
+                                                    <rect key="frame" x="0.0" y="13" width="320" height="321"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e3j-Lo-ear">
                                                             <rect key="frame" x="132" y="0.0" width="178" height="104"/>
@@ -1914,13 +1914,16 @@ asdfsdfg</string>
                                                             </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZaJ-4c-M7a">
-                                                            <rect key="frame" x="20" y="103" width="285" height="161"/>
+                                                            <rect key="frame" x="20" y="103" width="285" height="198"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="E8c-ak-81P">
                                                                     <rect key="frame" x="0.0" y="29" width="285" height="26"/>
                                                                 </imageView>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="LeM-Xq-HD8">
                                                                     <rect key="frame" x="0.0" y="99" width="285" height="21"/>
+                                                                </imageView>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="9Aa-67-Bet">
+                                                                    <rect key="frame" x="0.0" y="167" width="285" height="21"/>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enU-Hl-ko6">
                                                                     <rect key="frame" x="0.0" y="0.0" width="58" height="21"/>
@@ -1931,6 +1934,9 @@ asdfsdfg</string>
                                                                 </label>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Q0r-wF-y0y">
                                                                     <rect key="frame" x="270" y="32" width="9" height="16"/>
+                                                                </imageView>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="nGa-cY-CP0">
+                                                                    <rect key="frame" x="270" y="162" width="9" height="16"/>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sub-interests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b4-6W-ACb">
                                                                     <rect key="frame" x="0.0" y="70" width="119" height="21"/>
@@ -1957,6 +1963,24 @@ asdfsdfg</string>
                                                                         <segue destination="Jaz-Pe-n8k" kind="push" identifier="SelectInterest" id="gGN-0m-1iN"/>
                                                                     </connections>
                                                                 </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaT-yt-eaF">
+                                                                    <rect key="frame" x="0.0" y="158" width="285" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <state key="normal" title="Status">
+                                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <segue destination="C6J-A2-jJX" kind="push" identifier="Status" id="ELa-Fn-1mP"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjn-Lk-GTf">
+                                                                    <rect key="frame" x="0.0" y="138" width="95" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </view>
@@ -1988,6 +2012,7 @@ asdfsdfg</string>
                         <outlet property="btnGender" destination="a8h-Go-HBU" id="F21-yA-Xgw"/>
                         <outlet property="btnInterest" destination="nok-Zq-twP" id="Fmc-E8-HpC"/>
                         <outlet property="btnProfileImage" destination="aPJ-CB-6s0" id="50l-Fv-Hvp"/>
+                        <outlet property="btnStatus" destination="eaT-yt-eaF" id="bwS-op-d5K"/>
                         <outlet property="txtDateofBirth" destination="Pjq-Mo-IUo" id="D5n-Hh-hwD"/>
                         <outlet property="txtDisplayName" destination="3sr-8y-vUF" id="GGe-iU-wzT"/>
                         <outlet property="txtSubInterest" destination="0ms-b1-ZbX" id="rav-1U-DMp"/>
@@ -1997,6 +2022,73 @@ asdfsdfg</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BF2-re-r9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3032" y="210"/>
+        </scene>
+        <!--Status Select Controller - Current Status-->
+        <scene sceneID="jON-Ks-ekt">
+            <objects>
+                <tableViewController id="C6J-A2-jJX" customClass="WUStatusSelectController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ygM-xe-Tpy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="EyK-MD-OCa">
+                            <rect key="frame" x="0.0" y="64" width="320" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="sZ7-q8-w6P">
+                                    <rect key="frame" x="20" y="19" width="280" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your current status" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kTQ-8p-KXY">
+                                    <rect key="frame" x="20" y="11" width="280" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="C6J-A2-jJX" id="o7g-jn-9dt"/>
+                                    </connections>
+                                </textField>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select new status:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5U-BQ-xEB">
+                                    <rect key="frame" x="8" y="49" width="254" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatusCell" textLabel="TIQ-sM-YPC" style="IBUITableViewCellStyleDefault" id="8fk-eP-M7B">
+                                <rect key="frame" x="0.0" y="156" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8fk-eP-M7B" id="2C8-II-kIR">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TIQ-sM-YPC">
+                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="C6J-A2-jJX" id="7rH-Gr-dLP"/>
+                            <outlet property="delegate" destination="C6J-A2-jJX" id="Zfc-Bt-5Nd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Current Status" id="uPx-05-wk4"/>
+                    <connections>
+                        <outlet property="userStatus" destination="kTQ-8p-KXY" id="PTE-ei-U9Q"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x50-cs-CqE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3467" y="196"/>
         </scene>
         <!--Compose Message Controller - Compose Message-->
         <scene sceneID="utg-vE-z82">
@@ -7249,14 +7341,14 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="kjq-qc-r21"/>
+        <segue reference="n4d-a3-pqy"/>
+        <segue reference="l4c-f0-WTn"/>
+        <segue reference="XEP-pC-k3p"/>
+        <segue reference="p90-nP-FHg"/>
         <segue reference="VQ9-8Q-vDt"/>
         <segue reference="TC0-AQ-IeD"/>
         <segue reference="gGN-0m-1iN"/>
         <segue reference="tQs-8i-bTJ"/>
-        <segue reference="kjq-qc-r21"/>
-        <segue reference="n4d-a3-pqy"/>
-        <segue reference="gEM-cP-vpS"/>
-        <segue reference="XEP-pC-k3p"/>
-        <segue reference="p90-nP-FHg"/>
     </inferredMetricsTieBreakers>
 </document>

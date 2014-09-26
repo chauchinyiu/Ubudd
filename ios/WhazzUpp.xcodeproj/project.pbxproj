@@ -1118,6 +1118,7 @@
 		CEEFF0F319B1679200B59179 /* Info_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEEFF0F219B1679200B59179 /* Info_icon@2x.png */; };
 		CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEFF0FB19B19EE000B59179 /* WUBoardController.m */; };
 		CEF9E8C919CECDED00A864A6 /* WUGroupDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9E8C819CECDED00A864A6 /* WUGroupDetailController.m */; };
+		CEFDE7AF19D50DBC00FCC7D5 /* WUStatusSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDE7AE19D50DBC00FCC7D5 /* WUStatusSelectController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2299,6 +2300,8 @@
 		CEEFF0FB19B19EE000B59179 /* WUBoardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUBoardController.m; sourceTree = "<group>"; };
 		CEF9E8C719CECDED00A864A6 /* WUGroupDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUGroupDetailController.h; sourceTree = "<group>"; };
 		CEF9E8C819CECDED00A864A6 /* WUGroupDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUGroupDetailController.m; sourceTree = "<group>"; };
+		CEFDE7AD19D50DBC00FCC7D5 /* WUStatusSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUStatusSelectController.h; sourceTree = "<group>"; };
+		CEFDE7AE19D50DBC00FCC7D5 /* WUStatusSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUStatusSelectController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3473,6 +3476,8 @@
 				CE885CD219CBE1A800F8004C /* WULocationSearchController.m */,
 				CEF9E8C719CECDED00A864A6 /* WUGroupDetailController.h */,
 				CEF9E8C819CECDED00A864A6 /* WUGroupDetailController.m */,
+				CEFDE7AD19D50DBC00FCC7D5 /* WUStatusSelectController.h */,
+				CEFDE7AE19D50DBC00FCC7D5 /* WUStatusSelectController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4736,6 +4741,7 @@
 				97995405175B5587001F2D52 /* WUAppDelegate.m in Sources */,
 				17046E83194A3FB300034F9F /* WUVerificationController.m in Sources */,
 				CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */,
+				CEFDE7AF19D50DBC00FCC7D5 /* WUStatusSelectController.m in Sources */,
 				CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */,
 				17E7F1BA193BCC8700015AF6 /* WUUserProfileController.m in Sources */,
 				97A45CAE175B630B00320AE6 /* WUChatController.m in Sources */,

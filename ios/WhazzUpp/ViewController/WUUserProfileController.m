@@ -106,6 +106,8 @@
     
     // Plug the keyboardDoneButtonView into the text field...
     txtDateofBirth.inputAccessoryView = keyboardDoneButtonView;
+    
+    [btnStatus setTitle:[SCUserProfile currentUser].userStatus forState:UIControlStateNormal];
 }
 
 - (IBAction)btnGenderTapped{
@@ -154,6 +156,7 @@
         
         SCUserProfile *userProfile = [SCUserProfile currentUser];
         userProfile.firstname = txtDisplayName.text;
+        userProfile.userStatus = [btnStatus titleForState:UIControlStateNormal];
         
         if (btnProfileImage.imageView.image) {
             [userProfile setUserImage:btnProfileImage.imageView.image withCompletionHandler:^(BOOL finished) {
@@ -282,6 +285,11 @@
         WUInterestViewController *cvc = (WUInterestViewController *)[segue destinationViewController];
         cvc.delegate = self;        
     }
+    if ([segue.identifier isEqualToString:@"Status"]) {
+        WUStatusSelectController *cvc = (WUStatusSelectController *)[segue destinationViewController];
+        cvc.currentStatus = [btnStatus titleForState:UIControlStateNormal];
+        cvc.delegate = self;
+    }
 }
 
 -(void)selectedInerestID:(int) i withName:(NSString*) name;{
@@ -289,5 +297,8 @@
     [btnInterest setTitle:name forState:UIControlStateNormal];
 }
 
+-(void)selectedStatus:(NSString*)status{
+    [btnStatus setTitle:status forState:UIControlStateNormal];
+}
 
 @end

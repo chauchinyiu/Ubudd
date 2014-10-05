@@ -18,6 +18,7 @@
     IBOutlet UIButton *btnInterest;
     IBOutlet UITextField *txtSubInterest;
     IBOutlet UIButton *btnStatus;
+    IBOutlet UILabel *lblTelNo;
 }
 
 - (IBAction)btnSaveTapped;

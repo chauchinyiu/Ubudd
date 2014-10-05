@@ -87,8 +87,7 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]
-       || user.userType.intValue == 2){
+    if([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]){
         return favoritesCellHeight;
     }
     else{
@@ -107,7 +106,6 @@
             
             [favocell.userBtn setTag:indexPath.row];
             UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
-            
             if (image) {
                 favocell.userImg.image = image;
                 favocell.userImg.layer.cornerRadius = 15.0;
@@ -117,25 +115,6 @@
                 favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
             }
             
-        }
-    }
-    else if(user.userType.intValue == 2){
-        if ([cell isKindOfClass:[WUFavoritesCell class]]) {
-            WUFavoritesCell *favocell = (WUFavoritesCell *) cell;
-            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
-            favocell.statusLabel.text = user.userStatus? user.userStatus : @"Ubudd Group";
-            
-            [favocell.userBtn setTag:indexPath.row];
-            UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
-            
-            if (image) {
-                favocell.userImg.image = image;
-                favocell.userImg.layer.cornerRadius = 15.0;
-                favocell.userImg.layer.masksToBounds = YES;
-            }
-            else{
-                favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
-            }
         }
     }
     else{

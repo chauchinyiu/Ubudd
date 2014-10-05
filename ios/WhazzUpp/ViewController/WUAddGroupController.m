@@ -42,6 +42,9 @@
                 SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
                 [group setGroupImage:btnGroupImage.imageView.image withCompletionHandler:nil];
             }
+            SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
+            [group setGroupdata:txtTopic2.text forKey:@"topicDesc" public:YES];
+            [group saveGroup];
             
             //update c2call id and other details to server
             NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
@@ -55,6 +58,17 @@
             addChatGroupDTO.location = btnLocation.titleLabel.text;
             addChatGroupDTO.latCoord = loc.latitude;
             addChatGroupDTO.longCoord = loc.longitude;
+            addChatGroupDTO.topic = txtTopic.text;
+            
+            
+            NSArray* friends = [[SCFriendList instance] listFriendsInfo];
+            for (int i = 0; i < self.members.count; i++) {
+                NSDictionary* friendInfo = [[C2CallPhone currentPhone] getUserInfoForUserid:[self.members objectAtIndex:i]];
+                NSString* memberid = [friendInfo objectForKey:@"Email"];
+                memberid = [[memberid componentsSeparatedByString:@"@"] objectAtIndex:0];
+                [addChatGroupDTO.members addObject:memberid];
+            }
+            
             
             WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
             [serviceHandler execute:METHOD_ADD_CHAT_GROUP parameter:addChatGroupDTO target:self action:@selector(addChatGroupResponse:error:)];
@@ -65,7 +79,10 @@
     }];
 }
 
+
+
 - (void)addChatGroupResponse:(ResponseBase *)response error:(NSError *)error{
+    
 }
 
 

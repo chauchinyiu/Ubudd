@@ -71,29 +71,15 @@ static BOOL isGroup = YES;
 
 }
 
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[MessageCellOutStream class]]) {
-        MessageCellOutStream *c = (MessageCellOutStream*)cell;
-        SCBubbleViewOut* view = (SCBubbleViewOut*)(c.bubbleView);
-        
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 90, 9999);
-        CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
-                                        constrainedToSize:maximumSize
-                                            lineBreakMode:NSLineBreakByWordWrapping];
-        
-        return myStringSize.height + (isGroup? 30 : 18);
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath] - (isGroup? 0 : 12);
     }
     else if ([cell isKindOfClass:[MessageCellInStream class]]) {
-        MessageCellInStream *c = (MessageCellInStream*)cell;
-        SCBubbleViewIn* view = (SCBubbleViewIn*)(c.bubbleView);
-        
-        CGSize maximumSize = CGSizeMake(self.view.frame.size.width - 90, 9999);
-        CGSize myStringSize = [view.chatText sizeWithFont:[UIFont systemFontOfSize:18]
-                                        constrainedToSize:maximumSize
-                                            lineBreakMode:NSLineBreakByWordWrapping];
-        
-        return myStringSize.height + (isGroup? 30 : 18);
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath] - (isGroup? 0 : 12);
     }
     else{
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];

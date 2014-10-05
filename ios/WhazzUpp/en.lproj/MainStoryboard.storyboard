@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -29,7 +29,7 @@
             </objects>
             <point key="canvasLocation" x="84" y="644"/>
         </scene>
-        <!--Navigation Controller - UBudd List-->
+        <!--UBudd List-->
         <scene sceneID="Pw2-bG-wXJ">
             <objects>
                 <navigationController definesPresentationContext="YES" id="9mB-oN-lL3" sceneMemberID="viewController">
@@ -39,14 +39,14 @@
                         <color key="barTintColor" red="0.098039215690000001" green="0.50588235290000005" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="OQP-JR-H6z" kind="relationship" relationship="rootViewController" id="ACR-M6-9cz"/>
+                        <segue destination="sU5-NS-qIY" kind="relationship" relationship="rootViewController" id="YVO-HS-0Fd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bnj-vO-hxK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="633" y="-300"/>
         </scene>
-        <!--Navigation Controller - Contacts-->
+        <!--Contacts-->
         <scene sceneID="jOc-HG-2a6">
             <objects>
                 <navigationController definesPresentationContext="YES" id="mKo-C3-3Qu" sceneMemberID="viewController">
@@ -63,7 +63,7 @@
             </objects>
             <point key="canvasLocation" x="633" y="374"/>
         </scene>
-        <!--Navigation Controller - Chats-->
+        <!--Chats-->
         <scene sceneID="w03-71-7ws">
             <objects>
                 <navigationController definesPresentationContext="YES" id="JH9-o7-13T" sceneMemberID="viewController">
@@ -80,7 +80,7 @@
             </objects>
             <point key="canvasLocation" x="633" y="1116"/>
         </scene>
-        <!--Navigation Controller - Favorites-->
+        <!--Favorites-->
         <scene sceneID="uj8-UY-9dA">
             <objects>
                 <navigationController storyboardIdentifier="FavoritesViewController" title="Favorites" definesPresentationContext="YES" id="ohf-5L-RO6" sceneMemberID="viewController">
@@ -98,7 +98,7 @@
             </objects>
             <point key="canvasLocation" x="633" y="-1004"/>
         </scene>
-        <!--Navigation Controller - More-->
+        <!--More-->
         <scene sceneID="aGF-e3-FFe">
             <objects>
                 <navigationController definesPresentationContext="YES" id="i9z-eB-zY0" sceneMemberID="viewController">
@@ -115,7 +115,7 @@
             </objects>
             <point key="canvasLocation" x="633" y="1814"/>
         </scene>
-        <!--Table View Controller - More-->
+        <!--More-->
         <scene sceneID="WP6-JE-gOh">
             <objects>
                 <tableViewController id="pAR-rQ-QnW" sceneMemberID="viewController">
@@ -199,7 +199,7 @@
             </objects>
             <point key="canvasLocation" x="1069" y="1820"/>
         </scene>
-        <!--Location Search Controller - Location-->
+        <!--Location-->
         <scene sceneID="PBp-go-bLL">
             <objects>
                 <tableViewController storyboardIdentifier="WULocationSearchController" id="X3Q-mh-miM" customClass="WULocationSearchController" sceneMemberID="viewController">
@@ -261,7 +261,7 @@
             </objects>
             <point key="canvasLocation" x="1069" y="2481"/>
         </scene>
-        <!--Launch Screen Controller - Root View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="Q9A-za-Ktt">
             <objects>
                 <tableViewController storyboardIdentifier="SCLaunchScreenController" id="Ypf-fu-Wt8" customClass="WULaunchScreenController" sceneMemberID="viewController">
@@ -303,7 +303,7 @@
             </objects>
             <point key="canvasLocation" x="666" y="3179"/>
         </scene>
-        <!--Chat History Controller - Chats-->
+        <!--Chats-->
         <scene sceneID="g7Y-u5-mbm">
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="d7o-jq-Rd6" customClass="WUChatHistoryController" sceneMemberID="viewController">
@@ -435,7 +435,7 @@
             </objects>
             <point key="canvasLocation" x="1014" y="1116"/>
         </scene>
-        <!--Favorites View Controller - Favorites-->
+        <!--Favorites-->
         <scene sceneID="fmo-Xt-wEa">
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="eij-QV-GO5" customClass="WUFavoritesViewController" sceneMemberID="viewController">
@@ -490,8 +490,12 @@
                                             <color key="textColor" red="0.63921568627450975" green="0.63921568627450975" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-wk-wg9">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" placeholderIntrinsicWidth="30" placeholderIntrinsicHeight="30" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-wk-wg9">
                                             <rect key="frame" x="5" y="7" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="5sb-kR-Epg"/>
+                                                <constraint firstAttribute="height" constant="30" id="G1E-hE-ihA"/>
+                                            </constraints>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N62-ig-ToQ">
                                             <rect key="frame" x="274" y="9" width="26" height="26"/>
@@ -578,7 +582,7 @@
             </objects>
             <point key="canvasLocation" x="1147" y="3274"/>
         </scene>
-        <!--Registration Controller - Register-->
+        <!--Register-->
         <scene sceneID="Z9c-fW-kce">
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" modalTransitionStyle="crossDissolve" id="0AS-bu-8HY" customClass="WURegistrationController" sceneMemberID="viewController">
@@ -862,7 +866,7 @@
             </objects>
             <point key="canvasLocation" x="1664" y="3378"/>
         </scene>
-        <!--Country Selection Controller - Select Country-->
+        <!--Select Country-->
         <scene sceneID="d9O-kV-Jq6">
             <objects>
                 <tableViewController storyboardIdentifier="SCCountrySelectionController" extendedLayoutIncludesOpaqueBars="YES" id="gCe-Uo-D64" customClass="SCCountrySelectionController" sceneMemberID="viewController">
@@ -903,7 +907,7 @@
             </objects>
             <point key="canvasLocation" x="2393" y="3360"/>
         </scene>
-        <!--Interest View Controller - Select Interest-->
+        <!--Select Interest-->
         <scene sceneID="cdL-u6-Zye">
             <objects>
                 <tableViewController storyboardIdentifier="WUInterestViewController" extendedLayoutIncludesOpaqueBars="YES" id="Jaz-Pe-n8k" customClass="WUInterestViewController" sceneMemberID="viewController">
@@ -949,7 +953,7 @@
             </objects>
             <point key="canvasLocation" x="2604" y="1858"/>
         </scene>
-        <!--Group Detail Controller - Group Info-->
+        <!--Group Info-->
         <scene sceneID="p3H-vW-6rX">
             <objects>
                 <tableViewController storyboardIdentifier="SCGroupDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ydp-b9-UdG" customClass="WUGroupDetailController" sceneMemberID="viewController">
@@ -1203,7 +1207,7 @@
             </objects>
             <point key="canvasLocation" x="4059" y="-822"/>
         </scene>
-        <!--Address Book Controller - Contacts-->
+        <!--Contacts-->
         <scene sceneID="Sys-Hw-B9d">
             <objects>
                 <tableViewController storyboardIdentifier="SCAddressBookController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LeV-Ej-vNP" customClass="SCAddressBookController" sceneMemberID="viewController">
@@ -1271,7 +1275,7 @@
             </objects>
             <point key="canvasLocation" x="1045" y="370"/>
         </scene>
-        <!--Contact Detail Controller - Contact-->
+        <!--Contact-->
         <scene sceneID="IO3-b5-DYV">
             <objects>
                 <tableViewController storyboardIdentifier="SCContactDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n7B-AV-vLw" customClass="SCContactDetailController" sceneMemberID="viewController">
@@ -1407,7 +1411,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="1420" y="372"/>
         </scene>
-        <!--Contact List Controller - Contact-->
+        <!--Contact-->
         <scene sceneID="w4M-ET-BrY">
             <objects>
                 <tableViewController id="fQ6-Hd-NR4" customClass="WUContactListController" sceneMemberID="viewController">
@@ -1420,7 +1424,7 @@ asdfsdfg</string>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <outlet property="delegate" destination="fQ6-Hd-NR4" id="LjR-pn-43L"/>
+                                <outlet property="delegate" destination="fQ6-Hd-NR4" id="K4d-Bj-IAF"/>
                             </connections>
                         </searchBar>
                         <prototypes>
@@ -1434,7 +1438,7 @@ asdfsdfg</string>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mea-sq-Jzi">
                                             <rect key="frame" x="0.0" y="0.0" width="227" height="43"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-6I-evR" userLabel="nameLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-6I-evR" userLabel="nameLabel">
                                                     <rect key="frame" x="45" y="0.0" width="175" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="175" id="FK5-rY-wj2"/>
@@ -1443,7 +1447,7 @@ asdfsdfg</string>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Q1Q-I6-mwb" userLabel="statusLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Q1Q-I6-mwb" userLabel="statusLabel">
                                                     <rect key="frame" x="45" y="20" width="175" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="175" id="0y8-1U-sO2"/>
@@ -1513,7 +1517,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="1791" y="351"/>
         </scene>
-        <!--Add Group Controller - New Group-->
+        <!--New Group-->
         <scene sceneID="kkj-yA-g1a">
             <objects>
                 <tableViewController storyboardIdentifier="SCAddGroupController" title="New Group" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tY9-Si-6JS" customClass="WUAddGroupController" sceneMemberID="viewController">
@@ -1750,7 +1754,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="1984" y="1118"/>
         </scene>
-        <!--User Selection Controller - Select Friends-->
+        <!--Select Friends-->
         <scene sceneID="t17-L8-zmQ">
             <objects>
                 <tableViewController storyboardIdentifier="SCUserSelectionController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mqp-9r-GYy" customClass="WUUserSelectionController" sceneMemberID="viewController">
@@ -1838,7 +1842,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="2388" y="1118"/>
         </scene>
-        <!--User Profile Controller - My Profile-->
+        <!--My Profile-->
         <scene sceneID="yg1-wz-u4G">
             <objects>
                 <tableViewController storyboardIdentifier="SCUserProfileController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d5b-ab-Nc9" customClass="WUUserProfileController" sceneMemberID="viewController">
@@ -1850,7 +1854,7 @@ asdfsdfg</string>
                         <sections>
                             <tableViewSection id="hvb-B1-hBV">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="329" id="lhY-vH-grd">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="416" id="lhY-vH-grd">
                                         <rect key="frame" x="0.0" y="35" width="320" height="329"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lhY-vH-grd" id="i0l-zU-2BX">
@@ -1858,7 +1862,7 @@ asdfsdfg</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m3g-jR-lF8" userLabel="imageNameView">
-                                                    <rect key="frame" x="0.0" y="13" width="320" height="321"/>
+                                                    <rect key="frame" x="0.0" y="18" width="320" height="363"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e3j-Lo-ear">
                                                             <rect key="frame" x="132" y="0.0" width="178" height="104"/>
@@ -1914,7 +1918,7 @@ asdfsdfg</string>
                                                             </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZaJ-4c-M7a">
-                                                            <rect key="frame" x="20" y="103" width="285" height="198"/>
+                                                            <rect key="frame" x="20" y="107" width="285" height="250"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="E8c-ak-81P">
                                                                     <rect key="frame" x="0.0" y="29" width="285" height="26"/>
@@ -1976,9 +1980,14 @@ asdfsdfg</string>
                                                                 </button>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjn-Lk-GTf">
                                                                     <rect key="frame" x="0.0" y="138" width="95" height="21"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tel No.:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Tr-eb-8Tt">
+                                                                    <rect key="frame" x="0.0" y="203" width="285" height="21"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -2013,6 +2022,7 @@ asdfsdfg</string>
                         <outlet property="btnInterest" destination="nok-Zq-twP" id="Fmc-E8-HpC"/>
                         <outlet property="btnProfileImage" destination="aPJ-CB-6s0" id="50l-Fv-Hvp"/>
                         <outlet property="btnStatus" destination="eaT-yt-eaF" id="bwS-op-d5K"/>
+                        <outlet property="lblTelNo" destination="1Tr-eb-8Tt" id="Nvr-UC-s00"/>
                         <outlet property="txtDateofBirth" destination="Pjq-Mo-IUo" id="D5n-Hh-hwD"/>
                         <outlet property="txtDisplayName" destination="3sr-8y-vUF" id="GGe-iU-wzT"/>
                         <outlet property="txtSubInterest" destination="0ms-b1-ZbX" id="rav-1U-DMp"/>
@@ -2021,9 +2031,9 @@ asdfsdfg</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BF2-re-r9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3032" y="210"/>
+            <point key="canvasLocation" x="3032" y="199"/>
         </scene>
-        <!--Status Select Controller - Current Status-->
+        <!--Current Status-->
         <scene sceneID="jON-Ks-ekt">
             <objects>
                 <tableViewController id="C6J-A2-jJX" customClass="WUStatusSelectController" sceneMemberID="viewController">
@@ -2037,11 +2047,9 @@ asdfsdfg</string>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="sZ7-q8-w6P">
                                     <rect key="frame" x="20" y="19" width="280" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your current status" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kTQ-8p-KXY">
                                     <rect key="frame" x="20" y="11" width="280" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
                                     <connections>
@@ -2050,7 +2058,6 @@ asdfsdfg</string>
                                 </textField>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select new status:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5U-BQ-xEB">
                                     <rect key="frame" x="8" y="49" width="254" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -2090,7 +2097,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="3467" y="196"/>
         </scene>
-        <!--Compose Message Controller - Compose Message-->
+        <!--Compose Message-->
         <scene sceneID="utg-vE-z82">
             <objects>
                 <viewController storyboardIdentifier="SCComposeMessageController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WzF-cX-Vmv" customClass="SCComposeMessageController" sceneMemberID="viewController">
@@ -2223,7 +2230,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="2477" y="-2364"/>
         </scene>
-        <!--Video Player Controller - Video-->
+        <!--Video-->
         <scene sceneID="GnC-xB-8Bh">
             <objects>
                 <viewController storyboardIdentifier="SCVideoPlayerController" extendedLayoutIncludesOpaqueBars="YES" id="KBH-Yd-w1X" customClass="SCVideoPlayerController" sceneMemberID="viewController">
@@ -2387,7 +2394,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="2870" y="-1666"/>
         </scene>
-        <!--Audio Player Controller - VoiceMail-->
+        <!--VoiceMail-->
         <scene sceneID="PaO-iu-Ecu">
             <objects>
                 <viewController storyboardIdentifier="SCAudioPlayerController" extendedLayoutIncludesOpaqueBars="YES" id="7yt-O8-hWy" customClass="SCAudioPlayerController" sceneMemberID="viewController">
@@ -2505,7 +2512,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="3248" y="-1665"/>
         </scene>
-        <!--Location Viewer Controller - Location-->
+        <!--Location-->
         <scene sceneID="VKz-Vd-WeG">
             <objects>
                 <viewController storyboardIdentifier="SCLocationViewerController" extendedLayoutIncludesOpaqueBars="YES" id="Vde-y2-oHi" customClass="SCLocationViewerController" sceneMemberID="viewController">
@@ -2599,7 +2606,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="3630" y="-1668"/>
         </scene>
-        <!--Browser View Controller - Browser-->
+        <!--Browser-->
         <scene sceneID="oHm-7q-S1d">
             <objects>
                 <viewController storyboardIdentifier="SCBrowserViewController" id="ybS-Qo-aDU" customClass="SCBrowserViewController" sceneMemberID="viewController">
@@ -2664,7 +2671,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="4058" y="-1665"/>
         </scene>
-        <!--Photo Viewer Controller - Photo-->
+        <!--Photo-->
         <scene sceneID="Pz1-34-EUy">
             <objects>
                 <viewController storyboardIdentifier="SCPhotoViewerController" extendedLayoutIncludesOpaqueBars="YES" id="eXP-jk-7fi" customClass="SCPhotoViewerController" sceneMemberID="viewController">
@@ -2825,7 +2832,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="2487" y="-1666"/>
         </scene>
-        <!--Location Submit Controller - Your Location-->
+        <!--Your Location-->
         <scene sceneID="eKB-ia-0Rj">
             <objects>
                 <tableViewController storyboardIdentifier="SCLocationSubmitController" extendedLayoutIncludesOpaqueBars="YES" id="dfj-45-ERb" customClass="SCLocationSubmitController" sceneMemberID="viewController">
@@ -2909,7 +2916,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="2884" y="-2364"/>
         </scene>
-        <!--Audio Recorder Controller - VoiceMail Recorder-->
+        <!--VoiceMail Recorder-->
         <scene sceneID="ruw-Q0-ym3">
             <objects>
                 <viewController storyboardIdentifier="SCAudioRecorderController" extendedLayoutIncludesOpaqueBars="YES" id="w5g-j3-AON" customClass="SCAudioRecorderController" sceneMemberID="viewController">
@@ -3122,7 +3129,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="3248" y="-2364"/>
         </scene>
-        <!--Chat Controller - Chat-->
+        <!--Chat-->
         <scene sceneID="rxg-NO-4aO">
             <objects>
                 <viewController storyboardIdentifier="SCChatController" extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" id="mIK-nM-8TN" customClass="WUChatController" sceneMemberID="viewController">
@@ -3287,7 +3294,7 @@ asdfsdfg</string>
             </objects>
             <point key="canvasLocation" x="1613" y="-1051"/>
         </scene>
-        <!--Board Controller - Board-->
+        <!--Board-->
         <scene sceneID="xDW-rk-0uR">
             <objects>
                 <tableViewController storyboardIdentifier="SCChatBoardController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RhT-4x-TVZ" customClass="WUBoardController" sceneMemberID="viewController">
@@ -3311,7 +3318,7 @@ asdfsdfg</string>
                                                 <textView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="Message" translatesAutoresizingMaskIntoConstraints="NO" id="Bk7-RJ-8fz">
                                                     <rect key="frame" x="5" y="2" width="232" height="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                                 </textView>
@@ -4703,7 +4710,7 @@ Remove search filter?</string>
             </objects>
             <point key="canvasLocation" x="2046" y="-1046"/>
         </scene>
-        <!--User Status Controller - Status-->
+        <!--Status-->
         <scene sceneID="G4z-y1-lLF">
             <objects>
                 <tableViewController storyboardIdentifier="SCUserStatusController" id="OQP-JR-H6z" customClass="SCUserStatusController" sceneMemberID="viewController">
@@ -4783,9 +4790,9 @@ Remove search filter?</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6QN-oR-Jb4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1045" y="-300"/>
+            <point key="canvasLocation" x="1464" y="-385"/>
         </scene>
-        <!--Edit Status Controller - Your Status-->
+        <!--Your Status-->
         <scene sceneID="J3e-bh-AC9">
             <objects>
                 <tableViewController storyboardIdentifier="SCEditStatusController" id="HmB-YW-xMh" customClass="SCEditStatusController" sceneMemberID="viewController">
@@ -4847,9 +4854,9 @@ Remove search filter?</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PUI-45-57V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1418" y="-303"/>
+            <point key="canvasLocation" x="1545" y="-290"/>
         </scene>
-        <!--Friend Detail Controller - Friend Info-->
+        <!--Friend Info-->
         <scene sceneID="ejr-cH-WZv">
             <objects>
                 <tableViewController storyboardIdentifier="SCFriendDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fOb-ej-d3d" customClass="WUFriendDetailController" sceneMemberID="viewController">
@@ -4859,7 +4866,7 @@ Remove search filter?</string>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="SCUserInfoCell" rowHeight="273" id="ONB-JA-xCC" customClass="WUUserInfoCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="SCUserInfoCell" rowHeight="301" id="ONB-JA-xCC" customClass="WUUserInfoCell">
                                 <rect key="frame" x="0.0" y="55" width="320" height="273"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ONB-JA-xCC" id="fej-eW-Bz1">
@@ -4895,12 +4902,6 @@ Remove search filter?</string>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="img_star.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bcw-jp-KGb">
                                             <rect key="frame" x="10" y="4" width="16" height="16"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="vor 23d 6h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxt-CE-QAF">
-                                            <rect key="frame" x="243" y="246" width="57" height="15"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeV-nC-k7S" customClass="SCHorizontalLineView">
                                             <rect key="frame" x="0.0" y="110" width="320" height="1"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4911,7 +4912,7 @@ Remove search filter?</string>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Status " lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="8dI-Xd-2A5">
-                                            <rect key="frame" x="15" y="243" width="225" height="21"/>
+                                            <rect key="frame" x="15" y="271" width="225" height="21"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                             <color key="textColor" red="0.18055652829999999" green="0.53988156840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -4962,6 +4963,18 @@ Remove search filter?</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tel No.:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azt-gE-SjI">
+                                            <rect key="frame" x="15" y="244" width="279" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="vor 23d 6h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxt-CE-QAF">
+                                            <rect key="frame" x="243" y="278" width="57" height="15"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="Gxt-CE-QAF" secondAttribute="bottom" constant="8" id="hWZ-Lj-YAT"/>
@@ -4978,6 +4991,7 @@ Remove search filter?</string>
                                     <outlet property="lblGender" destination="R0B-BR-Qrj" id="069-T0-zA4"/>
                                     <outlet property="lblInterest" destination="Ykn-0o-KW1" id="nq3-nU-jVp"/>
                                     <outlet property="lblSubinterest" destination="Wbk-AW-g7z" id="zmv-Zl-PJ7"/>
+                                    <outlet property="lblTelNo" destination="azt-gE-SjI" id="hwk-Sd-sJ9"/>
                                     <outlet property="lineView" destination="xeV-nC-k7S" id="8mw-vU-fVO"/>
                                     <outlet property="onlineStatus" destination="7W5-CB-rww" id="hjL-HV-zjO"/>
                                     <outlet property="statusDuration" destination="Gxt-CE-QAF" id="XF7-qk-pBI"/>
@@ -5183,9 +5197,9 @@ Remove search filter?</string>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2640" y="230"/>
+            <point key="canvasLocation" x="2640" y="229"/>
         </scene>
-        <!--User Image Controller - Title-->
+        <!--Title-->
         <scene sceneID="DAl-v7-ycv">
             <objects>
                 <viewController storyboardIdentifier="SCUserImageController" extendedLayoutIncludesOpaqueBars="YES" id="HXf-qx-6NK" customClass="SCUserImageController" sceneMemberID="viewController">
@@ -5221,7 +5235,7 @@ Remove search filter?</string>
             </objects>
             <point key="canvasLocation" x="4453" y="-986"/>
         </scene>
-        <!--Board Controller - Board-->
+        <!--Board-->
         <scene sceneID="cFY-H1-43k">
             <objects>
                 <tableViewController storyboardIdentifier="SCBoardController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y85-cu-86u" customClass="WUBoardController" sceneMemberID="viewController">
@@ -5256,7 +5270,7 @@ Remove search filter?</string>
                                                 <textView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="Message" translatesAutoresizingMaskIntoConstraints="NO" id="87P-H4-Irp">
                                                     <rect key="frame" x="5" y="18" width="232" height="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                                 </textView>
@@ -6879,7 +6893,7 @@ Remove search filter?</string>
             </objects>
             <point key="canvasLocation" x="3074" y="1814"/>
         </scene>
-        <!--Table View Controller - About-->
+        <!--About-->
         <scene sceneID="D3Q-Hb-a7z">
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pfs-gY-r6G" sceneMemberID="viewController">
@@ -7003,7 +7017,7 @@ All rights reserved</string>
             </objects>
             <point key="canvasLocation" x="2646" y="708"/>
         </scene>
-        <!--Verification Controller - Verification-->
+        <!--Verification-->
         <scene sceneID="NKV-fx-HrR">
             <objects>
                 <tableViewController storyboardIdentifier="WCVerificationCodeController" extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0sd-Ai-Muz" customClass="WUVerificationController" sceneMemberID="viewController">
@@ -7083,7 +7097,7 @@ All rights reserved</string>
             </objects>
             <point key="canvasLocation" x="2810" y="1233"/>
         </scene>
-        <!--Tell Friend Controller - Tell a Friend-->
+        <!--Tell a Friend-->
         <scene sceneID="hJN-2u-Hjs">
             <objects>
                 <tableViewController id="mpo-vc-jQC" customClass="WUTellFriendController" sceneMemberID="viewController">
@@ -7143,7 +7157,7 @@ All rights reserved</string>
             </objects>
             <point key="canvasLocation" x="2320" y="2508"/>
         </scene>
-        <!--New Chat View Controller - Select Friend-->
+        <!--Select Friend-->
         <scene sceneID="xEA-hl-fOc">
             <objects>
                 <tableViewController storyboardIdentifier="WUNewChatViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IJn-MH-NgV" customClass="WUNewChatViewController" sceneMemberID="viewController">
@@ -7263,6 +7277,133 @@ All rights reserved</string>
             </objects>
             <point key="canvasLocation" x="2151" y="351"/>
         </scene>
+        <!--Ubudd-->
+        <scene sceneID="rgw-CC-jg5">
+            <objects>
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="sU5-NS-qIY" customClass="WUUbuddListController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="ozv-Oh-9Xf">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Hrd-fY-2Wa">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.80784313730000001" alpha="1" colorSpace="deviceRGB"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="sU5-NS-qIY" id="aMC-hD-YgY"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUUbuddListCell" rowHeight="65" id="dYd-BL-kee" customClass="WUUbuddListCell">
+                                <rect key="frame" x="0.0" y="66" width="320" height="65"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dYd-BL-kee" id="s6l-lC-JNI">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="tFZ-yH-e6C" userLabel="nameLabel">
+                                            <rect key="frame" x="73" y="0.0" width="203" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="Bqb-6w-ekd"/>
+                                                <constraint firstAttribute="width" constant="175" id="wg1-9i-Bxl"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Mobile" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ez-GT-Xu3" userLabel="onlineLabel">
+                                            <rect key="frame" x="293" y="40" width="13" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="5ul-Ps-ynb"/>
+                                                <constraint firstAttribute="width" constant="55" id="hcS-MQ-cCu"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="0.51000000000000001" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" preferredMaxLayoutWidth="198" translatesAutoresizingMaskIntoConstraints="NO" id="ap7-Es-dMy" userLabel="statusLabel">
+                                            <rect key="frame" x="73" y="20" width="198" height="41"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="ppn-s0-4y7"/>
+                                                <constraint firstAttribute="width" constant="175" id="tf6-9D-XUP"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                            <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="NEb-XO-6Wf">
+                                            <rect key="frame" x="0.0" y="0.0" width="69" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="69" id="h6S-JC-WZ0"/>
+                                                <constraint firstAttribute="height" constant="64" id="n8q-XP-HO6"/>
+                                            </constraints>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ocd-ee-sso">
+                                            <rect key="frame" x="284" y="18" width="26" height="26"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="26" id="2rI-eh-FnH"/>
+                                                <constraint firstAttribute="height" constant="26" id="deD-ea-QUk"/>
+                                            </constraints>
+                                            <state key="normal" image="Info_icon.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="showFriendInfo:" destination="sU5-NS-qIY" eventType="touchUpInside" id="Bsc-yf-z6C"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="7ez-GT-Xu3" firstAttribute="top" secondItem="s6l-lC-JNI" secondAttribute="top" constant="11" id="38P-ZR-fIM"/>
+                                        <constraint firstItem="tFZ-yH-e6C" firstAttribute="top" secondItem="s6l-lC-JNI" secondAttribute="top" constant="3" id="YHH-K0-Wc2"/>
+                                        <constraint firstAttribute="trailing" secondItem="7ez-GT-Xu3" secondAttribute="trailing" constant="55" id="aA4-Gb-3Zb"/>
+                                        <constraint firstItem="tFZ-yH-e6C" firstAttribute="leading" secondItem="s6l-lC-JNI" secondAttribute="leading" constant="73" id="ab2-OE-Mvm"/>
+                                        <constraint firstItem="ap7-Es-dMy" firstAttribute="leading" secondItem="s6l-lC-JNI" secondAttribute="leading" constant="73" id="hot-oe-h1j"/>
+                                        <constraint firstAttribute="trailing" secondItem="Ocd-ee-sso" secondAttribute="trailing" constant="10" id="ppD-tr-vs8"/>
+                                        <constraint firstAttribute="bottom" secondItem="ap7-Es-dMy" secondAttribute="bottom" id="xhJ-KB-Zv9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="nameLabel" destination="tFZ-yH-e6C" id="yFp-Tr-PhA"/>
+                                    <outlet property="onlineLabel" destination="7ez-GT-Xu3" id="ESS-vT-Ky3"/>
+                                    <outlet property="statusLabel" destination="ap7-Es-dMy" id="zPL-sa-dbH"/>
+                                    <outlet property="userBtn" destination="Ocd-ee-sso" id="IiS-zG-4qc"/>
+                                    <outlet property="userImg" destination="NEb-XO-6Wf" id="dle-6b-bWM"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sU5-NS-qIY" id="2Ae-fq-xLb"/>
+                            <outlet property="delegate" destination="sU5-NS-qIY" id="aXT-1A-HFE"/>
+                        </connections>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Ubudd" id="EU1-8E-5cb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="JRU-G3-reK">
+                            <connections>
+                                <action selector="toggleEditing:" destination="sU5-NS-qIY" id="glX-aB-0SL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="w3L-Jy-zgh" id="PCJ-kd-Ftx"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bhn-ir-WeV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="XXP-B3-dZ5">
+                    <connections>
+                        <outlet property="delegate" destination="sU5-NS-qIY" id="jMR-jV-qnS"/>
+                        <outlet property="searchBar" destination="Hrd-fY-2Wa" id="pKJ-Fp-BoU"/>
+                        <outlet property="searchContentsController" destination="sU5-NS-qIY" id="9fL-cr-Npp"/>
+                        <outlet property="searchResultsDataSource" destination="sU5-NS-qIY" id="JNN-Tv-vTz"/>
+                        <outlet property="searchResultsDelegate" destination="sU5-NS-qIY" id="31t-tL-ndw"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1080" y="-300"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AddContact2-24x24.png" width="30" height="30"/>
@@ -7334,21 +7475,21 @@ All rights reserved</string>
         <image name="welcome_btn_continue_off" width="278" height="50"/>
         <image name="welcome_btn_continue_on" width="278" height="50"/>
     </resources>
-    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kjq-qc-r21"/>
-        <segue reference="n4d-a3-pqy"/>
-        <segue reference="l4c-f0-WTn"/>
-        <segue reference="XEP-pC-k3p"/>
-        <segue reference="p90-nP-FHg"/>
+        <segue reference="tQs-8i-bTJ"/>
         <segue reference="VQ9-8Q-vDt"/>
         <segue reference="TC0-AQ-IeD"/>
         <segue reference="gGN-0m-1iN"/>
-        <segue reference="tQs-8i-bTJ"/>
+        <segue reference="kjq-qc-r21"/>
+        <segue reference="DAE-Aq-bKb"/>
+        <segue reference="XEP-pC-k3p"/>
+        <segue reference="p90-nP-FHg"/>
+        <segue reference="n4d-a3-pqy"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -67,6 +67,10 @@
     else if (user.errorCode == 1)
         [CommonMethods showAlertWithTitle:@"Registration Error" message:user.message delegate:nil];
     else {
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setBool:false forKey:kUserDefault_isWelcomeComplete];
+        [userDefaults synchronize];
+        
         [self performSegueWithIdentifier:@"WUUserProfileControllerSegue" sender:nil];
     }
 }

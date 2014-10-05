@@ -9,17 +9,30 @@
 #import "AddChatGroupDTO.h"
 
 @implementation AddChatGroupDTO
+@synthesize topicDescription, groupAdmin, interestID, interestDescription, c2CallID, location, latCoord, longCoord, topic, members, isPublic;
+
+-(id)init{
+    members = [[NSMutableArray alloc] init];
+    return self;
+}
 
 - (NSDictionary *)dictionaryRepresentation {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    [dictionary setObject:self.topicDescription forKey:@"topicDescription"];
-    [dictionary setObject:self.groupAdmin forKey:@"groupAdmin"];
-    [dictionary setObject:self.interestID forKey:@"interestID"];
-    [dictionary setObject:self.interestDescription forKey:@"interestDescription"];
-    [dictionary setObject:self.c2CallID forKey:@"c2CallID"];
-    [dictionary setObject:self.location forKey:@"location"];
-    [dictionary setObject:[NSNumber numberWithFloat:self.latCoord] forKey:@"latCoord"];
-    [dictionary setObject:[NSNumber numberWithFloat:self.longCoord] forKey:@"longCoord"];
+    [dictionary setObject:topicDescription forKey:@"topicDescription"];
+    [dictionary setObject:groupAdmin forKey:@"groupAdmin"];
+    [dictionary setObject:interestID forKey:@"interestID"];
+    [dictionary setObject:interestDescription forKey:@"interestDescription"];
+    [dictionary setObject:c2CallID forKey:@"c2CallID"];
+    [dictionary setObject:location forKey:@"location"];
+    [dictionary setObject:[NSNumber numberWithFloat:latCoord] forKey:@"latCoord"];
+    [dictionary setObject:[NSNumber numberWithFloat:longCoord] forKey:@"longCoord"];
+    [dictionary setObject:topic forKey:@"topic"];
+    [dictionary setObject:[NSNumber numberWithBool:isPublic] forKey:@"isPublic"];
+    
+    [dictionary setObject:[NSNumber numberWithInteger:members.count] forKey:@"memberCnt"];
+    for (int i = 0; i < members.count; i++) {
+        [dictionary setObject:[members objectAtIndex:i] forKey:[NSString stringWithFormat:@"memberID%d", i + 1]];
+    }
     
     return dictionary;
 }

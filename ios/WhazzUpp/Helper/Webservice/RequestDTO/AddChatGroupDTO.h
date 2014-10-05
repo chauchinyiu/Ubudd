@@ -10,7 +10,9 @@
 
 @interface AddChatGroupDTO : RequestBase
 
-@property (nonatomic, strong) NSString *topicDescription, *groupAdmin, *interestID, *interestDescription, *c2CallID, *location;
+@property (nonatomic, strong) NSString *topicDescription, *groupAdmin, *interestID, *interestDescription, *c2CallID, *location, *topic;
 @property float latCoord, longCoord;
+@property BOOL isPublic;
+@property (nonatomic, strong) NSMutableArray *members;
 
 @end

@@ -49,7 +49,8 @@
         txtDisplayName.text = userProfile.firstname;
         [btnProfileImage setImage:userProfile.userImage forState:UIControlStateNormal];
         
-        //read for user default
+        //read from user default
+        [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"]]];
         genderFemale = [self.userDefaults boolForKey:@"userIsFemale"];
         if (genderFemale) {
             [btnGender setTitle:@"Female" forState:UIControlStateNormal];

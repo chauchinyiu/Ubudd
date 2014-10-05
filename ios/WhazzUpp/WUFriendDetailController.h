@@ -10,7 +10,7 @@
 #import <SocialCommunication/UDUserInfoCell.h>
 
 @interface WUUserInfoCell : UDUserInfoCell
-@property(nonatomic, weak) IBOutlet UILabel *lblGender, *lblDateOfBirth, *lblInterest, *lblSubinterest;
+@property(nonatomic, weak) IBOutlet UILabel *lblGender, *lblDateOfBirth, *lblInterest, *lblSubinterest, *lblTelNo;
 @end
 
 @interface WUFriendDetailController : SCFriendDetailController

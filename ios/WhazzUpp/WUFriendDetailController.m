@@ -20,7 +20,7 @@
 
 
 @implementation WUUserInfoCell
-@synthesize lblGender, lblDateOfBirth, lblInterest, lblSubinterest;
+@synthesize lblGender, lblDateOfBirth, lblInterest, lblSubinterest, lblTelNo;
 @end
 
 @interface WUFriendDetailController(){
@@ -107,6 +107,7 @@
                                                                  timeStyle:NSDateFormatterNoStyle]];
         [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
         [c.lblSubinterest setText:subInterest];
+        [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@", [self currentUser].ownNumber]];
         profileCell = c;
     }
 }
@@ -126,6 +127,7 @@
                                                                  timeStyle:NSDateFormatterNoStyle]];
         [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
         [c.lblSubinterest setText:subInterest];
+        [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@", [self currentUser].ownNumber]];
         profileCell = c;
         return c;
     }

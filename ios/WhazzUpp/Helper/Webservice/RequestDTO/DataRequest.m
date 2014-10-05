@@ -8,7 +8,12 @@
 
 #import "DataRequest.h"
 
+
+
 @implementation DataRequest
+
+@synthesize values, requestName;
+
 - (NSDictionary *)dictionaryRepresentation {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self.values];
     [dictionary setObject:self.requestName forKey:@"requestName"];

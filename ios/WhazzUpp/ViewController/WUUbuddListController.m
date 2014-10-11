@@ -18,7 +18,7 @@
 
 @implementation WUUbuddListCell
 
-@synthesize nameLabel, statusLabel, onlineLabel, userBtn;
+@synthesize nameLabel, statusLabel, onlineLabel, userBtn, addButton;
 
 @end
 
@@ -53,11 +53,12 @@
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     favoritesCellHeight = cell.frame.size.height;
+    [self readUserGroup];
+    
 }
 
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self readUserGroup];
     //[self refetchResults];
     //[self.tableView reloadData];
 }
@@ -85,6 +86,7 @@
     DataRequest* datRequest = [[DataRequest alloc] init];
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     [data setValue:searchTxt forKey:@"searchString"];
+    [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
     datRequest.values = data;
     datRequest.requestName = @"searchGroup";
     inSearch = YES;
@@ -134,6 +136,16 @@
 {
     WUUbuddListCell *favocell = (WUUbuddListCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     [favocell.userBtn setTag:indexPath.row];
+    [favocell.addButton setTag:indexPath.row];
+    
+    NSNumber* isMember = [fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row]];
+    if(isMember.intValue == 1 || isMember.intValue == 2){
+        [favocell.addButton setHidden:YES];
+    }
+    else{
+        [favocell.addButton setHidden:NO];
+    }
+    
     SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]]];
     
     favocell.nameLabel.text = group.groupName;
@@ -193,8 +205,33 @@
     [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
+-(IBAction)joinGroup:(id)sender{
+    NSNumber* isPublic = [fetchResult objectForKey:[NSString stringWithFormat:@"isPublic%d", [sender tag]]];
+    if(isPublic.intValue == 1){
+        //join directly
+        NSString* groupID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", [sender tag] ]];
+        SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", [sender tag] ]]];
+        //[group addGroupMember:[SCUserProfile currentUser].userid];
+        [group joinGroup];
+        [group saveGroupWithCompletionHandler:^(BOOL success){
+            DataRequest* datRequest = [[DataRequest alloc] init];
+            NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+            [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"memberID"];
+            [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"groupID%d", [sender tag]]] forKey:@"groupID"];
+            datRequest.values = data;
+            datRequest.requestName = @"addGroupMember";
+            
+            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+            [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(addGroupUserResponse:error:)];
+        }];
+    }
+    else{
+        //submit request
+    }
+}
 
-
+- (void)addGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
+}
 
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString

@@ -264,13 +264,17 @@ class MyAPI extends API {
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
 
-		$stmt = $this->db->conn2->prepare("select id, c2CallID, interestID, interestDescription, topicDescription, locationName, memberCnt from chatGroup "
+		$stmt = $this->db->conn2->prepare("select id, c2CallID, interestID, interestDescription, topicDescription, locationName, memberCnt, isPublic, requestAccepted, groupAdmin from chatGroup "
+											."left join groupMember on chatGroup.id = groupMember.groupID and groupMember.memberID = ? "
 											."left join (select groupID, count(*) as memberCnt from groupMember where requestAccepted = 1 group by groupID) memb on chatGroup.id = memb.groupID "
 											."where chatGroup.groupAdmin = ? OR exists(select groupID from groupMember where groupID = chatGroup.id and memberID = ?)");
 
-		$stmt->bind_param('ss', $adminID, $memberID);
+		$stmt->bind_param('sss', $userID, $adminID, $memberID);
+        		
+		$userID = $args['userID'];
 		$adminID = $args['userID'];
 		$memberID = $args['userID'];
+
 
 		$stmt->execute();
 
@@ -286,6 +290,15 @@ class MyAPI extends API {
 			$groupArray['topicDescription' . $rowCnt] = $row['topicDescription'];
 			$groupArray['locationName' . $rowCnt] = $row['locationName'];
 			$groupArray['memberCnt' . $rowCnt] = $row['memberCnt'];
+			$groupArray['isPublic' . $rowCnt] = $row['isPublic'];
+			
+			if($row['groupAdmin'] == $args['userID']){
+				$groupArray['isMember' . $rowCnt] = 2;
+			}
+			else{
+				$groupArray['isMember' . $rowCnt] = $row['requestAccepted'];			
+			}
+			
 			$rowCnt++;
 		}
 		$groupArray['rowCnt'] = $rowCnt;
@@ -295,11 +308,12 @@ class MyAPI extends API {
 	}
 	
 	protected function searchGroup($args){
-        if ($args['searchString'] == '')
+        if ($args['searchString'] == '' || $args['userID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
 		$sqlStr = "select distinct chatGroup.id, chatGroup.c2CallID, chatGroup.interestID, chatGroup.interestDescription, "
-				."chatGroup.topicDescription, chatGroup.locationName, memberCnt from chatGroup "
+				."chatGroup.topicDescription, chatGroup.locationName, chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, memberCnt from chatGroup "
+				."left join groupMember on chatGroup.id = groupMember.groupID AND groupMember.memberID = ? "
 				."left join interestBase on chatGroup.interestID = interestBase.interestID "
 				."left join interestCat on chatGroup.interestID = interestCat.interestID "
 				."left join (select groupID, count(*) as memberCnt from groupMember where requestAccepted = 1 group by groupID) memb on chatGroup.id = memb.groupID "
@@ -310,7 +324,8 @@ class MyAPI extends API {
 				."OR interestCat.displayText like ? "
 				."OR chatGroup.locationName like ? ";
 		$stmt = $this->db->conn2->prepare($sqlStr);
-		$stmt->bind_param('ssssss', $str1, $str2, $str3, $str4, $str5, $str6);        
+		$stmt->bind_param('sssssss', $userID, $str1, $str2, $str3, $str4, $str5, $str6);      
+		$userID = $args['userID'];
 		$str1 = "%" . $args['searchString'] . "%";
 		$str2 = $str1;
 		$str3 = $str1;
@@ -331,6 +346,13 @@ class MyAPI extends API {
 			$groupArray['topicDescription' . $rowCnt] = $row['topicDescription'];
 			$groupArray['locationName' . $rowCnt] = $row['locationName'];
 			$groupArray['memberCnt' . $rowCnt] = $row['memberCnt'];
+			$groupArray['isPublic' . $rowCnt] = $row['isPublic'];
+			if($row['groupAdmin'] == $args['userID']){
+				$groupArray['isMember' . $rowCnt] = 2;
+			}
+			else{
+				$groupArray['isMember' . $rowCnt] = $row['requestAccepted'];			
+			}			
 			$rowCnt++;
 		}
 		$groupArray['rowCnt'] = $rowCnt;
@@ -346,7 +368,7 @@ class MyAPI extends API {
         if ($args['c2CallID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
-		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, topicDescription, locationName from chatGroup where c2CallID = ?");
+		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, topicDescription, locationName, isPublic from chatGroup where c2CallID = ?");
 		$stmt->bind_param('s', $c2CallID);
 		$c2CallID = $args['c2CallID'];
 		$stmt->execute();
@@ -360,6 +382,7 @@ class MyAPI extends API {
             'interestDescription' => $verifyRow['interestDescription'], 
             'topicDescription' => $verifyRow['topicDescription'],
             'locationName' => $verifyRow['locationName'],
+            'isPublic' => $verifyRow['isPublic'],
             'resultCode' => 1);
         } else {
             return array('error' => 1, 'message' => 'Read failed', 'resultCode' => 0);

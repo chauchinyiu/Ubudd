@@ -20,6 +20,7 @@
 @interface WUAddGroupController (){
     int interestID;
     CLLocationCoordinate2D loc;
+    BOOL isPublic;
 }
 @end
 
@@ -33,6 +34,8 @@
     btnGroupImage.imageView.layer.masksToBounds = YES;
     loc.latitude = 999;
     loc.longitude = 999;
+    isPublic = false;
+    [btnIsPublic setTitle:@"Private" forState:UIControlStateNormal];
     
     [self setAddGroupAction:^(NSString *groupid) {
         if ([self.parentController respondsToSelector:@selector(setCreatedGroupId:)]) {
@@ -44,6 +47,7 @@
             }
             SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
             [group setGroupdata:txtTopic2.text forKey:@"topicDesc" public:YES];
+            [group makePublic:YES];
             [group saveGroup];
             
             //update c2call id and other details to server
@@ -59,16 +63,14 @@
             addChatGroupDTO.latCoord = loc.latitude;
             addChatGroupDTO.longCoord = loc.longitude;
             addChatGroupDTO.topic = txtTopic.text;
+            addChatGroupDTO.isPublic = isPublic;
             
-            
-            NSArray* friends = [[SCFriendList instance] listFriendsInfo];
             for (int i = 0; i < self.members.count; i++) {
                 NSDictionary* friendInfo = [[C2CallPhone currentPhone] getUserInfoForUserid:[self.members objectAtIndex:i]];
                 NSString* memberid = [friendInfo objectForKey:@"Email"];
                 memberid = [[memberid componentsSeparatedByString:@"@"] objectAtIndex:0];
                 [addChatGroupDTO.members addObject:memberid];
             }
-            
             
             WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
             [serviceHandler execute:METHOD_ADD_CHAT_GROUP parameter:addChatGroupDTO target:self action:@selector(addChatGroupResponse:error:)];
@@ -189,6 +191,14 @@
     }
 }
 
-
+- (IBAction)btnIsPublicTapped:(id)sender{
+    isPublic = !isPublic;
+    if (isPublic) {
+        [btnIsPublic setTitle:@"Public" forState:UIControlStateNormal];
+    }
+    else{
+        [btnIsPublic setTitle:@"Private" forState:UIControlStateNormal];
+    }
+}
 
 @end

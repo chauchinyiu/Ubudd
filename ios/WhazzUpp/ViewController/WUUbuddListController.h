@@ -12,11 +12,13 @@
 @property(nonatomic, weak) IBOutlet UILabel     *nameLabel, *statusLabel, *onlineLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *userImg;
 @property (nonatomic, weak) IBOutlet UIButton *userBtn;
+@property (nonatomic, weak) IBOutlet UIButton *addButton;
 
 @end
 
 @interface WUUbuddListController : UITableViewController
 -(IBAction)toggleEditing:(id)sender;
 -(IBAction)showFriendInfo:(id)sender;
+-(IBAction)joinGroup:(id)sender;
 
 @end

@@ -21,7 +21,7 @@
 
 @implementation WUAddressBookCell
 
-@synthesize nameLabel, statusLabel, addButton, chatButton;
+@synthesize nameLabel, statusLabel, addButton, userBtn;
 
 @end
 
@@ -228,7 +228,7 @@
                 favocell.addButton.tag = indexPath.row;
                 [favocell.addButton setHidden:NO];
             }
-            favocell.chatButton.tag = indexPath.row;
+            favocell.userBtn.tag = indexPath.row;
             
             UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
                 
@@ -237,7 +237,7 @@
                 favocell.userImg.layer.cornerRadius = 15.0;
                 favocell.userImg.layer.masksToBounds = YES;
             }
-            [favocell.chatButton setHidden:NO];
+            [favocell.userBtn setHidden:NO];
             
         }
     }
@@ -274,7 +274,7 @@
         favocell.statusLabel.text = phone;
         [favocell.userImg setHidden:YES];
         [favocell.addButton setHidden:YES];
-        [favocell.chatButton setHidden:YES];
+        [favocell.userBtn setHidden:YES];
     }
  
  
@@ -300,8 +300,14 @@
     [favocell.addButton setHidden:YES];
 }
 
--(IBAction)chatWithFriend:(id)sender{
-    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
+
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selected = NO;
+    
     if ([user.userType intValue] == 2) {
         [WUBoardController setIsGroup:YES];
     } else {
@@ -309,6 +315,15 @@
     }
     
     [self showChatForUserid:user.userid];
+}
+
+-(IBAction)showFriendInfo:(id)sender{
+    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
+    if ([user.userType intValue] == 2) {
+        [self showGroupDetailForGroupid:user.userid];
+    } else {
+        [self showFriendDetailForUserid:user.userid];
+    }
 }
 
 

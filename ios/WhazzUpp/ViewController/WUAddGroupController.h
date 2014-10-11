@@ -19,6 +19,7 @@
     IBOutlet UIButton *btnInterest;
     IBOutlet UITextField *txtSubInterest;
     IBOutlet UIButton *btnLocation;
+    IBOutlet UIButton *btnIsPublic;
     
 }
 
@@ -28,5 +29,6 @@
 - (IBAction)txtSubInterestDone;
 - (IBAction)txtTopicDone;
 - (IBAction)txtTopic2Done;
+- (IBAction)btnIsPublicTapped:(id)sender;
 
 @end

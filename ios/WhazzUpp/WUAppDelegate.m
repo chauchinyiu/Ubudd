@@ -34,6 +34,7 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+
 #pragma mark - Other Methods
 - (void)locateCoreData {
     if ([SCDataManager instance].isDataInitialized) {
@@ -79,6 +80,7 @@
 -(void) c2callLoginSuccess
 {
     [super c2callLoginSuccess];
+    
 }
 
 #pragma mark - UIApplication Delegate

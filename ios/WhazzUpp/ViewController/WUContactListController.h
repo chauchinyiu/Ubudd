@@ -14,7 +14,7 @@
 @property(nonatomic, weak) IBOutlet UILabel     *nameLabel, *statusLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *userImg;
 @property (nonatomic, weak) IBOutlet UIButton *addButton;
-@property (nonatomic, weak) IBOutlet UIButton *chatButton;
+@property (nonatomic, weak) IBOutlet UIButton *userBtn;
 
 @end
 @interface WUContactListController : UITableViewController
@@ -22,5 +22,6 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 -(IBAction)addToFriend:(id)sender;
+-(IBAction)showFriendInfo:(id)sender;
 
 @end

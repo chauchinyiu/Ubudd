@@ -50,17 +50,17 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-    
+    inSearch = NO;
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     favoritesCellHeight = cell.frame.size.height;
-    [self readUserGroup];
     
 }
 
 
 - (void)viewDidAppear:(BOOL)animated {
-    //[self refetchResults];
-    //[self.tableView reloadData];
+    if(!inSearch){
+        [self readUserGroup];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,7 +75,6 @@
     [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
     datRequest.values = data;
     datRequest.requestName = @"readUserGroups";
-    inSearch = NO;
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readUserGroupResponse:error:)];
@@ -89,7 +88,6 @@
     [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
     datRequest.values = data;
     datRequest.requestName = @"searchGroup";
-    inSearch = YES;
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readUserGroupResponse:error:)];
@@ -139,7 +137,7 @@
     [favocell.addButton setTag:indexPath.row];
     
     NSNumber* isMember = [fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row]];
-    if(isMember.intValue == 1 || isMember.intValue == 2){
+    if(isMember.intValue != 0){
         [favocell.addButton setHidden:YES];
     }
     else{
@@ -227,8 +225,23 @@
     }
     else{
         //submit request
+        DataRequest* datRequest = [[DataRequest alloc] init];
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"memberID"];
+        [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"groupID%d", [sender tag]]] forKey:@"groupID"];
+        [data setValue:[SCUserProfile currentUser].firstname forKey:@"userName"];
+        
+        datRequest.values = data;
+        datRequest.requestName = @"requestJoinGroup";
+        
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(requestJoinGroupResponse:error:)];
     }
 }
+
+- (void)requestJoinGroupResponse:(ResponseBase *)response error:(NSError *)error{
+}
+
 
 - (void)addGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
 }
@@ -252,11 +265,13 @@
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
+    inSearch = YES;
 }
 
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
     [self readUserGroup];
+    inSearch = NO;
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView

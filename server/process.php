@@ -2,6 +2,8 @@
 
 require_once 'Models/API.php';
 require_once 'Models/ConDB.php';
+require_once 'Models/APNS.php';
+
 require_once "twilio-php/Services/Twilio.php";
 
 class MyAPI extends API {
@@ -258,6 +260,36 @@ class MyAPI extends API {
 				
 		return array('error' => 0, 'message' => 'Delete Successfully');
     }
+    
+    protected function requestJoinGroup($args){
+        if ($args['groupID'] == '' || $args['memberID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+            
+		$stmt = $this->db->conn2->prepare("insert into groupMember (groupID, memberID, requestAccepted) values (?, ?, 3)");
+		$stmt->bind_param('ss', $groupID, $memberID);
+
+		$groupID = $args['groupID'];
+		$memberID = $args['memberID'];
+		$stmt->execute();
+				
+				
+		$stmt = $this->db->conn2->prepare("select groupAdmin, topic from chatGroup where id = ?");
+		$stmt->bind_param('s', $groupID);
+		$groupID = $args['groupID'];
+		$stmt->execute();
+		$verifyRes = $stmt->get_result();
+
+        $verifyRow = mysqli_fetch_assoc($verifyRes);
+
+
+        if ($verifyRow['groupAdmin'] != '') {
+			$ap = new Apsn();
+			$err = $ap->sendNotification($verifyRow['groupAdmin'], $args['userName']." wish to join you group ".$verifyRow['topic']);
+		}
+				
+		return array('error' => 0, 'message' => 'Insert Successfully');
+    }
+    
 
 	protected function readUserGroups($args){
         if ($args['userID'] == '')

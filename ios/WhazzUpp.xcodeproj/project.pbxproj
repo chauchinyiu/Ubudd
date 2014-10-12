@@ -4946,8 +4946,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
+				PROVISIONING_PROFILE = "071f7715-d789-4fe0-8734-03fb8abac652";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "071f7715-d789-4fe0-8734-03fb8abac652";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -4983,8 +4983,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
+				PROVISIONING_PROFILE = "071f7715-d789-4fe0-8734-03fb8abac652";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "071f7715-d789-4fe0-8734-03fb8abac652";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

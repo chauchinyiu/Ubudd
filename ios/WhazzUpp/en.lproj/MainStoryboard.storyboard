@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -1379,6 +1378,79 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1024" y="371"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="9uq-J0-tyg">
+            <objects>
+                <tableViewController id="POz-Rc-geE" customClass="WUMapViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gUG-Ck-iuF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="3hE-5G-WvG">
+                            <rect key="frame" x="0.0" y="64" width="320" height="191"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3eb-Ba-UOz">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+                                </mapView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Within" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKT-dA-rgW">
+                                    <rect key="frame" x="8" y="170" width="68" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="phq-Ve-gbh">
+                                    <rect key="frame" x="300" y="141" width="12" height="23"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FcJ-rz-EpE">
+                                    <rect key="frame" x="0.0" y="138" width="320" height="30"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="X3Q-mh-miM" kind="push" id="PMU-xX-rr7"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xd4-d0-YTC">
+                                    <rect key="frame" x="8" y="143" width="277" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="MapCell" textLabel="RPd-Y9-M14" style="IBUITableViewCellStyleDefault" id="VqY-6O-X1z">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VqY-6O-X1z" id="ria-3e-kN8">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RPd-Y9-M14">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="POz-Rc-geE" id="K1y-MH-O3e"/>
+                            <outlet property="delegate" destination="POz-Rc-geE" id="Jyt-U1-b9H"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="dXg-Do-GJs"/>
+                    <connections>
+                        <outlet property="lblLocName" destination="xd4-d0-YTC" id="ShH-OQ-Mry"/>
+                        <outlet property="mapview" destination="3eb-Ba-UOz" id="EPT-W2-bQH"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hCF-is-jCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1375" y="-17"/>
         </scene>
         <!--New Group-->
         <scene sceneID="kkj-yA-g1a">
@@ -7018,14 +7090,44 @@ All rights reserved</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="5r8-xj-BjT">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="sU5-NS-qIY" id="QNZ-7l-PgO"/>
-                            </connections>
-                        </searchBar>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="TB1-4E-hsu">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5r8-xj-BjT">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="sU5-NS-qIY" id="QNZ-7l-PgO"/>
+                                    </connections>
+                                </searchBar>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="noa-5e-T8c">
+                                    <rect key="frame" x="8" y="44" width="261" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXS-wK-JK0">
+                                    <rect key="frame" x="8" y="58" width="261" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="8Pl-Zf-wXV">
+                                    <rect key="frame" x="302" y="49" width="10" height="22"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MwQ-Nw-Ce4">
+                                    <rect key="frame" x="0.0" y="46" width="320" height="33"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="POz-Rc-geE" kind="push" identifier="searchLoc" id="oaM-SS-1lY"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUUbuddListCell" rowHeight="65" id="dYd-BL-kee" customClass="WUUbuddListCell">
                                 <rect key="frame" x="0.0" y="66" width="320" height="65"/>
@@ -7140,19 +7242,11 @@ All rights reserved</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchDisplayController" destination="XXP-B3-dZ5" id="gwo-wE-QWI"/>
+                        <outlet property="distanceLabel" destination="aXS-wK-JK0" id="eb8-aV-aaN"/>
+                        <outlet property="locationLabel" destination="noa-5e-T8c" id="40y-8m-gLt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhn-ir-WeV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="XXP-B3-dZ5">
-                    <connections>
-                        <outlet property="delegate" destination="sU5-NS-qIY" id="jMR-jV-qnS"/>
-                        <outlet property="searchBar" destination="5r8-xj-BjT" id="RlM-Nw-GSl"/>
-                        <outlet property="searchContentsController" destination="sU5-NS-qIY" id="9fL-cr-Npp"/>
-                        <outlet property="searchResultsDataSource" destination="sU5-NS-qIY" id="JNN-Tv-vTz"/>
-                        <outlet property="searchResultsDelegate" destination="sU5-NS-qIY" id="31t-tL-ndw"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1080" y="-308"/>
         </scene>
@@ -7446,13 +7540,14 @@ All rights reserved</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="tQs-8i-bTJ"/>
+        <segue reference="PMU-xX-rr7"/>
         <segue reference="Lkj-dH-5d3"/>
         <segue reference="bqz-UJ-YGf"/>
         <segue reference="XEP-pC-k3p"/>
         <segue reference="p90-nP-FHg"/>
-        <segue reference="gGN-0m-1iN"/>
+        <segue reference="VQ9-8Q-vDt"/>
         <segue reference="TC0-AQ-IeD"/>
-        <segue reference="Mqk-6F-Ovc"/>
+        <segue reference="gGN-0m-1iN"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

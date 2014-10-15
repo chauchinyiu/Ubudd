@@ -355,14 +355,18 @@ class MyAPI extends API {
 				."left join interestBase on chatGroup.interestID = interestBase.interestID "
 				."left join interestCat on chatGroup.interestID = interestCat.interestID "
 				."left join (select groupID, count(*) as memberCnt from groupMember where requestAccepted = 1 group by groupID) memb on chatGroup.id = memb.groupID "
-				."where chatGroup.topicDescription like ? "
+				."where (chatGroup.topicDescription like ? "
 				."OR chatGroup.topic like ? "
 				."OR chatGroup.interestDescription like ? "
 				."OR interestBase.interestName like ? "
 				."OR interestCat.displayText like ? "
-				."OR chatGroup.locationName like ? ";
+				."OR chatGroup.locationName like ?) "
+				."AND (locationLag between ? AND ?) "
+				."AND (locationLong between ? AND ? "
+				."OR locationLong between ? AND ? "
+				."OR locationLong between ? AND ?) ";
 		$stmt = $this->db->conn2->prepare($sqlStr);
-		$stmt->bind_param('sssssss', $userID, $str1, $str2, $str3, $str4, $str5, $str6);      
+		$stmt->bind_param('sssssssssssssss', $userID, $str1, $str2, $str3, $str4, $str5, $str6, $latFrom, $latTo, $longFrom1, $longTo1, $longFrom2, $longTo2, $longFrom3, $longTo3);      
 		$userID = $args['userID'];
 		$str1 = "%" . $args['searchString'] . "%";
 		$str2 = $str1;
@@ -370,6 +374,14 @@ class MyAPI extends API {
 		$str4 = $str1;
 		$str5 = $str1;
 		$str6 = $str1;
+		$latFrom = $args['latFrom'];
+		$latTo = $args['latTo'];
+		$longFrom1 = $args['longFrom'];
+		$longTo1 = $args['longTo'];
+		$longFrom2 = $args['longFrom'] + 360;
+		$longTo2 = $args['longTo'] + 360;
+		$longFrom3 = $args['longFrom'] - 360;
+		$longTo3 = $args['longTo'] - 360;
 
 		$stmt->execute();
 

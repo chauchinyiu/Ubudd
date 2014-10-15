@@ -15,6 +15,7 @@
 #import "WebserviceHandler.h"
 #import "ResponseBase.h"
 #import "DataResponse.h"
+#import <MapKit/MapKit.h>
 
 @implementation WUUbuddListCell
 
@@ -26,14 +27,20 @@
     CGFloat favoritesCellHeight;
     NSDictionary* fetchResult;
     BOOL inSearch;
-    id joinCell;
     NSString* searchStr;
+    id joinCell;
+    CLLocationCoordinate2D loc;
+    NSString* locName;
+    int searchDist;
+    
 }
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 @end
 
 @implementation WUUbuddListController
+@synthesize locationLabel, distanceLabel;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -55,9 +62,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     inSearch = NO;
+    searchStr = @"";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     favoritesCellHeight = cell.frame.size.height;
-    
+    [self searchUpdated];
 }
 
 
@@ -91,10 +99,18 @@
 - (void)searchUserGroup:(NSString*)searchTxt{
     
     [self showActivityView];
+    searchStr = searchTxt;
     
     DataRequest* datRequest = [[DataRequest alloc] init];
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     [data setValue:searchTxt forKey:@"searchString"];
+    MKCoordinateRegion r = MKCoordinateRegionMakeWithDistance(loc, searchDist * 2000, searchDist * 2000);
+    
+    [data setValue:[NSNumber numberWithFloat:loc.latitude - (r.span.latitudeDelta / 2)] forKey:@"latFrom"];
+    [data setValue:[NSNumber numberWithFloat:loc.latitude + (r.span.latitudeDelta / 2)] forKey:@"latTo"];
+    [data setValue:[NSNumber numberWithFloat:loc.longitude - (r.span.longitudeDelta / 2)] forKey:@"longFrom"];
+    [data setValue:[NSNumber numberWithFloat:loc.longitude + (r.span.longitudeDelta / 2)] forKey:@"longTo"];
+    
     [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
     datRequest.values = data;
     datRequest.requestName = @"searchGroup";
@@ -128,12 +144,7 @@
 - (void)readUserGroupResponse:(ResponseBase *)response error:(NSError *)error{
     [self.activityView stopAnimating];
     fetchResult = ((DataResponse*)response).data;
-    if (inSearch) {
-        [self.searchDisplayController.searchResultsTableView reloadData];
-    }
-    else{
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
 }
 
 
@@ -319,44 +330,51 @@
 }
 
 
-
-
-- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
-{
-    inSearch = YES;
-}
-
-- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
-{
-    [self readUserGroup];
-    inSearch = NO;
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
-{
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)_tableView
-{
-}
-
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
-    searchStr = searchString;
-    // Return NO, as the search will be done in the background
-    return NO;
-}
-
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption{
-    // Return NO, as the search will be done in the background
-    return NO;
-}
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    if ([searchBar.text isEqualToString:@""]) {
+        inSearch = false;
+        [self readUserGroup];
+    }
+    else{
+        inSearch = true;
+        [self searchUserGroup:searchBar.text];
+    }
+    
+}
+
+
+-(void)updateLocationSearchGUI{
+    distanceLabel.text = [NSString stringWithFormat:@"Within %dKm", searchDist];
+    locationLabel.text = locName;
+}
+
+-(void)searchUpdated{
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+    if ([ud boolForKey:@"hasLocSearch"]) {
+        loc.latitude = [ud floatForKey:@"searchLat"];
+        loc.longitude = [ud floatForKey:@"searchLong"];
+        locName = [ud stringForKey:@"searchLoc"];
+        searchDist = [ud integerForKey:@"searchDist"];
+    }
+    else{
+        loc.latitude = 999;
+        loc.longitude = 999;
+        locName = @"";
+        searchDist = 2;
+    }
+    [self updateLocationSearchGUI];
     [self searchUserGroup:searchStr];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"searchLoc"]) {
+        WUMapViewController *cvc = (WUMapViewController *)[segue destinationViewController];
+        cvc.delegate = self;
+    }
+    else{
+        [super prepareForSegue:segue sender:sender];
+    }
+}
 
 @end
 

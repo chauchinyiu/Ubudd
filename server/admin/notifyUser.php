@@ -22,7 +22,7 @@ if (isset($_REQUEST['item_type'])) {
 	
 	for ($i = 0; $i < $count; $i++) {
 		$userId = $list[$i];
-		$err = $ap->sendNotification($userId, "Testing APNS");
+		$err = $ap->sendNotification($userId, "Testing APNS", array('type' => 'ubudd admin'));
 	} 
 	 
 	$result = array('flag' => 0, 'message' => $err);	

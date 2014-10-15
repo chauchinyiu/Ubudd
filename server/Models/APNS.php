@@ -9,7 +9,7 @@ class Apsn {
 
         }
 
-        public function sendNotification($userID, $message){
+        public function sendNotification($userID, $message, $customVals){
         	$ctx = stream_context_create();
 			stream_context_set_option($ctx, 'ssl', 'passphrase', 'Ubudd');
 			stream_context_set_option($ctx, 'ssl', 'cafile', '/var/www/html/Models/centrust_2048_ca.cer');
@@ -24,6 +24,7 @@ class Apsn {
 				'alert' => $message,
 				'sound' => 'default'
 				);
+			$body['ubuddcustom'] = $customVals;
 
 			// Encode the payload as JSON
 			$payload = json_encode($body);

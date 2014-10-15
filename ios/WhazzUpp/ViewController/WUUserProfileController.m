@@ -199,6 +199,10 @@
             WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
             [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
 
+            updateUserFieldDTO.field = @"userName";
+            updateUserFieldDTO.value = txtDisplayName.text;
+            [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
+
             updateUserFieldDTO.field = @"interestID";
             updateUserFieldDTO.value = [NSString stringWithFormat:@"%d" , interestID];
             [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];

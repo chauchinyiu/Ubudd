@@ -205,6 +205,50 @@
     NSLog(@"Failed to get token, error: %@", error);
 }
 
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"received notification");
+    //handle the notification here
+    NSDictionary* message = [userInfo objectForKey:@"aps"];
+    NSDictionary* custval = [userInfo objectForKey:@"ubuddcustom"];
+    
+    if (custval == NULL) {
+        [super application:application didReceiveRemoteNotification:userInfo];
+    }
+    else{
+        NSString* noteType = [custval objectForKey:@"type"];
+        if([noteType isEqualToString:@"join request"]){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Join Request" message:[message objectForKey:@"alert"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Announcement" message:[message objectForKey:@"alert"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"Cancel Button Pressed");
+            break;
+        case 1:
+            NSLog(@"Button 1 Pressed");
+            break;
+        case 2:
+            NSLog(@"Button 2 Pressed");
+            break;
+        case 3:
+            NSLog(@"Button 3 Pressed");
+            break;
+        default:
+            break;
+    }
+    
+}
+
 #pragma mark -
 - (void)showHint:(NSString *) message withNotificationType:(SCNotificationType) notificationType
 {

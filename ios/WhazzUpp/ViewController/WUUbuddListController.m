@@ -18,7 +18,7 @@
 
 @implementation WUUbuddListCell
 
-@synthesize nameLabel, statusLabel, onlineLabel, userBtn, addButton;
+@synthesize nameLabel, statusLabel, accessLabel, userBtn, addButton;
 
 @end
 
@@ -26,7 +26,11 @@
     CGFloat favoritesCellHeight;
     NSDictionary* fetchResult;
     BOOL inSearch;
+    id joinCell;
+    NSString* searchStr;
 }
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+
 @end
 
 @implementation WUUbuddListController
@@ -70,6 +74,9 @@
 }
 
 - (void)readUserGroup{
+    
+    [self showActivityView];
+    
     DataRequest* datRequest = [[DataRequest alloc] init];
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
@@ -82,6 +89,9 @@
 }
 
 - (void)searchUserGroup:(NSString*)searchTxt{
+    
+    [self showActivityView];
+    
     DataRequest* datRequest = [[DataRequest alloc] init];
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     [data setValue:searchTxt forKey:@"searchString"];
@@ -94,8 +104,29 @@
     
 }
 
+- (void) showActivityView {
+    if (self.activityView==nil) {
+        self.activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+        [self.tableView addSubview:self.activityView];
+        self.activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray ;
+        self.activityView.hidesWhenStopped = YES;
+    }
+    // Center
+    CGFloat x = UIScreen.mainScreen.applicationFrame.size.width/2;
+    CGFloat y = UIScreen.mainScreen.applicationFrame.size.height/2;
+    // Offset. If tableView has been scrolled
+    CGFloat yOffset = self.tableView.contentOffset.y;
+    self.activityView.frame = CGRectMake(x, y + yOffset, 0, 0);
+    
+    self.activityView.hidden = NO;
+    [self.activityView startAnimating];
+    [self.tableView bringSubviewToFront:self.activityView];
+}
+
+
 
 - (void)readUserGroupResponse:(ResponseBase *)response error:(NSError *)error{
+    [self.activityView stopAnimating];
     fetchResult = ((DataResponse*)response).data;
     if (inSearch) {
         [self.searchDisplayController.searchResultsTableView reloadData];
@@ -146,8 +177,16 @@
     
     SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]]];
     
-    favocell.nameLabel.text = group.groupName;
+    favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", indexPath.row]];;
     favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", indexPath.row]];
+    
+    NSNumber* isPublic = [fetchResult objectForKey:[NSString stringWithFormat:@"isPublic%d", indexPath.row]];
+    if(isPublic.intValue == 1){
+        favocell.accessLabel.text = @"Public";
+    }
+    else{
+        favocell.accessLabel.text = @"Private";
+    }
     
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:group.groupid];
     
@@ -170,8 +209,11 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
     
-    [WUBoardController setIsGroup:YES];
-    [self showChatForUserid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
+    NSNumber* isMember = [fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row]];
+    if(isMember.intValue == 1 || isMember.intValue == 2){
+        [WUBoardController setIsGroup:YES];
+        [self showChatForUserid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
+    }
 }
 
 -(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
@@ -205,10 +247,11 @@
 
 -(IBAction)joinGroup:(id)sender{
     NSNumber* isPublic = [fetchResult objectForKey:[NSString stringWithFormat:@"isPublic%d", [sender tag]]];
+    joinCell = sender;
     if(isPublic.intValue == 1){
         //join directly
         NSString* groupID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", [sender tag] ]];
-        SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", [sender tag] ]]];
+        SCGroup *group = [[SCGroup alloc] initWithGroupid:groupID];
         //[group addGroupMember:[SCUserProfile currentUser].userid];
         [group joinGroup];
         [group saveGroupWithCompletionHandler:^(BOOL success){
@@ -240,28 +283,43 @@
 }
 
 - (void)requestJoinGroupResponse:(ResponseBase *)response error:(NSError *)error{
+    if (response.errorCode == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Request submitted"
+                                                        message:@"Your request is submitted and is waiting for approval."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [joinCell setHidden:YES];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Submittion failed"
+                                                        message:@"Unable to submit your request."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    
+    }
+    
 }
 
 
 - (void)addGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Join Group"
+                                                    message:@"You are now a member of the group."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [joinCell setHidden:YES];
+    NSMutableDictionary* tempcpy = [NSMutableDictionary dictionaryWithDictionary:fetchResult];
+    [tempcpy  setValue:[NSNumber numberWithInt:1] forKey:[NSString stringWithFormat:@"isMember%d", [joinCell tag]]];
+    fetchResult = tempcpy;
 }
 
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self searchUserGroup:searchString];
-    
-    // Return NO, as the search will be done in the background
-    return NO;
-}
 
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
-{
-    
-    // Return NO, as the search will be done in the background
-    return NO;
-}
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
@@ -281,6 +339,24 @@
 - (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)_tableView
 {
 }
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+    searchStr = searchString;
+    // Return NO, as the search will be done in the background
+    return NO;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption{
+    // Return NO, as the search will be done in the background
+    return NO;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self searchUserGroup:searchStr];
+}
+
 
 @end
 

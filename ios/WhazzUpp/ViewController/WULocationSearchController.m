@@ -16,6 +16,8 @@
     NSArray *result;
     NSString* searchStr;
 }
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+
 @end
 
 @implementation WULocationSearchController
@@ -148,16 +150,39 @@
 
 -(void) refetchResults
 {
+    [self showActivityView];
+    
     //check to see if geocoder initialized, if not initialize it
     if(self.geocoder == nil){
         self.geocoder = [[CLGeocoder alloc] init];
     }
     [self.geocoder geocodeAddressString:searchStr completionHandler:^(NSArray *placemarks, NSError *error){
         result = [[NSArray alloc] initWithArray:placemarks copyItems:YES];
+        
+        [self.activityView stopAnimating];
         [self.searchDisplayController.searchResultsTableView reloadData];
     }];
     
 }
+
+- (void) showActivityView {
+    if (self.activityView==nil) {
+        self.activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+        [self.tableView addSubview:self.activityView];
+        self.activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray ;
+        self.activityView.hidesWhenStopped = YES;
+    }
+    // Center
+    CGFloat x = UIScreen.mainScreen.applicationFrame.size.width/2;
+    CGFloat y = UIScreen.mainScreen.applicationFrame.size.height/2;
+    // Offset. If tableView has been scrolled
+    CGFloat yOffset = self.tableView.contentOffset.y;
+    self.activityView.frame = CGRectMake(x, y + yOffset, 0, 0);
+    
+    self.activityView.hidden = NO;
+    [self.activityView startAnimating];
+}
+
 
 -(void) setTextFilterForText:(NSString *) text
 {

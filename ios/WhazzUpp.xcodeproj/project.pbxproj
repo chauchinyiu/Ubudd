@@ -1102,6 +1102,7 @@
 		CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */; };
 		CE5462221999C86000E91636 /* UpdateAPNSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462211999C86000E91636 /* UpdateAPNSToken.m */; };
 		CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */; };
+		CE68543619ED7EB9004AC9AF /* WURequestUserDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68543519ED7EB9004AC9AF /* WURequestUserDetailController.m */; };
 		CE7194BF19AF7F2A001B28A0 /* WUContactListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7194BE19AF7F2A001B28A0 /* WUContactListController.m */; };
 		CE787B1019B0277E00A0BD19 /* UpdateUserField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE787B0F19B0277E00A0BD19 /* UpdateUserField.m */; };
 		CE787B1319B027BE00A0BD19 /* UpdateUserFieldDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE787B1219B027BE00A0BD19 /* UpdateUserFieldDTO.m */; };
@@ -1113,6 +1114,7 @@
 		CE893C1719E3A18A007AD220 /* WUSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE893C1619E3A18A007AD220 /* WUSettingViewController.m */; };
 		CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE978C1619E13C0700A433A8 /* WUBoardViewController.m */; };
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
+		CEBA823119ECD55500B3F109 /* WUJoinRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA823019ECD55500B3F109 /* WUJoinRequestController.m */; };
 		CED5F1C019B555AA00DF8772 /* VerifyC2CallID.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */; };
 		CED5F1C319B5560900DF8772 /* VerifyC2CallIDDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C219B5560900DF8772 /* VerifyC2CallIDDTO.m */; };
 		CED5F1C619B558B300DF8772 /* ResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C519B558B300DF8772 /* ResponseHandler.m */; };
@@ -2273,6 +2275,8 @@
 		CE5462211999C86000E91636 /* UpdateAPNSToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSToken.m; sourceTree = "<group>"; };
 		CE5462231999C96000E91636 /* UpdateAPNSTokenDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAPNSTokenDTO.h; sourceTree = "<group>"; };
 		CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSTokenDTO.m; sourceTree = "<group>"; };
+		CE68543419ED7EB9004AC9AF /* WURequestUserDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WURequestUserDetailController.h; sourceTree = "<group>"; };
+		CE68543519ED7EB9004AC9AF /* WURequestUserDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WURequestUserDetailController.m; sourceTree = "<group>"; };
 		CE7194BD19AF7F2A001B28A0 /* WUContactListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUContactListController.h; sourceTree = "<group>"; };
 		CE7194BE19AF7F2A001B28A0 /* WUContactListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUContactListController.m; sourceTree = "<group>"; };
 		CE787B0E19B0277E00A0BD19 /* UpdateUserField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserField.h; sourceTree = "<group>"; };
@@ -2295,6 +2299,8 @@
 		CE978C1619E13C0700A433A8 /* WUBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUBoardViewController.m; sourceTree = "<group>"; };
 		CE9CFF7A19C29E1E004DC699 /* WUInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUInterestViewController.h; sourceTree = "<group>"; };
 		CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUInterestViewController.m; sourceTree = "<group>"; };
+		CEBA822F19ECD55500B3F109 /* WUJoinRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUJoinRequestController.h; sourceTree = "<group>"; };
+		CEBA823019ECD55500B3F109 /* WUJoinRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUJoinRequestController.m; sourceTree = "<group>"; };
 		CED5F1BE19B555AA00DF8772 /* VerifyC2CallID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyC2CallID.h; sourceTree = "<group>"; };
 		CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyC2CallID.m; sourceTree = "<group>"; };
 		CED5F1C119B5560900DF8772 /* VerifyC2CallIDDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyC2CallIDDTO.h; sourceTree = "<group>"; };
@@ -3489,10 +3495,14 @@
 				CEFDE7AE19D50DBC00FCC7D5 /* WUStatusSelectController.m */,
 				CE0919A119D6529C00865665 /* WUUbuddListController.h */,
 				CE0919A219D6529C00865665 /* WUUbuddListController.m */,
+				CEBA822F19ECD55500B3F109 /* WUJoinRequestController.h */,
+				CEBA823019ECD55500B3F109 /* WUJoinRequestController.m */,
 				CE978C1519E13C0700A433A8 /* WUBoardViewController.h */,
 				CE978C1619E13C0700A433A8 /* WUBoardViewController.m */,
 				CE893C1519E3A18A007AD220 /* WUSettingViewController.h */,
 				CE893C1619E3A18A007AD220 /* WUSettingViewController.m */,
+				CE68543419ED7EB9004AC9AF /* WURequestUserDetailController.h */,
+				CE68543519ED7EB9004AC9AF /* WURequestUserDetailController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4776,6 +4786,7 @@
 				972F3E1E175CA5250006DEF6 /* WUFavoritesViewController.m in Sources */,
 				CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */,
 				1733A09D19366D720064E97A /* RequestBuilder.m in Sources */,
+				CE68543619ED7EB9004AC9AF /* WURequestUserDetailController.m in Sources */,
 				CED5F1C619B558B300DF8772 /* ResponseHandler.m in Sources */,
 				CEF9E8C919CECDED00A864A6 /* WUGroupDetailController.m in Sources */,
 				972F453E175CB75F0006DEF6 /* WUContactDetailController.m in Sources */,
@@ -4788,6 +4799,7 @@
 				CE893C1719E3A18A007AD220 /* WUSettingViewController.m in Sources */,
 				1733A0A019366DB20064E97A /* ServiceURL.m in Sources */,
 				1733A0AB193674DA0064E97A /* ResponseBase.m in Sources */,
+				CEBA823119ECD55500B3F109 /* WUJoinRequestController.m in Sources */,
 				1730630E19277F6B0018EE25 /* myshader.vsh in Sources */,
 				17EF4A65192A8C7300E36286 /* CommonMethods.m in Sources */,
 				17C55605194647BE00D6132E /* DBHandler.m in Sources */,

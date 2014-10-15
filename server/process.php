@@ -60,7 +60,7 @@ class MyAPI extends API {
             return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         } else {
 	        $stmt->close();
-			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL, ?, ?, '', NULL, NULL)");
+			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL, ?, ?, '', NULL, NULL, NULL)");
 			$stmt->bind_param('ssssssssss', $userId, $brand, $model, $os, $uid, $email, $pwd, $rand, $countryCode, $phoneNo);
 			$userId = $args['msisdn'];
 			$brand = $args['brand'];
@@ -162,7 +162,7 @@ class MyAPI extends API {
         if ($args['c2CallID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
-		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, dob, gender from register where c2CallID = ?");
+		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, dob, gender, userName from register where c2CallID = ?");
 		$stmt->bind_param('s', $c2CallID);
 		$c2CallID = $args['c2CallID'];
 		$stmt->execute();
@@ -176,6 +176,7 @@ class MyAPI extends API {
             'interestDescription' => $verifyRow['interestDescription'], 
             'dob' => $verifyRow['dob'],
             'gender' => $verifyRow['gender'],
+            'userName' => $verifyRow['userName'],
             'resultCode' => 1);
         } else {
             return array('error' => 1, 'message' => 'Read failed', 'resultCode' => 0);
@@ -284,7 +285,11 @@ class MyAPI extends API {
 
         if ($verifyRow['groupAdmin'] != '') {
 			$ap = new Apsn();
-			$err = $ap->sendNotification($verifyRow['groupAdmin'], $args['userName']." wish to join you group ".$verifyRow['topic']);
+			$customVals = array(
+					'type' => 'join request',
+				);
+			$message = $args['userName']." wish to join you group ".$verifyRow['topic'];
+			$err = $ap->sendNotification($verifyRow['groupAdmin'], $message, $customVals);
 		}
 				
 		return array('error' => 0, 'message' => 'Insert Successfully');
@@ -296,7 +301,7 @@ class MyAPI extends API {
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
 
-		$stmt = $this->db->conn2->prepare("select id, c2CallID, interestID, interestDescription, topicDescription, locationName, memberCnt, isPublic, requestAccepted, groupAdmin from chatGroup "
+		$stmt = $this->db->conn2->prepare("select id, c2CallID, interestID, interestDescription, topicDescription, locationName, memberCnt, isPublic, requestAccepted, groupAdmin, topic from chatGroup "
 											."left join groupMember on chatGroup.id = groupMember.groupID and groupMember.memberID = ? "
 											."left join (select groupID, count(*) as memberCnt from groupMember where requestAccepted = 1 group by groupID) memb on chatGroup.id = memb.groupID "
 											."where chatGroup.groupAdmin = ? OR exists(select groupID from groupMember where groupID = chatGroup.id and memberID = ?)");
@@ -323,6 +328,7 @@ class MyAPI extends API {
 			$groupArray['locationName' . $rowCnt] = $row['locationName'];
 			$groupArray['memberCnt' . $rowCnt] = $row['memberCnt'];
 			$groupArray['isPublic' . $rowCnt] = $row['isPublic'];
+			$groupArray['topic' . $rowCnt] = $row['topic'];
 			
 			if($row['groupAdmin'] == $args['userID']){
 				$groupArray['isMember' . $rowCnt] = 2;
@@ -344,7 +350,7 @@ class MyAPI extends API {
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
 		$sqlStr = "select distinct chatGroup.id, chatGroup.c2CallID, chatGroup.interestID, chatGroup.interestDescription, "
-				."chatGroup.topicDescription, chatGroup.locationName, chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, memberCnt from chatGroup "
+				."chatGroup.topicDescription, chatGroup.locationName, chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, memberCnt, chatGroup.topic from chatGroup "
 				."left join groupMember on chatGroup.id = groupMember.groupID AND groupMember.memberID = ? "
 				."left join interestBase on chatGroup.interestID = interestBase.interestID "
 				."left join interestCat on chatGroup.interestID = interestCat.interestID "
@@ -379,6 +385,7 @@ class MyAPI extends API {
 			$groupArray['locationName' . $rowCnt] = $row['locationName'];
 			$groupArray['memberCnt' . $rowCnt] = $row['memberCnt'];
 			$groupArray['isPublic' . $rowCnt] = $row['isPublic'];
+			$groupArray['topic' . $rowCnt] = $row['topic'];
 			if($row['groupAdmin'] == $args['userID']){
 				$groupArray['isMember' . $rowCnt] = 2;
 			}
@@ -395,6 +402,73 @@ class MyAPI extends API {
 	
 	}
 
+	protected function readOutStandingRequest($args){
+        if ($args['userID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+
+		$stmt = $this->db->conn2->prepare("select chatGroup.id, chatGroup.c2CallID AS groupC2CallID, chatGroup.topic, "
+											."register.msisdn, register.c2CallID, register.userName, register.interestID, register.interestDescription, register.dob, register.gender from chatGroup "
+											."inner join groupMember on chatGroup.id = groupMember.groupID AND groupMember.requestAccepted = 3 "
+											."inner join register on groupMember.memberID = register.msisdn "
+											."where chatGroup.groupAdmin = ? ");
+
+		$stmt->bind_param('s', $userID);
+        		
+		$userID = $args['userID'];
+
+		$stmt->execute();
+
+
+		$res = $stmt->get_result();
+		$rowCnt = 0;
+		$groupArray = array();
+		while($row = mysqli_fetch_assoc($res)){
+			$groupArray['groupID' . $rowCnt] = $row['id'];
+			$groupArray['groupC2CallID' . $rowCnt] = $row['groupC2CallID'];
+			$groupArray['topic' . $rowCnt] = $row['topic'];
+			$groupArray['msisdn' . $rowCnt] = $row['msisdn'];
+			$groupArray['c2CallID' . $rowCnt] = $row['c2CallID'];
+			$groupArray['userName' . $rowCnt] = $row['userName'];
+			$groupArray['interestID' . $rowCnt] = $row['interestID'];
+			$groupArray['interestDescription' . $rowCnt] = $row['interestDescription'];
+			$groupArray['dob' . $rowCnt] = $row['dob'];
+			$groupArray['gender' . $rowCnt] = $row['gender'];
+						
+			$rowCnt++;
+		}
+		$groupArray['rowCnt'] = $rowCnt;
+		$groupArray['error'] = 0;
+		$groupArray['message'] = 'Loaded Successfully';
+        return $groupArray;
+	}
+
+	protected function acceptRequest($args){
+        if ($args['userID'] == '' || $args['groupID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+	
+		$stmt = $this->db->conn2->prepare("update groupMember set requestAccepted = 1 where groupID = ? and memberID = ?");
+		$stmt->bind_param('ss', $groupID, $userId);
+		$groupID = $args['groupID'];
+		$userId = $args['userID'];
+		$stmt->execute();
+		$stmt->close();
+		return array('error' => 0, 'message' => 'Request Accepted Successfully');
+	}
+	
+	protected function rejectRequest($args){
+        if ($args['userID'] == '' || $args['groupID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+	
+		$stmt = $this->db->conn2->prepare("update groupMember set requestAccepted = 4 where groupID = ? and memberID = ?");
+		$stmt->bind_param('ss', $groupID, $userId);
+		$groupID = $args['groupID'];
+		$userId = $args['userID'];
+		$stmt->execute();
+		$stmt->close();
+		return array('error' => 0, 'message' => 'Request Rejected Successfully');
+	}
+	
     protected function readGroupInfo($args) {
 
         if ($args['c2CallID'] == '')

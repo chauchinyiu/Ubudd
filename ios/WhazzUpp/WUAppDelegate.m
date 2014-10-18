@@ -228,27 +228,6 @@
     }
 }
 
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"Cancel Button Pressed");
-            break;
-        case 1:
-            NSLog(@"Button 1 Pressed");
-            break;
-        case 2:
-            NSLog(@"Button 2 Pressed");
-            break;
-        case 3:
-            NSLog(@"Button 3 Pressed");
-            break;
-        default:
-            break;
-    }
-    
-}
-
 #pragma mark -
 - (void)showHint:(NSString *) message withNotificationType:(SCNotificationType) notificationType
 {

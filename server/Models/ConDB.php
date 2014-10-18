@@ -28,10 +28,14 @@ class ConDB {
 				 $this->flag_conn = 1;
 				 die( print_r(mysql_error(), true));
 			}
+			
 			$this->conn2 = new mysqli($this->serverName, $this->userName,$this->pass, $this->database);
 			if (mysqli_connect_errno()) {
 				printf("Connect failed: %s\n", mysqli_connect_error());
 				exit();
+			}
+			else{
+				$this->conn2->set_charset("utf8");
 			}
         }
 }

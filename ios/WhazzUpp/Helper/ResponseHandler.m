@@ -114,6 +114,12 @@ static ResponseHandler *myInstance;
 -(void)readInterests{
     //read from server
     DataRequest *dataRequest = [[DataRequest alloc] init];
+    NSString *languageID = [[NSBundle mainBundle] preferredLocalizations].firstObject;
+    
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    [data setValue:languageID forKey:@"lang"];
+    dataRequest.values = data;
+    
     dataRequest.requestName = @"readInterest";
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readInterestResponse:error:)];

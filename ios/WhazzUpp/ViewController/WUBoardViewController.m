@@ -11,13 +11,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <QuickLook/QuickLook.h>
-#import <MessageUI/MessageUI.h>`
-
+#import <MessageUI/MessageUI.h>
 #import "WUBoardViewController.h"
-
 #import <SocialCommunication/UIViewController+AdSpace.h>
 #import <SocialCommunication/UIViewController+SCCustomViewController.h>
-
 #import <SocialCommunication/C2CallConstants.h>
 #import <SocialCommunication/SCBubbleViewIn.h>
 #import <SocialCommunication/SCBubbleViewOut.h>
@@ -1294,7 +1291,7 @@
     cell.imageNewIndicator.hidden = ![elem.missedDisplay boolValue];
     
     if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
-        cell.messageImage.image = [[C2CallPhone currentPhone] thumbnailForKey:elem.text];
+        cell.messageImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
         [cell.progress setHidden:YES];
         [cell setTapAction:^{
             [self showImage:text];

@@ -10,7 +10,7 @@
 #import "WUInterestViewController.h"
 #import "WUStatusSelectController.h"
 
-@interface WUUserProfileController : SCUserProfileController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WUStatusSelectControllerDelegate > {
+@interface WUUserProfileController : SCUserProfileController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WUStatusSelectControllerDelegate, UIGestureRecognizerDelegate > {
     IBOutlet UITextField *txtDisplayName;
     IBOutlet UIButton *btnProfileImage;
     IBOutlet UITextField *txtDateofBirth;

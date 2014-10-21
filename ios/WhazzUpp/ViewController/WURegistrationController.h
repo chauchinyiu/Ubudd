@@ -8,10 +8,11 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 
-@interface WURegistrationController : SCRegistrationController {
+@interface WURegistrationController : SCRegistrationController<UIGestureRecognizerDelegate> {
     IBOutlet UILabel *lblCountryCode;
     IBOutlet UIImageView *countryBG;
     IBOutlet UIBarButtonItem *btnDone;
+
 }
 
 - (IBAction)btnDoneTapped;

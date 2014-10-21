@@ -40,6 +40,7 @@
     
     self.userDefaults = [NSUserDefaults standardUserDefaults];
     
+    [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"]]];
     
     btnProfileImage.imageView.layer.cornerRadius = 42.0;
     btnProfileImage.imageView.layer.masksToBounds = YES;
@@ -50,7 +51,6 @@
         [btnProfileImage setImage:userProfile.userImage forState:UIControlStateNormal];
         
         //read from user default
-        [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"]]];
         genderFemale = [self.userDefaults boolForKey:@"userIsFemale"];
         if (genderFemale) {
             [btnGender setTitle:@"Female" forState:UIControlStateNormal];
@@ -109,6 +109,13 @@
     txtDateofBirth.inputAccessoryView = keyboardDoneButtonView;
     
     [btnStatus setTitle:[SCUserProfile currentUser].userStatus forState:UIControlStateNormal];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 - (IBAction)btnGenderTapped{
@@ -151,8 +158,6 @@
         [CommonMethods showAlertWithTitle:@"Enter Details" message:@"Display Name cannot be empty" delegate:nil];
     }
     else {
-        [self dismissKeyboard];
-        
         [CommonMethods showLoading:YES title:nil message:@"Saving"];
         
         SCUserProfile *userProfile = [SCUserProfile currentUser];
@@ -230,12 +235,6 @@
     }
 }
 
--(void) dismissKeyboard
-{
-    [txtSubInterest resignFirstResponder];
-    [txtDisplayName  resignFirstResponder];
-    [txtDateofBirth resignFirstResponder];
-}
 
 - (void)updateUserFieldResponse:(ResponseBase *)response error:(NSError *)error{
 }
@@ -255,8 +254,13 @@
     
     [actionSheet addButtonWithTitle:@"Cancel"];
     actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
-    
-    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+
+    if (nil == self.tabBarController) {
+        [actionSheet showInView:self.view];
+    }
+    else {
+        [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    }
 }
 
 #pragma mark - UIActionSheet Delegate
@@ -304,6 +308,19 @@
 
 -(void)selectedStatus:(NSString*)status{
     [btnStatus setTitle:status forState:UIControlStateNormal];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    [self.view endEditing:YES];
+    return NO; // handle the touch
+}
+
+-(void)hidekeybord
+{
+    [self.view endEditing:YES];
 }
 
 @end

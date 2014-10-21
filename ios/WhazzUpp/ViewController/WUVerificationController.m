@@ -31,6 +31,10 @@
     
     [txtCode becomeFirstResponder];
     [[ResponseHandler instance] readInterests];
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"VerifyComplete"]){
+        [self performSegueWithIdentifier:@"WUUserProfileControllerSegue" sender:nil];
+    }
 
 }
 -(IBAction)nextButtonClicked:(id)sender{
@@ -69,6 +73,7 @@
     else {
         NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setBool:false forKey:kUserDefault_isWelcomeComplete];
+        [userDefaults setBool:true forKey:@"VerifyComplete"];
         [userDefaults synchronize];
         
         [self performSegueWithIdentifier:@"WUUserProfileControllerSegue" sender:nil];

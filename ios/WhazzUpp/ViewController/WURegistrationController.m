@@ -40,6 +40,12 @@
     [self setRegisterDoneAction:^(void){
         [self performSegueWithIdentifier:@"VerificationSegue" sender:self];
     }];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
 
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -154,7 +160,6 @@
     
     if (self.phoneNumber.textContent.text.length > 0) {
         
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@%@", lblCountryCode.text, self.phoneNumber.textContent.text] forKey:@"msidn"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithString:lblCountryCode.text] forKey:@"countryCode"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithString:self.phoneNumber.textContent.text] forKey:@"phoneNo"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@%@", lblCountryCode.text, self.phoneNumber.textContent.text] forKey:@"msidn"];
@@ -180,4 +185,18 @@
         [super prepareForSegue:segue sender:sender];
     }
 }
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    [self.view endEditing:YES];
+    return NO; // handle the touch
+}
+
+-(void)hidekeybord
+{
+    [self.view endEditing:YES];
+}
+
 @end

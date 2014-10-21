@@ -11,7 +11,7 @@
 #import "WULocationSearchController.h"
 
 @interface WUAddGroupController : SCAddGroupController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-    WUInterestViewControllerDelegate, WULocationSelectControllerDelegate> {
+    WUInterestViewControllerDelegate, WULocationSelectControllerDelegate, UIGestureRecognizerDelegate> {
     IBOutlet UIButton *btnGroupImage;
     
     IBOutlet UITextField *txtTopic;

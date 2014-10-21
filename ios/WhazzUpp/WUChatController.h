@@ -8,7 +8,7 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 
-@interface WUChatController : SCChatController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface WUChatController : SCChatController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 - (IBAction)openProfile:(id)sender;
 - (IBAction)btnCallTapped;

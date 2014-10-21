@@ -85,6 +85,13 @@ typedef enum : NSUInteger {
         self.chatInput.text = @"Welcome!";
         [self submit:self.submitButton];
     }
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
+
 }
 
 #pragma mark - ChatController Methods
@@ -193,5 +200,17 @@ typedef enum : NSUInteger {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    [self.view endEditing:YES];
+    return NO; // handle the touch
+}
+
+-(void)hidekeybord
+{
+    [self.view endEditing:YES];
+}
 
 @end

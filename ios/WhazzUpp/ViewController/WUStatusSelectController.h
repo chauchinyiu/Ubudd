@@ -13,7 +13,7 @@
 -(void)selectedStatus:(NSString*)status;
 @end
 
-@interface WUStatusSelectController : UITableViewController<UITextFieldDelegate>
+@interface WUStatusSelectController : UITableViewController<UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak) IBOutlet UITextField *userStatus;
 @property(nonatomic,assign)id<WUStatusSelectControllerDelegate>delegate;

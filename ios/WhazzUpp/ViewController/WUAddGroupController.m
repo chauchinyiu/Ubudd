@@ -79,6 +79,13 @@
         }
         [self.navigationController popViewControllerAnimated:YES];
     }];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
+
 }
 
 
@@ -199,6 +206,19 @@
     else{
         [btnIsPublic setTitle:@"Private" forState:UIControlStateNormal];
     }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    [self.view endEditing:YES];
+    return NO; // handle the touch
+}
+
+-(void)hidekeybord
+{
+    [self.view endEditing:YES];
 }
 
 @end

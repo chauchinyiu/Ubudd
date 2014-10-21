@@ -66,6 +66,13 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     favoritesCellHeight = cell.frame.size.height;
     [self searchUpdated];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 
@@ -374,6 +381,19 @@
     else{
         [super prepareForSegue:segue sender:sender];
     }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    [self.view endEditing:YES];
+    return NO; // handle the touch
+}
+
+-(void)hidekeybord
+{
+    [self.view endEditing:YES];
 }
 
 @end

@@ -37,6 +37,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     statusOptions = @[@"Available", @"Busy", @"Learning", @"Out with friends", @"Working", @"Low battery", @"No calls please", @"In a meeting", @"Burning calories", @"Sleeping", @"Only urgent matters", @"I'm bored, please talk to me..."];
     [userStatus setText:currentStatus];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,5 +141,19 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    [self.view endEditing:YES];
+    return NO; // handle the touch
+}
+
+-(void)hidekeybord
+{
+    [self.view endEditing:YES];
+}
+
 
 @end

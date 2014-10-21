@@ -17,7 +17,7 @@
 
 @end
 
-@interface WUUbuddListController : UITableViewController<UISearchBarDelegate, UISearchControllerDelegate, UISearchDisplayDelegate, WUMapControllerDelegate>
+@interface WUUbuddListController : UITableViewController<UISearchBarDelegate, UISearchControllerDelegate, UISearchDisplayDelegate, WUMapControllerDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak) IBOutlet UILabel *locationLabel, *distanceLabel;
 

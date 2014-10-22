@@ -15,6 +15,10 @@
 
 @end
 
+@interface WUHistoryRequestCell : UITableViewCell
+@property(nonatomic, weak) IBOutlet UILabel     *nameLabel;
+@end
+
 @interface WUChatHistoryController : SCDataTableViewController
 
 @property (nonatomic, strong) NSString *createdGroupId;

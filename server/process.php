@@ -454,6 +454,34 @@ class MyAPI extends API {
 		$groupArray['message'] = 'Loaded Successfully';
         return $groupArray;
 	}
+	
+	protected function readOutStandingCount($args){
+        if ($args['userID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+
+		$stmt = $this->db->conn2->prepare("select count(*) as requestCnt from chatGroup "
+											."inner join groupMember on chatGroup.id = groupMember.groupID AND groupMember.requestAccepted = 3 "
+											."inner join register on groupMember.memberID = register.msisdn "
+											."where chatGroup.groupAdmin = ? ");
+
+		$stmt->bind_param('s', $userID);
+        		
+		$userID = $args['userID'];
+
+		$stmt->execute();
+
+
+		$res = $stmt->get_result();
+		$groupArray = array();
+		if($row = mysqli_fetch_assoc($res)){
+			$groupArray['requestCnt'] = $row['requestCnt'];
+		}
+		$groupArray['error'] = 0;
+		$groupArray['message'] = 'Loaded Successfully';
+        return $groupArray;
+	}
+	
 
 	protected function acceptRequest($args){
         if ($args['userID'] == '' || $args['groupID'] == '')

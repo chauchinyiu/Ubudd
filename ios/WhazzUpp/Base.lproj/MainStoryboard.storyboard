@@ -431,6 +431,24 @@
                                     <outlet property="userImage" destination="uOy-na-s8Y" id="bsi-PL-VUb"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUHistoryRequestCell" textLabel="Bnz-ja-VW3" style="IBUITableViewCellStyleDefault" id="A8r-rY-IwE" customClass="WUHistoryRequestCell">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A8r-rY-IwE" id="Yaj-Xe-PlV">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bnz-ja-VW3">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="Bnz-ja-VW3" id="Ice-OF-Tyn"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="d7o-jq-Rd6" id="I4J-Tj-Nso"/>
@@ -452,6 +470,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="mIK-nM-8TN" kind="push" identifier="SCChatControllerSegue" id="gEM-cP-vpS"/>
+                        <segue destination="3qn-9n-8L2" kind="push" identifier="JoinRequestSegue" id="Bgp-Uu-Xzb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qur-h9-Kju" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1450,7 +1469,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hCF-is-jCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1375" y="-17"/>
+            <point key="canvasLocation" x="1431" y="-378"/>
         </scene>
         <!--New Group-->
         <scene sceneID="kkj-yA-g1a">
@@ -7235,11 +7254,6 @@ All rights reserved</string>
                                 <action selector="toggleEditing:" destination="sU5-NS-qIY" id="glX-aB-0SL"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Requests" id="RQh-al-K6K">
-                            <connections>
-                                <segue destination="3qn-9n-8L2" kind="push" id="ZcM-Rd-2Tt"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="distanceLabel" destination="aXS-wK-JK0" id="eb8-aV-aaN"/>
@@ -7309,7 +7323,7 @@ All rights reserved</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQc-Gs-ntV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1418" y="-324"/>
+            <point key="canvasLocation" x="1350" y="850"/>
         </scene>
         <!--Request User Info-->
         <scene sceneID="ggB-gx-dRG">
@@ -7539,15 +7553,15 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tQs-8i-bTJ"/>
-        <segue reference="PMU-xX-rr7"/>
-        <segue reference="Lkj-dH-5d3"/>
         <segue reference="bqz-UJ-YGf"/>
-        <segue reference="XEP-pC-k3p"/>
-        <segue reference="p90-nP-FHg"/>
+        <segue reference="PMU-xX-rr7"/>
+        <segue reference="tQs-8i-bTJ"/>
         <segue reference="VQ9-8Q-vDt"/>
         <segue reference="TC0-AQ-IeD"/>
         <segue reference="gGN-0m-1iN"/>
+        <segue reference="gEM-cP-vpS"/>
+        <segue reference="p90-nP-FHg"/>
+        <segue reference="XEP-pC-k3p"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -8,6 +8,7 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 #import "WUMapViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface WUUbuddListCell : UITableViewCell
 @property(nonatomic, weak) IBOutlet UILabel     *nameLabel, *statusLabel, *accessLabel;
@@ -17,12 +18,11 @@
 
 @end
 
-@interface WUUbuddListController : UITableViewController<UISearchBarDelegate, UISearchControllerDelegate, UISearchDisplayDelegate, WUMapControllerDelegate, UIGestureRecognizerDelegate>
+@interface WUUbuddListController : UITableViewController<UISearchBarDelegate, UISearchControllerDelegate, UISearchDisplayDelegate, WUMapControllerDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate>
 
 @property(nonatomic, weak) IBOutlet UILabel *locationLabel, *distanceLabel;
 
 
--(IBAction)toggleEditing:(id)sender;
 -(IBAction)showFriendInfo:(id)sender;
 -(IBAction)joinGroup:(id)sender;
 

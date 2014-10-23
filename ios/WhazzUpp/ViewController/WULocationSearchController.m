@@ -15,6 +15,11 @@
 @interface WULocationSearchController (){
     NSArray *result;
     NSString* searchStr;
+    CLLocationManager *locationManager;
+    CLLocation *currentLocation;
+    CLLocationCoordinate2D loc;
+    NSString* locName;
+
 }
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
@@ -40,6 +45,11 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    locationManager = [CLLocationManager new];
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +72,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return result.count;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return result.count;
+    }
+    else{
+        return 1;
+    }
 }
 
 
@@ -72,29 +87,56 @@
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"WULocationCell"];
-    } else {
+        // Configure the cell...
+        CLPlacemark* placemark = (CLPlacemark*)[result objectAtIndex:indexPath.row];
+        
+        NSArray* addressArray = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
+        NSString* displayString = [addressArray objectAtIndex:0];
+        for (int i = 1; i < addressArray.count; i++) {
+            displayString = [NSString stringWithFormat:@"%@, %@", displayString, [addressArray objectAtIndex:i]];
+        }
+        
+        [cell.nameLabel setText:displayString];
+    }
+    else {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"WULocationCell" forIndexPath:indexPath];
+        [cell.nameLabel setText:@"Current location"];
     }
     
     
-    // Configure the cell...
-    CLPlacemark* placemark = (CLPlacemark*)[result objectAtIndex:indexPath.row];
-    
-    NSArray* addressArray = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
-    NSString* displayString = [addressArray objectAtIndex:0];
-    for (int i = 1; i < addressArray.count; i++) {
-        displayString = [NSString stringWithFormat:@"%@, %@", displayString, [addressArray objectAtIndex:i]];
-    }
-    
-    [cell.nameLabel setText:displayString];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CLPlacemark* placemark = (CLPlacemark*)[result objectAtIndex:indexPath.row];
-    WULocationCell *cell = (WULocationCell*)[tableView cellForRowAtIndexPath:indexPath];
-    [self.delegate selectedLocationWithCoord:placemark.location.coordinate typedName:cell.nameLabel.text];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        CLPlacemark* placemark = (CLPlacemark*)[result objectAtIndex:indexPath.row];
+        WULocationCell *cell = (WULocationCell*)[tableView cellForRowAtIndexPath:indexPath];
+        [self.delegate selectedLocationWithCoord:placemark.location.coordinate typedName:cell.nameLabel.text];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else{
+        [locationManager startUpdatingLocation];    
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    [locationManager stopUpdatingLocation];
+    
+    currentLocation = [locations lastObject];
+    loc = currentLocation.coordinate;
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!(error))
+         {
+             CLPlacemark* placemark = (CLPlacemark*)[placemarks objectAtIndex:0];
+             locName = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+             [self.delegate selectedLocationWithCoord:loc typedName:locName];
+             [self.navigationController popViewControllerAnimated:YES];
+         }
+     }];
+    
 }
 
 

@@ -33,6 +33,9 @@
     NSString* locName;
     int searchDist;
     
+    CLLocationManager *locationManager;
+    CLLocation *currentLocation;
+    
 }
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
@@ -63,6 +66,7 @@
 
     inSearch = NO;
     searchStr = @"";
+    locName = @"";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     favoritesCellHeight = cell.frame.size.height;
     [self searchUpdated];
@@ -72,6 +76,30 @@
                                    action:@selector(hidekeybord)];
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
+    locationManager = [CLLocationManager new];
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    [locationManager stopUpdatingLocation];
+
+    currentLocation = [locations lastObject];
+    loc = currentLocation.coordinate;
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!(error))
+         {
+             CLPlacemark* placemark = (CLPlacemark*)[placemarks objectAtIndex:0];
+             locName = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+             [self updateLocationSearchGUI];
+         }
+     }];
     
 }
 
@@ -79,6 +107,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     if(!inSearch){
         [self readUserGroup];
+    }
+    if ([locName isEqualToString:@""]) {
+        [locationManager startUpdatingLocation];
     }
 }
 
@@ -195,7 +226,7 @@
     
     SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]]];
     
-    favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", indexPath.row]];;
+    favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", indexPath.row]];
     favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", indexPath.row]];
     
     NSNumber* isPublic = [fetchResult objectForKey:[NSString stringWithFormat:@"isPublic%d", indexPath.row]];
@@ -250,17 +281,6 @@
 
 -(IBAction)showFriendInfo:(id)sender{
     [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", [sender tag]]]];
-}
-
-
--(IBAction)toggleEditing:(id)sender
-{
-    if (self.tableView.editing) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEditing:)];
-    } else {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEditing:)];
-    }
-    [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
 -(IBAction)joinGroup:(id)sender{

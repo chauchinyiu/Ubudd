@@ -11,6 +11,7 @@
 @interface WUMapViewController (){
     CLLocationCoordinate2D loc;
     NSString* locName;
+    NSString* computedName;
     int searchDist;
 }
 
@@ -106,6 +107,20 @@
     [self refreshGUI];
 }
 
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+    [geocoder reverseGeocodeLocation:userLocation.location completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!(error))
+         {
+             CLPlacemark* placemark = (CLPlacemark*)[placemarks objectAtIndex:0];
+             computedName = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+             [mapView.userLocation setTitle:computedName];
+         }
+     }];
+
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -173,6 +188,7 @@
 -(void)refreshGUI{
     [mapview removeAnnotations:[mapview annotations]];
     [mapview setShowsUserLocation:YES];
+    
     lblLocName.text = locName;
     if (loc.longitude < 999) {
         MKPointAnnotation* pin = [[MKPointAnnotation alloc] init];

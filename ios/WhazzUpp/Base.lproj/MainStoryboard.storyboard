@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -1410,8 +1411,11 @@
                             <rect key="frame" x="0.0" y="64" width="320" height="191"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3eb-Ba-UOz">
+                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3eb-Ba-UOz">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="POz-Rc-geE" id="2Zp-ay-UJ9"/>
+                                    </connections>
                                 </mapView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Within" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKT-dA-rgW">
                                     <rect key="frame" x="8" y="170" width="68" height="21"/>
@@ -7113,7 +7117,7 @@ All rights reserved</string>
                             <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5r8-xj-BjT">
+                                <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search for topic or interest (art, hobby etc)" translatesAutoresizingMaskIntoConstraints="NO" id="5r8-xj-BjT">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -7249,9 +7253,9 @@ All rights reserved</string>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Ubudd" id="EU1-8E-5cb">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="JRU-G3-reK">
+                        <barButtonItem key="rightBarButtonItem" image="mapMarker.png" id="1xO-lf-cVg">
                             <connections>
-                                <action selector="toggleEditing:" destination="sU5-NS-qIY" id="glX-aB-0SL"/>
+                                <segue destination="K4L-Le-Jh7" kind="push" id="3YA-2E-Rs5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -7477,6 +7481,82 @@ All rights reserved</string>
             </objects>
             <point key="canvasLocation" x="1765" y="-446"/>
         </scene>
+        <!--Ubudd Map-->
+        <scene sceneID="3H6-CP-DeV">
+            <objects>
+                <viewController title="Ubudd Map" id="K4L-Le-Jh7" customClass="WUUbuddMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Aqy-tO-Mex"/>
+                        <viewControllerLayoutGuide type="bottom" id="oKR-qj-Gph"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D7e-s7-xSJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rzd-ja-64c">
+                                <rect key="frame" x="0.0" y="64" width="320" height="79"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search for topic or interest (art, hobby etc)" translatesAutoresizingMaskIntoConstraints="NO" id="8jQ-O0-6pb">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sU5-NS-qIY" id="tRU-8D-udM"/>
+                                        </connections>
+                                    </searchBar>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pa-ic-Tfb">
+                                        <rect key="frame" x="8" y="44" width="261" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5A-vY-iJ6">
+                                        <rect key="frame" x="8" y="58" width="261" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Bk0-Qd-x3s">
+                                        <rect key="frame" x="302" y="49" width="10" height="22"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p97-hT-KcF">
+                                        <rect key="frame" x="0.0" y="46" width="320" height="33"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="POz-Rc-geE" kind="push" identifier="searchLoc" id="sk8-fE-Q4T"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qry-9l-bpC">
+                                <rect key="frame" x="0.0" y="143" width="320" height="288"/>
+                                <connections>
+                                    <outlet property="delegate" destination="K4L-Le-Jh7" id="PoW-lI-jy0"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qry-9l-bpC" firstAttribute="top" secondItem="Aqy-tO-Mex" secondAttribute="bottom" constant="79" id="4pk-tJ-vA5"/>
+                            <constraint firstItem="oKR-qj-Gph" firstAttribute="top" secondItem="qry-9l-bpC" secondAttribute="bottom" id="d8u-aM-hG0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Ubudd Map" id="pe0-Cl-pxG">
+                        <barButtonItem key="backBarButtonItem" title="List" id="viQ-jq-Sqd"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="distanceLabel" destination="t5A-vY-iJ6" id="RSZ-o8-siV"/>
+                        <outlet property="locationLabel" destination="0pa-ic-Tfb" id="oc9-FF-qQJ"/>
+                        <outlet property="mapview" destination="qry-9l-bpC" id="aah-s4-Jn2"/>
+                        <segue destination="Ydp-b9-UdG" kind="push" identifier="groupInfo" id="Mb7-Vt-gOO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5dT-in-FIQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1356" y="73"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AddContact2-24x24.png" width="30" height="30"/>
@@ -7533,6 +7613,7 @@ All rights reserved</string>
         <image name="ico_voice_msg.png" width="65" height="65"/>
         <image name="img_add_attachement.png" width="43" height="43"/>
         <image name="img_star.png" width="23" height="23"/>
+        <image name="mapMarker.png" width="16" height="24"/>
         <image name="messagechatscreen_add_image_off" width="23" height="23"/>
         <image name="messagechatscreen_add_image_on" width="23" height="23"/>
         <image name="messagechatscreen_send_btn_on" width="40" height="29"/>
@@ -7553,15 +7634,16 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="bqz-UJ-YGf"/>
-        <segue reference="PMU-xX-rr7"/>
-        <segue reference="tQs-8i-bTJ"/>
-        <segue reference="VQ9-8Q-vDt"/>
         <segue reference="TC0-AQ-IeD"/>
-        <segue reference="gGN-0m-1iN"/>
+        <segue reference="VQ9-8Q-vDt"/>
+        <segue reference="tQs-8i-bTJ"/>
+        <segue reference="Mb7-Vt-gOO"/>
+        <segue reference="sk8-fE-Q4T"/>
+        <segue reference="PMU-xX-rr7"/>
         <segue reference="gEM-cP-vpS"/>
-        <segue reference="p90-nP-FHg"/>
         <segue reference="XEP-pC-k3p"/>
+        <segue reference="p90-nP-FHg"/>
+        <segue reference="gGN-0m-1iN"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

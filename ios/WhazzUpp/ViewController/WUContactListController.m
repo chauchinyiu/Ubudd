@@ -271,7 +271,8 @@
         NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
         phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
         
-        favocell.statusLabel.text = phone;
+        //favocell.statusLabel.text = phone;
+        favocell.statusLabel.text = @"";
         [favocell.userImg setHidden:YES];
         [favocell.addButton setHidden:YES];
         [favocell.userBtn setHidden:YES];

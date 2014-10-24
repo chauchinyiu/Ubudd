@@ -25,5 +25,7 @@
 
 -(IBAction)showFriendInfo:(id)sender;
 -(IBAction)joinGroup:(id)sender;
+-(void)useResult:(NSDictionary*) result;
+
 
 @end

@@ -18,7 +18,8 @@
 
 @property(nonatomic, weak) IBOutlet UILabel *locationLabel, *distanceLabel;
 @property(nonatomic, weak) IBOutlet MKMapView* mapview;
+@property(nonatomic, weak) id parentController;
 
-
+-(void)useResult:(NSDictionary*) result;
 
 @end

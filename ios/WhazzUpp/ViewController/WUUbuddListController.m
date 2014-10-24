@@ -16,6 +16,7 @@
 #import "ResponseBase.h"
 #import "DataResponse.h"
 #import <MapKit/MapKit.h>
+#import "WUUbuddMapViewController.h"
 
 @implementation WUUbuddListCell
 
@@ -64,12 +65,18 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
+    //reset search
     inSearch = NO;
     searchStr = @"";
     locName = @"";
+    
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+    [ud setBool:NO forKey:@"hasLocSearch"];
+    [ud synchronize];
+    
+    
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     favoritesCellHeight = cell.frame.size.height;
-    [self searchUpdated];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -80,6 +87,7 @@
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self readUserGroup];
 
 }
 
@@ -97,6 +105,15 @@
          {
              CLPlacemark* placemark = (CLPlacemark*)[placemarks objectAtIndex:0];
              locName = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+
+             NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+             [ud setBool:YES forKey:@"hasLocSearch"];
+             [ud setFloat:loc.latitude forKey:@"searchLat"];
+             [ud setFloat:loc.longitude forKey:@"searchLong"];
+             [ud setObject:locName forKey:@"searchLoc"];
+             [ud setInteger:searchDist forKey:@"searchDist"];
+             [ud synchronize];
+             
              [self updateLocationSearchGUI];
          }
      }];
@@ -105,12 +122,8 @@
 
 
 - (void)viewDidAppear:(BOOL)animated {
-    if(!inSearch){
-        [self readUserGroup];
-    }
-    if ([locName isEqualToString:@""]) {
-        [locationManager startUpdatingLocation];
-    }
+    [self.tableView reloadData];
+    [self searchUpdated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -388,15 +401,20 @@
         loc.longitude = 999;
         locName = @"";
         searchDist = 2;
+        [locationManager startUpdatingLocation];
     }
     [self updateLocationSearchGUI];
-    [self searchUserGroup:searchStr];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"searchLoc"]) {
         WUMapViewController *cvc = (WUMapViewController *)[segue destinationViewController];
         cvc.delegate = self;
+    }
+    else if ([[segue identifier] isEqualToString:@"SwitchMap"]) {
+        WUUbuddMapViewController *cvc = (WUUbuddMapViewController *)[segue destinationViewController];
+        cvc.parentController = self;
+        [cvc useResult:fetchResult];
     }
     else{
         [super prepareForSegue:segue sender:sender];
@@ -415,6 +433,11 @@
 {
     [self.view endEditing:YES];
 }
+
+-(void)useResult:(NSDictionary*) result{
+    fetchResult = [NSDictionary dictionaryWithDictionary:result];
+}
+
 
 @end
 

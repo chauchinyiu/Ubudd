@@ -45,10 +45,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    inSearch = NO;
-    searchStr = @"";
-    locName = @"";
-    [self searchUpdated];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -77,6 +73,19 @@
 }
 */
 
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+    [geocoder reverseGeocodeLocation:userLocation.location completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!(error))
+         {
+             CLPlacemark* placemark = (CLPlacemark*)[placemarks objectAtIndex:0];
+             curLocName = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+             [mapview.userLocation setTitle:curLocName];
+         }
+     }];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     [locationManager stopUpdatingLocation];
     
@@ -88,22 +97,21 @@
          {
              CLPlacemark* placemark = (CLPlacemark*)[placemarks objectAtIndex:0];
              curLocName = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-             [mapview.userLocation setTitle:curLocName];
+             locName = curLocName;
+             [self updateLocationSearchGUI];
          }
      }];
-
-    if ([locName isEqualToString:@""]) {
-        loc = currentLocation.coordinate;
-        locName = curLocName;
-        [self updateLocationSearchGUI];
-    }
+    loc = currentLocation.coordinate;
+    [self updateLocationSearchGUI];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if(!inSearch){
-        [self readUserGroup];
-    }
-    [locationManager startUpdatingLocation];
+    [self searchUpdated];
+    [self reloadMap];
+}
+
+-(void)useResult:(NSDictionary*) result{
+    fetchResult = [NSDictionary dictionaryWithDictionary:result];
 }
 
 - (void)readUserGroup{
@@ -210,7 +218,9 @@
             [mapview addAnnotation:pin];
             
         }
-        [mapview setRegion:MKCoordinateRegionMakeWithDistance(loc, maxDist * 2, maxDist * 2) animated:YES];
+        if (loc.latitude != 999) {
+            [mapview setRegion:MKCoordinateRegionMakeWithDistance(loc, maxDist * 2.5, maxDist * 2.5) animated:YES];
+        }
     }
     
 }
@@ -253,9 +263,9 @@
         loc.longitude = 999;
         locName = @"";
         searchDist = 2;
+        [locationManager startUpdatingLocation];
     }
     [self updateLocationSearchGUI];
-    [self searchUserGroup:searchStr];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

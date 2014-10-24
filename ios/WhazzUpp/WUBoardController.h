@@ -8,6 +8,8 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 
+@class MOC2CallUser, MessageCell, MOC2CallEvent, C2TapImageView;
+
 @interface WUBoardController : SCBoardController
 
 +(void)setIsGroup:(BOOL)b;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -3354,7 +3355,7 @@
                                             <rect key="frame" x="40" y="4" width="120" height="98"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fTz-Cg-fid">
-                                                    <rect key="frame" x="18" y="6" width="88" height="86"/>
+                                                    <rect key="frame" x="18" y="6" width="102" height="88"/>
                                                 </imageView>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hR8-M1-Ffi">
                                                     <rect key="frame" x="44" y="31" width="37" height="37"/>
@@ -4024,7 +4025,7 @@ test</string>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zyq-gr-7oH">
-                                                    <rect key="frame" x="17" y="6" width="88" height="87"/>
+                                                    <rect key="frame" x="17" y="6" width="102" height="88"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5168,15 +5169,15 @@ Remove search filter?</string>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1y6-Zv-XPG" customClass="SCBubbleViewIn">
                                             <rect key="frame" x="40" y="0.0" width="120" height="100"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M7e-US-HQU">
-                                                    <rect key="frame" x="12" y="6" width="99" height="88"/>
-                                                </imageView>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="FT0-uu-OCe">
                                                     <rect key="frame" x="44" y="31" width="37" height="37"/>
                                                     <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </activityIndicatorView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="ico_bookmark.png" translatesAutoresizingMaskIntoConstraints="NO" id="XJ1-H9-WJ5">
                                                     <rect key="frame" x="101" y="0.0" width="10" height="17"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M7e-US-HQU">
+                                                    <rect key="frame" x="12" y="6" width="102" height="88"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5928,7 +5929,7 @@ test</string>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="46W-kL-cwM">
-                                                    <rect key="frame" x="8" y="7" width="102" height="85"/>
+                                                    <rect key="frame" x="8" y="7" width="102" height="88"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -7255,7 +7256,7 @@ All rights reserved</string>
                     <navigationItem key="navigationItem" title="Ubudd" id="EU1-8E-5cb">
                         <barButtonItem key="rightBarButtonItem" image="mapMarker.png" id="1xO-lf-cVg">
                             <connections>
-                                <segue destination="K4L-Le-Jh7" kind="push" id="3YA-2E-Rs5"/>
+                                <segue destination="K4L-Le-Jh7" kind="push" identifier="SwitchMap" id="3YA-2E-Rs5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -7500,7 +7501,7 @@ All rights reserved</string>
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <outlet property="delegate" destination="sU5-NS-qIY" id="tRU-8D-udM"/>
+                                            <outlet property="delegate" destination="K4L-Le-Jh7" id="gJQ-AF-M5g"/>
                                         </connections>
                                     </searchBar>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pa-ic-Tfb">

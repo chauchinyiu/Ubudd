@@ -7,6 +7,8 @@
 //
 #import <UIKit/UIKit.h>
 #import "WUBoardController.h"
+#import <SocialCommunication/UIViewController+SCCustomViewController.h>
+#import <SocialCommunication/MessageCell.h>
 #import "SocialCommunication/MessageCellOutStream.h"
 #import "SocialCommunication/ImageCellOutStream.h"
 #import "SocialCommunication/LocationCellOutStream.h"
@@ -23,6 +25,8 @@
 #import "SocialCommunication/FriendCellInStream.h"
 #import "SocialCommunication/ContactCellInStream.h"
 #import "SocialCommunication/CallCellInStream.h"
+#import <SocialCommunication/C2TapImageView.h>
+
 
 @interface WUBoardController ()
 @end
@@ -269,5 +273,215 @@ static BOOL isGroup = YES;
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void) configureImageCellIn:(__weak ImageCellInStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    NSString *text = elem.text;
+    cell.headline.text = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
+    
+    cell.userImage.image = [self imageForElement:elem];
+    [self setUserImageAction:cell.userImage forElement:elem];
+    cell.imageNewIndicator.hidden = ![elem.missedDisplay boolValue];
+    
+    if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
+        cell.messageImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
+        [cell.progress setHidden:YES];
+        [cell setTapAction:^{
+            [self showImage:text];
+        }];
+        
+        [cell setLongpressAction:^{
+            UIMenuController *menu = [UIMenuController sharedMenuController];
+            NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+            
+            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Share", @"MenuItem") action:@selector(shareAction:)];
+            [cell setShareAction:^{
+                [self shareRichMessageForKey:text];
+            }];
+            [menulist addObject:item];
+            
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy", @"MenuItem") action:@selector(copyAction:)];
+            [cell setCopyAction:^{
+                [self copyImageForKey:text];
+            }];
+            [menulist addObject:item];
+            
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Save", @"MenuItem") action:@selector(saveAction:)];
+            [cell setSaveAction:^{
+                [[C2CallAppDelegate appDelegate] waitIndicatorWithTitle:NSLocalizedString(@"Saving Image to Photo Album", @"Title") andWaitMessage:nil];
+                
+                [[C2CallPhone currentPhone] saveToAlbum:text withCompletionHandler:^(NSURL *assetURL, NSError *error) {
+                    [[C2CallAppDelegate appDelegate] waitIndicatorStop];
+                }];
+            }];
+            [menulist addObject:item];
+            
+            menu.menuItems = menulist;
+            CGRect rect = cell.messageImage.frame;
+            rect = [cell convertRect:rect fromView:cell.messageImage];
+            [menu setTargetRect:rect inView:cell];
+            [cell becomeFirstResponder];
+            [menu setMenuVisible:YES animated:YES];
+        }];
+    } else {
+        if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
+            [cell.downloadButton setHidden:YES];
+            [cell monitorDownloadForKey:text];
+        } else if ([[C2CallPhone currentPhone] failedDownloadStatusForKey:text]) {
+            // We need a broken link image here and a download button
+            cell.messageImage.image = [UIImage imageNamed:@"ico_broken_image.png"];
+            [cell setLongpressAction:^{
+                UIMenuController *menu = [UIMenuController sharedMenuController];
+                NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+                
+                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
+                [cell setRetransmitAction:^{
+                    [cell download:nil];
+                }];
+                [menulist addObject:item];
+                
+                menu.menuItems = menulist;
+                
+                CGRect rect = cell.messageImage.frame;
+                rect = [cell convertRect:rect fromView:cell.messageImage];
+                [menu setTargetRect:rect inView:cell];
+                [cell becomeFirstResponder];
+                [menu setMenuVisible:YES animated:YES];
+            }];
+            
+        } else {
+            [cell startDownloadForKey:text];
+        }
+    }
+    
+}
+
+-(void) configureImageCellOut:(__weak ImageCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    cell.userImage.image = [self ownUserImage];
+    [self setUserImageAction:cell.userImage forElement:elem];
+    
+    NSString *sendername = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
+    cell.headline.text = [NSString stringWithFormat:@"@%@",  sendername];
+    
+    if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
+        cell.messageImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
+        int status = [elem.status intValue];
+        if (status == 3) {
+            cell.iconSubmitted.image = [UIImage imageNamed:@"ico_notdelivered.png"];
+            [cell.iconSubmitted setHidden:NO];
+            
+            [cell setLongpressAction:^{
+                [self setRetransmitActionForCell:cell withKey:elem.text andUserid:elem.contact];
+            }];
+            
+            return;
+        }
+        
+        cell.iconSubmitted.image = nil;
+        [cell monitorUploadForKey:elem.text];
+        return;
+    }
+    
+    NSString *text = elem.text;
+    if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
+        cell.messageImage.image = [[C2CallPhone currentPhone] thumbnailForKey:text];
+        [cell.progress setHidden:YES];
+        [cell setTapAction:^{
+            [self showImage:text];
+        }];
+        
+        [cell setLongpressAction:^{
+            UIMenuController *menu = [UIMenuController sharedMenuController];
+            NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+            
+            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Share", @"MenuItem") action:@selector(shareAction:)];
+            [cell setShareAction:^{
+                [self shareRichMessageForKey:text];
+            }];
+            [menulist addObject:item];
+            
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy", @"MenuItem") action:@selector(copyAction:)];
+            [cell setCopyAction:^{
+                [self copyImageForKey:text];
+            }];
+            [menulist addObject:item];
+            
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Save", @"MenuItem") action:@selector(saveAction:)];
+            [cell setSaveAction:^{
+                [[C2CallAppDelegate appDelegate] waitIndicatorWithTitle:NSLocalizedString(@"Saving Image to Photo Album", @"Title") andWaitMessage:nil];
+                
+                [[C2CallPhone currentPhone] saveToAlbum:text withCompletionHandler:^(NSURL *assetURL, NSError *error) {
+                    [[C2CallAppDelegate appDelegate] waitIndicatorStop];
+                }];
+            }];
+            [menulist addObject:item];
+            
+            menu.menuItems = menulist;
+            CGRect rect = cell.messageImage.frame;
+            rect = [cell convertRect:rect fromView:cell.messageImage];
+            [menu setTargetRect:rect inView:cell];
+            [cell becomeFirstResponder];
+            [menu setMenuVisible:YES animated:YES];
+        }];
+    } else {
+        if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
+            [cell.downloadButton setHidden:YES];
+            [cell monitorDownloadForKey:text];
+        } else if ([[C2CallPhone currentPhone] failedDownloadStatusForKey:text]) {
+            // We need a broken link image here and a download button
+            cell.messageImage.image = [UIImage imageNamed:@"ico_broken_image.png"];
+            [cell setLongpressAction:^{
+                UIMenuController *menu = [UIMenuController sharedMenuController];
+                NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+                
+                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
+                [cell setRetransmitAction:^{
+                    [cell download:nil];
+                }];
+                [menulist addObject:item];
+                
+                menu.menuItems = menulist;
+                
+                CGRect rect = cell.messageImage.frame;
+                rect = [cell convertRect:rect fromView:cell.messageImage];
+                [menu setTargetRect:rect inView:cell];
+                [cell becomeFirstResponder];
+                [menu setMenuVisible:YES animated:YES];
+            }];
+            
+        } else {
+            [cell startDownloadForKey:text];
+        }
+    }
+    
+    [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+}
+
+-(void) showImage:(NSString *) key
+{
+    @try {
+        NSMutableArray *imageList = [NSMutableArray array];
+        for (MOC2CallEvent *elem in [self.fetchedResultsController fetchedObjects]) {
+            if ([elem.text hasPrefix:@"image://"]) {
+                NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
+                [info setObject:elem.text forKey:@"image"];
+                [info setObject:elem.eventId forKey:@"eventId"];
+                [info setObject:elem.timeStamp forKey:@"timeStamp"];
+                [info setObject:elem.eventType forKey:@"eventType"];
+                if (elem.senderName)
+                    [info setObject:elem.senderName forKey:@"senderName"];
+                
+                [imageList addObject:info];
+            }
+        }
+        
+        [self showPhotos:imageList currentPhoto:key];
+    }
+    @catch (NSException *exception) {
+        
+    }
+}
+
 
 @end

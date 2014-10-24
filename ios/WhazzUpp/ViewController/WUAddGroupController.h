@@ -20,15 +20,15 @@
     IBOutlet UITextField *txtSubInterest;
     IBOutlet UIButton *btnLocation;
     IBOutlet UIButton *btnIsPublic;
+    IBOutlet UIBarButtonItem *btnDone;
     
 }
 
 @property (nonatomic, strong) id parentController;
 
 - (IBAction)btnPhotoTapped:(id)sender;
-- (IBAction)txtSubInterestDone;
-- (IBAction)txtTopicDone;
-- (IBAction)txtTopic2Done;
 - (IBAction)btnIsPublicTapped:(id)sender;
+
+- (IBAction)editEnded;
 
 @end

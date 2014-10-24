@@ -35,9 +35,12 @@
     loc.latitude = 999;
     loc.longitude = 999;
     isPublic = false;
+    interestID = -1;
     [btnIsPublic setTitle:@"Private" forState:UIControlStateNormal];
+    [btnDone setEnabled:NO];
     
     [self setAddGroupAction:^(NSString *groupid) {
+        [btnDone setEnabled:NO];
         if ([self.parentController respondsToSelector:@selector(setCreatedGroupId:)]) {
             [self.parentController performSelector:@selector(setCreatedGroupId:) withObject:groupid];
             
@@ -86,6 +89,11 @@
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
 
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self checkFilled];
 }
 
 
@@ -150,17 +158,6 @@
     }
 }
 
-- (IBAction)txtSubInterestDone{
-    [txtSubInterest resignFirstResponder];
-}
-
-- (IBAction)txtTopicDone{
-    [txtTopic resignFirstResponder];
-}
-
-- (IBAction)txtTopic2Done{
-    [txtTopic2 resignFirstResponder];
-}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"Interest"]) {
@@ -179,11 +176,14 @@
 -(void)selectedInerestID:(int) i withName:(NSString*) name;{
     interestID = i;
     [btnInterest setTitle:name forState:UIControlStateNormal];
+    [self checkFilled];
+    
 }
 
 -(void)selectedLocationWithCoord:(CLLocationCoordinate2D)coord typedName:(NSString*)typedname{
     loc = coord;
     [btnLocation setTitle:typedname forState:UIControlStateNormal];
+    [self checkFilled];
 }
 
 
@@ -194,6 +194,7 @@
         return cell;
     }
     else{
+        [self checkFilled];
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
 }
@@ -220,5 +221,30 @@
 {
     [self.view endEditing:YES];
 }
+
+- (IBAction)editEnded{
+    [self checkFilled];
+}
+
+-(void)checkFilled{
+    [btnDone setEnabled:[self detailFilled]];
+}
+
+-(bool)detailFilled{
+    if ([txtTopic.text isEqualToString:@""]) {
+        return NO;
+    }
+    if (interestID < 1) {
+        return NO;
+    }
+    if (loc.latitude == 999) {
+        return NO;
+    }
+    if (self.members.count == 0){
+        return NO;
+    }
+    return YES;
+}
+
 
 @end

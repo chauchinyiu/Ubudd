@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -998,7 +997,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WUInterestViewController" extendedLayoutIncludesOpaqueBars="YES" id="Jaz-Pe-n8k" customClass="WUInterestViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qnO-4P-R1n">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1516,7 +1515,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done"/>
                                     <connections>
-                                        <action selector="txtTopicDone" destination="tY9-Si-6JS" eventType="editingDidEndOnExit" id="cjx-H9-Ojv"/>
+                                        <action selector="editEnded" destination="tY9-Si-6JS" eventType="editingDidEnd" id="oxJ-bb-PzF"/>
                                         <outlet property="delegate" destination="tY9-Si-6JS" id="rvW-ej-FBm"/>
                                     </connections>
                                 </textField>
@@ -1697,6 +1696,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="btnDone" destination="qae-qU-EOP" id="FLD-19-FAK"/>
                         <outlet property="btnGroupImage" destination="yvF-2Q-nOD" id="2aE-hT-Hf2"/>
                         <outlet property="btnInterest" destination="82u-DS-meh" id="xfR-BY-TjL"/>
                         <outlet property="btnIsPublic" destination="Snh-em-nDl" id="tVT-sw-5ec"/>
@@ -7636,14 +7636,14 @@ All rights reserved</string>
     <inferredMetricsTieBreakers>
         <segue reference="TC0-AQ-IeD"/>
         <segue reference="VQ9-8Q-vDt"/>
-        <segue reference="tQs-8i-bTJ"/>
-        <segue reference="Mb7-Vt-gOO"/>
-        <segue reference="sk8-fE-Q4T"/>
-        <segue reference="PMU-xX-rr7"/>
-        <segue reference="gEM-cP-vpS"/>
-        <segue reference="XEP-pC-k3p"/>
+        <segue reference="Hgt-RX-z8j"/>
+        <segue reference="l4c-f0-WTn"/>
+        <segue reference="mZ1-Vt-wje"/>
         <segue reference="p90-nP-FHg"/>
-        <segue reference="gGN-0m-1iN"/>
+        <segue reference="XEP-pC-k3p"/>
+        <segue reference="tQs-8i-bTJ"/>
+        <segue reference="sk8-fE-Q4T"/>
+        <segue reference="Mb7-Vt-gOO"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

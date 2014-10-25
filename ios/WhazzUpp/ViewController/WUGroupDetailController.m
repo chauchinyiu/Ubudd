@@ -26,6 +26,7 @@
     CGFloat readOnlyCellHeight;
     CGFloat memberCellHeight;
     BOOL isOwner;
+    BOOL isMember;
     NSMutableDictionary* groupInfo;
     WUGroupDetailCellEdit* editCell;
     UIImage* groupImg;
@@ -61,7 +62,9 @@
     self.group = [[SCGroup alloc] initWithGroupid:self.groupid];
     groupImg = self.group.groupImage;
     isOwner = [self.group.groupOwner isEqualToString:[SCUserProfile currentUser].userid];
+    isMember = NO;
     if (isOwner) {
+        isMember = YES;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveGroup)];
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
     }
@@ -98,7 +101,12 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    if (isMember) {
+        return 2;
+    }
+    else{
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -165,11 +173,65 @@
         }
         else{
             WUGroupDetailCellReadOnly *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellReadOnly"];
+            if (groupInfo) {
+                cell.groupImg.layer.cornerRadius = 40.0;
+                cell.groupImg.layer.masksToBounds = YES;
+                
+                [cell.groupImg setImage:groupImg];
+                [cell.lblTopic setText:[groupInfo objectForKey:@"topic"]];
+                [cell.lblTopicDesc setText:[groupInfo objectForKey:@"topicDescription"]];
+                
+                int interestID = [[groupInfo objectForKey:@"interestID"] integerValue];
+                [cell.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
+                [cell.lblSubinterest setText:[groupInfo objectForKey:@"interestDescription"]];
+                
+                [cell.lblLocation setText:[groupInfo objectForKey:@"locationName"]];
+                
+                NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
+                if(isPublic.intValue == 1){
+                    [cell.lblPublic setText:@"Public"];
+                }
+                else{
+                    [cell.lblPublic setText:@"Private"];
+                }
+                
+                NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
+                [cell.lblMemberCnt setText:[NSString stringWithFormat:@"%d OF 50", memberCnt.intValue + 1]];
+                
+                [cell.lblHost setText:[groupInfo objectForKey:@"userName"]];
+                
+                NSNumber* joinStatus = [groupInfo objectForKey:@"isMember"];
+
+                switch (joinStatus.intValue) {
+                    case 0:
+                        [cell.lblJoinStatus setText:@"Not a member"];
+                        [cell.btnJoin setHidden:NO];
+                        break;
+                    case 1:
+                        [cell.lblJoinStatus setText:@"Joined"];
+                        [cell.btnJoin setHidden:YES];
+                        break;
+                    case 2:
+                        [cell.lblJoinStatus setText:@"Group admin"];
+                        [cell.btnJoin setHidden:YES];
+                        break;
+                    case 3:
+                        [cell.lblJoinStatus setText:@"Waiting for reply"];
+                        [cell.btnJoin setHidden:YES];
+                        break;
+                    case 4:
+                        [cell.lblJoinStatus setText:@"Request rejected"];
+                        [cell.btnJoin setHidden:YES];
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
             return cell;
         }
     }
     else{
-        NSIndexPath* ipath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
         static NSString *CellIdentifier = @"SCGroupMemberCell";
         
         SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -403,6 +465,11 @@
     }
     else {
         groupInfo = [[NSMutableDictionary alloc] initWithDictionary:res.data];
+        NSNumber* joinStatus = [groupInfo objectForKey:@"isMember"];
+        if (joinStatus.intValue == 1 || joinStatus.intValue == 2) {
+            isMember = YES;
+        }
+        
         [self.tableView reloadData];
     }
 }
@@ -458,9 +525,7 @@
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
 }
 
-- (void)updateGroupInfo:(ResponseBase *)response error:(NSError *)error {
-    DataResponse *res = (DataResponse *)response;
-    
+- (void)updateGroupInfo:(ResponseBase *)response error:(NSError *)error {    
     if (error){
         
     }
@@ -469,5 +534,85 @@
     }
     [self.navigationItem.rightBarButtonItem setEnabled:YES];
 }
+
+- (IBAction)btnJoinTapped:(id)sender{
+    NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
+    if(isPublic.intValue == 1){
+        //join directly
+        [self.group joinGroup];
+        [self.group saveGroupWithCompletionHandler:^(BOOL success){
+            DataRequest* datRequest = [[DataRequest alloc] init];
+            NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+            [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"memberID"];
+            [data setValue:[groupInfo objectForKey:@"groupID"] forKey:@"groupID"];
+            datRequest.values = data;
+            datRequest.requestName = @"addGroupMember";
+            
+            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+            [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(addGroupUserResponse:error:)];
+        }];
+    }
+    else{
+        //submit request
+        DataRequest* datRequest = [[DataRequest alloc] init];
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"memberID"];
+        [data setValue:[groupInfo objectForKey:@"groupID"] forKey:@"groupID"];
+        [data setValue:[SCUserProfile currentUser].firstname forKey:@"userName"];
+        
+        datRequest.values = data;
+        datRequest.requestName = @"requestJoinGroup";
+        
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(requestJoinGroupResponse:error:)];
+    }
+}
+
+- (void)requestJoinGroupResponse:(ResponseBase *)response error:(NSError *)error{
+    if (response.errorCode == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Request submitted"
+                                                        message:@"Your request is submitted and is waiting for approval."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [self.tableView reloadData];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Submittion failed"
+                                                        message:@"Unable to submit your request."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    
+}
+
+
+- (void)addGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Join Group"
+                                                    message:@"You are now a member of the group."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    if (self.group.groupid != nil) {
+        [dictionary setObject:self.group.groupid forKey:@"c2CallID"];
+    }
+    [dictionary setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
+    DataRequest *dataRequest = [[DataRequest alloc] init];
+    dataRequest.requestName = @"readGroupInfo";
+    dataRequest.values = dictionary;
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readGroupInfo:error:)];
+
+}
+
+
+
 
 @end

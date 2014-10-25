@@ -23,8 +23,9 @@
 @end
 
 @interface WUGroupDetailCellReadOnly : UITableViewCell
-    @property(nonatomic, weak) IBOutlet UIImage *groupImg;
+    @property(nonatomic, weak) IBOutlet UIImageView *groupImg;
     @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic, *lblHost, *lblMemberCnt, *lblJoinStatus;
+    @property(nonatomic, weak) IBOutlet UIButton *btnJoin;
 @end
 
 @interface WUGroupDetailController : SCGroupDetailController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WULocationSelectControllerDelegate>
@@ -32,5 +33,6 @@
 - (IBAction)btnPhotoTapped:(id)sender;
 - (IBAction)btnIsPublicTapped:(id)sender;
 - (IBAction)editEnded;
+- (IBAction)btnJoinTapped:(id)sender;
 
 @end

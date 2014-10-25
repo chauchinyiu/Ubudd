@@ -237,15 +237,6 @@
     NSNumber* memberCnt = [fetchResult objectForKey:[NSString stringWithFormat:@"memberCnt%d", indexPath.row]];
     favocell.memberLabel.text = [NSString stringWithFormat:@"%d OF 50", memberCnt.intValue + 1];
     
-    /*
-    NSNumber* isPublic = [fetchResult objectForKey:[NSString stringWithFormat:@"isPublic%d", indexPath.row]];
-    if(isPublic.intValue == 1){
-        favocell.accessLabel.text = @"Public";
-    }
-    else{
-        favocell.accessLabel.text = @"Private";
-    }
-    */
     
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:group.groupid];
     

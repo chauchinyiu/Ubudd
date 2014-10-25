@@ -20,7 +20,8 @@
 
 @implementation WUUbuddListCell
 
-@synthesize nameLabel, statusLabel, accessLabel, userBtn, addButton;
+@synthesize nameLabel, statusLabel, hostLabel, memberLabel;
+
 
 @end
 
@@ -226,22 +227,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WUUbuddListCell *favocell = (WUUbuddListCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
-    [favocell.userBtn setTag:indexPath.row];
-    [favocell.addButton setTag:indexPath.row];
-    
-    NSNumber* isMember = [fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row]];
-    if(isMember.intValue != 0){
-        [favocell.addButton setHidden:YES];
-    }
-    else{
-        [favocell.addButton setHidden:NO];
-    }
     
     SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]]];
     
     favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", indexPath.row]];
     favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", indexPath.row]];
+    favocell.hostLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", indexPath.row]];
+    NSNumber* memberCnt = [fetchResult objectForKey:[NSString stringWithFormat:@"memberCnt%d", indexPath.row]];
+    favocell.memberLabel.text = [NSString stringWithFormat:@"%d OF 50", memberCnt.intValue + 1];
     
+    /*
     NSNumber* isPublic = [fetchResult objectForKey:[NSString stringWithFormat:@"isPublic%d", indexPath.row]];
     if(isPublic.intValue == 1){
         favocell.accessLabel.text = @"Public";
@@ -249,6 +244,7 @@
     else{
         favocell.accessLabel.text = @"Private";
     }
+    */
     
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:group.groupid];
     
@@ -276,6 +272,10 @@
         [WUBoardController setIsGroup:YES];
         [self showChatForUserid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
     }
+    else{
+        [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
+    
+    }
 }
 
 -(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
@@ -290,11 +290,6 @@
     return YES;
 }
 
-
-
--(IBAction)showFriendInfo:(id)sender{
-    [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", [sender tag]]]];
-}
 
 -(IBAction)joinGroup:(id)sender{
     NSNumber* isPublic = [fetchResult objectForKey:[NSString stringWithFormat:@"isPublic%d", [sender tag]]];
@@ -384,7 +379,7 @@
 
 
 -(void)updateLocationSearchGUI{
-    distanceLabel.text = [NSString stringWithFormat:@"Within %dKm", searchDist];
+    distanceLabel.text = [NSString stringWithFormat:@"Within %dKm radius in", searchDist];
     locationLabel.text = locName;
 }
 

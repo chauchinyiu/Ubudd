@@ -92,7 +92,11 @@ typedef enum : NSUInteger {
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
 
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
+    [self.titleButton setTitle:user.displayName forState:UIControlStateNormal];
 }
+
+
 
 #pragma mark - ChatController Methods
 -(IBAction)openProfile:(id)sender

@@ -15,5 +15,6 @@
 - (IBAction)btnRichMessageTapped:(id)sender;
 
 @property (nonatomic, assign) bool sendWelcomeText;
+@property(nonatomic, weak) IBOutlet UIButton* titleButton;
 
 @end

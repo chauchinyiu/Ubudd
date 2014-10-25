@@ -240,13 +240,21 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     if ([view.annotation isKindOfClass:[WUUbuddMapViewAnnotation class]]) {
-        [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", ((WUUbuddMapViewAnnotation*)(view.annotation)).groupIndex]]];
-        
+        int i = ((WUUbuddMapViewAnnotation*)(view.annotation)).groupIndex;
+        NSNumber* isMember = [fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", i]];
+        if(isMember.intValue == 1 || isMember.intValue == 2){
+            [WUBoardController setIsGroup:YES];
+            [self showChatForUserid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]]];
+        }
+        else{
+            [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]]];
+            
+        }
     }
 }
 
 -(void)updateLocationSearchGUI{
-    distanceLabel.text = [NSString stringWithFormat:@"Within %dKm", searchDist];
+    distanceLabel.text = [NSString stringWithFormat:@"Within %dKm radius in", searchDist];
     locationLabel.text = locName;
 }
 

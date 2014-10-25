@@ -52,6 +52,8 @@ static BOOL isGroup = YES;
                                              selector:@selector(keywordShown:)
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
+
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

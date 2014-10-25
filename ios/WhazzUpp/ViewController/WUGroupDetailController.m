@@ -62,7 +62,7 @@
     groupImg = self.group.groupImage;
     isOwner = [self.group.groupOwner isEqualToString:[SCUserProfile currentUser].userid];
     if (isOwner) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(saveGroup)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveGroup)];
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
     }
     
@@ -169,14 +169,142 @@
         }
     }
     else{
-        UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        NSIndexPath* ipath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+        static NSString *CellIdentifier = @"SCGroupMemberCell";
+        
+        SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        [cell.inviteButton setHidden:YES];
+        
+        NSString *userid = [self.members objectAtIndex:indexPath.row];
+        NSString *gid = self.group.groupid;
+        
+        MOC2CallUser *groupuser = [[SCDataManager instance] userForUserid:gid];
+        int grouponline = [groupuser.onlineStatus intValue];
+        int online = 0;
+        
+        BOOL itsMe = NO;
+        
+        NSString *displayName = nil;
+        if ([userid isEqualToString:[SCUserProfile currentUser].userid]) {
+            itsMe = YES;
+            displayName = [SCUserProfile currentUser].displayname;
+        } else {
+            MOC2CallUser *member = [[SCDataManager instance] userForUserid:userid];
+            displayName = [member.displayName copy];
+            if (!member) {
+                NSString *user = [self.members objectAtIndex:indexPath.row];
+                
+                NSString *lastname = [self.group nameForGroupMember:user];
+                NSString *firstname = [self.group firstnameForGroupMember:user];
+                NSString *email = [self.group emailForGroupMember:user];
+                
+                if ([lastname length] > 0 && [firstname length] > 0) {
+                    displayName = [NSString stringWithFormat:@"%@ %@", firstname, lastname];
+                } else if (firstname) {
+                    displayName = firstname;
+                } else if (lastname) {
+                    displayName = lastname;
+                } else {
+                    displayName = email;
+                }
+            } else {
+                online = [[member onlineStatus] intValue];
+            }
+        }
+        
+        cell.textLabel.text = displayName;
+        if ([self.group.groupOwner isEqualToString:userid]) {
+            cell.textLabel.textColor = [UIColor blueColor];
+            [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:@"(Group Admin)"]];
+        } else {
+            cell.textLabel.textColor = [UIColor darkTextColor];
+        }
+        
+        
+        if (itsMe)
+            online = OS_ONLINE;
+        
+        if (grouponline == OS_CALLME) {
+            NSArray *active = [[C2CallPhone currentPhone] activeMembersInCallForGroup:gid];
+            if ([active containsObject:userid]) {
+                online = OS_GROUPCALL;
+            }
+        }
+        
+        if (online > 0) {
+            cell.detailTextLabel.textColor = [UIColor greenColor];
+            switch (online) {
+                case OS_ONLINE:
+                    cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
+                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    break;
+                case OS_FORWARDED:
+                    cell.detailTextLabel.text = NSLocalizedString(@"Call forward", @"Cell Label");
+                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    break;
+                case OS_INVISIBLE:
+                    cell.detailTextLabel.text = NSLocalizedString(@"offline", @"Cell Label");
+                    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+                    break;
+                case OS_AWAY:
+                    cell.detailTextLabel.text = NSLocalizedString(@"offline (away)", @"Cell Label");
+                    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+                    break;
+                case OS_BUSY:
+                    cell.detailTextLabel.text = NSLocalizedString(@"offline (busy)", @"Cell Label");
+                    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+                    break;
+                case OS_CALLME:
+                    cell.detailTextLabel.text = NSLocalizedString(@"online (call me)", @"Cell Label");
+                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    break;
+                case OS_ONLINEVIDEO:
+                    cell.detailTextLabel.text = NSLocalizedString(@"online (active)", @"Cell Label");
+                    break;
+                case OS_IPUSH:
+                    cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
+                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    break;
+                case OS_IPUSHCALL:
+                    cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
+                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    break;
+                case OS_GROUPCALL:
+                    cell.detailTextLabel.text = NSLocalizedString(@"in conference", @"Cell Label");
+                    break;
+            }
+            
+        } else {
+            cell.detailTextLabel.text = NSLocalizedString(@"offline", @"Cell Label");
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        }
+        
+        //cell.detailTextLabel.text = [[member elementForName:@"EMail"] stringValue];
+        
+        UIImage *userpic = [[C2CallPhone currentPhone] userimageForUserid:userid];
+        if (userpic) {
+            cell.imageView.image = userpic;
+            cell.imageView.contentMode = UIViewContentModeScaleToFill;
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+            cell.imageView.contentMode = UIViewContentModeScaleToFill;
+        }
+        
+        cell.backgroundColor = [UIColor whiteColor];
+        return cell;
+        
+        /*
+        UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:ipath];
         if ([cell isKindOfClass:[SCGroupMemberCell class]]) {
             SCGroupMemberCell *c = (SCGroupMemberCell*)cell;
-            if (![c.textLabel.textColor isEqual:[UIColor colorWithWhite:0 alpha:1 ]]) {
+            NSString *userid = [self.members objectAtIndex:indexPath.row];
+            
+            if ([self.group.groupOwner isEqualToString:userid]) {
                 [c.textLabel setText:[c.textLabel.text stringByAppendingString:@"(Group Admin)"]];
             }
         }
         return cell;
+         */
     }
 }
 

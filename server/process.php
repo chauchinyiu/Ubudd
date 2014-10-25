@@ -423,6 +423,37 @@ class MyAPI extends API {
 	
 	}
 
+    protected function updateGroupInfo($args) {
+
+        if ($args['c2CallID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("update chatGroup set topic = ?, "
+											." topicDescription = ?, "
+											." interestID = ?, "
+											." interestDescription = ?, "
+											." locationLag = ?, "
+											." locationLong = ?, "
+											." locationName = ?, "
+											." isPublic = ? "
+											." where c2CallID = ?");
+		$stmt->bind_param('sssssssss', $topic, $topicDesc, $interestID, $interestDesc, 
+							$locLag, $locLong, $locationName, $isPublic, $c2CallID);
+		$topic = $args['topic'];
+		$topicDesc = $args['topicDescription'];
+		$interestID = $args['interestID'];
+		$interestDesc = $args['interestDescription'];
+		$locLag = $args['locationLag'];
+		$locLong = $args['locationLong'];
+		$locationName = $args['locationName'];
+		$isPublic = $args['isPublic'];
+		$c2CallID = $args['c2CallID'];
+		$stmt->execute();
+		$stmt->close();
+		return array('error' => 0, 'message' => 'Group updated');
+    }
+
+
 	protected function readOutStandingRequest($args){
         if ($args['userID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
@@ -520,11 +551,18 @@ class MyAPI extends API {
 	
     protected function readGroupInfo($args) {
 
-        if ($args['c2CallID'] == '')
+        if ($args['c2CallID'] == '' || $args['userID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
-		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, topicDescription, locationName, isPublic from chatGroup where c2CallID = ?");
-		$stmt->bind_param('s', $c2CallID);
+		$stmt = $this->db->conn2->prepare("select chatGroup.id, chatGroup.c2CallID, chatGroup.interestID, chatGroup.interestDescription, chatGroup.topicDescription, chatGroup.locationName, memb.memberCnt, "
+											."chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, chatGroup.topic, chatGroup.locationLag, chatGroup.locationLong, register.userName from chatGroup "
+											."inner join register on register.msisdn = chatGroup.groupAdmin "
+											."left join groupMember on chatGroup.id = groupMember.groupID and groupMember.memberID = ? "
+											."left join (select groupID, count(*) as memberCnt from groupMember where requestAccepted = 1 group by groupID) memb on chatGroup.id = memb.groupID "
+											."where chatGroup.c2CallID = ?");
+
+		$stmt->bind_param('ss', $userID, $c2CallID);
+		$userID = $args['userID'];
 		$c2CallID = $args['c2CallID'];
 		$stmt->execute();
 		$verifyRes = $stmt->get_result();
@@ -532,13 +570,31 @@ class MyAPI extends API {
         $verifyRow = mysqli_fetch_assoc($verifyRes);
 
         if ($verifyRow['c2CallID'] == $args['c2CallID']) {
-            return array('error' => 0, 'message' => 'Read Successfully', 
-            'interestID' => $verifyRow['interestID'], 
-            'interestDescription' => $verifyRow['interestDescription'], 
-            'topicDescription' => $verifyRow['topicDescription'],
-            'locationName' => $verifyRow['locationName'],
-            'isPublic' => $verifyRow['isPublic'],
-            'resultCode' => 1);
+        
+			$groupArray = array();
+			$groupArray['groupID'] = $verifyRow['id'];
+			$groupArray['c2CallID'] = $verifyRow['c2CallID'];
+			$groupArray['interestID'] = $verifyRow['interestID'];
+			$groupArray['interestDescription'] = $verifyRow['interestDescription'];
+			$groupArray['topicDescription'] = $verifyRow['topicDescription'];
+			$groupArray['locationName'] = $verifyRow['locationName'];
+			$groupArray['memberCnt'] = $verifyRow['memberCnt'];
+			$groupArray['isPublic'] = $verifyRow['isPublic'];
+			$groupArray['topic'] = $verifyRow['topic'];
+			$groupArray['locationLag'] = $verifyRow['locationLag'];
+			$groupArray['locationLong'] = $verifyRow['locationLong'];
+			$groupArray['userName'] = $verifyRow['userName'];
+			if($row['groupAdmin'] == $args['userID']){
+				$groupArray['isMember'] = 2;
+			}
+			else{
+				$groupArray['isMember'] = $verifyRow['requestAccepted'];			
+			}	
+			$groupArray['error'] = 0;
+			$groupArray['resultCode'] = 1;
+			$groupArray['message'] = 'Loaded Successfully';
+	        return $groupArray;
+			
         } else {
             return array('error' => 1, 'message' => 'Read failed', 'resultCode' => 0);
         }

@@ -7,7 +7,30 @@
 //
 
 #import <SocialCommunication/SocialCommunication.h>
+#import "WUInterestViewController.h"
+#import "WULocationSearchController.h"
 
-@interface WUGroupDetailController : SCGroupDetailController
+@interface WUGroupDetailCellEdit : UITableViewCell
+@property(nonatomic, weak) IBOutlet UIButton *btnGroupImageEdit;
+@property(nonatomic, weak) IBOutlet UITextField *txtTopicEdit;
+@property(nonatomic, weak) IBOutlet UITextField *txtTopic2Edit;
+@property(nonatomic, weak) IBOutlet UIButton *btnInterestEdit;
+@property(nonatomic, weak) IBOutlet UITextField *txtSubInterestEdit;
+@property(nonatomic, weak) IBOutlet UIButton *btnLocationEdit;
+@property(nonatomic, weak) IBOutlet UIButton *btnIsPublicEdit;
+@property(nonatomic, weak) IBOutlet UILabel *lblMemberCntEdit;
+
+@end
+
+@interface WUGroupDetailCellReadOnly : UITableViewCell
+    @property(nonatomic, weak) IBOutlet UIImage *groupImg;
+    @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic, *lblHost, *lblMemberCnt, *lblJoinStatus;
+@end
+
+@interface WUGroupDetailController : SCGroupDetailController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WULocationSelectControllerDelegate>
+
+- (IBAction)btnPhotoTapped:(id)sender;
+- (IBAction)btnIsPublicTapped:(id)sender;
+- (IBAction)editEnded;
 
 @end

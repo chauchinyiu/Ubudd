@@ -1098,6 +1098,7 @@
 		97AFCF8D1780213E005A8D49 /* R1PhotoEffectsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97AFCF8C1780213E005A8D49 /* R1PhotoEffectsSDK.a */; };
 		CE01E46E19B5AC41003A0289 /* WUUserSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01E46D19B5AC41003A0289 /* WUUserSelectionController.m */; };
 		CE0919A319D6529C00865665 /* WUUbuddListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0919A219D6529C00865665 /* WUUbuddListController.m */; };
+		CE2AC7F519FD36BB00A3D093 /* WUPhotoViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */; };
 		CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C003198C8D3500D22BFE /* VerifyUser.m */; };
 		CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */; };
 		CE5462221999C86000E91636 /* UpdateAPNSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462211999C86000E91636 /* UpdateAPNSToken.m */; };
@@ -2259,6 +2260,8 @@
 		CE01E46D19B5AC41003A0289 /* WUUserSelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUUserSelectionController.m; sourceTree = "<group>"; };
 		CE0919A119D6529C00865665 /* WUUbuddListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUUbuddListController.h; sourceTree = "<group>"; };
 		CE0919A219D6529C00865665 /* WUUbuddListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUUbuddListController.m; sourceTree = "<group>"; };
+		CE2AC7F319FD36BB00A3D093 /* WUPhotoViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUPhotoViewerController.h; sourceTree = "<group>"; };
+		CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUPhotoViewerController.m; sourceTree = "<group>"; };
 		CE30C003198C8D3500D22BFE /* VerifyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyUser.m; sourceTree = "<group>"; };
 		CE30C005198C8D4100D22BFE /* VerifyUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUser.h; sourceTree = "<group>"; };
 		CE30C006198C8D7000D22BFE /* VerifyUserDTO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUserDTO.h; sourceTree = "<group>"; };
@@ -3509,6 +3512,8 @@
 				CE0919A219D6529C00865665 /* WUUbuddListController.m */,
 				CE7E964519F8F6F1001C229F /* WUUbuddMapViewController.h */,
 				CE7E964619F8F6F1001C229F /* WUUbuddMapViewController.m */,
+				CE2AC7F319FD36BB00A3D093 /* WUPhotoViewerController.h */,
+				CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4801,6 +4806,7 @@
 				CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */,
 				CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */,
 				17A1D68F1927ED3700B28792 /* WULoginController.m in Sources */,
+				CE2AC7F519FD36BB00A3D093 /* WUPhotoViewerController.m in Sources */,
 				17E87630194A56D400786419 /* WUWelcomeController.m in Sources */,
 				972F4541175CBA830006DEF6 /* WUFriendDetailController.m in Sources */,
 				CE893C1719E3A18A007AD220 /* WUSettingViewController.m in Sources */,

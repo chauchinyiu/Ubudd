@@ -30,6 +30,7 @@ class MyAPI extends API {
         if ($args['msisdn'] == '' || $args['brand'] == '' || $args['model'] == '' || $args['os'] == '' || $args['uid'] == '' || $args['countryCode'] == '' || $args['phoneNo'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
+
 		$stmt = $this->db->conn2->prepare("select email from register where email = ?");
 		$stmt->bind_param('s', $userId);
 		$userId = $args['msisdn'] . "@mobifyi.com";

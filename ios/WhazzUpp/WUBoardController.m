@@ -29,10 +29,13 @@
 
 
 @interface WUBoardController ()
+@property (nonatomic, strong) NSMutableDictionary           *smallImageCache;
 @end
 
 
 @implementation WUBoardController
+@synthesize smallImageCache;
+
 static BOOL isGroup = YES;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -53,6 +56,9 @@ static BOOL isGroup = YES;
                                                  name:UIKeyboardDidShowNotification
                                                object:nil];
 
+    if (!self.smallImageCache) {
+        self.smallImageCache = [NSMutableDictionary dictionaryWithCapacity:50];
+    }
 
 }
 
@@ -485,5 +491,61 @@ static BOOL isGroup = YES;
     }
 }
 
+-(UIImage *) ownUserImage
+{
+    UIImage *image = [self.smallImageCache objectForKey:[SCUserProfile currentUser].userid];
+    if (image)
+        return image;
+    
+    image = [[C2CallPhone currentPhone] userimageForUserid:[SCUserProfile currentUser].userid];
+    if (image) {
+        [self.smallImageCache setObject:image forKey:[SCUserProfile currentUser].userid];
+        return image;
+    }
+    
+    image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+    [self.smallImageCache setObject:image forKey:[SCUserProfile currentUser].userid];
+    return image;
+}
+
+
+-(UIImage *) imageForElement:(MOC2CallEvent *) elem
+{
+    UIImage *image = [self.smallImageCache objectForKey:elem.contact];
+    if (image)
+        return image;
+    
+    image = [[C2CallPhone currentPhone] userimageForUserid:elem.contact];
+    if (image) {
+        [self.smallImageCache setObject:image forKey:elem.contact];
+        return image;
+    }
+    
+    if ([self isPhoneNumber:elem.contact]) {
+        image = [UIImage imageNamed:@"btn_ico_adressbook_contact.png"];
+        [self.smallImageCache setObject:image forKey:elem.contact];
+        return image;
+    }
+    
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:elem.contact];
+    if ([user.userType intValue] == 2) {
+        image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
+        [self.smallImageCache setObject:image forKey:elem.contact];
+        return image;
+        
+    }
+    
+    image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+    [self.smallImageCache setObject:image forKey:elem.contact];
+    return image;
+}
+
+-(BOOL) isPhoneNumber:(NSString *) uid
+{
+    if ([uid hasPrefix:@"+"] && [uid rangeOfString:@"@"].location == NSNotFound) {
+        return YES;
+    }
+    return NO;
+}
 
 @end

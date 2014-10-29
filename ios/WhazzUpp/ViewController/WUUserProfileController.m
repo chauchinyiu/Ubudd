@@ -90,6 +90,7 @@
     [pickerView sizeToFit];
     pickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     pickerView.datePickerMode = UIDatePickerModeDate;
+    pickerView.maximumDate = [NSDate date];
     
     txtDateofBirth.inputView = pickerView;
     

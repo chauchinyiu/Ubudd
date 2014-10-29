@@ -51,14 +51,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     resHandler = [ResponseHandler instance];
-
+    
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                              reuseIdentifier:@"WUAddressBookCell"];
+                                                   reuseIdentifier:@"WUAddressBookCell"];
     favoritesCellHeight = cell.frame.size.height;
     self.managedObjectContext = [DBHandler context];
-  
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -88,7 +88,7 @@
     
     ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     [ubuddUsers performFetch:nil];
-
+    
     //count fav
     int favCnt = 0;
     for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
@@ -117,14 +117,14 @@
                       CFRangeMake(0, CFArrayGetCount(peopleMutable)),
                       (CFComparatorFunction) ABPersonComparePeopleByName,
                       kABPersonSortByFirstName);
-
+    
     
     
     addressListSection = [[NSMutableArray alloc] init];
     for (CFIndex loop = 0; loop < CFArrayGetCount(peopleMutable); loop++){
         BOOL hasUbudd = false;
         ABRecordRef record = CFArrayGetValueAtIndex(peopleMutable, loop); // get address book record
-
+        
         ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
         // If the contact has multiple phone numbers, iterate on each of them
         for (int i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
@@ -134,7 +134,7 @@
             NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
             phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
             phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
-         
+            
             
             for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
                 MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
@@ -151,7 +151,7 @@
         }
     }
     [self.tableView reloadData];
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -206,11 +206,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
-
+    
     if (indexPath.section == 0) {
-
+        
         MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
-
+        
         if(user.userType.intValue == 2){
             [favocell setHidden:YES];
         }
@@ -231,7 +231,7 @@
             favocell.userBtn.tag = indexPath.row;
             
             UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
-                
+            
             if (image) {
                 favocell.userImg.image = image;
                 favocell.userImg.layer.cornerRadius = 15.0;
@@ -264,7 +264,7 @@
         favocell.nameLabel.text = fullName;
         
         ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
-
+        
         NSString *phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
         
         // Remove all formatting symbols that might be in both phone number being compared
@@ -277,13 +277,13 @@
         [favocell.addButton setHidden:YES];
         [favocell.userBtn setHidden:YES];
     }
- 
- 
+    
+    
     return favocell;
 }
 
 -(IBAction)addToFriend:(id)sender{
-     MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
+    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
     int favCnt = [[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
     favCnt++;
     [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
@@ -305,17 +305,32 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.selected = NO;
-    
-    if ([user.userType intValue] == 2) {
-        [WUBoardController setIsGroup:YES];
-    } else {
-        [WUBoardController setIsGroup:NO];
+    if (indexPath.section == 0)
+    {
+        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.selected = NO;
+        
+        if ([user.userType intValue] == 2) {
+            [WUBoardController setIsGroup:YES];
+        } else {
+            [WUBoardController setIsGroup:NO];
+        }
+        
+        [self showChatForUserid:user.userid];
     }
-    
-    [self showChatForUserid:user.userid];
+    else
+    {
+        // TODO : add the contact page
+        ABRecordRef record;
+        if (inSearch) {
+            record = (__bridge ABRecordRef)([addressSearch objectAtIndex:indexPath.row]);
+        }
+        else{
+            record = (__bridge ABRecordRef)([addressListSection objectAtIndex:indexPath.row]);
+        }
+    }
+        
 }
 
 -(IBAction)showFriendInfo:(id)sender{
@@ -329,53 +344,53 @@
 
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark SearchDisplayController Delegate
 
@@ -452,7 +467,7 @@
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
     inSearch = NO;
-
+    
     [self removeTextFilter];
     [self refetchResults];
     

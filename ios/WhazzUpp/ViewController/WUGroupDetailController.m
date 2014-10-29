@@ -123,14 +123,17 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (isOwner) {
-            return editCellHeight;
+            return 333;
+            //return editCellHeight;
         }
         else{
-            return readOnlyCellHeight;
+            return 345;
+            //return readOnlyCellHeight;
         }
     }
     else{
-        return memberCellHeight;
+        return 44;
+        //return memberCellHeight;
     }
 }
 

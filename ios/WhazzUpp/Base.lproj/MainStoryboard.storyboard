@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -954,7 +954,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WUInterestViewController" extendedLayoutIncludesOpaqueBars="YES" id="Jaz-Pe-n8k" customClass="WUInterestViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qnO-4P-R1n">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1067,28 +1067,7 @@
                                                 <action selector="btnPhotoTapped:" destination="Ydp-b9-UdG" eventType="touchUpInside" id="CYj-dB-mj5"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="aGU-K9-7O8">
-                                            <rect key="frame" x="20" y="168" width="280" height="28"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="deW-gU-TLd">
-                                            <rect key="frame" x="104" y="34" width="190" height="22"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="BV9-se-Br8">
-                                            <rect key="frame" x="20" y="211" width="280" height="28"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="jo2-0q-0Hl">
-                                            <rect key="frame" x="19" y="98" width="280" height="26"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="BPu-fE-TRT">
-                                            <rect key="frame" x="20" y="130" width="280" height="29"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="Rgu-WJ-Pec">
-                                            <rect key="frame" x="19" y="254" width="280" height="28"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="ziR-Yu-pNu">
-                                            <rect key="frame" x="19" y="295" width="280" height="28"/>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="t7f-me-7hO">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="t7f-me-7hO">
                                             <rect key="frame" x="282" y="131" width="12" height="24"/>
                                         </imageView>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Topic Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="59Q-Ql-IBL">
@@ -1116,7 +1095,7 @@
                                                 <action selector="editEnded" destination="Ydp-b9-UdG" eventType="editingDidEnd" id="1ob-ux-cDk"/>
                                             </connections>
                                         </textField>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="9LK-hQ-9qy">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="9LK-hQ-9qy">
                                             <rect key="frame" x="282" y="207" width="12" height="24"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYB-pJ-7ea">
@@ -1164,6 +1143,33 @@
                                                 <segue destination="X3Q-mh-miM" kind="push" identifier="EditLocation" id="CpG-ap-BDD"/>
                                             </connections>
                                         </button>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z1s-57-Fvm">
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3es-1S-OpP">
+                                            <rect key="frame" x="20" y="123" width="279" height="1"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltz-e3-YRi">
+                                            <rect key="frame" x="20" y="157.5" width="279" height="1"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWY-Mb-eGb">
+                                            <rect key="frame" x="20" y="194.5" width="279" height="1"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HnX-5T-Ht0">
+                                            <rect key="frame" x="20" y="237.5" width="279" height="1"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7vu-0T-VmU">
+                                            <rect key="frame" x="20" y="281" width="279" height="1"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8OT-DY-7mW">
+                                            <rect key="frame" x="20" y="322" width="279" height="1"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -2043,15 +2049,16 @@
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e3j-Lo-ear">
                                                             <rect key="frame" x="132" y="0.0" width="178" height="104"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="Jv8-gH-1kc">
-                                                                    <rect key="frame" x="26" y="0.0" width="144" height="26"/>
-                                                                </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="4II-Mf-jHA">
-                                                                    <rect key="frame" x="26" y="34" width="144" height="26"/>
-                                                                </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="i7l-pf-Jit">
-                                                                    <rect key="frame" x="26" y="68" width="144" height="26"/>
-                                                                </imageView>
+                                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="98y-Yb-fVV" userLabel="line">
+                                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qFS-b3-pMv" userLabel="line">
+                                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <accessibility key="accessibilityConfiguration" label="line"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZ0-LN-Vaa" userLabel="line">
+                                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </view>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Display name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3sr-8y-vUF" customClass="SCTextField">
                                                                     <rect key="frame" x="26" y="0.0" width="144" height="26"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -2096,15 +2103,6 @@
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZaJ-4c-M7a">
                                                             <rect key="frame" x="20" y="107" width="285" height="250"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="E8c-ak-81P">
-                                                                    <rect key="frame" x="0.0" y="29" width="285" height="26"/>
-                                                                </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="LeM-Xq-HD8">
-                                                                    <rect key="frame" x="0.0" y="99" width="285" height="21"/>
-                                                                </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signupscreen_firstname_tab" translatesAutoresizingMaskIntoConstraints="NO" id="9Aa-67-Bet">
-                                                                    <rect key="frame" x="0.0" y="167" width="285" height="21"/>
-                                                                </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enU-Hl-ko6">
                                                                     <rect key="frame" x="0.0" y="0.0" width="58" height="21"/>
                                                                     <accessibility key="accessibilityConfiguration" label=""/>
@@ -2112,10 +2110,10 @@
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Q0r-wF-y0y">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Q0r-wF-y0y">
                                                                     <rect key="frame" x="270" y="32" width="9" height="16"/>
                                                                 </imageView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="nGa-cY-CP0">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="nGa-cY-CP0">
                                                                     <rect key="frame" x="270" y="162" width="9" height="16"/>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sub-interests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b4-6W-ACb">
@@ -2166,6 +2164,18 @@
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9PO-lH-dmW" userLabel="line">
+                                                                    <rect key="frame" x="0.0" y="54" width="285" height="1"/>
+                                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7u-j1-rYu" userLabel="line">
+                                                                    <rect key="frame" x="0.0" y="119" width="285" height="1"/>
+                                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PKz-f0-fHq" userLabel="line">
+                                                                    <rect key="frame" x="0.0" y="187" width="285" height="1"/>
+                                                                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </view>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </view>
@@ -2617,7 +2627,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5LX-Jz-YLN">
+                            <progressView opaque="NO" contentMode="scaleToFill" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5LX-Jz-YLN">
                                 <rect key="frame" x="86" y="333" width="149" height="2"/>
                             </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cwq-ck-43d" userLabel="btnPlay">
@@ -5009,7 +5019,7 @@ Remove search filter?</string>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="vor 23d 6h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxt-CE-QAF">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vor 23d 6h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxt-CE-QAF">
                                             <rect key="frame" x="243" y="278" width="57" height="15"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -7829,14 +7839,14 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="VQ9-8Q-vDt"/>
-        <segue reference="oaM-SS-1lY"/>
-        <segue reference="l4c-f0-WTn"/>
-        <segue reference="XEP-pC-k3p"/>
         <segue reference="p90-nP-FHg"/>
-        <segue reference="JX8-i6-PVw"/>
+        <segue reference="l4c-f0-WTn"/>
+        <segue reference="oaM-SS-1lY"/>
+        <segue reference="VQ9-8Q-vDt"/>
         <segue reference="tQs-8i-bTJ"/>
-        <segue reference="wV6-VW-yCP"/>
+        <segue reference="JX8-i6-PVw"/>
+        <segue reference="gGN-0m-1iN"/>
+        <segue reference="XEP-pC-k3p"/>
         <segue reference="CpG-ap-BDD"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

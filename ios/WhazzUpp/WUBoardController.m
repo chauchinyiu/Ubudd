@@ -137,6 +137,9 @@ static BOOL isGroup = YES;
         LocationCellOutStream *c = (LocationCellOutStream*)cell;
         [c.headline setText:@"me"];
         [c.headline setTextColor:[UIColor blackColor]];
+        [c.locationAddress setTextColor:[UIColor blackColor]];
+        [c.contactName setTextColor:[UIColor blackColor]];
+        [c.info setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
     }
     else if ([cell isKindOfClass:[AudioCellOutStream class]]) {
@@ -222,6 +225,9 @@ static BOOL isGroup = YES;
         AudioCellInStream *c = (AudioCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
+        [c.locationAddress setTextColor:[UIColor blackColor]];
+        [c.contactName setTextColor:[UIColor blackColor]];
+        [c.info setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text

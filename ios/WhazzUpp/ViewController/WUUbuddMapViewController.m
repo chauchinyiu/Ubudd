@@ -46,6 +46,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(hidekeybord)];
@@ -297,6 +298,13 @@
 -(void)hidekeybord
 {
     [self.view endEditing:YES];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    if ([searchBar.text isEqualToString:@""]) {
+        inSearch = false;
+        [self readUserGroup];
+    }
 }
 
 @end

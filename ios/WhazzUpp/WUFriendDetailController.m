@@ -28,6 +28,8 @@
     int interestID;
     NSDate* dob;
     NSString* subInterest;
+    NSString* countryCode;
+    NSString* phoneNo;
     WUUserInfoCell* profileCell;
 }
 @end
@@ -64,10 +66,21 @@
         subInterest = [res.data objectForKey:@"interestDescription"];
         dob = [res.data objectForKey:@"dob"];
         genderFemale = [(NSString*)[res.data objectForKey:@"gender"] isEqualToString:@"F"];
+        countryCode = [res.data objectForKey:@"countryCode"];
+        
+        NSMutableString *stringts = [NSMutableString stringWithString:[res.data objectForKey:@"phoneNo"]];
+        [stringts insertString:@"-" atIndex:4];
+        if (stringts.length > 9) {
+            [stringts insertString:@"-" atIndex:9];
+        }
+        phoneNo = [NSString stringWithString:stringts];
+
         if (profileCell == nil) {
             [self.tableView reloadData];
         }
         else{
+            [profileCell.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", countryCode, phoneNo]];
+            
             [profileCell.lblGender setText:(genderFemale ? @"Female" : @"Male")];
             [profileCell.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
                                                                      dateStyle:NSDateFormatterMediumStyle
@@ -80,11 +93,22 @@
 }
 
 
+-(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0;
+}
+
+-(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+     return nil;
+}
+
+
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        return 300;
+        return 330;
     }
     else{
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -107,7 +131,7 @@
                                                                  timeStyle:NSDateFormatterNoStyle]];
         [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
         [c.lblSubinterest setText:subInterest];
-        [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@", [self currentUser].ownNumber]];
+        [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", countryCode, phoneNo]];
         profileCell = c;
     }
 }
@@ -127,7 +151,7 @@
                                                                  timeStyle:NSDateFormatterNoStyle]];
         [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
         [c.lblSubinterest setText:subInterest];
-        [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@", [self currentUser].ownNumber]];
+        [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", countryCode, phoneNo]];
         profileCell = c;
         return c;
     }

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 C2Call GmbH. All rights reserved.
 //
 
+#import <SocialCommunication/UIViewController+SCCustomViewController.h>
 #import "WUAddGroupController.h"
 #import "WUChatController.h"
 #import "SocialCommunication/SCGroupNameCell.h"
@@ -193,6 +194,11 @@
         [cell.groupName setHidden:YES];
         return cell;
     }
+    else if (indexPath.section == 0 && indexPath.row == 1) {
+        SCGroupAddMembersCell* c = (SCGroupAddMembersCell*)[super tableView:tableView cellForRowAtIndexPath:indexPath];
+        [c.numMembers setText:[NSString stringWithFormat:@"(%d of 50)", self.members.count]];
+        return c;
+    }
     else{
         [self checkFilled];
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -246,5 +252,11 @@
     return YES;
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+    }
+    else{
+        [self showFriendDetailForUserid:[self.members objectAtIndex:indexPath.row]];
+    }
+}
 @end

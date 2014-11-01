@@ -1119,6 +1119,8 @@
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
 		CEA4FDD519EE6F4700A824B3 /* WUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */; };
 		CEBA823119ECD55500B3F109 /* WUJoinRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA823019ECD55500B3F109 /* WUJoinRequestController.m */; };
+		CECA9E481A035501007B9FE7 /* btn_ico_avatar_group2.png in Resources */ = {isa = PBXBuildFile; fileRef = CECA9E471A035501007B9FE7 /* btn_ico_avatar_group2.png */; };
+		CECA9E4A1A03550B007B9FE7 /* btn_ico_avatar_group2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CECA9E491A03550B007B9FE7 /* btn_ico_avatar_group2@2x.png */; };
 		CED5F1C019B555AA00DF8772 /* VerifyC2CallID.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */; };
 		CED5F1C319B5560900DF8772 /* VerifyC2CallIDDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C219B5560900DF8772 /* VerifyC2CallIDDTO.m */; };
 		CED5F1C619B558B300DF8772 /* ResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F1C519B558B300DF8772 /* ResponseHandler.m */; };
@@ -2306,6 +2308,8 @@
 		CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUMapViewController.m; sourceTree = "<group>"; };
 		CEBA822F19ECD55500B3F109 /* WUJoinRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUJoinRequestController.h; sourceTree = "<group>"; };
 		CEBA823019ECD55500B3F109 /* WUJoinRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUJoinRequestController.m; sourceTree = "<group>"; };
+		CECA9E471A035501007B9FE7 /* btn_ico_avatar_group2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_ico_avatar_group2.png; sourceTree = "<group>"; };
+		CECA9E491A03550B007B9FE7 /* btn_ico_avatar_group2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_ico_avatar_group2@2x.png"; sourceTree = "<group>"; };
 		CED5F1BE19B555AA00DF8772 /* VerifyC2CallID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyC2CallID.h; sourceTree = "<group>"; };
 		CED5F1BF19B555AA00DF8772 /* VerifyC2CallID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyC2CallID.m; sourceTree = "<group>"; };
 		CED5F1C119B5560900DF8772 /* VerifyC2CallIDDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyC2CallIDDTO.h; sourceTree = "<group>"; };
@@ -3542,6 +3546,8 @@
 				CEEFF0F219B1679200B59179 /* Info_icon@2x.png */,
 				CEEFF0F019B1678A00B59179 /* Info_icon.png */,
 				17FC6644194DC89D0080A2D5 /* country_code.json */,
+				CECA9E471A035501007B9FE7 /* btn_ico_avatar_group2.png */,
+				CECA9E491A03550B007B9FE7 /* btn_ico_avatar_group2@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -4352,6 +4358,7 @@
 				1730627019277F6B0018EE25 /* ico_record_again.png in Resources */,
 				1730619819277F6B0018EE25 /* flag56.png in Resources */,
 				1730609719277F6B0018EE25 /* btn_dial_n.png in Resources */,
+				CECA9E481A035501007B9FE7 /* btn_ico_avatar_group2.png in Resources */,
 				173062C319277F6B0018EE25 /* icon_call.png in Resources */,
 				173060BB19277F6B0018EE25 /* btn_ico_video.png in Resources */,
 				173060B719277F6B0018EE25 /* btn_ico_offline.png in Resources */,
@@ -4503,6 +4510,7 @@
 				173061DF19277F6B0018EE25 /* flag976.png in Resources */,
 				1730616419277F6B0018EE25 /* flag354.png in Resources */,
 				1730617819277F6B0018EE25 /* flag386.png in Resources */,
+				CECA9E4A1A03550B007B9FE7 /* btn_ico_avatar_group2@2x.png in Resources */,
 				1730605B19277F6B0018EE25 /* bg_offerwall_blue_video.png in Resources */,
 				173062B719277F6B0018EE25 /* ico_z9@2x.png in Resources */,
 				1730638D19277F6B0018EE25 /* np-58.xml in Resources */,

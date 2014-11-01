@@ -39,8 +39,15 @@
     self.isCameraSupported = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
     
     self.userDefaults = [NSUserDefaults standardUserDefaults];
+
+    NSMutableString *stringts = [NSMutableString stringWithString:[self.userDefaults objectForKey:@"phoneNo"]];
+    [stringts insertString:@"-" atIndex:4];
+    if (stringts.length > 9) {
+        [stringts insertString:@"-" atIndex:9];
+    }
     
-    [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"]]];
+    
+    [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", [self.userDefaults objectForKey:@"countryCode"], stringts]];
     
     btnProfileImage.imageView.layer.cornerRadius = 42.0;
     btnProfileImage.imageView.layer.masksToBounds = YES;
@@ -81,6 +88,8 @@
         else{
             dob = nil;
         }
+        
+        
     }
     else
         self.navigationItem.hidesBackButton = YES;

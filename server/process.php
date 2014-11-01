@@ -163,7 +163,7 @@ class MyAPI extends API {
         if ($args['c2CallID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
-		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, dob, gender, userName from register where c2CallID = ?");
+		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, dob, gender, userName, countryCode, phoneNo from register where c2CallID = ?");
 		$stmt->bind_param('s', $c2CallID);
 		$c2CallID = $args['c2CallID'];
 		$stmt->execute();
@@ -178,6 +178,8 @@ class MyAPI extends API {
             'dob' => $verifyRow['dob'],
             'gender' => $verifyRow['gender'],
             'userName' => $verifyRow['userName'],
+            'countryCode' => $verifyRow['countryCode'],
+            'phoneNo' => $verifyRow['phoneNo'],
             'resultCode' => 1);
         } else {
             return array('error' => 1, 'message' => 'Read failed', 'resultCode' => 0);
@@ -368,11 +370,14 @@ class MyAPI extends API {
 				."OR interestBase.interestName like ? "
 				."OR interestCat.displayText like ? "
 				."OR chatGroup.locationName like ?) "
-				."AND (locationLag between ? AND ?) "
-				."AND (locationLong between ? AND ? "
-				."OR locationLong between ? AND ? "
-				."OR locationLong between ? AND ?) ";
+				."AND (chatGroup.locationLag between ? AND ?) "
+				."AND (chatGroup.locationLong between ? AND ? "
+				."OR chatGroup.locationLong between ? AND ? "
+				."OR chatGroup.locationLong between ? AND ?) ";
+
+
 		$stmt = $this->db->conn2->prepare($sqlStr);
+
 		$stmt->bind_param('sssssssssssssss', $userID, $str1, $str2, $str3, $str4, $str5, $str6, $latFrom, $latTo, $longFrom1, $longTo1, $longFrom2, $longTo2, $longFrom3, $longTo3);      
 		$userID = $args['userID'];
 		$str1 = "%" . $args['searchString'] . "%";
@@ -391,6 +396,7 @@ class MyAPI extends API {
 		$longTo3 = $args['longTo'] - 360;
 
 		$stmt->execute();
+
 
 		$res = $stmt->get_result();
 		$rowCnt = 0;

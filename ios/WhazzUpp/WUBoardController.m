@@ -94,10 +94,10 @@ static BOOL isGroup = YES;
         return [super tableView:tableView heightForRowAtIndexPath:indexPath] - (isGroup? 0 : 12);
     }
     else if ([cell isKindOfClass:[ImageCellInStream class]]) {
-        return 155;
+        return 200;
     }
     else if ([cell isKindOfClass:[ImageCellOutStream class]]) {
-        return 155;
+        return 200;
     }
     else{
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];

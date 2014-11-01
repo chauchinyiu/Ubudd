@@ -21,7 +21,7 @@
 
 @implementation WUAddressBookCell
 
-@synthesize nameLabel, statusLabel, addButton, userBtn;
+@synthesize nameLabel, statusLabel, addButton, userBtn, addButton2;
 
 @end
 
@@ -222,11 +222,14 @@
             if([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]){
                 favocell.statusLabel.text = @"Added to favorites";
                 [favocell.addButton setHidden:YES];
+                [favocell.addButton2 setHidden:YES];
             }
             else{
                 favocell.statusLabel.text = @"Using Ubudd";
                 favocell.addButton.tag = indexPath.row;
+                favocell.addButton2.tag = indexPath.row;
                 [favocell.addButton setHidden:NO];
+                [favocell.addButton2 setHidden:NO];
             }
             favocell.userBtn.tag = indexPath.row;
             
@@ -275,6 +278,7 @@
         favocell.statusLabel.text = @"";
         [favocell.userImg setHidden:YES];
         [favocell.addButton setHidden:YES];
+        [favocell.addButton2 setHidden:YES];
         [favocell.userBtn setHidden:YES];
     }
     
@@ -299,6 +303,7 @@
     }
     favocell.statusLabel.text = @"Added to favorites";
     [favocell.addButton setHidden:YES];
+    [favocell.addButton2 setHidden:YES];
 }
 
 

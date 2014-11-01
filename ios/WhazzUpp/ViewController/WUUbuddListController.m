@@ -75,7 +75,6 @@
     [ud setBool:NO forKey:@"hasLocSearch"];
     [ud synchronize];
     
-    
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     favoritesCellHeight = cell.frame.size.height;
     
@@ -425,6 +424,12 @@
     fetchResult = [NSDictionary dictionaryWithDictionary:result];
 }
 
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    if ([searchBar.text isEqualToString:@""]) {
+        inSearch = false;
+        [self readUserGroup];
+    }
+}
 
 @end
 

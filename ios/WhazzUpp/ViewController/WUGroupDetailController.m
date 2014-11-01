@@ -60,7 +60,9 @@
     [self.view addGestureRecognizer:tap];
     
     self.group = [[SCGroup alloc] initWithGroupid:self.groupid];
-    groupImg = self.group.groupImage;
+    if (self.group.groupImage) {
+        groupImg = self.group.groupImage;
+    }
     isOwner = [self.group.groupOwner isEqualToString:[SCUserProfile currentUser].userid];
     isMember = NO;
     if (isOwner) {

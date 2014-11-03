@@ -256,10 +256,10 @@
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (hasRequest && indexPath.row == 0) {
-        return YES;
+        return NO;
     }
     else{
-        return NO;
+        return YES;
     }
 }
 

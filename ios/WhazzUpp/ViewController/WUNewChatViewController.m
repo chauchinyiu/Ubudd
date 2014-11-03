@@ -121,7 +121,7 @@
                 favocell.userImg.layer.masksToBounds = YES;
             }
             else{
-                favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
+                favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
             }
             
         }

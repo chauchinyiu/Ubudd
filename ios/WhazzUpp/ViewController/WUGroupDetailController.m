@@ -125,11 +125,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (isOwner) {
-            return 333;
+            return 338;
             //return editCellHeight;
         }
         else{
-            return 345;
+            return 338;
             //return readOnlyCellHeight;
         }
     }
@@ -150,8 +150,11 @@
             if (groupInfo) {
                 cell.btnGroupImageEdit.imageView.layer.cornerRadius = 40.0;
                 cell.btnGroupImageEdit.imageView.layer.masksToBounds = YES;
+                if(groupImg){
+                    [cell.btnGroupImageEdit setImage:groupImg forState:UIControlStateNormal];
+                    [cell.btnGroupImageEdit setBackgroundImage:nil forState:UIControlStateNormal];
+                }
 
-                [cell.btnGroupImageEdit setImage:groupImg forState:UIControlStateNormal];
                 [cell.txtTopicEdit setText:[groupInfo objectForKey:@"topic"]];
                 [cell.txtTopic2Edit setText:[groupInfo objectForKey:@"topicDescription"]];
 
@@ -182,7 +185,9 @@
                 cell.groupImg.layer.cornerRadius = 40.0;
                 cell.groupImg.layer.masksToBounds = YES;
                 
-                [cell.groupImg setImage:groupImg];
+                if (groupImg) {
+                    [cell.groupImg setImage:groupImg];
+                }
                 [cell.lblTopic setText:[groupInfo objectForKey:@"topic"]];
                 [cell.lblTopicDesc setText:[groupInfo objectForKey:@"topicDescription"]];
                 
@@ -211,22 +216,27 @@
                     case 0:
                         [cell.lblJoinStatus setText:@"Not a member"];
                         [cell.btnJoin setHidden:NO];
+                        [cell.btnMedia setHidden:YES];
                         break;
                     case 1:
                         [cell.lblJoinStatus setText:@"Joined"];
                         [cell.btnJoin setHidden:YES];
+                        [cell.btnMedia setHidden:YES];
                         break;
                     case 2:
                         [cell.lblJoinStatus setText:@"Group admin"];
                         [cell.btnJoin setHidden:YES];
+                        [cell.btnMedia setHidden:YES];
                         break;
                     case 3:
                         [cell.lblJoinStatus setText:@"Waiting for reply"];
                         [cell.btnJoin setHidden:YES];
+                        [cell.btnMedia setHidden:YES];
                         break;
                     case 4:
                         [cell.lblJoinStatus setText:@"Request rejected"];
                         [cell.btnJoin setHidden:YES];
+                        [cell.btnMedia setHidden:YES];
                         break;
                         
                     default:

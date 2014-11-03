@@ -1115,6 +1115,7 @@
 		CE871B4F19C58BFF006B05B6 /* AddChatGroupDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE871B4E19C58BFF006B05B6 /* AddChatGroupDTO.m */; };
 		CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE885CD219CBE1A800F8004C /* WULocationSearchController.m */; };
 		CE893C1719E3A18A007AD220 /* WUSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE893C1619E3A18A007AD220 /* WUSettingViewController.m */; };
+		CE95F1481A077AD30012493A /* WUMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE95F1471A077AD30012493A /* WUMediaViewController.m */; };
 		CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE978C1619E13C0700A433A8 /* WUBoardViewController.m */; };
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
 		CEA4FDD519EE6F4700A824B3 /* WUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */; };
@@ -2295,6 +2296,8 @@
 		CE885CD219CBE1A800F8004C /* WULocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WULocationSearchController.m; sourceTree = "<group>"; };
 		CE893C1519E3A18A007AD220 /* WUSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUSettingViewController.h; sourceTree = "<group>"; };
 		CE893C1619E3A18A007AD220 /* WUSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUSettingViewController.m; sourceTree = "<group>"; };
+		CE95F1461A077AD30012493A /* WUMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUMediaViewController.h; sourceTree = "<group>"; };
+		CE95F1471A077AD30012493A /* WUMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUMediaViewController.m; sourceTree = "<group>"; };
 		CE978C1519E13C0700A433A8 /* WUBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUBoardViewController.h; sourceTree = "<group>"; };
 		CE978C1619E13C0700A433A8 /* WUBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUBoardViewController.m; sourceTree = "<group>"; };
 		CE9CFF7A19C29E1E004DC699 /* WUInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUInterestViewController.h; sourceTree = "<group>"; };
@@ -3518,6 +3521,8 @@
 				CE7E964619F8F6F1001C229F /* WUUbuddMapViewController.m */,
 				CE2AC7F319FD36BB00A3D093 /* WUPhotoViewerController.h */,
 				CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */,
+				CE95F1461A077AD30012493A /* WUMediaViewController.h */,
+				CE95F1471A077AD30012493A /* WUMediaViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4812,6 +4817,7 @@
 				972F453E175CB75F0006DEF6 /* WUContactDetailController.m in Sources */,
 				CED5F1C919B5760700DF8772 /* WUNewChatViewController.m in Sources */,
 				CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */,
+				CE95F1481A077AD30012493A /* WUMediaViewController.m in Sources */,
 				CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */,
 				17A1D68F1927ED3700B28792 /* WULoginController.m in Sources */,
 				CE2AC7F519FD36BB00A3D093 /* WUPhotoViewerController.m in Sources */,

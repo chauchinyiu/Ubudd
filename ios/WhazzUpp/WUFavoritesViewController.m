@@ -105,6 +105,7 @@
             favocell.statusLabel.text = user.userStatus? user.userStatus : @"Hi there, I'm using Ubudd?";
             
             [favocell.userBtn setTag:indexPath.row];
+            [favocell.userBtn2 setTag:indexPath.row];
             UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
             if (image) {
                 favocell.userImg.image = image;

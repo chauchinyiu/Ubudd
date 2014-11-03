@@ -582,6 +582,7 @@
                                     <outlet property="onlineLabel" destination="DlZ-hx-W9R" id="Xye-iq-zno"/>
                                     <outlet property="statusLabel" destination="iKK-wN-8R3" id="0Kj-h5-wE9"/>
                                     <outlet property="userBtn" destination="N62-ig-ToQ" id="ops-Ea-gWd"/>
+                                    <outlet property="userBtn2" destination="Ii4-Fh-KJB" id="Rg1-W8-gvO"/>
                                     <outlet property="userImg" destination="dZR-wk-wg9" id="UcD-FW-PT4"/>
                                 </connections>
                             </tableViewCell>
@@ -964,7 +965,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WUInterestViewController" extendedLayoutIncludesOpaqueBars="YES" id="Jaz-Pe-n8k" customClass="WUInterestViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qnO-4P-R1n">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1608,6 +1609,7 @@
                                     <outlet property="nameLabel" destination="Tbb-6I-evR" id="hVm-KS-Rk9"/>
                                     <outlet property="statusLabel" destination="Q1Q-I6-mwb" id="yKp-YM-cls"/>
                                     <outlet property="userBtn" destination="6NH-ms-ane" id="LIf-c2-icc"/>
+                                    <outlet property="userBtn2" destination="HS5-17-1kp" id="Yg9-JR-1i1"/>
                                     <outlet property="userImg" destination="QNK-9g-EhY" id="zD6-gx-2Ut"/>
                                 </connections>
                             </tableViewCell>
@@ -7945,15 +7947,15 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="sk8-fE-Q4T"/>
         <segue reference="VQ9-8Q-vDt"/>
-        <segue reference="gEM-cP-vpS"/>
+        <segue reference="DAE-Aq-bKb"/>
+        <segue reference="tQs-8i-bTJ"/>
         <segue reference="XEP-pC-k3p"/>
         <segue reference="p90-nP-FHg"/>
-        <segue reference="Hgt-RX-z8j"/>
-        <segue reference="mZ1-Vt-wje"/>
-        <segue reference="sk8-fE-Q4T"/>
-        <segue reference="tQs-8i-bTJ"/>
         <segue reference="JX8-i6-PVw"/>
+        <segue reference="wV6-VW-yCP"/>
+        <segue reference="CpG-ap-BDD"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

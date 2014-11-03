@@ -232,6 +232,8 @@
                 [favocell.addButton2 setHidden:NO];
             }
             favocell.userBtn.tag = indexPath.row;
+            favocell.userBtn2.tag = indexPath.row;
+            
             
             UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
             

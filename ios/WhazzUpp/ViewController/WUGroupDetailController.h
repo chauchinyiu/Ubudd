@@ -26,6 +26,8 @@
     @property(nonatomic, weak) IBOutlet UIImageView *groupImg;
     @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic, *lblHost, *lblMemberCnt, *lblJoinStatus;
     @property(nonatomic, weak) IBOutlet UIButton *btnJoin;
+    @property(nonatomic, weak) IBOutlet UIButton *btnMedia;
+
 @end
 
 @interface WUGroupDetailController : SCGroupDetailController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WULocationSelectControllerDelegate>

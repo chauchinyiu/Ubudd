@@ -222,6 +222,8 @@ static BOOL isGroup = YES;
         LocationCellInStream *c = (LocationCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
+        [c.locationAddress setTextColor:[UIColor blackColor]];
+        [c.locationTitle  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text

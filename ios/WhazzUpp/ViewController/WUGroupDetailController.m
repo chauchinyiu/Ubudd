@@ -11,6 +11,7 @@
 #import "DataResponse.h"
 #import "WebserviceHandler.h"
 #import "ResponseHandler.h"
+#import "WUMediaController.h"
 #define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kGroupImage_UseCamera @"Use Camera"
 
@@ -125,11 +126,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (isOwner) {
-            return 338;
+            return 368;
             //return editCellHeight;
         }
         else{
-            return 338;
+            return 348;
             //return readOnlyCellHeight;
         }
     }
@@ -221,12 +222,12 @@
                     case 1:
                         [cell.lblJoinStatus setText:@"Joined"];
                         [cell.btnJoin setHidden:YES];
-                        [cell.btnMedia setHidden:YES];
+                        [cell.btnMedia setHidden:NO];
                         break;
                     case 2:
                         [cell.lblJoinStatus setText:@"Group admin"];
                         [cell.btnJoin setHidden:YES];
-                        [cell.btnMedia setHidden:YES];
+                        [cell.btnMedia setHidden:NO];
                         break;
                     case 3:
                         [cell.lblJoinStatus setText:@"Waiting for reply"];
@@ -519,6 +520,14 @@
     else if ([[segue identifier] isEqualToString:@"EditLocation"]) {
         WULocationSearchController *cvc = (WULocationSearchController *)[segue destinationViewController];
         cvc.delegate = self;
+    }
+    else if ([[segue identifier] isEqualToString:@"ViewMedia"]) {
+        WUMediaController *mv = (WUMediaController *)[segue destinationViewController];
+        mv.targetUserid = [self.group groupid];
+    }
+    else if ([[segue identifier] isEqualToString:@"ViewMedia2"]) {
+        WUMediaController *mv = (WUMediaController *)[segue destinationViewController];
+        mv.targetUserid = [self.group groupid];
     }
     else{
         [super prepareForSegue:segue sender:sender];

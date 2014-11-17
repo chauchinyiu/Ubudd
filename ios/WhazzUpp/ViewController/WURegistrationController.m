@@ -148,7 +148,7 @@
         self.email.textContent.text = user.email;
         self.password1.textContent.text = user.password;
         self.password2.textContent.text = user.password;
-        
+
         [self registerUser:self];
     }
 }

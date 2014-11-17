@@ -128,13 +128,11 @@
         } else {
             predicate = [NSPredicate predicateWithFormat:@"contact == %@ AND eventType contains[cd] %@", self.targetUserid, @"message"];
         }
-        
+                
         [fetchRequest setPredicate:predicate];
         self.activeUser = predicate;
-    } else if (dontShowCallEvents) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"eventType contains[cd] %@", @"message"];
-        [fetchRequest setPredicate:predicate];
     }
+    
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];

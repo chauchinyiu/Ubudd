@@ -14,6 +14,7 @@
 @end
 
 @interface WUFriendDetailController : SCFriendDetailController
-    -(IBAction)phoneCall:(id)sender;
+-(IBAction)phoneCall:(id)sender;
++(void)setPhoneNo:(NSString*)p;
 
 @end

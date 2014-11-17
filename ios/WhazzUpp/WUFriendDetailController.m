@@ -17,6 +17,7 @@
 #import "DataResponse.h"
 #import "WebserviceHandler.h"
 #import "ResponseHandler.h"
+#import "WUMediaController.h"
 
 
 @implementation WUUserInfoCell
@@ -30,11 +31,15 @@
     NSString* subInterest;
     NSString* countryCode;
     NSString* phoneNo;
+    NSString* status;
     WUUserInfoCell* profileCell;
+    MOC2CallUser* curUser;
 }
 @end
 
 @implementation WUFriendDetailController
+
+static NSString* currentPhoneNo = @"";
 
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad {
@@ -43,8 +48,21 @@
     self.userInfoCell.userImage.layer.cornerRadius = 45.0;
     self.userInfoCell.userImage.layer.masksToBounds = YES;
 
-    //read from server
+    NSMutableArray* acclist = [ResponseHandler instance].friendList;
+    if ([[self.fetchedResultsController fetchedObjects] count] == 0){
+        curUser = [[MOC2CallUser alloc] init];
+        curUser.ownNumber = currentPhoneNo;
+        for (int i = 0; i < acclist.count; i++) {
+            WUAccount* a = [acclist objectAtIndex:i];
+            if ([a.phoneNo isEqualToString:currentPhoneNo]) {
+                curUser.userid = a.c2CallID;
+            }
+        }
+    }
+    
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    //read from server
+
     [dictionary setObject:self.currentUser.userid forKey:@"c2CallID"];
 
     DataRequest *dataRequest = [[DataRequest alloc] init];
@@ -54,6 +72,14 @@
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readFriendInfo:error:)];
 }
+
+-(MOC2CallUser *) currentUser{
+    if ([[self.fetchedResultsController fetchedObjects] count] == 0)
+        return curUser;
+    
+    return [[self.fetchedResultsController fetchedObjects] objectAtIndex:0];
+}
+
 
 - (void)readFriendInfo:(ResponseBase *)response error:(NSError *)error {
     DataResponse *res = (DataResponse *)response;
@@ -67,6 +93,7 @@
         dob = [res.data objectForKey:@"dob"];
         genderFemale = [(NSString*)[res.data objectForKey:@"gender"] isEqualToString:@"F"];
         countryCode = [res.data objectForKey:@"countryCode"];
+        status = [res.data objectForKey:@"status"];
         
         NSMutableString *stringts = [NSMutableString stringWithString:[res.data objectForKey:@"phoneNo"]];
         [stringts insertString:@"-" atIndex:4];
@@ -87,7 +114,7 @@
                                                                      timeStyle:NSDateFormatterNoStyle]];
             [profileCell.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
             [profileCell.lblSubinterest setText:subInterest];
-        
+            
         }
     }
 }
@@ -111,7 +138,7 @@
         return 330;
     }
     else{
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        return 100;
     }
 }
 
@@ -152,6 +179,7 @@
         [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
         [c.lblSubinterest setText:subInterest];
         [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", countryCode, phoneNo]];
+        [c.userStatus setText:status];
         profileCell = c;
         return c;
     }
@@ -171,20 +199,39 @@
             return;
         }
     }
+    [WUBoardController setIsGroup:NO];
     
     MOC2CallUser *user = [self currentUser];
+    /*
     if ([user.userType intValue] == 2) {
         [WUBoardController setIsGroup:YES];
     } else {
         [WUBoardController setIsGroup:NO];
     }
+     */
     [self showChatForUserid:user.userid];
 }
 
 -(IBAction)phoneCall:(id)sender{
+    NSString* phoneNumber;
     MOC2CallUser *user = [self currentUser];
-    NSString* phoneNumber = [@"telprompt://" stringByAppendingString:user.ownNumber];
+    phoneNumber = [@"telprompt://" stringByAppendingString:user.ownNumber];
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+}
+
++(void)setPhoneNo:(NSString*)p{
+    currentPhoneNo = p;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"ViewMedia"]) {
+        WUMediaController *mv = (WUMediaController *)[segue destinationViewController];
+        mv.targetUserid = self.currentUser.userid;
+    }
+    else{
+        [super prepareForSegue:segue sender:sender];
+    }
 }
 
 

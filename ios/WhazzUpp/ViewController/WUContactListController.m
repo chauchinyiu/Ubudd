@@ -16,6 +16,7 @@
 #import "DataRequest.h"
 #import "ResponseHandler.h"
 #import "WUBoardController.h"
+#import "WUFriendDetailController.h"
 
 #import "DBHandler.h"
 
@@ -25,6 +26,7 @@
 
 @end
 
+
 @interface WUContactListController (){
     CGFloat favoritesCellHeight;
     NSMutableArray *addressListSection;
@@ -33,6 +35,9 @@
     ResponseHandler *resHandler;
     BOOL inSearch;
     NSString* searchStr;
+    
+    NSMutableArray *ubuddSearch;
+    NSMutableArray *ubuddListSection;
 }
 @end
 
@@ -59,11 +64,6 @@
     favoritesCellHeight = cell.frame.size.height;
     self.managedObjectContext = [DBHandler context];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString*)title atIndex:(NSInteger)index{
@@ -81,14 +81,22 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self refreshList];
+    [self.tableView reloadData];
+}
+
+-(void)refreshList{
     inSearch = NO;
+    /*
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0"];
     NSFetchRequest *fetch = [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
     
     ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     [ubuddUsers performFetch:nil];
-    
+
+    ubuddPhoneList = [[NSMutableDictionary alloc] init];
+    ubuddPhoneSearchList = [[NSMutableDictionary alloc] init];
+
     //count fav
     int favCnt = 0;
     for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
@@ -103,9 +111,8 @@
             }
         }
     }
-    [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    */
+    int favCnt = 0;
     
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
@@ -117,10 +124,10 @@
                       CFRangeMake(0, CFArrayGetCount(peopleMutable)),
                       (CFComparatorFunction) ABPersonComparePeopleByName,
                       kABPersonSortByFirstName);
-    
-    
-    
+    ubuddListSection = [ResponseHandler instance].friendList;
     addressListSection = [[NSMutableArray alloc] init];
+    NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
+    
     for (CFIndex loop = 0; loop < CFArrayGetCount(peopleMutable); loop++){
         BOOL hasUbudd = false;
         ABRecordRef record = CFArrayGetValueAtIndex(peopleMutable, loop); // get address book record
@@ -135,24 +142,42 @@
             phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
             phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
             
+            for (int j = 0; j < ubuddListSection.count; j++) {
+                WUAccount* a = [ubuddListSection objectAtIndex:j];
+                if ([a.phoneNo isEqualToString:phone]) {
+                    if ([u boolForKey:a.c2CallID]) {
+                        favCnt++;
+                    }
+                    hasUbudd = true;
+                }
+            }
             
+            /*
             for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
                 MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
                 //filter verified c2callID only
                 if([resHandler c2CallIDPassed:user.userid]){
                     if ([phone isEqualToString: user.ownNumber]) {
+                        
                         hasUbudd = true;
                     }
                 }
             }
+             */
+            
+            
         }
         if (!hasUbudd) {
             [addressListSection addObject:(__bridge id)(record)];
         }
     }
-    [self.tableView reloadData];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -171,21 +196,31 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    /*
     if (section == 0 && ubuddUsers != nil) {
         return [[[[ubuddUsers sections] objectAtIndex:0] objects] count];
+    }*/
+    if(section == 0){
+        if (inSearch) {
+            return ubuddSearch.count;
+        }
+        else{
+            return ubuddListSection.count;
+        }
     }
     else{
         if (inSearch) {
-            return [addressSearch count];
+            return addressSearch.count;
         }
         else{
-            return [addressListSection count];
+            return addressListSection.count;
         }
     }
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     if (indexPath.section == 0) {
         MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
         if(user.userType.intValue == 2){
@@ -201,6 +236,9 @@
     else{
         return favoritesCellHeight;
     }
+    */
+    return favoritesCellHeight;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -208,7 +246,45 @@
     WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
     
     if (indexPath.section == 0) {
+        WUAccount* accRecord;
+        if (inSearch) {
+            accRecord = [ubuddSearch objectAtIndex:indexPath.row];
+        }
+        else{
+            accRecord = [ubuddListSection objectAtIndex:indexPath.row];
+        }
+        if ([accRecord.name isEqualToString:@""]) {
+            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:accRecord.c2CallID];
+        }
+        else{
+            favocell.nameLabel.text = accRecord.name;
+        }
+        if([[NSUserDefaults standardUserDefaults] boolForKey:accRecord.c2CallID]){
+            favocell.statusLabel.text = @"Added to favorites";
+            [favocell.addButton setHidden:YES];
+            [favocell.addButton2 setHidden:YES];
+        }
+        else{
+            favocell.statusLabel.text = @"Using Ubudd";
+            favocell.addButton.tag = indexPath.row;
+            favocell.addButton2.tag = indexPath.row;
+            [favocell.addButton setHidden:NO];
+            [favocell.addButton2 setHidden:NO];
+        }
+        favocell.userBtn.tag = indexPath.row;
+        favocell.userBtn2.tag = indexPath.row;
         
+        
+        UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:accRecord.c2CallID];
+        
+        if (image) {
+            favocell.userImg.image = image;
+            favocell.userImg.layer.cornerRadius = 15.0;
+            favocell.userImg.layer.masksToBounds = YES;
+        }
+        [favocell.userBtn setHidden:NO];
+        
+        /*
         MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
         
         if(user.userType.intValue == 2){
@@ -245,6 +321,7 @@
             [favocell.userBtn setHidden:NO];
             
         }
+         */
     }
     else{
         ABRecordRef record;
@@ -289,12 +366,19 @@
 }
 
 -(IBAction)addToFriend:(id)sender{
-    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
+    WUAccount* accRecord;
+    if (inSearch) {
+        accRecord = [ubuddSearch objectAtIndex:((UIButton*)sender).tag];
+    }
+    else{
+        accRecord = [ubuddListSection objectAtIndex:((UIButton*)sender).tag];
+    }
     int favCnt = [[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
     favCnt++;
-    [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:user.userid];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+    [ud setInteger:favCnt forKey:@"FavCount"];
+    [ud setBool:YES forKey:accRecord.c2CallID];
+    [ud synchronize];
     
     WUAddressBookCell *favocell;
     if(inSearch){
@@ -306,6 +390,31 @@
     favocell.statusLabel.text = @"Added to favorites";
     [favocell.addButton setHidden:YES];
     [favocell.addButton2 setHidden:YES];
+    [self.tableView reloadData];
+    
+
+    /*
+    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
+    
+    int favCnt = [[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
+    favCnt++;
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+    [ud setInteger:favCnt forKey:@"FavCount"];
+    [ud setBool:YES forKey:user.userid];
+    [ud synchronize];
+    
+    WUAddressBookCell *favocell;
+    if(inSearch){
+        favocell= (WUAddressBookCell *)[self.searchDisplayController.searchResultsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
+    }
+    else{
+        favocell= (WUAddressBookCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
+    }
+    favocell.statusLabel.text = @"Added to favorites";
+    [favocell.addButton setHidden:YES];
+    [favocell.addButton2 setHidden:YES];
+    [self.tableView reloadData];
+     */
 }
 
 
@@ -314,6 +423,19 @@
 {
     if (indexPath.section == 0)
     {
+        WUAccount* accRecord;
+        if (inSearch) {
+            accRecord = [ubuddSearch objectAtIndex:indexPath.row];
+        }
+        else{
+            accRecord = [ubuddListSection objectAtIndex:indexPath.row];
+        }
+        [WUBoardController setIsGroup:NO];
+        [self showChatForUserid:accRecord.c2CallID];
+    
+        /*
+        
+        
         MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         cell.selected = NO;
@@ -325,6 +447,7 @@
         }
         
         [self showChatForUserid:user.userid];
+         */
     }
     else
     {
@@ -341,12 +464,23 @@
 }
 
 -(IBAction)showFriendInfo:(id)sender{
+    WUAccount* accRecord;
+    if (inSearch) {
+        accRecord = [ubuddSearch objectAtIndex:((UIButton*)sender).tag];
+    }
+    else{
+        accRecord = [ubuddListSection objectAtIndex:((UIButton*)sender).tag];
+    }
+    [WUFriendDetailController setPhoneNo:accRecord.phoneNo];
+    [self showFriendDetailForUserid:accRecord.c2CallID];
+    /*
     MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
     if ([user.userType intValue] == 2) {
         [self showGroupDetailForGroupid:user.userid];
     } else {
         [self showFriendDetailForUserid:user.userid];
     }
+     */
 }
 
 
@@ -403,6 +537,40 @@
 
 -(void) refetchResults
 {
+    ubuddSearch = [[NSMutableArray alloc] init];
+    for (int i = 0; i < ubuddListSection.count; i++) {
+        WUAccount* accRecord = [ubuddListSection objectAtIndex:i];
+        if ([accRecord.name rangeOfString:searchStr].location == NSNotFound) {
+        }
+        else{
+            [ubuddSearch addObject:[ubuddListSection objectAtIndex:i]];
+        }
+    }
+    
+    addressSearch = [[NSMutableArray alloc] init];
+    for (int i = 0; i < addressListSection.count; i++) {
+        ABRecordRef record = (__bridge ABRecordRef)([addressListSection objectAtIndex:i]);
+        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+        NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+        NSString * fullName;
+        if (lastName == nil) {
+            fullName = firstName;
+        }
+        else if (firstName == nil) {
+            fullName = lastName;
+        }
+        else{
+            fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        }
+        if ([fullName rangeOfString:searchStr].location == NSNotFound) {
+        }
+        else{
+            [addressSearch addObject:[addressListSection objectAtIndex:i]];
+        }
+    }
+    [self.tableView reloadData];
+    
+    /*
     [ubuddUsers performFetch:nil];
     addressSearch = [[NSMutableArray alloc] init];
     for (int i = 0; i < addressListSection.count; i++) {
@@ -426,10 +594,12 @@
         }
     }
     [self.tableView reloadData];
+     */
 }
 
 -(void) setTextFilterForText:(NSString *) text
 {
+    /*
     searchStr = text;
     NSFetchRequest *fetch = [ubuddUsers fetchRequest];
     
@@ -439,12 +609,13 @@
     NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0 AND not (userid in %@) AND displayName contains[cd] %@", [NSArray arrayWithObjects:@"9bc2858f1194dc1c107", nil], text];
     
     [fetch setPredicate:textFilter];
+     */
 }
 
 -(void) removeTextFilter
 {
-    NSFetchRequest *fetch = [ubuddUsers fetchRequest];
-    [fetch setPredicate:nil];
+    //NSFetchRequest *fetch = [ubuddUsers fetchRequest];
+    //[fetch setPredicate:nil];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString

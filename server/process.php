@@ -41,8 +41,12 @@ class MyAPI extends API {
         $account_sid = 'AC5cf3e259d9f0842517d370885e914aff';
         $auth_token = '6573f29127cac058d60422c565e5d32e';
         $client = new Services_Twilio($account_sid, $auth_token);
-        $rand = rand(100000, 999999);
-
+        if($args['model'] == 'Simulator'){
+        	$rand = 123456;
+        }
+        else{
+        	$rand = rand(100000, 999999);
+		}
         $message = $client->account->messages->create(array(
             'To' => $args['msisdn'],
             'From' => "+19063563715",
@@ -61,7 +65,7 @@ class MyAPI extends API {
             return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         } else {
 	        $stmt->close();
-			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL, ?, ?, '', NULL, NULL, NULL)");
+			$stmt = $this->db->conn2->prepare("insert into register values(?, ?, ?, ?, ?, ?, ?, ?, '-1', '', '999', '999', '', '0', NULL, ?, ?, '', NULL, NULL, NULL, NULL)");
 			$stmt->bind_param('ssssssssss', $userId, $brand, $model, $os, $uid, $email, $pwd, $rand, $countryCode, $phoneNo);
 			$userId = $args['msisdn'];
 			$brand = $args['brand'];
@@ -109,6 +113,55 @@ class MyAPI extends API {
         }
     }
 
+
+	protected function checkPhoneNumbers($args){
+		$stmt = $this->db->conn2->prepare("select c2CallID, email from register where email = ?");
+		$stmt->bind_param('s', $userId);
+		$groupArray = array();
+		$rowCnt = 0;
+		for($i = 0; $i < $args['phoneNoCnt']; $i++){
+			$userId = $args['phoneNo' . $i] . "@mobifyi.com";
+			$stmt->execute();			
+			$verifyRes = $stmt->get_result();
+        	$verifyRow = mysqli_fetch_assoc($verifyRes);
+			if ($verifyRow['email'] == $userId) {
+				$groupArray['phoneMatch' . $rowCnt] = $args['phoneNo' . $i];
+				$groupArray['c2CallID' . $rowCnt] = $verifyRow['c2CallID'];
+				$rowCnt++;
+			}	
+		}
+		$stmt->close();
+		$groupArray['matchCnt'] = $rowCnt;
+		$groupArray['toPhoneNoIndex'] = $args['toPhoneNoIndex'];
+		$groupArray['error'] = 0;
+		$groupArray['message'] = 'Loaded Successfully';
+        return $groupArray;
+	}
+	
+	protected function readUserStatus($args){
+		$stmt = $this->db->conn2->prepare("select status, email from register where email = ?");
+		$stmt->bind_param('s', $userId);
+		$groupArray = array();
+		$rowCnt = 0;
+		for($i = 0; $i < $args['phoneNoCnt']; $i++){
+			$userId = $args['phoneNo' . $i] . "@mobifyi.com";
+			$stmt->execute();			
+			$verifyRes = $stmt->get_result();
+        	$verifyRow = mysqli_fetch_assoc($verifyRes);
+			if ($verifyRow['email'] == $userId) {
+				$groupArray['phoneMatch' . $rowCnt] = $args['phoneNo' . $i];
+				$groupArray['status' . $rowCnt] = $verifyRow['status'];
+				$rowCnt++;
+			}	
+		}
+		$stmt->close();
+		$groupArray['matchCnt'] = $rowCnt;
+		$groupArray['error'] = 0;
+		$groupArray['message'] = 'Loaded Successfully';
+        return $groupArray;
+	}
+	
+	
 
     protected function updateAPNSToken($args) {
 
@@ -163,7 +216,7 @@ class MyAPI extends API {
         if ($args['c2CallID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
-		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, dob, gender, userName, countryCode, phoneNo from register where c2CallID = ?");
+		$stmt = $this->db->conn2->prepare("select c2CallID, interestID, interestDescription, dob, gender, userName, countryCode, phoneNo, status from register where c2CallID = ?");
 		$stmt->bind_param('s', $c2CallID);
 		$c2CallID = $args['c2CallID'];
 		$stmt->execute();
@@ -180,6 +233,7 @@ class MyAPI extends API {
             'userName' => $verifyRow['userName'],
             'countryCode' => $verifyRow['countryCode'],
             'phoneNo' => $verifyRow['phoneNo'],
+            'status' => $verifyRow['status'],
             'resultCode' => 1);
         } else {
             return array('error' => 1, 'message' => 'Read failed', 'resultCode' => 0);

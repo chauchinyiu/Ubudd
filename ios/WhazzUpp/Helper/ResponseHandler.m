@@ -22,6 +22,9 @@
 @synthesize interestName;
 @end
 
+@implementation WUAccount
+@synthesize name, phoneNo, c2CallID, status;
+@end
 
 
 @interface ResponseHandler (){
@@ -32,10 +35,23 @@
 @implementation ResponseHandler
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize interestList = _interestList;
+@synthesize friendList = _friendList;
 
 static ResponseHandler *myInstance;
 
 -(id)init{
+    //load friend list
+    self.friendList = [[NSMutableArray alloc] init];
+    NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
+    int friendCnt = [u integerForKey:@"friendCnt"];
+    for (int i = 0; i < friendCnt; i++) {
+        WUAccount* a = [[WUAccount alloc] init];
+        a.c2CallID = [u valueForKey:[NSString stringWithFormat:@"friendID%d", i]];
+        a.phoneNo = [u valueForKey:[NSString stringWithFormat:@"friendPhoneNo%d", i]];
+        a.name = @"";
+        [self.friendList addObject:a];
+    }
+    
     return self;
 }
 
@@ -158,14 +174,7 @@ static ResponseHandler *myInstance;
 }
 
 
--(void)checkPhoneNumber{
-    self.managedObjectContext = [DBHandler context];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0"];
-    NSFetchRequest *fetch = [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
-    
-    ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    [ubuddUsers performFetch:nil];
-    
+-(void)checkPhoneNumberFromIndex:(int)fIndex{
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(kCFAllocatorDefault,
@@ -176,15 +185,18 @@ static ResponseHandler *myInstance;
                       CFRangeMake(0, CFArrayGetCount(peopleMutable)),
                       (CFComparatorFunction) ABPersonComparePeopleByName,
                       kABPersonSortByFirstName);
-
-    NSUInteger phoneCnt = 0;
+    
     NSMutableArray* phoneArray = [NSMutableArray array];
-   
-    for (CFIndex loop = 0; loop < CFArrayGetCount(peopleMutable); loop++){
+    NSMutableArray* addressPhones = [NSMutableArray array];
+
+    //run 30 per round
+    for (CFIndex loop = fIndex; loop < CFArrayGetCount(peopleMutable) && loop < fIndex + 30; loop++){
         BOOL hasUbudd = false;
         ABRecordRef record = CFArrayGetValueAtIndex(peopleMutable, loop); // get address book record
         
         ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
+        
+        [addressPhones removeAllObjects];
         // If the contact has multiple phone numbers, iterate on each of them
         for (int i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
             NSString *phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
@@ -192,24 +204,126 @@ static ResponseHandler *myInstance;
             // Remove all formatting symbols that might be in both phone number being compared
             NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
             phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
+            phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
+            
+            for (int j = 0; j < self.friendList.count; j++) {
+                WUAccount* a = [self.friendList objectAtIndex:j];
+                if ([phone isEqualToString:a.phoneNo]) {
+                    hasUbudd = true;
+                }
+            }
+            
+            if (!hasUbudd) {
+                [addressPhones addObject:phone];
+            }
+        }
+        //the phone is not list, add to check list
+        if (!hasUbudd) {
+            [phoneArray addObjectsFromArray:addressPhones];
+        }
+    }
+    //send phone list to server
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    for (int i = 0; i < [phoneArray count]; i++) {
+        [dictionary setValue:[phoneArray objectAtIndex:i] forKey:[NSString stringWithFormat:@"phoneNo%d", i]];
+    }
+    [dictionary setValue:[NSNumber numberWithInt:[phoneArray count]] forKey:@"phoneNoCnt"];
+    if (fIndex + 30 < CFArrayGetCount(peopleMutable)) {
+        [dictionary setValue:[NSNumber numberWithInt:fIndex + 30] forKey:@"toPhoneNoIndex"];
+    }
+    else{
+        [dictionary setValue:[NSNumber numberWithInt:-1] forKey:@"toPhoneNoIndex"];
+    }
+
+    DataRequest *dataRequest = [[DataRequest alloc] init];
+    dataRequest.requestName = @"checkPhoneNumbers";
+    dataRequest.values = dictionary;
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(checkPhoneNumbers:error:)];
+}
+
+- (void)checkPhoneNumbers:(ResponseBase *)response error:(NSError *)error {
+    DataResponse *res = (DataResponse *)response;
+    
+    if (error){
+        
+    }
+    else {
+        NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
+        NSMutableDictionary* addressbookInfo = [[NSMutableDictionary alloc] initWithDictionary:res.data];
+        NSNumber* matchCnt = [addressbookInfo objectForKey:@"matchCnt"];
+        for (int i = 0; i < [matchCnt intValue]; i++) {
+            NSString* phoneNo = [addressbookInfo objectForKey:[NSString stringWithFormat:@"phoneMatch%d", i]];
+            NSString* c2CallID = [addressbookInfo objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]];
+            WUAccount* a = [[WUAccount alloc] init];
+            a.c2CallID = c2CallID;
+            a.phoneNo = phoneNo;
+            [self.friendList addObject:a];
+        }
+
+        for (int j = 0; j < self.friendList.count; j++) {
+            WUAccount* a = [self.friendList objectAtIndex:j];
+            [u setValue:a.c2CallID forKey:[NSString stringWithFormat:@"friendID%d", j]];
+            [u setValue:a.phoneNo forKey:[NSString stringWithFormat:@"friendPhoneNo%d", j]];
+        }
+        [u setInteger:self.friendList.count forKey:@"friendCnt"];
+        [u synchronize];
+        NSNumber* phoneIndex = [addressbookInfo objectForKey:@"toPhoneNoIndex"];
+        if ([phoneIndex intValue] != -1) {
+            [self checkPhoneNumberFromIndex:[phoneIndex intValue]];
+        }
+        else{
+            
+            ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
+            CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+            CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(kCFAllocatorDefault,
+                                                                       CFArrayGetCount(allPeople),
+                                                                       allPeople);
+            
+            CFArraySortValues(peopleMutable,
+                              CFRangeMake(0, CFArrayGetCount(peopleMutable)),
+                              (CFComparatorFunction) ABPersonComparePeopleByName,
+                              kABPersonSortByFirstName);
             
             
-            for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
-                MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
-                //filter verified c2callID only
-                if([self c2CallIDPassed:user.userid]){
-                    if ([phone isEqualToString: user.ownNumber]) {
-                        hasUbudd = true;
+            //refresh name
+            for (int j = 0; j < self.friendList.count; j++) {
+                WUAccount* a = [self.friendList objectAtIndex:j];
+                for (CFIndex loop = 0; loop < CFArrayGetCount(peopleMutable); loop++){
+                    BOOL hasUbudd = false;
+                    ABRecordRef record = CFArrayGetValueAtIndex(peopleMutable, loop); // get address book record
+                    
+                    ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
+                    // If the contact has multiple phone numbers, iterate on each of them
+                    for (int i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
+                        NSString *phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+                        
+                        // Remove all formatting symbols that might be in both phone number being compared
+                        NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
+                        phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
+                        phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
+                        
+                        if ([phone isEqualToString:a.phoneNo]){
+                            NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                            NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+                            NSString * fullName;
+                            if (lastName == nil) {
+                                fullName = firstName;
+                            }
+                            else if (firstName == nil) {
+                                fullName = lastName;
+                            }
+                            else{
+                                fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                            }
+                            a.name = fullName;
+                        }
                     }
                 }
             }
-            if (!hasUbudd) {
-                [phoneArray addObject:[NSString stringWithFormat:@"%@@mobifyi.com", phone]];
-                phoneCnt++;
-            }
         }
     }
-    [[C2CallPhone currentPhone] findFriends:phoneArray];
 }
 
 

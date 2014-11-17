@@ -184,7 +184,7 @@
             
             [CommonMethods showLoading:NO title:nil message:nil];
             
-            [[ResponseHandler instance] checkPhoneNumber];
+            [[ResponseHandler instance] checkPhoneNumberFromIndex:0];
             
             //save to user default
             self.userDefaults = [NSUserDefaults standardUserDefaults];
@@ -228,6 +228,10 @@
  
             updateUserFieldDTO.field = @"gender";
             updateUserFieldDTO.value = (genderFemale ? @"F" : @"M");
+            [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
+            
+            updateUserFieldDTO.field = @"status";
+            updateUserFieldDTO.value = [btnStatus titleForState:UIControlStateNormal];
             [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
             
             if (dob != nil) {

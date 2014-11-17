@@ -1103,6 +1103,7 @@
 		CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */; };
 		CE5462221999C86000E91636 /* UpdateAPNSToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462211999C86000E91636 /* UpdateAPNSToken.m */; };
 		CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */; };
+		CE61BD5D1A17601E001E63D8 /* WUMediaController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61BD5C1A17601E001E63D8 /* WUMediaController.m */; };
 		CE68543619ED7EB9004AC9AF /* WURequestUserDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE68543519ED7EB9004AC9AF /* WURequestUserDetailController.m */; };
 		CE7194BF19AF7F2A001B28A0 /* WUContactListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7194BE19AF7F2A001B28A0 /* WUContactListController.m */; };
 		CE787B1019B0277E00A0BD19 /* UpdateUserField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE787B0F19B0277E00A0BD19 /* UpdateUserField.m */; };
@@ -1115,7 +1116,6 @@
 		CE871B4F19C58BFF006B05B6 /* AddChatGroupDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE871B4E19C58BFF006B05B6 /* AddChatGroupDTO.m */; };
 		CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE885CD219CBE1A800F8004C /* WULocationSearchController.m */; };
 		CE893C1719E3A18A007AD220 /* WUSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE893C1619E3A18A007AD220 /* WUSettingViewController.m */; };
-		CE95F1481A077AD30012493A /* WUMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE95F1471A077AD30012493A /* WUMediaViewController.m */; };
 		CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE978C1619E13C0700A433A8 /* WUBoardViewController.m */; };
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
 		CEA4FDD519EE6F4700A824B3 /* WUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */; };
@@ -2273,6 +2273,8 @@
 		CE5462211999C86000E91636 /* UpdateAPNSToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSToken.m; sourceTree = "<group>"; };
 		CE5462231999C96000E91636 /* UpdateAPNSTokenDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAPNSTokenDTO.h; sourceTree = "<group>"; };
 		CE5462241999C96100E91636 /* UpdateAPNSTokenDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSTokenDTO.m; sourceTree = "<group>"; };
+		CE61BD5B1A17601E001E63D8 /* WUMediaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUMediaController.h; sourceTree = "<group>"; };
+		CE61BD5C1A17601E001E63D8 /* WUMediaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUMediaController.m; sourceTree = "<group>"; };
 		CE68543419ED7EB9004AC9AF /* WURequestUserDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WURequestUserDetailController.h; sourceTree = "<group>"; };
 		CE68543519ED7EB9004AC9AF /* WURequestUserDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WURequestUserDetailController.m; sourceTree = "<group>"; };
 		CE7194BD19AF7F2A001B28A0 /* WUContactListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUContactListController.h; sourceTree = "<group>"; };
@@ -2296,8 +2298,6 @@
 		CE885CD219CBE1A800F8004C /* WULocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WULocationSearchController.m; sourceTree = "<group>"; };
 		CE893C1519E3A18A007AD220 /* WUSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUSettingViewController.h; sourceTree = "<group>"; };
 		CE893C1619E3A18A007AD220 /* WUSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUSettingViewController.m; sourceTree = "<group>"; };
-		CE95F1461A077AD30012493A /* WUMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUMediaViewController.h; sourceTree = "<group>"; };
-		CE95F1471A077AD30012493A /* WUMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUMediaViewController.m; sourceTree = "<group>"; };
 		CE978C1519E13C0700A433A8 /* WUBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUBoardViewController.h; sourceTree = "<group>"; };
 		CE978C1619E13C0700A433A8 /* WUBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUBoardViewController.m; sourceTree = "<group>"; };
 		CE9CFF7A19C29E1E004DC699 /* WUInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUInterestViewController.h; sourceTree = "<group>"; };
@@ -3521,8 +3521,8 @@
 				CE7E964619F8F6F1001C229F /* WUUbuddMapViewController.m */,
 				CE2AC7F319FD36BB00A3D093 /* WUPhotoViewerController.h */,
 				CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */,
-				CE95F1461A077AD30012493A /* WUMediaViewController.h */,
-				CE95F1471A077AD30012493A /* WUMediaViewController.m */,
+				CE61BD5B1A17601E001E63D8 /* WUMediaController.h */,
+				CE61BD5C1A17601E001E63D8 /* WUMediaController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4806,6 +4806,7 @@
 				CE787B1919B032FD00A0BD19 /* DataRequest.m in Sources */,
 				17FD053F195907840061938A /* WUTellFriendController.m in Sources */,
 				173060E019277F6B0018EE25 /* C2CallDataModel.xcdatamodeld in Sources */,
+				CE61BD5D1A17601E001E63D8 /* WUMediaController.m in Sources */,
 				97A45CBE175BEBA800320AE6 /* WUChatHistoryController.m in Sources */,
 				CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */,
 				972F3E1E175CA5250006DEF6 /* WUFavoritesViewController.m in Sources */,
@@ -4817,7 +4818,6 @@
 				972F453E175CB75F0006DEF6 /* WUContactDetailController.m in Sources */,
 				CED5F1C919B5760700DF8772 /* WUNewChatViewController.m in Sources */,
 				CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */,
-				CE95F1481A077AD30012493A /* WUMediaViewController.m in Sources */,
 				CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */,
 				17A1D68F1927ED3700B28792 /* WULoginController.m in Sources */,
 				CE2AC7F519FD36BB00A3D093 /* WUPhotoViewerController.m in Sources */,
@@ -4979,8 +4979,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
+				PROVISIONING_PROFILE = "071f7715-d789-4fe0-8734-03fb8abac652";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "071f7715-d789-4fe0-8734-03fb8abac652";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -5016,8 +5016,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
+				PROVISIONING_PROFILE = "071f7715-d789-4fe0-8734-03fb8abac652";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "071f7715-d789-4fe0-8734-03fb8abac652";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

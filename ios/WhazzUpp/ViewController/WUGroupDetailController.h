@@ -19,6 +19,7 @@
 @property(nonatomic, weak) IBOutlet UIButton *btnLocationEdit;
 @property(nonatomic, weak) IBOutlet UIButton *btnIsPublicEdit;
 @property(nonatomic, weak) IBOutlet UILabel *lblMemberCntEdit;
+@property(nonatomic, weak) IBOutlet UIButton *btnDeleteGroup;
 
 @end
 
@@ -27,6 +28,7 @@
     @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic, *lblHost, *lblMemberCnt, *lblJoinStatus;
     @property(nonatomic, weak) IBOutlet UIButton *btnJoin;
     @property(nonatomic, weak) IBOutlet UIButton *btnMedia;
+    @property(nonatomic, weak) IBOutlet UIButton *btnLeave;
 
 @end
 
@@ -36,5 +38,7 @@
 - (IBAction)btnIsPublicTapped:(id)sender;
 - (IBAction)editEnded;
 - (IBAction)btnJoinTapped:(id)sender;
+- (IBAction)btnLeaveTapped:(id)sender;
+- (IBAction)btnDeleteTapped:(id)sender;
 
 @end

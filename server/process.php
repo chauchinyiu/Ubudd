@@ -139,7 +139,7 @@ class MyAPI extends API {
 	}
 	
 	protected function readUserStatus($args){
-		$stmt = $this->db->conn2->prepare("select status, email from register where email = ?");
+		$stmt = $this->db->conn2->prepare("select userName, status, email from register where email = ?");
 		$stmt->bind_param('s', $userId);
 		$groupArray = array();
 		$rowCnt = 0;
@@ -151,6 +151,7 @@ class MyAPI extends API {
 			if ($verifyRow['email'] == $userId) {
 				$groupArray['phoneMatch' . $rowCnt] = $args['phoneNo' . $i];
 				$groupArray['status' . $rowCnt] = $verifyRow['status'];
+				$groupArray['userName' . $rowCnt] = $verifyRow['userName'];
 				$rowCnt++;
 			}	
 		}
@@ -318,6 +319,27 @@ class MyAPI extends API {
 				
 		return array('error' => 0, 'message' => 'Delete Successfully');
     }
+    
+    protected function deleteGroup($args){
+        if ($args['groupID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+            
+		$stmt = $this->db->conn2->prepare("delete from groupMember where groupID=?");
+		$stmt->bind_param('s', $groupID);
+
+		$groupID = $args['groupID'];
+		$stmt->execute();
+			
+		$stmt = $this->db->conn2->prepare("delete from chatGroup where id=?");
+		$stmt->bind_param('s', $groupID);
+
+		$groupID = $args['groupID'];
+		$stmt->execute();
+			
+				
+		return array('error' => 0, 'message' => 'Delete Successfully');
+    }
+    
     
     protected function requestJoinGroup($args){
         if ($args['groupID'] == '' || $args['memberID'] == '')

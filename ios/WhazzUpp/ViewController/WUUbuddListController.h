@@ -19,6 +19,7 @@
 @interface WUUbuddListController : UITableViewController<UISearchBarDelegate, UISearchControllerDelegate, UISearchDisplayDelegate, WUMapControllerDelegate, UIGestureRecognizerDelegate, CLLocationManagerDelegate>
 
 @property(nonatomic, weak) IBOutlet UILabel *locationLabel, *distanceLabel;
+@property (nonatomic, strong) NSString *createdGroupId;
 
 
 -(void)useResult:(NSDictionary*) result;

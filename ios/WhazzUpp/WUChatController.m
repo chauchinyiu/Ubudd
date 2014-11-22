@@ -94,6 +94,8 @@ typedef enum : NSUInteger {
 
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
     [self.titleButton setTitle:user.displayName forState:UIControlStateNormal];
+    
+    self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
 }
     
 

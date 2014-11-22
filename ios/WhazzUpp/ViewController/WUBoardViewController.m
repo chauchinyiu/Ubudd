@@ -1024,6 +1024,7 @@
         SCBubbleViewIn *bv = (SCBubbleViewIn *) cell.bubbleView;
         bv.chatText = text;
         bv.textFont = textFieldInFont;
+        bv.textFont = [UIFont fontWithName:bv.textFont.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleBody].pointSize];
         bv.textColor = cell.textfield.textColor;
         cell.textfield.hidden = YES;
     } else {
@@ -1158,6 +1159,8 @@
     if (bv) {
         bv.chatText = text;
         bv.textFont = textFieldOutFont;
+        bv.textFont = [UIFont fontWithName:bv.textFont.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleBody].pointSize];
+        
         bv.textColor = cell.textfield.textColor;
         cell.textfield.hidden = YES;
     } else {

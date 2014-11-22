@@ -22,6 +22,7 @@
     int interestID;
     CLLocationCoordinate2D loc;
     BOOL isPublic;
+    BOOL inWorking;
 }
 @end
 
@@ -30,7 +31,6 @@
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     btnGroupImage.imageView.layer.cornerRadius = 40.0;
     btnGroupImage.imageView.layer.masksToBounds = YES;
     loc.latitude = 999;
@@ -95,6 +95,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self checkFilled];
+    inWorking = false;    
 }
 
 
@@ -259,4 +260,13 @@
         [self showFriendDetailForUserid:[self.members objectAtIndex:indexPath.row]];
     }
 }
+
+
+- (IBAction)createGroup:(id)sender{
+    if (!inWorking) {
+        inWorking = true;
+        [super createGroup:sender];
+    }
+}
+
 @end

@@ -126,11 +126,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (isOwner) {
-            return 368;
+            return 400;
             //return editCellHeight;
         }
         else{
-            return 348;
+            return 370;
             //return readOnlyCellHeight;
         }
     }
@@ -218,26 +218,31 @@
                         [cell.lblJoinStatus setText:@"Not a member"];
                         [cell.btnJoin setHidden:NO];
                         [cell.btnMedia setHidden:YES];
+                        [cell.btnLeave setHidden:YES];
                         break;
                     case 1:
                         [cell.lblJoinStatus setText:@"Joined"];
                         [cell.btnJoin setHidden:YES];
                         [cell.btnMedia setHidden:NO];
+                        [cell.btnLeave setHidden:NO];
                         break;
                     case 2:
                         [cell.lblJoinStatus setText:@"Group admin"];
                         [cell.btnJoin setHidden:YES];
                         [cell.btnMedia setHidden:NO];
+                        [cell.btnLeave setHidden:NO];
                         break;
                     case 3:
                         [cell.lblJoinStatus setText:@"Waiting for reply"];
                         [cell.btnJoin setHidden:YES];
                         [cell.btnMedia setHidden:YES];
+                        [cell.btnLeave setHidden:YES];
                         break;
                     case 4:
                         [cell.lblJoinStatus setText:@"Request rejected"];
                         [cell.btnJoin setHidden:YES];
                         [cell.btnMedia setHidden:YES];
+                        [cell.btnLeave setHidden:YES];
                         break;
                         
                     default:
@@ -637,6 +642,64 @@
 }
 
 
+- (IBAction)btnLeaveTapped:(id)sender{
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:[[SCUserProfile currentUser] userid]];
+    [[SCDataManager instance] removeDatabaseObject:user];
 
+    DataRequest* datRequest = [[DataRequest alloc] init];
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"memberID"];
+    [data setValue:[groupInfo objectForKey:@"groupID"] forKey:@"groupID"];
+    datRequest.values = data;
+    datRequest.requestName = @"removeGroupMember";
+        
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(removeGroupUserResponse:error:)];
+}
+
+- (void)removeGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Leave Group"
+                                                    message:@"You left the group."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    if (self.group.groupid != nil) {
+        [dictionary setObject:self.group.groupid forKey:@"c2CallID"];
+    }
+    [dictionary setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
+    DataRequest *dataRequest = [[DataRequest alloc] init];
+    dataRequest.requestName = @"readGroupInfo";
+    dataRequest.values = dictionary;
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readGroupInfo:error:)];
+    
+}
+
+- (IBAction)btnDeleteTapped:(id)sender{
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:[[SCUserProfile currentUser] userid]];
+    [[SCDataManager instance] removeDatabaseObject:user];
+    
+    DataRequest* datRequest = [[DataRequest alloc] init];
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    [data setValue:[groupInfo objectForKey:@"groupID"] forKey:@"groupID"];
+    datRequest.values = data;
+    datRequest.requestName = @"deleteGroup";
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(deleteGroupResponse:error:)];
+}
+
+- (void)deleteGroupResponse:(ResponseBase *)response error:(NSError *)error{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Group"
+                                                    message:@"You deleted the group."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [self removeFromParentViewController];
+}
 
 @end

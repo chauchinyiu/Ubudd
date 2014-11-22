@@ -17,6 +17,7 @@
 #import "DataResponse.h"
 #import <MapKit/MapKit.h>
 #import "WUUbuddMapViewController.h"
+#import "WUAddGroupController.h"
 
 @implementation WUUbuddListCell
 
@@ -401,6 +402,10 @@
         WUUbuddMapViewController *cvc = (WUUbuddMapViewController *)[segue destinationViewController];
         cvc.parentController = self;
         [cvc useResult:fetchResult];
+    }
+    else if ([segue.destinationViewController isKindOfClass:[WUAddGroupController class]]) {
+        WUAddGroupController *addGroupController = (WUAddGroupController *)segue.destinationViewController;
+        addGroupController.parentController = self;
     }
     else{
         [super prepareForSegue:segue sender:sender];

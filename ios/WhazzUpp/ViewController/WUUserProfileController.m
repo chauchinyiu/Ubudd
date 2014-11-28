@@ -5,7 +5,7 @@
 //  Created by Sahil.Khanna on 02/06/14.
 //  Copyright (c) 2014 C2Call GmbH. All rights reserved.
 //
-
+#import <SocialCommunication/UIViewController+SCCustomViewController.h>
 #import "WUUserProfileController.h"
 #import "CommonMethods.h"
 #import "WUAppDelegate.h"
@@ -49,13 +49,15 @@
     
     [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", [self.userDefaults objectForKey:@"countryCode"], stringts]];
     
-    btnProfileImage.imageView.layer.cornerRadius = 42.0;
-    btnProfileImage.imageView.layer.masksToBounds = YES;
-    
+    userImage.layer.cornerRadius = 42.0;
+    userImage.layer.masksToBounds = YES;
+    [userImage setTapAction:^{
+        [self showUserImageForUserid:[SCUserProfile currentUser].userid];
+    }];
     if ([self.userDefaults boolForKey:kUserDefault_isWelcomeComplete]) {
         SCUserProfile *userProfile = [SCUserProfile currentUser];
         txtDisplayName.text = userProfile.firstname;
-        [btnProfileImage setImage:userProfile.userImage forState:UIControlStateNormal];
+        [userImage setImage:userProfile.userImage];
         
         //read from user default
         genderFemale = [self.userDefaults boolForKey:@"userIsFemale"];
@@ -298,7 +300,7 @@
 
 #pragma mark - UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [btnProfileImage setImage:[info objectForKey:@"UIImagePickerControllerEditedImage"] forState:UIControlStateNormal];
+    [userImage setImage:[info objectForKey:@"UIImagePickerControllerEditedImage"]];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }

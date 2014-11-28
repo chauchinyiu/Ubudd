@@ -9,10 +9,12 @@
 #import <SocialCommunication/SocialCommunication.h>
 #import "WUInterestViewController.h"
 #import "WUStatusSelectController.h"
+#import <SocialCommunication/C2TapImageView.h>
 
 @interface WUUserProfileController : SCUserProfileController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WUStatusSelectControllerDelegate, UIGestureRecognizerDelegate > {
     IBOutlet UITextField *txtDisplayName;
     IBOutlet UIButton *btnProfileImage;
+    IBOutlet C2TapImageView *userImage;
     IBOutlet UITextField *txtDateofBirth;
     IBOutlet UIButton *btnGender;
     IBOutlet UIButton *btnInterest;

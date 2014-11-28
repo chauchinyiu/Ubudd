@@ -600,8 +600,9 @@
 
 -(void) setTextFilterForText:(NSString *) text
 {
-    /*
+    
     searchStr = text;
+    /*
     NSFetchRequest *fetch = [ubuddUsers fetchRequest];
     
     //    NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"displayName contains[cd] %@ OR email contains[cd] %@", text, text];

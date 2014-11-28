@@ -1051,7 +1051,7 @@
 		972F3E1E175CA5250006DEF6 /* WUFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F3E1D175CA5250006DEF6 /* WUFavoritesViewController.m */; };
 		972F453E175CB75F0006DEF6 /* WUContactDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F453D175CB75F0006DEF6 /* WUContactDetailController.m */; };
 		972F4541175CBA830006DEF6 /* WUFriendDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F4540175CBA830006DEF6 /* WUFriendDetailController.m */; };
-		9768A794178D2FD500BB9E01 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9768A793178D2FD500BB9E01 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9768A794178D2FD500BB9E01 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9768A793178D2FD500BB9E01 /* Social.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		978172CF1770947D003067F0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172B21770947D003067F0 /* Security.framework */; };
 		978172D01770947D003067F0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172B31770947D003067F0 /* MobileCoreServices.framework */; };
 		978172D11770947D003067F0 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172B41770947D003067F0 /* QuickLook.framework */; };
@@ -4897,7 +4897,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -4931,7 +4931,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

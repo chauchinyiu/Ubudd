@@ -231,6 +231,8 @@
     
     SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]]];
     
+    favocell.nameLabel.font = [UIFont fontWithName:favocell.nameLabel.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
+        
     favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", indexPath.row]];
     favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", indexPath.row]];
     favocell.hostLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", indexPath.row]];

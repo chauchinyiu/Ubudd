@@ -388,6 +388,7 @@
 
 -(void) setTextFilterForText:(NSString *) text
 {
+    searchStr = text;
     /*
     NSFetchRequest *fetch = [self.fetchedResultsController fetchRequest];
     

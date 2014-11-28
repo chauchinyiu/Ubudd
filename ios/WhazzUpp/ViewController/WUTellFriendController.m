@@ -8,6 +8,7 @@
 
 #import "WUTellFriendController.h"
 #import "CommonMethods.h"
+#import <Social/Social.h>
 
 @implementation WUTellFriendController
 
@@ -38,6 +39,13 @@
     }
 }
 
+- (void)shareFacebook{
+    SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+    [controller setInitialText:@"First post from my iPhone app"];
+    [self presentViewController:controller animated:YES completion:Nil];
+}
+
 #pragma mark - TableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -46,6 +54,8 @@
         [self composeEmail];
     else if (indexPath.row == 1)
         [self composeMessage];
+    else if (indexPath.row == 2)
+        [self shareFacebook];
 }
 
 #pragma mark - MFMessageComposeViewController Delegate

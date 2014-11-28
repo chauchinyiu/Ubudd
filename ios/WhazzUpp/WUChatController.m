@@ -92,12 +92,24 @@ typedef enum : NSUInteger {
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
 
+    UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
+    
+    if (image) {
+        [self.imageBtn setImage:image forState:UIControlStateNormal];
+    }
+
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
     [self.titleButton setTitle:user.displayName forState:UIControlStateNormal];
     
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
-}
     
+    
+}
+
+- (IBAction)btnImageTapped:(id)sender{
+    [self showUserImageForUserid:self.targetUserid];
+}
+
 
 
 #pragma mark - ChatController Methods

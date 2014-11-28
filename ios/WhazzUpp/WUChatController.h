@@ -13,8 +13,10 @@
 - (IBAction)openProfile:(id)sender;
 - (IBAction)btnCallTapped;
 - (IBAction)btnRichMessageTapped:(id)sender;
+- (IBAction)btnImageTapped:(id)sender;
 
 @property (nonatomic, assign) bool sendWelcomeText;
 @property(nonatomic, weak) IBOutlet UIButton* titleButton;
+@property(nonatomic, weak) IBOutlet UIButton* imageBtn;
 
 @end

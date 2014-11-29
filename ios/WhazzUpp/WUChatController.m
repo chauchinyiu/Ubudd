@@ -92,13 +92,18 @@ typedef enum : NSUInteger {
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
 
-    UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
     
-    if (image) {
-        [self.imageBtn setImage:image forState:UIControlStateNormal];
-    }
 
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
+    if (user.userType.intValue != 2) {
+        UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
+        
+        if (image) {
+            [self.imageBtn setImage:image forState:UIControlStateNormal];
+        }
+    }
+    
+    
     [self.titleButton setTitle:user.displayName forState:UIControlStateNormal];
     
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
@@ -107,7 +112,10 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)btnImageTapped:(id)sender{
-    [self showUserImageForUserid:self.targetUserid];
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
+    if (user.userType.intValue != 2) {
+        [self showUserImageForUserid:self.targetUserid];
+    }
 }
 
 

@@ -16,6 +16,7 @@
 #import "DataRequest.h"
 #import "DataResponse.h"
 #import "DBHandler.h"
+#import "Constant.h"
 
 @implementation interestDat
 @synthesize interestID;
@@ -24,6 +25,11 @@
 
 @implementation WUAccount
 @synthesize name, phoneNo, c2CallID, status;
+
+- (NSComparisonResult)compare:(WUAccount *)otherObject {
+    return [self.name compare:otherObject.name];
+}
+
 @end
 
 
@@ -41,15 +47,22 @@ static ResponseHandler *myInstance;
 
 -(id)init{
     //load friend list
+    
+    
     self.friendList = [[NSMutableArray alloc] init];
     NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
-    int friendCnt = [u integerForKey:@"friendCnt"];
-    for (int i = 0; i < friendCnt; i++) {
-        WUAccount* a = [[WUAccount alloc] init];
-        a.c2CallID = [u valueForKey:[NSString stringWithFormat:@"friendID%d", i]];
-        a.phoneNo = [u valueForKey:[NSString stringWithFormat:@"friendPhoneNo%d", i]];
-        a.name = @"";
-        [self.friendList addObject:a];
+    
+    int tVersion = [u integerForKey:@"RefreshVersion"];
+    if (tVersion >= kRefreshVersion) {
+        int friendCnt = [u integerForKey:@"friendCnt"];
+        for (int i = 0; i < friendCnt; i++) {
+            WUAccount* a = [[WUAccount alloc] init];
+            a.c2CallID = [u valueForKey:[NSString stringWithFormat:@"friendID%d", i]];
+            a.phoneNo = [u valueForKey:[NSString stringWithFormat:@"friendPhoneNo%d", i]];
+            a.name = @"";
+            [self.friendList addObject:a];
+        }
+        [self refreshFriendListNames];
     }
     
     return self;
@@ -174,6 +187,8 @@ static ResponseHandler *myInstance;
 }
 
 
+
+
 -(void)checkPhoneNumberFromIndex:(int)fIndex{
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
@@ -188,6 +203,7 @@ static ResponseHandler *myInstance;
     
     NSMutableArray* phoneArray = [NSMutableArray array];
     NSMutableArray* addressPhones = [NSMutableArray array];
+    NSString* myNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
 
     //run 30 per round
     for (CFIndex loop = fIndex; loop < CFArrayGetCount(peopleMutable) && loop < fIndex + 30; loop++){
@@ -206,10 +222,24 @@ static ResponseHandler *myInstance;
             phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
             phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
             
-            for (int j = 0; j < self.friendList.count; j++) {
-                WUAccount* a = [self.friendList objectAtIndex:j];
-                if ([phone isEqualToString:a.phoneNo]) {
-                    hasUbudd = true;
+            
+            if ([phone isEqualToString:myNumber]) {
+                hasUbudd = true;
+            }
+            else{
+                for (int j = 0; j < self.friendList.count; j++) {
+                    WUAccount* a = [self.friendList objectAtIndex:j];
+                    if ([phone isEqualToString:a.phoneNo]) {
+                        hasUbudd = true;
+                    }
+                }
+                if (!hasUbudd) {
+                    for (int j = 0; j < phoneArray.count; j++) {
+                        NSString* a = [phoneArray objectAtIndex:j];
+                        if ([phone isEqualToString:a]) {
+                            hasUbudd = true;
+                        }
+                    }
                 }
             }
             
@@ -261,6 +291,8 @@ static ResponseHandler *myInstance;
             a.phoneNo = phoneNo;
             [self.friendList addObject:a];
         }
+        
+        self.friendList = [NSMutableArray arrayWithArray:[self.friendList sortedArrayUsingSelector:@selector(compare:)]];
 
         for (int j = 0; j < self.friendList.count; j++) {
             WUAccount* a = [self.friendList objectAtIndex:j];
@@ -269,63 +301,66 @@ static ResponseHandler *myInstance;
         }
         [u setInteger:self.friendList.count forKey:@"friendCnt"];
         [u synchronize];
+        
         NSNumber* phoneIndex = [addressbookInfo objectForKey:@"toPhoneNoIndex"];
         if ([phoneIndex intValue] != -1) {
             [self checkPhoneNumberFromIndex:[phoneIndex intValue]];
         }
         else{
-            
-            ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
-            CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
-            CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(kCFAllocatorDefault,
-                                                                       CFArrayGetCount(allPeople),
-                                                                       allPeople);
-            
-            CFArraySortValues(peopleMutable,
-                              CFRangeMake(0, CFArrayGetCount(peopleMutable)),
-                              (CFComparatorFunction) ABPersonComparePeopleByName,
-                              kABPersonSortByFirstName);
-            
-            
-            //refresh name
-            for (int j = 0; j < self.friendList.count; j++) {
-                WUAccount* a = [self.friendList objectAtIndex:j];
-                for (CFIndex loop = 0; loop < CFArrayGetCount(peopleMutable); loop++){
-                    BOOL hasUbudd = false;
-                    ABRecordRef record = CFArrayGetValueAtIndex(peopleMutable, loop); // get address book record
-                    
-                    ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
-                    // If the contact has multiple phone numbers, iterate on each of them
-                    for (int i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
-                        NSString *phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
-                        
-                        // Remove all formatting symbols that might be in both phone number being compared
-                        NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
-                        phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
-                        phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
-                        
-                        if ([phone isEqualToString:a.phoneNo]){
-                            NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
-                            NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
-                            NSString * fullName;
-                            if (lastName == nil) {
-                                fullName = firstName;
-                            }
-                            else if (firstName == nil) {
-                                fullName = lastName;
-                            }
-                            else{
-                                fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-                            }
-                            a.name = fullName;
-                        }
-                    }
-                }
-            }
+            [self refreshFriendListNames];
         }
     }
 }
 
+-(void)refreshFriendListNames{
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+    CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(kCFAllocatorDefault,
+                                                               CFArrayGetCount(allPeople),
+                                                               allPeople);
+    
+    CFArraySortValues(peopleMutable,
+                      CFRangeMake(0, CFArrayGetCount(peopleMutable)),
+                      (CFComparatorFunction) ABPersonComparePeopleByName,
+                      kABPersonSortByFirstName);
+    
+    
+    //refresh name
+    for (int j = 0; j < self.friendList.count; j++) {
+        WUAccount* a = [self.friendList objectAtIndex:j];
+        for (CFIndex loop = 0; loop < CFArrayGetCount(peopleMutable); loop++){
+            ABRecordRef record = CFArrayGetValueAtIndex(peopleMutable, loop); // get address book record
+            
+            ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
+            // If the contact has multiple phone numbers, iterate on each of them
+            for (int i = 0; i < ABMultiValueGetCount(phoneNumbers); i++) {
+                NSString *phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, i);
+                
+                // Remove all formatting symbols that might be in both phone number being compared
+                NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
+                phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
+                phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
+                
+                if ([phone isEqualToString:a.phoneNo]){
+                    NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                    NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+                    NSString * fullName;
+                    if (lastName == nil) {
+                        fullName = firstName;
+                    }
+                    else if (firstName == nil) {
+                        fullName = lastName;
+                    }
+                    else{
+                        fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                    }
+                    a.name = fullName;
+                }
+            }
+        }
+    }
+
+}
 
 
 @end

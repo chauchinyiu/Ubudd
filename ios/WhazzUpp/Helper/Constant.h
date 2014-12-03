@@ -13,4 +13,5 @@
 #define kUserDefault_isUserRegistered @"registerStatus"
 #define kUserDefault_isWelcomeComplete @"isWelcomeComplete"
 
+#define kRefreshVersion 2
 @end

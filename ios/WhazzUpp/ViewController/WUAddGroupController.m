@@ -13,7 +13,8 @@
 #import "AddChatGroupDTO.h"
 #import "WebserviceHandler.h"
 #import "ResponseBase.h"
-
+#import "ResponseHandler.h"
+#import "WUFriendDetailController.h"
 
 #define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kGroupImage_UseCamera @"Use Camera"
@@ -171,7 +172,12 @@
         cvc.delegate = self;
     }
     else{
-        [super prepareForSegue:segue sender:sender];
+        WUUserSelectionController *cvc = (WUUserSelectionController *)[segue destinationViewController];
+        cvc.delegate = self;
+        if(self.members){
+            [cvc setSelectedAccount:self.members];
+        }
+        //[super prepareForSegue:segue sender:sender];
     }
 }
 
@@ -257,6 +263,13 @@
     if (indexPath.section == 0) {
     }
     else{
+        NSMutableArray* friendList = [[ResponseHandler instance] friendList];
+        for (int i = 0; i < friendList.count; i++) {
+            WUAccount* a = [friendList objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:[self.members objectAtIndex:indexPath.row]]) {
+                [WUFriendDetailController setPhoneNo:a.phoneNo];
+            }
+        }
         [self showFriendDetailForUserid:[self.members objectAtIndex:indexPath.row]];
     }
 }
@@ -267,6 +280,11 @@
         inWorking = true;
         [super createGroup:sender];
     }
+}
+
+-(void)selectedUsersUpdated:(NSArray*)users{
+    self.members = users;
+    [self.tableView reloadData];
 }
 
 @end

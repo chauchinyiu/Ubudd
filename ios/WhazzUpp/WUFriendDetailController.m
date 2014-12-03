@@ -18,6 +18,7 @@
 #import "WebserviceHandler.h"
 #import "ResponseHandler.h"
 #import "WUMediaController.h"
+#import "WUC2CallUser.h"
 
 
 @implementation WUUserInfoCell
@@ -33,7 +34,7 @@
     NSString* phoneNo;
     NSString* status;
     WUUserInfoCell* profileCell;
-    MOC2CallUser* curUser;
+    MOC2CallUser* curUserObj;
 }
 @end
 
@@ -47,18 +48,19 @@ static NSString* currentPhoneNo = @"";
     
     self.userInfoCell.userImage.layer.cornerRadius = 45.0;
     self.userInfoCell.userImage.layer.masksToBounds = YES;
-
+    
     NSMutableArray* acclist = [ResponseHandler instance].friendList;
     if ([[self.fetchedResultsController fetchedObjects] count] == 0){
-        curUser = [[MOC2CallUser alloc] init];
-        curUser.ownNumber = currentPhoneNo;
+        curUserObj = [[WUC2CallUser alloc] init];
+        curUserObj.ownNumber = currentPhoneNo;
         for (int i = 0; i < acclist.count; i++) {
             WUAccount* a = [acclist objectAtIndex:i];
             if ([a.phoneNo isEqualToString:currentPhoneNo]) {
-                curUser.userid = a.c2CallID;
+                curUserObj.userid = a.c2CallID;
             }
         }
     }
+    
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     //read from server
@@ -75,7 +77,7 @@ static NSString* currentPhoneNo = @"";
 
 -(MOC2CallUser *) currentUser{
     if ([[self.fetchedResultsController fetchedObjects] count] == 0)
-        return curUser;
+        return curUserObj;
     
     return [[self.fetchedResultsController fetchedObjects] objectAtIndex:0];
 }
@@ -149,6 +151,15 @@ static NSString* currentPhoneNo = @"";
     [super configureCell:cell atIndexPath:indexPath];
     if ([cell isKindOfClass:[WUUserInfoCell class]]) {
         WUUserInfoCell* c = (WUUserInfoCell*)cell;
+        
+        NSMutableArray* acclist = [ResponseHandler instance].friendList;
+        for (int i = 0; i < acclist.count; i++) {
+            WUAccount* a = [acclist objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:self.currentUser.userid] && a.name) {
+                c.displayName.text = a.name;
+            }
+        }
+        
         [c.favoriteImage setHidden:YES];
         [c.facebookImage setHidden:YES];
         [c.email setHidden:YES];
@@ -167,8 +178,20 @@ static NSString* currentPhoneNo = @"";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
+        
+        
         WUUserInfoCell *c;
+        
         c = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        
+        NSMutableArray* acclist = [ResponseHandler instance].friendList;
+        for (int i = 0; i < acclist.count; i++) {
+            WUAccount* a = [acclist objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:self.currentUser.userid] && a.name) {
+                c.displayName.text = a.name;
+            }
+        }
+        
         [c.favoriteImage setHidden:YES];
         [c.facebookImage setHidden:YES];
         [c.email setHidden:YES];

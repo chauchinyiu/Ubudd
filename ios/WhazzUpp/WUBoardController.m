@@ -117,6 +117,50 @@ static BOOL isGroup = YES;
 }
 
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    MOC2CallEvent *elem = nil;
+    @try {
+        elem = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+    @catch (NSException *exception) {
+    }
+    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
+                                                              locale:[NSLocale currentLocale]];
+    if (section == 0 && elem) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:formatString];
+        //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        self.firstHeaderLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+        self.firstHeaderView.hidden = NO;
+        return self.headerView;
+    }
+    
+    if (elem) {
+        if (self.timestampHeader) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:formatString];
+            //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+            //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+            
+            self.timestampLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+            
+            NSData *archivedViewData = [NSKeyedArchiver archivedDataWithRootObject: self.timestampHeader];
+            id clone = [NSKeyedUnarchiver unarchiveObjectWithData:archivedViewData];
+            return (UIView *) clone;
+        }
+        
+        return nil;
+    }
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor colorWithWhite:0. alpha:0.];
+    label.text = @"";
+    
+    return label;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell* cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -444,7 +488,7 @@ static BOOL isGroup = YES;
     
     NSString *text = elem.text;
     if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
-        cell.messageImage.image = [[C2CallPhone currentPhone] thumbnailForKey:text];
+        cell.messageImage.image = [[C2CallPhone currentPhone] imageForKey:text];
         [cell.progress setHidden:YES];
         [cell setTapAction:^{
             [self showImage:text];

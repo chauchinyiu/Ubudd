@@ -9,9 +9,10 @@
 #import <SocialCommunication/SocialCommunication.h>
 #import "WUInterestViewController.h"
 #import "WULocationSearchController.h"
+#import "WUUserSelectionController.h"
 
 @interface WUAddGroupController : SCAddGroupController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-    WUInterestViewControllerDelegate, WULocationSelectControllerDelegate, UIGestureRecognizerDelegate> {
+    WUInterestViewControllerDelegate, WULocationSelectControllerDelegate, UIGestureRecognizerDelegate, WUUserSelectClientDelegate> {
     IBOutlet UIButton *btnGroupImage;
     
     IBOutlet UITextField *txtTopic;

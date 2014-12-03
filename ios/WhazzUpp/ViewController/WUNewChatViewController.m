@@ -12,6 +12,7 @@
 #import "DBHandler.h"
 #import "ResponseHandler.h"
 #import "WUBoardController.h"
+#import "WUFriendDetailController.h"
 
 @implementation WUNewChatCell
 
@@ -156,6 +157,13 @@
     if ([user.userType intValue] == 2) {
         [self showGroupDetailForGroupid:user.userid];
     } else {
+        NSMutableArray* friendList = [[ResponseHandler instance] friendList];
+        for (int i = 0; i < friendList.count; i++) {
+            WUAccount* a = [friendList objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:user.userid]) {
+                [WUFriendDetailController setPhoneNo:a.phoneNo];
+            }
+        }
         [self showFriendDetailForUserid:user.userid];
     }
 }
@@ -163,6 +171,13 @@
 
 -(IBAction)showFriendInfo:(id)sender{
     MOC2CallUser *user = [[[[self.fetchedResultsController sections] objectAtIndex:0] objects] objectAtIndex:[sender tag]];
+    NSMutableArray* friendList = [[ResponseHandler instance] friendList];
+    for (int i = 0; i < friendList.count; i++) {
+        WUAccount* a = [friendList objectAtIndex:i];
+        if ([a.c2CallID isEqualToString:user.userid]) {
+            [WUFriendDetailController setPhoneNo:a.phoneNo];
+        }
+    }
     [self showFriendDetailForUserid:user.userid];
 }
 

@@ -87,31 +87,6 @@
 
 -(void)refreshList{
     inSearch = NO;
-    /*
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0"];
-    NSFetchRequest *fetch = [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
-    
-    ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    [ubuddUsers performFetch:nil];
-
-    ubuddPhoneList = [[NSMutableDictionary alloc] init];
-    ubuddPhoneSearchList = [[NSMutableDictionary alloc] init];
-
-    //count fav
-    int favCnt = 0;
-    for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
-        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]) {
-            favCnt++;
-        }
-        if(user.userType.intValue != 2){
-            //verify the c2call id with our server
-            if(![resHandler c2CallIDVerified:user.userid]){
-                [resHandler verifyC2CallID:user.userid];
-            }
-        }
-    }
-    */
     int favCnt = 0;
     
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
@@ -127,6 +102,7 @@
     ubuddListSection = [ResponseHandler instance].friendList;
     addressListSection = [[NSMutableArray alloc] init];
     NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
+    NSString* myNumber = [u objectForKey:@"msidn"];
     
     for (CFIndex loop = 0; loop < CFArrayGetCount(peopleMutable); loop++){
         BOOL hasUbudd = false;
@@ -142,35 +118,31 @@
             phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
             phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
             
-            for (int j = 0; j < ubuddListSection.count; j++) {
-                WUAccount* a = [ubuddListSection objectAtIndex:j];
-                if ([a.phoneNo isEqualToString:phone]) {
-                    if ([u boolForKey:a.c2CallID]) {
-                        favCnt++;
-                    }
-                    hasUbudd = true;
-                }
-            }
             
-            /*
-            for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
-                MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
-                //filter verified c2callID only
-                if([resHandler c2CallIDPassed:user.userid]){
-                    if ([phone isEqualToString: user.ownNumber]) {
-                        
+            if ([phone isEqualToString:myNumber]) {
+                hasUbudd = true;
+            }
+            else{
+                for (int j = 0; j < ubuddListSection.count; j++) {
+                    WUAccount* a = [ubuddListSection objectAtIndex:j];
+                    if ([a.phoneNo isEqualToString:phone]) {
                         hasUbudd = true;
                     }
                 }
             }
-             */
-            
-            
         }
         if (!hasUbudd) {
             [addressListSection addObject:(__bridge id)(record)];
         }
     }
+    
+    for (int j = 0; j < ubuddListSection.count; j++) {
+        WUAccount* a = [ubuddListSection objectAtIndex:j];
+        if ([u boolForKey:a.c2CallID]) {
+            favCnt++;
+        }
+    }
+    
     
     [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
     [[NSUserDefaults standardUserDefaults] synchronize];

@@ -8,14 +8,24 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 
+@protocol WUUserSelectClientDelegate <NSObject>
+@required
+-(void)selectedUsersUpdated:(NSArray*)users;
+@end
+
+
 @interface WUUserSelectCell : UITableViewCell
 
-@property(nonatomic, weak) IBOutlet UILabel *titleLabel, *subTitleLabel;
+@property(nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property(nonatomic, weak) IBOutlet UIImageView *photo;
 
 @end
 
-@interface WUUserSelectionController : SCUserSelectionController
+@interface WUUserSelectionController : UITableViewController
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property(nonatomic,assign)id<WUUserSelectClientDelegate>delegate;
+
+-(void)setSelectedAccount:(NSArray*)users;
 
 @end

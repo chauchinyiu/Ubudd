@@ -10,6 +10,8 @@
 #import "WUChatController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "Helper/CommonMethods.h"
+#import "ResponseHandler.h"
+#import "WUFriendDetailController.h"
 
 #define kRichMessage_ChoosePhotoOrVideo @"Choose Photo or Video"
 #define kRichMessage_TakePhotoOrVideo @"Take Photo or Video"
@@ -95,16 +97,23 @@ typedef enum : NSUInteger {
     
 
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
-    if (user.userType.intValue != 2) {
-        UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
-        
-        if (image) {
-            [self.imageBtn setImage:image forState:UIControlStateNormal];
+    if(user){
+        [self.titleButton setTitle:user.displayName forState:UIControlStateNormal];
+    }
+    UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
+    
+    if (image) {
+        [self.imageBtn setImage:image forState:UIControlStateNormal];
+    }
+    NSMutableArray* friends = [ResponseHandler instance].friendList;
+    for (int i = 0; i < friends.count; i++) {
+        WUAccount* a = [friends objectAtIndex:i];
+        if([a.c2CallID isEqualToString:self.targetUserid] && a.name != nil){
+            [self.titleButton setTitle:a.name forState:UIControlStateNormal];
         }
     }
     
     
-    [self.titleButton setTitle:user.displayName forState:UIControlStateNormal];
     
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
     
@@ -127,6 +136,14 @@ typedef enum : NSUInteger {
     if ([user.userType intValue] == 2) {
         [self showGroupDetailForGroupid:self.targetUserid];
     } else {
+        NSMutableArray* friendList = [[ResponseHandler instance] friendList];
+        for (int i = 0; i < friendList.count; i++) {
+            WUAccount* a = [friendList objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:self.targetUserid]) {
+                [WUFriendDetailController setPhoneNo:a.phoneNo];
+            }
+        }
+        
         [self showFriendDetailForUserid:self.targetUserid];
     }
 }

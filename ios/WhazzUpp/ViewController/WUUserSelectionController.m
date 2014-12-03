@@ -9,16 +9,20 @@
 #import "WUUserSelectionController.h"
 #import "DBHandler.h"
 #import "ResponseHandler.h"
+#import "WUC2CallUser.h"
 
 @implementation WUUserSelectCell
 
-@synthesize titleLabel, subTitleLabel;
+@synthesize titleLabel, photo;
 
 @end
 
 @interface WUUserSelectionController (){
     ResponseHandler *resHandler;
     NSFetchedResultsController *ubuddUsers;
+    NSMutableArray* friendList;
+    NSMutableArray* selection;
+    NSArray* startList;
 }
 @end
 
@@ -45,11 +49,18 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(userType == 0 OR userType == 2) AND callmeLink == 0"];
-    NSFetchRequest *fetch = [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
-    
-    ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    [ubuddUsers performFetch:nil];
+    friendList = [ResponseHandler instance].friendList;
+    selection = [[NSMutableArray alloc] init];
+    for (int i = 0; i < friendList.count; i++) {
+        [selection addObject: [NSNumber numberWithBool:NO]];
+        WUAccount *a = [friendList objectAtIndex:i];
+        for (int j = 0; j < startList.count; j++) {
+            NSString* u = [startList objectAtIndex:j];
+            if([u isEqualToString:a.c2CallID]){
+                [selection replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
+            }
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,48 +69,67 @@
     // Dispose of any resources that can be recreated.
 }
 
--(BOOL) validUser:(NSString*)userName Email:(NSString*)email{
-    BOOL hasValid = NO;
-    for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
-        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
-        if(user.userType.intValue != 2){
-            if ([[[C2CallPhone currentPhone] nameForUserid:user.userid] isEqualToString:userName] && [user.email isEqualToString:email] ) {
-                if ([resHandler c2CallIDPassed:user.userid]) {
-                    hasValid = YES;
-                }
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    WUUserSelectCell *cell = (WUUserSelectCell *)[self.tableView dequeueReusableCellWithIdentifier:@"SCUserCell"];
+    
+    WUAccount* a = [friendList objectAtIndex:indexPath.row];
+    cell.titleLabel.text = a.name;
+    UIImage* image = [[C2CallPhone currentPhone] userimageForUserid:a.c2CallID];
+    if(image){
+        [cell.photo setImage:image];
+    }
+    else{
+        NSDictionary* userInfo = [[C2CallPhone currentPhone] getUserInfoForUserid:a.c2CallID];
+        NSString* imageName = [userInfo objectForKey:@"ImageLarge"];
+        if(imageName){
+            image = [[C2CallPhone currentPhone] imageForKey:imageName];
+            if(image){
+                [cell.photo setImage:image];
             }
         }
     }
-    return hasValid;
-}
-
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WUUserSelectCell* cell = (WUUserSelectCell*)[super tableView:tableView cellForRowAtIndexPath: indexPath];
-    if ([self validUser:cell.titleLabel.text Email:cell.subTitleLabel.text]) {
-        return [super tableView:tableView heightForRowAtIndexPath: indexPath];
+    if (((NSNumber*)[selection objectAtIndex:indexPath.row]).boolValue) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    WUUserSelectCell* cell = (WUUserSelectCell*)[super tableView:tableView cellForRowAtIndexPath: indexPath];
-    if (![self validUser:cell.titleLabel.text Email:cell.subTitleLabel.text]) {
-        [cell setHidden:YES];
+    else{
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
     return cell;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return friendList.count;
 }
-*/
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if (((NSNumber*)[selection objectAtIndex:indexPath.row]).boolValue) {
+        [selection replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:NO]];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    else{
+        [selection replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:YES]];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+}
+
+
+- (IBAction)confirmSelection:(id)sender{
+    NSMutableArray* result = [[NSMutableArray alloc] init];
+    for (int i = 0; i < selection.count; i++) {
+        if (((NSNumber*)[selection objectAtIndex:i]).boolValue) {
+            WUAccount* a = [friendList objectAtIndex:i];
+            [result addObject:a.c2CallID];
+        }
+    }
+    [self.delegate selectedUsersUpdated:result];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)setSelectedAccount:(NSArray*)users{
+    startList = users;
+}
 
 @end

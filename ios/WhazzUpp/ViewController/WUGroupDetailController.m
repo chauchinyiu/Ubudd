@@ -227,7 +227,7 @@
                         [cell.btnLeave setHidden:NO];
                         break;
                     case 2:
-                        [cell.lblJoinStatus setText:@"Group admin"];
+                        [cell.lblJoinStatus setText:@"Event admin"];
                         [cell.btnJoin setHidden:YES];
                         [cell.btnMedia setHidden:NO];
                         [cell.btnLeave setHidden:NO];
@@ -298,7 +298,7 @@
         cell.textLabel.text = displayName;
         if ([self.group.groupOwner isEqualToString:userid]) {
             cell.textLabel.textColor = [UIColor blueColor];
-            [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:@"(Group Admin)"]];
+            [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:@"(Event Admin)"]];
         } else {
             cell.textLabel.textColor = [UIColor darkTextColor];
         }
@@ -658,8 +658,8 @@
 }
 
 - (void)removeGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Leave Group"
-                                                    message:@"You left the group."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Leave Event"
+                                                    message:@"You left the event."
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -693,8 +693,8 @@
 }
 
 - (void)deleteGroupResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Group"
-                                                    message:@"You deleted the group."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Event"
+                                                    message:@"You deleted the event."
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];

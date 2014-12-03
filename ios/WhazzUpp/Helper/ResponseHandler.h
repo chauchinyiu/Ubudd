@@ -14,10 +14,14 @@
 @end
 
 @interface WUAccount : NSObject
+
+- (NSComparisonResult)compare:(WUAccount *)otherObject;
+
 @property NSString* name;
 @property NSString* phoneNo;
 @property NSString* c2CallID;
 @property NSString* status;
+
 @end
 
 

@@ -16,6 +16,7 @@
 #import "WebserviceHandler.h"
 #import "ResponseBase.h"
 #import "DataResponse.h"
+#import "ResponseHandler.h"
 
 @implementation WUChatHistoryCell
 
@@ -160,6 +161,14 @@
         WUChatHistoryCell *histcell = (WUChatHistoryCell *) cell;
         histcell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:chathist.contact];
 
+        NSMutableArray* friends = [ResponseHandler instance].friendList;
+        for (int i = 0; i < friends.count; i++) {
+            WUAccount* a = [friends objectAtIndex:i];
+            if([a.c2CallID isEqualToString:chathist.contact] && a.name != nil){
+                histcell.nameLabel.text= a.name;
+            }
+        }
+        
         NSDate *today = [NSDate date];
 
         NSDateComponents *dateComps = [calendar components:NSDayCalendarUnit fromDate:chathist.lastTimestamp toDate:today options:0];

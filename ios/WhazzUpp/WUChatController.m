@@ -75,6 +75,10 @@ typedef enum : NSUInteger {
     [actionSheet showInView:self.view];
 }
 
+- (IBAction)btnSendTapped:(id)sender{
+    [self submit:sender];
+}
+
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad
 {
@@ -83,11 +87,6 @@ typedef enum : NSUInteger {
     self.tabBarController.tabBar.hidden = YES;
     [self.submitButton setImage:nil forState:UIControlStateHighlighted];
     
-    if (self.sendWelcomeText) {
-        self.chatInput.text = @"Welcome!";
-        [self submit:self.submitButton];
-    }
-
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(hidekeybord)];

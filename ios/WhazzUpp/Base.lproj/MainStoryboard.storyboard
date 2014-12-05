@@ -3459,7 +3459,7 @@
                                         <rect key="frame" x="0.0" y="378" width="320" height="38"/>
                                         <subviews>
                                             <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tu1-rG-kf5" userLabel="messageTextView">
-                                                <rect key="frame" x="52" y="3" width="210" height="32"/>
+                                                <rect key="frame" x="52" y="3" width="208" height="32"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
@@ -3485,21 +3485,29 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="submit:" destination="mIK-nM-8TN" eventType="touchUpInside" id="QD5-Cf-xkM"/>
+                                                    <action selector="btnSendTapped:" destination="mIK-nM-8TN" eventType="touchUpInside" id="3rT-mw-dOC"/>
                                                 </connections>
                                             </button>
                                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0/160" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="UNi-Fv-k3H" userLabel="Label NumChars">
-                                                <rect key="frame" x="267" y="2" width="42" height="15"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="42" id="ewr-lh-K1V"/>
-                                                    <constraint firstAttribute="height" constant="15" id="vrl-A8-4me"/>
+                                                    <constraint firstAttribute="width" id="ewr-lh-K1V"/>
+                                                    <constraint firstAttribute="height" id="vrl-A8-4me"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
                                                 <color key="textColor" cyan="0.0" magenta="0.0" yellow="0.0" black="0.69999999000000002" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WJ-gv-KsO" userLabel="richMediaButton">
-                                                <rect key="frame" x="7" y="3" width="34" height="34"/>
+                                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 SMS" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zgd-il-c8N" userLabel="Label NumSMS">
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="StD-La-aGf"/>
+                                                    <constraint firstAttribute="width" id="fVJ-Oz-Tk5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
+                                                <color key="textColor" cyan="0.0" magenta="0.0" yellow="0.0" black="0.69999999000000002" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WJ-gv-KsO" userLabel="richMediaButton">
+                                                <rect key="frame" x="8" y="3" width="34" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="WJJ-Bi-qQI"/>
                                                     <constraint firstAttribute="width" constant="34" id="WPp-GQ-SRY"/>
@@ -3516,24 +3524,14 @@
                                                     <action selector="btnRichMessageTapped:" destination="mIK-nM-8TN" eventType="touchUpInside" id="YfP-jR-iO2"/>
                                                 </connections>
                                             </button>
-                                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 SMS" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zgd-il-c8N" userLabel="Label NumSMS">
-                                                <rect key="frame" x="267" y="15" width="42" height="15"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="15" id="StD-La-aGf"/>
-                                                    <constraint firstAttribute="width" constant="42" id="fVJ-Oz-Tk5"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
-                                                <color key="textColor" cyan="0.0" magenta="0.0" yellow="0.0" black="0.69999999000000002" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Zgd-il-c8N" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" constant="15" id="44K-B3-0aP"/>
+                                            <constraint firstItem="Q0T-d6-NbB" firstAttribute="leading" secondItem="tu1-rG-kf5" secondAttribute="trailing" constant="8" id="5He-Ge-sVH"/>
                                             <constraint firstItem="UNi-Fv-k3H" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" constant="2" id="BKy-be-Hsw"/>
                                             <constraint firstAttribute="trailing" secondItem="UNi-Fv-k3H" secondAttribute="trailing" constant="11" id="Htc-O9-9I6"/>
                                             <constraint firstAttribute="height" constant="38" id="L1w-9S-soh"/>
-                                            <constraint firstItem="Zgd-il-c8N" firstAttribute="leading" secondItem="tu1-rG-kf5" secondAttribute="trailing" constant="5" id="VUs-M1-bhg"/>
                                             <constraint firstItem="3WJ-gv-KsO" firstAttribute="leading" secondItem="41u-fV-1Vn" secondAttribute="leading" constant="7" id="bK4-9O-OcQ"/>
                                             <constraint firstAttribute="bottom" secondItem="Q0T-d6-NbB" secondAttribute="bottom" constant="5" id="clH-6L-UAd"/>
                                             <constraint firstAttribute="bottom" secondItem="tu1-rG-kf5" secondAttribute="bottom" constant="3" id="fLN-jF-Yd8"/>
@@ -8138,11 +8136,11 @@ All rights reserved</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="oaM-SS-1lY"/>
-        <segue reference="l4c-f0-WTn"/>
+        <segue reference="DAE-Aq-bKb"/>
+        <segue reference="tQs-8i-bTJ"/>
         <segue reference="XEP-pC-k3p"/>
         <segue reference="p90-nP-FHg"/>
         <segue reference="JX8-i6-PVw"/>
-        <segue reference="ZrM-q5-zCU"/>
         <segue reference="CpG-ap-BDD"/>
         <segue reference="qEU-4M-V6f"/>
         <segue reference="wV6-VW-yCP"/>

@@ -14,6 +14,7 @@
 - (IBAction)btnCallTapped;
 - (IBAction)btnRichMessageTapped:(id)sender;
 - (IBAction)btnImageTapped:(id)sender;
+- (IBAction)btnSendTapped:(id)sender;
 
 @property (nonatomic, assign) bool sendWelcomeText;
 @property(nonatomic, weak) IBOutlet UIButton* titleButton;

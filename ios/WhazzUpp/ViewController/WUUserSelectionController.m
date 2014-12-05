@@ -23,6 +23,13 @@
     NSMutableArray* friendList;
     NSMutableArray* selection;
     NSArray* startList;
+    
+
+    BOOL inSearch;
+    NSString* searchStr;
+    NSMutableArray *searchList;
+    NSMutableArray *searchIndexList;
+
 }
 @end
 
@@ -61,7 +68,10 @@
             }
         }
     }
+    inSearch = NO;
+    [self.tableView reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -73,7 +83,13 @@
     
     WUUserSelectCell *cell = (WUUserSelectCell *)[self.tableView dequeueReusableCellWithIdentifier:@"SCUserCell"];
     
-    WUAccount* a = [friendList objectAtIndex:indexPath.row];
+    WUAccount* a;
+    if (inSearch) {
+        a = [searchList objectAtIndex:indexPath.row];
+    }
+    else{
+        a = [friendList objectAtIndex:indexPath.row];
+    }
     cell.titleLabel.text = a.name;
     UIImage* image = [[C2CallPhone currentPhone] userimageForUserid:a.c2CallID];
     if(image){
@@ -87,9 +103,20 @@
             if(image){
                 [cell.photo setImage:image];
             }
+            else{
+                image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+                [cell.photo setImage:image];
+            }
         }
     }
-    if (((NSNumber*)[selection objectAtIndex:indexPath.row]).boolValue) {
+    NSNumber* selected;
+    if (inSearch) {
+        selected = ((NSNumber*)[selection objectAtIndex:((NSNumber*)[searchIndexList objectAtIndex: indexPath.row]).intValue]);
+    }
+    else{
+        selected = ((NSNumber*)[selection objectAtIndex:indexPath.row]);
+    }
+    if (selected.boolValue) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else{
@@ -99,20 +126,33 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return friendList.count;
+    if (inSearch) {
+        return searchList.count;
+    }
+    else{
+        return friendList.count;
+    }
 }
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    if (((NSNumber*)[selection objectAtIndex:indexPath.row]).boolValue) {
-        [selection replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:NO]];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    int selectedIndex;
+    if (inSearch) {
+        selectedIndex = ((NSNumber*)[searchIndexList objectAtIndex: indexPath.row]).intValue;
+    }
+    else{
+        selectedIndex = indexPath.row;
+    }
+    if (((NSNumber*)[selection objectAtIndex:selectedIndex]).boolValue) {
+        [selection replaceObjectAtIndex:selectedIndex withObject:[NSNumber numberWithBool:NO]];
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     else{
-        [selection replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:YES]];
+        [selection replaceObjectAtIndex:selectedIndex withObject:[NSNumber numberWithBool:YES]];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
+    [self.tableView reloadData];
 }
 
 
@@ -131,5 +171,79 @@
 -(void)setSelectedAccount:(NSArray*)users{
     startList = users;
 }
+
+#pragma mark SearchDisplayController Delegate
+
+-(void) refetchResults
+{
+    
+    searchList = [[NSMutableArray alloc] init];
+    searchIndexList = [[NSMutableArray alloc] init];
+    for (int i = 0; i < friendList.count; i++) {
+        WUAccount* accRecord = [friendList objectAtIndex:i];
+        if ([accRecord.name rangeOfString:searchStr options:NSCaseInsensitiveSearch].location == NSNotFound) {
+        }
+        else{
+            [searchList addObject:[friendList objectAtIndex:i]];
+            [searchIndexList addObject:[NSNumber numberWithInt:i]];
+        }
+    }
+    [self.tableView reloadData];
+}
+
+-(void) setTextFilterForText:(NSString *) text
+{
+    
+    searchStr = text;
+}
+
+-(void) removeTextFilter
+{
+    //NSFetchRequest *fetch = [ubuddUsers fetchRequest];
+    //[fetch setPredicate:nil];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self setTextFilterForText:searchString];
+    [self refetchResults];
+    
+    // Return NO, as the search will be done in the background
+    return YES;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    [self setTextFilterForText:[self.searchDisplayController.searchBar text]];
+    [self refetchResults];
+    
+    // Return NO, as the search will be done in the background
+    return YES;
+}
+
+- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    inSearch = YES;
+}
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
+{
+    inSearch = NO;
+    
+    [self removeTextFilter];
+    [self refetchResults];
+    
+    
+    return;
+}
+- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)_tableView
+{
+}
+
 
 @end

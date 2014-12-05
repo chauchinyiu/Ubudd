@@ -374,7 +374,7 @@
     ubuddSearch = [[NSMutableArray alloc] init];
     for (int i = 0; i < ubuddListSection.count; i++) {
         WUAccount* accRecord = [ubuddListSection objectAtIndex:i];
-        if ([accRecord.name rangeOfString:searchStr].location == NSNotFound) {
+        if ([accRecord.name rangeOfString:searchStr options:NSCaseInsensitiveSearch].location == NSNotFound) {
         }
         else{
             [ubuddSearch addObject:[ubuddListSection objectAtIndex:i]];

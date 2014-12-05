@@ -192,23 +192,6 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    if (indexPath.section == 0) {
-        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
-        if(user.userType.intValue == 2){
-            return 0;
-        }
-        else if(![resHandler c2CallIDPassed:user.userid]){
-            return 0;
-        }
-        else{
-            return favoritesCellHeight;
-        }
-    }
-    else{
-        return favoritesCellHeight;
-    }
-    */
     return favoritesCellHeight;
     
 }
@@ -257,44 +240,6 @@
         }
         [favocell.userBtn setHidden:NO];
         
-        /*
-        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
-        
-        if(user.userType.intValue == 2){
-            [favocell setHidden:YES];
-        }
-        else if(![resHandler c2CallIDPassed:user.userid]){
-            [favocell setHidden:YES];
-        }
-        else{
-            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
-            if([[NSUserDefaults standardUserDefaults] boolForKey:user.userid]){
-                favocell.statusLabel.text = @"Added to favorites";
-                [favocell.addButton setHidden:YES];
-                [favocell.addButton2 setHidden:YES];
-            }
-            else{
-                favocell.statusLabel.text = @"Using Ubudd";
-                favocell.addButton.tag = indexPath.row;
-                favocell.addButton2.tag = indexPath.row;
-                [favocell.addButton setHidden:NO];
-                [favocell.addButton2 setHidden:NO];
-            }
-            favocell.userBtn.tag = indexPath.row;
-            favocell.userBtn2.tag = indexPath.row;
-            
-            
-            UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
-            
-            if (image) {
-                favocell.userImg.image = image;
-                favocell.userImg.layer.cornerRadius = 15.0;
-                favocell.userImg.layer.masksToBounds = YES;
-            }
-            [favocell.userBtn setHidden:NO];
-            
-        }
-         */
     }
     else{
         ABRecordRef record;
@@ -364,30 +309,6 @@
     [favocell.addButton setHidden:YES];
     [favocell.addButton2 setHidden:YES];
     [self.tableView reloadData];
-    
-
-    /*
-    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
-    
-    int favCnt = [[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
-    favCnt++;
-    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-    [ud setInteger:favCnt forKey:@"FavCount"];
-    [ud setBool:YES forKey:user.userid];
-    [ud synchronize];
-    
-    WUAddressBookCell *favocell;
-    if(inSearch){
-        favocell= (WUAddressBookCell *)[self.searchDisplayController.searchResultsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
-    }
-    else{
-        favocell= (WUAddressBookCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
-    }
-    favocell.statusLabel.text = @"Added to favorites";
-    [favocell.addButton setHidden:YES];
-    [favocell.addButton2 setHidden:YES];
-    [self.tableView reloadData];
-     */
 }
 
 
@@ -406,21 +327,6 @@
         [WUBoardController setIsGroup:NO];
         [self showChatForUserid:accRecord.c2CallID];
     
-        /*
-        
-        
-        MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:indexPath.row];
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        cell.selected = NO;
-        
-        if ([user.userType intValue] == 2) {
-            [WUBoardController setIsGroup:YES];
-        } else {
-            [WUBoardController setIsGroup:NO];
-        }
-        
-        [self showChatForUserid:user.userid];
-         */
     }
     else
     {
@@ -446,65 +352,9 @@
     }
     [WUFriendDetailController setPhoneNo:accRecord.phoneNo];
     [self showFriendDetailForUserid:accRecord.c2CallID];
-    /*
-    MOC2CallUser *user = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:((UIButton*)sender).tag];
-    if ([user.userType intValue] == 2) {
-        [self showGroupDetailForGroupid:user.userid];
-    } else {
-        [self showFriendDetailForUserid:user.userid];
-    }
-     */
 }
 
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 #pragma mark SearchDisplayController Delegate
 
@@ -513,7 +363,7 @@
     ubuddSearch = [[NSMutableArray alloc] init];
     for (int i = 0; i < ubuddListSection.count; i++) {
         WUAccount* accRecord = [ubuddListSection objectAtIndex:i];
-        if ([accRecord.name rangeOfString:searchStr].location == NSNotFound) {
+        if ([accRecord.name rangeOfString:searchStr options:NSCaseInsensitiveSearch].location == NSNotFound) {
         }
         else{
             [ubuddSearch addObject:[ubuddListSection objectAtIndex:i]];
@@ -535,7 +385,7 @@
         else{
             fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         }
-        if ([fullName rangeOfString:searchStr].location == NSNotFound) {
+        if ([fullName rangeOfString:searchStr options:NSCaseInsensitiveSearch].location == NSNotFound) {
         }
         else{
             [addressSearch addObject:[addressListSection objectAtIndex:i]];
@@ -543,47 +393,12 @@
     }
     [self.tableView reloadData];
     
-    /*
-    [ubuddUsers performFetch:nil];
-    addressSearch = [[NSMutableArray alloc] init];
-    for (int i = 0; i < addressListSection.count; i++) {
-        ABRecordRef record = (__bridge ABRecordRef)([addressListSection objectAtIndex:i]);
-        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
-        NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
-        NSString * fullName;
-        if (lastName == nil) {
-            fullName = firstName;
-        }
-        else if (firstName == nil) {
-            fullName = lastName;
-        }
-        else{
-            fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-        }
-        if ([fullName rangeOfString:searchStr].location == NSNotFound) {
-        }
-        else{
-            [addressSearch addObject:[addressListSection objectAtIndex:i]];
-        }
-    }
-    [self.tableView reloadData];
-     */
 }
 
 -(void) setTextFilterForText:(NSString *) text
 {
     
     searchStr = text;
-    /*
-    NSFetchRequest *fetch = [ubuddUsers fetchRequest];
-    
-    //    NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"displayName contains[cd] %@ OR email contains[cd] %@", text, text];
-    
-    
-    NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0 AND not (userid in %@) AND displayName contains[cd] %@", [NSArray arrayWithObjects:@"9bc2858f1194dc1c107", nil], text];
-    
-    [fetch setPredicate:textFilter];
-     */
 }
 
 -(void) removeTextFilter

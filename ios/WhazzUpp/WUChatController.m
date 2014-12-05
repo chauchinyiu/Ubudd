@@ -87,12 +87,6 @@ typedef enum : NSUInteger {
     self.tabBarController.tabBar.hidden = YES;
     [self.submitButton setImage:nil forState:UIControlStateHighlighted];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(hidekeybord)];
-    [tap setDelegate:self];
-    [self.view addGestureRecognizer:tap];
-
     
 
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
@@ -250,9 +244,5 @@ typedef enum : NSUInteger {
     return NO; // handle the touch
 }
 
--(void)hidekeybord
-{
-    [self.view endEditing:YES];
-}
 
 @end

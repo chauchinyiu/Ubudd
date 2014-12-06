@@ -10,6 +10,7 @@
 #import "WUInterestViewController.h"
 #import "WULocationSearchController.h"
 #import "WUUserSelectionController.h"
+#import <SocialCommunication/C2TapImageView.h>
 
 @interface WUAddGroupController : SCAddGroupController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     WUInterestViewControllerDelegate, WULocationSelectControllerDelegate, UIGestureRecognizerDelegate, WUUserSelectClientDelegate> {
@@ -22,6 +23,7 @@
     IBOutlet UIButton *btnLocation;
     IBOutlet UIButton *btnIsPublic;
     IBOutlet UIBarButtonItem *btnDone;
+    IBOutlet C2TapImageView *btnPhoto;
     
 }
 

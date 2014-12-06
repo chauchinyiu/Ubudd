@@ -11,5 +11,10 @@
 
 @interface WUSettingViewController : UITableViewController
 @property(nonatomic, weak) IBOutlet UILabel *lblConnectionStatus;
+@property(nonatomic, weak) IBOutlet UILabel *lblMyProfile;
+@property(nonatomic, weak) IBOutlet UILabel *lblAboutUbudd;
+@property(nonatomic, weak) IBOutlet UILabel *lblTellAFriend;
+@property(nonatomic, weak) IBOutlet UILabel *lblConnectionStatusHeader;
+@property(nonatomic, weak) IBOutlet UILabel *lblFontSizeSetting;
 
 @end

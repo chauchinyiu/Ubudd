@@ -9,6 +9,7 @@
 #import <SocialCommunication/SocialCommunication.h>
 #import "WUInterestViewController.h"
 #import "WULocationSearchController.h"
+#import <SocialCommunication/C2TapImageView.h>
 
 @interface WUGroupDetailCellEdit : UITableViewCell
 @property(nonatomic, weak) IBOutlet UIButton *btnGroupImageEdit;
@@ -20,6 +21,7 @@
 @property(nonatomic, weak) IBOutlet UIButton *btnIsPublicEdit;
 @property(nonatomic, weak) IBOutlet UILabel *lblMemberCntEdit;
 @property(nonatomic, weak) IBOutlet UIButton *btnDeleteGroup;
+@property(nonatomic, weak) IBOutlet C2TapImageView *btnPhoto;
 
 @end
 

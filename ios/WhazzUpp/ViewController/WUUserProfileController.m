@@ -14,6 +14,7 @@
 #import "WebServiceHandler.h"
 #import "ResponseHandler.h"
 #import "WUInterestViewController.h"
+#import "WUUserImageController.h"
 
 
 #define kProfileImage_SelectFromCameraRoll @"Select from Camera Roll"
@@ -52,7 +53,11 @@
     userImage.layer.cornerRadius = 42.0;
     userImage.layer.masksToBounds = YES;
     [userImage setTapAction:^{
-        [self showUserImageForUserid:[SCUserProfile currentUser].userid];
+        NSString * storyboardName = @"MainStoryboard";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
+        vc.viewImage = userImage.image;
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     if ([self.userDefaults boolForKey:kUserDefault_isWelcomeComplete]) {
         SCUserProfile *userProfile = [SCUserProfile currentUser];

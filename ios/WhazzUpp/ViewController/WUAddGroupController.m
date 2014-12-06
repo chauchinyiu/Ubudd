@@ -15,6 +15,7 @@
 #import "ResponseBase.h"
 #import "ResponseHandler.h"
 #import "WUFriendDetailController.h"
+#import "WUUserImageController.h"
 
 #define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kGroupImage_UseCamera @"Use Camera"
@@ -32,8 +33,17 @@
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad {
     [super viewDidLoad];
-    btnGroupImage.imageView.layer.cornerRadius = 40.0;
-    btnGroupImage.imageView.layer.masksToBounds = YES;
+    btnPhoto.layer.cornerRadius = 42.0;
+    btnPhoto.layer.masksToBounds = YES;
+    [btnPhoto setTapAction:^{
+        
+        NSString * storyboardName = @"MainStoryboard";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
+        vc.viewImage = btnPhoto.image;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+
     loc.latitude = 999;
     loc.longitude = 999;
     isPublic = false;
@@ -46,9 +56,9 @@
         if ([self.parentController respondsToSelector:@selector(setCreatedGroupId:)]) {
             [self.parentController performSelector:@selector(setCreatedGroupId:) withObject:groupid];
             
-            if (btnGroupImage.imageView.image) {
+            if (btnPhoto.image) {
                 SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
-                [group setGroupImage:btnGroupImage.imageView.image withCompletionHandler:nil];
+                [group setGroupImage:btnPhoto.image withCompletionHandler:nil];
             }
             SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
             [group setGroupdata:txtTopic2.text forKey:@"topicDesc" public:YES];
@@ -147,7 +157,7 @@
 
 #pragma mark - UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [btnGroupImage setImage:[info objectForKey:@"UIImagePickerControllerEditedImage"] forState:UIControlStateNormal];
+    btnPhoto.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }

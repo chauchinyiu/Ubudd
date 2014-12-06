@@ -199,7 +199,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
-    favocell.nameLabel.font = [UIFont fontWithName:favocell.nameLabel.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
+    favocell.nameLabel.font = [CommonMethods getStdFontType:0];
+    favocell.statusLabel.font = [CommonMethods getStdFontType:2];
 
     if (indexPath.section == 0) {
         WUAccount* accRecord;

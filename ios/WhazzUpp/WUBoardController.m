@@ -27,6 +27,8 @@
 #import "SocialCommunication/CallCellInStream.h"
 #import <SocialCommunication/C2TapImageView.h>
 
+#import "CommonMethods.h"
+
 
 @interface WUBoardController (){
     CGFloat messageInHeightOffset, messageOutHeightOffset, messageInMinHeight, messageOutMinHeight;
@@ -187,9 +189,8 @@ static BOOL isGroup = YES;
     [super configureCell:cell atIndexPath:indexPath];
     if ([cell isKindOfClass:[MessageCellOutStream class]]) {
         MessageCellOutStream *c = (MessageCellOutStream*)cell;
-        [c.headline setText:@"me"];
-        [c.headline setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
+        [c.headline setHidden:YES];
+        
         SCBubbleViewOut* view = (SCBubbleViewOut*)(c.bubbleView);
         [view setTextColor:[UIColor blackColor]];
         /*
@@ -214,48 +215,34 @@ static BOOL isGroup = YES;
     }
     else if ([cell isKindOfClass:[ImageCellOutStream class]]) {
         ImageCellOutStream *c = (ImageCellOutStream*)cell;
-        [c.headline setText:@"me"];
-        [c.headline setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
+        [c.headline setHidden:YES];
     }
     else if ([cell isKindOfClass:[LocationCellOutStream class]]) {
         LocationCellOutStream *c = (LocationCellOutStream*)cell;
-        [c.headline setText:@"me"];
-        [c.headline setTextColor:[UIColor blackColor]];
+        [c.headline setHidden:YES];
         [c.locationAddress setTextColor:[UIColor blackColor]];
         [c.contactName setTextColor:[UIColor blackColor]];
         [c.info setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
     }
     else if ([cell isKindOfClass:[AudioCellOutStream class]]) {
         AudioCellOutStream *c = (AudioCellOutStream*)cell;
-        [c.headline setText:@"me"];
-        [c.headline setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
+        [c.headline setHidden:YES];
     }
     else if ([cell isKindOfClass:[VideoCellOutStream class]]) {
         VideoCellOutStream *c = (VideoCellOutStream*)cell;
-        [c.headline setText:@"me"];
-        [c.headline setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
+        [c.headline setHidden:YES];
     }
     else if ([cell isKindOfClass:[FriendCellOutStream class]]) {
         FriendCellOutStream *c = (FriendCellOutStream*)cell;
-        [c.headline setText:@"me"];
-        [c.headline setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
+        [c.headline setHidden:YES];
     }
     else if ([cell isKindOfClass:[ContactCellOutStream class]]) {
         ContactCellOutStream *c = (ContactCellOutStream*)cell;
-        [c.headline setText:@"me"];
-        [c.headline setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
+        [c.headline setHidden:YES];
     }
     else if ([cell isKindOfClass:[CallCellOutStream class]]) {
         CallCellOutStream *c = (CallCellOutStream*)cell;
-        [c.headline setText:@"me"];
-        [c.headline setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
+        [c.headline setHidden:YES];
     }
     
     else if ([cell isKindOfClass:[MessageCellInStream class]]) {
@@ -263,6 +250,7 @@ static BOOL isGroup = YES;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        c.headline.font = [CommonMethods getStdFontType:3];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                  attributes:underlineAttribute];
@@ -295,6 +283,7 @@ static BOOL isGroup = YES;
         [c.messageImage setFrame:CGRectMake(c.messageImage.frame.origin.x, c.messageImage.frame.origin.y, 100, 100) ];
         [c.headline setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        c.headline.font = [CommonMethods getStdFontType:3];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
@@ -303,6 +292,7 @@ static BOOL isGroup = YES;
         LocationCellInStream *c = (LocationCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
+        c.headline.font = [CommonMethods getStdFontType:3];
         [c.locationAddress setTextColor:[UIColor blackColor]];
         [c.locationTitle  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [c.headline setHidden:!isGroup];
@@ -314,6 +304,7 @@ static BOOL isGroup = YES;
         AudioCellInStream *c = (AudioCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
+        c.headline.font = [CommonMethods getStdFontType:3];
         [c.locationAddress setTextColor:[UIColor blackColor]];
         [c.contactName setTextColor:[UIColor blackColor]];
         [c.info setTextColor:[UIColor blackColor]];
@@ -326,6 +317,7 @@ static BOOL isGroup = YES;
         VideoCellInStream *c = (VideoCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
+        c.headline.font = [CommonMethods getStdFontType:3];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
@@ -335,6 +327,7 @@ static BOOL isGroup = YES;
         FriendCellInStream *c = (FriendCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
+        c.headline.font = [CommonMethods getStdFontType:3];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
@@ -344,6 +337,7 @@ static BOOL isGroup = YES;
         ContactCellInStream *c = (ContactCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
+        c.headline.font = [CommonMethods getStdFontType:3];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
@@ -353,6 +347,7 @@ static BOOL isGroup = YES;
         CallCellInStream *c = (CallCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
+        c.headline.font = [CommonMethods getStdFontType:3];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
@@ -627,7 +622,7 @@ static BOOL isGroup = YES;
     if ([cell.bubbleView isKindOfClass:[SCBubbleViewIn class]]) {
         SCBubbleViewIn *bv = (SCBubbleViewIn *) cell.bubbleView;
         bv.chatText = text;
-        bv.textFont = self.textFieldInFont;
+        bv.textFont = [CommonMethods getStdFontType:1];
         bv.textColor = cell.textfield.textColor;
         cell.textfield.hidden = YES;
     } else {
@@ -759,7 +754,7 @@ static BOOL isGroup = YES;
     
     if (bv) {
         bv.chatText = text;
-        bv.textFont = self.textFieldOutFont;
+        bv.textFont = [CommonMethods getStdFontType:1];
         bv.textColor = cell.textfield.textColor;
         cell.textfield.hidden = YES;
     } else {
@@ -983,7 +978,7 @@ static BOOL isGroup = YES;
 {
     CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
     
-    CGSize expectedLabelSize = [elem.text sizeWithFont:font
+    CGSize expectedLabelSize = [elem.text sizeWithFont:[CommonMethods getStdFontType:1]
                                      constrainedToSize:maximumLabelSize
                                          lineBreakMode:NSLineBreakByWordWrapping];
     
@@ -998,7 +993,7 @@ static BOOL isGroup = YES;
 {
     CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
     
-    CGSize expectedLabelSize = [elem.text sizeWithFont:font
+    CGSize expectedLabelSize = [elem.text sizeWithFont:[CommonMethods getStdFontType:1]
                                      constrainedToSize:maximumLabelSize
                                          lineBreakMode:NSLineBreakByWordWrapping];
     

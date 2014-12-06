@@ -114,10 +114,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)btnImageTapped:(id)sender{
-    MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
-    if (user.userType.intValue != 2) {
-        [self showUserImageForUserid:self.targetUserid];
-    }
+    [self showUserImageForUserid:self.targetUserid];
 }
 
 

@@ -18,6 +18,7 @@
 #import <MapKit/MapKit.h>
 #import "WUUbuddMapViewController.h"
 #import "WUAddGroupController.h"
+#import "CommonMethods.h"
 
 @implementation WUUbuddListCell
 
@@ -230,6 +231,13 @@
     WUUbuddListCell *favocell = (WUUbuddListCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     
     SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]]];
+    
+    favocell.nameLabel.font = [CommonMethods getStdFontType:0];
+    favocell.statusLabel.font = [CommonMethods getStdFontType:2];
+    favocell.hostHeaderLabel.font = [CommonMethods getStdFontType:2];
+    favocell.memberHeaderLabel.font = [CommonMethods getStdFontType:2];
+    favocell.hostLabel.font = [CommonMethods getStdFontType:2];
+    favocell.hostLabel.font = [CommonMethods getStdFontType:2];
     
     favocell.nameLabel.font = [UIFont fontWithName:favocell.nameLabel.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
         

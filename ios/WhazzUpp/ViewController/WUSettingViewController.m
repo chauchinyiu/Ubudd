@@ -8,6 +8,7 @@
 
 #import "WUSettingViewController.h"
 #import "WUAppDelegate.h"
+#import "CommonMethods.h"
 
 
 @interface WUSettingViewController ()
@@ -15,7 +16,7 @@
 @end
 
 @implementation WUSettingViewController
-@synthesize lblConnectionStatus;
+@synthesize lblConnectionStatus, lblAboutUbudd, lblConnectionStatusHeader, lblFontSizeSetting, lblMyProfile, lblTellAFriend;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,7 +30,12 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     WUAppDelegate *appDelegate = (WUAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
+    lblAboutUbudd.font = [CommonMethods getStdFontType:1];
+    lblConnectionStatus.font = [CommonMethods getStdFontType:1];
+    lblConnectionStatusHeader.font = [CommonMethods getStdFontType:1];
+    lblFontSizeSetting.font = [CommonMethods getStdFontType:1];
+    lblMyProfile.font = [CommonMethods getStdFontType:1];
+    lblTellAFriend.font = [CommonMethods getStdFontType:1];
     if (appDelegate.loginCompleted) {
         [lblConnectionStatus setText:@"Connected"];
     }

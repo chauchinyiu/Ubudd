@@ -17,6 +17,7 @@
 #import "ResponseBase.h"
 #import "DataResponse.h"
 #import "ResponseHandler.h"
+#import "CommonMethods.h"
 
 @implementation WUChatHistoryCell
 
@@ -141,6 +142,7 @@
 {
     if (hasRequest && indexPath.row == 0) {
         WUHistoryRequestCell* rCell = (WUHistoryRequestCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUHistoryRequestCell"];
+        rCell.nameLabel.font = [CommonMethods getStdFontType:0];
         [rCell.nameLabel setText:[NSString stringWithFormat:@"You have %d requests", requestCnt]];
         return rCell;
     }
@@ -159,6 +161,9 @@
     
     if ([cell isKindOfClass:[WUChatHistoryCell class]]) {
         WUChatHistoryCell *histcell = (WUChatHistoryCell *) cell;
+        histcell.nameLabel.font = [CommonMethods getStdFontType:0];
+        histcell.timeLabel.font = [CommonMethods getStdFontType:2];
+        histcell.textLabel.font = [CommonMethods getStdFontType:2];
         histcell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:chathist.contact];
 
         NSMutableArray* friends = [ResponseHandler instance].friendList;

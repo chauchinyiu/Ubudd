@@ -17,6 +17,7 @@
 #import "WebserviceHandler.h"
 #import "DataResponse.h"
 #import "ResponseBase.h"
+#import "CommonMethods.h"
 
 @implementation WUFavoritesCell
 
@@ -177,6 +178,8 @@
 -(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     WUFavoritesCell *favocell = (WUFavoritesCell *) cell;
+    favocell.nameLabel.font = [CommonMethods getStdFontType:0];
+    favocell.statusLabel.font = [CommonMethods getStdFontType:2];
     if (indexPath.section == 0) {
         WUAccount* accRecord;
         if (inSearch) {

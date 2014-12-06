@@ -12,6 +12,7 @@
 #import "WebserviceHandler.h"
 #import "ResponseHandler.h"
 #import "WUMediaController.h"
+#import "WUUserImageController.h"
 #define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kGroupImage_UseCamera @"Use Camera"
 
@@ -149,11 +150,20 @@
         if (isOwner) {
             WUGroupDetailCellEdit *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellEdit"];
             if (groupInfo) {
-                cell.btnGroupImageEdit.imageView.layer.cornerRadius = 40.0;
-                cell.btnGroupImageEdit.imageView.layer.masksToBounds = YES;
+                
+                cell.btnPhoto.layer.cornerRadius = 42.0;
+                cell.btnPhoto.layer.masksToBounds = YES;
+                [cell.btnPhoto setTapAction:^{
+                    
+                    NSString * storyboardName = @"MainStoryboard";
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                    WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
+                    vc.viewImage = cell.btnPhoto.image;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }];
+                
                 if(groupImg){
-                    [cell.btnGroupImageEdit setImage:groupImg forState:UIControlStateNormal];
-                    [cell.btnGroupImageEdit setBackgroundImage:nil forState:UIControlStateNormal];
+                    [cell.btnPhoto setImage:groupImg];
                 }
 
                 [cell.txtTopicEdit setText:[groupInfo objectForKey:@"topic"]];
@@ -457,7 +467,7 @@
 #pragma mark - UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     groupImg = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-    [editCell.btnGroupImageEdit setImage:groupImg forState:UIControlStateNormal];
+    [editCell.btnPhoto setImage:groupImg];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -664,17 +674,7 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    if (self.group.groupid != nil) {
-        [dictionary setObject:self.group.groupid forKey:@"c2CallID"];
-    }
-    [dictionary setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
-    DataRequest *dataRequest = [[DataRequest alloc] init];
-    dataRequest.requestName = @"readGroupInfo";
-    dataRequest.values = dictionary;
-    
-    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readGroupInfo:error:)];
+    [self removeFromParentViewController];
     
 }
 

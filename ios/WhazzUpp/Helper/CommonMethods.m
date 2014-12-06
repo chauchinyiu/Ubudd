@@ -39,4 +39,24 @@
         [C2WaitMessage hideWaitMessage];
 }
 
++ (UIFont*) getStdFontType:(int)type{
+    
+    UIFont* f;
+    if (type == 0) {
+        f = [UIFont fontWithName:@"HelveticaNeue-Bold" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 17];
+    }
+    else if (type == 1) {
+        f = [UIFont fontWithName:@"HelveticaNeue" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 17];
+    }
+    else if (type == 2) {
+        f = [UIFont fontWithName:@"HelveticaNeue" size:([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 1) * 2 - 17];
+    }
+    else if (type == 3) {
+        f = [UIFont fontWithName:@"HelveticaNeue" size:([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 2) * 2 - 17];
+    }
+    else{
+        
+    }
+    return f;
+}
 @end

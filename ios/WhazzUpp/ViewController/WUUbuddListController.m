@@ -245,7 +245,7 @@
     favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", indexPath.row]];
     favocell.hostLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", indexPath.row]];
     NSNumber* memberCnt = [fetchResult objectForKey:[NSString stringWithFormat:@"memberCnt%d", indexPath.row]];
-    favocell.memberLabel.text = [NSString stringWithFormat:@"%d OF 50", memberCnt.intValue + 1];
+    favocell.memberLabel.text = [NSString stringWithFormat:@"%d OF 200", memberCnt.intValue + 1];
     
     
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:group.groupid];
@@ -269,15 +269,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
     
-    NSNumber* isMember = [fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row]];
-    if(isMember.intValue == 1 || isMember.intValue == 2){
-        [WUBoardController setIsGroup:YES];
-        [self showChatForUserid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
-    }
-    else{
-        [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
-    
-    }
+    [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
 }
 
 -(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
@@ -292,79 +284,6 @@
     return YES;
 }
 
-
--(IBAction)joinGroup:(id)sender{
-    NSNumber* isPublic = [fetchResult objectForKey:[NSString stringWithFormat:@"isPublic%d", [sender tag]]];
-    joinCell = sender;
-    if(isPublic.intValue == 1){
-        //join directly
-        NSString* groupID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", [sender tag] ]];
-        SCGroup *group = [[SCGroup alloc] initWithGroupid:groupID];
-        //[group addGroupMember:[SCUserProfile currentUser].userid];
-        [group joinGroup];
-        [group saveGroupWithCompletionHandler:^(BOOL success){
-            DataRequest* datRequest = [[DataRequest alloc] init];
-            NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-            [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"memberID"];
-            [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"groupID%d", [sender tag]]] forKey:@"groupID"];
-            datRequest.values = data;
-            datRequest.requestName = @"addGroupMember";
-            
-            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-            [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(addGroupUserResponse:error:)];
-        }];
-    }
-    else{
-        //submit request
-        DataRequest* datRequest = [[DataRequest alloc] init];
-        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-        [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"memberID"];
-        [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"groupID%d", [sender tag]]] forKey:@"groupID"];
-        [data setValue:[SCUserProfile currentUser].firstname forKey:@"userName"];
-        
-        datRequest.values = data;
-        datRequest.requestName = @"requestJoinGroup";
-        
-        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(requestJoinGroupResponse:error:)];
-    }
-}
-
-- (void)requestJoinGroupResponse:(ResponseBase *)response error:(NSError *)error{
-    if (response.errorCode == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Request submitted"
-                                                        message:@"Your request is submitted and is waiting for approval."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [joinCell setHidden:YES];
-    }
-    else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Submittion failed"
-                                                        message:@"Unable to submit your request."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    
-    }
-    
-}
-
-
-- (void)addGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Join Group"
-                                                    message:@"You are now a member of the group."
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    [joinCell setHidden:YES];
-    NSMutableDictionary* tempcpy = [NSMutableDictionary dictionaryWithDictionary:fetchResult];
-    [tempcpy  setValue:[NSNumber numberWithInt:1] forKey:[NSString stringWithFormat:@"isMember%d", [joinCell tag]]];
-    fetchResult = tempcpy;
-}
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{

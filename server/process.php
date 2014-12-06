@@ -667,7 +667,7 @@ class MyAPI extends API {
 			$groupArray['locationLag'] = $verifyRow['locationLag'];
 			$groupArray['locationLong'] = $verifyRow['locationLong'];
 			$groupArray['userName'] = $verifyRow['userName'];
-			if($row['groupAdmin'] == $args['userID']){
+			if($verifyRow['groupAdmin'] == $args['userID']){
 				$groupArray['isMember'] = 2;
 			}
 			else{

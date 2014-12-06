@@ -20,7 +20,6 @@
 @property(nonatomic, weak) IBOutlet UIButton *btnLocationEdit;
 @property(nonatomic, weak) IBOutlet UIButton *btnIsPublicEdit;
 @property(nonatomic, weak) IBOutlet UILabel *lblMemberCntEdit;
-@property(nonatomic, weak) IBOutlet UIButton *btnDeleteGroup;
 @property(nonatomic, weak) IBOutlet C2TapImageView *btnPhoto;
 
 @end
@@ -28,11 +27,26 @@
 @interface WUGroupDetailCellReadOnly : UITableViewCell
     @property(nonatomic, weak) IBOutlet UIImageView *groupImg;
     @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic, *lblHost, *lblMemberCnt, *lblJoinStatus;
-    @property(nonatomic, weak) IBOutlet UIButton *btnJoin;
-    @property(nonatomic, weak) IBOutlet UIButton *btnMedia;
-    @property(nonatomic, weak) IBOutlet UIButton *btnLeave;
-
 @end
+
+@interface WUGroupViewMediaCell : UITableViewCell
+@end
+
+@interface WUGroupAdminActionCell : UITableViewCell
+@end
+
+@interface WUGroupMemberActionCell : UITableViewCell
+@end
+
+@interface WUGroupPublicActionCell : UITableViewCell
+@end
+
+@interface WUGroupNonMemberActionCell : UITableViewCell
+@end
+
+
+
+
 
 @interface WUGroupDetailController : SCGroupDetailController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WULocationSelectControllerDelegate>
 
@@ -42,5 +56,6 @@
 - (IBAction)btnJoinTapped:(id)sender;
 - (IBAction)btnLeaveTapped:(id)sender;
 - (IBAction)btnDeleteTapped:(id)sender;
+- (IBAction)btnChatTapped:(id)sender;
 
 @end

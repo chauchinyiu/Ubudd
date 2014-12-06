@@ -213,7 +213,7 @@
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
         SCGroupAddMembersCell* c = (SCGroupAddMembersCell*)[super tableView:tableView cellForRowAtIndexPath:indexPath];
-        [c.numMembers setText:[NSString stringWithFormat:@"(%d of 49)", self.members.count]];
+        [c.numMembers setText:[NSString stringWithFormat:@"(%d of 199)", self.members.count]];
         return c;
     }
     else{
@@ -264,6 +264,9 @@
         return NO;
     }
     if (self.members.count == 0){
+        return NO;
+    }
+    if (self.members.count > 199){
         return NO;
     }
     return YES;

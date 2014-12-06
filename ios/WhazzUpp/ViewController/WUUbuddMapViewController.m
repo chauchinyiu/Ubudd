@@ -242,15 +242,7 @@
 {
     if ([view.annotation isKindOfClass:[WUUbuddMapViewAnnotation class]]) {
         int i = ((WUUbuddMapViewAnnotation*)(view.annotation)).groupIndex;
-        NSNumber* isMember = [fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", i]];
-        if(isMember.intValue == 1 || isMember.intValue == 2){
-            [WUBoardController setIsGroup:YES];
-            [self showChatForUserid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]]];
-        }
-        else{
-            [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]]];
-            
-        }
+        [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]]];
     }
 }
 

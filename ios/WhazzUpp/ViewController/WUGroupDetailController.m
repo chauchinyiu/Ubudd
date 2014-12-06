@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 3Embed Technologies. All rights reserved.
 //
 
+#import <SocialCommunication/UIViewController+SCCustomViewController.h>
 #import "WUGroupDetailController.h"
 #import "DataRequest.h"
 #import "DataResponse.h"
@@ -16,6 +17,17 @@
 #define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kGroupImage_UseCamera @"Use Camera"
 
+@implementation WUGroupNonMemberActionCell
+@end
+
+@implementation WUGroupMemberActionCell
+@end
+
+@implementation WUGroupAdminActionCell
+@end
+
+@implementation WUGroupViewMediaCell
+@end
 
 @implementation WUGroupDetailCellEdit
 @end
@@ -24,11 +36,7 @@
 @end
 
 @interface WUGroupDetailController (){
-    CGFloat editCellHeight;
-    CGFloat readOnlyCellHeight;
-    CGFloat memberCellHeight;
-    BOOL isOwner;
-    BOOL isMember;
+    int userType;
     NSMutableDictionary* groupInfo;
     WUGroupDetailCellEdit* editCell;
     UIImage* groupImg;
@@ -46,15 +54,6 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-    WUGroupDetailCellEdit *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellEdit"];
-    editCellHeight = cell.frame.size.height;
-    
-    WUGroupDetailCellReadOnly *cell2 = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellReadOnly"];
-    readOnlyCellHeight = cell2.frame.size.height;
-    
-    SCGroupMemberCell *cell3 = [self.tableView dequeueReusableCellWithIdentifier:@"SCGroupMemberCell"];
-    memberCellHeight = cell3.frame.size.height;
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(hidekeybord)];
@@ -65,12 +64,14 @@
     if (self.group.groupImage) {
         groupImg = self.group.groupImage;
     }
-    isOwner = [self.group.groupOwner isEqualToString:[SCUserProfile currentUser].userid];
-    isMember = NO;
-    if (isOwner) {
-        isMember = YES;
+    if ([self.group.groupOwner isEqualToString:[SCUserProfile currentUser].userid]) {
+        //owner
+        userType = 1;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveGroup)];
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    }
+    else{
+        userType = 3;
     }
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
@@ -105,40 +106,59 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    if (isMember) {
-        return 2;
-    }
-    else{
-        return 1;
-    }
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
+    
     if (section == 0) {
-        return 1;
+        if (userType == 1 || userType == 2 || isPublic.intValue == 1) {
+            return 2; //detail and media
+        }
+        else{
+            return 1; //detail only
+        }
+    }
+    else if (section == 1) {
+        if (userType == 1 || userType == 2 || isPublic.intValue == 1) {
+            return [self.members count];
+        }
+        else{
+            return 0;
+        }
     }
     else{
-        return [self.members count];
+        if (userType == 1 || userType == 2 || userType == 3 || isPublic.intValue == 1) {
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        if (isOwner) {
-            return 400;
-            //return editCellHeight;
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        if (userType == 1) {
+            return 320;
         }
         else{
-            return 370;
-            //return readOnlyCellHeight;
+            return 320;
         }
     }
-    else{
-        return 44;
-        //return memberCellHeight;
+    else if(indexPath.section == 2){
+        if (userType == 1) {
+            return 80;
+        }
+        else{
+            return 80;
+        }
+        
     }
+    return 44;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -146,8 +166,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        if (isOwner) {
+    
+    NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
+    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        if (userType == 1) {
             WUGroupDetailCellEdit *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellEdit"];
             if (groupInfo) {
                 
@@ -184,7 +207,7 @@
                 }
                 
                 NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
-                [cell.lblMemberCntEdit setText:[NSString stringWithFormat:@"Members: %d OF 50", memberCnt.intValue + 1]];
+                [cell.lblMemberCntEdit setText:[NSString stringWithFormat:@"Members: %d OF 200", memberCnt.intValue + 1]];
                 
             }
             editCell = cell;
@@ -217,52 +240,18 @@
                 }
                 
                 NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
-                [cell.lblMemberCnt setText:[NSString stringWithFormat:@"%d OF 50", memberCnt.intValue + 1]];
+                [cell.lblMemberCnt setText:[NSString stringWithFormat:@"%d OF 200", memberCnt.intValue + 1]];
                 
                 [cell.lblHost setText:[groupInfo objectForKey:@"userName"]];
-                
-                NSNumber* joinStatus = [groupInfo objectForKey:@"isMember"];
-
-                switch (joinStatus.intValue) {
-                    case 0:
-                        [cell.lblJoinStatus setText:@"Not a member"];
-                        [cell.btnJoin setHidden:NO];
-                        [cell.btnMedia setHidden:YES];
-                        [cell.btnLeave setHidden:YES];
-                        break;
-                    case 1:
-                        [cell.lblJoinStatus setText:@"Joined"];
-                        [cell.btnJoin setHidden:YES];
-                        [cell.btnMedia setHidden:NO];
-                        [cell.btnLeave setHidden:NO];
-                        break;
-                    case 2:
-                        [cell.lblJoinStatus setText:@"Event admin"];
-                        [cell.btnJoin setHidden:YES];
-                        [cell.btnMedia setHidden:NO];
-                        [cell.btnLeave setHidden:NO];
-                        break;
-                    case 3:
-                        [cell.lblJoinStatus setText:@"Waiting for reply"];
-                        [cell.btnJoin setHidden:YES];
-                        [cell.btnMedia setHidden:YES];
-                        [cell.btnLeave setHidden:YES];
-                        break;
-                    case 4:
-                        [cell.lblJoinStatus setText:@"Request rejected"];
-                        [cell.btnJoin setHidden:YES];
-                        [cell.btnMedia setHidden:YES];
-                        [cell.btnLeave setHidden:YES];
-                        break;
-                        
-                    default:
-                        break;
-                }
             }
             return cell;
         }
     }
-    else{
+    else if (indexPath.section == 0 && indexPath.row == 1) {
+        WUGroupViewMediaCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupViewMediaCell"];
+        return cell;
+    }
+    else if (indexPath.section == 1){
         static NSString *CellIdentifier = @"SCGroupMemberCell";
         
         SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -386,18 +375,20 @@
         cell.backgroundColor = [UIColor whiteColor];
         return cell;
         
-        /*
-        UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:ipath];
-        if ([cell isKindOfClass:[SCGroupMemberCell class]]) {
-            SCGroupMemberCell *c = (SCGroupMemberCell*)cell;
-            NSString *userid = [self.members objectAtIndex:indexPath.row];
-            
-            if ([self.group.groupOwner isEqualToString:userid]) {
-                [c.textLabel setText:[c.textLabel.text stringByAppendingString:@"(Group Admin)"]];
-            }
+    }
+    else{
+        if (userType == 1) {
+            return [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupAdminActionCell"];
         }
-        return cell;
-         */
+        else if (userType == 2) {
+            return [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupMemberActionCell"];
+        }
+        else if (isPublic.intValue == 1) {
+            return [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupPublicActionCell"];
+        }
+        else {
+            return [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupNonMemberActionCell"];
+        }
     }
 }
 
@@ -497,10 +488,15 @@
     else {
         groupInfo = [[NSMutableDictionary alloc] initWithDictionary:res.data];
         NSNumber* joinStatus = [groupInfo objectForKey:@"isMember"];
-        if (joinStatus.intValue == 1 || joinStatus.intValue == 2) {
-            isMember = YES;
+        if (joinStatus.intValue == 1) {
+            userType = 2;
         }
-        
+        else if (joinStatus.intValue == 2) {
+            userType = 1;
+        }
+        else{
+            userType = 4;
+        }
         [self.tableView reloadData];
     }
 }
@@ -631,12 +627,8 @@
 
 
 - (void)addGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Join Group"
-                                                    message:@"You are now a member of the group."
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+
+    
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     if (self.group.groupid != nil) {
         [dictionary setObject:self.group.groupid forKey:@"c2CallID"];
@@ -648,6 +640,8 @@
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readGroupInfo:error:)];
+    [self showChatForUserid:self.group.groupid];
+
 
 }
 
@@ -678,6 +672,10 @@
     
 }
 
+- (IBAction)btnChatTapped:(id)sender{
+    [self showChatForUserid:self.group.groupid];
+}
+
 - (IBAction)btnDeleteTapped:(id)sender{
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:[[SCUserProfile currentUser] userid]];
     [[SCDataManager instance] removeDatabaseObject:user];
@@ -691,6 +689,8 @@
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(deleteGroupResponse:error:)];
 }
+
+
 
 - (void)deleteGroupResponse:(ResponseBase *)response error:(NSError *)error{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Event"

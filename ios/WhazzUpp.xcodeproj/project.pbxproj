@@ -1097,6 +1097,8 @@
 		97AFCF7217801CD0005A8D49 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97AFCF7017801CAD005A8D49 /* CoreText.framework */; };
 		97AFCF8D1780213E005A8D49 /* R1PhotoEffectsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97AFCF8C1780213E005A8D49 /* R1PhotoEffectsSDK.a */; };
 		CE01E46E19B5AC41003A0289 /* WUUserSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01E46D19B5AC41003A0289 /* WUUserSelectionController.m */; };
+		CE049FC11A368E0C006D5C25 /* bg_newgroup.png in Resources */ = {isa = PBXBuildFile; fileRef = CE049FBF1A368E0C006D5C25 /* bg_newgroup.png */; };
+		CE049FC21A368E0C006D5C25 /* bg_newgroup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE049FC01A368E0C006D5C25 /* bg_newgroup@2x.png */; };
 		CE0919A319D6529C00865665 /* WUUbuddListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0919A219D6529C00865665 /* WUUbuddListController.m */; };
 		CE2AC7F519FD36BB00A3D093 /* WUPhotoViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */; };
 		CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C003198C8D3500D22BFE /* VerifyUser.m */; };
@@ -2263,6 +2265,8 @@
 		97AFCF8C1780213E005A8D49 /* R1PhotoEffectsSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = R1PhotoEffectsSDK.a; sourceTree = "<group>"; };
 		CE01E46C19B5AC41003A0289 /* WUUserSelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUUserSelectionController.h; sourceTree = "<group>"; };
 		CE01E46D19B5AC41003A0289 /* WUUserSelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUUserSelectionController.m; sourceTree = "<group>"; };
+		CE049FBF1A368E0C006D5C25 /* bg_newgroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_newgroup.png; sourceTree = "<group>"; };
+		CE049FC01A368E0C006D5C25 /* bg_newgroup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_newgroup@2x.png"; sourceTree = "<group>"; };
 		CE0919A119D6529C00865665 /* WUUbuddListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUUbuddListController.h; sourceTree = "<group>"; };
 		CE0919A219D6529C00865665 /* WUUbuddListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUUbuddListController.m; sourceTree = "<group>"; };
 		CE2AC7F319FD36BB00A3D093 /* WUPhotoViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUPhotoViewerController.h; sourceTree = "<group>"; };
@@ -3557,6 +3561,8 @@
 		17FC6643194DC89D0080A2D5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE049FBF1A368E0C006D5C25 /* bg_newgroup.png */,
+				CE049FC01A368E0C006D5C25 /* bg_newgroup@2x.png */,
 				CE7E964319F8F017001C229F /* mapMarker.png */,
 				CEEFF0F219B1679200B59179 /* Info_icon@2x.png */,
 				CEEFF0F019B1678A00B59179 /* Info_icon.png */,
@@ -4102,6 +4108,7 @@
 				1730612E19277F6B0018EE25 /* flag230.png in Resources */,
 				173062A419277F6B0018EE25 /* ico_z0.png in Resources */,
 				1730620519277F6B0018EE25 /* ico_broken_voice_msg@2x.png in Resources */,
+				CE049FC21A368E0C006D5C25 /* bg_newgroup@2x.png in Resources */,
 				1730604A19277F6B0018EE25 /* bg_dialpad_rechts_unten.png in Resources */,
 				1730636E19277F6B0018EE25 /* np-389.xml in Resources */,
 				1730632F19277F6B0018EE25 /* np-245.xml in Resources */,
@@ -4568,6 +4575,7 @@
 				1730627219277F6B0018EE25 /* ico_richmessaging_03.png in Resources */,
 				173060EA19277F6B0018EE25 /* CustomEventsBannerView.nib in Resources */,
 				1730627B19277F6B0018EE25 /* ico_sending_2@2x.png in Resources */,
+				CE049FC11A368E0C006D5C25 /* bg_newgroup.png in Resources */,
 				1730609419277F6B0018EE25 /* btn_dial_call_n@2x.png in Resources */,
 				1730628519277F6B0018EE25 /* ico_sms-24x24@2x.png in Resources */,
 				1730621C19277F6B0018EE25 /* ico_delet_number.png in Resources */,

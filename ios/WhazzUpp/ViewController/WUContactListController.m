@@ -236,7 +236,7 @@
         
         if (image) {
             favocell.userImg.image = image;
-            favocell.userImg.layer.cornerRadius = 15.0;
+            favocell.userImg.layer.cornerRadius = 0.0;
             favocell.userImg.layer.masksToBounds = YES;
         }
         [favocell.userBtn setHidden:NO];

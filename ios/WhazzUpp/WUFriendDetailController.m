@@ -45,10 +45,10 @@ static NSString* currentPhoneNo = @"";
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.userInfoCell.userImage.layer.cornerRadius = 45.0;
+
+    self.userInfoCell.userImage.layer.cornerRadius = 0.0;
     self.userInfoCell.userImage.layer.masksToBounds = YES;
-    
+
     NSMutableArray* acclist = [ResponseHandler instance].friendList;
     if ([[self.fetchedResultsController fetchedObjects] count] == 0){
         curUserObj = [[WUC2CallUser alloc] init];

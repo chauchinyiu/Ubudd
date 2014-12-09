@@ -50,7 +50,7 @@
     
     [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", [self.userDefaults objectForKey:@"countryCode"], stringts]];
     
-    userImage.layer.cornerRadius = 42.0;
+    userImage.layer.cornerRadius = 0.0;
     userImage.layer.masksToBounds = YES;
     [userImage setTapAction:^{
         NSString * storyboardName = @"MainStoryboard";

@@ -33,6 +33,7 @@
 @end
 
 @interface WUGroupAdminActionCell : UITableViewCell
+    @property(nonatomic, weak) IBOutlet UIButton *btnBlockUser;
 @end
 
 @interface WUGroupMemberActionCell : UITableViewCell
@@ -44,6 +45,8 @@
 @interface WUGroupNonMemberActionCell : UITableViewCell
 @end
 
+@interface WUGroupMemberCell : UITableViewCell
+@end
 
 
 
@@ -57,5 +60,6 @@
 - (IBAction)btnLeaveTapped:(id)sender;
 - (IBAction)btnDeleteTapped:(id)sender;
 - (IBAction)btnChatTapped:(id)sender;
+- (IBAction)btnBlockMemberTapped:(id)sender;
 
 @end

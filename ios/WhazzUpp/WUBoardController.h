@@ -10,6 +10,14 @@
 
 @class MOC2CallUser, MessageCell, MOC2CallEvent, C2TapImageView;
 
+
+@interface WUCreateGroupCell : UITableViewCell
+
+@property(nonatomic, weak) IBOutlet UILabel *nameLabel;
+
+@end
+
+
 @interface WUBoardController : SCBoardController
 
 +(void)setIsGroup:(BOOL)b;

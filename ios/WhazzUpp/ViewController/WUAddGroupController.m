@@ -25,6 +25,7 @@
     CLLocationCoordinate2D loc;
     BOOL isPublic;
     BOOL inWorking;
+    BOOL hasImage;
 }
 @end
 
@@ -33,7 +34,7 @@
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad {
     [super viewDidLoad];
-    btnPhoto.layer.cornerRadius = 42.0;
+    btnPhoto.layer.cornerRadius = 0.0;
     btnPhoto.layer.masksToBounds = YES;
     [btnPhoto setTapAction:^{
         
@@ -48,6 +49,7 @@
     loc.longitude = 999;
     isPublic = false;
     interestID = -1;
+    hasImage = false;
     [btnIsPublic setTitle:@"Private" forState:UIControlStateNormal];
     [btnDone setEnabled:NO];
     
@@ -56,7 +58,7 @@
         if ([self.parentController respondsToSelector:@selector(setCreatedGroupId:)]) {
             [self.parentController performSelector:@selector(setCreatedGroupId:) withObject:groupid];
             
-            if (btnPhoto.image) {
+            if (hasImage) {
                 SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
                 [group setGroupImage:btnPhoto.image withCompletionHandler:nil];
             }
@@ -101,12 +103,13 @@
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
 
+    [self setTitle:@"New Event"];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self checkFilled];
-    inWorking = false;    
+    inWorking = false;
 }
 
 
@@ -114,6 +117,7 @@
 - (void)addChatGroupResponse:(ResponseBase *)response error:(NSError *)error{
     
 }
+
 
 
 #pragma mark - UIButton Action
@@ -157,6 +161,7 @@
 
 #pragma mark - UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    hasImage = true;
     btnPhoto.image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     
     [picker dismissViewControllerAnimated:YES completion:nil];

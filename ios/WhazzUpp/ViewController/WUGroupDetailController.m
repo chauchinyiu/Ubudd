@@ -151,7 +151,7 @@
     }
     else if(indexPath.section == 2){
         if (userType == 1) {
-            return 80;
+            return 120;
         }
         else{
             return 80;
@@ -173,9 +173,8 @@
         if (userType == 1) {
             WUGroupDetailCellEdit *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellEdit"];
             if (groupInfo) {
-                
-                cell.btnPhoto.layer.cornerRadius = 42.0;
-                cell.btnPhoto.layer.masksToBounds = YES;
+                cell.btnPhoto.layer.cornerRadius = 0.0;
+                cell.btnPhoto.layer.masksToBounds = YES;                
                 [cell.btnPhoto setTapAction:^{
                     
                     NSString * storyboardName = @"MainStoryboard";
@@ -216,8 +215,6 @@
         else{
             WUGroupDetailCellReadOnly *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellReadOnly"];
             if (groupInfo) {
-                cell.groupImg.layer.cornerRadius = 40.0;
-                cell.groupImg.layer.masksToBounds = YES;
                 
                 if (groupImg) {
                     [cell.groupImg setImage:groupImg];
@@ -253,9 +250,9 @@
     }
     else if (indexPath.section == 1){
         static NSString *CellIdentifier = @"SCGroupMemberCell";
-        
+    
         SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        [cell.inviteButton setHidden:YES];
+        cell.tag = indexPath.row;
         
         NSString *userid = [self.members objectAtIndex:indexPath.row];
         NSString *gid = self.group.groupid;
@@ -294,12 +291,16 @@
             }
         }
         
+        [cell.inviteButton setHidden:YES];
         cell.textLabel.text = displayName;
         if ([self.group.groupOwner isEqualToString:userid]) {
             cell.textLabel.textColor = [UIColor blueColor];
             [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:@"(Event Admin)"]];
         } else {
             cell.textLabel.textColor = [UIColor darkTextColor];
+            if (userType == 1) {
+                [cell.inviteButton setHidden:NO];
+            }
         }
         
         
@@ -392,9 +393,19 @@
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+-(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (userType == 1 && indexPath.section == 1) {
+        if([[SCUserProfile currentUser].userid isEqualToString:[self.members objectAtIndex:indexPath.row]]){
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
     return NO;
 }
+
 
 
 
@@ -647,9 +658,10 @@
 
 
 - (IBAction)btnLeaveTapped:(id)sender{
-    MOC2CallUser *user = [[SCDataManager instance] userForUserid:[[SCUserProfile currentUser] userid]];
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.groupid];
     [[SCDataManager instance] removeDatabaseObject:user];
 
+    
     DataRequest* datRequest = [[DataRequest alloc] init];
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
     [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"memberID"];
@@ -668,8 +680,7 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [self removeFromParentViewController];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)btnChatTapped:(id)sender{
@@ -677,7 +688,7 @@
 }
 
 - (IBAction)btnDeleteTapped:(id)sender{
-    MOC2CallUser *user = [[SCDataManager instance] userForUserid:[[SCUserProfile currentUser] userid]];
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.groupid];
     [[SCDataManager instance] removeDatabaseObject:user];
     
     DataRequest* datRequest = [[DataRequest alloc] init];
@@ -699,7 +710,77 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [self removeFromParentViewController];
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+
+
+- (IBAction)btnBlockMemberTapped:(id)sender{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Blocking a member"
+                                                    message:@"Do you really want to blocked this member?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes", nil];
+    [alert setTag:((UIButton*)sender).tag];
+    [alert show];
+}
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        SCGroup* tGroup = [[SCGroup alloc] initWithGroupid:self.groupid];
+        NSString *userid = [self.members objectAtIndex:[alertView tag]];
+        [tGroup removeMember:userid];
+        [tGroup saveGroup];
+        [self.tableView reloadData];
+        
+        
+        DataRequest* datRequest = [[DataRequest alloc] init];
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        [data setValue:userid forKey:@"c2CallID"];
+        datRequest.values = data;
+        datRequest.requestName = @"readUserInfo";
+        
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(readBlockUserInfo:error:)];
+    }
+}
+    
+- (void)readBlockUserInfo:(ResponseBase *)response error:(NSError *)error{
+    DataResponse *res = (DataResponse *)response;
+    
+    if (error){
+        
+    }
+    else {
+        NSMutableDictionary* tUser = [[NSMutableDictionary alloc] initWithDictionary:res.data];
+        NSString* tUserID = [NSString stringWithFormat:@"%@%@", [tUser objectForKey:@"countryCode"], [tUser objectForKey:@"phoneNo"]];
+
+        DataRequest* datRequest = [[DataRequest alloc] init];
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        [data setValue:tUserID forKey:@"userID"];
+        [data setValue:[groupInfo objectForKey:@"groupID"] forKey:@"groupID"];
+        datRequest.values = data;
+        datRequest.requestName = @"rejectRequest";
+        
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(rejectGroupUserResponse:error:)];
+    }
+    
+    
+}
+
+- (void)rejectGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Member Blocked"
+                                                        message:@"You blocked the member."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+    [alert show];
+    
+    [self removeFromParentViewController];
+    [self showGroupDetailForGroupid:self.groupid];
+    
+}
+
 
 @end

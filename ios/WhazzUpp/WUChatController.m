@@ -87,7 +87,6 @@ typedef enum : NSUInteger {
     self.tabBarController.tabBar.hidden = YES;
     [self.submitButton setImage:nil forState:UIControlStateHighlighted];
     
-    
 
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
     if(user){
@@ -105,9 +104,7 @@ typedef enum : NSUInteger {
             [self.titleButton setTitle:a.name forState:UIControlStateNormal];
         }
     }
-    
-    
-    
+        
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
     
     

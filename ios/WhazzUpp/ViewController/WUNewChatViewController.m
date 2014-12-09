@@ -102,8 +102,6 @@
             
             if (image) {
                 favocell.userImg.image = image;
-                favocell.userImg.layer.cornerRadius = 15.0;
-                favocell.userImg.layer.masksToBounds = YES;
             }
         }
     }
@@ -118,12 +116,12 @@
             
             if (image) {
                 favocell.userImg.image = image;
-                favocell.userImg.layer.cornerRadius = 15.0;
-                favocell.userImg.layer.masksToBounds = YES;
             }
             else{
                 favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
             }
+            favocell.userImg.layer.cornerRadius = 0.0;
+            favocell.userImg.layer.masksToBounds = YES;
             
         }
     }

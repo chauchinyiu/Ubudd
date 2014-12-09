@@ -918,13 +918,13 @@
     
     image = [[C2CallPhone currentPhone] userimageForUserid:[SCUserProfile currentUser].userid];
     if (image) {
-        image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:3.];
+        image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:0];
         [self.smallImageCache setObject:image forKey:[SCUserProfile currentUser].userid];
         return image;
     }
     
     image = [UIImage imageNamed:@"btn_ico_avatar.png"];
-    image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:3.];
+    image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:0];
     [self.smallImageCache setObject:image forKey:[SCUserProfile currentUser].userid];
     return image;
 }
@@ -945,14 +945,14 @@
     
     image = [[C2CallPhone currentPhone] userimageForUserid:elem.contact];
     if (image) {
-        image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:3.];
+        image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:0];
         [self.smallImageCache setObject:image forKey:elem.contact];
         return image;
     }
     
     if ([self isPhoneNumber:elem.contact]) {
         image = [UIImage imageNamed:@"btn_ico_adressbook_contact.png"];
-        image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:3.];
+        image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:0];
         [self.smallImageCache setObject:image forKey:elem.contact];
         return image;
     }
@@ -960,14 +960,14 @@
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:elem.contact];
     if ([user.userType intValue] == 2) {
         image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
-        image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:3.];
+        image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:0];
         [self.smallImageCache setObject:image forKey:elem.contact];
         return image;
         
     }
     
     image = [UIImage imageNamed:@"btn_ico_avatar.png"];
-    image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:3.];
+    image = [ImageUtil thumbnailFromImage:image withSize:35. andCornerRadius:0];
     [self.smallImageCache setObject:image forKey:elem.contact];
     return image;
 }

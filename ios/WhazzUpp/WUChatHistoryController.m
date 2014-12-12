@@ -79,11 +79,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if (self.createdGroupId) {
-        NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"0", self.createdGroupId, @"1", nil] forKeys:[NSArray arrayWithObjects:@"startEdit", @"userid", @"sendWelcomeText", nil]];
-        [self performSegueWithIdentifier:@"SCChatControllerSegue" sender:dictionary];
-        self.createdGroupId = nil;
-    }
+    [self.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -135,7 +131,15 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (hasRequest && indexPath.row == 0 ? requestCellHeight : chatHistoryCellHeight);
+    if (hasRequest && indexPath.row == 0){
+        return requestCellHeight;
+    }
+    else{
+        MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
+        return (user ? chatHistoryCellHeight : 0);
+
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -158,91 +162,107 @@
 -(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    if ([cell isKindOfClass:[WUChatHistoryCell class]]) {
-        WUChatHistoryCell *histcell = (WUChatHistoryCell *) cell;
-        histcell.nameLabel.font = [CommonMethods getStdFontType:0];
-        histcell.timeLabel.font = [CommonMethods getStdFontType:2];
-        histcell.textLabel.font = [CommonMethods getStdFontType:2];
-        histcell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:chathist.contact];
-
-        NSMutableArray* friends = [ResponseHandler instance].friendList;
-        for (int i = 0; i < friends.count; i++) {
-            WUAccount* a = [friends objectAtIndex:i];
-            if([a.c2CallID isEqualToString:chathist.contact] && a.name != nil){
-                histcell.nameLabel.text= a.name;
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
+    if(user){
+        [cell setHidden:NO];
+        if ([cell isKindOfClass:[WUChatHistoryCell class]]) {
+            WUChatHistoryCell *histcell = (WUChatHistoryCell *) cell;
+            histcell.nameLabel.font = [CommonMethods getStdFontType:0];
+            histcell.timeLabel.font = [CommonMethods getStdFontType:2];
+            histcell.textLabel.font = [CommonMethods getStdFontType:2];
+            histcell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:chathist.contact];
+            
+            NSMutableArray* friends = [ResponseHandler instance].friendList;
+            for (int i = 0; i < friends.count; i++) {
+                WUAccount* a = [friends objectAtIndex:i];
+                if([a.c2CallID isEqualToString:chathist.contact] && a.name != nil){
+                    histcell.nameLabel.text= a.name;
+                }
             }
-        }
-        
-        NSDate *today = [NSDate date];
-
-        NSDateComponents *dateComps = [calendar components:NSDayCalendarUnit fromDate:chathist.lastTimestamp toDate:today options:0];
-        
-        if ([dateComps day] > 0) {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-            [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
             
-            histcell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:chathist.lastTimestamp]];
-        } else {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateStyle:NSDateFormatterNoStyle];
-            [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+            NSDate *today = [NSDate date];
             
-            histcell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:chathist.lastTimestamp]];            
-        }
-    
-        if (chathist.lastEventId) {
-            MOC2CallEvent *event = [[SCDataManager instance] eventForEventId:chathist.lastEventId];
+            NSDateComponents *dateComps = [calendar components:NSDayCalendarUnit fromDate:chathist.lastTimestamp toDate:today options:0];
             
-            switch ([[C2CallPhone currentPhone] mediaTypeForKey:event.text]) {
-                case SCMEDIATYPE_VOICEMAIL:
-                    histcell.textLabel.text = @"VoiceMail";
-                    break;
-                case SCMEDIATYPE_IMAGE:
-                    histcell.textLabel.text = @"Picture Message";
-                    break;
-                case SCMEDIATYPE_VIDEO:
-                    histcell.textLabel.text = @"Video Message";
-                    break;
-                case SCMEDIATYPE_VCARD:
-                    histcell.textLabel.text = @"VCard Message";
-                    break;
-                case SCMEDIATYPE_FILE:
-                    histcell.textLabel.text = @"File Attachment";
-                    break;
-                case SCMEDIATYPE_FRIEND:
-                    histcell.textLabel.text = @"Contact Info";
-                    break;
-                default:
-                    histcell.textLabel.text = event.text;
-                    break;
-            }
-        } else {
-            histcell.textLabel.text = @"";
-        }
-        
-        UIImage *img = [[C2CallPhone currentPhone] userimageForUserid:chathist.contact];
-
-        if (img) {
-            histcell.userImage.image = img;
-        } else {
-            MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
-            if ([user.userType intValue] == 2) {
-                histcell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
+            if ([dateComps day] > 0) {
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+                [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+                
+                histcell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:chathist.lastTimestamp]];
             } else {
-                histcell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+                [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+                
+                histcell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:chathist.lastTimestamp]];
             }
-        }
-
-
-        if ([chathist.missedEvents intValue] > 0) {
-            histcell.missedEvents.hidden = NO;
-            histcell.missedEvents.text = [NSString stringWithFormat:@"%@", chathist.missedEvents];
-        } else {
-            histcell.missedEvents.hidden = YES;
+            
+            if (chathist.lastEventId) {
+                MOC2CallEvent *event = [[SCDataManager instance] eventForEventId:chathist.lastEventId];
+                
+                switch ([[C2CallPhone currentPhone] mediaTypeForKey:event.text]) {
+                    case SCMEDIATYPE_VOICEMAIL:
+                        histcell.textLabel.text = @"VoiceMail";
+                        break;
+                    case SCMEDIATYPE_IMAGE:
+                        histcell.textLabel.text = @"Picture Message";
+                        break;
+                    case SCMEDIATYPE_VIDEO:
+                        histcell.textLabel.text = @"Video Message";
+                        break;
+                    case SCMEDIATYPE_VCARD:
+                        histcell.textLabel.text = @"VCard Message";
+                        break;
+                    case SCMEDIATYPE_FILE:
+                        histcell.textLabel.text = @"File Attachment";
+                        break;
+                    case SCMEDIATYPE_FRIEND:
+                        histcell.textLabel.text = @"Contact Info";
+                        break;
+                    default:
+                        histcell.textLabel.text = event.text;
+                        break;
+                }
+            } else {
+                histcell.textLabel.text = @"";
+            }
+            
+            UIImage *img = [[C2CallPhone currentPhone] userimageForUserid:chathist.contact];
+            
+            if (img) {
+                histcell.userImage.image = img;
+            } else {
+                MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
+                if ([user.userType intValue] == 2) {
+                    histcell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
+                } else {
+                    histcell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+                }
+            }
+            
+            
+            if ([chathist.missedEvents intValue] > 0) {
+                histcell.missedEvents.hidden = NO;
+                histcell.missedEvents.text = [NSString stringWithFormat:@"%@", chathist.missedEvents];
+            } else {
+                histcell.missedEvents.hidden = YES;
+            }
         }
     }
+    else{
+        [cell setHidden:YES];
+        if ([cell isKindOfClass:[WUChatHistoryCell class]]) {
+            WUChatHistoryCell *histcell = (WUChatHistoryCell *) cell;
+            histcell.nameLabel.text = @"";
+            histcell.timeLabel.text = @"";
+            histcell.textLabel.text = @"";
+            histcell.nameLabel.text = @"";
+            histcell.missedEvents.hidden = YES;
+            histcell.userImage.image = nil;
+        }
+    }
+
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

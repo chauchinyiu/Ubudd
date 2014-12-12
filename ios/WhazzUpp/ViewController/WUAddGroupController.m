@@ -26,6 +26,7 @@
     BOOL isPublic;
     BOOL inWorking;
     BOOL hasImage;
+    NSMutableArray* friendList;
 }
 @end
 
@@ -104,6 +105,7 @@
     [self.view addGestureRecognizer:tap];
 
     [self setTitle:@"New Event"];
+    friendList = [[ResponseHandler instance] friendList];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -118,6 +120,9 @@
     
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0;
+}
 
 
 #pragma mark - UIButton Action
@@ -223,7 +228,16 @@
     }
     else{
         [self checkFilled];
-        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        UITableViewCell* t = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        NSString* memberID = [self.members objectAtIndex:indexPath.row];
+        for (int i = 0; i < friendList.count; i++) {
+            WUAccount* a = [friendList objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:memberID]) {
+                [t.textLabel setText:a.name];
+            }
+        }
+        [t.detailTextLabel setText:@""];
+        return t;
     }
 }
 

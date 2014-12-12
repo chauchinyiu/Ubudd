@@ -40,7 +40,7 @@
     NSMutableDictionary* groupInfo;
     WUGroupDetailCellEdit* editCell;
     UIImage* groupImg;
-    
+    NSMutableArray* friendList;
 }
 @property(nonatomic, strong) SCGroup *group;
 @property(nonatomic, strong) NSArray *members;
@@ -73,6 +73,7 @@
     else{
         userType = 3;
     }
+    friendList = [[ResponseHandler instance] friendList];
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     if (self.group.groupid != nil) {
@@ -240,6 +241,14 @@
                 [cell.lblMemberCnt setText:[NSString stringWithFormat:@"%d OF 200", memberCnt.intValue + 1]];
                 
                 [cell.lblHost setText:[groupInfo objectForKey:@"userName"]];
+                
+                if (userType == 2) {
+                    [cell.lblJoinStatus setText:@"Joined"];
+                }
+                else if (userType == 3) {
+                    [cell.lblJoinStatus setText:@"Non member"];
+                }
+                
             }
             return cell;
         }
@@ -277,22 +286,25 @@
                 NSString *firstname = [self.group firstnameForGroupMember:user];
                 NSString *email = [self.group emailForGroupMember:user];
                 
-                if ([lastname length] > 0 && [firstname length] > 0) {
-                    displayName = [NSString stringWithFormat:@"%@ %@", firstname, lastname];
-                } else if (firstname) {
+                if (firstname) {
                     displayName = firstname;
-                } else if (lastname) {
-                    displayName = lastname;
-                } else {
-                    displayName = email;
                 }
             } else {
                 online = [[member onlineStatus] intValue];
             }
         }
+        for (int i = 0; i < friendList.count; i++) {
+            WUAccount* a = [friendList objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:userid]) {
+                displayName = a.name;
+            }
+        }
+        
         
         [cell.inviteButton setHidden:YES];
         cell.textLabel.text = displayName;
+        
+        
         if ([self.group.groupOwner isEqualToString:userid]) {
             cell.textLabel.textColor = [UIColor blueColor];
             [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:@"(Event Admin)"]];
@@ -535,6 +547,7 @@
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    [self editEnded];
     if ([[segue identifier] isEqualToString:@"EditInterest"]) {
         WUInterestViewController *cvc = (WUInterestViewController *)[segue destinationViewController];
         cvc.delegate = self;
@@ -557,6 +570,7 @@
 }
 
 -(void)saveGroup{
+    [self editEnded];
     [self.group setGroupName: [groupInfo objectForKey:@"topic"]];
     [self.group setGroupdata:[groupInfo objectForKey:@"topicDescription"] forKey:@"topicDesc" public:YES];
     [self.group saveGroup];

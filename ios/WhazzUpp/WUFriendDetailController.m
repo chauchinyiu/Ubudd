@@ -18,7 +18,6 @@
 #import "WebserviceHandler.h"
 #import "ResponseHandler.h"
 #import "WUMediaController.h"
-#import "WUC2CallUser.h"
 
 
 @implementation WUUserInfoCell
@@ -34,7 +33,7 @@
     NSString* phoneNo;
     NSString* status;
     WUUserInfoCell* profileCell;
-    MOC2CallUser* curUserObj;
+    NSString* c2CallID;
 }
 @end
 
@@ -43,6 +42,7 @@
 static NSString* currentPhoneNo = @"";
 
 #pragma mark - UIViewController Delegate
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -51,12 +51,10 @@ static NSString* currentPhoneNo = @"";
 
     NSMutableArray* acclist = [ResponseHandler instance].friendList;
     if ([[self.fetchedResultsController fetchedObjects] count] == 0){
-        curUserObj = [[WUC2CallUser alloc] init];
-        curUserObj.ownNumber = currentPhoneNo;
         for (int i = 0; i < acclist.count; i++) {
             WUAccount* a = [acclist objectAtIndex:i];
             if ([a.phoneNo isEqualToString:currentPhoneNo]) {
-                curUserObj.userid = a.c2CallID;
+                c2CallID = a.c2CallID;
             }
         }
     }
@@ -64,8 +62,11 @@ static NSString* currentPhoneNo = @"";
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     //read from server
+    if (self.currentUser) {
+        c2CallID = self.currentUser.userid;
+    }
 
-    [dictionary setObject:self.currentUser.userid forKey:@"c2CallID"];
+    [dictionary setObject:c2CallID forKey:@"c2CallID"];
 
     DataRequest *dataRequest = [[DataRequest alloc] init];
     dataRequest.requestName = @"readUserInfo";
@@ -73,11 +74,12 @@ static NSString* currentPhoneNo = @"";
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readFriendInfo:error:)];
+ 
 }
 
 -(MOC2CallUser *) currentUser{
     if ([[self.fetchedResultsController fetchedObjects] count] == 0)
-        return curUserObj;
+        return nil;
     
     return [[self.fetchedResultsController fetchedObjects] objectAtIndex:0];
 }
@@ -121,9 +123,40 @@ static NSString* currentPhoneNo = @"";
     }
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    [super numberOfSectionsInTableView:tableView];
+    return 3;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    MOC2CallUser *elem = self.currentUser;
+    switch (section) {
+        case 0:
+            return 1;
+        case 1:
+            return 1;
+        case 2:
+            if ([elem.friendNumbers count] > 0)
+                return [elem.friendNumbers count];
+            return [elem.contactNumbers count];
+        case 3:
+            return [elem.contactNumbers count];
+        default:
+            break;
+    }
+    return 0;
+}
+
 
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == 1) {
+        return 20;
+    }
     return 0;
 }
 
@@ -137,7 +170,7 @@ static NSString* currentPhoneNo = @"";
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        return 330;
+        return 237;
     }
     else{
         return 100;
@@ -155,7 +188,7 @@ static NSString* currentPhoneNo = @"";
         NSMutableArray* acclist = [ResponseHandler instance].friendList;
         for (int i = 0; i < acclist.count; i++) {
             WUAccount* a = [acclist objectAtIndex:i];
-            if ([a.c2CallID isEqualToString:self.currentUser.userid] && a.name) {
+            if ([a.c2CallID isEqualToString:c2CallID] && a.name) {
                 c.displayName.text = a.name;
             }
         }
@@ -187,7 +220,7 @@ static NSString* currentPhoneNo = @"";
         NSMutableArray* acclist = [ResponseHandler instance].friendList;
         for (int i = 0; i < acclist.count; i++) {
             WUAccount* a = [acclist objectAtIndex:i];
-            if ([a.c2CallID isEqualToString:self.currentUser.userid] && a.name) {
+            if ([a.c2CallID isEqualToString:c2CallID] && a.name) {
                 c.displayName.text = a.name;
             }
         }
@@ -224,24 +257,16 @@ static NSString* currentPhoneNo = @"";
     }
     [WUBoardController setIsGroup:NO];
     
-    MOC2CallUser *user = [self currentUser];
-    /*
-    if ([user.userType intValue] == 2) {
-        [WUBoardController setIsGroup:YES];
-    } else {
-        [WUBoardController setIsGroup:NO];
-    }
-     */
-    [self showChatForUserid:user.userid];
+    [self showChatForUserid:c2CallID];
 }
 
 -(IBAction)phoneCall:(id)sender{
     NSString* phoneNumber;
-    MOC2CallUser *user = [self currentUser];
-    phoneNumber = [@"telprompt://" stringByAppendingString:user.ownNumber];
+    phoneNumber = [@"telprompt://" stringByAppendingString:currentPhoneNo];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
 }
+
 
 +(void)setPhoneNo:(NSString*)p{
     currentPhoneNo = p;
@@ -250,12 +275,11 @@ static NSString* currentPhoneNo = @"";
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"ViewMedia"]) {
         WUMediaController *mv = (WUMediaController *)[segue destinationViewController];
-        mv.targetUserid = self.currentUser.userid;
+        mv.targetUserid = c2CallID;
     }
     else{
         [super prepareForSegue:segue sender:sender];
     }
 }
-
 
 @end

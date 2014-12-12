@@ -165,12 +165,12 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSDate* lastupdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"interestRefreshTime"];
     int tVersion = [[NSUserDefaults standardUserDefaults] integerForKey:@"RefreshVersion"] ;
-    if (lastupdate == nil || [lastupdate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedAscending || tVersion < kRefreshVersion) {
+//    if (lastupdate == nil || [lastupdate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedAscending || tVersion < kRefreshVersion) {
         [[ResponseHandler instance] readInterests];
         [[ResponseHandler instance] checkPhoneNumberFromIndex:0];
         [[NSUserDefaults standardUserDefaults] setInteger:kRefreshVersion forKey:@"RefreshVersion"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

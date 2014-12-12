@@ -9,7 +9,6 @@
 #import "WUUserSelectionController.h"
 #import "DBHandler.h"
 #import "ResponseHandler.h"
-#import "WUC2CallUser.h"
 
 @implementation WUUserSelectCell
 

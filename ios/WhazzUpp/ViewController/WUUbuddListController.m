@@ -90,7 +90,6 @@
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [self readUserGroup];
 
 }
 
@@ -125,6 +124,13 @@
 
 
 - (void)viewDidAppear:(BOOL)animated {
+    if (inSearch){
+        [self searchUserGroup:searchStr];
+    }
+    else{
+        [self readUserGroup];
+    }
+    
     [self.tableView reloadData];
     [self searchUpdated];
 }
@@ -270,6 +276,8 @@
     cell.selected = NO;
     
     [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
+    
+    
 }
 
 -(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath

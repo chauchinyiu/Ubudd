@@ -184,15 +184,7 @@ static BOOL isGroup = YES;
         MOC2CallGroup* mg = [[SCDataManager instance] groupForGroupid:self.targetUserid];
         NSString* ownerName;
         NSDictionary* d = [[C2CallPhone currentPhone] getUserInfoForUserid:mg.groupOwner];
-        if ([d objectForKey:@"Firstname"] && ![d objectForKey:@"Lastname"]) {
-            ownerName = [d objectForKey:@"Firstname"];
-        }
-        else if ([d objectForKey:@"Lastname"] && ![d objectForKey:@"Firstname"]) {
-            ownerName = [d objectForKey:@"Lastname"];
-        }
-        else{
-            ownerName = [NSString stringWithFormat:@"%@ %@", [d objectForKey:@"Firstname"], [d objectForKey:@"Lastnaem"]];
-        }
+        ownerName = [d objectForKey:@"Firstname"];
         for (int i = 0; i < friendList.count; i++) {
             WUAccount* a = [friendList objectAtIndex:i];
             if ([a.c2CallID isEqualToString:mg.groupOwner]) {

@@ -38,12 +38,16 @@
     btnPhoto.layer.cornerRadius = 0.0;
     btnPhoto.layer.masksToBounds = YES;
     [btnPhoto setTapAction:^{
-        
-        NSString * storyboardName = @"MainStoryboard";
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-        WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
-        vc.viewImage = btnPhoto.image;
-        [self.navigationController pushViewController:vc animated:YES];
+        if(hasImage){
+            NSString * storyboardName = @"MainStoryboard";
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+            WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
+            vc.viewImage = btnPhoto.image;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else{
+            [self btnPhotoTapped:btnPhoto];
+        }
     }];
 
     loc.latitude = 999;
@@ -66,7 +70,15 @@
             SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
             [group setGroupdata:txtTopic2.text forKey:@"topicDesc" public:YES];
             [group makePublic:YES];
-            [group saveGroup];
+            [group saveGroupWithCompletionHandler:^(BOOL success) {
+                
+            }];
+            
+            WUAccount* a = [[WUAccount alloc] init];
+            a.c2CallID = groupid;
+            a.name = txtTopic.text;
+            [[[ResponseHandler instance] groupList] addObject:a];
+
             
             //update c2call id and other details to server
             NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
@@ -117,7 +129,6 @@
 
 
 - (void)addChatGroupResponse:(ResponseBase *)response error:(NSError *)error{
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

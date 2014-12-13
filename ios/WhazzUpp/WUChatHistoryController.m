@@ -180,6 +180,15 @@
                 }
             }
             
+            NSMutableArray* groups = [ResponseHandler instance].groupList;
+            for (int i = 0; i < groups.count; i++) {
+                WUAccount* a = [groups objectAtIndex:i];
+                if([a.c2CallID isEqualToString:chathist.contact] && a.name != nil){
+                    histcell.nameLabel.text= a.name;
+                }
+            }
+            
+            
             NSDate *today = [NSDate date];
             
             NSDateComponents *dateComps = [calendar components:NSDayCalendarUnit fromDate:chathist.lastTimestamp toDate:today options:0];
@@ -304,6 +313,7 @@
         
         MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
         [[SCDataManager instance] removeDatabaseObject:chathist];
+        [self.tableView reloadData];
     }
 }
 

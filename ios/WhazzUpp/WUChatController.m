@@ -79,6 +79,38 @@ typedef enum : NSUInteger {
     [self submit:sender];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    NSMutableArray* friends = [ResponseHandler instance].friendList;
+    for (int i = 0; i < friends.count; i++) {
+        WUAccount* a = [friends objectAtIndex:i];
+        if([a.c2CallID isEqualToString:self.targetUserid] && a.name != nil){
+            [self.titleButton setTitle:a.name forState:UIControlStateNormal];
+            UIBarButtonItem *newBackButton =
+            [[UIBarButtonItem alloc] initWithTitle:a.name
+                                             style:UIBarButtonItemStyleBordered
+                                            target:nil
+                                            action:nil];
+            [[self navigationItem] setBackBarButtonItem:newBackButton];
+            
+        }
+    }
+    NSMutableArray* groups = [ResponseHandler instance].groupList;
+    for (int i = 0; i < groups.count; i++) {
+        WUAccount* a = [groups objectAtIndex:i];
+        if([a.c2CallID isEqualToString:self.targetUserid] && a.name != nil){
+            [self.titleButton setTitle:a.name forState:UIControlStateNormal];
+            UIBarButtonItem *newBackButton =
+            [[UIBarButtonItem alloc] initWithTitle:a.name
+                                             style:UIBarButtonItemStyleBordered
+                                            target:nil
+                                            action:nil];
+            [[self navigationItem] setBackBarButtonItem:newBackButton];
+            
+        }
+    }
+    
+}
+
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad
 {
@@ -97,14 +129,7 @@ typedef enum : NSUInteger {
     if (image) {
         [self.imageBtn setImage:image forState:UIControlStateNormal];
     }
-    NSMutableArray* friends = [ResponseHandler instance].friendList;
-    for (int i = 0; i < friends.count; i++) {
-        WUAccount* a = [friends objectAtIndex:i];
-        if([a.c2CallID isEqualToString:self.targetUserid] && a.name != nil){
-            [self.titleButton setTitle:a.name forState:UIControlStateNormal];
-        }
-    }
-        
+    
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
     
     

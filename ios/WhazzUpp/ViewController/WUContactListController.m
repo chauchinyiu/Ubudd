@@ -17,6 +17,7 @@
 #import "ResponseHandler.h"
 #import "WUBoardController.h"
 #import "WUFriendDetailController.h"
+#import "WUContactInfoController.h"
 
 #import "DBHandler.h"
 
@@ -339,6 +340,32 @@
         else{
             record = (__bridge ABRecordRef)([addressListSection objectAtIndex:indexPath.row]);
         }
+        
+        NSString * storyboardName = @"MainStoryboard";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        WUContactInfoController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUContactInfoController"];
+        
+        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+        NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+        NSString * fullName;
+        if (lastName == nil) {
+            fullName = firstName;
+        }
+        else if (firstName == nil) {
+            fullName = lastName;
+        }
+        else{
+            fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        }
+        
+        NSString *phone;
+        ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
+        if(ABMultiValueGetCount(phoneNumbers) > 0){
+            phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
+        }
+        [vc setContactName:fullName Tel:phone];
+        [self.navigationController pushViewController:vc animated:YES];
+        
     }
         
 }

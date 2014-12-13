@@ -31,11 +31,13 @@
 -(BOOL)c2CallIDVerified:(NSString*)c2CallID;
 -(BOOL)c2CallIDPassed:(NSString*)c2CallID;
 -(void)readInterests;
+-(void)readGroups;
 -(void)checkPhoneNumberFromIndex:(int)fIndex;
 -(NSString*)getInterestNameForID:(int) intID;
 +(ResponseHandler*) instance;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSMutableArray *interestList;
 @property (strong, nonatomic) NSMutableArray *friendList;
+@property (strong, nonatomic) NSMutableArray *groupList;
 
 @end

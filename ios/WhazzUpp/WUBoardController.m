@@ -110,6 +110,7 @@ static BOOL isGroup = YES;
 
 -(void) viewWillAppear:(BOOL)animated{
     isVisible = YES;
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -191,7 +192,16 @@ static BOOL isGroup = YES;
                 ownerName = a.name;
             }
         }
-        cell.nameLabel.text = [NSString stringWithFormat:@"%@ created an event %@", ownerName, mg.groupName];
+        NSString* groupName = mg.groupName;
+        NSMutableArray* groups = [[ResponseHandler instance] groupList];
+        for (int i = 0; i < groups.count; i++) {
+            WUAccount* a = [groups objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:self.targetUserid]) {
+                groupName = a.name;
+            }
+        }
+        
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@ created an event %@", ownerName, groupName];
         return cell;
     }
     else{
@@ -1046,6 +1056,15 @@ static BOOL isGroup = YES;
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
     UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:ip];
+
+    MOC2CallEvent *elem = nil;
+    @try {
+        elem = [self.fetchedResultsController objectAtIndexPath:ip];
+        [[SCDataManager instance] markAsRead:elem];
+    }
+    @catch (NSException *exception) {
+    }
+    
     return cell;
 
     

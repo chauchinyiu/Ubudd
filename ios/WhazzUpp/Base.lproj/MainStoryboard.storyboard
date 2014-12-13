@@ -8115,6 +8115,73 @@ All rights reserved</string>
             </objects>
             <point key="canvasLocation" x="1356" y="73"/>
         </scene>
+        <!--Contact Info Controller-->
+        <scene sceneID="lXY-oU-EHe">
+            <objects>
+                <viewController storyboardIdentifier="WUContactInfoController" id="mkT-ln-k1X" customClass="WUContactInfoController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JhT-QO-W1F"/>
+                        <viewControllerLayoutGuide type="bottom" id="j5D-U1-GHc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bXa-Ij-mxg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCc-cx-9iy">
+                                <rect key="frame" x="16" y="62" width="58" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tel No.:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ao8-tB-qNS">
+                                <rect key="frame" x="16" y="101" width="66" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOL-R6-7Aw">
+                                <rect key="frame" x="125" y="145" width="70" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" image="ico_call_blue_50x50.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" cyan="0.44999999000000002" magenta="0.0" yellow="1" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" cyan="0.44999999000000002" magenta="0.0" yellow="1" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" cyan="0.44999999000000002" magenta="0.0" yellow="1" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="callButtonClicked:" destination="mkT-ln-k1X" eventType="touchUpInside" id="fo5-64-c9r"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yr3-hn-7IW">
+                                <rect key="frame" x="82" y="106" width="222" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZC-61-A8r">
+                                <rect key="frame" x="82" y="67" width="222" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="vZC-61-A8r" id="D5Q-hJ-WZ9"/>
+                        <outlet property="telLabel" destination="Yr3-hn-7IW" id="Tjr-rs-kZf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hXR-8O-RMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1702" y="37"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="yZd-0n-QvT">
             <objects>
@@ -8211,15 +8278,15 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ZrM-q5-zCU"/>
-        <segue reference="heo-jQ-s56"/>
-        <segue reference="JX8-i6-PVw"/>
         <segue reference="oaM-SS-1lY"/>
         <segue reference="mZ1-Vt-wje"/>
         <segue reference="Hgt-RX-z8j"/>
-        <segue reference="l4c-f0-WTn"/>
-        <segue reference="XEP-pC-k3p"/>
+        <segue reference="JX8-i6-PVw"/>
+        <segue reference="gEM-cP-vpS"/>
         <segue reference="p90-nP-FHg"/>
+        <segue reference="XEP-pC-k3p"/>
+        <segue reference="ZrM-q5-zCU"/>
+        <segue reference="heo-jQ-s56"/>
         <segue reference="Mqk-6F-Ovc"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

@@ -42,6 +42,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize interestList = _interestList;
 @synthesize friendList = _friendList;
+@synthesize groupList = _groupList;
 
 static ResponseHandler *myInstance;
 
@@ -64,7 +65,8 @@ static ResponseHandler *myInstance;
         }
         [self refreshFriendListNames];
     }
-    
+    self.groupList = [[NSMutableArray alloc] init];
+    [self readGroups];
     return self;
 }
 
@@ -360,6 +362,30 @@ static ResponseHandler *myInstance;
         }
     }
 
+}
+
+-(void)readGroups{
+    DataRequest* datRequest = [[DataRequest alloc] init];
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
+    datRequest.values = data;
+    datRequest.requestName = @"readUserGroups";
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readUserGroupResponse:error:)];
+}
+
+- (void)readUserGroupResponse:(ResponseBase *)response error:(NSError *)error{
+    NSDictionary* fetchResult = ((DataResponse*)response).data;
+    [self.groupList removeAllObjects];
+    
+    int groupCnt = ((NSNumber*)[fetchResult objectForKey:@"rowCnt"]).intValue;
+    for (int i = 0; i < groupCnt; i++) {
+        WUAccount* a = [[WUAccount alloc] init];
+        a.c2CallID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]];
+        a.name = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", i]];
+        [self.groupList addObject:a];
+    }
 }
 
 

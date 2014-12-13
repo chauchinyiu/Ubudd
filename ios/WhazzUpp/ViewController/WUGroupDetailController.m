@@ -44,6 +44,7 @@
 }
 @property(nonatomic, strong) SCGroup *group;
 @property(nonatomic, strong) NSArray *members;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 @end
 
@@ -177,12 +178,16 @@
                 cell.btnPhoto.layer.cornerRadius = 0.0;
                 cell.btnPhoto.layer.masksToBounds = YES;                
                 [cell.btnPhoto setTapAction:^{
-                    
-                    NSString * storyboardName = @"MainStoryboard";
-                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                    WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
-                    vc.viewImage = cell.btnPhoto.image;
-                    [self.navigationController pushViewController:vc animated:YES];
+                    if (groupImg) {
+                        NSString * storyboardName = @"MainStoryboard";
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                        WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
+                        vc.viewImage = cell.btnPhoto.image;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                    else{
+                        [self btnPhotoTapped:cell.btnPhoto];
+                    }
                 }];
                 
                 if(groupImg){
@@ -281,10 +286,7 @@
             displayName = [member.displayName copy];
             if (!member) {
                 NSString *user = [self.members objectAtIndex:indexPath.row];
-                
-                NSString *lastname = [self.group nameForGroupMember:user];
                 NSString *firstname = [self.group firstnameForGroupMember:user];
-                NSString *email = [self.group emailForGroupMember:user];
                 
                 if (firstname) {
                     displayName = firstname;
@@ -521,6 +523,13 @@
             userType = 4;
         }
         [self.tableView reloadData];
+        
+        UIBarButtonItem *newBackButton =
+        [[UIBarButtonItem alloc] initWithTitle:[groupInfo objectForKey:@"topic"]
+                                         style:UIBarButtonItemStyleBordered
+                                        target:nil
+                                        action:nil];
+        [[self navigationItem] setBackBarButtonItem:newBackButton];
     }
 }
 
@@ -573,16 +582,18 @@
     [self editEnded];
     [self.group setGroupName: [groupInfo objectForKey:@"topic"]];
     [self.group setGroupdata:[groupInfo objectForKey:@"topicDescription"] forKey:@"topicDesc" public:YES];
-    [self.group saveGroup];
+    [self.group saveGroupWithCompletionHandler:^(BOOL success){
+        DataRequest *dataRequest = [[DataRequest alloc] init];
+        dataRequest.requestName = @"updateGroupInfo";
+        dataRequest.values = groupInfo;
+        
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(updateGroupInfo:error:)];
+        
+    }];
     [self.group setGroupImage:groupImg withCompletionHandler:nil];
-    
-    DataRequest *dataRequest = [[DataRequest alloc] init];
-    dataRequest.requestName = @"updateGroupInfo";
-    dataRequest.values = groupInfo;
-    
-    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(updateGroupInfo:error:)];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    [self showActivityView];
 }
 
 - (void)updateGroupInfo:(ResponseBase *)response error:(NSError *)error {    
@@ -590,7 +601,16 @@
         
     }
     else {
+        [self.activityView stopAnimating];
         [self.navigationController popViewControllerAnimated:YES];
+        
+        NSMutableArray* groups = [[ResponseHandler instance] groupList];
+        for (int i = 0; i < groups.count; i++) {
+            WUAccount* a = [groups objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:self.group.groupid]) {
+                a.name = [groupInfo objectForKey:@"topic"];
+            }
+        }
     }
     [self.navigationItem.rightBarButtonItem setEnabled:YES];
 }
@@ -724,6 +744,13 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+    NSMutableArray* groups = [[ResponseHandler instance] groupList];
+    for (int i = 0; i < groups.count; i++) {
+        WUAccount* a = [groups objectAtIndex:i];
+        if ([a.c2CallID isEqualToString:self.group.groupid]) {
+            [groups removeObjectAtIndex:i];
+        }
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -744,18 +771,19 @@
         SCGroup* tGroup = [[SCGroup alloc] initWithGroupid:self.groupid];
         NSString *userid = [self.members objectAtIndex:[alertView tag]];
         [tGroup removeMember:userid];
-        [tGroup saveGroup];
-        [self.tableView reloadData];
+        [tGroup saveGroupWithCompletionHandler:^(BOOL success){
+            DataRequest* datRequest = [[DataRequest alloc] init];
+            NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+            [data setValue:userid forKey:@"c2CallID"];
+            datRequest.values = data;
+            datRequest.requestName = @"readUserInfo";
+            
+            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+            [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(readBlockUserInfo:error:)];
+            
+        }];
         
-        
-        DataRequest* datRequest = [[DataRequest alloc] init];
-        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-        [data setValue:userid forKey:@"c2CallID"];
-        datRequest.values = data;
-        datRequest.requestName = @"readUserInfo";
-        
-        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(readBlockUserInfo:error:)];
+        [self showActivityView];
     }
 }
     
@@ -766,6 +794,8 @@
         
     }
     else {
+        [self.activityView stopAnimating];
+
         NSMutableDictionary* tUser = [[NSMutableDictionary alloc] initWithDictionary:res.data];
         NSString* tUserID = [NSString stringWithFormat:@"%@%@", [tUser objectForKey:@"countryCode"], [tUser objectForKey:@"phoneNo"]];
 
@@ -791,9 +821,28 @@
                                               otherButtonTitles:nil];
     [alert show];
     
-    [self removeFromParentViewController];
     [self showGroupDetailForGroupid:self.groupid];
+    [self removeFromParentViewController];
     
+}
+
+- (void) showActivityView {
+    if (self.activityView==nil) {
+        self.activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+        [self.tableView addSubview:self.activityView];
+        self.activityView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray ;
+        self.activityView.hidesWhenStopped = YES;
+    }
+    // Center
+    CGFloat x = UIScreen.mainScreen.applicationFrame.size.width/2;
+    CGFloat y = UIScreen.mainScreen.applicationFrame.size.height/2;
+    // Offset. If tableView has been scrolled
+    CGFloat yOffset = self.tableView.contentOffset.y;
+    self.activityView.frame = CGRectMake(x, y + yOffset, 0, 0);
+    
+    self.activityView.hidden = NO;
+    [self.activityView startAnimating];
+    [self.tableView bringSubviewToFront:self.activityView];
 }
 
 

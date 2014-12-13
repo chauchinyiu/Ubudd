@@ -24,6 +24,7 @@
     bool genderFemale;
     int interestID;
     NSDate* dob;
+    BOOL hasPhoto;
 }
 
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
@@ -49,15 +50,28 @@
     
     
     [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", [self.userDefaults objectForKey:@"countryCode"], stringts]];
+    SCUserProfile *userProfile = [SCUserProfile currentUser];
+    if (userProfile.userImage) {
+        hasPhoto = YES;
+    }
+    else{
+        hasPhoto = NO;
+    }
     
     userImage.layer.cornerRadius = 0.0;
     userImage.layer.masksToBounds = YES;
     [userImage setTapAction:^{
-        NSString * storyboardName = @"MainStoryboard";
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-        WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
-        vc.viewImage = userImage.image;
-        [self.navigationController pushViewController:vc animated:YES];
+        SCUserProfile *userProfile = [SCUserProfile currentUser];
+        if(hasPhoto){
+            NSString * storyboardName = @"MainStoryboard";
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+            WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
+            vc.viewImage = userImage.image;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else{
+            [self btnProfileImageTapped];
+        }
     }];
     if ([self.userDefaults boolForKey:kUserDefault_isWelcomeComplete]) {
         SCUserProfile *userProfile = [SCUserProfile currentUser];
@@ -238,7 +252,12 @@
             [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
             
             updateUserFieldDTO.field = @"status";
-            updateUserFieldDTO.value = [btnStatus titleForState:UIControlStateNormal];
+            if([btnStatus titleForState:UIControlStateNormal]){
+                updateUserFieldDTO.value = [btnStatus titleForState:UIControlStateNormal];
+            }
+            else{
+                updateUserFieldDTO.value = @"";
+            }
             [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
             
             if (dob != nil) {
@@ -306,7 +325,7 @@
 #pragma mark - UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [userImage setImage:[info objectForKey:@"UIImagePickerControllerEditedImage"]];
-    
+    hasPhoto = true;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 

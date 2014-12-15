@@ -244,9 +244,7 @@
     favocell.memberHeaderLabel.font = [CommonMethods getStdFontType:2];
     favocell.hostLabel.font = [CommonMethods getStdFontType:2];
     favocell.hostLabel.font = [CommonMethods getStdFontType:2];
-    
-    favocell.nameLabel.font = [UIFont fontWithName:favocell.nameLabel.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
-        
+            
     favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", indexPath.row]];
     favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", indexPath.row]];
     favocell.hostLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", indexPath.row]];
@@ -260,7 +258,7 @@
         favocell.userImg.image = image;
     }
     else{
-        favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group.png"];
+        favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
     }
     
     return favocell;

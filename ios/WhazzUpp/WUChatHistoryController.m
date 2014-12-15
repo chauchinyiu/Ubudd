@@ -124,7 +124,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [super tableView:tableView numberOfRowsInSection:section] + (hasRequest ? 1: 0) + 1;
+    return [super tableView:tableView numberOfRowsInSection:section] + (hasRequest ? 1: 0);
 }
 
 

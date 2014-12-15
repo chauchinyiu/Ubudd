@@ -26,7 +26,6 @@
 #import "SocialCommunication/ContactCellInStream.h"
 #import "SocialCommunication/CallCellInStream.h"
 #import <SocialCommunication/C2TapImageView.h>
-#import "ResponseHandler.h"
 #import "CommonMethods.h"
 
 
@@ -106,6 +105,11 @@ static BOOL isGroup = YES;
     messageOutHeightOffset += bubbleFrame.size.height - (textFrame.size.height + textFrame.origin.y);
     groupHeadType = 0;
     friendList = [ResponseHandler instance].friendList;
+    
+    if(!self.targetUserid){
+        [ResponseHandler instance].bcdelegate = self;
+        [[ResponseHandler instance] readBroadcasts];
+    }
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -138,146 +142,162 @@ static BOOL isGroup = YES;
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (groupHeadType == 0) {
-        groupHeadType = 1;
-        if (isGroup && ([[self.fetchedResultsController fetchedObjects] count] < 20)) {
-            groupHeadType = 2;
+    if (self.targetUserid) {
+        if (groupHeadType == 0) {
+            groupHeadType = 1;
+            if (isGroup && ([[self.fetchedResultsController fetchedObjects] count] < 20)) {
+                groupHeadType = 2;
+            }
         }
+        if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
+            return 1 + (groupHeadType == 2 ? 1 : 0);
+        }
+        
+        return [[self.fetchedResultsController sections] count] + (groupHeadType == 2 ? 1 : 0);
     }
-    if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
-        return 1 + (groupHeadType == 2 ? 1 : 0);
+    else{
+        return 1;
     }
-    
-    return [[self.fetchedResultsController sections] count] + (groupHeadType == 2 ? 1 : 0);
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (groupHeadType == 2 && section == 0) {
-        return 0;
+    if (self.targetUserid) {
+        if (groupHeadType == 2 && section == 0) {
+            return 0;
+        }
+        else{
+            if ([self.fetchedResultsController fetchedObjects].count == 0) {
+                return 1;
+            }
+            
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section - (groupHeadType == 2 ? 1 : 0)];
+            return [sectionInfo numberOfObjects];
+        }
     }
     else{
-        if ([self.fetchedResultsController fetchedObjects].count == 0) {
-            return 1;
-        }
-        
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section - (groupHeadType == 2 ? 1 : 0)];
-        return [sectionInfo numberOfObjects];
+        return [ResponseHandler instance].broadcastList.count;
     }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (groupHeadType == 2) {
-        if (section == 0) {
-            return 44;
+    if(self.targetUserid){
+        if (groupHeadType == 2) {
+            if (section == 0) {
+                return 44;
+            }
+            return [super tableView:tableView heightForHeaderInSection:section - 1];
         }
-        return [super tableView:tableView heightForHeaderInSection:section - 1];
+        return [super tableView:tableView heightForHeaderInSection:section];
     }
-    return [super tableView:tableView heightForHeaderInSection:section];
+    else{
+        return 0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (groupHeadType == 2 && section == 0) {
-        WUCreateGroupCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUCreateGroupCell"];
+    if(self.targetUserid){
+        if (groupHeadType == 2 && section == 0) {
+            WUCreateGroupCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUCreateGroupCell"];
 
-        
-        MOC2CallGroup* mg = [[SCDataManager instance] groupForGroupid:self.targetUserid];
-        NSString* ownerName;
-        NSDictionary* d = [[C2CallPhone currentPhone] getUserInfoForUserid:mg.groupOwner];
-        ownerName = [d objectForKey:@"Firstname"];
-        for (int i = 0; i < friendList.count; i++) {
-            WUAccount* a = [friendList objectAtIndex:i];
-            if ([a.c2CallID isEqualToString:mg.groupOwner]) {
-                ownerName = a.name;
+            
+            MOC2CallGroup* mg = [[SCDataManager instance] groupForGroupid:self.targetUserid];
+            NSString* ownerName;
+            NSDictionary* d = [[C2CallPhone currentPhone] getUserInfoForUserid:mg.groupOwner];
+            ownerName = [d objectForKey:@"Firstname"];
+            for (int i = 0; i < friendList.count; i++) {
+                WUAccount* a = [friendList objectAtIndex:i];
+                if ([a.c2CallID isEqualToString:mg.groupOwner]) {
+                    ownerName = a.name;
+                }
             }
-        }
-        NSString* groupName = mg.groupName;
-        NSMutableArray* groups = [[ResponseHandler instance] groupList];
-        for (int i = 0; i < groups.count; i++) {
-            WUAccount* a = [groups objectAtIndex:i];
-            if ([a.c2CallID isEqualToString:self.targetUserid]) {
-                groupName = a.name;
+            NSString* groupName = mg.groupName;
+            NSMutableArray* groups = [[ResponseHandler instance] groupList];
+            for (int i = 0; i < groups.count; i++) {
+                WUAccount* a = [groups objectAtIndex:i];
+                if ([a.c2CallID isEqualToString:self.targetUserid]) {
+                    groupName = a.name;
+                }
             }
+            
+            cell.nameLabel.text = [NSString stringWithFormat:@"%@ created an event %@", ownerName, groupName];
+            return cell;
         }
-        
-        cell.nameLabel.text = [NSString stringWithFormat:@"%@ created an event %@", ownerName, groupName];
-        return cell;
-    }
-    else{
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section - (groupHeadType == 2 ? 1 : 0)];
-        MOC2CallEvent *elem = nil;
-        @try {
-            elem = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        }
-        @catch (NSException *exception) {
-        }
-        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
-                                                                  locale:[NSLocale currentLocale]];
-        if (section == 0 && elem) {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:formatString];
-            //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-            //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-            self.firstHeaderLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-            self.firstHeaderView.hidden = NO;
-            return self.headerView;
-        }
-        
-        if (elem) {
-            if (self.timestampHeader) {
+        else{
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section - (groupHeadType == 2 ? 1 : 0)];
+            MOC2CallEvent *elem = nil;
+            @try {
+                elem = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            }
+            @catch (NSException *exception) {
+            }
+            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
+                                                                      locale:[NSLocale currentLocale]];
+            if (section == 0 && elem) {
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                 [dateFormatter setDateFormat:formatString];
                 //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
                 //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-                
-                self.timestampLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-                
-                NSData *archivedViewData = [NSKeyedArchiver archivedDataWithRootObject: self.timestampHeader];
-                id clone = [NSKeyedUnarchiver unarchiveObjectWithData:archivedViewData];
-                return (UIView *) clone;
+                self.firstHeaderLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+                self.firstHeaderView.hidden = NO;
+                return self.headerView;
             }
             
-            return nil;
+            if (elem) {
+                if (self.timestampHeader) {
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    [dateFormatter setDateFormat:formatString];
+                    //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+                    //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+                    
+                    self.timestampLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+                    
+                    NSData *archivedViewData = [NSKeyedArchiver archivedDataWithRootObject: self.timestampHeader];
+                    id clone = [NSKeyedUnarchiver unarchiveObjectWithData:archivedViewData];
+                    return (UIView *) clone;
+                }
+                
+                return nil;
+            }
+        
         }
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+        label.backgroundColor = [UIColor colorWithWhite:0. alpha:0.];
+        label.text = @"";
     
+        return label;
     }
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor colorWithWhite:0. alpha:0.];
-    label.text = @"";
-    
-    return label;
+    else{
+        return nil;
+    }
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell* cell;
-    NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
-    
-    cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    if ([cell isKindOfClass:[ImageCellInStream class]]) {
-        return 208;
-    }
-    return [super tableView:tableView heightForRowAtIndexPath:ip];
-/*
-    cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    if ([cell isKindOfClass:[MessageCellOutStream class]]) {
-        return [super tableView:tableView heightForRowAtIndexPath:ip] - (isGroup? 0 : 12);
-    }
-    else if ([cell isKindOfClass:[MessageCellInStream class]]) {
-        return [super tableView:tableView heightForRowAtIndexPath:ip] - (isGroup? 0 : 12);
-    }
-    else if ([cell isKindOfClass:[ImageCellInStream class]]) {
-        return 200;
-    }
-    else if ([cell isKindOfClass:[ImageCellOutStream class]]) {
-        return 200;
-    }
-    else{
+    if (self.targetUserid) {
+        UITableViewCell* cell;
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
+        
+        cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        if ([cell isKindOfClass:[ImageCellInStream class]]) {
+            return 208;
+        }
         return [super tableView:tableView heightForRowAtIndexPath:ip];
     }
- */
+    else{
+        CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+        
+        CGSize expectedLabelSize = [[[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row] sizeWithFont:[CommonMethods getStdFontType:1]
+                                         constrainedToSize:maximumLabelSize
+                                             lineBreakMode:NSLineBreakByWordWrapping];
+        
+        CGFloat sz = expectedLabelSize.height + messageInHeightOffset;
+        if (sz < messageInMinHeight)
+            sz = messageInMinHeight;
+        return sz;
+    }
 }
 
 
@@ -1054,21 +1074,137 @@ static BOOL isGroup = YES;
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
-    UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:ip];
-
-    MOC2CallEvent *elem = nil;
-    @try {
-        elem = [self.fetchedResultsController objectAtIndexPath:ip];
-        [[SCDataManager instance] markAsRead:elem];
+    if (self.targetUserid) {
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
+        UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:ip];
+        
+        MOC2CallEvent *elem = nil;
+        @try {
+            elem = [self.fetchedResultsController objectAtIndexPath:ip];
+            [[SCDataManager instance] markAsRead:elem];
+        }
+        @catch (NSException *exception) {
+        }
+        return cell;
     }
-    @catch (NSException *exception) {
+    else{
+        MessageCellInStream* cell = [self.tableView dequeueReusableCellWithIdentifier:@"MessageCellInStream"];
+        NSString *text = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
+        cell.userImage.image = nil;
+        cell.headline.text = @"";
+        
+        if ([cell.bubbleView isKindOfClass:[SCBubbleViewIn class]]) {
+            SCBubbleViewIn *bv = (SCBubbleViewIn *) cell.bubbleView;
+            bv.chatText = text;
+            bv.textFont = [CommonMethods getStdFontType:1];
+            bv.textColor = cell.textfield.textColor;
+            cell.textfield.hidden = YES;
+        } else {
+            cell.textfield.text = text;
+            [cell.textfield setContentInset:UIEdgeInsetsMake(-8, 0, -8, 0)];
+        }
+        
+        cell.imageNewIndicator.hidden = YES;
+        
+        // Textfield size
+        CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+        
+        //    dispatch_async(dispatch_get_main_queue(), ^(){
+        CGSize expectedLabelSize = [text sizeWithFont:self.textFieldInFont
+                                    constrainedToSize:maximumLabelSize
+                                        lineBreakMode:NSLineBreakByWordWrapping];
+        
+        CGRect frame = cell.bubbleView.frame;
+        CGRect inset = CGRectZero;
+        if ([cell.bubbleView isKindOfClass:[SCBubbleViewIn class]]) {
+            SCBubbleViewIn *bv = (SCBubbleViewIn *)cell.bubbleView;
+            SCBubbleType_In t = bv.bubbleTypeIn;
+            inset = [SCBubbleViewIn insetForBubbleType:t];
+            
+            frame.origin.x += inset.origin.x;
+            frame.origin.y += inset.origin.y;
+            frame.size.width -= inset.size.width;
+            frame.size.height -= inset.size.height;
+        }
+        
+        CGRect textframe = cell.textfield.frame;
+        CGRect headerFrame = cell.headline.frame;
+        
+        CGFloat diffLeft = textframe.origin.x - frame.origin.x;
+        CGFloat diffRight = frame.size.width - (diffLeft + textframe.size.width);
+        CGFloat diffHeaderLeft = headerFrame.origin.x - frame.origin.x;
+        CGFloat diffHeaderRight = frame.size.width - (diffHeaderLeft + headerFrame.size.width);
+        
+        CGFloat width = expectedLabelSize.width + diffLeft + diffRight + 16;
+        
+        if (cell.headline) {
+            CGSize sendernameSize = [@"Admin" sizeWithFont:self.headerFieldInFont
+                                           constrainedToSize:maximumLabelSize
+                                               lineBreakMode:NSLineBreakByWordWrapping];
+            sendernameSize.width += diffHeaderLeft + diffHeaderRight;
+            
+            if (sendernameSize.width > width) {
+                width = sendernameSize.width;
+            }
+        }
+        
+        if (width < 67.0)
+            width = 67.0;
+        
+        
+        if (frame.size.width != width) {
+            SCBubbleViewIn *bubble = nil;
+            if ([cell.bubbleView isKindOfClass:[SCBubbleViewIn class]]) {
+                bubble = (SCBubbleViewIn *) cell.bubbleView;
+            }
+            
+            frame.size.width = width;
+            
+            // Re-apply inset
+            frame.origin.x -= inset.origin.x;
+            frame.origin.y -= inset.origin.y;
+            frame.size.width += inset.size.width;
+            frame.size.height += inset.size.height;
+            
+            if (bubble.width) {
+                bubble.width.constant = frame.size.width;
+                bubble.left.constant = frame.origin.x;
+                bubble.top.constant = frame.origin.y;
+            } else {
+                cell.bubbleView.frame = frame;
+            }
+            
+            
+            [cell.bubbleView layoutIfNeeded];
+            [cell.bubbleView setNeedsDisplay];
+            [cell setNeedsLayout];
+        }
+        
+        MessageCellInStream *c = (MessageCellInStream*)cell;
+        [c.imageNewIndicator setHidden:YES];
+        [c.headline setTextColor:[UIColor blackColor]];
+        [c.headline setHidden:!isGroup];
+        c.headline.font = [CommonMethods getStdFontType:3];
+        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                    attributes:underlineAttribute];
+        
+        SCBubbleViewIn* view = (SCBubbleViewIn*)(c.bubbleView);
+        [view setTextColor:[UIColor blackColor]];
+        if (!isGroup) {
+            [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
+        }
+        
+        return cell;
+        
     }
     
-    return cell;
 
     
 }
 
+-(void)readBroadcastCompleted{
+    [self.tableView reloadData];
+}
 
 @end

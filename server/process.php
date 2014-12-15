@@ -740,7 +740,24 @@ class MyAPI extends API {
 		$resArray['message'] = 'Verified Successfully';
         return $resArray;
     }  
-     
+    
+    protected function readBroadcasts($args) {
+
+		$sql = "select message from broadcast where showing <> 0"; 
+		$stmt = $this->db->conn2->prepare($sql);
+		$stmt->execute();
+		$res = $stmt->get_result();
+		$rowCnt = 0;
+		$messageArray = array();
+		while($row = mysqli_fetch_assoc($res)){
+			$messageArray['message' . $rowCnt] = $row['message'];
+			$rowCnt++;
+		}
+		$messageArray['rowCnt'] = $rowCnt;
+		$messageArray['error'] = 0;
+		$messageArray['message'] = 'Verified Successfully';
+        return $messageArray;
+    }
 }
 
 if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {

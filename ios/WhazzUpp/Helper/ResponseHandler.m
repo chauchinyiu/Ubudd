@@ -43,6 +43,7 @@
 @synthesize interestList = _interestList;
 @synthesize friendList = _friendList;
 @synthesize groupList = _groupList;
+@synthesize broadcastList = _broadcastList;
 
 static ResponseHandler *myInstance;
 
@@ -67,6 +68,7 @@ static ResponseHandler *myInstance;
     }
     self.groupList = [[NSMutableArray alloc] init];
     [self readGroups];
+    self.broadcastList = [[NSMutableArray alloc] init];
     return self;
 }
 
@@ -388,5 +390,27 @@ static ResponseHandler *myInstance;
     }
 }
 
+-(void)readBroadcasts{
+    DataRequest* datRequest = [[DataRequest alloc] init];
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    datRequest.values = data;
+    datRequest.requestName = @"readBroadcasts";
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readBoardcastResponse:error:)];
+}
+
+- (void)readBoardcastResponse:(ResponseBase *)response error:(NSError *)error{
+    NSDictionary* fetchResult = ((DataResponse*)response).data;
+    [self.broadcastList removeAllObjects];
+    
+    int cnt = ((NSNumber*)[fetchResult objectForKey:@"rowCnt"]).intValue;
+    for (int i = 0; i < cnt; i++) {
+        [self.broadcastList addObject:[fetchResult objectForKey:[NSString stringWithFormat:@"message%d", i]]];
+    }
+    if (self.bcdelegate) {
+        [self.bcdelegate readBroadcastCompleted];
+    }
+}
 
 @end

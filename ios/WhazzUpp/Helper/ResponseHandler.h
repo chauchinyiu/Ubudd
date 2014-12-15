@@ -24,6 +24,11 @@
 
 @end
 
+@protocol WUReadBroadcastDelegate <NSObject>
+@required
+-(void)readBroadcastCompleted;
+@end
+
 
 @interface ResponseHandler : NSObject
 -(void)verifyC2CallID:(NSString*)c2CallID;
@@ -32,6 +37,7 @@
 -(BOOL)c2CallIDPassed:(NSString*)c2CallID;
 -(void)readInterests;
 -(void)readGroups;
+-(void)readBroadcasts;
 -(void)checkPhoneNumberFromIndex:(int)fIndex;
 -(NSString*)getInterestNameForID:(int) intID;
 +(ResponseHandler*) instance;
@@ -39,5 +45,8 @@
 @property (strong, nonatomic) NSMutableArray *interestList;
 @property (strong, nonatomic) NSMutableArray *friendList;
 @property (strong, nonatomic) NSMutableArray *groupList;
+@property (strong, nonatomic) NSMutableArray *broadcastList;
+@property (nonatomic,assign)id<WUReadBroadcastDelegate>bcdelegate;
+
 
 @end

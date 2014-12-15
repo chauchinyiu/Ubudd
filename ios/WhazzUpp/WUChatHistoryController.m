@@ -124,7 +124,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [super tableView:tableView numberOfRowsInSection:section] + (hasRequest ? 1: 0);
+    return [super tableView:tableView numberOfRowsInSection:section] + (hasRequest ? 1: 0) + 1;
 }
 
 
@@ -135,11 +135,11 @@
         return requestCellHeight;
     }
     else{
-        if(self.fetchedResultsController.fetchedObjects.count == indexPath.row){
+        NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
+        if (tmppath.row == [super tableView:tableView numberOfRowsInSection:indexPath.section]) {
             return chatHistoryCellHeight;
         }
         else{
-            
             MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
             MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
             return (user ? chatHistoryCellHeight : 0);
@@ -301,16 +301,25 @@
     }
     else{
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
-        MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        cell.selected = NO;
-        MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
-        if ([user.userType intValue] == 2) {
-            [WUBoardController setIsGroup:YES];
-        } else {
-            [WUBoardController setIsGroup:NO];
+        if (tmppath.row == [super tableView:tableView numberOfRowsInSection:indexPath.section]) {
+            NSString * storyboardName = @"MainStoryboard";
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+            WUBoardController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCBoardController"];
+            [self.navigationController pushViewController:vc animated:YES];
+            
         }
-        [self showChatForUserid:chathist.contact];
+        else{
+            MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            cell.selected = NO;
+            MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
+            if ([user.userType intValue] == 2) {
+                [WUBoardController setIsGroup:YES];
+            } else {
+                [WUBoardController setIsGroup:NO];
+            }
+            [self showChatForUserid:chathist.contact];
+        }
     }
 }
 

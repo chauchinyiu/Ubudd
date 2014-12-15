@@ -7,6 +7,7 @@
 //
 
 #import <SocialCommunication/SocialCommunication.h>
+#import "ResponseHandler.h"
 
 @class MOC2CallUser, MessageCell, MOC2CallEvent, C2TapImageView;
 
@@ -18,8 +19,9 @@
 @end
 
 
-@interface WUBoardController : SCBoardController
+@interface WUBoardController : SCBoardController<WUReadBroadcastDelegate>
 
 +(void)setIsGroup:(BOOL)b;
+-(void)readBroadcastCompleted;
 
 @end

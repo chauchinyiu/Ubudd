@@ -122,6 +122,10 @@ $_SESSION['session'] = time() + 60 * 60;
                             <a href="settings.php"><span class="figure"><i class="ico-settings"></i></span>
                                 <span class="text">Settings</span></a>                        
                         </li>
+                        <li>
+                            <a href="messages.php"><span class="figure"><i class="ico-settings"></i></span>
+                                <span class="text">Broadcast messages</span></a>                        
+                        </li>
 
                     </ul>
 

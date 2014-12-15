@@ -65,10 +65,10 @@ $_SESSION['session'] = time() + 60 * 60;
                 <!-- START Left nav -->
                 <ul class="nav navbar-nav navbar-left">
                     <div class="navbar-form navbar-left">
-                        <form action="chatgroup.php" accept-charset="utf-8" method="GET" id="myform">
+                        <form action="users.php" accept-charset="utf-8" method="GET" id="myform">
                             <div class="has-icon">
 
-                                <input type="text" name="q" class="form-control" placeholder="Search chat group...">
+                                <input type="text" name="q" class="form-control" placeholder="Search user...">
                                 <i type="submit" class="ico-search form-control-icon"></i>
                             </div>
                         </form>
@@ -153,7 +153,7 @@ $_SESSION['session'] = time() + 60 * 60;
                 <!-- Page Header -->
                 <div class="page-header page-header-block">
                     <div class="page-header-section">
-                        <h4 class="title semibold">Ubudd Chat Groups</h4>
+                        <h4 class="title semibold">Ubudd Users</h4>
                     </div>
                 </div>
                 <!-- Page Header -->
@@ -165,7 +165,7 @@ $_SESSION['session'] = time() + 60 * 60;
                         <div class="panel panel-primary">
                             <!-- panel heading/header -->
                             <div class="panel-heading">
-                                <h3 class="panel-title"><span class="panel-icon mr5"><i class="ico-table22"></i></span>All the chat groups</h3>
+                                <h3 class="panel-title"><span class="panel-icon mr5"><i class="ico-table22"></i></span>All the users</h3>
                                 <!-- panel toolbar -->
                                 <div class="panel-toolbar text-right">
                                     <!-- option -->
@@ -194,9 +194,10 @@ $_SESSION['session'] = time() + 60 * 60;
                                                                                 </div>-->
                                         <!--<div style="float:left;margin-left: 3px;" title="Archive CSV">-->
                                         <form action="" method="post" style="display: inline;/* height: 0px; */" title="Manage User">
-                	                        <button type="button" id="delete_group" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
-                    	                    <!--<button type="button" id="enable_group" class="btn btn-sm">Enable</button>
-                	                        <button type="button" id="disable_group" class="btn btn-sm">Disable</button>-->
+                	                        <button type="button" id="delete_message" class="btn btn-sm btn-danger"><i class="ico-remove3"></i></button>
+                    	                    <button type="button" id="show_message" class="btn btn-sm">Show</button>
+                	                        <button type="button" id="hide_message" class="btn btn-sm">Hide</button>
+                	                        <button type="button" id="notify_message" class="btn btn-sm">Notify all users</button>
                                         </form>
                                         <!--</div>-->
                                     </div>
@@ -212,19 +213,14 @@ $_SESSION['session'] = time() + 60 * 60;
                                         <tr>
                                             <th width="3%" class="text-center"><i class="ico-long-arrow-down"></i></th>
 
-                                            <th>Group ID</th>
-                                            <th>Group Name</th>
-                                            <th>Group Admin</th>
-                                            <th>Interest</th>
-                                            <th>Interest Detail</th>
-                                            <th>Location Name</th>
-                                            <th>View Members</th>
-                                            <!--<th width="20%"></th>-->
+                                            <th>ID</th>
+                                            <th>Message</th>
+                                            <th>Add time</th>
+                                            <th>Showing</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        
                                         if (isset($_REQUEST['page']))
                                             $page = $_REQUEST['page'];
                                         else
@@ -235,34 +231,23 @@ $_SESSION['session'] = time() + 60 * 60;
 
                                         $total = 0;
 
-                                        $getQry = "select id, topic, groupAdmin, interestName, interestDescription, locationName, disabled ";
-                                        $getQry .= "from chatGroup g LEFT JOIN interestBase i ON g.interestID = i.interestID ";
-                                        if (isset($_REQUEST['q'])) {
-                                            $getQry .= " where groupAdmin like '%" . $_REQUEST['q'] . "%' or  groupName like '%" . $_REQUEST['q'] . "%' or  locationName like '%" . $_REQUEST['q'] . "%'  or  interestName like '%" . $_REQUEST['q'] . "%' ";
-                                        }
-                                        $getQry .= "limit " . $start . "," . $size;
-                                        $res = $db->conn2->query($getQry);
-                                        $total = $res->num_rows;
-                                        while ($group = $res->fetch_assoc()) {
+                                        $getQry = "select id, message, showing, addtime from broadcast limit " . $start . "," . $size;
+                                        
+                                        $getRes = $db->conn2->query($getQry);
+                                        $total = $getRes->num_rows;
+                                        
+                                        while ($message = $getRes->fetch_assoc()) {
                                             ?>
-                                            <tr id="group<?php echo $group['id']; ?>">
+                                            <tr id="message<?php echo $message['id']; ?>">
                                                 <th width="3%" class="text-center">
-                                                    <input  class="checkbox custom-checkbox" type="checkbox" value="<?php echo $group['id']; ?>" />  
+                                                    <input  class="checkbox custom-checkbox" type="checkbox" value="<?php echo $message['id']; ?>" />  
                                                 </th>
-                                                <th><?php echo $group['id']; ?></th>
-                                                <th><?php echo $group['groupName']; ?></th>
-                                                <th><?php echo $group['groupAdmin']; ?></th>
-                                                <th><?php echo $group['interestName']; ?></th>
-                                                <th><?php echo $group['interestDescription']; ?></th>
-                                                <th><?php echo $group['locationName']; ?></th>
-                                                <th>
-                                                	<form action="users.php" method="post" style="display: inline;" title="View members">
-                                                		<button type="submit" name="gid" class="btn btn-sm btn-default" value="<?php echo $group['id']; ?>">View</button>
-                                        			</form>
-                                        		</th>
+                                                <th><?php echo $message['id']; ?></th>
+                                                <th><?php echo $message['message']; ?></th>
+                                                <th><?php echo $message['addtime']; ?></th>
+                                                <th id="showing<?php echo $message['id']; ?>"><?php echo ($message['showing'] ? 'Y' : ''); ?></th>
                                                 <!--<th width="20%"></th>-->
                                             </tr>
-                                            
                                         <?php } ?>
                                     </tbody>
                                 </table>
@@ -284,6 +269,12 @@ $_SESSION['session'] = time() + 60 * 60;
             <!-- START To Top Scroller -->
             <a href="#" class="totop animation" data-toggle="waypoints totop" data-marker="#main" data-showanim="bounceIn" data-hideanim="bounceOut" data-offset="-50%"><i class="ico-angle-up"></i></a>
             <!--/ END To Top Scroller -->
+            
+            <div>
+            	<input type="text" id="message_text" class="form-control" placeholder="Broadcast message...">
+                <button type="button" id="add_message" class="btn btn-sm">Add</button>
+            </div>
+            
         </section>
         <!--/ END Template Main -->
 
@@ -302,10 +293,23 @@ $_SESSION['session'] = time() + 60 * 60;
         <!--/ Library script -->
 
         <script type="text/javascript">
-        
             $(document).ready(function() {
+                $('#add_message').click(function() {
+					$.ajax({
+						type: "POST",
+						url: "addMessage.php",
+						data: {message_text: document.getElementById("message_text").value},
+						dataType: "JSON",
+						success: function(result) {
+							alert(result.message);
+							if (result.flag == 0) {
+								window.location.reload();
+							}
+						}
+					});
+                });                            
                             
-                $('#delete_group').click(function() {
+                $('#delete_message').click(function() {
                     var dis = $(this);
                     var count = 0;
 
@@ -315,12 +319,12 @@ $_SESSION['session'] = time() + 60 * 60;
                     }).get();
 
                     if (count == 0) {
-                        $('#error-span').text('Please select at least one group in the list.');
+                        $('#error-span').text('Please select at least one message in the list.');
                     } else if (count > 0) {
-                        if (confirm('Are you sure to delete checked group(s)?')) {
+                        if (confirm('Are you sure to delete checked message(s)?')) {
                             $.ajax({
                                 type: "POST",
-                                url: "deleteGroup.php",
+                                url: "deleteMessage.php",
                                 data: {item_type: 1, item_list: values},
                                 dataType: "JSON",
                                 success: function(result) {
@@ -328,7 +332,7 @@ $_SESSION['session'] = time() + 60 * 60;
                                     if (result.flag == 0) {
                                         $('.custom-checkbox').each(function() {
                                             if ($(this).is(':checked') == true) {
-                                                $('#group' + ($(this).val())).remove();
+                                                $('#message' + ($(this).val())).remove();
                                             }
                                         });
                                     }
@@ -338,21 +342,22 @@ $_SESSION['session'] = time() + 60 * 60;
                     }
                 });
                 
-                $('#enable_group').click(function() {
+                $('#show_message').click(function() {
                     var dis = $(this);
                     var count = 0;
+
                     var values = $('input:checkbox:checked.custom-checkbox').map(function() {
                         count++;
                         return this.value;
                     }).get();
 
                     if (count == 0) {
-                        $('#error-span').text('Please select at least one group in the list.');
+                        $('#error-span').text('Please select at least one message in the list.');
                     } else if (count > 0) {
-                        if (confirm('Are you sure to enable checked group(s)?')) {
+                        if (confirm('Are you sure to show checked message(s)?')) {
                             $.ajax({
                                 type: "POST",
-                                url: "enableGroup.php",
+                                url: "showMessage.php",
                                 data: {item_type: 1, item_list: values},
                                 dataType: "JSON",
                                 success: function(result) {
@@ -360,7 +365,7 @@ $_SESSION['session'] = time() + 60 * 60;
                                     if (result.flag == 0) {
                                         $('.custom-checkbox').each(function() {
                                             if ($(this).is(':checked') == true) {
-                                                $('#disableCol' + ($(this).val())).html('');
+                                                $('#showing' + ($(this).val())).html('Y');
                                             }
                                         });
                                     }
@@ -370,7 +375,7 @@ $_SESSION['session'] = time() + 60 * 60;
                     }
                 });
 
-                $('#disable_group').click(function() {
+                $('#hide_message').click(function() {
                     var dis = $(this);
                     var count = 0;
 
@@ -380,12 +385,12 @@ $_SESSION['session'] = time() + 60 * 60;
                     }).get();
 
                     if (count == 0) {
-                        $('#error-span').text('Please select at least one group in the list.');
+                        $('#error-span').text('Please select at least one message in the list.');
                     } else if (count > 0) {
-                        if (confirm('Are you sure to disable checked group(s)?')) {
+                        if (confirm('Are you sure to hide checked message(s)?')) {
                             $.ajax({
                                 type: "POST",
-                                url: "disableGroup.php",
+                                url: "hideMessage.php",
                                 data: {item_type: 1, item_list: values},
                                 dataType: "JSON",
                                 success: function(result) {
@@ -393,7 +398,7 @@ $_SESSION['session'] = time() + 60 * 60;
                                     if (result.flag == 0) {
                                         $('.custom-checkbox').each(function() {
                                             if ($(this).is(':checked') == true) {
-                                                $('#disableCol' + ($(this).val())).html('Y');
+                                                $('#showing' + ($(this).val())).html('');
                                             }
                                         });
                                     }
@@ -401,6 +406,21 @@ $_SESSION['session'] = time() + 60 * 60;
                             });
                         }
                     }
+                });
+
+                $('#notify_message').click(function() {
+                    var dis = $(this);
+					if (confirm('Are you sure to notify all users?')) {
+						$.ajax({
+							type: "POST",
+							url: "notifyUser.php",
+							data: {item_type: 2},
+							dataType: "JSON",
+							success: function(result) {
+								alert(result.message);
+							}
+						});
+					}
                 });
                 
             });

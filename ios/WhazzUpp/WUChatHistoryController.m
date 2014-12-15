@@ -135,10 +135,15 @@
         return requestCellHeight;
     }
     else{
-        MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
-        return (user ? chatHistoryCellHeight : 0);
-
+        if(self.fetchedResultsController.fetchedObjects.count == indexPath.row){
+            return chatHistoryCellHeight;
+        }
+        else{
+            
+            MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
+            return (user ? chatHistoryCellHeight : 0);
+        }
     }
 }
 
@@ -150,10 +155,23 @@
         [rCell.nameLabel setText:[NSString stringWithFormat:@"You have %d requests", requestCnt]];
         return rCell;
     }
+    
     else{
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
         WUChatHistoryCell* hCell = (WUChatHistoryCell*)[self.tableView dequeueReusableCellWithIdentifier:@"WUChatHistoryCell"];
-        [self configureCell:hCell atIndexPath:tmppath];
+        if (tmppath.row == [super tableView:tableView numberOfRowsInSection:indexPath.section]) {
+            hCell.nameLabel.font = [CommonMethods getStdFontType:0];
+            hCell.timeLabel.font = [CommonMethods getStdFontType:2];
+            hCell.textLabel.font = [CommonMethods getStdFontType:2];
+            hCell.nameLabel.text = @"Admin messages";
+            hCell.timeLabel.text = @"";
+            hCell.textLabel.text = @"";
+            hCell.missedEvents.hidden = YES;
+            hCell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+        }
+        else{
+            [self configureCell:hCell atIndexPath:tmppath];
+        }
         return hCell;
     }
 }

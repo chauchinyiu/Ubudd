@@ -13,19 +13,27 @@ if (isset($_REQUEST['item_type'])) {
 	
 	$ap = new Apsn();
 
-    if (!is_array($_REQUEST['item_list']))
-        $list = explode(',', $_REQUEST['item_list']);
-    else
-        $list = $_REQUEST['item_list'];
-    
-	$count = count($list);
+	if($_REQUEST['item_type'] == 1){
+		if (!is_array($_REQUEST['item_list']))
+			$list = explode(',', $_REQUEST['item_list']);
+		else
+			$list = $_REQUEST['item_list'];
 	
-	for ($i = 0; $i < $count; $i++) {
-		$userId = $list[$i];
-		$err = $ap->sendNotification($userId, "Testing APNS", array('type' => 'ubudd admin'));
-	} 
+		$count = count($list);
+	
+		for ($i = 0; $i < $count; $i++) {
+			$userId = $list[$i];
+			$err = $ap->sendNotification($userId, "Testing APNS", array('type' => 'ubudd admin'));
+		} 
 	 
-	$result = array('flag' => 0, 'message' => $err);	
-	echo json_encode($result);
+		$result = array('flag' => 0, 'message' => $err);	
+		echo json_encode($result);
+	}
+	else{
+		$err = $ap->sendNotificationToAll("New message from Ubudd admin.", array('type' => 'ubudd admin'));
+		$result = array('flag' => 0, 'message' => $err);	
+		echo json_encode($result);
+	
+	}
 }
 ?>

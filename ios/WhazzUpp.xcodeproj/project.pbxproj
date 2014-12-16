@@ -1135,6 +1135,8 @@
 		CEEFF0FC19B19EE000B59179 /* WUBoardController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEFF0FB19B19EE000B59179 /* WUBoardController.m */; };
 		CEF9E8C919CECDED00A864A6 /* WUGroupDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9E8C819CECDED00A864A6 /* WUGroupDetailController.m */; };
 		CEFDE7AF19D50DBC00FCC7D5 /* WUStatusSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDE7AE19D50DBC00FCC7D5 /* WUStatusSelectController.m */; };
+		CEFF45931A3FFC2B00003EF2 /* ubudd_ico@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFF45921A3FFC2B00003EF2 /* ubudd_ico@2x.png */; };
+		CEFF45951A3FFC5B00003EF2 /* ubudd_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFF45941A3FFC5B00003EF2 /* ubudd_ico.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2339,6 +2341,8 @@
 		CEF9E8C819CECDED00A864A6 /* WUGroupDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUGroupDetailController.m; sourceTree = "<group>"; };
 		CEFDE7AD19D50DBC00FCC7D5 /* WUStatusSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUStatusSelectController.h; sourceTree = "<group>"; };
 		CEFDE7AE19D50DBC00FCC7D5 /* WUStatusSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUStatusSelectController.m; sourceTree = "<group>"; };
+		CEFF45921A3FFC2B00003EF2 /* ubudd_ico@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ubudd_ico@2x.png"; sourceTree = "<group>"; };
+		CEFF45941A3FFC5B00003EF2 /* ubudd_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ubudd_ico.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3561,6 +3565,8 @@
 		17FC6643194DC89D0080A2D5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CEFF45921A3FFC2B00003EF2 /* ubudd_ico@2x.png */,
+				CEFF45941A3FFC5B00003EF2 /* ubudd_ico.png */,
 				CE049FBF1A368E0C006D5C25 /* bg_newgroup.png */,
 				CE049FC01A368E0C006D5C25 /* bg_newgroup@2x.png */,
 				CE7E964319F8F017001C229F /* mapMarker.png */,
@@ -4638,6 +4644,7 @@
 				1730632319277F6B0018EE25 /* np-233.xml in Resources */,
 				1730614A19277F6B0018EE25 /* flag258.png in Resources */,
 				173063BC19277F6B0018EE25 /* np-852.xml in Resources */,
+				CEFF45951A3FFC5B00003EF2 /* ubudd_ico.png in Resources */,
 				173061DC19277F6B0018EE25 /* flag973.png in Resources */,
 				173061E819277F6B0018EE25 /* FriendCellIn.nib in Resources */,
 				1730617119277F6B0018EE25 /* flag376.png in Resources */,
@@ -4704,6 +4711,7 @@
 				1730624219277F6B0018EE25 /* ico_friendcaller-color.png in Resources */,
 				1730641A19277F6B0018EE25 /* ziffer_star_h.png in Resources */,
 				173061A419277F6B0018EE25 /* flag60.png in Resources */,
+				CEFF45931A3FFC2B00003EF2 /* ubudd_ico@2x.png in Resources */,
 				173063AF19277F6B0018EE25 /* np-688.xml in Resources */,
 				1730629119277F6B0018EE25 /* ico_take_call@2x.png in Resources */,
 				1730610419277F6B0018EE25 /* FileCellOut.nib in Resources */,

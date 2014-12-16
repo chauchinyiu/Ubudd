@@ -7,6 +7,7 @@
 //
 
 #import <SocialCommunication/SocialCommunication.h>
+#import "ResponseHandler.h"
 
 @interface WUChatHistoryCell : UITableViewCell
 
@@ -19,10 +20,11 @@
 @property(nonatomic, weak) IBOutlet UILabel     *nameLabel;
 @end
 
-@interface WUChatHistoryController : SCDataTableViewController
+@interface WUChatHistoryController : SCDataTableViewController<WUReadBroadcastDelegate>
 
 @property (nonatomic, strong) NSString *createdGroupId;
 
 -(IBAction)toggleEditing:(id)sender;
+-(void)readBroadcastCompleted;
 
 @end

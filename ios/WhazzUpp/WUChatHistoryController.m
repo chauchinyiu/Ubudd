@@ -16,7 +16,6 @@
 #import "WebserviceHandler.h"
 #import "ResponseBase.h"
 #import "DataResponse.h"
-#import "ResponseHandler.h"
 #import "CommonMethods.h"
 
 @implementation WUChatHistoryCell
@@ -45,6 +44,8 @@
     CGFloat     requestCellHeight;
     BOOL hasRequest;
     int requestCnt;
+    BOOL hasBroadcast;
+    int broadcastIdx;
 }
 
 @end
@@ -76,6 +77,11 @@
     requestCellHeight = cell.frame.size.height;
 
     calendar = [NSCalendar currentCalendar];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [ResponseHandler instance].bcdelegate = self;
+    [[ResponseHandler instance] readBroadcasts];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -124,7 +130,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [super tableView:tableView numberOfRowsInSection:section] + (hasRequest ? 1: 0);
+    return [super tableView:tableView numberOfRowsInSection:section] + (hasRequest ? 1: 0) + (hasBroadcast ? 1 : 0);
 }
 
 
@@ -136,11 +142,12 @@
     }
     else{
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
-        if (tmppath.row == [super tableView:tableView numberOfRowsInSection:indexPath.section]) {
+        if (hasBroadcast && tmppath.row == broadcastIdx) {
             return chatHistoryCellHeight;
         }
         else{
-            MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
+            MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
             MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
             return (user ? chatHistoryCellHeight : 0);
         }
@@ -159,7 +166,7 @@
     else{
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
         WUChatHistoryCell* hCell = (WUChatHistoryCell*)[self.tableView dequeueReusableCellWithIdentifier:@"WUChatHistoryCell"];
-        if (tmppath.row == [super tableView:tableView numberOfRowsInSection:indexPath.section]) {
+        if (hasBroadcast && tmppath.row == broadcastIdx) {
             hCell.nameLabel.font = [CommonMethods getStdFontType:0];
             hCell.timeLabel.font = [CommonMethods getStdFontType:2];
             hCell.textLabel.font = [CommonMethods getStdFontType:2];
@@ -167,9 +174,42 @@
             hCell.timeLabel.text = @"";
             hCell.textLabel.text = @"";
             hCell.missedEvents.hidden = YES;
-            hCell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+            hCell.userImage.image = [UIImage imageNamed:@"ubudd_ico.png"];
+            
+            NSDate *today = [NSDate date];
+            NSDate *bcDate = [ResponseHandler instance].lastBroadcastTime;
+            
+            NSDateComponents* c1 =
+            [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
+                       fromDate:today];
+            
+            NSDateComponents* c2 =
+            [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
+                       fromDate:bcDate];
+            
+            if (!([c1 day] == [c2 day] && [c1 month] == [c2 month] && [c1 year] == [c2 year])) {
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                NSTimeZone *gmt = [NSTimeZone localTimeZone];
+                [dateFormatter setTimeZone:gmt];
+                [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+                [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+                
+                hCell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:bcDate]];
+            } else {
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                NSTimeZone *gmt = [NSTimeZone localTimeZone];
+                [dateFormatter setTimeZone:gmt];
+                [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+                [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+                
+                hCell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:bcDate]];
+            }
+            
+            hCell.textLabel.text = [[ResponseHandler instance].broadcastList objectAtIndex:[ResponseHandler instance].broadcastList.count -1];
+            
         }
         else{
+            tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
             [self configureCell:hCell atIndexPath:tmppath];
         }
         return hCell;
@@ -301,7 +341,7 @@
     }
     else{
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
-        if (tmppath.row == [super tableView:tableView numberOfRowsInSection:indexPath.section]) {
+        if (hasBroadcast && tmppath.row == broadcastIdx) {
             NSString * storyboardName = @"MainStoryboard";
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
             WUBoardController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCBoardController"];
@@ -309,6 +349,8 @@
             
         }
         else{
+            tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
+            
             MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             cell.selected = NO;
@@ -328,8 +370,14 @@
     if (hasRequest && indexPath.row == 0) {
         return NO;
     }
-    else{
-        return YES;
+    else {
+        NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
+        if (hasBroadcast && tmppath.row == broadcastIdx) {
+            return NO;
+        }
+        else{
+            return YES;
+        }
     }
 }
 
@@ -337,7 +385,10 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
+        if(hasBroadcast){
+            tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
         
+        }
         MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
         [[SCDataManager instance] removeDatabaseObject:chathist];
         [self.tableView reloadData];
@@ -354,5 +405,25 @@
     [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
+-(void)readBroadcastCompleted{
+    if ([ResponseHandler instance].broadcastList.count > 0) {
+        hasBroadcast = YES;
+        BOOL isEarlier = NO;
+        broadcastIdx = self.fetchedResultsController.fetchedObjects.count;
+        for (int i = 0; i < self.fetchedResultsController.fetchedObjects.count; i++) {
+            if(!isEarlier){
+                MOChatHistory *chathist = [self.fetchedResultsController.fetchedObjects objectAtIndex:i];
+                if ([chathist.lastTimestamp compare: [ResponseHandler instance].lastBroadcastTime] == NSOrderedAscending) {
+                    broadcastIdx = i;
+                    isEarlier = YES;
+                }
+            }
+        }
+    }
+    else{
+        hasBroadcast = NO;
+    }
+    [self.tableView reloadData];
+}
 
 @end

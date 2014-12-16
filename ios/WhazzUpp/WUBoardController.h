@@ -19,9 +19,8 @@
 @end
 
 
-@interface WUBoardController : SCBoardController<WUReadBroadcastDelegate>
+@interface WUBoardController : SCBoardController
 
 +(void)setIsGroup:(BOOL)b;
--(void)readBroadcastCompleted;
 
 @end

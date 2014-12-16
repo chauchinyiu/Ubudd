@@ -44,6 +44,7 @@
 @synthesize friendList = _friendList;
 @synthesize groupList = _groupList;
 @synthesize broadcastList = _broadcastList;
+@synthesize lastBroadcastTime;
 
 static ResponseHandler *myInstance;
 
@@ -403,10 +404,15 @@ static ResponseHandler *myInstance;
 - (void)readBoardcastResponse:(ResponseBase *)response error:(NSError *)error{
     NSDictionary* fetchResult = ((DataResponse*)response).data;
     [self.broadcastList removeAllObjects];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+    [dateFormat setTimeZone:gmt];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     int cnt = ((NSNumber*)[fetchResult objectForKey:@"rowCnt"]).intValue;
     for (int i = 0; i < cnt; i++) {
         [self.broadcastList addObject:[fetchResult objectForKey:[NSString stringWithFormat:@"message%d", i]]];
+        lastBroadcastTime = [dateFormat dateFromString:[fetchResult objectForKey:[NSString stringWithFormat:@"addtime%d", i]]];
     }
     if (self.bcdelegate) {
         [self.bcdelegate readBroadcastCompleted];

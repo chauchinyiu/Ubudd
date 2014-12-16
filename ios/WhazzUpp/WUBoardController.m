@@ -106,10 +106,6 @@ static BOOL isGroup = YES;
     groupHeadType = 0;
     friendList = [ResponseHandler instance].friendList;
     
-    if(!self.targetUserid){
-        [ResponseHandler instance].bcdelegate = self;
-        [[ResponseHandler instance] readBroadcasts];
-    }
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -1203,8 +1199,5 @@ static BOOL isGroup = YES;
     
 }
 
--(void)readBroadcastCompleted{
-    [self.tableView reloadData];
-}
 
 @end

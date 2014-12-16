@@ -743,7 +743,7 @@ class MyAPI extends API {
     
     protected function readBroadcasts($args) {
 
-		$sql = "select message from broadcast where showing <> 0"; 
+		$sql = "select message, addtime from broadcast where showing <> 0 order by addtime "; 
 		$stmt = $this->db->conn2->prepare($sql);
 		$stmt->execute();
 		$res = $stmt->get_result();
@@ -751,6 +751,7 @@ class MyAPI extends API {
 		$messageArray = array();
 		while($row = mysqli_fetch_assoc($res)){
 			$messageArray['message' . $rowCnt] = $row['message'];
+			$messageArray['addtime' . $rowCnt] = $row['addtime'];
 			$rowCnt++;
 		}
 		$messageArray['rowCnt'] = $rowCnt;

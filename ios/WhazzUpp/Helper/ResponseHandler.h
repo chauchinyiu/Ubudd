@@ -47,6 +47,7 @@
 @property (strong, nonatomic) NSMutableArray *groupList;
 @property (strong, nonatomic) NSMutableArray *broadcastList;
 @property (nonatomic,assign)id<WUReadBroadcastDelegate>bcdelegate;
+@property NSDate* lastBroadcastTime;
 
 
 @end

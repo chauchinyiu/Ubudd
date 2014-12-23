@@ -13,10 +13,11 @@
 @property(nonatomic, weak) IBOutlet UILabel     *nameLabel, *statusLabel, *onlineLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *userImg;
 @property (nonatomic, weak) IBOutlet UIButton *userBtn;
+@property (nonatomic, weak) IBOutlet UIButton *infoBtn;
 
 @end
 
-@interface WUNewChatViewController : SCDataTableViewController
+@interface WUNewChatViewController : UITableViewController
 -(IBAction)showFriendInfo:(id)sender;
 
 @end

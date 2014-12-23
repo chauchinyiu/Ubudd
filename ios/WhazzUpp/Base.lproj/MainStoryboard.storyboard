@@ -123,8 +123,8 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UTF-p0-fRJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="Y4d-wb-YnD">
                                 <cells>
@@ -143,7 +143,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="d5b-ab-Nc9" kind="push" id="JX8-i6-PVw"/>
                                         </connections>
@@ -1707,7 +1707,8 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Mru-JK-ks5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="eyu-YO-41x">
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -7572,16 +7573,6 @@ All rights reserved</string>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Mobile" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uK6-d6-8Tg" userLabel="onlineLabel">
-                                            <rect key="frame" x="210" y="12" width="55" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="5kW-B2-uCm"/>
-                                                <constraint firstAttribute="width" constant="55" id="Ryi-3h-9FE"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
-                                            <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="0.51000000000000001" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="2eV-zX-qap" userLabel="statusLabel">
                                             <rect key="frame" x="43" y="21" width="175" height="24"/>
                                             <constraints>
@@ -7620,8 +7611,6 @@ All rights reserved</string>
                                     </subviews>
                                     <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="uK6-d6-8Tg" firstAttribute="top" secondItem="dqu-T0-Z1u" secondAttribute="top" constant="11" id="7VU-wr-xLp"/>
-                                        <constraint firstAttribute="trailing" secondItem="uK6-d6-8Tg" secondAttribute="trailing" constant="55" id="D27-hO-2Ak"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="wCV-Wn-kDB" secondAttribute="bottom" constant="-5" id="EuS-x0-ghF"/>
                                         <constraint firstAttribute="bottom" secondItem="2eV-zX-qap" secondAttribute="bottom" id="K6w-zp-d2v"/>
                                         <constraint firstItem="VYh-rP-Ima" firstAttribute="top" secondItem="dqu-T0-Z1u" secondAttribute="top" constant="3" id="KgK-ug-K3L"/>
@@ -7634,8 +7623,8 @@ All rights reserved</string>
                                 </tableViewCellContentView>
                                 <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="infoBtn" destination="wCV-Wn-kDB" id="3M5-7a-AlA"/>
                                     <outlet property="nameLabel" destination="VYh-rP-Ima" id="asP-v0-d4O"/>
-                                    <outlet property="onlineLabel" destination="uK6-d6-8Tg" id="zDD-3a-yZs"/>
                                     <outlet property="statusLabel" destination="2eV-zX-qap" id="dQa-nz-rPf"/>
                                     <outlet property="userBtn" destination="KVv-OP-l3b" id="Sfp-7c-1OV"/>
                                     <outlet property="userImg" destination="gpa-tg-y5K" id="xq6-wQ-7Tw"/>
@@ -8311,15 +8300,15 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="ZrM-q5-zCU"/>
+        <segue reference="Lkj-dH-5d3"/>
+        <segue reference="heo-jQ-s56"/>
+        <segue reference="p90-nP-FHg"/>
+        <segue reference="XEP-pC-k3p"/>
+        <segue reference="JX8-i6-PVw"/>
         <segue reference="oaM-SS-1lY"/>
         <segue reference="mZ1-Vt-wje"/>
         <segue reference="Hgt-RX-z8j"/>
-        <segue reference="JX8-i6-PVw"/>
-        <segue reference="gEM-cP-vpS"/>
-        <segue reference="p90-nP-FHg"/>
-        <segue reference="XEP-pC-k3p"/>
-        <segue reference="ZrM-q5-zCU"/>
-        <segue reference="heo-jQ-s56"/>
         <segue reference="Mqk-6F-Ovc"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

@@ -13,10 +13,11 @@
 #import "ResponseHandler.h"
 #import "WUBoardController.h"
 #import "WUFriendDetailController.h"
+#import "CommonMethods.h"
 
 @implementation WUNewChatCell
 
-@synthesize nameLabel, statusLabel, onlineLabel, userBtn;
+@synthesize nameLabel, statusLabel, onlineLabel, userBtn, infoBtn;
 
 @end
 
@@ -24,6 +25,15 @@
 @interface WUNewChatViewController (){
     CGFloat     favoritesCellHeight;
     ResponseHandler *resHandler;
+    
+    NSMutableArray *friendSearch;
+    NSMutableArray *friendSection;
+    NSMutableArray *groupSearch;
+    NSMutableArray *groupSection;
+
+    BOOL inSearch;
+    NSString* searchStr;
+
 }
 
 @end
@@ -49,16 +59,23 @@
     [super viewDidLoad];
     
     resHandler = [ResponseHandler instance];
-    self.cellIdentifier = @"WUNewChatCell";
-        
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
+    
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUNewChatCell"];
     favoritesCellHeight = cell.frame.size.height;
+    
+    
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    self.navigationController.navigationBarHidden = NO;
-    [resHandler verifyNewC2CallID];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self refreshList];
     [self.tableView reloadData];
+}
+
+-(void)refreshList{
+    inSearch = NO;
+    friendSection = [ResponseHandler instance].friendList;
+    groupSection = [ResponseHandler instance].groupList;
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,147 +84,190 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark fetchRequest
 
--(NSFetchRequest *) fetchRequest {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(userType == 0 OR userType == 2) AND callmeLink == 0"];
-    return [DBHandler fetchRequestFromTable:@"MOC2CallUser" predicate:predicate orderBy:@"firstname" ascending:YES];
-}
 
 #pragma mark Configure Cell
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if([resHandler c2CallIDPassed:user.userid]
-       || user.userType.intValue == 2){
-        return favoritesCellHeight;
+    return favoritesCellHeight;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (inSearch) {
+        return friendSearch.count + groupSearch.count;
     }
     else{
-        return 0;
+        return friendSection.count + groupSection.count;
     }
 }
 
--(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if([resHandler c2CallIDPassed:user.userid]){
-        if ([cell isKindOfClass:[WUNewChatCell class]]) {
-            WUNewChatCell *favocell = (WUNewChatCell *) cell;
-            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
-            favocell.statusLabel.text = user.userStatus? user.userStatus : @"Hi there, I'm using Ubudd?";
-            
-            [favocell.userBtn setTag:indexPath.row];
-            UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
-            
-            if (image) {
-                favocell.userImg.image = image;
-            }
+    WUNewChatCell *favocell = (WUNewChatCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUNewChatCell"];
+    favocell.nameLabel.font = [CommonMethods getStdFontType:0];
+    favocell.statusLabel.font = [CommonMethods getStdFontType:2];
+    
+    WUAccount* accRecord;
+    BOOL isGroup;
+    if (inSearch) {
+        if (indexPath.row < friendSearch.count) {
+            accRecord = [friendSearch objectAtIndex:indexPath.row];
+            isGroup = NO;
         }
-    }
-    else if(user.userType.intValue == 2){
-        if ([cell isKindOfClass:[WUNewChatCell class]]) {
-            WUNewChatCell *favocell = (WUNewChatCell *) cell;
-            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:user.userid];
-            favocell.statusLabel.text = user.userStatus? user.userStatus : @"Ubudd Group";
-            
-            [favocell.userBtn setTag:indexPath.row];
-            UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:user.userid];
-            
-            if (image) {
-                favocell.userImg.image = image;
-            }
-            else{
-                favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
-            }
-            favocell.userImg.layer.cornerRadius = 0.0;
-            favocell.userImg.layer.masksToBounds = YES;
-            
+        else{
+            accRecord = [groupSearch objectAtIndex:indexPath.row - friendSearch.count];
+            isGroup = YES;
         }
     }
     else{
-        [cell setHidden:YES];
+        if (indexPath.row < friendSection.count) {
+            accRecord = [friendSection objectAtIndex:indexPath.row];
+            isGroup = NO;
+        }
+        else{
+            accRecord = [groupSection objectAtIndex:indexPath.row - friendSection.count];
+            isGroup = YES;
+        }
     }
+    if ([accRecord.name isEqualToString:@""]) {
+        favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:accRecord.c2CallID];
+    }
+    else{
+        favocell.nameLabel.text = accRecord.name;
+    }
+    if (isGroup) {
+        favocell.statusLabel.text = @"Ubudd event";
+    }
+    else{
+        favocell.statusLabel.text = @"Ubudd user";
+    }
+    
+    UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:accRecord.c2CallID];
+    
+    if (image) {
+        favocell.userImg.image = image;
+    }
+    else{
+        if(isGroup){
+            favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
+        }
+    }
+    favocell.userImg.layer.cornerRadius = 0.0;
+    favocell.userImg.layer.masksToBounds = YES;
+    favocell.infoBtn.tag = indexPath.row;
+    
+    return favocell;
 }
+
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DLog(@"didSelectRowAtIndexPath : %d / %d", indexPath.section, indexPath.row);
+    WUAccount* accRecord;
+    BOOL isGroup;
+    if (inSearch) {
+        if (indexPath.row < friendSearch.count) {
+            accRecord = [friendSearch objectAtIndex:indexPath.row];
+            isGroup = NO;
+        }
+        else{
+            accRecord = [groupSearch objectAtIndex:indexPath.row - friendSearch.count];
+            isGroup = YES;
+        }
+    }
+    else{
+        if (indexPath.row < friendSection.count) {
+            accRecord = [friendSection objectAtIndex:indexPath.row];
+            isGroup = NO;
+        }
+        else{
+            accRecord = [groupSection objectAtIndex:indexPath.row - friendSection.count];
+            isGroup = YES;
+        }
+    }
+
     
-    MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.selected = NO;
-    
-    if ([user.userType intValue] == 2) {
+    if (isGroup) {
         [WUBoardController setIsGroup:YES];
     } else {
         [WUBoardController setIsGroup:NO];
     }
-    [self showChatForUserid:user.userid];
+    [self showChatForUserid:accRecord.c2CallID];
 }
-
--(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    DLog(@"accessoryButtonTappedForRowWithIndexPath : %d / %d", indexPath.section, indexPath.row);
-    
-    MOC2CallUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    if ([user.userType intValue] == 2) {
-        [self showGroupDetailForGroupid:user.userid];
-    } else {
-        NSMutableArray* friendList = [[ResponseHandler instance] friendList];
-        for (int i = 0; i < friendList.count; i++) {
-            WUAccount* a = [friendList objectAtIndex:i];
-            if ([a.c2CallID isEqualToString:user.userid]) {
-                [WUFriendDetailController setPhoneNo:a.phoneNo];
-            }
-        }
-        [self showFriendDetailForUserid:user.userid];
-    }
-}
-
 
 -(IBAction)showFriendInfo:(id)sender{
-    MOC2CallUser *user = [[[[self.fetchedResultsController sections] objectAtIndex:0] objects] objectAtIndex:[sender tag]];
-    
-    if ([user.userType intValue] == 2) {
-        [self showGroupDetailForGroupid:user.userid];
-    }
-    else {
-        NSMutableArray* friendList = [[ResponseHandler instance] friendList];
-        for (int i = 0; i < friendList.count; i++) {
-            WUAccount* a = [friendList objectAtIndex:i];
-            if ([a.c2CallID isEqualToString:user.userid]) {
-                [WUFriendDetailController setPhoneNo:a.phoneNo];
-            }
+    WUAccount* accRecord;
+    BOOL isGroup;
+    if (inSearch) {
+        if (((UIButton*)sender).tag < friendSearch.count) {
+            accRecord = [friendSearch objectAtIndex:((UIButton*)sender).tag];
+            isGroup = NO;
         }
-        [self showFriendDetailForUserid:user.userid];
+        else{
+            accRecord = [groupSearch objectAtIndex:((UIButton*)sender).tag - friendSearch.count];
+            isGroup = YES;
+        }
+    }
+    else{
+        if (((UIButton*)sender).tag < friendSection.count) {
+            accRecord = [friendSection objectAtIndex:((UIButton*)sender).tag];
+            isGroup = NO;
+        }
+        else{
+            accRecord = [groupSection objectAtIndex:((UIButton*)sender).tag - friendSection.count];
+            isGroup = YES;
+        }
+    }
+
+    if(isGroup){
+        [self showGroupDetailForGroupid:accRecord.c2CallID];
+    }
+    else{
+        [WUFriendDetailController setPhoneNo:accRecord.phoneNo];
+        [self showFriendDetailForUserid:accRecord.c2CallID];
     }
 }
+
 
 #pragma mark SearchDisplayController Delegate
 
 -(void) refetchResults
 {
-    [self.fetchedResultsController performFetch:nil];
+    friendSearch = [[NSMutableArray alloc] init];
+    for (int i = 0; i < friendSection.count; i++) {
+        WUAccount* accRecord = [friendSection objectAtIndex:i];
+        if ([accRecord.name rangeOfString:searchStr options:NSCaseInsensitiveSearch].location == NSNotFound) {
+        }
+        else{
+            [friendSearch addObject:[friendSection objectAtIndex:i]];
+        }
+    }
+    groupSearch = [[NSMutableArray alloc] init];
+    for (int i = 0; i < groupSection.count; i++) {
+        WUAccount* accRecord = [groupSection objectAtIndex:i];
+        if ([accRecord.name rangeOfString:searchStr options:NSCaseInsensitiveSearch].location == NSNotFound) {
+        }
+        else{
+            [groupSearch addObject:[groupSection objectAtIndex:i]];
+        }
+    }
+    
+    [self.tableView reloadData];
+    
 }
 
 -(void) setTextFilterForText:(NSString *) text
 {
-    NSFetchRequest *fetch = [self.fetchedResultsController fetchRequest];
     
-    //    NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"displayName contains[cd] %@ OR email contains[cd] %@", text, text];
-    
-    
-    NSPredicate *textFilter = [NSPredicate predicateWithFormat:@"userType == 0 AND callmeLink == 0 AND not (userid in %@) AND displayName contains[cd] %@", [NSArray arrayWithObjects:@"9bc2858f1194dc1c107", nil], text];
-    
-    [fetch setPredicate:textFilter];
+    searchStr = text;
 }
 
 -(void) removeTextFilter
 {
-    NSFetchRequest *fetch = [self.fetchedResultsController fetchRequest];
-    [fetch setPredicate:nil];
+    //NSFetchRequest *fetch = [ubuddUsers fetchRequest];
+    //[fetch setPredicate:nil];
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -231,13 +291,13 @@
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
-    DLog(@"searchDisplayControllerDidBeginSearch");
-    
+    inSearch = YES;
 }
 
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
-    DLog(@"searchDisplayControllerDidEndSearch");
+    inSearch = NO;
+    
     [self removeTextFilter];
     [self refetchResults];
     

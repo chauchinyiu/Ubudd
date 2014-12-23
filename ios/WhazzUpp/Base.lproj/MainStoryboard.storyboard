@@ -5120,7 +5120,7 @@ Remove search filter?</string>
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2046" y="-1046"/>
+            <point key="canvasLocation" x="2085" y="-1710"/>
         </scene>
         <!--Friend Info-->
         <scene sceneID="ejr-cH-WZv">
@@ -5468,11 +5468,17 @@ Remove search filter?</string>
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1LX-Ye-70b">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1LX-Ye-70b">
+                                <rect key="frame" x="8" y="0.0" width="304" height="367"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1LX-Ye-70b" firstAttribute="top" secondItem="SXh-Dx-2El" secondAttribute="bottom" id="714-af-ZDB"/>
+                            <constraint firstItem="V3e-FK-rIW" firstAttribute="top" secondItem="1LX-Ye-70b" secondAttribute="bottom" id="BUx-bO-Kzc"/>
+                            <constraint firstItem="1LX-Ye-70b" firstAttribute="leading" secondItem="0Pv-eT-HQu" secondAttribute="leadingMargin" constant="-8" id="ivr-bR-Jmr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1LX-Ye-70b" secondAttribute="trailing" constant="-8" id="ybV-jZ-mJm"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Title" id="cAp-Lk-NKp">
@@ -7111,6 +7117,64 @@ Remove search filter?</string>
             </objects>
             <point key="canvasLocation" x="2494" y="-378"/>
         </scene>
+        <!--Photos-->
+        <scene sceneID="IGq-15-Xof">
+            <objects>
+                <pageViewController storyboardIdentifier="WUPhotoViewController" autoresizesArchivedViewToFullSize="NO" title="Photos" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="cIY-ki-hEI" customClass="WUPhotoViewController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rZt-VD-2ZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2906" y="-378"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="JLV-CG-wfG">
+            <objects>
+                <viewController storyboardIdentifier="WUImageViewController" id="o2R-Vo-XZb" customClass="WUImageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KkB-rT-Ek1"/>
+                        <viewControllerLayoutGuide type="bottom" id="lbd-aZ-hkS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ov0-pN-TDy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.5" maximumZoomScale="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZCz-yI-Fwn">
+                                <rect key="frame" x="0.0" y="0.0" width="340" height="436"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="WUImageViewController" translatesAutoresizingMaskIntoConstraints="NO" id="bK4-WH-d85">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="o2R-Vo-XZb" id="QQ0-El-I6c"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZCz-yI-Fwn" secondAttribute="trailing" constant="-8" id="06H-29-Mzk"/>
+                            <constraint firstItem="ZCz-yI-Fwn" firstAttribute="leading" secondItem="Ov0-pN-TDy" secondAttribute="leadingMargin" constant="-8" id="PQc-ze-kOz"/>
+                            <constraint firstItem="ZCz-yI-Fwn" firstAttribute="top" secondItem="KkB-rT-Ek1" secondAttribute="bottom" constant="-8" id="m7j-Jl-Gov"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ZCz-yI-Fwn" secondAttribute="bottom" constant="-8" id="vkz-pJ-tDx"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="imageFrame" destination="ZCz-yI-Fwn" id="lm5-UF-Abo"/>
+                        <outlet property="imageView" destination="bK4-WH-d85" id="4MW-BC-gqf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YVD-nI-cKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2847" y="-38"/>
+        </scene>
         <!--Welcome Controller-->
         <scene sceneID="Ipo-hv-Lpp">
             <objects>
@@ -8168,24 +8232,6 @@ All rights reserved</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXR-8O-RMz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1702" y="37"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="yZd-0n-QvT">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="bAa-Ch-cwe" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ibS-Vj-exX"/>
-                        <viewControllerLayoutGuide type="bottom" id="OVw-cd-nkY"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="GgK-cE-2vT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Yz7-V1-f4Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

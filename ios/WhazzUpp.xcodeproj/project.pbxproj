@@ -1120,6 +1120,8 @@
 		CE871B4F19C58BFF006B05B6 /* AddChatGroupDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE871B4E19C58BFF006B05B6 /* AddChatGroupDTO.m */; };
 		CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE885CD219CBE1A800F8004C /* WULocationSearchController.m */; };
 		CE893C1719E3A18A007AD220 /* WUSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE893C1619E3A18A007AD220 /* WUSettingViewController.m */; };
+		CE8A895B1A43BD99000EE809 /* WUPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8A895A1A43BD99000EE809 /* WUPhotoViewController.m */; };
+		CE8A895E1A43DD54000EE809 /* WUImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8A895D1A43DD54000EE809 /* WUImageViewController.m */; };
 		CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE978C1619E13C0700A433A8 /* WUBoardViewController.m */; };
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
 		CEA4FDD519EE6F4700A824B3 /* WUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */; };
@@ -2310,6 +2312,10 @@
 		CE885CD219CBE1A800F8004C /* WULocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WULocationSearchController.m; sourceTree = "<group>"; };
 		CE893C1519E3A18A007AD220 /* WUSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUSettingViewController.h; sourceTree = "<group>"; };
 		CE893C1619E3A18A007AD220 /* WUSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUSettingViewController.m; sourceTree = "<group>"; };
+		CE8A89591A43BD99000EE809 /* WUPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUPhotoViewController.h; sourceTree = "<group>"; };
+		CE8A895A1A43BD99000EE809 /* WUPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUPhotoViewController.m; sourceTree = "<group>"; };
+		CE8A895C1A43DD54000EE809 /* WUImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUImageViewController.h; sourceTree = "<group>"; };
+		CE8A895D1A43DD54000EE809 /* WUImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUImageViewController.m; sourceTree = "<group>"; };
 		CE978C1519E13C0700A433A8 /* WUBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUBoardViewController.h; sourceTree = "<group>"; };
 		CE978C1619E13C0700A433A8 /* WUBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUBoardViewController.m; sourceTree = "<group>"; };
 		CE9CFF7A19C29E1E004DC699 /* WUInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUInterestViewController.h; sourceTree = "<group>"; };
@@ -3541,6 +3547,10 @@
 				CE7A777B1A321B8900059E4B /* WUUserImageController.m */,
 				CE6015711A3C2D860064994F /* WUContactInfoController.h */,
 				CE6015721A3C2D860064994F /* WUContactInfoController.m */,
+				CE8A89591A43BD99000EE809 /* WUPhotoViewController.h */,
+				CE8A895A1A43BD99000EE809 /* WUPhotoViewController.m */,
+				CE8A895C1A43DD54000EE809 /* WUImageViewController.h */,
+				CE8A895D1A43DD54000EE809 /* WUImageViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -4806,6 +4816,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE8A895E1A43DD54000EE809 /* WUImageViewController.m in Sources */,
 				CEA4FDD519EE6F4700A824B3 /* WUMapViewController.m in Sources */,
 				17F9C1B9193A5FAB002CC76E /* WULaunchScreenController.m in Sources */,
 				CED5F1C019B555AA00DF8772 /* VerifyC2CallID.m in Sources */,
@@ -4830,6 +4841,7 @@
 				CE8292BC19CEC3B1002B0615 /* WUGroupDetailHeaderController.m in Sources */,
 				CE7A777C1A321B8900059E4B /* WUUserImageController.m in Sources */,
 				CE7E964719F8F6F1001C229F /* WUUbuddMapViewController.m in Sources */,
+				CE8A895B1A43BD99000EE809 /* WUPhotoViewController.m in Sources */,
 				CE787B1919B032FD00A0BD19 /* DataRequest.m in Sources */,
 				17FD053F195907840061938A /* WUTellFriendController.m in Sources */,
 				173060E019277F6B0018EE25 /* C2CallDataModel.xcdatamodeld in Sources */,
@@ -5007,8 +5019,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
+				PROVISIONING_PROFILE = "071f7715-d789-4fe0-8734-03fb8abac652";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "071f7715-d789-4fe0-8734-03fb8abac652";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -5044,8 +5056,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "41d609c1-0dda-4445-a57c-2c3c05fa89eb";
+				PROVISIONING_PROFILE = "071f7715-d789-4fe0-8734-03fb8abac652";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "071f7715-d789-4fe0-8734-03fb8abac652";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

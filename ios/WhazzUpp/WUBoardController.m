@@ -27,6 +27,7 @@
 #import "SocialCommunication/CallCellInStream.h"
 #import <SocialCommunication/C2TapImageView.h>
 #import "CommonMethods.h"
+#import "WUPhotoViewController.h"
 
 
 @implementation WUCreateGroupCell
@@ -957,7 +958,14 @@ static BOOL isGroup = YES;
             }
         }
         
-        [self showPhotos:imageList currentPhoto:key];
+        NSString * storyboardName = @"MainStoryboard";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+        [vc showPhotos:imageList currentPhoto:key];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        //[self showPhotos:imageList currentPhoto:key];
+        
     }
     @catch (NSException *exception) {
         

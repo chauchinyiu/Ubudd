@@ -203,21 +203,25 @@
         CLLocationDistance maxDist = 0;
         int rowCnt = ((NSNumber*)[fetchResult objectForKey:@"rowCnt"]).intValue;
         for (int i = 0; i < rowCnt; i++) {
-            float grouplag = ((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"locationLag%d", i]]).floatValue;
-            float grouplong = ((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"locationLong%d", i]]).floatValue;
             
-            CLLocation* groupLoc = [[CLLocation alloc] initWithLatitude:grouplag longitude:grouplong];
-            CLLocationDistance distance = [mapCentre distanceFromLocation:groupLoc];
-            if (distance > maxDist) {
-                maxDist = distance;
+            if (((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", i ]]).intValue != 4) {
+                float grouplag = ((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"locationLag%d", i]]).floatValue;
+                float grouplong = ((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"locationLong%d", i]]).floatValue;
+                
+                CLLocation* groupLoc = [[CLLocation alloc] initWithLatitude:grouplag longitude:grouplong];
+                CLLocationDistance distance = [mapCentre distanceFromLocation:groupLoc];
+                if (distance > maxDist) {
+                    maxDist = distance;
+                }
+                
+                WUUbuddMapViewAnnotation* pin = [[WUUbuddMapViewAnnotation alloc] init];
+                pin.title = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", i]];
+                pin.coordinate = groupLoc.coordinate;
+                pin.groupIndex = i;
+                [mapview addAnnotation:pin];
+            
             }
-            
-            WUUbuddMapViewAnnotation* pin = [[WUUbuddMapViewAnnotation alloc] init];
-            pin.title = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", i]];
-            pin.coordinate = groupLoc.coordinate;
-            pin.groupIndex = i;
-            [mapview addAnnotation:pin];
-            
+           
         }
         if (loc.latitude != 999) {
             [mapview setRegion:MKCoordinateRegionMakeWithDistance(loc, maxDist * 2.5, maxDist * 2.5) animated:YES];

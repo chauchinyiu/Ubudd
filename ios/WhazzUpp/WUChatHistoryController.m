@@ -80,6 +80,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [[ResponseHandler instance] readGroups];
     [ResponseHandler instance].bcdelegate = self;
     [[ResponseHandler instance] readBroadcasts];
 }
@@ -149,7 +150,23 @@
             tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
             MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
             MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
-            return (user ? chatHistoryCellHeight : 0);
+            if(user){
+                NSMutableArray* groups = [[ResponseHandler instance] groupList];
+                for (int i = 0; i < groups.count; i++) {
+                    WUAccount* a = [groups objectAtIndex:i];
+                    if ([a.c2CallID isEqualToString:chathist.contact]) {
+                        return chatHistoryCellHeight;
+                    }
+                }
+                NSMutableArray* friends = [[ResponseHandler instance] friendList];
+                for (int i = 0; i < friends.count; i++) {
+                    WUAccount* a = [friends objectAtIndex:i];
+                    if ([a.c2CallID isEqualToString:chathist.contact]) {
+                        return chatHistoryCellHeight;
+                    }
+                }
+            }
+            return 0;
         }
     }
 }
@@ -221,7 +238,23 @@
 {
     MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
-    if(user){
+    BOOL hasRelation = false;
+    NSMutableArray* groups = [[ResponseHandler instance] groupList];
+    for (int i = 0; i < groups.count; i++) {
+        WUAccount* a = [groups objectAtIndex:i];
+        if ([a.c2CallID isEqualToString:chathist.contact]) {
+            hasRelation = true;
+        }
+    }
+    NSMutableArray* friends = [[ResponseHandler instance] friendList];
+    for (int i = 0; i < friends.count; i++) {
+        WUAccount* a = [friends objectAtIndex:i];
+        if ([a.c2CallID isEqualToString:chathist.contact]) {
+            hasRelation = true;
+        }
+    }
+    
+    if(user && hasRelation){
         [cell setHidden:NO];
         if ([cell isKindOfClass:[WUChatHistoryCell class]]) {
             WUChatHistoryCell *histcell = (WUChatHistoryCell *) cell;

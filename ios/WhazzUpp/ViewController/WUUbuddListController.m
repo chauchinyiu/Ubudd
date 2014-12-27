@@ -229,6 +229,12 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (fetchResult) {
+        if (((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row ]]).intValue == 4) {
+            return 0;
+        }
+    }
+    
     return 105;
 }
 
@@ -236,6 +242,10 @@
 {
     WUUbuddListCell *favocell = (WUUbuddListCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     
+    if (((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row ]]).intValue == 4) {
+        [favocell setHidden:YES];
+        return favocell;
+    }
     SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]]];
     
     favocell.nameLabel.font = [CommonMethods getStdFontType:0];

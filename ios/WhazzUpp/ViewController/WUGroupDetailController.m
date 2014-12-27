@@ -250,8 +250,18 @@
                 if (userType == 2) {
                     [cell.lblJoinStatus setText:@"Joined"];
                 }
-                else if (userType == 3) {
-                    [cell.lblJoinStatus setText:@"Non member"];
+                else{
+                    NSMutableArray* groups = [[ResponseHandler instance] groupList];
+                    for (int i = 0; i < groups.count; i++) {
+                        WUAccount* a = [groups objectAtIndex:i];
+                        if ([a.c2CallID isEqualToString:self.group.groupid]) {
+                            [groups removeObjectAtIndex:i];
+                        }
+                    }
+                    
+                    if (userType == 3) {
+                        [cell.lblJoinStatus setText:@"Non member"];
+                    }
                 }
                 
             }
@@ -705,6 +715,7 @@
         
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(removeGroupUserResponse:error:)];
+
 }
 
 - (void)removeGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
@@ -714,6 +725,14 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
+    NSMutableArray* groups = [[ResponseHandler instance] groupList];
+    for (int i = 0; i < groups.count; i++) {
+        WUAccount* a = [groups objectAtIndex:i];
+        if ([a.c2CallID isEqualToString:self.group.groupid]) {
+            [groups removeObjectAtIndex:i];
+        }
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

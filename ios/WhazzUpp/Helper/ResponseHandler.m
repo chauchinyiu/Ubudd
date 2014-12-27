@@ -384,10 +384,12 @@ static ResponseHandler *myInstance;
     
     int groupCnt = ((NSNumber*)[fetchResult objectForKey:@"rowCnt"]).intValue;
     for (int i = 0; i < groupCnt; i++) {
-        WUAccount* a = [[WUAccount alloc] init];
-        a.c2CallID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]];
-        a.name = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", i]];
-        [self.groupList addObject:a];
+        if(((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", i]]).intValue < 3){
+            WUAccount* a = [[WUAccount alloc] init];
+            a.c2CallID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]];
+            a.name = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", i]];
+            [self.groupList addObject:a];
+        }
     }
 }
 

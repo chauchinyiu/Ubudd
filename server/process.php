@@ -673,6 +673,25 @@ class MyAPI extends API {
 			else{
 				$groupArray['isMember'] = $verifyRow['requestAccepted'];			
 			}	
+			$stmt->close();
+			
+			
+			$stmt = $this->db->conn2->prepare("select register.c2CallID from chatGroup "
+											."inner join groupMember on chatGroup.id = groupMember.groupID and groupMember.requestAccepted = 1 "
+											."inner join register on groupMember.memberID = register.msisdn "
+											."where chatGroup.c2CallID = ?");
+
+			$stmt->bind_param('s', $c2CallID);
+			$c2CallID = $args['c2CallID'];
+			$stmt->execute();
+			$verifyRes = $stmt->get_result();
+
+			$rowCnt = 0;
+			while($row = mysqli_fetch_assoc($verifyRes)){
+				$groupArray['memberID' . $rowCnt] = $row['c2CallID'];						
+				$rowCnt++;
+			}
+
 			$groupArray['error'] = 0;
 			$groupArray['resultCode'] = 1;
 			$groupArray['message'] = 'Loaded Successfully';

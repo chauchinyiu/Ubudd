@@ -41,6 +41,7 @@
     WUGroupDetailCellEdit* editCell;
     UIImage* groupImg;
     NSMutableArray* friendList;
+    NSMutableArray* memberList;
 }
 @property(nonatomic, strong) SCGroup *group;
 @property(nonatomic, strong) NSArray *members;
@@ -60,6 +61,8 @@
                                    action:@selector(hidekeybord)];
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
+    
+    memberList = [[NSMutableArray alloc] init];
     
     self.group = [[SCGroup alloc] initWithGroupid:self.groupid];
     if (self.group.groupImage) {
@@ -126,7 +129,7 @@
     }
     else if (section == 1) {
         if (userType == 1 || userType == 2 || isPublic.intValue == 1) {
-            return [self.members count];
+            return [memberList count] + 1;
         }
         else{
             return 0;
@@ -278,7 +281,13 @@
         SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.tag = indexPath.row;
         
-        NSString *userid = [self.members objectAtIndex:indexPath.row];
+        NSString *userid;
+        if (indexPath.row == 0) {
+            userid = self.group.groupOwner;
+        }
+        else{
+            userid = [memberList objectAtIndex:indexPath.row - 1];
+        }
         NSString *gid = self.group.groupid;
         
         MOC2CallUser *groupuser = [[SCDataManager instance] userForUserid:gid];
@@ -540,6 +549,28 @@
                                         target:nil
                                         action:nil];
         [[self navigationItem] setBackBarButtonItem:newBackButton];
+        
+        [memberList removeAllObjects];
+        for (int i = 0; i < ((NSNumber*)[groupInfo objectForKey:@"memberCnt"]).intValue; i++) {
+            [memberList addObject:[groupInfo objectForKey:[NSString stringWithFormat:@"memberID%d", i]]];
+        }
+        for (int i = 0; i < self.members.count; i++) {
+            NSString *userid = [self.members objectAtIndex:i];
+            if (![userid isEqualToString:self.group.groupOwner]) {
+                BOOL isValid = NO;
+                for (int j = 0; j < memberList.count; j++) {
+                    if([userid isEqualToString:[memberList objectAtIndex:j]]){
+                        isValid = YES;
+                    }
+                }
+                if (!isValid) {
+                    SCGroup* tGroup = [[SCGroup alloc] initWithGroupid:self.groupid];
+                    [tGroup removeMember:userid];
+                    [tGroup saveGroup];
+                }
+            }
+        }
+        [self.tableView reloadData];
     }
 }
 

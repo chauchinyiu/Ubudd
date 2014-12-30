@@ -14,6 +14,7 @@
 #import <SocialCommunication/SCDataManager.h>
 
 #import <SocialCommunication/debug.h>
+#import "WUPhotoViewController.h"
 
 @implementation WUMediaCell
 @synthesize userImage, mediaID;
@@ -272,12 +273,18 @@ static NSString * const reuseIdentifier = @"Cell";
             }
         }
         
-        [self showPhotos:imageList currentPhoto:key];
+        NSString * storyboardName = @"MainStoryboard";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+        [vc showPhotos:imageList currentPhoto:key];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     @catch (NSException *exception) {
         
     }
 }
+
+
 
 
 -(IBAction)showButtonClicked:(id)sender{

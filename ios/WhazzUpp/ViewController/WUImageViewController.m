@@ -19,12 +19,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [imageView setImage:viewImage];
+    
+    /*
     CGRect r = imageView.frame;
     r.origin.x = 0;
     r.origin.y = 0;
     r.size.width = viewImage.size.width / viewImage.scale;
     r.size.height = viewImage.size.height / viewImage.scale;
     [imageView setFrame:r];
+     */
     imageFrame.minimumZoomScale = 0.5;
     imageFrame.maximumZoomScale = 6.0;
     imageFrame.contentSize = imageView.frame.size;
@@ -32,7 +35,7 @@
     
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageClicked)];
-    doubleTap.numberOfTapsRequired = 2;
+    doubleTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:doubleTap];
     
 }

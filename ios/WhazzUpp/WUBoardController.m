@@ -281,6 +281,9 @@ static BOOL isGroup = YES;
         if ([cell isKindOfClass:[ImageCellInStream class]]) {
             return 208;
         }
+        if ([cell isKindOfClass:[ImageCellOutStream class]]) {
+            return 208;
+        }
         return [super tableView:tableView heightForRowAtIndexPath:ip];
     }
     else{

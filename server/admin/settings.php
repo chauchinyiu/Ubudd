@@ -186,6 +186,8 @@ $_SESSION['session'] = time() + 60 * 60;
                     </form>
 
                 </div>
+                
+                <?php phpinfo(); ?>
                 <!-- Page Header -->
 
 

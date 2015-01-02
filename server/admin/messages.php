@@ -231,7 +231,7 @@ $_SESSION['session'] = time() + 60 * 60;
 
                                         $total = 0;
 
-                                        $getQry = "select id, message, showing, addtime from broadcast limit " . $start . "," . $size;
+                                        $getQry = "select id, message, showing, addtime, isImage from broadcast limit " . $start . "," . $size;
                                         
                                         $getRes = $db->conn2->query($getQry);
                                         $total = $getRes->num_rows;
@@ -243,7 +243,16 @@ $_SESSION['session'] = time() + 60 * 60;
                                                     <input  class="checkbox custom-checkbox" type="checkbox" value="<?php echo $message['id']; ?>" />  
                                                 </th>
                                                 <th><?php echo $message['id']; ?></th>
-                                                <th><?php echo $message['message']; ?></th>
+                                                <th><?php
+                                                
+                                                	if($message['isImage']){
+                                                		echo ("<a href=\"../uploads/".$message['message']."\">".$message['message']."</a>"); 
+                                                	}
+                                                	else{
+	                                                	echo $message['message'];
+                                                	}
+                                                	
+                                                ?></th>
                                                 <th><?php echo $message['addtime']; ?></th>
                                                 <th id="showing<?php echo $message['id']; ?>"><?php echo ($message['showing'] ? 'Y' : ''); ?></th>
                                                 <!--<th width="20%"></th>-->
@@ -274,6 +283,13 @@ $_SESSION['session'] = time() + 60 * 60;
             	<input type="text" id="message_text" class="form-control" placeholder="Broadcast message...">
                 <button type="button" id="add_message" class="btn btn-sm">Add</button>
             </div>
+            
+            
+			<form action="upload.php" method="post" enctype="multipart/form-data">
+    			Or select an image to upload:
+    			<input type="file" name="fileToUpload" id="fileToUpload">
+    			<input type="submit" value="Upload Image" name="submit class="btn btn-sm">
+			</form>
             
         </section>
         <!--/ END Template Main -->

@@ -762,15 +762,17 @@ class MyAPI extends API {
     
     protected function readBroadcasts($args) {
 
-		$sql = "select message, addtime from broadcast where showing <> 0 order by addtime "; 
+		$sql = "select id, message, addtime, isImage from broadcast where showing <> 0 order by addtime "; 
 		$stmt = $this->db->conn2->prepare($sql);
 		$stmt->execute();
 		$res = $stmt->get_result();
 		$rowCnt = 0;
 		$messageArray = array();
 		while($row = mysqli_fetch_assoc($res)){
+			$messageArray['messageID' . $rowCnt] = $row['id'];
 			$messageArray['message' . $rowCnt] = $row['message'];
 			$messageArray['addtime' . $rowCnt] = $row['addtime'];
+			$messageArray['isImage' . $rowCnt] = $row['isImage'];
 			$rowCnt++;
 		}
 		$messageArray['rowCnt'] = $rowCnt;

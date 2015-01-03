@@ -23,6 +23,25 @@
 @synthesize interestName;
 @end
 
+@implementation WUBroadcast
+@synthesize messageID, message, isImage, postTime, imgData, markForDelete;
+
+- (void)readImageData{
+    if(isImage){
+        
+        NSString *imageUrl = [NSString stringWithFormat:@"http://128.199.145.104/uploads/%@", message];
+        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            imgData = data;
+            if([ResponseHandler instance].bcdelegate){
+                [[ResponseHandler instance].bcdelegate readBroadcastCompleted];
+            }
+        }];
+    }
+
+}
+
+@end
+
 @implementation WUAccount
 @synthesize name, phoneNo, c2CallID, status;
 
@@ -405,7 +424,13 @@ static ResponseHandler *myInstance;
 
 - (void)readBoardcastResponse:(ResponseBase *)response error:(NSError *)error{
     NSDictionary* fetchResult = ((DataResponse*)response).data;
-    [self.broadcastList removeAllObjects];
+
+    WUBroadcast* msg;
+    for (int i = 0; i < self.broadcastList.count; i++) {
+        msg = [self.broadcastList objectAtIndex:i];
+        msg.markForDelete = YES;
+    }
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
     [dateFormat setTimeZone:gmt];
@@ -413,9 +438,37 @@ static ResponseHandler *myInstance;
     
     int cnt = ((NSNumber*)[fetchResult objectForKey:@"rowCnt"]).intValue;
     for (int i = 0; i < cnt; i++) {
-        [self.broadcastList addObject:[fetchResult objectForKey:[NSString stringWithFormat:@"message%d", i]]];
-        lastBroadcastTime = [dateFormat dateFromString:[fetchResult objectForKey:[NSString stringWithFormat:@"addtime%d", i]]];
+        int mID = ((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"messageID%d", i]]).intValue;
+        BOOL hasOldCopy = NO;
+        for (int j = 0; j < self.broadcastList.count; j++) {
+            msg = [self.broadcastList objectAtIndex:j];
+            if (msg.messageID == mID) {
+                msg.markForDelete = NO;
+                hasOldCopy = YES;
+            }
+        }
+        if (!hasOldCopy) {
+            msg = [[WUBroadcast alloc] init];
+            msg.messageID = mID;
+            msg.message = [fetchResult objectForKey:[NSString stringWithFormat:@"message%d", i]];
+            msg.isImage = (((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isImage%d", i]]).intValue == 1);
+            msg.postTime = [dateFormat dateFromString:[fetchResult objectForKey:[NSString stringWithFormat:@"addtime%d", i]]];
+            if (msg.isImage) {
+                [msg readImageData];
+            }
+            [self.broadcastList addObject:msg];
+        }
+       lastBroadcastTime = [dateFormat dateFromString:[fetchResult objectForKey:[NSString stringWithFormat:@"addtime%d", i]]];
     }
+    NSMutableIndexSet* iset = [[NSMutableIndexSet alloc] init];
+    for (int i = 0; i < self.broadcastList.count; i++) {
+        msg = [self.broadcastList objectAtIndex:i];
+        if (msg.markForDelete) {
+            [iset addIndex:i];
+        }
+    }
+    [self.broadcastList removeObjectsAtIndexes:iset];
+    
     if (self.bcdelegate) {
         [self.bcdelegate readBroadcastCompleted];
     }

@@ -19,7 +19,7 @@
 @end
 
 
-@interface WUBoardController : SCBoardController
+@interface WUBoardController : SCBoardController<WUReadBroadcastDelegate>
 
 +(void)setIsGroup:(BOOL)b;
 

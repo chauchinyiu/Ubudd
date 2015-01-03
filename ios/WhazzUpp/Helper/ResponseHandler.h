@@ -24,6 +24,18 @@
 
 @end
 
+@interface WUBroadcast : NSObject
+
+- (void)readImageData;
+@property int messageID;
+@property NSString* message;
+@property BOOL isImage;
+@property NSDate* postTime;
+@property NSData* imgData;
+@property BOOL markForDelete;
+@end
+
+
 @protocol WUReadBroadcastDelegate <NSObject>
 @required
 -(void)readBroadcastCompleted;

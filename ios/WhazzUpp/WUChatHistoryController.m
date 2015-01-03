@@ -221,9 +221,14 @@
                 
                 hCell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:bcDate]];
             }
+            WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:[ResponseHandler instance].broadcastList.count -1];
             
-            hCell.textLabel.text = [[ResponseHandler instance].broadcastList objectAtIndex:[ResponseHandler instance].broadcastList.count -1];
-            
+            if (b.isImage) {
+                hCell.textLabel.text = @"Picture Message";
+            }
+            else{
+                hCell.textLabel.text = b.message;
+            }
         }
         else{
             tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];

@@ -287,16 +287,22 @@ static BOOL isGroup = YES;
         return [super tableView:tableView heightForRowAtIndexPath:ip];
     }
     else{
-        CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
-        
-        CGSize expectedLabelSize = [[[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row] sizeWithFont:[CommonMethods getStdFontType:1]
-                                         constrainedToSize:maximumLabelSize
-                                             lineBreakMode:NSLineBreakByWordWrapping];
-        
-        CGFloat sz = expectedLabelSize.height + messageInHeightOffset;
-        if (sz < messageInMinHeight)
-            sz = messageInMinHeight;
-        return sz;
+        WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
+                             
+        if(b.isImage){
+            return 208;
+        }
+        else{
+            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+            CGSize expectedLabelSize = [b.message sizeWithFont:[CommonMethods getStdFontType:1]
+                                             constrainedToSize:maximumLabelSize
+                                                 lineBreakMode:NSLineBreakByWordWrapping];
+            
+            CGFloat sz = expectedLabelSize.height + messageInHeightOffset;
+            if (sz < messageInMinHeight)
+                sz = messageInMinHeight;
+            return sz;
+        }
     }
 }
 
@@ -1095,120 +1101,144 @@ static BOOL isGroup = YES;
         return cell;
     }
     else{
-        MessageCellInStream* cell = [self.tableView dequeueReusableCellWithIdentifier:@"MessageCellInStream"];
-        NSString *text = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
-        cell.userImage.image = nil;
-        cell.headline.text = @"";
+        WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
         
-        if ([cell.bubbleView isKindOfClass:[SCBubbleViewIn class]]) {
-            SCBubbleViewIn *bv = (SCBubbleViewIn *) cell.bubbleView;
-            bv.chatText = text;
-            bv.textFont = [CommonMethods getStdFontType:1];
-            bv.textColor = cell.textfield.textColor;
-            cell.textfield.hidden = YES;
-        } else {
-            cell.textfield.text = text;
-            [cell.textfield setContentInset:UIEdgeInsetsMake(-8, 0, -8, 0)];
+        if(b.isImage){
+            ImageCellInStream* cell = [self.tableView dequeueReusableCellWithIdentifier:@"ImageCellInStream"];
+            
+            [cell.imageNewIndicator setHidden:YES];
+            [cell.headline setHidden:YES];
+            
+            cell.messageImage.image = [UIImage imageWithData:b.imgData];
+            [cell.progress setHidden:YES];
+            
+            [cell setTapAction:^{
+                NSMutableArray *imageList = [NSMutableArray array];
+                for (int i = 0; i < [ResponseHandler instance].broadcastList.count; i++) {
+                    WUBroadcast *c = [[ResponseHandler instance].broadcastList objectAtIndex:i];
+                    if (c.isImage) {
+                        NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
+                        [info setValue:@"YES" forKey:@"IsBroadcast"];
+                        [info setObject:[NSNumber numberWithInt:i] forKey:@"image"];
+                        [imageList addObject:info];
+                    }
+                }
+                
+                NSString * storyboardName = @"MainStoryboard";
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+                [vc showPhotos:imageList currentPhoto:b.message];
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+            [cell.messageImage setFrame:CGRectMake(cell.messageImage.frame.origin.x, cell.messageImage.frame.origin.y, 100, 100) ];
+            [cell.headline setHidden:YES];
+
+            if (!b.imgData) {
+                [ResponseHandler instance].bcdelegate = self;
+            }
+            return cell;
         }
-        
-        cell.imageNewIndicator.hidden = YES;
-        
-        // Textfield size
-        CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
-        
-        //    dispatch_async(dispatch_get_main_queue(), ^(){
-        CGSize expectedLabelSize = [text sizeWithFont:self.textFieldInFont
-                                    constrainedToSize:maximumLabelSize
-                                        lineBreakMode:NSLineBreakByWordWrapping];
-        
-        CGRect frame = cell.bubbleView.frame;
-        CGRect inset = CGRectZero;
-        if ([cell.bubbleView isKindOfClass:[SCBubbleViewIn class]]) {
-            SCBubbleViewIn *bv = (SCBubbleViewIn *)cell.bubbleView;
-            SCBubbleType_In t = bv.bubbleTypeIn;
+        else{
+            MessageCellInStream* c = [self.tableView dequeueReusableCellWithIdentifier:@"MessageCellInStream"];
+
+            [c.imageNewIndicator setHidden:YES];
+            [c.headline setTextColor:[UIColor blackColor]];
+            [c.headline setHidden:YES];
+            c.headline.font = [CommonMethods getStdFontType:3];
+            NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+            c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
+                                                                        attributes:underlineAttribute];
+            
+            SCBubbleViewIn* view = (SCBubbleViewIn*)(c.bubbleView);
+            [view setTextColor:[UIColor blackColor]];
+            [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
+            
+            NSString *text = b.message;
+            NSString *sendername = @"Admin";
+            c.headline.text = sendername;
+
+            view.chatText = text;
+            view.textFont = [CommonMethods getStdFontType:1];
+            view.textColor = [UIColor blackColor];
+            c.textfield.hidden = YES;
+
+            c.imageNewIndicator.hidden = YES;
+            
+            // Textfield size
+            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+            
+            //    dispatch_async(dispatch_get_main_queue(), ^(){
+            CGSize expectedLabelSize = [text sizeWithFont:self.textFieldInFont
+                                        constrainedToSize:maximumLabelSize
+                                            lineBreakMode:NSLineBreakByWordWrapping];
+            
+            CGRect frame = c.bubbleView.frame;
+            CGRect inset = CGRectZero;
+            SCBubbleType_In t = view.bubbleTypeIn;
             inset = [SCBubbleViewIn insetForBubbleType:t];
             
             frame.origin.x += inset.origin.x;
             frame.origin.y += inset.origin.y;
             frame.size.width -= inset.size.width;
             frame.size.height -= inset.size.height;
-        }
-        
-        CGRect textframe = cell.textfield.frame;
-        CGRect headerFrame = cell.headline.frame;
-        
-        CGFloat diffLeft = textframe.origin.x - frame.origin.x;
-        CGFloat diffRight = frame.size.width - (diffLeft + textframe.size.width);
-        CGFloat diffHeaderLeft = headerFrame.origin.x - frame.origin.x;
-        CGFloat diffHeaderRight = frame.size.width - (diffHeaderLeft + headerFrame.size.width);
-        
-        CGFloat width = expectedLabelSize.width + diffLeft + diffRight + 16;
-        
-        if (cell.headline) {
-            CGSize sendernameSize = [@"Admin" sizeWithFont:self.headerFieldInFont
-                                           constrainedToSize:maximumLabelSize
-                                               lineBreakMode:NSLineBreakByWordWrapping];
-            sendernameSize.width += diffHeaderLeft + diffHeaderRight;
             
-            if (sendernameSize.width > width) {
-                width = sendernameSize.width;
-            }
-        }
-        
-        if (width < 67.0)
-            width = 67.0;
-        
-        
-        if (frame.size.width != width) {
-            SCBubbleViewIn *bubble = nil;
-            if ([cell.bubbleView isKindOfClass:[SCBubbleViewIn class]]) {
-                bubble = (SCBubbleViewIn *) cell.bubbleView;
+            CGRect textframe = c.textfield.frame;
+            CGRect headerFrame = c.headline.frame;
+            
+            CGFloat diffLeft = textframe.origin.x - frame.origin.x;
+            CGFloat diffRight = frame.size.width - (diffLeft + textframe.size.width);
+            CGFloat diffHeaderLeft = headerFrame.origin.x - frame.origin.x;
+            CGFloat diffHeaderRight = frame.size.width - (diffHeaderLeft + headerFrame.size.width);
+            
+            CGFloat width = expectedLabelSize.width + diffLeft + diffRight + 16;
+            
+            if (sendername && c.headline) {
+                CGSize sendernameSize = [sendername sizeWithFont:self.headerFieldInFont
+                                               constrainedToSize:maximumLabelSize
+                                                   lineBreakMode:NSLineBreakByWordWrapping];
+                sendernameSize.width += diffHeaderLeft + diffHeaderRight;
+                
+                if (sendernameSize.width > width) {
+                    width = sendernameSize.width;
+                }
             }
             
-            frame.size.width = width;
+            if (width < 67.0)
+                width = 67.0;
             
-            // Re-apply inset
-            frame.origin.x -= inset.origin.x;
-            frame.origin.y -= inset.origin.y;
-            frame.size.width += inset.size.width;
-            frame.size.height += inset.size.height;
             
-            if (bubble.width) {
-                bubble.width.constant = frame.size.width;
-                bubble.left.constant = frame.origin.x;
-                bubble.top.constant = frame.origin.y;
-            } else {
-                cell.bubbleView.frame = frame;
+            if (frame.size.width != width) {
+                
+                frame.size.width = width;
+                
+                // Re-apply inset
+                frame.origin.x -= inset.origin.x;
+                frame.origin.y -= inset.origin.y;
+                frame.size.width += inset.size.width;
+                frame.size.height += inset.size.height;
+                
+                if (view.width) {
+                    view.width.constant = frame.size.width;
+                    view.left.constant = frame.origin.x;
+                    view.top.constant = frame.origin.y;
+                }
+                [c.bubbleView layoutIfNeeded];
+                [c.bubbleView setNeedsDisplay];
+                [c setNeedsLayout];
+                view.top.constant = -10;
+                frame.size.height = expectedLabelSize.height;
+                
             }
             
-            
-            [cell.bubbleView layoutIfNeeded];
-            [cell.bubbleView setNeedsDisplay];
-            [cell setNeedsLayout];
+            return c;
         }
-        
-        MessageCellInStream *c = (MessageCellInStream*)cell;
-        [c.imageNewIndicator setHidden:YES];
-        [c.headline setTextColor:[UIColor blackColor]];
-        [c.headline setHidden:!isGroup];
-        c.headline.font = [CommonMethods getStdFontType:3];
-        NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-        c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
-                                                                    attributes:underlineAttribute];
-        
-        SCBubbleViewIn* view = (SCBubbleViewIn*)(c.bubbleView);
-        [view setTextColor:[UIColor blackColor]];
-        if (!isGroup) {
-            [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
-        }
-        
-        return cell;
-        
     }
-    
-
-    
 }
 
+-(void)readBroadcastCompleted{
+    [self.tableView reloadData];
+}
 
 @end

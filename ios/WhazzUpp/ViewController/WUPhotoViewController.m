@@ -8,6 +8,7 @@
 
 #import "WUPhotoViewController.h"
 #import "WUImageViewController.h"
+#import "ResponseHandler.h"
 
 @interface WUPhotoViewController (){
     NSArray* pages;
@@ -69,7 +70,13 @@
         NSString * storyboardName = @"MainStoryboard";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
         WUImageViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUImageViewController"];
-        UIImage* image = [[C2CallPhone currentPhone] imageForKey:[info objectForKey:@"image"]];
+        UIImage* image;
+        if ([info objectForKey:@"IsBroadcast"]) {
+            image = [UIImage imageWithData:((WUBroadcast*)[[ResponseHandler instance].broadcastList objectAtIndex:((NSNumber*)[info objectForKey:@"image"]).intValue]).imgData];
+        }
+        else{
+            image = [[C2CallPhone currentPhone] imageForKey:[info objectForKey:@"image"]];
+        }
         vc.viewImage = image;
         vc.pageID = pageIdx;
         return vc;

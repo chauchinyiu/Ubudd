@@ -31,6 +31,7 @@
 
 - (IBAction)btnPhotoTapped:(id)sender;
 - (IBAction)btnIsPublicTapped:(id)sender;
+- (IBAction)btnAddGroupClicked:(id)sender;
 
 - (IBAction)editEnded;
 

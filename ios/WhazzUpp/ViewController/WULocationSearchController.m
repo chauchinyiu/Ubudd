@@ -198,7 +198,8 @@
     if(self.geocoder == nil){
         self.geocoder = [[CLGeocoder alloc] init];
     }
-    [self.geocoder geocodeAddressString:searchStr completionHandler:^(NSArray *placemarks, NSError *error){
+    CLRegion* refRegion = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"location"]];
+    [self.geocoder geocodeAddressString:searchStr inRegion:refRegion completionHandler:^(NSArray *placemarks, NSError *error){
         result = [[NSArray alloc] initWithArray:placemarks copyItems:YES];
         
         [self.activityView stopAnimating];

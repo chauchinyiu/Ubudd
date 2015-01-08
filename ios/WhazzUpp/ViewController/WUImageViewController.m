@@ -70,7 +70,9 @@
     {
         // Show the Navigation Bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
+        [imageFrame scrollRectToVisible:imageView.frame animated:NO];
     }
+    
 }
 
 /*

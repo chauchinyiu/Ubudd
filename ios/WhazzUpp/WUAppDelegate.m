@@ -167,10 +167,10 @@
     int tVersion = [[NSUserDefaults standardUserDefaults] integerForKey:@"RefreshVersion"] ;
     if (lastupdate == nil || [lastupdate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedAscending || tVersion < kRefreshVersion) {
         [[ResponseHandler instance] readInterests];
-        [[ResponseHandler instance] checkPhoneNumberFromIndex:0];
         [[NSUserDefaults standardUserDefaults] setInteger:kRefreshVersion forKey:@"RefreshVersion"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    [[ResponseHandler instance] checkPhoneNumberFromIndex:0];
     [[ResponseHandler instance] readBroadcasts];
 }
 

@@ -27,6 +27,7 @@
     BOOL inWorking;
     BOOL hasImage;
     NSMutableArray* friendList;
+    BOOL hasNoMember;
 }
 @end
 
@@ -95,11 +96,13 @@
             addChatGroupDTO.topic = txtTopic.text;
             addChatGroupDTO.isPublic = isPublic;
             
-            for (int i = 0; i < self.members.count; i++) {
-                NSDictionary* friendInfo = [[C2CallPhone currentPhone] getUserInfoForUserid:[self.members objectAtIndex:i]];
-                NSString* memberid = [friendInfo objectForKey:@"Email"];
-                memberid = [[memberid componentsSeparatedByString:@"@"] objectAtIndex:0];
-                [addChatGroupDTO.members addObject:memberid];
+            if (!hasNoMember) {
+                for (int i = 0; i < self.members.count; i++) {
+                    NSDictionary* friendInfo = [[C2CallPhone currentPhone] getUserInfoForUserid:[self.members objectAtIndex:i]];
+                    NSString* memberid = [friendInfo objectForKey:@"Email"];
+                    memberid = [[memberid componentsSeparatedByString:@"@"] objectAtIndex:0];
+                    [addChatGroupDTO.members addObject:memberid];
+                }
             }
             
             WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
@@ -293,9 +296,9 @@
     if (loc.latitude == 999) {
         return NO;
     }
-    if (self.members.count == 0){
-        return NO;
-    }
+    //if (self.members.count == 0){
+    //    return NO;
+    //}
     if (self.members.count > 199){
         return NO;
     }
@@ -328,6 +331,21 @@
 -(void)selectedUsersUpdated:(NSArray*)users{
     self.members = users;
     [self.tableView reloadData];
+}
+
+- (IBAction)btnAddGroupClicked:(id)sender{
+    if (self.members.count == 0) {
+        NSMutableArray* defMember;
+        defMember = [[NSMutableArray alloc] init];
+        [defMember addObject:[[SCUserProfile currentUser] userid]];
+        self.members = defMember;
+        hasNoMember = true;
+    }
+    else{
+        hasNoMember = false;
+    }
+    [self createGroup:sender];
+    
 }
 
 @end

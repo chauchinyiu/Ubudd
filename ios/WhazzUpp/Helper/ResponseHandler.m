@@ -245,7 +245,10 @@ static ResponseHandler *myInstance;
             NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
             phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
             phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
-            
+            //add area code if does not have one
+            if ([phone characterAtIndex:0] != '+') {
+                phone = [NSString stringWithFormat:@"%@%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"countryCode"], phone];
+            }
             
             if ([phone isEqualToString:myNumber]) {
                 hasUbudd = true;
@@ -364,6 +367,10 @@ static ResponseHandler *myInstance;
                 NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
                 phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
                 phone = [[phone componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""];
+                //add area code if does not have one
+                if ([phone characterAtIndex:0] != '+') {
+                    phone = [NSString stringWithFormat:@"%@%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"countryCode"], phone];
+                }
                 
                 if ([phone isEqualToString:a.phoneNo]){
                     NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));

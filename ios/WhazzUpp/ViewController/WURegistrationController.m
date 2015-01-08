@@ -159,6 +159,20 @@
     self.phoneNumber.textContent.text = [CommonMethods trimText:self.phoneNumber.textContent.text];
     
     if (self.phoneNumber.textContent.text.length > 0) {
+        //add area code if does not have one
+
+        CLGeocoder *geocoder;
+        geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:self.country.textLabel.text completionHandler:^(NSArray *placemarks, NSError *error){
+            NSArray* result = [[NSArray alloc] initWithArray:placemarks copyItems:YES];
+            if (result.count > 0) {
+                CLPlacemark* placemark = (CLPlacemark*)[result objectAtIndex:0];
+                NSData *encodedRegion = [NSKeyedArchiver archivedDataWithRootObject:placemark.region];
+                [[NSUserDefaults standardUserDefaults] setObject:encodedRegion forKey:@"location"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }];
+
         
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithString:lblCountryCode.text] forKey:@"countryCode"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithString:self.phoneNumber.textContent.text] forKey:@"phoneNo"];

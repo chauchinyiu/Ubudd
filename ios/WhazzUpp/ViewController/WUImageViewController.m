@@ -9,7 +9,6 @@
 #import "WUImageViewController.h"
 
 @interface WUImageViewController ()
-
 @end
 
 @implementation WUImageViewController
@@ -20,19 +19,10 @@
     // Do any additional setup after loading the view.
     [imageView setImage:viewImage];
     
-    /*
-    CGRect r = imageView.frame;
-    r.origin.x = 0;
-    r.origin.y = 0;
-    r.size.width = viewImage.size.width / viewImage.scale;
-    r.size.height = viewImage.size.height / viewImage.scale;
-    [imageView setFrame:r];
-     */
     imageFrame.minimumZoomScale = 0.5;
     imageFrame.maximumZoomScale = 6.0;
     imageFrame.contentSize = imageView.frame.size;
     [imageFrame scrollRectToVisible:imageView.frame animated:NO];
-    
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageClicked)];
     doubleTap.numberOfTapsRequired = 1;
@@ -59,6 +49,19 @@
 }
 
 -(void)imageClicked{
+    
+    if (imageFrame.zoomScale != 1.0f) {
+        CGSize scrollViewSize = imageFrame.bounds.size;
+        
+        CGFloat w = scrollViewSize.width;
+        CGFloat h = scrollViewSize.height;
+        CGFloat x = (w / 2.0f);
+        CGFloat y = (h / 2.0f);
+        
+        CGRect rectToZoomTo = CGRectMake(x, y, w, h);
+        [imageFrame zoomToRect:rectToZoomTo animated:YES];
+        
+    }
     //toggle navigation bar
     if (self.navigationController.navigationBar.hidden == NO)
     {
@@ -70,8 +73,8 @@
     {
         // Show the Navigation Bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        [imageFrame scrollRectToVisible:imageView.frame animated:NO];
     }
+    
     
 }
 

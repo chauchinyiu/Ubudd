@@ -279,10 +279,10 @@ static BOOL isGroup = YES;
         
         cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         if ([cell isKindOfClass:[ImageCellInStream class]]) {
-            return 208;
+            return 228;
         }
         if ([cell isKindOfClass:[ImageCellOutStream class]]) {
-            return 208;
+            return 228;
         }
         return [super tableView:tableView heightForRowAtIndexPath:ip];
     }
@@ -290,7 +290,7 @@ static BOOL isGroup = YES;
         WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
                              
         if(b.isImage){
-            return 208;
+            return 228;
         }
         else{
             CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);

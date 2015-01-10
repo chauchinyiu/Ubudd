@@ -1131,7 +1131,8 @@
             DLog(@"messageCellIn contraints : %f / %f / %f / %f", frame.origin.x, frame.origin.y,  frame.size.width, frame.size.height);
             bubble.width.constant = frame.size.width;
             bubble.left.constant = frame.origin.x;
-            bubble.top.constant = frame.origin.y;
+            bubble.top.constant = -150;
+            //frame.origin.y;
         } else {
             cell.bubbleView.frame = frame;
         }

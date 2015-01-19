@@ -77,6 +77,7 @@
     requestCellHeight = cell.frame.size.height;
 
     calendar = [NSCalendar currentCalendar];
+    hasBroadcast = false;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -131,6 +132,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog([NSString stringWithFormat:@"%@, %d, %d", (hasBroadcast ? @"a" : @"b"), [super tableView:tableView numberOfRowsInSection:section], broadcastIdx]);
     return [super tableView:tableView numberOfRowsInSection:section] + (hasRequest ? 1: 0) + (hasBroadcast ? 1 : 0);
 }
 
@@ -138,15 +140,21 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (hasRequest && indexPath.row == 0){
+        NSLog(@"h");
         return requestCellHeight;
     }
     else{
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
+        
         if (hasBroadcast && tmppath.row == broadcastIdx) {
+            NSLog(@"h");
             return chatHistoryCellHeight;
         }
         else{
+            
+            
             tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
             MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
             MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
@@ -155,6 +163,7 @@
                 for (int i = 0; i < groups.count; i++) {
                     WUAccount* a = [groups objectAtIndex:i];
                     if ([a.c2CallID isEqualToString:chathist.contact]) {
+                        NSLog(@"h");
                         return chatHistoryCellHeight;
                     }
                 }
@@ -162,10 +171,13 @@
                 for (int i = 0; i < friends.count; i++) {
                     WUAccount* a = [friends objectAtIndex:i];
                     if ([a.c2CallID isEqualToString:chathist.contact]) {
+                        NSLog(@"h");
                         return chatHistoryCellHeight;
                     }
                 }
             }
+            NSLog(@"0");
+
             return 0;
         }
     }
@@ -173,6 +185,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog([NSString stringWithFormat:@"%@, row %d, %d", (hasBroadcast ? @"a" : @"b"), indexPath.row, broadcastIdx]);
+
+    
     if (hasRequest && indexPath.row == 0) {
         WUHistoryRequestCell* rCell = (WUHistoryRequestCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUHistoryRequestCell"];
         rCell.nameLabel.font = [CommonMethods getStdFontType:0];
@@ -181,9 +196,13 @@
     }
     
     else{
+
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
+        
+        
         WUChatHistoryCell* hCell = (WUChatHistoryCell*)[self.tableView dequeueReusableCellWithIdentifier:@"WUChatHistoryCell"];
         if (hasBroadcast && tmppath.row == broadcastIdx) {
+            NSLog(@"a");
             hCell.nameLabel.font = [CommonMethods getStdFontType:0];
             hCell.timeLabel.font = [CommonMethods getStdFontType:2];
             hCell.textLabel.font = [CommonMethods getStdFontType:2];
@@ -231,6 +250,7 @@
             }
         }
         else{
+            NSLog(@"b");
             tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
             [self configureCell:hCell atIndexPath:tmppath];
         }
@@ -239,8 +259,30 @@
 }
 
 
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath;
+{
+    if (hasRequest && indexPath.row == 0) {
+        return;
+    }
+    
+    else{
+        
+        NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
+        if (hasBroadcast && tmppath.row == broadcastIdx) {
+            return;
+        }
+        else{
+            tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
+            [super controller:controller didChangeObject:anObject atIndexPath:tmppath forChangeType:type newIndexPath:newIndexPath];
+        }
+    }
+
+}
+
+
 -(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+    
     MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
     BOOL hasRelation = false;
@@ -464,4 +506,6 @@
     [self.tableView reloadData];
 }
 
+-(void)readBroadcastImgCompleted{
+}
 @end

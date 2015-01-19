@@ -1241,4 +1241,8 @@ static BOOL isGroup = YES;
     [self.tableView reloadData];
 }
 
+-(void)readBroadcastImgCompleted{
+    [self.tableView reloadData];
+}
+
 @end

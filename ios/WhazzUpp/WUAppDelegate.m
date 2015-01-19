@@ -331,6 +331,6 @@
 
 -(void) waitIndicatorConnectingToService
 {
-    NSLog(@"stupid fucking c2call architecture design");
+    NSLog(@"stupid c2call architecture design");
 }
 @end

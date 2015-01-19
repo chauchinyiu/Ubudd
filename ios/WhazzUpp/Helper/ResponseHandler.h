@@ -39,6 +39,7 @@
 @protocol WUReadBroadcastDelegate <NSObject>
 @required
 -(void)readBroadcastCompleted;
+-(void)readBroadcastImgCompleted;
 @end
 
 

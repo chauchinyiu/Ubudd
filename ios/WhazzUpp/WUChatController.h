@@ -7,6 +7,7 @@
 //
 
 #import <SocialCommunication/SocialCommunication.h>
+#import <SocialCommunication/SCAudioPlayerController.h>
 
 @interface WUChatController : SCChatController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
@@ -19,5 +20,6 @@
 @property (nonatomic, assign) bool sendWelcomeText;
 @property(nonatomic, weak) IBOutlet UIButton* titleButton;
 @property(nonatomic, weak) IBOutlet UIButton* imageBtn;
+@property(nonatomic, weak) SCAudioRecorderController *audioView;
 
 @end

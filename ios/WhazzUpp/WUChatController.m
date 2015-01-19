@@ -19,18 +19,22 @@
 #define kRichMessage_SubmitVoiceMessage @"Submit Voice Message"
 #define kRichMessage_SendContact @"Send Contact"
 
+
 typedef enum : NSUInteger {
     Action_Call,
     Action_RichMessage
 } ChatAction;
 
-@interface WUChatController ()
+@interface WUChatController (){
+    BOOL isRecording;
+}
 
 @property (nonatomic, assign) CFAbsoluteTime lastTypeEventReceived;
 
 @end
 
 @implementation WUChatController
+@synthesize audioView;
 
 #pragma mark - UIButton Action
 - (IBAction)btnCallTapped {
@@ -132,7 +136,7 @@ typedef enum : NSUInteger {
     
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
     
-    
+    isRecording = NO;
 }
 
 - (IBAction)btnImageTapped:(id)sender{
@@ -215,9 +219,22 @@ typedef enum : NSUInteger {
             }];
         }
         else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_SubmitVoiceMessage]) {
+            /*
             [self recordVoiceMail:^(NSString *key) {
                 [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
             }];
+             */
+            
+            if(isRecording) {
+                [self.audioView togglePlayback:self.audioView.btnPlay];
+                [self.audioView submitMessage:self.audioView.btnSubmit];
+                isRecording = NO;
+            }
+            else{
+                [self.audioView toogleRecording:self.audioView.btnRecord];
+                isRecording = YES;
+            }
+            
         }
         else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_SendContact]) {
             [self showPicker:nil];
@@ -245,8 +262,6 @@ typedef enum : NSUInteger {
          }
           [self dismissViewControllerAnimated:YES completion:NULL];
      }];
-
-  
 }
 
 
@@ -263,5 +278,18 @@ typedef enum : NSUInteger {
     return NO; // handle the touch
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([segue.identifier isEqualToString:@"audioRecorder"]){
+        self.audioView = (SCAudioRecorderController *)segue.destinationViewController;
+        [self.audioView setSubmitAction:^(NSString *key) {
+            [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
+        }];
+    }
+    else{
+        [super prepareForSegue:segue sender:sender];
+    }
+}
 
 @end

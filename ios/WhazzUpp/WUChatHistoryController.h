@@ -25,6 +25,5 @@
 @property (nonatomic, strong) NSString *createdGroupId;
 
 -(IBAction)toggleEditing:(id)sender;
--(void)readBroadcastCompleted;
 
 @end

@@ -33,7 +33,7 @@
         [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageUrl]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             imgData = data;
             if([ResponseHandler instance].bcdelegate){
-                [[ResponseHandler instance].bcdelegate readBroadcastCompleted];
+                [[ResponseHandler instance].bcdelegate readBroadcastImgCompleted];
             }
         }];
     }
@@ -54,6 +54,7 @@
 
 @interface ResponseHandler (){
     NSFetchedResultsController *ubuddUsers;
+    BOOL readingBroadcast;
 }
 @end
 
@@ -89,6 +90,7 @@ static ResponseHandler *myInstance;
     self.groupList = [[NSMutableArray alloc] init];
     [self readGroups];
     self.broadcastList = [[NSMutableArray alloc] init];
+    readingBroadcast = false;
     return self;
 }
 
@@ -420,13 +422,15 @@ static ResponseHandler *myInstance;
 }
 
 -(void)readBroadcasts{
-    DataRequest* datRequest = [[DataRequest alloc] init];
-    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-    datRequest.values = data;
-    datRequest.requestName = @"readBroadcasts";
-    
-    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readBoardcastResponse:error:)];
+    if(!readingBroadcast){
+        DataRequest* datRequest = [[DataRequest alloc] init];
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        datRequest.values = data;
+        datRequest.requestName = @"readBroadcasts";
+        readingBroadcast = true;
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readBoardcastResponse:error:)];
+    }
 }
 
 - (void)readBoardcastResponse:(ResponseBase *)response error:(NSError *)error{
@@ -475,7 +479,7 @@ static ResponseHandler *myInstance;
         }
     }
     [self.broadcastList removeObjectsAtIndexes:iset];
-    
+    readingBroadcast = false;
     if (self.bcdelegate) {
         [self.bcdelegate readBroadcastCompleted];
     }

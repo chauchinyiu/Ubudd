@@ -51,7 +51,7 @@
 
 
 
-@interface WUGroupDetailController : SCGroupDetailController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WULocationSelectControllerDelegate>
+@interface WUGroupDetailController : SCGroupDetailController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WULocationSelectControllerDelegate, UITextFieldDelegate>
 
 - (IBAction)btnPhotoTapped:(id)sender;
 - (IBAction)btnIsPublicTapped:(id)sender;

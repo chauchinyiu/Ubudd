@@ -310,8 +310,13 @@ static BOOL isGroup = YES;
 -(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath* ip = indexPath;
+    CGRect frame;
+    UIView* bview;
 
     [super configureCell:cell atIndexPath:ip];
+    
+    [[cell viewWithTag:1000] removeFromSuperview];
+    
     if ([cell isKindOfClass:[MessageCellOutStream class]]) {
         MessageCellOutStream *c = (MessageCellOutStream*)cell;
         [c.headline setHidden:YES];
@@ -321,11 +326,14 @@ static BOOL isGroup = YES;
         if (!isGroup) {
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
         }
-        
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[ImageCellOutStream class]]) {
         ImageCellOutStream *c = (ImageCellOutStream*)cell;
         [c.headline setHidden:YES];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[LocationCellOutStream class]]) {
         LocationCellOutStream *c = (LocationCellOutStream*)cell;
@@ -333,26 +341,38 @@ static BOOL isGroup = YES;
         [c.locationAddress setTextColor:[UIColor blackColor]];
         [c.contactName setTextColor:[UIColor blackColor]];
         [c.info setTextColor:[UIColor blackColor]];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[AudioCellOutStream class]]) {
         AudioCellOutStream *c = (AudioCellOutStream*)cell;
         [c.headline setHidden:YES];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[VideoCellOutStream class]]) {
         VideoCellOutStream *c = (VideoCellOutStream*)cell;
         [c.headline setHidden:YES];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[FriendCellOutStream class]]) {
         FriendCellOutStream *c = (FriendCellOutStream*)cell;
         [c.headline setHidden:YES];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[ContactCellOutStream class]]) {
         ContactCellOutStream *c = (ContactCellOutStream*)cell;
         [c.headline setHidden:YES];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[CallCellOutStream class]]) {
         CallCellOutStream *c = (CallCellOutStream*)cell;
         [c.headline setHidden:YES];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     
     else if ([cell isKindOfClass:[MessageCellInStream class]]) {
@@ -370,6 +390,8 @@ static BOOL isGroup = YES;
         if (!isGroup) {
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
         }
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[ImageCellInStream class]]) {
         ImageCellInStream *c = (ImageCellInStream*)cell;
@@ -381,6 +403,8 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[LocationCellInStream class]]) {
         LocationCellInStream *c = (LocationCellInStream*)cell;
@@ -393,6 +417,8 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[AudioCellInStream class]]) {
         AudioCellInStream *c = (AudioCellInStream*)cell;
@@ -406,6 +432,8 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[VideoCellInStream class]]) {
         VideoCellInStream *c = (VideoCellInStream*)cell;
@@ -416,6 +444,8 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[FriendCellInStream class]]) {
         FriendCellInStream *c = (FriendCellInStream*)cell;
@@ -426,6 +456,8 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[ContactCellInStream class]]) {
         ContactCellInStream *c = (ContactCellInStream*)cell;
@@ -436,6 +468,8 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[CallCellInStream class]]) {
         CallCellInStream *c = (CallCellInStream*)cell;
@@ -446,7 +480,14 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        frame = c.bubbleView.frame;
+        bview = c.bubbleView;
     }
+
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
+    imgView.image = [UIImage imageNamed:@"shadow.png"];
+    imgView.tag = 1000;
+    [cell insertSubview:imgView belowSubview:bview];
 
 }
 
@@ -797,12 +838,11 @@ static BOOL isGroup = YES;
         frame.size.width += inset.size.width;
         frame.size.height += inset.size.height;
         
+        cell.bubbleView.frame = frame;
         if (bubble.width) {
             bubble.width.constant = frame.size.width;
             bubble.left.constant = frame.origin.x;
             bubble.top.constant = frame.origin.y;
-        } else {
-            cell.bubbleView.frame = frame;
         }
         
         
@@ -811,6 +851,9 @@ static BOOL isGroup = YES;
         [cell setNeedsLayout];
     }
     
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(cell.bubbleView.frame.origin.x - 5 , cell.bubbleView.frame.origin.y - 5, cell.bubbleView.frame.size.width + 10, cell.bubbleView.frame.size.height + 10)];
+    imgView.image = [UIImage imageNamed:@"shadow.png"];
+    [cell insertSubview:imgView belowSubview:cell.bubbleView];
 }
 
 
@@ -934,18 +977,17 @@ static BOOL isGroup = YES;
         frame.origin.y -= inset.origin.y;
         frame.size.width += inset.size.width;
         frame.size.height += inset.size.height;
+        cell.bubbleView.frame = frame;
         
         if (bubble.width) {
-            
             bubble.width.constant = frame.size.width;
             bubble.left.constant = frame.origin.x;
             bubble.top.constant = frame.origin.y;
-        } else {
-            cell.bubbleView.frame = frame;
         }
     }
     
     [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+    
 }
 
 

@@ -55,11 +55,6 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(hidekeybord)];
-    [tap setDelegate:self];
-    [self.view addGestureRecognizer:tap];
     
     memberList = [[NSMutableArray alloc] init];
     
@@ -169,6 +164,28 @@
     return 10;
 }
 
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.view endEditing:YES];
+
+    if (indexPath.section == 1){
+        NSString *userid;
+        if (indexPath.row == 0) {
+            userid = self.group.groupOwner;
+        }
+        else{
+            userid = [memberList objectAtIndex:indexPath.row - 1];
+        }
+        
+        if ([userid isEqualToString:[SCUserProfile currentUser].userid]) {
+            
+        } else {
+            [self showFriendDetailForUserid:userid];
+        }
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
@@ -218,6 +235,7 @@
                 
             }
             editCell = cell;
+
             return cell;
         }
         else{
@@ -453,10 +471,6 @@
 }
 */
 
--(void)hidekeybord
-{
-    [self.view endEditing:YES];
-}
 
 #pragma mark - UIButton Action
 - (IBAction)btnPhotoTapped:(id)sender {
@@ -895,4 +909,8 @@
 }
 
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 @end

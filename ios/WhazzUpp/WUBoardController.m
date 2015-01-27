@@ -313,9 +313,9 @@ static BOOL isGroup = YES;
     CGRect frame;
     UIView* bview;
 
-    [super configureCell:cell atIndexPath:ip];
-    
     [[cell viewWithTag:1000] removeFromSuperview];
+
+    [super configureCell:cell atIndexPath:ip];
     
     if ([cell isKindOfClass:[MessageCellOutStream class]]) {
         MessageCellOutStream *c = (MessageCellOutStream*)cell;
@@ -1129,6 +1129,9 @@ static BOOL isGroup = YES;
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UIView* bview;
+    
     if (self.targetUserid) {
         NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
         UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:ip];
@@ -1148,6 +1151,7 @@ static BOOL isGroup = YES;
         if(b.isImage){
             ImageCellInStream* cell = [self.tableView dequeueReusableCellWithIdentifier:@"ImageCellInStream"];
             
+            [[cell viewWithTag:1000] removeFromSuperview];
             [cell.imageNewIndicator setHidden:YES];
             [cell.headline setHidden:YES];
             
@@ -1180,11 +1184,23 @@ static BOOL isGroup = YES;
             if (!b.imgData) {
                 [ResponseHandler instance].bcdelegate = self;
             }
+            
+            CGRect frame;
+            frame = cell.bubbleView.frame;
+            bview = cell.bubbleView;
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
+            imgView.image = [UIImage imageNamed:@"shadow.png"];
+            imgView.tag = 1000;
+            [cell insertSubview:imgView belowSubview:bview];
+           
+            
             return cell;
         }
         else{
             MessageCellInStream* c = [self.tableView dequeueReusableCellWithIdentifier:@"MessageCellInStream"];
 
+            [[c viewWithTag:1000] removeFromSuperview];
+            
             [c.imageNewIndicator setHidden:YES];
             [c.headline setTextColor:[UIColor blackColor]];
             [c.headline setHidden:YES];
@@ -1273,6 +1289,12 @@ static BOOL isGroup = YES;
                 frame.size.height = expectedLabelSize.height;
                 
             }
+            frame = c.bubbleView.frame;
+            bview = c.bubbleView;
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
+            imgView.image = [UIImage imageNamed:@"shadow.png"];
+            imgView.tag = 1000;
+            [c insertSubview:imgView belowSubview:bview];
             
             return c;
         }

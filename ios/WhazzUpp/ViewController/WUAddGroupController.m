@@ -17,7 +17,6 @@
 #import "WUFriendDetailController.h"
 #import "WUUserImageController.h"
 
-#define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kGroupImage_UseCamera @"Use Camera"
 
 @interface WUAddGroupController (){
@@ -56,7 +55,7 @@
     isPublic = false;
     interestID = -1;
     hasImage = false;
-    [btnIsPublic setTitle:@"Private" forState:UIControlStateNormal];
+    [btnIsPublic setTitle:NSLocalizedString(@"Private", @"") forState:UIControlStateNormal];
     [btnDone setEnabled:NO];
     
     [self setAddGroupAction:^(NSString *groupid) {
@@ -141,10 +140,10 @@
 
 #pragma mark - UIButton Action
 - (IBAction)btnPhotoTapped:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select photo" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select photo", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [actionSheet addButtonWithTitle:kGroupImage_SelectFromCameraRoll];
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Select from Camera Roll", @"")];
     }
     
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
@@ -153,7 +152,7 @@
         }
     }
     
-    [actionSheet addButtonWithTitle:@"Cancel"];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
     actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
     
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
@@ -165,7 +164,7 @@
     imagePickerController.allowsEditing = YES;
     imagePickerController.delegate = self;
     
-    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kGroupImage_SelectFromCameraRoll]) {
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Select from Camera Roll", @"")]) {
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         [self presentViewController:imagePickerController animated:YES completion:nil];
     }
@@ -258,10 +257,10 @@
 - (IBAction)btnIsPublicTapped:(id)sender{
     isPublic = !isPublic;
     if (isPublic) {
-        [btnIsPublic setTitle:@"Public" forState:UIControlStateNormal];
+        [btnIsPublic setTitle:NSLocalizedString(@"Public", @"") forState:UIControlStateNormal];
     }
     else{
-        [btnIsPublic setTitle:@"Private" forState:UIControlStateNormal];
+        [btnIsPublic setTitle:NSLocalizedString(@"Private", @"") forState:UIControlStateNormal];
     }
 }
 

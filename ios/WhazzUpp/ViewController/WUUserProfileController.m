@@ -17,7 +17,6 @@
 #import "WUUserImageController.h"
 
 
-#define kProfileImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kProfileImage_UseCamera @"Use Camera"
 
 @interface WUUserProfileController (){
@@ -49,7 +48,7 @@
     }
     
     
-    [lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", [self.userDefaults objectForKey:@"countryCode"], stringts]];
+    [lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), [self.userDefaults objectForKey:@"countryCode"], stringts]];
     SCUserProfile *userProfile = [SCUserProfile currentUser];
     if (userProfile.userImage) {
         hasPhoto = YES;
@@ -280,10 +279,10 @@
 }
 
 - (IBAction)btnProfileImageTapped {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select photo" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select photo", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [actionSheet addButtonWithTitle:kProfileImage_SelectFromCameraRoll];
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Select from Camera Roll", @"")];
     }
     
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
@@ -292,7 +291,7 @@
         }
     }
     
-    [actionSheet addButtonWithTitle:@"Cancel"];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
     actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
 
     if (nil == self.tabBarController) {
@@ -309,7 +308,7 @@
     imagePickerController.allowsEditing = YES;
     imagePickerController.delegate = self;
     
-    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kProfileImage_SelectFromCameraRoll]) {
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Select from Camera Roll", @"")]) {
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         [self presentViewController:imagePickerController animated:YES completion:nil];
     }

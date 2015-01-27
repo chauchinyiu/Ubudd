@@ -142,7 +142,7 @@
         favocell.statusLabel.text = @"Ubudd event";
     }
     else{
-        favocell.statusLabel.text = @"Ubudd user";
+        favocell.statusLabel.text = NSLocalizedString(@"Ubudd user", @"");
     }
     
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:accRecord.c2CallID];

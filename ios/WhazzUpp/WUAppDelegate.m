@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 C2Call GmbH. All rights reserved.
 //
 
-#import "WUAppDelegate.h"
+#import "WUAppDelegate.h" 
 #import "CommonMethods.h"
 #import <SocialCommunication/SCDataManager.h>
 

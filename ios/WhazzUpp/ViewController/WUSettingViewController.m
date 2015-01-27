@@ -37,10 +37,10 @@
     lblMyProfile.font = [CommonMethods getStdFontType:1];
     lblTellAFriend.font = [CommonMethods getStdFontType:1];
     if (appDelegate.loginCompleted) {
-        [lblConnectionStatus setText:@"Connected"];
+        [lblConnectionStatus setText:NSLocalizedString(@"Connected", @"")];
     }
     else{
-        [lblConnectionStatus setText:@"Not connected"];
+        [lblConnectionStatus setText:NSLocalizedString(@"Not connected", @"")];
     }
 }
 

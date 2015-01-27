@@ -73,10 +73,10 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0){
-        return @"Ubudd friends";
+        return NSLocalizedString(@"Ubudd friends", @"");
     }
     else{
-        return @"Address book";
+        return NSLocalizedString(@"Address book", @"");
     }
 }
 
@@ -227,7 +227,7 @@
             [favocell.addButton2 setHidden:YES];
         }
         else{
-            favocell.statusLabel.text = @"Using Ubudd";
+            favocell.statusLabel.text = NSLocalizedString(@"Using Ubudd", @"");
             favocell.addButton.tag = indexPath.row;
             favocell.addButton2.tag = indexPath.row;
             [favocell.addButton setHidden:NO];

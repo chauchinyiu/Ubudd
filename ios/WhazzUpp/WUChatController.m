@@ -13,11 +13,11 @@
 #import "ResponseHandler.h"
 #import "WUFriendDetailController.h"
 
-#define kRichMessage_ChoosePhotoOrVideo @"Choose Photo or Video"
+//#define kRichMessage_ChoosePhotoOrVideo @"Choose Photo or Video"
 #define kRichMessage_TakePhotoOrVideo @"Take Photo or Video"
 #define kRichMessage_SubmitLocation @"Submit Location"
-#define kRichMessage_SubmitVoiceMessage @"Submit Voice Message"
-#define kRichMessage_SendContact @"Send Contact"
+//#define kRichMessage_SubmitVoiceMessage @"Submit Voice Message"
+//#define kRichMessage_SendContact @"Send Contact"
 
 
 typedef enum : NSUInteger {
@@ -38,7 +38,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - UIButton Action
 - (IBAction)btnCallTapped {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Voice Call", @"Video Call", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") destructiveButtonTitle:nil otherButtonTitles:@"Voice Call", @"Video Call", nil];
     actionSheet.tag = Action_Call;
     [actionSheet showInView:self.view];
     
@@ -46,11 +46,11 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)btnRichMessageTapped:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select an option" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select an option", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     actionSheet.tag = Action_RichMessage;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [actionSheet addButtonWithTitle:kRichMessage_ChoosePhotoOrVideo];
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Choose Photo or Video", @"")];
     }
     
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
@@ -63,17 +63,18 @@ typedef enum : NSUInteger {
         [actionSheet addButtonWithTitle:kRichMessage_SubmitLocation];
     }
     
+    /*
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
         if ([[AVAudioSession sharedInstance] inputIsAvailable]) {
             [actionSheet addButtonWithTitle:kRichMessage_SubmitVoiceMessage];
         }
     }
-    
+    */
     if ([CommonMethods osVersion] >= 5.0) {
-        [actionSheet addButtonWithTitle:kRichMessage_SendContact];
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Send Contact", @"")];
     }
 
-    [actionSheet addButtonWithTitle:@"Cancel"];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
     actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
     
     [actionSheet showInView:self.view];
@@ -195,7 +196,7 @@ typedef enum : NSUInteger {
         }
     }
     else if (actionSheet.tag == Action_RichMessage) {
-        if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_ChoosePhotoOrVideo]) {
+        if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Choose Photo or Video", @"")]) {
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
             imagePicker.delegate = self;
             imagePicker.allowsEditing = NO;
@@ -218,25 +219,7 @@ typedef enum : NSUInteger {
                 [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
             }];
         }
-        else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_SubmitVoiceMessage]) {
-            /*
-            [self recordVoiceMail:^(NSString *key) {
-                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-            }];
-             */
-            
-            if(isRecording) {
-                [self.audioView togglePlayback:self.audioView.btnPlay];
-                [self.audioView submitMessage:self.audioView.btnSubmit];
-                isRecording = NO;
-            }
-            else{
-                [self.audioView toogleRecording:self.audioView.btnRecord];
-                isRecording = YES;
-            }
-            
-        }
-        else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_SendContact]) {
+        else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Send Contact", @"")]) {
             [self showPicker:nil];
         }
     }
@@ -291,5 +274,47 @@ typedef enum : NSUInteger {
         [super prepareForSegue:segue sender:sender];
     }
 }
+
+- (IBAction)recordBtnPress:(id)sender{
+    if (!isRecording) {
+        [self.audioView toogleRecording:self.audioView.btnRecord];
+        [self.recordButton setImage:[UIImage imageNamed:@"Mic_press.png"] forState:UIControlStateHighlighted];
+        isRecording = YES;
+    }
+}
+
+- (IBAction)recordBtnUnpress:(id)sender{
+    if(isRecording){
+        [self.audioView togglePlayback:self.audioView.btnPlay];
+        isRecording = NO;
+
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send voice message"
+                                                        message:@"Send the recorded voice message?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"No"
+                                              otherButtonTitles:@"Yes", nil];
+        [alert show];
+
+    }
+    
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        [self.audioView submitMessage:self.audioView.btnSubmit];
+    }
+    SCAudioRecorderController* newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SCAudioRecorderController"];
+    [newVC setSubmitAction:^(NSString *key) {
+        [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
+    }];
+    newVC.view.frame = self.audioContainer.bounds;
+    [self.audioContainer addSubview:newVC.view];
+    [self addChildViewController:newVC];
+    [newVC didMoveToParentViewController:self];
+    self.audioView = newVC;
+
+}
+
+
 
 @end

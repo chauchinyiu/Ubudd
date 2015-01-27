@@ -251,7 +251,7 @@
 }
 
 -(void)updateLocationSearchGUI{
-    distanceLabel.text = [NSString stringWithFormat:@"Within %dKm radius in", searchDist];
+    distanceLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Within Km radius in", @""), searchDist];
     locationLabel.text = locName;
 }
 

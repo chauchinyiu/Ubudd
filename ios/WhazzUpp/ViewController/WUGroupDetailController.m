@@ -14,7 +14,6 @@
 #import "ResponseHandler.h"
 #import "WUMediaController.h"
 #import "WUUserImageController.h"
-#define kGroupImage_SelectFromCameraRoll @"Select from Camera Roll"
 #define kGroupImage_UseCamera @"Use Camera"
 
 @implementation WUGroupNonMemberActionCell
@@ -208,10 +207,10 @@
 
                 NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
                 if(isPublic.intValue == 1){
-                    [cell.btnIsPublicEdit setTitle:@"Public" forState:UIControlStateNormal];
+                    [cell.btnIsPublicEdit setTitle:NSLocalizedString(@"Public", @"") forState:UIControlStateNormal];
                 }
                 else{
-                    [cell.btnIsPublicEdit setTitle:@"Private" forState:UIControlStateNormal];
+                    [cell.btnIsPublicEdit setTitle:NSLocalizedString(@"Private", @"") forState:UIControlStateNormal];
                 }
                 
                 NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
@@ -239,10 +238,10 @@
                 
                 NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
                 if(isPublic.intValue == 1){
-                    [cell.lblPublic setText:@"Public"];
+                    [cell.lblPublic setText:NSLocalizedString(@"Public", @"")];
                 }
                 else{
-                    [cell.lblPublic setText:@"Private"];
+                    [cell.lblPublic setText:NSLocalizedString(@"Private", @"")];
                 }
                 
                 NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
@@ -328,7 +327,7 @@
         
         if ([self.group.groupOwner isEqualToString:userid]) {
             cell.textLabel.textColor = [UIColor blueColor];
-            [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:@"(Event Admin)"]];
+            [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:NSLocalizedString(@"Event Admin", @"")]];
         } else {
             cell.textLabel.textColor = [UIColor darkTextColor];
             if (userType == 1) {
@@ -461,10 +460,10 @@
 
 #pragma mark - UIButton Action
 - (IBAction)btnPhotoTapped:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select photo" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select photo", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [actionSheet addButtonWithTitle:kGroupImage_SelectFromCameraRoll];
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Select from Camera Roll", @"")];
     }
     
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
@@ -473,7 +472,7 @@
         }
     }
     
-    [actionSheet addButtonWithTitle:@"Cancel"];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
     actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
     
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
@@ -485,7 +484,7 @@
     imagePickerController.allowsEditing = YES;
     imagePickerController.delegate = self;
     
-    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kGroupImage_SelectFromCameraRoll]) {
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Select from Camera Roll", @"")]) {
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         [self presentViewController:imagePickerController animated:YES completion:nil];
     }
@@ -512,11 +511,11 @@
     NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
     if(isPublic.intValue == 1){
         isPublic = [NSNumber numberWithInt:0];
-        [editCell.btnIsPublicEdit setTitle:@"Public" forState:UIControlStateNormal];
+        [editCell.btnIsPublicEdit setTitle:NSLocalizedString(@"Public", @"") forState:UIControlStateNormal];
     }
     else{
         isPublic = [NSNumber numberWithInt:1];
-        [editCell.btnIsPublicEdit setTitle:@"Private" forState:UIControlStateNormal];
+        [editCell.btnIsPublicEdit setTitle:NSLocalizedString(@"Private", @"") forState:UIControlStateNormal];
     }
     [groupInfo setObject:isPublic forKey:@"isPublic"];
    

@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  WhazzUpp
+
+  Created by Ming Kei Wong on 26/1/15.
+  Copyright (c) 2015年 3Embed Technologies. All rights reserved.
+*/
+"Tel No" = "電話號碼: %@ %@";
+"Select photo" = "選擇照片";
+"Select from Camera Roll" = "從照片簿中選擇";
+"Cancel" = "取消";
+"Available" = "有空";
+"Busy" = "忙碌中";
+"Learning" = "學習中";
+"Out with friends" = "朋友聚舊";
+"Working" = "工作中";
+"Low battery" = "電話無電";
+"No calls please" = "請勿打擾";
+"In a meeting" = "會議中";
+"Burning calories" = "Burning calories";
+"Sleeping" = "Sleeping";
+"Only urgent matters" = "Only urgent matters";
+"I'm bored, please talk to me..." = "I'm bored, please talk to me...";
+"Ubudd friends" = "Ubudd 之友";
+"Address book" = "電話簿";
+"Using Ubudd" = "正在使用Ubudd";
+"Within Km radius in" = "在%dKm半徑範圍內";
+"Save" = "保存";
+"Private" = "私人";
+"Public" = "公共";
+"Event Admin" = "(管理員)";
+"online" = "在線";
+"offline" = "離線";
+"Voice Mails" = "錄音";
+"Voice Mail" = "錄音";
+"Picture Message" = "圖片信息";
+"Ubudd user" = "Ubudd 用戶";
+"Select an option" = "選項";
+"Choose Photo or Video" = "選擇照片或影片";
+"Send Contact" = "發送聯絡";
+"Connected" = "已連接";
+"Not connected" = "未連接";

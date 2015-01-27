@@ -110,7 +110,7 @@ static NSString* currentPhoneNo = @"";
             [self.tableView reloadData];
         }
         else{
-            [profileCell.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", countryCode, phoneNo]];
+            [profileCell.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
             
             [profileCell.lblGender setText:(genderFemale ? @"Female" : @"Male")];
             [profileCell.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
@@ -202,7 +202,7 @@ static NSString* currentPhoneNo = @"";
                                                                  timeStyle:NSDateFormatterNoStyle]];
         [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
         [c.lblSubinterest setText:subInterest];
-        [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", countryCode, phoneNo]];
+        [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
         profileCell = c;
     }
 }
@@ -234,7 +234,7 @@ static NSString* currentPhoneNo = @"";
                                                                  timeStyle:NSDateFormatterNoStyle]];
         [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
         [c.lblSubinterest setText:subInterest];
-        [c.lblTelNo setText:[NSString stringWithFormat:@"Tel No.: %@ %@", countryCode, phoneNo]];
+        [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
         [c.userStatus setText:status];
         profileCell = c;
         return c;

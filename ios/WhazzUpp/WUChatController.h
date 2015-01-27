@@ -16,10 +16,14 @@
 - (IBAction)btnRichMessageTapped:(id)sender;
 - (IBAction)btnImageTapped:(id)sender;
 - (IBAction)btnSendTapped:(id)sender;
+- (IBAction)recordBtnPress:(id)sender;
+- (IBAction)recordBtnUnpress:(id)sender;
 
 @property (nonatomic, assign) bool sendWelcomeText;
 @property(nonatomic, weak) IBOutlet UIButton* titleButton;
 @property(nonatomic, weak) IBOutlet UIButton* imageBtn;
 @property(nonatomic, weak) SCAudioRecorderController *audioView;
+@property(nonatomic, weak) IBOutlet UIView *audioContainer;
+@property(nonatomic, weak) IBOutlet UIButton* recordButton;
 
 @end

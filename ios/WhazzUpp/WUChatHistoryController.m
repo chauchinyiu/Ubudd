@@ -350,10 +350,10 @@
                 
                 switch ([[C2CallPhone currentPhone] mediaTypeForKey:event.text]) {
                     case SCMEDIATYPE_VOICEMAIL:
-                        histcell.textLabel.text = @"VoiceMail";
+                        histcell.textLabel.text = NSLocalizedString(@"Voice Mail", @"");
                         break;
                     case SCMEDIATYPE_IMAGE:
-                        histcell.textLabel.text = @"Picture Message";
+                        histcell.textLabel.text = NSLocalizedString(@"Picture Message", @"");
                         break;
                     case SCMEDIATYPE_VIDEO:
                         histcell.textLabel.text = @"Video Message";

@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  WhazzUpp
+
+  Created by Ming Kei Wong on 26/1/15.
+  Copyright (c) 2015年 3Embed Technologies. All rights reserved.
+*/
+"Tel No" = "Tel No.: %@ %@";
+"Select photo" = "Select photo";
+"Select from Camera Roll" = "Select from Camera Roll";
+"Cancel" = "Cancel";
+"Available" = "Available";
+"Busy" = "Busy";
+"Learning" = "Learning";
+"Out with friends" = "Out with friends";
+"Working" = "Working";
+"Low battery" = "Low battery";
+"No calls please" = "No calls please";
+"In a meeting" = "In a meeting";
+"Burning calories" = "Burning calories";
+"Sleeping" = "Sleeping";
+"Only urgent matters" = "Only urgent matters";
+"I'm bored, please talk to me..." = "I'm bored, please talk to me...";
+"Ubudd friends" = "Ubudd friends";
+"Address book" = "Address book";
+"Using Ubudd" = "Using Ubudd";
+"Within Km radius in" = "Within %dKm radius in";
+"Save" = "Save";
+"Private" = "Private";
+"Public" = "Public";
+"Event Admin" = "(Event Admin)";
+"online" = "online";
+"offline" = "offline";
+"Voice Mails" = "Voice Mails";
+"Voice Mail" = "Voice Mail";
+"Picture Message" = "Picture Message";
+"Ubudd user" = "Ubudd user";
+"Select an option" = "Select an option";
+"Choose Photo or Video" = "Choose Photo or Video";
+"Send Contact" = "Send Contact";
+"Connected" = "Connected";
+"Not connected" = "Not connected";

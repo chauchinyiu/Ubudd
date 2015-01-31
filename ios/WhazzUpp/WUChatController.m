@@ -136,7 +136,10 @@ typedef enum : NSUInteger {
     }
     
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
-    
+
+    [self.submitButton setHidden:YES];
+    [self.recordButton setHidden:NO];
+    [self.lblRecording setHidden:YES];
     isRecording = NO;
 }
 
@@ -280,6 +283,7 @@ typedef enum : NSUInteger {
         [self.audioView toogleRecording:self.audioView.btnRecord];
         [self.recordButton setImage:[UIImage imageNamed:@"Mic_press.png"] forState:UIControlStateHighlighted];
         isRecording = YES;
+        [self.lblRecording setHidden:NO];
     }
 }
 
@@ -287,7 +291,8 @@ typedef enum : NSUInteger {
     if(isRecording){
         [self.audioView togglePlayback:self.audioView.btnPlay];
         isRecording = NO;
-
+        [self.lblRecording setHidden:YES];
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send voice message"
                                                         message:@"Send the recorded voice message?"
                                                        delegate:self
@@ -315,6 +320,16 @@ typedef enum : NSUInteger {
 
 }
 
-
+-(void)textViewDidChange:(UITextView *)textView
+{
+    if ([textView.text length] > 0) {
+        [self.submitButton setHidden:NO];
+        [self.recordButton setHidden:YES];
+    }
+    else{
+        [self.submitButton setHidden:YES];
+        [self.recordButton setHidden:NO];
+    }
+}
 
 @end

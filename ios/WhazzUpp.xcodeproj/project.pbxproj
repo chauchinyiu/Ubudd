@@ -1116,7 +1116,6 @@
 		CE7A777C1A321B8900059E4B /* WUUserImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A777B1A321B8900059E4B /* WUUserImageController.m */; };
 		CE7E964419F8F017001C229F /* mapMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7E964319F8F017001C229F /* mapMarker.png */; };
 		CE7E964719F8F6F1001C229F /* WUUbuddMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7E964619F8F6F1001C229F /* WUUbuddMapViewController.m */; };
-		CE8292BC19CEC3B1002B0615 /* WUGroupDetailHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8292BB19CEC3B1002B0615 /* WUGroupDetailHeaderController.m */; };
 		CE871B4F19C58BFF006B05B6 /* AddChatGroupDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE871B4E19C58BFF006B05B6 /* AddChatGroupDTO.m */; };
 		CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE885CD219CBE1A800F8004C /* WULocationSearchController.m */; };
 		CE88BC341A760057008814E9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE88BC361A760057008814E9 /* Localizable.strings */; };
@@ -2308,8 +2307,6 @@
 		CE7E964319F8F017001C229F /* mapMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapMarker.png; sourceTree = "<group>"; };
 		CE7E964519F8F6F1001C229F /* WUUbuddMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUUbuddMapViewController.h; sourceTree = "<group>"; };
 		CE7E964619F8F6F1001C229F /* WUUbuddMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUUbuddMapViewController.m; sourceTree = "<group>"; };
-		CE8292BA19CEC3B1002B0615 /* WUGroupDetailHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUGroupDetailHeaderController.h; sourceTree = "<group>"; };
-		CE8292BB19CEC3B1002B0615 /* WUGroupDetailHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUGroupDetailHeaderController.m; sourceTree = "<group>"; };
 		CE871B4D19C58BFF006B05B6 /* AddChatGroupDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddChatGroupDTO.h; sourceTree = "<group>"; };
 		CE871B4E19C58BFF006B05B6 /* AddChatGroupDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddChatGroupDTO.m; sourceTree = "<group>"; };
 		CE885CD119CBE1A800F8004C /* WULocationSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WULocationSearchController.h; sourceTree = "<group>"; };
@@ -3502,8 +3499,6 @@
 		17A1D68C1927ED2400B28792 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				CE8292BA19CEC3B1002B0615 /* WUGroupDetailHeaderController.h */,
-				CE8292BB19CEC3B1002B0615 /* WUGroupDetailHeaderController.m */,
 				17A1D68D1927ED3700B28792 /* WULoginController.h */,
 				17A1D68E1927ED3700B28792 /* WULoginController.m */,
 				170C61F71937D3CD00E25EC7 /* WURegistrationController.h */,
@@ -4855,7 +4850,6 @@
 				CED5F1C319B5560900DF8772 /* VerifyC2CallIDDTO.m in Sources */,
 				1733A09A19366BC60064E97A /* WebserviceHandler.m in Sources */,
 				CE871B4F19C58BFF006B05B6 /* AddChatGroupDTO.m in Sources */,
-				CE8292BC19CEC3B1002B0615 /* WUGroupDetailHeaderController.m in Sources */,
 				CE7A777C1A321B8900059E4B /* WUUserImageController.m in Sources */,
 				CE7E964719F8F6F1001C229F /* WUUbuddMapViewController.m in Sources */,
 				CE8A895B1A43BD99000EE809 /* WUPhotoViewController.m in Sources */,

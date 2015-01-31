@@ -9,7 +9,7 @@
 #import <SocialCommunication/SocialCommunication.h>
 #import <SocialCommunication/SCAudioPlayerController.h>
 
-@interface WUChatController : SCChatController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
+@interface WUChatController : SCChatController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UITextViewDelegate>
 
 - (IBAction)openProfile:(id)sender;
 - (IBAction)btnCallTapped;
@@ -25,5 +25,6 @@
 @property(nonatomic, weak) SCAudioRecorderController *audioView;
 @property(nonatomic, weak) IBOutlet UIView *audioContainer;
 @property(nonatomic, weak) IBOutlet UIButton* recordButton;
+@property(nonatomic, weak) IBOutlet UILabel* lblRecording;
 
 @end

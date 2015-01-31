@@ -414,6 +414,7 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
+    inSearch = YES;
     [self setTextFilterForText:searchString];
     [self refetchResults];
     
@@ -424,6 +425,7 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
+    inSearch = YES;
     [self setTextFilterForText:[self.searchDisplayController.searchBar text]];
     [self refetchResults];
     

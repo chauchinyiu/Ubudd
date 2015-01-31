@@ -139,7 +139,7 @@
         favocell.nameLabel.text = accRecord.name;
     }
     if (isGroup) {
-        favocell.statusLabel.text = @"Ubudd event";
+        favocell.statusLabel.text = @"Ubudd group";
     }
     else{
         favocell.statusLabel.text = NSLocalizedString(@"Ubudd user", @"");

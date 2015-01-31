@@ -345,7 +345,7 @@
         
         if ([self.group.groupOwner isEqualToString:userid]) {
             cell.textLabel.textColor = [UIColor blueColor];
-            [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:NSLocalizedString(@"Event Admin", @"")]];
+            [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:NSLocalizedString(@"Group Admin", @"")]];
         } else {
             cell.textLabel.textColor = [UIColor darkTextColor];
             if (userType == 1) {
@@ -763,8 +763,8 @@
 }
 
 - (void)removeGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Leave Event"
-                                                    message:@"You left the event."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Leave Group"
+                                                    message:@"You left the group."
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -801,8 +801,8 @@
 
 
 - (void)deleteGroupResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Event"
-                                                    message:@"You deleted the event."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Group"
+                                                    message:@"You deleted the group."
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];

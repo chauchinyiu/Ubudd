@@ -967,7 +967,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="WUInterestViewController" extendedLayoutIncludesOpaqueBars="YES" id="Jaz-Pe-n8k" customClass="WUInterestViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="qnO-4P-R1n">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1008,10 +1008,10 @@
             </objects>
             <point key="canvasLocation" x="2749" y="1863"/>
         </scene>
-        <!--Event Info-->
+        <!--Group Profile-->
         <scene sceneID="p3H-vW-6rX">
             <objects>
-                <tableViewController storyboardIdentifier="SCGroupDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ydp-b9-UdG" customClass="WUGroupDetailController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SCGroupDetailController" title="Group Profile" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ydp-b9-UdG" customClass="WUGroupDetailController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xWO-91-URW">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1029,7 +1029,7 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya1-Yp-K1d">
                                             <rect key="frame" x="20" y="7" width="256" height="30"/>
-                                            <state key="normal" title="Join Event">
+                                            <state key="normal" title="Join Group">
                                                 <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -1083,7 +1083,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="np7-tl-CBn">
                                             <rect key="frame" x="20" y="38" width="256" height="30"/>
-                                            <state key="normal" title="Leave Event">
+                                            <state key="normal" title="Leave Group">
                                                 <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -1118,7 +1118,7 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVf-O3-r4B">
                                             <rect key="frame" x="20" y="38" width="256" height="30"/>
-                                            <state key="normal" title="Delete Event">
+                                            <state key="normal" title="Delete Group">
                                                 <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -1345,7 +1345,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" fixedFrame="YES" image="btn_ico_avatar_group.png" translatesAutoresizingMaskIntoConstraints="NO" id="OHm-jv-B9J">
                                                     <rect key="frame" x="20" y="14" width="85" height="86"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Event Topic" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TYb-1g-Mpf" userLabel="labelGroupName">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Group Topic" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TYb-1g-Mpf" userLabel="labelGroupName">
                                                     <rect key="frame" x="125" y="15" width="170" height="21"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1455,7 +1455,7 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Event Info" id="X8a-6o-fLx"/>
+                    <navigationItem key="navigationItem" title="Group Profile" id="X8a-6o-fLx"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="09F-9z-9Mn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1568,7 +1568,7 @@
                                                     <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="QNK-9g-EhY">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="btn_ico_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="QNK-9g-EhY">
                                                     <rect key="frame" x="7" y="4" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="0YR-XX-h3M"/>
@@ -1737,10 +1737,10 @@
             </objects>
             <point key="canvasLocation" x="1431" y="-378"/>
         </scene>
-        <!--New Event-->
+        <!--New Group-->
         <scene sceneID="kkj-yA-g1a">
             <objects>
-                <tableViewController storyboardIdentifier="SCAddGroupController" title="New Event" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tY9-Si-6JS" customClass="WUAddGroupController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SCAddGroupController" title="New Group" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tY9-Si-6JS" customClass="WUAddGroupController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4fU-gm-Nkx">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1750,7 +1750,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="296"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Topic:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYU-Fv-j5s">
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group Topic:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYU-Fv-j5s">
                                     <rect key="frame" x="120" y="16" width="161" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1952,7 +1952,7 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="New Event" id="wYQ-JA-FDT">
+                    <navigationItem key="navigationItem" title="New Group" id="wYQ-JA-FDT">
                         <barButtonItem key="rightBarButtonItem" title="Done" style="plain" id="qae-qU-EOP">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -7853,14 +7853,14 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qEU-4M-V6f"/>
-        <segue reference="wV6-VW-yCP"/>
-        <segue reference="CpG-ap-BDD"/>
-        <segue reference="DAE-Aq-bKb"/>
-        <segue reference="oaM-SS-1lY"/>
         <segue reference="VQ9-8Q-vDt"/>
-        <segue reference="JX8-i6-PVw"/>
         <segue reference="tQs-8i-bTJ"/>
+        <segue reference="oaM-SS-1lY"/>
+        <segue reference="mZ1-Vt-wje"/>
+        <segue reference="Hgt-RX-z8j"/>
+        <segue reference="l4c-f0-WTn"/>
+        <segue reference="JX8-i6-PVw"/>
+        <segue reference="qEU-4M-V6f"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

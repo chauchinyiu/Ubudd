@@ -218,7 +218,7 @@ static BOOL isGroup = YES;
                 }
             }
             
-            cell.nameLabel.text = [NSString stringWithFormat:@"%@ created an event %@", ownerName, groupName];
+            cell.nameLabel.text = [NSString stringWithFormat:@"%@ created a group %@", ownerName, groupName];
             return cell;
         }
         else{

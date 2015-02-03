@@ -15,7 +15,7 @@
 
 //#define kRichMessage_ChoosePhotoOrVideo @"Choose Photo or Video"
 #define kRichMessage_TakePhotoOrVideo @"Take Photo or Video"
-#define kRichMessage_SubmitLocation @"Submit Location"
+//#define kRichMessage_SubmitLocation @"Submit Location"
 //#define kRichMessage_SubmitVoiceMessage @"Submit Voice Message"
 //#define kRichMessage_SendContact @"Send Contact"
 
@@ -60,7 +60,7 @@ typedef enum : NSUInteger {
     }
     
     if ([CLLocationManager locationServicesEnabled]) {
-        [actionSheet addButtonWithTitle:kRichMessage_SubmitLocation];
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Share Location", @"")];
     }
     
     /*
@@ -217,7 +217,7 @@ typedef enum : NSUInteger {
             imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
             [self presentViewController:imagePicker animated:YES completion:nil];
         }
-        else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_SubmitLocation]) {
+        else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Share Location", @"")]) {
             [self requestLocation:^(NSString *key) {
                 [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
             }];

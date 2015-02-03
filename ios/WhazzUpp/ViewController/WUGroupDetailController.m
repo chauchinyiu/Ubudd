@@ -65,7 +65,7 @@
     if ([self.group.groupOwner isEqualToString:[SCUserProfile currentUser].userid]) {
         //owner
         userType = 1;
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveGroup)];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", @"") style:UIBarButtonItemStylePlain target:self action:@selector(saveGroup)];
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
     }
     else{
@@ -231,7 +231,7 @@
                 }
                 
                 NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
-                [cell.lblMemberCntEdit setText:[NSString stringWithFormat:@"Members: %d OF 200", memberCnt.intValue + 1]];
+                [cell.lblMemberCntEdit setText:[NSString stringWithFormat:NSLocalizedString(@"Members X OF 200", @""), memberCnt.intValue + 1]];
                 
             }
             editCell = cell;
@@ -801,7 +801,7 @@
 
 
 - (void)deleteGroupResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Group"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Group", @"")
                                                     message:@"You deleted the group."
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"

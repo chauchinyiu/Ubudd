@@ -11,10 +11,10 @@ class Apsn {
 
         public function sendNotification($userID, $message, $customVals){
         	$ctx = stream_context_create();
-			stream_context_set_option($ctx, 'ssl', 'passphrase', 'Ubudd');
+			stream_context_set_option($ctx, 'ssl', 'passphrase', 'apairthird');
 			stream_context_set_option($ctx, 'ssl', 'cafile', '/var/www/html/Models/centrust_2048_ca.cer');
 			stream_context_set_option($ctx, 'ssl', 'local_cert', '/var/www/html/Models/ck.pem');
-			$fp = stream_socket_client("ssl://gateway.sandbox.push.apple.com:2195", $errno, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+			$fp = stream_socket_client("ssl://gateway.push.apple.com:2195", $errno, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
 			if (!$fp) {
 				return "ERROR:" . $errstr;
 			} 
@@ -48,10 +48,10 @@ class Apsn {
         
         public function sendNotificationToAll($message, $customVals){
         	$ctx = stream_context_create();
-			stream_context_set_option($ctx, 'ssl', 'passphrase', 'Ubudd');
+			stream_context_set_option($ctx, 'ssl', 'passphrase', 'apairthird');
 			stream_context_set_option($ctx, 'ssl', 'cafile', '/var/www/html/Models/centrust_2048_ca.cer');
 			stream_context_set_option($ctx, 'ssl', 'local_cert', '/var/www/html/Models/ck.pem');
-			$fp = stream_socket_client("ssl://gateway.sandbox.push.apple.com:2195", $errno, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+			$fp = stream_socket_client("ssl://gateway.push.apple.com:2195", $errno, $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
 			if (!$fp) {
 				return "ERROR:" . $errstr;
 			} 

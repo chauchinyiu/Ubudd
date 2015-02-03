@@ -326,13 +326,13 @@ static BOOL isGroup = YES;
         if (!isGroup) {
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
         }
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[ImageCellOutStream class]]) {
         ImageCellOutStream *c = (ImageCellOutStream*)cell;
         [c.headline setHidden:YES];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[LocationCellOutStream class]]) {
@@ -341,37 +341,37 @@ static BOOL isGroup = YES;
         [c.locationAddress setTextColor:[UIColor blackColor]];
         [c.contactName setTextColor:[UIColor blackColor]];
         [c.info setTextColor:[UIColor blackColor]];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[AudioCellOutStream class]]) {
         AudioCellOutStream *c = (AudioCellOutStream*)cell;
         [c.headline setHidden:YES];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[VideoCellOutStream class]]) {
         VideoCellOutStream *c = (VideoCellOutStream*)cell;
         [c.headline setHidden:YES];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[FriendCellOutStream class]]) {
         FriendCellOutStream *c = (FriendCellOutStream*)cell;
         [c.headline setHidden:YES];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[ContactCellOutStream class]]) {
         ContactCellOutStream *c = (ContactCellOutStream*)cell;
         [c.headline setHidden:YES];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[CallCellOutStream class]]) {
         CallCellOutStream *c = (CallCellOutStream*)cell;
         [c.headline setHidden:YES];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     
@@ -390,7 +390,7 @@ static BOOL isGroup = YES;
         if (!isGroup) {
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
         }
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[ImageCellInStream class]]) {
@@ -403,7 +403,7 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[LocationCellInStream class]]) {
@@ -417,7 +417,7 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[AudioCellInStream class]]) {
@@ -432,7 +432,7 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[VideoCellInStream class]]) {
@@ -444,7 +444,7 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[FriendCellInStream class]]) {
@@ -456,7 +456,7 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[ContactCellInStream class]]) {
@@ -468,7 +468,7 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
     else if ([cell isKindOfClass:[CallCellInStream class]]) {
@@ -480,14 +480,15 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        frame = c.bubbleView.frame;
+        frame = c.bubbleView.bounds;
         bview = c.bubbleView;
     }
 
+    
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
     imgView.image = [UIImage imageNamed:@"shadow.png"];
     imgView.tag = 1000;
-    [cell insertSubview:imgView belowSubview:bview];
+    [cell insertSubview:imgView atIndex:0];
 
 }
 
@@ -853,7 +854,7 @@ static BOOL isGroup = YES;
     
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(cell.bubbleView.frame.origin.x - 5 , cell.bubbleView.frame.origin.y - 5, cell.bubbleView.frame.size.width + 10, cell.bubbleView.frame.size.height + 10)];
     imgView.image = [UIImage imageNamed:@"shadow.png"];
-    [cell insertSubview:imgView belowSubview:cell.bubbleView];
+    [cell insertSubview:imgView atIndex:0];
 }
 
 
@@ -1186,12 +1187,12 @@ static BOOL isGroup = YES;
             }
             
             CGRect frame;
-            frame = cell.bubbleView.frame;
+            frame = cell.bubbleView.bounds;
             bview = cell.bubbleView;
             UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
             imgView.image = [UIImage imageNamed:@"shadow.png"];
             imgView.tag = 1000;
-            [cell insertSubview:imgView belowSubview:bview];
+            [cell insertSubview:imgView atIndex:0];
            
             
             return cell;
@@ -1289,12 +1290,12 @@ static BOOL isGroup = YES;
                 frame.size.height = expectedLabelSize.height;
                 
             }
-            frame = c.bubbleView.frame;
+            frame = c.bubbleView.bounds;
             bview = c.bubbleView;
             UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
             imgView.image = [UIImage imageNamed:@"shadow.png"];
             imgView.tag = 1000;
-            [c insertSubview:imgView belowSubview:bview];
+            [c insertSubview:imgView atIndex:0];
             
             return c;
         }

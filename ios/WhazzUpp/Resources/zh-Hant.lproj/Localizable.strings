@@ -40,3 +40,6 @@
 "Send Contact" = "發送聯絡";
 "Connected" = "已連接";
 "Not connected" = "未連接";
+"Share Location" = "分享位置";
+"Delete Group" = "刪除群組";
+"Members X OF 200" = "會員: %d OF 200";

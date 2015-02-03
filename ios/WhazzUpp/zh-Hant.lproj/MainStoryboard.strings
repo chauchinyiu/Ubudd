@@ -84,7 +84,7 @@
 "5r8-xj-BjT.placeholder" = "Search for topic or interest (art, hobby etc)";
 
 /* Class = "IBUINavigationItem"; title = "Location"; ObjectID = "6Je-jf-M0Y"; */
-"6Je-jf-M0Y.title" = "Location";
+"6Je-jf-M0Y.title" = "位置";
 
 /* Class = "IBUILabel"; text = "興趣 (詳細)"; ObjectID = "6b4-6W-ACb"; */
 "6b4-6W-ACb.text" = "興趣 (詳細)";
@@ -200,7 +200,7 @@
 "Gxt-CE-QAF.text" = "vor 23d 6h";
 
 /* Class = "IBUIButton"; normalTitle = "Block"; ObjectID = "Gz5-d9-oQC"; */
-"Gz5-d9-oQC.normalTitle" = "Block";
+"Gz5-d9-oQC.normalTitle" = "剔出群組";
 
 /* Class = "IBUINavigationItem"; title = "Chats"; ObjectID = "HLT-Or-TQp"; */
 "HLT-Or-TQp.title" = "對話";
@@ -209,7 +209,7 @@
 "HS5-OH-Lwf.text" = "Label";
 
 /* Class = "IBUINavigationItem"; title = "Location"; ObjectID = "IBu-hI-jpl"; */
-"IBu-hI-jpl.title" = "Location";
+"IBu-hI-jpl.title" = "位置";
 
 /* Class = "IBUILabel"; text = "23:15"; ObjectID = "IDp-47-fDY"; */
 "IDp-47-fDY.text" = "23:15";
@@ -254,7 +254,7 @@
 "MFr-du-hEE.text" = "Label";
 
 /* Class = "IBUIButton"; normalTitle = "Location"; ObjectID = "NIG-9A-h9x"; */
-"NIG-9A-h9x.normalTitle" = "Location";
+"NIG-9A-h9x.normalTitle" = "位置";
 
 /* Class = "IBUINavigationItem"; title = "Join Requests"; ObjectID = "ODg-zF-KgK"; */
 "ODg-zF-KgK.title" = "Join Requests";
@@ -470,7 +470,7 @@
 "bJL-kw-tA9.text" = "Michael Knecht";
 
 /* Class = "IBUIButton"; normalTitle = "Location"; ObjectID = "bL2-fJ-660"; */
-"bL2-fJ-660.normalTitle" = "Location";
+"bL2-fJ-660.normalTitle" = "位置";
 
 /* Class = "IBUITabBarItem"; title = "Chats"; ObjectID = "c1W-kW-GhH"; */
 "c1W-kW-GhH.title" = "對話";
@@ -572,7 +572,7 @@
 "lRd-9b-iZf.text" = "連接狀態";
 
 /* Class = "IBUILabel"; text = "Location:"; ObjectID = "lTY-O4-5Cj"; */
-"lTY-O4-5Cj.text" = "Location:";
+"lTY-O4-5Cj.text" = "位置:";
 
 /* Class = "IBUISegmentedControl"; lrQ-wn-IYf.segmentTitles[0] = "Standard"; ObjectID = "lrQ-wn-IYf"; */
 "lrQ-wn-IYf.segmentTitles[0]" = "Standard";
@@ -680,7 +680,7 @@
 "qae-qU-EOP.title" = "Done";
 
 /* Class = "IBUINavigationItem"; title = "Contact"; ObjectID = "qee-nZ-dq6"; */
-"qee-nZ-dq6.title" = "Contact";
+"qee-nZ-dq6.title" = "聯絡";
 
 /* Class = "IBUILabel"; text = "By continuing, you are indicating that you agree to the Privacy Policy and Terms and Conditions."; ObjectID = "qfb-eT-bPP"; */
 "qfb-eT-bPP.text" = "By continuing, you are indicating that you agree to the Privacy Policy and Terms and Conditions.";

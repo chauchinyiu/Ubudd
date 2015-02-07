@@ -14,7 +14,7 @@
 #import "WUFriendDetailController.h"
 
 //#define kRichMessage_ChoosePhotoOrVideo @"Choose Photo or Video"
-#define kRichMessage_TakePhotoOrVideo @"Take Photo or Video"
+//#define kRichMessage_TakePhotoOrVideo @"Take Photo or Video"
 //#define kRichMessage_SubmitLocation @"Submit Location"
 //#define kRichMessage_SubmitVoiceMessage @"Submit Voice Message"
 //#define kRichMessage_SendContact @"Send Contact"
@@ -55,7 +55,7 @@ typedef enum : NSUInteger {
     
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [actionSheet addButtonWithTitle:kRichMessage_TakePhotoOrVideo];
+            [actionSheet addButtonWithTitle:NSLocalizedString(@"Take Photo or Video", @"")];
         }
     }
     
@@ -208,7 +208,7 @@ typedef enum : NSUInteger {
             imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
             [self presentViewController:imagePicker animated:YES completion:nil];
         }
-        else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kRichMessage_TakePhotoOrVideo]) {
+        else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Take Photo or Video", @"")]) {
             UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
             imagePicker.delegate = self;
             imagePicker.allowsEditing = NO;
@@ -293,11 +293,11 @@ typedef enum : NSUInteger {
         isRecording = NO;
         [self.lblRecording setHidden:YES];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Send voice message"
-                                                        message:@"Send the recorded voice message?"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Send voice message", @"")
+                                                        message:NSLocalizedString(@"Send the recorded voice message", @"")
                                                        delegate:self
-                                              cancelButtonTitle:@"No"
-                                              otherButtonTitles:@"Yes", nil];
+                                              cancelButtonTitle:NSLocalizedString(@"No", @"")
+                                              otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
         [alert show];
 
     }

@@ -16,9 +16,6 @@
 #import "WUInterestViewController.h"
 #import "WUUserImageController.h"
 
-
-#define kProfileImage_UseCamera @"Use Camera"
-
 @interface WUUserProfileController (){
     bool genderFemale;
     int interestID;
@@ -80,10 +77,10 @@
         //read from user default
         genderFemale = [self.userDefaults boolForKey:@"userIsFemale"];
         if (genderFemale) {
-            [btnGender setTitle:@"Female" forState:UIControlStateNormal];
+            [btnGender setTitle:NSLocalizedString(@"Female", @"") forState:UIControlStateNormal];
         }
         else{
-            [btnGender setTitle:@"Male" forState:UIControlStateNormal];
+            [btnGender setTitle:NSLocalizedString(@"Male", @"") forState:UIControlStateNormal];
         }
         
         if ([self.userDefaults boolForKey:@"userHasInterest"]) {
@@ -151,10 +148,10 @@
 - (IBAction)btnGenderTapped{
     genderFemale = !genderFemale;
     if (genderFemale) {
-        [btnGender setTitle:@"Female" forState:UIControlStateNormal];
+        [btnGender setTitle:NSLocalizedString(@"Female", @"") forState:UIControlStateNormal];
     }
     else{
-        [btnGender setTitle:@"Male" forState:UIControlStateNormal];
+        [btnGender setTitle:NSLocalizedString(@"Male", @"") forState:UIControlStateNormal];
     }
 
 }
@@ -185,10 +182,10 @@
     txtDisplayName.text = [CommonMethods trimText:txtDisplayName.text];
     
     if (txtDisplayName.text.length == 0) {
-        [CommonMethods showAlertWithTitle:@"Enter Details" message:@"Display Name cannot be empty" delegate:nil];
+        [CommonMethods showAlertWithTitle:NSLocalizedString(@"Enter Details", @"") message:NSLocalizedString(@"Display Name cannot be empty", @"") delegate:nil];
     }
     else {
-        [CommonMethods showLoading:YES title:nil message:@"Saving"];
+        [CommonMethods showLoading:YES title:nil message:NSLocalizedString(@"Saving", @"")];
         
         SCUserProfile *userProfile = [SCUserProfile currentUser];
         userProfile.firstname = txtDisplayName.text;
@@ -267,7 +264,7 @@
             }
             
             if ([self.userDefaults boolForKey:kUserDefault_isWelcomeComplete])
-                [CommonMethods showAlertWithTitle:nil message:@"Profile updated" delegate:nil];
+                [CommonMethods showAlertWithTitle:nil message:NSLocalizedString(@"Profile updated", @"") delegate:nil];
             else
                 [self performSegueWithIdentifier:@"WUWelcomeControllerSegue" sender:self];
         }];
@@ -287,7 +284,7 @@
     
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [actionSheet addButtonWithTitle:kProfileImage_UseCamera];
+            [actionSheet addButtonWithTitle:NSLocalizedString(@"Use Camera", @"")];
         }
     }
     
@@ -312,7 +309,7 @@
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         [self presentViewController:imagePickerController animated:YES completion:nil];
     }
-    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kProfileImage_UseCamera]) {
+    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Use Camera", @"")]) {
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
         imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;

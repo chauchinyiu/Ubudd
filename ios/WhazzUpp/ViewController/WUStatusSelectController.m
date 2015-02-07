@@ -35,7 +35,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    statusOptions = @[NSLocalizedString(@"Available", @""), NSLocalizedString(@"Busy", @""), NSLocalizedString(@"Learning", @""), NSLocalizedString(@"Out with friends", @""), NSLocalizedString(@"Working", @""), NSLocalizedString(@"Low battery", @""), NSLocalizedString(@"No calls please", @""), NSLocalizedString(@"In a meeting", @""), @"Burning calories", @"Sleeping", @"Only urgent matters", @"I'm bored, please talk to me..."];
+    statusOptions = @[NSLocalizedString(@"Available", @""), NSLocalizedString(@"Busy", @""), NSLocalizedString(@"Learning", @""), NSLocalizedString(@"Out with friends", @""), NSLocalizedString(@"Working", @""), NSLocalizedString(@"Low battery", @""), NSLocalizedString(@"No calls please", @""), NSLocalizedString(@"In a meeting", @""), NSLocalizedString(@"Burning calories", @""), NSLocalizedString(@"Sleeping", @""), NSLocalizedString(@"Only urgent matters", @""), NSLocalizedString(@"Im bored please talk to me", @"")];
     [userStatus setText:currentStatus];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]

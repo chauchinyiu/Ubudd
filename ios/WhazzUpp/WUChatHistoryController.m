@@ -191,7 +191,7 @@
     if (hasRequest && indexPath.row == 0) {
         WUHistoryRequestCell* rCell = (WUHistoryRequestCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUHistoryRequestCell"];
         rCell.nameLabel.font = [CommonMethods getStdFontType:0];
-        [rCell.nameLabel setText:[NSString stringWithFormat:@"You have %d requests", requestCnt]];
+        [rCell.nameLabel setText:[NSString stringWithFormat:NSLocalizedString(@"You have requests", @""), requestCnt]];
         return rCell;
     }
     
@@ -206,7 +206,7 @@
             hCell.nameLabel.font = [CommonMethods getStdFontType:0];
             hCell.timeLabel.font = [CommonMethods getStdFontType:2];
             hCell.textLabel.font = [CommonMethods getStdFontType:2];
-            hCell.nameLabel.text = @"Admin messages";
+            hCell.nameLabel.text = NSLocalizedString(@"Admin messages", @"");
             hCell.timeLabel.text = @"";
             hCell.textLabel.text = @"";
             hCell.missedEvents.hidden = YES;
@@ -356,7 +356,7 @@
                         histcell.textLabel.text = NSLocalizedString(@"Picture Message", @"");
                         break;
                     case SCMEDIATYPE_VIDEO:
-                        histcell.textLabel.text = @"Video Message";
+                        histcell.textLabel.text = NSLocalizedString(@"Video Message", @"");
                         break;
                     case SCMEDIATYPE_VCARD:
                         histcell.textLabel.text = @"VCard Message";
@@ -365,7 +365,7 @@
                         histcell.textLabel.text = @"File Attachment";
                         break;
                     case SCMEDIATYPE_FRIEND:
-                        histcell.textLabel.text = @"Contact Info";
+                        histcell.textLabel.text = NSLocalizedString(@"Contact Info", @"");
                         break;
                     default:
                         histcell.textLabel.text = event.text;

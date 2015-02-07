@@ -311,7 +311,6 @@ static BOOL isGroup = YES;
 {
     NSIndexPath* ip = indexPath;
     CGRect frame;
-    UIView* bview;
 
     [[cell viewWithTag:1000] removeFromSuperview];
 
@@ -327,13 +326,15 @@ static BOOL isGroup = YES;
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
         }
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = cell.bounds.size.width - frame.size.width + 5;
+        frame.origin.y = cell.bounds.size.height - 31;
     }
     else if ([cell isKindOfClass:[ImageCellOutStream class]]) {
         ImageCellOutStream *c = (ImageCellOutStream*)cell;
         [c.headline setHidden:YES];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = cell.bounds.size.width - frame.size.width + 5;
+        frame.origin.y = frame.size.height - 25;
     }
     else if ([cell isKindOfClass:[LocationCellOutStream class]]) {
         LocationCellOutStream *c = (LocationCellOutStream*)cell;
@@ -341,40 +342,46 @@ static BOOL isGroup = YES;
         [c.locationAddress setTextColor:[UIColor blackColor]];
         [c.contactName setTextColor:[UIColor blackColor]];
         [c.info setTextColor:[UIColor blackColor]];
+        [c.locationTitle setTitle:NSLocalizedString(@"Current location", @"") forState:UIControlStateNormal];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = cell.bounds.size.width - frame.size.width + 5;
+        frame.origin.y = frame.size.height - 23;
     }
     else if ([cell isKindOfClass:[AudioCellOutStream class]]) {
         AudioCellOutStream *c = (AudioCellOutStream*)cell;
         [c.headline setHidden:YES];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = cell.bounds.size.width - frame.size.width + 5;
+        frame.origin.y = frame.size.height - 22;
     }
     else if ([cell isKindOfClass:[VideoCellOutStream class]]) {
         VideoCellOutStream *c = (VideoCellOutStream*)cell;
         [c.headline setHidden:YES];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = cell.bounds.size.width - frame.size.width + 5;
+        frame.origin.y = frame.size.height - 22;
     }
     else if ([cell isKindOfClass:[FriendCellOutStream class]]) {
         FriendCellOutStream *c = (FriendCellOutStream*)cell;
         [c.headline setHidden:YES];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = cell.bounds.size.width - frame.size.width + 5;
+        frame.origin.y = frame.size.height - 22;
     }
     else if ([cell isKindOfClass:[ContactCellOutStream class]]) {
         ContactCellOutStream *c = (ContactCellOutStream*)cell;
         [c.headline setHidden:YES];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = cell.bounds.size.width - frame.size.width + 5;
+        frame.origin.y = frame.size.height - 25;
     }
     else if ([cell isKindOfClass:[CallCellOutStream class]]) {
         CallCellOutStream *c = (CallCellOutStream*)cell;
         [c.headline setHidden:YES];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = cell.bounds.size.width - frame.size.width + 5;
+        frame.origin.y = frame.size.height - 22;
     }
-    
     else if ([cell isKindOfClass:[MessageCellInStream class]]) {
         MessageCellInStream *c = (MessageCellInStream*)cell;
         [c.imageNewIndicator setHidden:YES];
@@ -391,7 +398,8 @@ static BOOL isGroup = YES;
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
         }
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = 10;
+        frame.origin.y = frame.size.height - 22;
     }
     else if ([cell isKindOfClass:[ImageCellInStream class]]) {
         ImageCellInStream *c = (ImageCellInStream*)cell;
@@ -404,7 +412,8 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = 10;
+        frame.origin.y = frame.size.height - 18;
     }
     else if ([cell isKindOfClass:[LocationCellInStream class]]) {
         LocationCellInStream *c = (LocationCellInStream*)cell;
@@ -413,12 +422,14 @@ static BOOL isGroup = YES;
         c.headline.font = [CommonMethods getStdFontType:3];
         [c.locationAddress setTextColor:[UIColor blackColor]];
         [c.locationTitle  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [c.locationTitle setTitle:NSLocalizedString(@"Current location", @"") forState:UIControlStateNormal];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = 10;
+        frame.origin.y = frame.size.height - 22;
     }
     else if ([cell isKindOfClass:[AudioCellInStream class]]) {
         AudioCellInStream *c = (AudioCellInStream*)cell;
@@ -433,7 +444,8 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = 10;
+        frame.origin.y = frame.size.height - 25;
     }
     else if ([cell isKindOfClass:[VideoCellInStream class]]) {
         VideoCellInStream *c = (VideoCellInStream*)cell;
@@ -445,7 +457,8 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = 10;
+        frame.origin.y = frame.size.height - 22;
     }
     else if ([cell isKindOfClass:[FriendCellInStream class]]) {
         FriendCellInStream *c = (FriendCellInStream*)cell;
@@ -457,7 +470,8 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = 10;
+        frame.origin.y = frame.size.height - 22;
     }
     else if ([cell isKindOfClass:[ContactCellInStream class]]) {
         ContactCellInStream *c = (ContactCellInStream*)cell;
@@ -469,7 +483,8 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = 10;
+        frame.origin.y = frame.size.height - 22;
     }
     else if ([cell isKindOfClass:[CallCellInStream class]]) {
         CallCellInStream *c = (CallCellInStream*)cell;
@@ -481,11 +496,12 @@ static BOOL isGroup = YES;
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
         frame = c.bubbleView.bounds;
-        bview = c.bubbleView;
+        frame.origin.x = 10;
+        frame.origin.y = frame.size.height - 22;
     }
 
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width - 10, 30)];
     imgView.image = [UIImage imageNamed:@"shadow.png"];
     imgView.tag = 1000;
     [cell insertSubview:imgView atIndex:0];
@@ -783,7 +799,7 @@ static BOOL isGroup = YES;
     CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
     
     //    dispatch_async(dispatch_get_main_queue(), ^(){
-    CGSize expectedLabelSize = [text sizeWithFont:self.textFieldInFont
+    CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
                                 constrainedToSize:maximumLabelSize
                                     lineBreakMode:NSLineBreakByWordWrapping];
     
@@ -852,9 +868,6 @@ static BOOL isGroup = YES;
         [cell setNeedsLayout];
     }
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(cell.bubbleView.frame.origin.x - 5 , cell.bubbleView.frame.origin.y - 5, cell.bubbleView.frame.size.width + 10, cell.bubbleView.frame.size.height + 10)];
-    imgView.image = [UIImage imageNamed:@"shadow.png"];
-    [cell insertSubview:imgView atIndex:0];
 }
 
 
@@ -916,7 +929,7 @@ static BOOL isGroup = YES;
     CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
     
     //    dispatch_async(dispatch_get_main_queue(), ^(){
-    CGSize expectedLabelSize = [text sizeWithFont:self.textFieldOutFont
+    CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
                                 constrainedToSize:maximumLabelSize
                                     lineBreakMode:NSLineBreakByWordWrapping];
     
@@ -1131,7 +1144,6 @@ static BOOL isGroup = YES;
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UIView* bview;
     
     if (self.targetUserid) {
         NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
@@ -1148,7 +1160,6 @@ static BOOL isGroup = YES;
     }
     else{
         WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
-        
         if(b.isImage){
             ImageCellInStream* cell = [self.tableView dequeueReusableCellWithIdentifier:@"ImageCellInStream"];
             
@@ -1158,7 +1169,7 @@ static BOOL isGroup = YES;
             
             cell.messageImage.image = [UIImage imageWithData:b.imgData];
             [cell.progress setHidden:YES];
-            
+            cell.tag = indexPath.row;
             [cell setTapAction:^{
                 NSMutableArray *imageList = [NSMutableArray array];
                 for (int i = 0; i < [ResponseHandler instance].broadcastList.count; i++) {
@@ -1166,7 +1177,7 @@ static BOOL isGroup = YES;
                     if (c.isImage) {
                         NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
                         [info setValue:@"YES" forKey:@"IsBroadcast"];
-                        [info setObject:[NSNumber numberWithInt:i] forKey:@"image"];
+                        [info setObject:[NSString stringWithFormat:@"%d", i] forKey:@"image"];
                         [imageList addObject:info];
                     }
                 }
@@ -1174,7 +1185,7 @@ static BOOL isGroup = YES;
                 NSString * storyboardName = @"MainStoryboard";
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
                 WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
-                [vc showPhotos:imageList currentPhoto:b.message];
+                [vc showPhotos:imageList currentPhoto:[NSString stringWithFormat:@"%d", indexPath.row]];
                 [self.navigationController pushViewController:vc animated:YES];
                 
             }];
@@ -1188,8 +1199,7 @@ static BOOL isGroup = YES;
             
             CGRect frame;
             frame = cell.bubbleView.bounds;
-            bview = cell.bubbleView;
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, frame.size.height - 18, frame.size.width - 5, 30)];
             imgView.image = [UIImage imageNamed:@"shadow.png"];
             imgView.tag = 1000;
             [cell insertSubview:imgView atIndex:0];
@@ -1215,7 +1225,7 @@ static BOOL isGroup = YES;
             [view setTextOffsetTop:[NSNumber numberWithFloat:0]];
             
             NSString *text = b.message;
-            NSString *sendername = @"Admin";
+            NSString *sendername = NSLocalizedString(@"Admin", @"");
             c.headline.text = sendername;
 
             view.chatText = text;
@@ -1229,7 +1239,7 @@ static BOOL isGroup = YES;
             CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
             
             //    dispatch_async(dispatch_get_main_queue(), ^(){
-            CGSize expectedLabelSize = [text sizeWithFont:self.textFieldInFont
+            CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
                                         constrainedToSize:maximumLabelSize
                                             lineBreakMode:NSLineBreakByWordWrapping];
             
@@ -1291,8 +1301,7 @@ static BOOL isGroup = YES;
                 
             }
             frame = c.bubbleView.bounds;
-            bview = c.bubbleView;
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x + 2, frame.origin.y + 5, frame.size.width - 2, frame.size.height)];
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, frame.size.height - 22, frame.size.width - 5, 30)];
             imgView.image = [UIImage imageNamed:@"shadow.png"];
             imgView.tag = 1000;
             [c insertSubview:imgView atIndex:0];

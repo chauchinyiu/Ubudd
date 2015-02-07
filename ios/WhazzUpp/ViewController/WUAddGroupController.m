@@ -17,8 +17,6 @@
 #import "WUFriendDetailController.h"
 #import "WUUserImageController.h"
 
-#define kGroupImage_UseCamera @"Use Camera"
-
 @interface WUAddGroupController (){
     int interestID;
     CLLocationCoordinate2D loc;
@@ -148,7 +146,7 @@
     
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [actionSheet addButtonWithTitle:kGroupImage_UseCamera];
+            [actionSheet addButtonWithTitle:NSLocalizedString(@"Use Camera", @"")];
         }
     }
     
@@ -168,7 +166,7 @@
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         [self presentViewController:imagePickerController animated:YES completion:nil];
     }
-    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kGroupImage_UseCamera]) {
+    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Use Camera", @"")]) {
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
         imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;

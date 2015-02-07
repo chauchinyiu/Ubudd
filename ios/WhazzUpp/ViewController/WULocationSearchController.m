@@ -100,7 +100,7 @@
     }
     else {
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"WULocationCell" forIndexPath:indexPath];
-        [cell.nameLabel setText:@"Current location"];
+        [cell.nameLabel setText: NSLocalizedString(@"Current location", @"")];
     }
     
     

@@ -221,8 +221,9 @@
         else{
             favocell.nameLabel.text = accRecord.name;
         }
+        
         if([[NSUserDefaults standardUserDefaults] boolForKey:accRecord.c2CallID]){
-            favocell.statusLabel.text = @"Added to favorites";
+            favocell.statusLabel.text = NSLocalizedString(@"Added to favorites", @"");
             [favocell.addButton setHidden:YES];
             [favocell.addButton2 setHidden:YES];
         }
@@ -311,7 +312,7 @@
     else{
         favocell= (WUAddressBookCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
     }
-    favocell.statusLabel.text = @"Added to favorites";
+    favocell.statusLabel.text = NSLocalizedString(@"Added to favorites", @"");
     [favocell.addButton setHidden:YES];
     [favocell.addButton2 setHidden:YES];
     [self.tableView reloadData];

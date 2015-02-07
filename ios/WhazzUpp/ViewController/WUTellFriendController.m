@@ -15,7 +15,7 @@
 - (void)composeMessage {
     if ([MFMessageComposeViewController canSendText]) {
         MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
-        messageController.body = @"Check out \"UBudd?\" Messenger for your smartphone. Download it today from APPSTORE_LINK_URL";
+        messageController.body = NSLocalizedString(@"Tell Friend SMS", @"");
         messageController.messageComposeDelegate = self;
         [self presentViewController:messageController animated:YES completion:nil];
     }
@@ -28,8 +28,8 @@
 - (void)composeEmail {
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
-        [emailController setSubject:@"Ubudd? Messenger: iOS + Android"];
-        [emailController setMessageBody:[NSString stringWithFormat:@"Hey,\n\nI just downloaded Ubudd? Messenger on my %@.\n\nIt's a Messenger for smartphones which replaces SMS. This app even lets me send pictures, videos and other multimedia.\n\n Ubudd? Messenger is available for iOS and Android devices and there is no PIN or username to remember - it works just like SMS and uses internet data plan\n\nGet it now from APPSTORE_LINK_URL and say good-bye to SMS.", [UIDevice currentDevice].model] isHTML:NO];
+        [emailController setSubject:@"Ubudd: iOS + Android"];
+        [emailController setMessageBody:NSLocalizedString(@"Tell Friend Email", @"") isHTML:NO];
         emailController.mailComposeDelegate = self;
         [self presentViewController:emailController animated:YES completion:nil];
     }
@@ -42,7 +42,7 @@
 - (void)shareFacebook{
     SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-    [controller setInitialText:@"First post from my iPhone app"];
+    [controller setInitialText:NSLocalizedString(@"First post from my iPhone app", @"")];
     [self presentViewController:controller animated:YES completion:Nil];
 }
 

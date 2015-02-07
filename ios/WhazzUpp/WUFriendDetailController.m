@@ -112,7 +112,7 @@ static NSString* currentPhoneNo = @"";
         else{
             [profileCell.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
             
-            [profileCell.lblGender setText:(genderFemale ? @"Female" : @"Male")];
+            [profileCell.lblGender setText:(genderFemale ? NSLocalizedString(@"Female", @"") : NSLocalizedString(@"Male", @""))];
             [profileCell.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
                                                                      dateStyle:NSDateFormatterMediumStyle
                                                                      timeStyle:NSDateFormatterNoStyle]];
@@ -196,7 +196,7 @@ static NSString* currentPhoneNo = @"";
         [c.favoriteImage setHidden:YES];
         [c.facebookImage setHidden:YES];
         [c.email setHidden:YES];
-        [c.lblGender setText:(genderFemale ? @"Female" : @"Male")];
+        [c.lblGender setText:(genderFemale ? NSLocalizedString(@"Female", @"") : NSLocalizedString(@"Male", @""))];
         [c.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
                                                                  dateStyle:NSDateFormatterMediumStyle
                                                                  timeStyle:NSDateFormatterNoStyle]];
@@ -228,7 +228,7 @@ static NSString* currentPhoneNo = @"";
         [c.favoriteImage setHidden:YES];
         [c.facebookImage setHidden:YES];
         [c.email setHidden:YES];
-        [c.lblGender setText:(genderFemale ? @"Female" : @"Male")];
+        [c.lblGender setText:(genderFemale ? NSLocalizedString(@"Female", @"") : NSLocalizedString(@"Male", @""))];
         [c.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
                                                                  dateStyle:NSDateFormatterMediumStyle
                                                                  timeStyle:NSDateFormatterNoStyle]];

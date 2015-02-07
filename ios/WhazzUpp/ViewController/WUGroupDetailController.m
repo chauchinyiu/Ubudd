@@ -14,7 +14,6 @@
 #import "ResponseHandler.h"
 #import "WUMediaController.h"
 #import "WUUserImageController.h"
-#define kGroupImage_UseCamera @"Use Camera"
 
 @implementation WUGroupNonMemberActionCell
 @end
@@ -268,7 +267,7 @@
                 [cell.lblHost setText:[groupInfo objectForKey:@"userName"]];
                 
                 if (userType == 2) {
-                    [cell.lblJoinStatus setText:@"Joined"];
+                    [cell.lblJoinStatus setText:NSLocalizedString(@"Joined", @"")];
                 }
                 else{
                     NSMutableArray* groups = [[ResponseHandler instance] groupList];
@@ -280,7 +279,7 @@
                     }
                     
                     if (userType == 3) {
-                        [cell.lblJoinStatus setText:@"Non member"];
+                        [cell.lblJoinStatus setText:NSLocalizedString(@"Non member", @"")];
                     }
                 }
                 
@@ -482,7 +481,7 @@
     
     if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [actionSheet addButtonWithTitle:kGroupImage_UseCamera];
+            [actionSheet addButtonWithTitle:NSLocalizedString(@"Use Camera", @"")];
         }
     }
     
@@ -502,7 +501,7 @@
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         [self presentViewController:imagePickerController animated:YES completion:nil];
     }
-    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:kGroupImage_UseCamera]) {
+    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Use Camera", @"")]) {
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
         imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
@@ -704,8 +703,8 @@
 
 - (void)requestJoinGroupResponse:(ResponseBase *)response error:(NSError *)error{
     if (response.errorCode == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Request submitted"
-                                                        message:@"Your request is submitted and is waiting for approval."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Request submitted", @"")
+                                                        message:NSLocalizedString(@"Your request is submitted and is waiting for approval", @"")
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
@@ -713,8 +712,8 @@
         [self.tableView reloadData];
     }
     else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Submittion failed"
-                                                        message:@"Unable to submit your request."
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Submittion failed", @"")
+                                                        message:NSLocalizedString(@"Unable to submit your request", @"")
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
@@ -763,8 +762,8 @@
 }
 
 - (void)removeGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Leave Group"
-                                                    message:@"You left the group."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Leave Group", @"")
+                                                    message:NSLocalizedString(@"You left the group", @"")
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -802,7 +801,7 @@
 
 - (void)deleteGroupResponse:(ResponseBase *)response error:(NSError *)error{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Group", @"")
-                                                    message:@"You deleted the group."
+                                                    message:NSLocalizedString(@"You deleted the group", @"")
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -821,11 +820,11 @@
 
 
 - (IBAction)btnBlockMemberTapped:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Blocking a member"
-                                                    message:@"Do you really want to blocked this member?"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Blocking a member", @"")
+                                                    message:NSLocalizedString(@"Do you really want to blocked this member", @"")
                                                    delegate:self
-                                          cancelButtonTitle:@"No"
-                                          otherButtonTitles:@"Yes", nil];
+                                          cancelButtonTitle:NSLocalizedString(@"No", @"")
+                                          otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
     [alert setTag:((UIButton*)sender).tag];
     [alert show];
 }
@@ -877,8 +876,8 @@
 }
 
 - (void)rejectGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Member Blocked"
-                                                        message:@"You blocked the member."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Member Blocked", @"")
+                                                        message:NSLocalizedString(@"You blocked the member", @"")
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];

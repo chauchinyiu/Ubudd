@@ -129,16 +129,16 @@
     User *user = (User *)response;
     
     if (error){
-        [CommonMethods showAlertWithTitle:@"Registration Error" message:[error localizedDescription] delegate:nil];
+        [CommonMethods showAlertWithTitle:NSLocalizedString(@"Registration Error", @"") message:[error localizedDescription] delegate:nil];
         [btnDone setEnabled:YES];
     }
     else if (user.errorCode){
-        [CommonMethods showAlertWithTitle:@"Registration Error" message:user.message delegate:nil];
+        [CommonMethods showAlertWithTitle:NSLocalizedString(@"Registration Error", @"") message:user.message delegate:nil];
         [btnDone setEnabled:YES];
 
     }
     else if (!user.email || !user.password){
-        [CommonMethods showAlertWithTitle:@"Registration Error" message:@"Failed to register. Please try again" delegate:nil];
+        [CommonMethods showAlertWithTitle:NSLocalizedString(@"Registration Error", @"") message:@"Failed to register. Please try again" delegate:nil];
         [btnDone setEnabled:YES];        
     }
     else {

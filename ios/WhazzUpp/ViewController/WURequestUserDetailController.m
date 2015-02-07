@@ -59,7 +59,7 @@
     
     // Configure the cell...
     [cell.displayName setText:[userData objectForKey:@"userName"]];
-    [cell.lblGender setText:([(NSString*)[userData objectForKey:@"gender"] isEqualToString:@"F"] ? @"Female" : @"Male")];
+    [cell.lblGender setText:([(NSString*)[userData objectForKey:@"gender"] isEqualToString:@"F"] ? NSLocalizedString(@"Female", @"") : NSLocalizedString(@"Male", @""))];
     [cell.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:[userData objectForKey:@"dob"]
                                                              dateStyle:NSDateFormatterMediumStyle
                                                              timeStyle:NSDateFormatterNoStyle]];

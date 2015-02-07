@@ -21,7 +21,7 @@
 "13e-ss-guZ.title" = "Back";
 
 /* Class = "IBUINavigationItem"; title = "Friend Info"; ObjectID = "16q-Dc-C01"; */
-"16q-Dc-C01.title" = "Friend Info";
+"16q-Dc-C01.title" = "朋友資料";
 
 /* Class = "IBUILabel"; text = "Subtitle"; ObjectID = "1F8-fv-DOF"; */
 "1F8-fv-DOF.text" = "Subtitle";
@@ -81,7 +81,7 @@
 "5cz-qx-lZm.text" = "0:00";
 
 /* Class = "IBUISearchBar"; placeholder = "Search for topic or interest (art, hobby etc)"; ObjectID = "5r8-xj-BjT"; */
-"5r8-xj-BjT.placeholder" = "Search for topic or interest (art, hobby etc)";
+"5r8-xj-BjT.placeholder" = "搜索群組題目或興趣（藝術，興趣等）";
 
 /* Class = "IBUINavigationItem"; title = "Location"; ObjectID = "6Je-jf-M0Y"; */
 "6Je-jf-M0Y.title" = "位置";
@@ -110,7 +110,7 @@
 ";
 
 /* Class = "IBUISearchBar"; placeholder = "Search for topic or interest (art, hobby etc)"; ObjectID = "8jQ-O0-6pb"; */
-"8jQ-O0-6pb.placeholder" = "Search for topic or interest (art, hobby etc)";
+"8jQ-O0-6pb.placeholder" = "搜索群組題目或興趣（藝術，興趣等）";
 
 /* Class = "IBUILabel"; text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"; ObjectID = "978-Vy-nYu"; */
 "978-Vy-nYu.text" = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
@@ -122,7 +122,7 @@
 "9i9-ld-Bis.text" = "Title";
 
 /* Class = "IBUIButton"; normalTitle = "Download"; ObjectID = "ANC-lb-bcP"; */
-"ANC-lb-bcP.normalTitle" = "Download";
+"ANC-lb-bcP.normalTitle" = "下載";
 
 /* Class = "IBUILabel"; text = "Michael Knecht"; ObjectID = "Ak1-cr-p2o"; */
 "Ak1-cr-p2o.text" = "Michael Knecht";
@@ -182,7 +182,7 @@
 "Ebk-ww-OR9.placeholder" = "主題";
 
 /* Class = "IBUIButton"; normalTitle = "Download"; ObjectID = "FNo-ry-HB6"; */
-"FNo-ry-HB6.normalTitle" = "Download";
+"FNo-ry-HB6.normalTitle" = "下載";
 
 /* Class = "IBUILabel"; text = "00:00"; ObjectID = "Fp6-n7-ACl"; */
 "Fp6-n7-ACl.text" = "00:00";
@@ -230,7 +230,7 @@
 "JQ8-Y0-RaJ.text" = "00:00";
 
 /* Class = "IBUIViewController"; title = "Ubudd Map"; ObjectID = "K4L-Le-Jh7"; */
-"K4L-Le-Jh7.title" = "Ubudd Map";
+"K4L-Le-Jh7.title" = "Ubudd 地圖";
 
 /* Class = "IBUIButton"; normalTitle = "Title Text"; ObjectID = "KEP-YA-dQ1"; */
 "KEP-YA-dQ1.normalTitle" = "Title Text";
@@ -257,13 +257,13 @@
 "NIG-9A-h9x.normalTitle" = "位置";
 
 /* Class = "IBUINavigationItem"; title = "Join Requests"; ObjectID = "ODg-zF-KgK"; */
-"ODg-zF-KgK.title" = "Join Requests";
+"ODg-zF-KgK.title" = "加入要求";
 
 /* Class = "IBUILabel"; text = "Michael.Knecht@c2call.com"; ObjectID = "OJr-E4-jS2"; */
 "OJr-E4-jS2.text" = "Michael.Knecht@c2call.com";
 
 /* Class = "IBUINavigationItem"; title = "VoiceMail"; ObjectID = "OUN-Yl-cff"; */
-"OUN-Yl-cff.title" = "VoiceMail";
+"OUN-Yl-cff.title" = "錄音";
 
 /* Class = "IBUINavigationItem"; title = "Terms and Conditions"; ObjectID = "Opk-ID-jX3"; */
 "Opk-ID-jX3.title" = "條款和細則";
@@ -350,7 +350,7 @@
 "Tjl-q9-W9v.text" = "122323";
 
 /* Class = "IBUIButton"; normalTitle = "Download"; ObjectID = "Tmh-RL-tVk"; */
-"Tmh-RL-tVk.normalTitle" = "Download";
+"Tmh-RL-tVk.normalTitle" = "下載";
 
 /* Class = "IBUILabel"; text = "0/160"; ObjectID = "UNi-Fv-k3H"; */
 "UNi-Fv-k3H.text" = "0/160";
@@ -521,7 +521,7 @@
 "fmT-DC-Gf8.normalTitle" = "Title Text";
 
 /* Class = "IBUIButton"; normalTitle = "Download"; ObjectID = "g0p-TE-ZnH"; */
-"g0p-TE-ZnH.normalTitle" = "Download";
+"g0p-TE-ZnH.normalTitle" = "下載";
 
 /* Class = "IBUILabel"; text = "Search result is empty. \nRemove search filter?"; ObjectID = "gD5-LU-JMM"; */
 "gD5-LU-JMM.text" = "Search result is empty. \nRemove search filter?";
@@ -626,7 +626,7 @@
 "nok-Zq-twP.normalTitle" = "興趣";
 
 /* Class = "IBUIButton"; normalTitle = "Leave Group"; ObjectID = "np7-tl-CBn"; */
-"np7-tl-CBn.normalTitle" = "Leave Group";
+"np7-tl-CBn.normalTitle" = "離開群組";
 
 /* Class = "IBUITextField"; placeholder = "verification code"; ObjectID = "oKd-qU-XXj"; */
 "oKd-qU-XXj.placeholder" = "驗證碼";
@@ -656,7 +656,7 @@
 "pQL-M4-N1h.text" = "SMS";
 
 /* Class = "IBUINavigationItem"; title = "Ubudd Map"; ObjectID = "pe0-Cl-pxG"; */
-"pe0-Cl-pxG.title" = "Ubudd Map";
+"pe0-Cl-pxG.title" = "Ubudd 地圖";
 
 /* Class = "IBUILabel"; text = "Add Phone Number"; ObjectID = "pjZ-EZ-yoo"; */
 "pjZ-EZ-yoo.text" = "Add Phone Number";
@@ -677,7 +677,7 @@
 "qaI-KZ-fod.text" = "(Confirmed!)";
 
 /* Class = "IBUIBarButtonItem"; title = "Done"; ObjectID = "qae-qU-EOP"; */
-"qae-qU-EOP.title" = "Done";
+"qae-qU-EOP.title" = "完成";
 
 /* Class = "IBUINavigationItem"; title = "Contact"; ObjectID = "qee-nZ-dq6"; */
 "qee-nZ-dq6.title" = "聯絡";
@@ -686,7 +686,7 @@
 "qfb-eT-bPP.text" = "By continuing, you are indicating that you agree to the Privacy Policy and Terms and Conditions.";
 
 /* Class = "IBUILabel"; text = "Recording"; ObjectID = "qrT-P7-Jdz"; */
-"qrT-P7-Jdz.text" = "Recording";
+"qrT-P7-Jdz.text" = "錄製中";
 
 /* Class = "IBUIButton"; normalTitle = "Enter Chat"; ObjectID = "r1u-Ct-hFt"; */
 "r1u-Ct-hFt.normalTitle" = "進入對話";
@@ -740,7 +740,7 @@
 "u6a-cW-kUy.normalTitle" = "Show previous messages";
 
 /* Class = "IBUILabel"; text = "Name:"; ObjectID = "uCc-cx-9iy"; */
-"uCc-cx-9iy.text" = "Name:";
+"uCc-cx-9iy.text" = "名字:";
 
 /* Class = "IBUILabel"; text = "Michael Knecht"; ObjectID = "uNQ-ps-uGZ"; */
 "uNQ-ps-uGZ.text" = "Michael Knecht";

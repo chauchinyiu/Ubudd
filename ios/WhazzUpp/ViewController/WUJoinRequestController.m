@@ -151,7 +151,7 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Join Request" message:@"How will you handle the request?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles: @"Accept", @"Reject", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Join Request", @"") message:@"How will you handle the request?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles: @"Accept", @"Reject", nil];
     [alert setTag:indexPath.row];
     [alert show];
 }

@@ -27,6 +27,8 @@ typedef enum : NSUInteger {
 
 @interface WUChatController (){
     BOOL isRecording;
+    double accumulatedTime;
+    NSTimer* timer;
 }
 
 @property (nonatomic, assign) CFAbsoluteTime lastTypeEventReceived;
@@ -284,7 +286,28 @@ typedef enum : NSUInteger {
         [self.recordButton setImage:[UIImage imageNamed:@"Mic_press.png"] forState:UIControlStateHighlighted];
         isRecording = YES;
         [self.lblRecording setHidden:NO];
+        accumulatedTime = 0;
+        timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+        self.lblRecording.text = @"00:00";
+        
     }
+}
+
+-(void)updateTime:(NSTimer *)timer
+{
+    accumulatedTime++;
+    NSInteger tempMinute = accumulatedTime / 60;
+    NSInteger tempSecond = accumulatedTime - (tempMinute * 60);
+    
+    NSString *minute = [[NSNumber numberWithInteger:tempMinute] stringValue];
+    NSString *second = [[NSNumber numberWithInteger:tempSecond] stringValue];
+    if (tempMinute < 10) {
+        minute = [@"0" stringByAppendingString:minute];
+    }
+    if (tempSecond < 10) {
+        second = [@"0" stringByAppendingString:second];
+    }
+    self.lblRecording.text = [NSString stringWithFormat:@"%@:%@", minute, second];
 }
 
 - (IBAction)recordBtnUnpress:(id)sender{
@@ -292,6 +315,7 @@ typedef enum : NSUInteger {
         [self.audioView togglePlayback:self.audioView.btnPlay];
         isRecording = NO;
         [self.lblRecording setHidden:YES];
+        [timer invalidate];
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Send voice message", @"")
                                                         message:NSLocalizedString(@"Send the recorded voice message", @"")

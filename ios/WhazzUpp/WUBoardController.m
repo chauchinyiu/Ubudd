@@ -440,6 +440,7 @@ static BOOL isGroup = YES;
         [c.contactName setTextColor:[UIColor blackColor]];
         [c.info setTextColor:[UIColor blackColor]];
         [c.headline setHidden:!isGroup];
+        [c.downloadButton setTitle:NSLocalizedString(@"Download", @"") forState:UIControlStateNormal];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 3Embed Technologies. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import "WUBoardController.h"
 #import <SocialCommunication/UIViewController+SCCustomViewController.h>
 #import <SocialCommunication/MessageCell.h>
@@ -709,6 +710,8 @@ static BOOL isGroup = YES;
     [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
 }
 
+
+
 -(BOOL) dataDetectorAction:(MOC2CallEvent *) elem
 {
     NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink | NSTextCheckingTypePhoneNumber error:nil];
@@ -1004,6 +1007,24 @@ static BOOL isGroup = YES;
     [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
     
 }
+
+//-(void) configureAudioCellOut:(__weak AudioCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+//{
+//    [[cell viewWithTag:1000] removeFromSuperview];
+//    NSString *text = elem.text;
+//    NSURL* url = [[C2CallPhone currentPhone] mediaUrlForKey:text];
+//    MPMoviePlayerController *mPlayer = [MPMoviePlayerController new];
+//    mPlayer.controlStyle=MPMovieControlStyleEmbedded;
+//    [mPlayer setContentURL:url];
+//    mPlayer.backgroundView.hidden = NO;
+//    
+//    [mPlayer setScalingMode:MPMovieScalingModeAspectFit];
+//    mPlayer.shouldAutoplay=NO;
+//    mPlayer.movieSourceType = MPMovieSourceTypeFile;
+//    
+//    mPlayer.view.tag = 1000;
+//    [cell addSubview:mPlayer.view];
+//}
 
 
 -(void) showImage:(NSString *) key
@@ -1311,6 +1332,8 @@ static BOOL isGroup = YES;
         }
     }
 }
+
+
 
 -(void)readBroadcastCompleted{
     [self.tableView reloadData];

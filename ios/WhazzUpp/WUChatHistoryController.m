@@ -422,7 +422,7 @@
     else{
         NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
         if (hasBroadcast && tmppath.row == broadcastIdx) {
-            NSString * storyboardName = @"MainStoryboard";
+            NSString * storyboardName = @"chatboard";
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
             WUBoardController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCBoardController"];
             [self.navigationController pushViewController:vc animated:YES];
@@ -440,6 +440,8 @@
             } else {
                 [WUBoardController setIsGroup:NO];
             }
+            
+            
             [self showChatForUserid:chathist.contact];
         }
     }

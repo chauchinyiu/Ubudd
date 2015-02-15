@@ -26,5 +26,6 @@
 @property(nonatomic, weak) IBOutlet UIView *audioContainer;
 @property(nonatomic, weak) IBOutlet UIButton* recordButton;
 @property(nonatomic, weak) IBOutlet UILabel* lblRecording;
+@property(nonatomic, weak) IBOutlet UIView *broadContainer;
 
 @end

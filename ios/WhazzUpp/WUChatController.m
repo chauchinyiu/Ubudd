@@ -12,6 +12,7 @@
 #import "Helper/CommonMethods.h"
 #import "ResponseHandler.h"
 #import "WUFriendDetailController.h"
+#import "WUBoardController.h"
 
 //#define kRichMessage_ChoosePhotoOrVideo @"Choose Photo or Video"
 //#define kRichMessage_TakePhotoOrVideo @"Take Photo or Video"
@@ -115,13 +116,28 @@ typedef enum : NSUInteger {
             
         }
     }
-    
+    [self.chatboard.tableView reloadData];
 }
+
+
+
 
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"chatboard" bundle: nil];
+    WUBoardController* newVC = [storyboard instantiateViewControllerWithIdentifier:@"SCBoardController"];
+    newVC.view.frame = self.broadContainer.bounds;
+    [self.broadContainer addSubview:newVC.view];
+    [self addChildViewController:newVC];
+    [newVC didMoveToParentViewController:self];
+    self.chatboard = newVC;
+    self.chatboard.targetUserid = self.targetUserid;
+    
     
     self.tabBarController.tabBar.hidden = YES;
     [self.submitButton setImage:nil forState:UIControlStateHighlighted];

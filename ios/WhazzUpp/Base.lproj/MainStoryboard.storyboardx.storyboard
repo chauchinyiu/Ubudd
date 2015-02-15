@@ -3267,7 +3267,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="audioContainer" destination="M3d-Y8-iXg" id="C4Y-E8-SBg"/>
-                        <outlet property="broadContainer" destination="5EE-Q4-TqU" id="hmj-Zi-LSc"/>
                         <outlet property="chatInput" destination="tu1-rG-kf5" id="jkJ-iB-yeb"/>
                         <outlet property="imageBtn" destination="boS-vv-xna" id="db6-aQ-Rpw"/>
                         <outlet property="lblRecording" destination="H1P-fP-sXT" id="1Qp-Ji-6a3"/>

@@ -126,6 +126,10 @@
     inWorking = false;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
+}
+
 
 
 - (void)addChatGroupResponse:(ResponseBase *)response error:(NSError *)error{

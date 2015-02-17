@@ -77,6 +77,11 @@ static NSString* currentPhoneNo = @"";
  
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+
 -(MOC2CallUser *) currentUser{
     if ([[self.fetchedResultsController fetchedObjects] count] == 0)
         return nil;

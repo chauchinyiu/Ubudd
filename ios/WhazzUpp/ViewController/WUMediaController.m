@@ -47,6 +47,11 @@ static NSString * const reuseIdentifier = @"Cell";
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

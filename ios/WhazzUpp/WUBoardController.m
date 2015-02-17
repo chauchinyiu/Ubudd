@@ -111,6 +111,7 @@ static BOOL isGroup = YES;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
     isVisible = YES;
     [self.tableView reloadData];
 }

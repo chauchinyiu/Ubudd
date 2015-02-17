@@ -54,6 +54,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
     
     friendList = [ResponseHandler instance].friendList;
     selection = [[NSMutableArray alloc] init];

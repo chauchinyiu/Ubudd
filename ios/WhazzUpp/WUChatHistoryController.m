@@ -81,6 +81,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
     [[ResponseHandler instance] readGroups];
     [ResponseHandler instance].bcdelegate = self;
     [[ResponseHandler instance] readBroadcasts];

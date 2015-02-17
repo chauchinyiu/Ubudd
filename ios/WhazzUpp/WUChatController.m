@@ -88,6 +88,7 @@ typedef enum : NSUInteger {
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
     NSMutableArray* friends = [ResponseHandler instance].friendList;
     for (int i = 0; i < friends.count; i++) {
         WUAccount* a = [friends objectAtIndex:i];

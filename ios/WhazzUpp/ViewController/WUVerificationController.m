@@ -37,6 +37,12 @@
     }
 
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+
 -(IBAction)nextButtonClicked:(id)sender{
     
     if (txtCode.text.length > 0) {

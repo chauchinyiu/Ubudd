@@ -57,19 +57,18 @@
 
 - (void)customizeUI {
     if ([CommonMethods osVersion] < 7.0) {
-        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:255.0/255.0 green:216.0/255.0 blue:0.0/255.0 alpha:1.0]];
+        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:235.0/255.0 green:202.0/255.0 blue:20.0/255.0 alpha:1.0]];
         
         [[UITabBar appearance] setTintColor:[UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0]];
     }
     else {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:255.0/255.0 green:216.0/255.0 blue:0.0/255.0 alpha:1.0]];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:235.0/255.0 green:202.0/255.0 blue:20.0/255.0 alpha:1.0]];
         
         [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0]];
     }
     [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor blackColor]}];
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
-
 
 }
 
@@ -99,7 +98,7 @@
 
     [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:255./255. green:238./255. blue:161./255. alpha:1.]];
     [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:1.]];
-    [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_IN_IOS7];
+    [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_OUT_IOS7];
     [[SCBubbleViewOut appearance] setBubbleTypeOut:SC_BUBBLE_OUT_IOS7];
     
     [self customizeUI];

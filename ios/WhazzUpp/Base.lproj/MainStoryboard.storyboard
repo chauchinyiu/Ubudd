@@ -3074,13 +3074,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41u-fV-1Vn" userLabel="toolbarView">
-                                        <rect key="frame" x="0.0" y="378" width="320" height="38"/>
+                                        <rect key="frame" x="0.0" y="366" width="320" height="50"/>
                                         <subviews>
-                                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tu1-rG-kf5" userLabel="messageTextView">
-                                                <rect key="frame" x="34" y="3" width="271" height="32"/>
+                                            <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tu1-rG-kf5" userLabel="messageTextView">
+                                                <rect key="frame" x="34" y="3" width="271" height="44"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="mIK-nM-8TN" id="y6a-69-Ppz"/>
@@ -3105,9 +3105,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WJ-gv-KsO" userLabel="richMediaButton">
-                                                <rect key="frame" x="8" y="3" width="34" height="34"/>
+                                                <rect key="frame" x="8" y="7" width="34" height="37"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="34" id="WJJ-Bi-qQI"/>
+                                                    <constraint firstAttribute="height" constant="37" id="WJJ-Bi-qQI"/>
                                                     <constraint firstAttribute="width" constant="34" id="WPp-GQ-SRY"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -3123,20 +3123,20 @@
                                                 </connections>
                                             </button>
                                             <containerView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M3d-Y8-iXg">
-                                                <rect key="frame" x="0.0" y="0.0" width="20" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="36"/>
                                                 <connections>
                                                     <segue destination="w5g-j3-AON" kind="embed" identifier="audioRecorder" id="vfz-wh-Xd3"/>
                                                 </connections>
                                             </containerView>
                                             <label hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1P-fP-sXT">
-                                                <rect key="frame" x="0.0" y="0.0" width="10" height="36"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="10" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q0T-d6-NbB" userLabel="submitButton">
-                                                <rect key="frame" x="276" y="4" width="40" height="29"/>
+                                                <rect key="frame" x="276" y="16" width="40" height="29"/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="29" id="G9f-DY-t1J"/>
@@ -3156,7 +3156,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPf-QT-pzm">
-                                                <rect key="frame" x="290" y="5" width="15" height="30"/>
+                                                <rect key="frame" x="290" y="8" width="15" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="YfT-5y-WyF"/>
                                                     <constraint firstAttribute="width" constant="15" id="wqJ-SK-7UO"/>
@@ -3175,13 +3175,13 @@
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Zgd-il-c8N" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" constant="15" id="44K-B3-0aP"/>
-                                            <constraint firstItem="DPf-QT-pzm" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" constant="5" id="5Iw-sw-rR9"/>
+                                            <constraint firstItem="DPf-QT-pzm" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" constant="8" id="5Iw-sw-rR9"/>
                                             <constraint firstAttribute="trailing" secondItem="H1P-fP-sXT" secondAttribute="trailing" id="AIM-UQ-0aL"/>
                                             <constraint firstAttribute="trailing" secondItem="M3d-Y8-iXg" secondAttribute="trailing" id="AnW-wv-nSI"/>
                                             <constraint firstItem="UNi-Fv-k3H" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" constant="2" id="BKy-be-Hsw"/>
                                             <constraint firstAttribute="trailing" secondItem="UNi-Fv-k3H" secondAttribute="trailing" constant="11" id="Htc-O9-9I6"/>
                                             <constraint firstAttribute="bottom" secondItem="H1P-fP-sXT" secondAttribute="bottom" id="IlD-nk-7GH"/>
-                                            <constraint firstAttribute="height" constant="38" id="L1w-9S-soh"/>
+                                            <constraint firstAttribute="height" constant="50" id="L1w-9S-soh"/>
                                             <constraint firstAttribute="trailing" secondItem="tu1-rG-kf5" secondAttribute="trailing" constant="50" id="Ml2-oa-AEm"/>
                                             <constraint firstItem="M3d-Y8-iXg" firstAttribute="top" secondItem="41u-fV-1Vn" secondAttribute="top" id="SeH-yI-gVc"/>
                                             <constraint firstAttribute="trailing" secondItem="DPf-QT-pzm" secondAttribute="trailing" constant="15" id="TE7-sQ-ykW"/>
@@ -3200,7 +3200,7 @@
                                         </constraints>
                                     </view>
                                     <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5EE-Q4-TqU">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="378"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="366"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </containerView>
                                 </subviews>

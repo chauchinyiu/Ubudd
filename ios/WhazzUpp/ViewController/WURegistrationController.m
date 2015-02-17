@@ -50,6 +50,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     lblCountryCode.text = [self countryCode];
+    self.navigationController.navigationBar.translucent = NO;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {

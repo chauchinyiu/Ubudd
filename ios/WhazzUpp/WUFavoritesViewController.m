@@ -74,6 +74,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
     
     [[C2CallPhone currentPhone] transferAddressBook:NO];
     [self refreshList];

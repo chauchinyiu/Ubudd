@@ -12,6 +12,11 @@
 
 @implementation WUTellFriendController
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+
 - (void)composeMessage {
     if ([MFMessageComposeViewController canSendText]) {
         MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];

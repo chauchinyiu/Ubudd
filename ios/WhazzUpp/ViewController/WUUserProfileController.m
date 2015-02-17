@@ -145,6 +145,10 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
+}
+
 - (IBAction)btnGenderTapped{
     genderFemale = !genderFemale;
     if (genderFemale) {

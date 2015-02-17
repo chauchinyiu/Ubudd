@@ -357,6 +357,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
     isVisible = YES;
     
     [self.navigationController setNavigationBarHidden:NO animated:NO];

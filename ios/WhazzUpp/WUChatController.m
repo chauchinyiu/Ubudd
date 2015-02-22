@@ -138,7 +138,7 @@ typedef enum : NSUInteger {
     [newVC didMoveToParentViewController:self];
     self.chatboard = newVC;
     self.chatboard.targetUserid = self.targetUserid;
-    
+    [self.chatboard initFetchedResultsController];
     
     self.tabBarController.tabBar.hidden = YES;
     [self.submitButton setImage:nil forState:UIControlStateHighlighted];
@@ -155,7 +155,6 @@ typedef enum : NSUInteger {
     }
     
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
-
     [self.submitButton setHidden:YES];
     [self.recordButton setHidden:NO];
     [self.lblRecording setHidden:YES];

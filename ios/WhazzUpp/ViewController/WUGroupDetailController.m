@@ -446,7 +446,9 @@
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (userType == 1 && indexPath.section == 1) {
-        if([[SCUserProfile currentUser].userid isEqualToString:[self.members objectAtIndex:indexPath.row]]){
+        SCUserProfile *userProfile = [SCUserProfile currentUser];
+        
+        if([userProfile.userid isEqualToString:[self.members objectAtIndex:indexPath.row]]){
             return NO;
         }
         else{

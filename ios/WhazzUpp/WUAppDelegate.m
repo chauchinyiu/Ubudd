@@ -96,7 +96,7 @@
     
     self.usePhotoEffects = SC_PHOTO_USERCHOICE;
 
-    [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:255./255. green:238./255. blue:161./255. alpha:1.]];
+    [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:225./255. green:255./255. blue:197./255. alpha:1.]];
     [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:1.]];
     [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_OUT_IOS7];
     [[SCBubbleViewOut appearance] setBubbleTypeOut:SC_BUBBLE_OUT_IOS7];

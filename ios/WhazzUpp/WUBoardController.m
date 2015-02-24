@@ -315,19 +315,37 @@ static BOOL isGroup = YES;
         if ([cell isKindOfClass:[LocationCellIn class]]) {
             return 152;
         }
+        if ([cell isKindOfClass:[LocationCellOut class]]) {
+            return 152;
+        }
         if ([cell isKindOfClass:[AudioCellIn class]]) {
+            return 132;
+        }
+        if ([cell isKindOfClass:[AudioCellOut class]]) {
             return 132;
         }
         if ([cell isKindOfClass:[VideoCellIn class]]) {
             return 133;
         }
+        if ([cell isKindOfClass:[VideoCellOut class]]) {
+            return 133;
+        }
         if ([cell isKindOfClass:[FriendCellIn class]]) {
+            return 121;
+        }
+        if ([cell isKindOfClass:[FriendCellOut class]]) {
             return 121;
         }
         if ([cell isKindOfClass:[ContactCellIn class]]) {
             return 111;
         }
+        if ([cell isKindOfClass:[ContactCellOut class]]) {
+            return 111;
+        }
         if ([cell isKindOfClass:[CallCellIn class]]) {
+            return 105;
+        }
+        if ([cell isKindOfClass:[CallCellOut class]]) {
             return 105;
         }
         
@@ -808,6 +826,7 @@ static BOOL isGroup = YES;
                                     lineBreakMode:NSLineBreakByWordWrapping];
     CGRect frame = CGRectMake(self.view.frame.size.width - expectedLabelSize.width - 20, 8, expectedLabelSize.width + 20, expectedLabelSize.height + 20);
     [cell.bubbleView setFrame:frame];
+    cell.bubbleView.layer.cornerRadius = 30.0f;
     
     frame = CGRectMake(8, 8, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];

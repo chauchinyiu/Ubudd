@@ -224,12 +224,23 @@ static BOOL isGroup = YES;
                 }
             }
             NSString* groupName = mg.groupName;
+            NSDate* createTime;
             NSMutableArray* groups = [[ResponseHandler instance] groupList];
             for (int i = 0; i < groups.count; i++) {
                 WUAccount* a = [groups objectAtIndex:i];
                 if ([a.c2CallID isEqualToString:self.targetUserid]) {
                     groupName = a.name;
+                    createTime = a.createTime;
                 }
+            }
+
+            if (createTime) {
+                NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
+                                                                          locale:[NSLocale currentLocale]];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+                [dateFormatter setDateFormat:formatString];
+                cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:createTime]];
             }
             
             cell.nameLabel.text = [NSString stringWithFormat:@"%@ created a group %@", ownerName, groupName];
@@ -1000,55 +1011,60 @@ static BOOL isGroup = YES;
         
         UITableViewCell* cell;
         
-        MOC2CallEvent *elem = [self.fetchedResultsController objectAtIndexPath:ip];
-        NSString *eventType = elem.eventType;
-        NSString *text = elem.text;
-        
-        if ([eventType isEqualToString:@"MessageIn"]) {
-            if ([text hasPrefix:@"image://"]){
-                cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
-                [self configureImageCellIn:cell forEvent:elem atIndexPath:ip];
-            }
-            else if([text hasPrefix:@"video://"] ||
-                [text hasPrefix:@"audio://"] ||
-                [text hasPrefix:@"file://"] ||
-                [text hasPrefix:@"loc://"] ||
-                [text hasPrefix:@"BEGIN:VCARD"] ||
-                [text hasPrefix:@"vcard://"] ||
-                [text hasPrefix:@"friend://"]) {
-                cell = [super tableView:tableView cellForRowAtIndexPath:ip];
-            }
-            else{
-                cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageInCell"];
-                [self configureMessageCellIn:cell forEvent:elem atIndexPath:ip];
-            }
+        if ([self.fetchedResultsController fetchedObjects].count == 0) {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:@"SCNoMessagesCell"];
         }
         else{
-            if ([text hasPrefix:@"image://"]){
-                cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageOutCell"];
-                [self configureImageCellOut:cell forEvent:elem atIndexPath:ip];
-            }
-            else if([text hasPrefix:@"video://"] ||
+            MOC2CallEvent *elem = [self.fetchedResultsController objectAtIndexPath:ip];
+            NSString *eventType = elem.eventType;
+            NSString *text = elem.text;
+            
+            if ([eventType isEqualToString:@"MessageIn"]) {
+                if ([text hasPrefix:@"image://"]){
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
+                    [self configureImageCellIn:cell forEvent:elem atIndexPath:ip];
+                }
+                else if([text hasPrefix:@"video://"] ||
                     [text hasPrefix:@"audio://"] ||
                     [text hasPrefix:@"file://"] ||
                     [text hasPrefix:@"loc://"] ||
                     [text hasPrefix:@"BEGIN:VCARD"] ||
                     [text hasPrefix:@"vcard://"] ||
                     [text hasPrefix:@"friend://"]) {
-                cell = [super tableView:tableView cellForRowAtIndexPath:ip];
+                    cell = [super tableView:tableView cellForRowAtIndexPath:ip];
+                }
+                else{
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageInCell"];
+                    [self configureMessageCellIn:cell forEvent:elem atIndexPath:ip];
+                }
             }
             else{
-                cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageOutCell"];
-                [self configureMessageCellOut:cell forEvent:elem atIndexPath:ip];
+                if ([text hasPrefix:@"image://"]){
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageOutCell"];
+                    [self configureImageCellOut:cell forEvent:elem atIndexPath:ip];
+                }
+                else if([text hasPrefix:@"video://"] ||
+                        [text hasPrefix:@"audio://"] ||
+                        [text hasPrefix:@"file://"] ||
+                        [text hasPrefix:@"loc://"] ||
+                        [text hasPrefix:@"BEGIN:VCARD"] ||
+                        [text hasPrefix:@"vcard://"] ||
+                        [text hasPrefix:@"friend://"]) {
+                    cell = [super tableView:tableView cellForRowAtIndexPath:ip];
+                }
+                else{
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageOutCell"];
+                    [self configureMessageCellOut:cell forEvent:elem atIndexPath:ip];
+                }
+                
             }
             
-        }
-        
-        @try {
-            
-            [[SCDataManager instance] markAsRead:elem];
-        }
-        @catch (NSException *exception) {
+            @try {
+                
+                [[SCDataManager instance] markAsRead:elem];
+            }
+            @catch (NSException *exception) {
+            }
         }
         return cell;
 

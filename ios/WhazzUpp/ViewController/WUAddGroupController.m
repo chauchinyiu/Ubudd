@@ -75,6 +75,7 @@
             WUAccount* a = [[WUAccount alloc] init];
             a.c2CallID = groupid;
             a.name = txtTopic.text;
+            a.createTime = [NSDate dateWithTimeIntervalSinceNow:0];
             [[[ResponseHandler instance] groupList] addObject:a];
 
             

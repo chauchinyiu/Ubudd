@@ -381,7 +381,7 @@ class MyAPI extends API {
 
 
 		$stmt = $this->db->conn2->prepare("select chatGroup.id, chatGroup.c2CallID, chatGroup.interestID, chatGroup.interestDescription, chatGroup.topicDescription, chatGroup.locationName, memb.memberCnt, "
-											."chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, chatGroup.topic, chatGroup.locationLag, chatGroup.locationLong, register.userName from chatGroup "
+											."chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, chatGroup.topic, chatGroup.locationLag, chatGroup.locationLong, register.userName, chatGroup.createTime from chatGroup "
 											."inner join register on register.msisdn = chatGroup.groupAdmin "
 											."left join groupMember on chatGroup.id = groupMember.groupID and groupMember.memberID = ? "
 											."left join (select groupID, count(*) as memberCnt from groupMember where requestAccepted = 1 group by groupID) memb on chatGroup.id = memb.groupID "
@@ -413,6 +413,7 @@ class MyAPI extends API {
 			$groupArray['locationLag' . $rowCnt] = $row['locationLag'];
 			$groupArray['locationLong' . $rowCnt] = $row['locationLong'];
 			$groupArray['userName' . $rowCnt] = $row['userName'];
+			$groupArray['createTime' . $rowCnt] = $row['createTime'];
 			
 			if($row['groupAdmin'] == $args['userID']){
 				$groupArray['isMember' . $rowCnt] = 2;
@@ -638,7 +639,7 @@ class MyAPI extends API {
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
 		$stmt = $this->db->conn2->prepare("select chatGroup.id, chatGroup.c2CallID, chatGroup.interestID, chatGroup.interestDescription, chatGroup.topicDescription, chatGroup.locationName, memb.memberCnt, "
-											."chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, chatGroup.topic, chatGroup.locationLag, chatGroup.locationLong, register.userName from chatGroup "
+											."chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, chatGroup.topic, chatGroup.locationLag, chatGroup.locationLong, register.userName, chatGroup.createTime from chatGroup "
 											."inner join register on register.msisdn = chatGroup.groupAdmin "
 											."left join groupMember on chatGroup.id = groupMember.groupID and groupMember.memberID = ? "
 											."left join (select groupID, count(*) as memberCnt from groupMember where requestAccepted = 1 group by groupID) memb on chatGroup.id = memb.groupID "
@@ -673,6 +674,7 @@ class MyAPI extends API {
 			else{
 				$groupArray['isMember'] = $verifyRow['requestAccepted'];			
 			}	
+			$groupArray['createTime'] = $verifyRow['createTime'];
 			$stmt->close();
 			
 			

@@ -43,7 +43,7 @@
 @end
 
 @implementation WUAccount
-@synthesize name, phoneNo, c2CallID, status;
+@synthesize name, phoneNo, c2CallID, status, createTime;
 
 - (NSComparisonResult)compare:(WUAccount *)otherObject {
     return [self.name compare:otherObject.name];
@@ -409,6 +409,11 @@ static ResponseHandler *myInstance;
 - (void)readUserGroupResponse:(ResponseBase *)response error:(NSError *)error{
     NSDictionary* fetchResult = ((DataResponse*)response).data;
     [self.groupList removeAllObjects];
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"EST"];
+    [dateFormat setTimeZone:gmt];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     int groupCnt = ((NSNumber*)[fetchResult objectForKey:@"rowCnt"]).intValue;
     for (int i = 0; i < groupCnt; i++) {
@@ -416,6 +421,7 @@ static ResponseHandler *myInstance;
             WUAccount* a = [[WUAccount alloc] init];
             a.c2CallID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]];
             a.name = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", i]];
+            a.createTime = [dateFormat dateFromString:[fetchResult objectForKey:[NSString stringWithFormat:@"createTime%d", i]]];
             [self.groupList addObject:a];
         }
     }
@@ -443,7 +449,7 @@ static ResponseHandler *myInstance;
     }
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"EST"];
     [dateFormat setTimeZone:gmt];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     

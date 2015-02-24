@@ -21,6 +21,7 @@
 @property NSString* phoneNo;
 @property NSString* c2CallID;
 @property NSString* status;
+@property NSDate* createTime;
 
 @end
 

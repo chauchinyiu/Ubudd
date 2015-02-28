@@ -27,6 +27,10 @@
 
 @property(nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property(nonatomic, weak) IBOutlet UILabel *sectiontimeLabel;
+@property(nonatomic, weak) IBOutlet UIView *createGroupView;
+@property(nonatomic, weak) IBOutlet UIView *showPreviousMsgView;
+@property(nonatomic, weak) IBOutlet UIView *sectiontimeview;
 
 @end
 

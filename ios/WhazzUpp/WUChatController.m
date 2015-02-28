@@ -122,6 +122,29 @@ typedef enum : NSUInteger {
 
 
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.chatInputBorderWidth = 1.5;
+        self.chatInputCornerRadius = 8.;
+        self.chatInputBorderColor = [UIColor colorWithRed:228./256. green:228./256. blue:228./256. alpha:1.];
+        self.dontShowCallEvents = YES;
+    }
+    return self;
+}
+
+-(id) initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.chatInputBorderWidth = 1.5;
+        self.chatInputCornerRadius = 8.;
+        self.chatInputBorderColor = [UIColor colorWithRed:228./256. green:228./256. blue:228./256. alpha:1.];
+        self.dontShowCallEvents = YES;
+    }
+    return self;
+}
 
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad
@@ -129,6 +152,9 @@ typedef enum : NSUInteger {
     
     [super viewDidLoad];
     
+    self.chatInputBorderWidth = 1.;
+    self.chatInputCornerRadius = 8.;
+    self.chatInputBorderColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"chatboard" bundle: nil];
     WUBoardController* newVC = [storyboard instantiateViewControllerWithIdentifier:@"SCBoardController"];

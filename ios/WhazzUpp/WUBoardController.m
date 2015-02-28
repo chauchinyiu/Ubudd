@@ -32,7 +32,7 @@
 
 
 @implementation WUCreateGroupCell
-@synthesize nameLabel, timeLabel;
+@synthesize nameLabel, timeLabel, sectiontimeLabel, sectiontimeview, showPreviousMsgView, createGroupView;
 @end
 
 
@@ -82,16 +82,15 @@
     int groupHeadType;
     NSMutableArray* friendList;
     BOOL isVisible;
-
 }
+
 @property (nonatomic, strong) NSMutableDictionary  *smallImageCache;
 @property (nonatomic, strong) UIFont *textFieldInFont, *headerFieldInFont, *textFieldOutFont, *headerFieldOutFont;
 @end
 
 
 @implementation WUBoardController
-@synthesize smallImageCache;
-@synthesize textFieldInFont, textFieldOutFont, headerFieldInFont, headerFieldOutFont;
+@synthesize smallImageCache, textFieldInFont, textFieldOutFont, headerFieldInFont, headerFieldOutFont;
 
 static BOOL isGroup = YES;
 
@@ -153,18 +152,8 @@ static BOOL isGroup = YES;
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (self.targetUserid) {
-        if (groupHeadType == 0) {
-            groupHeadType = 1;
-            if (isGroup && ([[self.fetchedResultsController fetchedObjects] count] < 20)) {
-                groupHeadType = 2;
-            }
-        }
-        if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
-            return 1 + (groupHeadType == 2 ? 1 : 0);
-        }
-        
-        return [[self.fetchedResultsController sections] count] + (groupHeadType == 2 ? 1 : 0);
+    if (self.targetUserid && [[self.fetchedResultsController fetchedObjects] count] > 0) {
+        return [[self.fetchedResultsController sections] count];
     }
     else{
         return 1;
@@ -190,16 +179,27 @@ static BOOL isGroup = YES;
     }
 }
 
+
+
+
+
+
+
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    [super tableView:tableView heightForHeaderInSection:section];
     if(self.targetUserid){
-        if (groupHeadType == 2) {
-            if (section == 0) {
-                return 70;
-            }
-            return [super tableView:tableView heightForHeaderInSection:section - 1];
+        CGFloat h = 0.;
+        if (isGroup && section == 0) {
+            h += 72;
         }
-        return [super tableView:tableView heightForHeaderInSection:section];
+        if (section == 0 && !self.previousMessagesButton.hidden) {
+            h += 40;
+        }
+        if ([[self.fetchedResultsController fetchedObjects] count] > 0) {
+            h += 28;
+        }
+        return h;
     }
     else{
         return 0;
@@ -208,11 +208,14 @@ static BOOL isGroup = YES;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    
     if(self.targetUserid){
-        if (groupHeadType == 2 && section == 0) {
-            WUCreateGroupCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUCreateGroupCell"];
-
-            
+        WUCreateGroupCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUCreateGroupCell"];
+        CGFloat h = 0;
+        CGRect f;
+        
+        if (isGroup && section == 0) {
+            cell.createGroupView.hidden = NO;
             MOC2CallGroup* mg = [[SCDataManager instance] groupForGroupid:self.targetUserid];
             NSString* ownerName;
             NSDictionary* d = [[C2CallPhone currentPhone] getUserInfoForUserid:mg.groupOwner];
@@ -233,7 +236,7 @@ static BOOL isGroup = YES;
                     createTime = a.createTime;
                 }
             }
-
+            
             if (createTime) {
                 NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
                                                                           locale:[NSLocale currentLocale]];
@@ -245,54 +248,55 @@ static BOOL isGroup = YES;
             
             cell.nameLabel.text = [NSString stringWithFormat:@"%@ created a group %@", ownerName, groupName];
             
+            f = cell.createGroupView.frame;
+            f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+            cell.createGroupView.frame = f;
             
-            
-            return cell;
+            h += 72.;
         }
         else{
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section - (groupHeadType == 2 ? 1 : 0)];
-            MOC2CallEvent *elem = nil;
-            @try {
-                elem = [self.fetchedResultsController objectAtIndexPath:indexPath];
-            }
-            @catch (NSException *exception) {
-            }
-            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
-                                                                      locale:[NSLocale currentLocale]];
-            if (section == 0 && elem) {
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:formatString];
-                //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-                //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-                self.firstHeaderLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-                self.firstHeaderView.hidden = NO;
-                return self.headerView;
-            }
-            
-            if (elem) {
-                if (self.timestampHeader) {
-                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                    [dateFormatter setDateFormat:formatString];
-                    //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-                    //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-                    
-                    self.timestampLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-                    
-                    NSData *archivedViewData = [NSKeyedArchiver archivedDataWithRootObject: self.timestampHeader];
-                    id clone = [NSKeyedUnarchiver unarchiveObjectWithData:archivedViewData];
-                    return (UIView *) clone;
-                }
-                
-                return nil;
-            }
-        
+            cell.createGroupView.hidden = YES;
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-        label.backgroundColor = [UIColor colorWithWhite:0. alpha:0.];
-        label.text = @"";
-    
-        return label;
+        if (section == 0 && !self.previousMessagesButton.hidden) {
+            cell.showPreviousMsgView.hidden = NO;
+            f = cell.showPreviousMsgView.frame;
+            f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+            f.origin.y = h;
+            cell.showPreviousMsgView.frame = f;
+            h += 40.;
+        }
+        else{
+            cell.showPreviousMsgView.hidden = YES;
+        }
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+        MOC2CallEvent *elem = nil;
+        @try {
+            elem = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        }
+        @catch (NSException *exception) {
+        }
+        
+        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
+                                                                  locale:[NSLocale currentLocale]];
+        if (elem) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:formatString];
+            cell.sectiontimeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+            cell.sectiontimeview.hidden = NO;
+            
+            f = cell.sectiontimeview.frame;
+            f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+            f.origin.y = h;
+            cell.sectiontimeview.frame = f;
+        }
+        else{
+            cell.sectiontimeview.hidden = YES;
+        }
+        return cell;
+        
+        
     }
     else{
         return nil;

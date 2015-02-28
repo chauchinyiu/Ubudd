@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 3Embed Technologies. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "WUBoardController.h"
 #import <SocialCommunication/UIViewController+SCCustomViewController.h>
@@ -27,6 +28,8 @@
 #import "SocialCommunication/ContactCellInStream.h"
 #import "SocialCommunication/CallCellInStream.h"
 #import <SocialCommunication/C2TapImageView.h>
+#import <SocialCommunication/FCLocation.h>
+
 #import "CommonMethods.h"
 #import "WUPhotoViewController.h"
 
@@ -50,6 +53,30 @@
 
 @implementation WUImageOutCell
 @synthesize eventImage, shadowImage;
+@end
+
+@implementation WULocationInCell
+@synthesize timeLabel;
+@end
+
+@implementation WUAudioInCell
+@synthesize timeLabel;
+@end
+
+@implementation WUVideoInCell
+@synthesize timeLabel;
+@end
+
+@implementation WUContactInCell
+@synthesize timeLabel;
+@end
+
+@implementation WUFriendInCell
+@synthesize timeLabel;
+@end
+
+@implementation WUCallInCell
+@synthesize timeLabel;
 @end
 
 @implementation WULocationOutCell
@@ -170,7 +197,7 @@ static BOOL isGroup = YES;
                 return 1;
             }
             
-            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section - (groupHeadType == 2 ? 1 : 0)];
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
             return [sectionInfo numberOfObjects];
         }
     }
@@ -307,7 +334,7 @@ static BOOL isGroup = YES;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.targetUserid) {
         UITableViewCell* cell;
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
         
         cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         if ([cell isKindOfClass:[ImageCellInStream class]]) {
@@ -362,7 +389,7 @@ static BOOL isGroup = YES;
             return 228;
         }
         else{
-            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
             CGSize expectedLabelSize = [b.message sizeWithFont:[CommonMethods getStdFontType:1]
                                              constrainedToSize:maximumLabelSize
                                                  lineBreakMode:NSLineBreakByWordWrapping];
@@ -377,9 +404,17 @@ static BOOL isGroup = YES;
 -(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath* ip = indexPath;
+    MOC2CallEvent *elem = [self.fetchedResultsController objectAtIndexPath:ip];
+
     [[cell viewWithTag:1000] removeFromSuperview];
 
     [super configureCell:cell atIndexPath:ip];
+    
+    
+    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
+                                                              locale:[NSLocale currentLocale]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:formatString];
     
     if ([cell isKindOfClass:[WULocationOutCell class]]) {
         WULocationOutCell *c = (WULocationOutCell*)cell;
@@ -396,6 +431,7 @@ static BOOL isGroup = YES;
         frame = c.shadowImage.frame;
         frame.origin.x = c.bubbleView.frame.origin.x + 8;
         [c.shadowImage setFrame:frame];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
     else if ([cell isKindOfClass:[WUAudioOutCell class]]) {
@@ -409,6 +445,7 @@ static BOOL isGroup = YES;
         frame = c.shadowImage.frame;
         frame.origin.x = c.bubbleView.frame.origin.x + 8;
         [c.shadowImage setFrame:frame];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
     else if ([cell isKindOfClass:[WUVideoOutCell class]]) {
@@ -422,6 +459,7 @@ static BOOL isGroup = YES;
         frame = c.shadowImage.frame;
         frame.origin.x = c.bubbleView.frame.origin.x + 8;
         [c.shadowImage setFrame:frame];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
     else if ([cell isKindOfClass:[WUFriendOutCell class]]) {
@@ -435,6 +473,7 @@ static BOOL isGroup = YES;
         frame = c.shadowImage.frame;
         frame.origin.x = c.bubbleView.frame.origin.x + 8;
         [c.shadowImage setFrame:frame];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
     else if ([cell isKindOfClass:[WUContactOutCell class]]) {
@@ -448,6 +487,7 @@ static BOOL isGroup = YES;
         frame = c.shadowImage.frame;
         frame.origin.x = c.bubbleView.frame.origin.x + 8;
         [c.shadowImage setFrame:frame];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
     else if ([cell isKindOfClass:[WUCallOutCell class]]) {
@@ -461,10 +501,11 @@ static BOOL isGroup = YES;
         frame = c.shadowImage.frame;
         frame.origin.x = c.bubbleView.frame.origin.x + 8;
         [c.shadowImage setFrame:frame];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
-    else if ([cell isKindOfClass:[LocationCellInStream class]]) {
-        LocationCellInStream *c = (LocationCellInStream*)cell;
+    else if ([cell isKindOfClass:[WULocationInCell class]]) {
+        WULocationInCell *c = (WULocationInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         c.headline.font = [CommonMethods getStdFontType:3];
@@ -475,9 +516,10 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
-    else if ([cell isKindOfClass:[AudioCellInStream class]]) {
-        AudioCellInStream *c = (AudioCellInStream*)cell;
+    else if ([cell isKindOfClass:[WUAudioInCell class]]) {
+        WUAudioInCell *c = (WUAudioInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         c.headline.font = [CommonMethods getStdFontType:3];
@@ -489,9 +531,10 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
-    else if ([cell isKindOfClass:[VideoCellInStream class]]) {
-        VideoCellInStream *c = (VideoCellInStream*)cell;
+    else if ([cell isKindOfClass:[WUVideoInCell class]]) {
+        WUVideoInCell *c = (WUVideoInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         c.headline.font = [CommonMethods getStdFontType:3];
@@ -499,9 +542,10 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
-    else if ([cell isKindOfClass:[FriendCellInStream class]]) {
-        FriendCellInStream *c = (FriendCellInStream*)cell;
+    else if ([cell isKindOfClass:[WUFriendInCell class]]) {
+        WUFriendInCell *c = (WUFriendInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         c.headline.font = [CommonMethods getStdFontType:3];
@@ -509,9 +553,10 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
-    else if ([cell isKindOfClass:[ContactCellInStream class]]) {
-        ContactCellInStream *c = (ContactCellInStream*)cell;
+    else if ([cell isKindOfClass:[WUContactInCell class]]) {
+        WUContactInCell *c = (WUContactInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         c.headline.font = [CommonMethods getStdFontType:3];
@@ -519,9 +564,10 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
-    else if ([cell isKindOfClass:[CallCellInStream class]]) {
-        CallCellInStream *c = (CallCellInStream*)cell;
+    else if ([cell isKindOfClass:[WUCallInCell class]]) {
+        WUCallInCell *c = (WUCallInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
         [c.headline setTextColor:[UIColor blackColor]];
         c.headline.font = [CommonMethods getStdFontType:3];
@@ -529,8 +575,8 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
+        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
-
 }
 
 +(void)setIsGroup:(BOOL)b{
@@ -587,8 +633,8 @@ static BOOL isGroup = YES;
             [menulist addObject:item];
             
             menu.menuItems = menulist;
-            CGRect rect = cell.messageImage.frame;
-            rect = [cell convertRect:rect fromView:cell.messageImage];
+            CGRect rect = cell.bubbleView.frame;
+            rect = [cell convertRect:rect fromView:cell.bubbleView];
             [menu setTargetRect:rect inView:cell];
             [cell becomeFirstResponder];
             [menu setMenuVisible:YES animated:YES];
@@ -612,8 +658,8 @@ static BOOL isGroup = YES;
                 
                 menu.menuItems = menulist;
                 
-                CGRect rect = cell.messageImage.frame;
-                rect = [cell convertRect:rect fromView:cell.messageImage];
+                CGRect rect = cell.bubbleView.frame;
+                rect = [cell convertRect:rect fromView:cell.bubbleView];
                 [menu setTargetRect:rect inView:cell];
                 [cell becomeFirstResponder];
                 [menu setMenuVisible:YES animated:YES];
@@ -689,10 +735,16 @@ static BOOL isGroup = YES;
                 }];
             }];
             [menulist addObject:item];
+
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+            [cell setAnswerAction:^{
+                [[SCDataManager instance] removeDatabaseObject:elem];
+            }];
+            [menulist addObject:item];
             
             menu.menuItems = menulist;
-            CGRect rect = cell.messageImage.frame;
-            rect = [cell convertRect:rect fromView:cell.messageImage];
+            CGRect rect = cell.bubbleView.frame;
+            rect = [cell convertRect:rect fromView:cell.bubbleView];
             [menu setTargetRect:rect inView:cell];
             [cell becomeFirstResponder];
             [menu setMenuVisible:YES animated:YES];
@@ -712,12 +764,19 @@ static BOOL isGroup = YES;
                 [cell setRetransmitAction:^{
                     [cell download:nil];
                 }];
+                
+                item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+                [cell setAnswerAction:^{
+                    [[SCDataManager instance] removeDatabaseObject:elem];
+                }];
+                [menulist addObject:item];
+                
                 [menulist addObject:item];
                 
                 menu.menuItems = menulist;
                 
-                CGRect rect = cell.messageImage.frame;
-                rect = [cell convertRect:rect fromView:cell.messageImage];
+                CGRect rect = cell.bubbleView.frame;
+                rect = [cell convertRect:rect fromView:cell.bubbleView];
                 [menu setTargetRect:rect inView:cell];
                 [cell becomeFirstResponder];
                 [menu setMenuVisible:YES animated:YES];
@@ -774,18 +833,28 @@ static BOOL isGroup = YES;
     [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
 
     // Textfield size
-    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
     CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
                                 constrainedToSize:maximumLabelSize
                                     lineBreakMode:NSLineBreakByWordWrapping];
-    CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 20, expectedLabelSize.height + 20);
+    CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
     [cell.bubbleView setFrame:frame];
     
     frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
 
-    frame = CGRectMake(12, expectedLabelSize.height, expectedLabelSize.width + 4, 30);
+    frame = CGRectMake(12, expectedLabelSize.height, expectedLabelSize.width + 74, 30);
     [cell.shadowImage setFrame:frame];
+
+    
+    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
+                                                              locale:[NSLocale currentLocale]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:formatString];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+    frame = CGRectMake(expectedLabelSize.width + 10, expectedLabelSize.height - 14, 64, 21);
+    [cell.timeLabel setFrame:frame];
+    
     
     [cell setLongpressAction:^{
         UIMenuController *menu = [UIMenuController sharedMenuController];
@@ -824,20 +893,27 @@ static BOOL isGroup = YES;
     [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
     
     // Textfield size
-    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
     CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
                                 constrainedToSize:maximumLabelSize
                                     lineBreakMode:NSLineBreakByWordWrapping];
-    CGRect frame = CGRectMake(self.view.frame.size.width - expectedLabelSize.width - 20, 8, expectedLabelSize.width + 20, expectedLabelSize.height + 20);
+    CGRect frame = CGRectMake(self.view.frame.size.width - expectedLabelSize.width - 90, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
     [cell.bubbleView setFrame:frame];
-    cell.bubbleView.layer.cornerRadius = 30.0f;
     
     frame = CGRectMake(8, 8, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
     
-    frame = CGRectMake(self.view.frame.size.width - expectedLabelSize.width - 20 + 8, expectedLabelSize.height, expectedLabelSize.width + 4, 30);
+    frame = CGRectMake(self.view.frame.size.width - expectedLabelSize.width - 90 + 8, expectedLabelSize.height, expectedLabelSize.width + 74, 30);
     [cell.shadowImage setFrame:frame];
 
+    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
+                                                              locale:[NSLocale currentLocale]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:formatString];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+    frame = CGRectMake(expectedLabelSize.width + 6, expectedLabelSize.height - 14, 64, 21);
+    [cell.timeLabel setFrame:frame];
+    
     frame = CGRectMake(expectedLabelSize.width + 20 - 14 - 4, 0, 14, 14);
     [cell.iconSubmitted setFrame:frame];
     
@@ -858,6 +934,13 @@ static BOOL isGroup = YES;
         }];
         [menulist addObject:item];
         
+        item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+        [cell setAnswerAction:^{
+            [[SCDataManager instance] removeDatabaseObject:elem];
+        }];
+        [menulist addObject:item];
+        
+        
         menu.menuItems = menulist;
         CGRect rect = cell.bubbleView.frame;
         rect = [cell convertRect:rect fromView:cell.bubbleView];
@@ -870,23 +953,452 @@ static BOOL isGroup = YES;
     
 }
 
-//-(void) configureAudioCellOut:(__weak AudioCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
-//{
-//    [[cell viewWithTag:1000] removeFromSuperview];
-//    NSString *text = elem.text;
-//    NSURL* url = [[C2CallPhone currentPhone] mediaUrlForKey:text];
-//    MPMoviePlayerController *mPlayer = [MPMoviePlayerController new];
-//    mPlayer.controlStyle=MPMovieControlStyleEmbedded;
-//    [mPlayer setContentURL:url];
-//    mPlayer.backgroundView.hidden = NO;
-//    
-//    [mPlayer setScalingMode:MPMovieScalingModeAspectFit];
-//    mPlayer.shouldAutoplay=NO;
-//    mPlayer.movieSourceType = MPMovieSourceTypeFile;
-//    
-//    mPlayer.view.tag = 1000;
-//    [cell addSubview:mPlayer.view];
-//}
+
+-(void) configureVideoCellOut:(__weak VideoCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    NSString *text = elem.text;
+    
+    cell.userImage.image = [self ownUserImage];
+    [self setUserImageAction:cell.userImage forElement:elem];
+    
+    NSString *sendername = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
+    cell.headline.text = [NSString stringWithFormat:@"@%@",  sendername];
+    
+    // Special Handling for current submissions
+    if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
+        cell.messageImage.image = [[C2CallPhone currentPhone] thumbnailForKey:text];
+        cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
+        
+        int status = [elem.status intValue];
+        if (status == 3) {
+            cell.iconSubmitted.image = [UIImage imageNamed:@"ico_notdelivered.png"];
+            [cell.iconSubmitted setHidden:NO];
+            
+            [cell setLongpressAction:^{
+                [self setRetransmitActionForCell:cell withKey:elem.text andUserid:elem.contact];
+            }];
+            
+            return;
+        }
+        
+        cell.iconSubmitted.image = nil;
+        [cell monitorUploadForKey:text];
+        return;
+    }
+    
+    BOOL failed = NO, hasVideo = NO;
+    if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
+        hasVideo = YES;
+        cell.messageImage.image = [[C2CallPhone currentPhone] thumbnailForKey:text];
+        cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
+        
+        [cell.progress setHidden:YES];
+    } else {
+        UIImage *thumb = [[C2CallPhone currentPhone] thumbnailForKey:text];
+        
+        if (thumb) {
+            cell.messageImage.image = thumb;
+            cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
+        }
+        
+        cell.downloadKey = text;
+        
+        if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
+            [cell.downloadButton setHidden:YES];
+            [cell monitorDownloadForKey:text];
+        } else if ([[C2CallPhone currentPhone] failedDownloadStatusForKey:text]) {
+            // We need a broken link image here and a download button
+            cell.messageImage.image = [UIImage imageNamed:@"ico_video.png"];
+            [cell.downloadButton setHidden:YES];
+            [cell setLongpressAction:^{
+                UIMenuController *menu = [UIMenuController sharedMenuController];
+                NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+                
+                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
+                [cell setRetransmitAction:^{
+                    [cell download:nil];
+                }];
+                [menulist addObject:item];
+                
+                item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+                [cell setAnswerAction:^{
+                    [[SCDataManager instance] removeDatabaseObject:elem];
+                }];
+                [menulist addObject:item];
+                
+                menu.menuItems = menulist;
+                
+                CGRect rect = cell.bubbleView.frame;
+                rect = [cell convertRect:rect fromView:cell.bubbleView];
+                [menu setTargetRect:rect inView:cell];
+                [cell becomeFirstResponder];
+                [menu setMenuVisible:YES animated:YES];
+            }];
+            failed = YES;
+        } else {
+            if (!thumb) {
+                [cell retrieveVideoThumbnailForKey:text];
+            } else {
+                [cell.downloadButton setHidden:NO];
+            }
+            [cell.progress setHidden:YES];
+        }
+    }
+    
+    if (!failed) {
+        [cell setTapAction:^{
+            [self showVideo:text];
+        }];
+        
+        [cell setLongpressAction:^{
+            UIMenuController *menu = [UIMenuController sharedMenuController];
+            NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+            
+            UIMenuItem *item = nil;
+            if (hasVideo) {
+                item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Share", @"MenuItem") action:@selector(shareAction:)];
+                [cell setShareAction:^{
+                    [self shareRichMessageForKey:text];
+                }];
+                
+                [menulist addObject:item];
+                
+                
+                /*
+                 item = [[UIMenuItem alloc] initWithTitle:@"Copy" action:@selector(copyAction:)];
+                 [cell setCopyAction:^{
+                 [self copyMovieForKey:text];
+                 }];
+                 [menulist addObject:item];
+                 
+                 */
+                
+                item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Save", @"MenuItem") action:@selector(saveAction:)];
+                [cell setSaveAction:^{
+                    [[C2CallAppDelegate appDelegate] waitIndicatorWithTitle:NSLocalizedString(@"Saving Video to Photo Album", @"Title") andWaitMessage:nil];
+                    
+                    [[C2CallPhone currentPhone] saveToAlbum:text withCompletionHandler:^(NSURL *assetURL, NSError *error) {
+                        [[C2CallAppDelegate appDelegate] waitIndicatorStop];
+                    }];
+                }];
+                [menulist addObject:item];
+                
+            } else {
+                item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retrieve", @"MenuItem") action:@selector(retransmitAction:)];
+                [cell setRetransmitAction:^{
+                    [cell download:nil];
+                }];
+                [menulist addObject:item];
+                
+            }
+            
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+            [cell setAnswerAction:^{
+                [[SCDataManager instance] removeDatabaseObject:elem];
+            }];
+            [menulist addObject:item];
+            
+            menu.menuItems = menulist;
+            CGRect rect = cell.bubbleView.frame;
+            rect = [cell convertRect:rect fromView:cell.bubbleView];
+            [menu setTargetRect:rect inView:cell];
+            [cell becomeFirstResponder];
+            [menu setMenuVisible:YES animated:YES];
+        }];
+    }
+    
+    [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+}
+
+
+-(void) configureLocationCellOut:(__weak LocationCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    NSString *text = elem.text;
+    
+    cell.userImage.image = [self ownUserImage];
+    [self setUserImageAction:cell.userImage forElement:elem];
+    
+    NSString *sendername = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
+    cell.headline.text = [NSString stringWithFormat:@"@%@",  sendername];
+    
+    FCLocation *loc = [[FCLocation alloc] initWithKey:text];
+    [cell retrieveLocation:loc];
+    
+    [cell setOpenLocationAction:^{
+        if (cell.locationUrl) {
+            NSString *name = [loc.place objectForKey:@"name"];
+            [self openBrowserWithUrl:cell.locationUrl andTitle:name];
+        }
+    }];
+    
+    
+    [cell setTapAction:^{
+        [self showLocation:text forUser:NSLocalizedString(@"Me", "Title")];
+    }];
+    
+    [cell setLongpressAction:^{
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+        
+        UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
+        [cell setForwardAction:^{
+            [self forwardMessage:text];
+        }];
+        [menulist addObject:item];
+        
+        
+        item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy", @"MenuItem") action:@selector(copyAction:)];
+        [cell setCopyAction:^{
+            [self copyLocationForKey:text];
+        }];
+        [menulist addObject:item];
+        
+        item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+        [cell setAnswerAction:^{
+            [[SCDataManager instance] removeDatabaseObject:elem];
+        }];
+        [menulist addObject:item];
+        
+        menu.menuItems = menulist;
+        CGRect rect = cell.bubbleView.frame;
+        rect = [cell convertRect:rect fromView:cell.bubbleView];
+        [menu setTargetRect:rect inView:cell];
+        [cell becomeFirstResponder];
+        [menu setMenuVisible:YES animated:YES];
+    }];
+    
+    [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+}
+
+
+-(void) configureAudioCellOut:(__weak AudioCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    NSString *text = elem.text;
+    
+    cell.userImage.image = [self ownUserImage];
+    [self setUserImageAction:cell.userImage forElement:elem];
+    
+    NSString *sendername = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
+    cell.headline.text = [NSString stringWithFormat:@"@%@",  sendername];
+    
+    // Special Handling for current submissions
+    if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
+        cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
+        
+        int status = [elem.status intValue];
+        if (status == 3) {
+            cell.iconSubmitted.image = [UIImage imageNamed:@"ico_notdelivered.png"];
+            [cell.iconSubmitted setHidden:NO];
+            
+            [cell setLongpressAction:^{
+                [self setRetransmitActionForCell:cell withKey:elem.text andUserid:elem.contact];
+            }];
+            
+            return;
+        }
+        
+        cell.iconSubmitted.image = nil;
+        [cell monitorUploadForKey:text];
+        return;
+    }
+    
+    BOOL failed = NO, hasAudio = NO;
+    
+    if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
+        hasAudio = YES;
+        cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
+        
+        [cell.progress setHidden:YES];
+        [cell setTapAction:^{
+            [self showVoiceMail:text];
+        }];
+    } else {
+        cell.downloadKey = text;
+        
+        if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
+            [cell.downloadButton setHidden:YES];
+            [cell monitorDownloadForKey:text];
+        } else if ([[C2CallPhone currentPhone] failedDownloadStatusForKey:text]) {
+            // We need a broken link image here and a download button
+            cell.messageImage.image = [UIImage imageNamed:@"ico_broken_voice_msg.png"];
+            [cell.downloadButton setHidden:YES];
+            [cell setLongpressAction:^{
+                UIMenuController *menu = [UIMenuController sharedMenuController];
+                NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+                
+                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
+                [cell setRetransmitAction:^{
+                    [cell download:nil];
+                }];
+                [menulist addObject:item];
+                
+                item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+                [cell setAnswerAction:^{
+                    [[SCDataManager instance] removeDatabaseObject:elem];
+                }];
+                [menulist addObject:item];
+                
+                menu.menuItems = menulist;
+                
+                CGRect rect = cell.bubbleView.frame;
+                rect = [cell convertRect:rect fromView:cell.bubbleView];
+                [menu setTargetRect:rect inView:cell];
+                [cell becomeFirstResponder];
+                [menu setMenuVisible:YES animated:YES];
+            }];
+            failed = YES;
+        } else {
+            cell.messageImage.image = [UIImage imageNamed:@"ico_broken_voice_msg.png"];
+            [cell.downloadButton setHidden:NO];
+            [cell.progress setHidden:YES];
+            [cell setTapAction:^{
+                [cell download:cell.downloadButton];
+            }];
+        }
+    }
+    
+    if (!failed) {
+        [cell setLongpressAction:^{
+            UIMenuController *menu = [UIMenuController sharedMenuController];
+            NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+            
+            UIMenuItem *item = nil;
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
+            if (hasAudio) {
+                [cell setForwardAction:^{
+                    [self forwardMessage:text];
+                }];
+                [menulist addObject:item];
+                
+            } else {
+                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retrieve", @"MenuItem") action:@selector(retransmitAction:)];
+                [cell setRetransmitAction:^{
+                    [cell download:nil];
+                }];
+                [menulist addObject:item];
+                
+            }
+            
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+            [cell setAnswerAction:^{
+                [[SCDataManager instance] removeDatabaseObject:elem];
+            }];
+            [menulist addObject:item];
+            
+            menu.menuItems = menulist;
+            CGRect rect = cell.bubbleView.frame;
+            rect = [cell convertRect:rect fromView:cell.bubbleView];
+            [menu setTargetRect:rect inView:cell];
+            [cell becomeFirstResponder];
+            [menu setMenuVisible:YES animated:YES];
+        }];
+    }
+    
+    [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+}
+
+
+-(void) configureFriendCellOut:(__weak FriendCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    NSString *text = elem.text;
+    
+    cell.userImage.image = [self ownUserImage];
+    [self setUserImageAction:cell.userImage forElement:elem];
+    
+    NSString *sendername = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
+    cell.headline.text = [NSString stringWithFormat:@"@%@",  sendername];
+    
+    if ([cell isKindOfClass:[FriendCellIn class]]) {
+        [(FriendCellIn *)cell setFriend:text];
+    }
+    if ([cell isKindOfClass:[FriendCellOut class]]) {
+        [(FriendCellOut *)cell setFriend:text];
+    }
+    
+    [cell setTapAction:^{
+    }];
+    
+    [cell setLongpressAction:^{
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+        
+        UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
+        [cell setForwardAction:^{
+            [self forwardMessage:text];
+        }];
+        [menulist addObject:item];
+        
+        item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+        [cell setAnswerAction:^{
+            [[SCDataManager instance] removeDatabaseObject:elem];
+        }];
+        [menulist addObject:item];
+        
+        menu.menuItems = menulist;
+        CGRect rect = cell.bubbleView.frame;
+        rect = [cell convertRect:rect fromView:cell.bubbleView];
+        [menu setTargetRect:rect inView:cell];
+        [cell becomeFirstResponder];
+        [menu setMenuVisible:YES animated:YES];
+    }];
+    
+    [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+    
+}
+
+
+-(void) configureContactCellOut:(__weak ContactCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    NSString *text = elem.text;
+    
+    cell.userImage.image = [self ownUserImage];
+    [self setUserImageAction:cell.userImage forElement:elem];
+    
+    NSString *sendername = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
+    cell.headline.text = [NSString stringWithFormat:@"@%@",  sendername];
+    
+    [cell setVCard:text];
+    
+    [cell setTapAction:^{
+        [self showContact:text];
+    }];
+    
+    [cell setLongpressAction:^{
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+        
+        UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
+        [cell setForwardAction:^{
+            [self forwardMessage:text];
+        }];
+        [menulist addObject:item];
+        
+        
+        item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy", @"MenuItem") action:@selector(copyAction:)];
+        [cell setCopyAction:^{
+            [self copyVCard:text];
+        }];
+        [menulist addObject:item];
+        
+        
+        item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
+        [cell setAnswerAction:^{
+            [[SCDataManager instance] removeDatabaseObject:elem];
+        }];
+        [menulist addObject:item];
+
+        menu.menuItems = menulist;
+        CGRect rect = cell.bubbleView.frame;
+        rect = [cell convertRect:rect fromView:cell.bubbleView];
+        [menu setTargetRect:rect inView:cell];
+        [cell becomeFirstResponder];
+        [menu setMenuVisible:YES animated:YES];
+    }];
+    
+    [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+}
+
+
 
 
 -(void) showImage:(NSString *) key
@@ -997,7 +1509,7 @@ static BOOL isGroup = YES;
 
 -(CGFloat) messageCellInHeight:(MOC2CallEvent *) elem font:(UIFont *) font
 {
-    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
     
     CGSize expectedLabelSize = [elem.text sizeWithFont:[CommonMethods getStdFontType:1]
                                      constrainedToSize:maximumLabelSize
@@ -1012,7 +1524,7 @@ static BOOL isGroup = YES;
 
 -(CGFloat) messageCellOutHeight:(MOC2CallEvent *) elem font:(UIFont *) font
 {
-    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
     
     CGSize expectedLabelSize = [elem.text sizeWithFont:[CommonMethods getStdFontType:1]
                                      constrainedToSize:maximumLabelSize
@@ -1030,7 +1542,7 @@ static BOOL isGroup = YES;
     
     
     if (self.targetUserid) {
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - (groupHeadType == 2 ? 1 : 0)];
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
         
         UITableViewCell* cell;
         
@@ -1133,7 +1645,7 @@ static BOOL isGroup = YES;
             [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
             
             // Textfield size
-            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 90,9999);
+            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
             CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
                                         constrainedToSize:maximumLabelSize
                                             lineBreakMode:NSLineBreakByWordWrapping];
@@ -1142,8 +1654,16 @@ static BOOL isGroup = YES;
             
             frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);
             [cell.textLabel setFrame:frame];
+
+            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
+                                                                      locale:[NSLocale currentLocale]];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:formatString];
+            cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:b.postTime]];
+            frame = CGRectMake(expectedLabelSize.width + 10, expectedLabelSize.height - 14, 64, 21);
+            [cell.timeLabel setFrame:frame];
             
-            frame = CGRectMake(12, expectedLabelSize.height, expectedLabelSize.width + 4, 30);
+            frame = CGRectMake(12, expectedLabelSize.height, expectedLabelSize.width + 74, 30);
             [cell.shadowImage setFrame:frame];
             
             return cell;
@@ -1161,4 +1681,13 @@ static BOOL isGroup = YES;
     [self.tableView reloadData];
 }
 
+-(void) copyVCard:(NSString *) vcard
+{
+    @autoreleasepool {
+        UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+        
+        NSData *data = [vcard dataUsingEncoding:NSUTF8StringEncoding];
+        [pasteBoard setData:data forPasteboardType:(NSString*)kUTTypeVCard];
+    }
+}
 @end

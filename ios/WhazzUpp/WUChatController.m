@@ -14,6 +14,7 @@
 #import "WUFriendDetailController.h"
 #import "WUBoardController.h"
 
+
 //#define kRichMessage_ChoosePhotoOrVideo @"Choose Photo or Video"
 //#define kRichMessage_TakePhotoOrVideo @"Take Photo or Video"
 //#define kRichMessage_SubmitLocation @"Submit Location"
@@ -30,6 +31,7 @@ typedef enum : NSUInteger {
     BOOL isRecording;
     double accumulatedTime;
     NSTimer* timer;
+    NSString* boardTitle;
 }
 
 @property (nonatomic, assign) CFAbsoluteTime lastTypeEventReceived;
@@ -118,6 +120,7 @@ typedef enum : NSUInteger {
         }
     }
     [self.chatboard.tableView reloadData];
+    boardTitle = [self.titleButton titleForState:UIControlStateNormal];
 }
 
 
@@ -220,14 +223,15 @@ typedef enum : NSUInteger {
         self.lastTypeEventReceived = CFAbsoluteTimeGetCurrent();
         
         // Show prompt
-        self.navigationItem.prompt = NSLocalizedString(@" is typing...", [[C2CallPhone currentPhone] nameForUserid:fromUserid]);
+        [self.titleButton setTitle:[NSString stringWithFormat:@"%@ is typing...", boardTitle] forState:UIControlStateNormal];
+        
         double delayInSeconds = 2.5;
         
         // And remove if no further event has been receive in the past few seconds
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             if (CFAbsoluteTimeGetCurrent() - self.lastTypeEventReceived > 2.4) {
-                self.navigationItem.prompt = nil;
+                [self.titleButton setTitle:boardTitle forState:UIControlStateNormal];;
             }
         });
     }

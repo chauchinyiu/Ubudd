@@ -10,6 +10,12 @@
 #import "ResponseHandler.h"
 #import <SocialCommunication/MessageCellInStream.h>
 #import <SocialCommunication/ImageCellInStream.h>
+#import "SocialCommunication/LocationCellInStream.h"
+#import "SocialCommunication/AudioCellInStream.h"
+#import "SocialCommunication/VideoCellInStream.h"
+#import "SocialCommunication/FriendCellInStream.h"
+#import "SocialCommunication/ContactCellInStream.h"
+#import "SocialCommunication/CallCellInStream.h"
 
 #import <SocialCommunication/MessageCellOutStream.h>
 #import <SocialCommunication/ImageCellOutStream.h>
@@ -50,35 +56,67 @@
 
 @interface WUImageInCell : ImageCellInStream
 @property(nonatomic, weak) IBOutlet UIImageView *eventImage;
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @end
 
 
 @interface WUImageOutCell : ImageCellOutStream
 @property(nonatomic, weak) IBOutlet UIImageView *eventImage;
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
+@interface WULocationInCell : LocationCellInStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@end
+
+@interface WUAudioInCell : AudioCellInStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@end
+
+@interface WUVideoInCell : VideoCellInStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@end
+
+@interface WUFriendInCell : FriendCellInStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@end
+
+@interface WUContactInCell : ContactCellInStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@end
+
+@interface WUCallInCell : CallCellInStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@end
+
 @interface WULocationOutCell : LocationCellOutStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUAudioOutCell : AudioCellOutStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUVideoOutCell : VideoCellOutStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUFriendOutCell : FriendCellOutStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUContactOutCell : ContactCellOutStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUCallOutCell : CallCellOutStream
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 

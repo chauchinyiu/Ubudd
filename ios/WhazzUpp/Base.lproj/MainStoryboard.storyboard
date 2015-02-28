@@ -384,16 +384,6 @@
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" preferredMaxLayoutWidth="197" translatesAutoresizingMaskIntoConstraints="NO" id="fI5-ue-nQr" userLabel="textLabel">
-                                            <rect key="frame" x="71" y="23" width="197" height="39"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="39" id="6XM-kH-2hk"/>
-                                                <constraint firstAttribute="width" constant="197" id="VZs-dw-T1y"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZe-uG-RhL" userLabel="missedEvents">
                                             <rect key="frame" x="258" y="41" width="29" height="21"/>
                                             <color key="backgroundColor" white="0.84999999999999998" alpha="1" colorSpace="calibratedWhite"/>
@@ -413,6 +403,16 @@
                                                 <constraint firstAttribute="width" constant="55" id="w58-zx-Vjy"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" preferredMaxLayoutWidth="197" translatesAutoresizingMaskIntoConstraints="NO" id="fI5-ue-nQr" userLabel="textLabel">
+                                            <rect key="frame" x="71" y="23" width="197" height="39"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="39" id="6XM-kH-2hk"/>
+                                                <constraint firstAttribute="width" constant="197" id="VZs-dw-T1y"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="fI5-ue-nQr" secondAttribute="bottom" constant="5" id="1Ib-Tm-bgj"/>

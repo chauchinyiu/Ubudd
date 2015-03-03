@@ -3279,7 +3279,7 @@
             </objects>
             <point key="canvasLocation" x="1908" y="-456"/>
         </scene>
-        <!--Friend Info-->
+        <!--Contact Info-->
         <scene sceneID="ejr-cH-WZv">
             <objects>
                 <tableViewController storyboardIdentifier="SCFriendDetailController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fOb-ej-d3d" customClass="WUFriendDetailController" sceneMemberID="viewController">
@@ -3327,7 +3327,7 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Status " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="8dI-Xd-2A5">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Status " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="8dI-Xd-2A5">
                                             <rect key="frame" x="82" y="183" width="218" height="21"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="highlightedColor"/>
@@ -3559,7 +3559,7 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Friend Info" id="16q-Dc-C01"/>
+                    <navigationItem key="navigationItem" title="Contact Info" id="16q-Dc-C01"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="addPhoneNumberHeader" destination="aYG-Yr-R3b" id="h6b-fN-eq3"/>
@@ -4812,14 +4812,14 @@ All rights reserved</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oaM-SS-1lY"/>
-        <segue reference="mZ1-Vt-wje"/>
-        <segue reference="Hgt-RX-z8j"/>
-        <segue reference="VQ9-8Q-vDt"/>
-        <segue reference="tQs-8i-bTJ"/>
         <segue reference="gEM-cP-vpS"/>
+        <segue reference="tQs-8i-bTJ"/>
+        <segue reference="heo-jQ-s56"/>
         <segue reference="JX8-i6-PVw"/>
-        <segue reference="qEU-4M-V6f"/>
+        <segue reference="VQ9-8Q-vDt"/>
+        <segue reference="oaM-SS-1lY"/>
+        <segue reference="Hgt-RX-z8j"/>
+        <segue reference="mZ1-Vt-wje"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -1058,7 +1058,6 @@
 		978172D21770947D003067F0 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172B51770947D003067F0 /* AssetsLibrary.framework */; };
 		978172D31770947D003067F0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172B61770947D003067F0 /* CoreData.framework */; };
 		978172D41770947D003067F0 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172B71770947D003067F0 /* AdSupport.framework */; };
-		978172D51770947D003067F0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172B81770947D003067F0 /* MediaPlayer.framework */; };
 		978172D61770947D003067F0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172B91770947D003067F0 /* CoreTelephony.framework */; };
 		978172D71770947D003067F0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172BA1770947D003067F0 /* CFNetwork.framework */; };
 		978172D81770947D003067F0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 978172BB1770947D003067F0 /* OpenGLES.framework */; };
@@ -2383,7 +2382,6 @@
 				978172D21770947D003067F0 /* AssetsLibrary.framework in Frameworks */,
 				978172D31770947D003067F0 /* CoreData.framework in Frameworks */,
 				978172D41770947D003067F0 /* AdSupport.framework in Frameworks */,
-				978172D51770947D003067F0 /* MediaPlayer.framework in Frameworks */,
 				978172D61770947D003067F0 /* CoreTelephony.framework in Frameworks */,
 				978172D71770947D003067F0 /* CFNetwork.framework in Frameworks */,
 				978172D81770947D003067F0 /* OpenGLES.framework in Frameworks */,
@@ -4977,8 +4975,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Apperdeen Ltd (B23B29XPG4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Apperdeen Ltd (B23B29XPG4)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4993,7 +4991,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "52620554-c2f0-4503-ae8e-cbbd5b5b9eb0";
+				PROVISIONING_PROFILE = "a5bea1ee-1711-46a1-8038-86454ff6b100";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = armv7;
 			};
@@ -5011,8 +5009,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Apperdeen Ltd (B23B29XPG4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Apperdeen Ltd (B23B29XPG4)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -5021,7 +5019,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "52620554-c2f0-4503-ae8e-cbbd5b5b9eb0";
+				PROVISIONING_PROFILE = "a5bea1ee-1711-46a1-8038-86454ff6b100";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;

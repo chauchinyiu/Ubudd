@@ -59,8 +59,81 @@
 @synthesize timeLabel;
 @end
 
+
 @implementation WUAudioInCell
-@synthesize timeLabel;
+@synthesize timeLabel, playButton, playSlider, playView, isPlaying, timer, player;
+
+- (IBAction)playBtnPress:(id)sender{
+    if (!isPlaying) {
+        NSURL *audioUrl = [[C2CallPhone currentPhone] mediaUrlForKey:self.downloadKey];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioUrl error:nil];
+        player.numberOfLoops = 1;
+        player.currentTime = playSlider.value;
+        playSlider.maximumValue = player.duration + 0.1;
+        [player play];
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+        isPlaying = YES;
+        [playButton setImage:[UIImage imageNamed:@"pause_unpress.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [player stop];
+        isPlaying = NO;
+        [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        [timer invalidate];
+    }
+}
+
+-(void)updateTime:(NSTimer *)ptimer
+{
+    playSlider.value += ptimer.timeInterval;
+    NSInteger tempMinute = playSlider.value / 60;
+    NSInteger tempSecond = playSlider.value - (tempMinute * 60);
+    
+    NSString *minute = [[NSNumber numberWithInteger:tempMinute] stringValue];
+    NSString *second = [[NSNumber numberWithInteger:tempSecond] stringValue];
+    if (tempMinute < 10) {
+        minute = [@"0" stringByAppendingString:minute];
+    }
+    if (tempSecond < 10) {
+        second = [@"0" stringByAppendingString:second];
+    }
+    self.duration.text = [NSString stringWithFormat:@"%@:%@", minute, second];
+    
+    if (playSlider.value >= player.duration) {
+        isPlaying = NO;
+        [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        playSlider.value = 0.;
+        [self duration].text = [[C2CallPhone currentPhone] durationForKey:self.downloadKey];
+        [ptimer invalidate];
+    }
+}
+
+
+- (IBAction)playBtnDown:(id)sender{
+    if (isPlaying) {
+        [sender setImage:[UIImage imageNamed:@"pause_press.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [sender setImage:[UIImage imageNamed:@"play_press.png"] forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)playBtnUp:(id)sender{
+    if (isPlaying) {
+        [sender setImage:[UIImage imageNamed:@"pause_unpress.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [sender setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)sliderMove:(id)sender{
+    if (isPlaying) {
+        [player pause];
+        player.currentTime = playSlider.value;
+        [player play];
+    }
+}
 @end
 
 @implementation WUVideoInCell
@@ -84,7 +157,80 @@
 @end
 
 @implementation WUAudioOutCell
-@synthesize shadowImage;
+@synthesize shadowImage, playButton, playSlider, playView, isPlaying, timer, player;
+
+- (IBAction)playBtnPress:(id)sender{
+    if (!isPlaying) {
+        NSURL *audioUrl = [[C2CallPhone currentPhone] mediaUrlForKey:self.downloadKey];
+        player = [[AVAudioPlayer alloc] initWithContentsOfURL:audioUrl error:nil];
+        player.numberOfLoops = 1;
+        player.currentTime = playSlider.value;
+        playSlider.maximumValue = player.duration + 0.1;
+        [player play];
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+        isPlaying = YES;
+        [playButton setImage:[UIImage imageNamed:@"pause_unpress.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [player stop];
+        isPlaying = NO;
+        [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        [timer invalidate];
+    }
+}
+
+-(void)updateTime:(NSTimer *)ptimer
+{
+    playSlider.value += ptimer.timeInterval;
+    NSInteger tempMinute = playSlider.value / 60;
+    NSInteger tempSecond = playSlider.value - (tempMinute * 60);
+    
+    NSString *minute = [[NSNumber numberWithInteger:tempMinute] stringValue];
+    NSString *second = [[NSNumber numberWithInteger:tempSecond] stringValue];
+    if (tempMinute < 10) {
+        minute = [@"0" stringByAppendingString:minute];
+    }
+    if (tempSecond < 10) {
+        second = [@"0" stringByAppendingString:second];
+    }
+    self.duration.text = [NSString stringWithFormat:@"%@:%@", minute, second];
+    
+    if (playSlider.value >= player.duration) {
+        isPlaying = NO;
+        [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        playSlider.value = 0.;
+        [self duration].text = [[C2CallPhone currentPhone] durationForKey:self.downloadKey];
+        [ptimer invalidate];
+    }
+}
+
+
+- (IBAction)playBtnDown:(id)sender{
+    if (isPlaying) {
+        [sender setImage:[UIImage imageNamed:@"pause_press.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [sender setImage:[UIImage imageNamed:@"play_press.png"] forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)playBtnUp:(id)sender{
+    if (isPlaying) {
+        [sender setImage:[UIImage imageNamed:@"pause_unpress.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [sender setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)sliderMove:(id)sender{
+    if (isPlaying) {
+        [player pause];
+        player.currentTime = playSlider.value;
+        [player play];
+    }
+}
+
 @end
 
 @implementation WUVideoOutCell
@@ -350,10 +496,10 @@ static BOOL isGroup = YES;
             return 152;
         }
         if ([cell isKindOfClass:[AudioCellIn class]]) {
-            return 132;
+            return 101;
         }
         if ([cell isKindOfClass:[AudioCellOut class]]) {
-            return 132;
+            return 101;
         }
         if ([cell isKindOfClass:[VideoCellIn class]]) {
             return 133;
@@ -598,6 +744,13 @@ static BOOL isGroup = YES;
 -(void) configureImageCellIn:(__weak WUImageInCell *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
 {
     NSString *text = elem.text;
+    
+    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
+                                                              locale:[NSLocale currentLocale]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:formatString];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+    
     if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
         cell.eventImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
         
@@ -683,6 +836,13 @@ static BOOL isGroup = YES;
     frame = cell.shadowImage.frame;
     frame.origin.x = cell.bubbleView.frame.origin.x + 8;
     [cell.shadowImage setFrame:frame];
+    
+    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
+                                                              locale:[NSLocale currentLocale]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:formatString];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
+    
     
     if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
         cell.eventImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
@@ -852,7 +1012,7 @@ static BOOL isGroup = YES;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:formatString];
     cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-    frame = CGRectMake(expectedLabelSize.width + 10, expectedLabelSize.height - 14, 64, 21);
+    frame = CGRectMake(expectedLabelSize.width + 10, expectedLabelSize.height - 6, 64, 21);
     [cell.timeLabel setFrame:frame];
     
     
@@ -911,10 +1071,10 @@ static BOOL isGroup = YES;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:formatString];
     cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-    frame = CGRectMake(expectedLabelSize.width + 6, expectedLabelSize.height - 14, 64, 21);
+    frame = CGRectMake(expectedLabelSize.width + 6, expectedLabelSize.height - 6, 64, 21);
     [cell.timeLabel setFrame:frame];
     
-    frame = CGRectMake(expectedLabelSize.width + 20 - 14 - 4, 0, 14, 14);
+    frame = CGRectMake(expectedLabelSize.width + 90 - 14 - 6, expectedLabelSize.height - 2, 14, 14);
     [cell.iconSubmitted setFrame:frame];
     
     [cell setLongpressAction:^{
@@ -1171,15 +1331,11 @@ static BOOL isGroup = YES;
 }
 
 
--(void) configureAudioCellOut:(__weak AudioCellOutStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+-(void) configureAudioCellOut:(__weak WUAudioOutCell *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
 {
+
     NSString *text = elem.text;
-    
-    cell.userImage.image = [self ownUserImage];
-    [self setUserImageAction:cell.userImage forElement:elem];
-    
-    NSString *sendername = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
-    cell.headline.text = [NSString stringWithFormat:@"@%@",  sendername];
+    cell.downloadKey = text;
     
     // Special Handling for current submissions
     if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
@@ -1209,11 +1365,38 @@ static BOOL isGroup = YES;
         cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
         
         [cell.progress setHidden:YES];
-        [cell setTapAction:^{
-            [self showVoiceMail:text];
-        }];
+        [cell.progress setHidden:YES];
+        [cell.playView setHidden:NO];
+        [cell.playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        
+        NSString *durStr = [[C2CallPhone currentPhone] durationForKey:text];
+        CGFloat durSec = 0.;
+        
+        while (durStr.length > 0) {
+            NSRange range = [durStr rangeOfString:@":"];
+            NSString* numStr;
+            if (range.location == NSNotFound) {
+                numStr = durStr;
+                durStr = @"";
+            }
+            else{
+                NSRange numRange;
+                numRange.location = 0;
+                numRange.length = range.location;
+                numStr = [durStr substringWithRange:numRange];
+                
+                numRange.location = range.location + 1;
+                numRange.length = durStr.length - numRange.location;
+                durStr = [durStr substringWithRange:numRange];
+            }
+            durSec = durSec * 60 + numStr.intValue;
+        }
+        
+        [cell.playSlider setMaximumValue:durSec];
+        [cell.playSlider setMinimumValue:0.0];
+        [cell.playSlider setValue:0.0];
+
     } else {
-        cell.downloadKey = text;
         
         if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
             [cell.downloadButton setHidden:YES];
@@ -1398,6 +1581,106 @@ static BOOL isGroup = YES;
     [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
 }
 
+-(void) configureAudioCellIn:(__weak WUAudioInCell *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    NSString *text = elem.text;
+    BOOL failed = NO;
+
+    cell.downloadKey = text;
+    
+    if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
+        cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
+        
+        [cell.progress setHidden:YES];
+        [cell.playView setHidden:NO];
+        [cell.playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        
+        NSString *durStr = [[C2CallPhone currentPhone] durationForKey:text];
+        CGFloat durSec = 0.;
+        
+        while (durStr.length > 0) {
+            NSRange range = [durStr rangeOfString:@":"];
+            NSString* numStr;
+            if (range.location == NSNotFound) {
+                numStr = durStr;
+                durStr = @"";
+            }
+            else{
+                NSRange numRange;
+                numRange.location = 0;
+                numRange.length = range.location;
+                numStr = [durStr substringWithRange:numRange];
+                
+                numRange.location = range.location + 1;
+                numRange.length = durStr.length - numRange.location;
+                durStr = [durStr substringWithRange:numRange];
+            }
+            durSec = durSec * 60 + numStr.intValue;
+        }
+        
+        [cell.playSlider setMaximumValue:durSec];
+        [cell.playSlider setMinimumValue:0.0];
+        [cell.playSlider setValue:0.0];
+    } else {
+        
+        if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
+            [cell.downloadButton setHidden:YES];
+            [cell monitorDownloadForKey:text];
+        } else if ([[C2CallPhone currentPhone] failedDownloadStatusForKey:text]) {
+            // We need a broken link image here and a download button
+            cell.messageImage.image = [UIImage imageNamed:@"ico_broken_video.png"];
+            [cell.downloadButton setHidden:YES];
+            [cell setLongpressAction:^{
+                UIMenuController *menu = [UIMenuController sharedMenuController];
+                NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+                
+                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
+                [cell setRetransmitAction:^{
+                    [cell download:nil];
+                }];
+                [menulist addObject:item];
+                
+                
+                menu.menuItems = menulist;
+                
+                CGRect rect = cell.messageImage.frame;
+                rect = [cell convertRect:rect fromView:cell.messageImage];
+                [menu setTargetRect:rect inView:cell];
+                [cell becomeFirstResponder];
+                [menu setMenuVisible:YES animated:YES];
+            }];
+            failed = YES;
+        } else {
+            [cell.downloadButton setHidden:NO];
+            [cell.progress setHidden:YES];
+            [cell setTapAction:^{
+                [cell download:cell.downloadButton];
+            }];
+        }
+    }
+    
+    if (!failed) {
+        [cell setLongpressAction:^{
+            UIMenuController *menu = [UIMenuController sharedMenuController];
+            NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+            
+            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
+            [cell setForwardAction:^{
+                [self forwardMessage:text];
+            }];
+            [menulist addObject:item];
+            
+            
+            menu.menuItems = menulist;
+            CGRect rect = cell.messageImage.frame;
+            rect = [cell convertRect:rect fromView:cell.messageImage];
+            [menu setTargetRect:rect inView:cell];
+            [cell becomeFirstResponder];
+            [menu setMenuVisible:YES animated:YES];
+        }];
+    }
+    
+}
 
 
 
@@ -1660,7 +1943,7 @@ static BOOL isGroup = YES;
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:formatString];
             cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:b.postTime]];
-            frame = CGRectMake(expectedLabelSize.width + 10, expectedLabelSize.height - 14, 64, 21);
+            frame = CGRectMake(expectedLabelSize.width + 10, expectedLabelSize.height - 6, 64, 21);
             [cell.timeLabel setFrame:frame];
             
             frame = CGRectMake(12, expectedLabelSize.height, expectedLabelSize.width + 74, 30);

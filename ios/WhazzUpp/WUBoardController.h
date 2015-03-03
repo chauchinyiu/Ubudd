@@ -72,6 +72,17 @@
 
 @interface WUAudioInCell : AudioCellInStream
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property(nonatomic, weak) IBOutlet UIButton *playButton;
+@property(nonatomic, weak) IBOutlet UISlider *playSlider;
+@property(nonatomic, weak) IBOutlet UIView *playView;
+@property BOOL isPlaying;
+@property NSTimer *timer;
+@property AVAudioPlayer *player;
+
+- (IBAction)playBtnDown:(id)sender;
+- (IBAction)playBtnPress:(id)sender;
+- (IBAction)playBtnUp:(id)sender;
+- (IBAction)sliderMove:(id)sender;
 @end
 
 @interface WUVideoInCell : VideoCellInStream
@@ -98,6 +109,18 @@
 @interface WUAudioOutCell : AudioCellOutStream
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
+@property(nonatomic, weak) IBOutlet UIButton *playButton;
+@property(nonatomic, weak) IBOutlet UISlider *playSlider;
+@property(nonatomic, weak) IBOutlet UIView *playView;
+@property BOOL isPlaying;
+@property NSTimer *timer;
+@property AVAudioPlayer *player;
+
+- (IBAction)playBtnDown:(id)sender;
+- (IBAction)playBtnPress:(id)sender;
+- (IBAction)playBtnUp:(id)sender;
+- (IBAction)sliderMove:(id)sender;
+
 @end
 
 @interface WUVideoOutCell : VideoCellOutStream

@@ -16,9 +16,13 @@
  It uses the ABAddressBook API but implements its own user interface allowing a better customization.
  
 */
-@interface SCAddressBookController : UITableViewController
+@interface SCAddressBookController : UITableViewController {
+    NSMutableArray          *segmentedContacts;
+}
 
 @property(nonatomic) ABAddressBookRef       addressBook;
+@property(nonatomic, strong) NSArray       *searchResult;
+
 
 -(BOOL) refreshAddressBook;
 

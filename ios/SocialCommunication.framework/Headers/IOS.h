@@ -58,11 +58,12 @@ typedef enum {
 +(BOOL) has4inchScreen;
 +(void) setClient:(NSString *) c;
 +(NSString *) client;
-+(NSString *) advertisingIdentifier;
-+(BOOL) advertisingTrackingEnabled;
++(NSString *) advIdentifier;
++(BOOL) advTrackingEnabled;
 +(NSString *) uniqueIdentifier;
 +(NSString *) getMacAddress;
 +(NSString *) sha1MacAddress;
 +(void) setVideoResolution:(SCVideoResolutionT) vRes;
++(void) setUseAds:(BOOL) useAds;
 
 @end

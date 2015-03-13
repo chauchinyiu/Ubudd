@@ -9,6 +9,8 @@
 #ifndef C2CallPhone_SocialCommunication_h
 #define C2CallPhone_SocialCommunication_h
 
+#import <UIKit/UIKit.h>
+
 #import "C2CallAppDelegate.h"
 
 #import "C2CallPhone.h"

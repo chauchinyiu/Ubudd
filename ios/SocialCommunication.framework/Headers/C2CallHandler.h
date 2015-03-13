@@ -119,7 +119,7 @@
 @property(nonatomic) BOOL           ownNumberVerified, callMeLinkActive;
 @property(nonatomic, strong) C2CallDataManager      *dataManager;
 @property(nonatomic, assign) int    currentRelease;
-@property(nonatomic) BOOL processingFacebookLogin;
+@property(nonatomic) BOOL processingFacebookLogin, useVoIPPush;
 
 // AWS Temorary Token
 @property(nonatomic, strong) NSString   *accessKey, *secretKey, *securityToken, *expireDate;
@@ -177,6 +177,7 @@
 -(void) willTerminate;
 -(void) willEnterForeground;
 -(void) registerAPS:(NSData *)token;
+-(void) registerAPS:(NSData *)token isVoIP:(BOOL) voip;
 -(void) unregisterAPS;
 -(void) callMePush:(NSString *) userid;
 -(BOOL) addCredit:(NSString *)value currency:(NSString *) currency transactionid:(NSString *) tid receipt:(NSData *) receipt;
@@ -227,6 +228,10 @@
 -(DDXMLDocument *) getAppRecommendation;
 -(DDXMLElement *) getUserInfoForUserid:(NSString *) userid;
 -(BOOL) numberVerificationForRegister:(NSString *) number withPinMessage:(NSString *) pinMessage forcePinCall:(BOOL) force;
+-(NSDictionary *) createGroupLinkForGroup:(NSString *) groupid;
+-(NSDate *) getLastOnlineStatusForUser:(NSString *) userid;
+-(NSString *) requestBTClientToken;
+-(NSDictionary *) addBrainTreeCredit:(NSString *)value currency:(NSString *)currency nonce:(NSString *) nonce channel:(NSString *) channel;
 
 +(C2CallHandler *) defaultHandler;
 

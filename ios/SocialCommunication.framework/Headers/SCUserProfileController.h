@@ -82,6 +82,14 @@
  */
 -(IBAction)selectPhoto:(id)sender;
 
+/** This method will be called on updated userprofile
+ 
+ Overwrite this method to present additional data for the user profile.
+ Calling super is required.
+ 
+ */
+-(void) refreshUserProfile;
+
 /** Saves User Profile Action.
  @param sender - The initiator of the action
  */

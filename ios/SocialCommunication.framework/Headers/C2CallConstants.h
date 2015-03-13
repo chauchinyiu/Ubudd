@@ -88,7 +88,7 @@
 #define DEFAULT_DARKBLUECOLOR [UIColor colorWithRed:(0x15/255.) green:(0x76/255.) blue:(0xd6/ 255.) alpha:1.0]
 
 #ifdef __FCHD
-#define C2CALL_RELEASE              15
+#define C2CALL_RELEASE              17
 #else
-#define C2CALL_RELEASE              14
+#define C2CALL_RELEASE              17
 #endif

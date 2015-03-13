@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>R1NavigationBarBackgroundColor</key>
+	<string>0xFFFFFF</string>
 	<key>R1NavigationBarButtonTextColor</key>
 	<string>0x46464b</string>
 	<key>R1NavigationBarButtonShadowColor</key>
@@ -11,7 +13,7 @@
 	<key>R1NavigationBarButtonFontSize</key>
 	<string>12</string>
 	<key>R1NavigationBarTitleTextColor</key>
-	<string>0x46464b</string>
+	<string>0x314b63</string>
 	<key>R1NavigationBarTitleShadowColor</key>
 	<string>0xFFFFFF</string>
 	<key>R1NavigationBarTitleShadowOffset</key>

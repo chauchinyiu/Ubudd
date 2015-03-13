@@ -108,4 +108,11 @@
  */
 -(IBAction) chooseCountry:(id)sender;
 
+/** Set the pre-defined number for the number field
+ 
+ @param number - The number to set
+ */
+
+-(void) pickNumber:(NSString *) number;
+
 @end

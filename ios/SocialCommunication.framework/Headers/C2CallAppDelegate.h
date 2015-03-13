@@ -93,13 +93,39 @@ As a VoIP and Messaging Service the C2Call Framework requires a complex initiali
  */
 @property(nonatomic) SCPhotoEffects             usePhotoEffects;
 
+
+/** Enable the iOS8 VoIP Push feature
+ 
+ Before setting this option to YES, please check whether the device is currently running iOS8 or higher.
+ You also need to upload a VoIP Push Certificate in the DevArea then.
+ This option has to be set in applicationDidFinishLaunching:withOptions
+ 
+ With VoIP Push all incoming calls will wake-up the app immediately and receive the push notification first, before 
+ it will be presented to the user. The Application has the chance to restore the network connections then and present 
+ a custom notification to the user.
+ 
+ Please also see the methods :
+ 
+    - callNotificationForUserid:displayName:videoCall
+    - missedCallNotificationForUserid:displayName:
+ 
+ The presented call notification can be customized here.
+ 
+ */
+@property(nonatomic) BOOL                       usePushKit;
+
+/** Set the Supported PushTypes for PushKit Framework
+ */
+@property(nonatomic, strong) NSSet              *pushKitPushTypes;
+
+
 /** Is the user with the current credentials logged in and has a server session
  */
-@property(nonatomic, readonly) BOOL                 loginCompleted;
+@property(nonatomic, readonly) BOOL             loginCompleted;
 
 /** Are valid credentials available for single sign on
  */
-@property(nonatomic, readonly) BOOL                 hasValidCredentials;
+@property(nonatomic, readonly) BOOL             hasValidCredentials;
 
 
 

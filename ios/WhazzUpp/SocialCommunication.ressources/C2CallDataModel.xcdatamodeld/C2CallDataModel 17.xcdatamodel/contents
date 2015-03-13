@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="1.0.11" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Interest" syncable="YES">
-        <attribute name="id" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="interestName" attributeType="String" syncable="YES"/>
-    </entity>
+<model userDefinedModelVersionIdentifier="1.0.11" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MOAddress" representedClassName="MOAddress" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
@@ -138,6 +134,5 @@
         <element name="MOOpenId" positionX="412" positionY="81" width="128" height="90"/>
         <element name="MOPhoneNumber" positionX="817" positionY="204" width="128" height="120"/>
         <element name="MOUserData" positionX="-450" positionY="45" width="128" height="118"/>
-        <element name="Interest" positionX="-414" positionY="-117" width="128" height="75"/>
     </elements>
 </model>

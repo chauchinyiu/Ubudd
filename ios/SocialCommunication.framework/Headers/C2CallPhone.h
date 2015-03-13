@@ -14,6 +14,7 @@
 #define C2_EMAIL             @"EMail"
 #define C2_AFFILIATEID       @"AffiliateId"
 #define C2_SECRET            @"Secret"
+#define C2_VOIPPUSH          @"VoIPPush"
 
 typedef enum {
     SCMEDIATYPE_TEXT,
@@ -39,6 +40,15 @@ typedef enum {
     SC_PHOTO_APPLYEFFECTS,
     SC_PHOTO_USERCHOICE
 } SCPhotoEffects;
+
+typedef enum {
+    SCCALLERID_USE_VERIFIEDNUMBER,
+    SCCALLERID_USE_DID,
+    SCCALLERID_USE_DID1,
+    SCCALLERID_USE_DID2,
+    SCCALLERID_USE_DID3,
+    SCCALLERID_USE_DID4,
+} SCCallerId;
 
 /** C2CallPhoneDelegate protocol inherits the SIPPhoneDelegate protocol.
  
@@ -159,6 +169,12 @@ typedef enum {
 /** AffiliateId available in C2Call SDK Developer Area.
  */
 @property(nonatomic, readonly) NSString               *affiliateId;
+
+/** Current SessionId
+ */
+@property(nonatomic, readonly) NSString               *sessionId;
+
+
 
 /** Application Secret available in C2Call SDK Developer Area.
  */
@@ -379,6 +395,41 @@ typedef enum {
  */
 -(void) rejectCall;
 
+
+/** Set the active callerid for the call or SMS
+ 
+ The C2Call SDK support a number verification for your own phone number and up to 5 C2Call numbers.
+ If the user has a verified number and one or more DIDs (C2Call numbers), this method can be used to choose
+ the phone number which will be used for outbound calls or SMS.
+ The active number can be changed on the fly before the actuall call or SMS.
+ 
+ The following options are available:
+ 
+    SCCALLERID_USE_VERIFIEDNUMBER   - Use your own verified number
+    SCCALLERID_USE_DID              - Use the 1st DID
+    SCCALLERID_USE_DID1             - Use the 2nd DID
+    SCCALLERID_USE_DID2             - Use the 3rd DID
+    SCCALLERID_USE_DID3             - Use the 4th DID
+    SCCALLERID_USE_DID4             - Use the 5th DID
+
+ In case the choosen caller id is not available, use own verified number will be the default
+ 
+ @param cid - The callerid to use
+ */
+-(BOOL) setActiveCallerId:(SCCallerId) cid;
+
+/** Returns the type of the active callerId
+ 
+ @return Active CallerId
+ */
+-(SCCallerId) activeCallerIdType;
+
+/** Returns  the active callerId as phone number
+ 
+ @return Active CallerId
+ */
+-(NSString *) activeCallerId;
+
 /** connectionTimeout set the timeout in seconds, when the connection will be dropped,
  because no packets are received any longer.
  
@@ -532,6 +583,33 @@ typedef enum {
  */
 -(BOOL) loginWithUser:(NSString *)email andPassword:(NSString *) password withCompletionHandler:(void (^)(BOOL success, int resultCode, NSString *resultMessage))handler;
 
+/** Send Password Email
+
+ Send a password email to reset the user password
+ This method is only available to customers with dedicated SDK server.
+ @param email - email address
+ */
+-(void) submitPasswordEMail:(NSString *) email;
+
+/** Get the last time the user was active in the app
+ 
+ This method returns the date when the user was active in the App (using in foreground)
+ 
+ @param userid - Userid of the user
+ @return The last online timestamp as date
+ */
+-(NSDate *) lastTimeOnlineForUser:(NSString *) userid;
+
+/** Get the last time the user was active in the app
+ 
+ This method returns the date when the user was active in the App (using in foreground)
+ The last online time is provided as time ago string (like 1h ago).
+ 
+ @param userid - Userid of the user
+ @return The last online timestamp as date
+ */
+-(NSString *) lastTimeOnlineForUserAsString:(NSString *) userid;
+
 /** Enable Public/Private Key Encryption for message communication
  
  This is a restricted API for Enterprise Developers only.
@@ -618,6 +696,20 @@ typedef enum {
 
  */
 -(void) createGroup:(NSString *) groupName withMembers:(NSArray *) members withCompletionHandler:(void (^)(BOOL success, NSString *groupId, NSString *result))handler;
+
+/** Create a CallMe Link for the specified group
+ 
+ This allows Anonymous Users to participate on a group call via browser based CallMe Link
+ 
+ A dictionary with the following keys will be returned:
+ 
+    LinkId - The Link Id for the CallMe Link
+    CallLink - The URL for the Link
+ 
+ @param groupid - groupid for the group
+ @return NSDictionary
+ */
+-(NSDictionary *) createGroupLinkForGroup:(NSString *) groupid;
 
 /** Enable Group Encryption 
  
@@ -997,6 +1089,15 @@ typedef enum {
  */
 -(NSURL *) mediaUrlForKey:(NSString *) key;
 
+/** Local file system path for rich media key
+ 
+ @param key - rich message key of the media file
+ 
+ @return Referenced Path
+ 
+ */
+-(NSString *) pathForKey:(NSString *) key;
+
 /** Return the duration for a media object if available.
  
  Duration is available for video and audio files
@@ -1007,6 +1108,18 @@ typedef enum {
  
  */
 -(NSString *) durationForKey:(NSString *) key;
+
+/** Return the meta data for a media object if available
+ 
+ Meta data is available for documents and contains the original file name and possibly further information.
+ 
+ @param key - rich message key of the media file
+ 
+ @return duration as string
+ 
+ */
+-(NSDictionary *) metaInfoForKey:(NSString *) key;
+
 
 /** Return the mime type for a given mediakey
  
@@ -1211,6 +1324,28 @@ typedef enum {
  
  */
 -(BOOL) addCredit:(NSString *)valueInCent currency:(NSString *) currency transactionid:(NSString *) tid receipt:(NSData *) receipt;
+
+/** Request Braintree Client Token
+    
+    Support for Braintree Payment. Enterprise Customer only.
+ 
+    @return client token
+ */
+-(NSString *) requestBTClientToken;
+
+/** Add Credit using Braintree Payment 
+ 
+ Support for Braintree Payment. Enterprise Customer only.
+
+ @param value - Payment Amount as decimal value (10.00)
+ @param currency - Currency
+ @param nonce - Payment Nonce created by Braintree
+ @param channel - Purchase Channel
+ 
+ @return NSDictionary with transaction result
+ */
+-(NSDictionary *) addBrainTreeCredit:(NSString *)value currency:(NSString *)currency nonce:(NSString *) nonce channel:(NSString *) channel;
+
 
 /** Get application credits for the current user
  

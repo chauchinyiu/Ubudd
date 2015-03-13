@@ -11,7 +11,8 @@
 
 typedef enum {
     SC_CURRENCY_USD,
-    SC_CURRENCY_EUR
+    SC_CURRENCY_EUR,
+    SC_CURRENCY_GBP
 } SCUserCreditCurrency;
 
 /** SCStoreObserver is an SKPaymentTransactionObserver handling StoreKit transactions.
@@ -34,7 +35,7 @@ typedef enum {
  
  @param identifier - The iTunes Connect Product Id
  @param valueInCents - The cent value the user will get in his account, when purchaseing this product
- @param currency - The currency for the credit (EUR / USD)
+ @param currency - The currency for the credit (EUR / USD / GBP)
  
  */
 -(void) addConsumableProduct:(NSString *) identifier creditValue:(int) valueInCents currency:(SCUserCreditCurrency) currency;
@@ -51,7 +52,7 @@ typedef enum {
  
     - identifier : The Product Id
     - value : The value in cent as NSNumber
-    - currency : The currency as NSString (EUR / USD)
+    - currency : The currency as NSString (EUR / USD / GBP)
  
  @return The product as NSDictionary.
  */
@@ -82,13 +83,13 @@ typedef enum {
  
  @return An instance of SCStoreObserver
  */
-+(SCStoreObserver *) new;
++(instancetype) new;
 
 /** Returns an existing instance of SCStoreObserver or nil
  @return The SCStoreObserver or nil
  */
-+(SCStoreObserver *) instance;
-
++(instancetype) instance;
++(void) setInstance:(SCStoreObserver *)observer;
 
 @end
 

@@ -59,6 +59,22 @@
 /** Hides ScreenControls view. */
 -(void) hideScreenControls;
 
+/** Returns the BackgroundImage for the current screen orientation and number of participants
+ 
+ The SCGroupViedoCallCotnroller calls this method to get the current background image, based on the number of active 
+ participants and on the current screen size and orientation.
+ Overwrite this method, if you want to provide your own background image.
+ 
+ @return The background image
+ */
+-(UIImage *) backgroundImage;
+
+/** Get the current number of participant views in the group call
+ 
+ @return The number of participant views
+ */
+-(int) numberOfParticipantViews;
+
 /** @name Actions */
 /** HangUp.
  @param sender - The initiator of the action

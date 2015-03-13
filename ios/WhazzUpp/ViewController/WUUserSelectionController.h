@@ -27,5 +27,6 @@
 @property(nonatomic,assign)id<WUUserSelectClientDelegate>delegate;
 
 -(void)setSelectedAccount:(NSArray*)users;
+-(void)setAndHideSelectedAccount:(NSArray*)users;
 
 @end

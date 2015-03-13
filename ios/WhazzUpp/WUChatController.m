@@ -358,7 +358,7 @@ typedef enum : NSUInteger {
 
 - (IBAction)recordBtnUnpress:(id)sender{
     if(isRecording){
-        [self.audioView togglePlayback:self.audioView.btnPlay];
+        [self.audioView toogleRecording:self.audioView.btnRecord];
         isRecording = NO;
         [self.lblRecording setHidden:YES];
         [timer invalidate];

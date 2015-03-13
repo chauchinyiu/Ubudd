@@ -53,6 +53,9 @@ The BoardController shows MOC2CallEvent Items (Chat History and Call History) in
 /** UIView references to the first section header. */
 @property(nonatomic, strong) IBOutlet UIView                *headerView;
 
+/** UIView references to the first section header (new Version). */
+@property(nonatomic, strong) IBOutlet UIView                *headerViewEmbed;
+
 /** UIView references to the filter info view. */
 @property(nonatomic, strong) IBOutlet UIView                *filterInfoView;
 

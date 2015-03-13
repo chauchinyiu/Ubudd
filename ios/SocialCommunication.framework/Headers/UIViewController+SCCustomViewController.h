@@ -161,6 +161,12 @@
  */
 -(void) showVoiceMail:(NSString *) voiceMailKey;
 
+/** Presents a Document Preview using the SCDocumentViewerController component.
+ 
+ @param documentKey - Rich Media Key of a Document
+ */
+-(void) showDocument:(NSString *) documentKey;
+
 /** Presents a VCard using the SCPersonController component.
  
  @param vcard - Rich Media Key of a VCARD
@@ -180,6 +186,25 @@
  @param startEdit - YES - Set the firstResponder to the Chat input to start edit
  */
 -(void) showChatForUserid:(NSString *) userid startEdit:(BOOL)startEdit;
+
+/** @name Show Object Details */
+/** Presents a Chat History using the SCGroupChatController component.
+ 
+ The group chat controller component shows the actual sender name on a message
+ 
+ @param userid - Userid of a Friend
+ */
+-(void) showGroupChatForUserid:(NSString *) userid;
+
+/** Presents a Chat History using the SCGroupChatController component.
+
+ The group chat controller component shows the actual sender name on a message
+
+ @param userid - Userid of a Friend
+ @param startEdit - YES - Set the firstResponder to the Chat input to start edit
+ */
+-(void) showGroupChatForUserid:(NSString *) userid startEdit:(BOOL) startEdit;
+
 
 /** Presents Group Details using the SCGroupDetailController component.
  

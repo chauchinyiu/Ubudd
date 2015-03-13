@@ -145,6 +145,29 @@
 -(void) removeUserdataForKey:(NSString *) key;
 
 
+/** Get extended DID Numer
+ 
+ In case the users has subscribed for multiuple DIDs, 
+ access the DID with index (num) 0-5
+ 
+ @param num - Index of the requested did
+ @return DID number or nil
+ */
+-(NSString *) didNumberExt:(int)num;
+
+/** Get available DIDs 
+ 
+ This mothod returns the list of avilable (active) DIDs for this user.
+ The return value is an array of NSDictionary with the following keys:
+ 
+    DidNumber - The actual DID
+    Index - The actual DID index to reference the DID for cancellation or renewal
+ 
+ @return Array of DIDs
+
+ */
+-(NSArray *) activeDIDs;
+
 /** Accesses to the current SCUserProfile instance.
  
  @return Current SCUserProfile instance

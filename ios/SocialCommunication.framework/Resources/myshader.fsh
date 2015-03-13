@@ -39,8 +39,8 @@ void main()
     
     /* yuv420 */
     mediump float  y = texture2D(videoTex_y, fragmentTextureCoordinates).x;
-    mediump float  u = texture2D(videoTex_u, mediump vec2(fragmentTextureCoordinates.x/2.0,fragmentTextureCoordinates.y/2.0)).x;
-    mediump float  v = texture2D(videoTex_v, mediump vec2(fragmentTextureCoordinates.x/2.0,fragmentTextureCoordinates.y/2.0)).x;
+    mediump float  u = texture2D(videoTex_u, vec2(fragmentTextureCoordinates.x/2.0,fragmentTextureCoordinates.y/2.0)).x;
+    mediump float  v = texture2D(videoTex_v, vec2(fragmentTextureCoordinates.x/2.0,fragmentTextureCoordinates.y/2.0)).x;
     
     
     y = 1.1643 * (y - 0.0625);

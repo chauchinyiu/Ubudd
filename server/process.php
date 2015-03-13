@@ -306,6 +306,24 @@ class MyAPI extends API {
 		return array('error' => 0, 'message' => 'Insert Successfully');
     }
     
+    protected function addGroupMembers($args){
+        if ($args['groupID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+            
+		//save members
+		$stmt = $this->db->conn2->prepare("insert into groupMember (groupID, memberID, requestAccepted) values (?, ?, 1)");
+		$stmt->bind_param('ss', $groupID, $memberID);
+		$groupID = $args['groupID'];
+		for($i = 1; $i <= $args['memberCnt']; $i++){
+			$memberID = $args['memberID'.$i];
+			$stmt->execute();
+		}
+		$stmt->close();
+				
+		return array('error' => 0, 'message' => 'Insert Successfully');
+    }
+    
+    
     protected function removeGroupMember($args){
         if ($args['groupID'] == '' || $args['memberID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');

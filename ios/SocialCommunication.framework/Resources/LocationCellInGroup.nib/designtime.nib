@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">13D65</string>
-		<string key="IBDocument.InterfaceBuilderVersion">5056</string>
-		<string key="IBDocument.AppKitVersion">1265.20</string>
-		<string key="IBDocument.HIToolboxVersion">698.00</string>
+		<int key="IBDocument.SystemTarget">1792</int>
+		<string key="IBDocument.SystemVersion">14B25</string>
+		<string key="IBDocument.InterfaceBuilderVersion">6254</string>
+		<string key="IBDocument.AppKitVersion">1343.16</string>
+		<string key="IBDocument.HIToolboxVersion">755.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">3733</string>
+			<string key="NS.object.0">6247</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -152,6 +152,7 @@
 										<string key="NSFrame">{{0, 102}, {19, 16}}</string>
 										<reference key="NSSuperview" ref="626798553"/>
 										<reference key="NSNextKeyView" ref="1057760074"/>
+										<string key="NSReuseIdentifierKey">_NS:567</string>
 										<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -196,6 +197,7 @@
 										<string key="NSFrame">{{19, 2}, {264, 16}}</string>
 										<reference key="NSSuperview" ref="626798553"/>
 										<reference key="NSNextKeyView" ref="911651940"/>
+										<string key="NSReuseIdentifierKey">_NS:328</string>
 										<object class="NSColor" key="IBUIBackgroundColor" id="983337954">
 											<int key="NSColorSpace">3</int>
 											<bytes key="NSWhite">MCAwAA</bytes>
@@ -225,6 +227,7 @@
 											<double key="NSSize">12</double>
 											<int key="NSfFlags">16</int>
 										</object>
+										<bool key="useAutomaticPreferredMaxLayoutWidth">YES</bool>
 									</object>
 									<object class="IBUIImageView" id="621342787">
 										<reference key="NSNextResponder" ref="626798553"/>
@@ -232,6 +235,7 @@
 										<string key="NSFrame">{{17, 21}, {88, 88}}</string>
 										<reference key="NSSuperview" ref="626798553"/>
 										<reference key="NSNextKeyView" ref="851492238"/>
+										<string key="NSReuseIdentifierKey">_NS:567</string>
 										<bool key="IBUIClipsSubviews">YES</bool>
 										<int key="IBUIContentMode">2</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -243,6 +247,7 @@
 										<string key="NSFrame">{{40, 46}, {37, 37}}</string>
 										<reference key="NSSuperview" ref="626798553"/>
 										<reference key="NSNextKeyView" ref="600037847"/>
+										<string key="NSReuseIdentifierKey">_NS:1030</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIStyle">0</int>
@@ -254,6 +259,7 @@
 										<string key="NSFrame">{{110, 20}, {172, 20}}</string>
 										<reference key="NSSuperview" ref="626798553"/>
 										<reference key="NSNextKeyView" ref="331996552"/>
+										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
@@ -290,6 +296,7 @@
 										<string key="NSFrame">{{110, 33}, {170, 79}}</string>
 										<reference key="NSSuperview" ref="626798553"/>
 										<reference key="NSNextKeyView" ref="234520088"/>
+										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
 										<int key="IBUIContentMode">7</int>
@@ -324,6 +331,7 @@
 										<string key="NSFrame">{{281, 2}, {10, 17}}</string>
 										<reference key="NSSuperview" ref="626798553"/>
 										<reference key="NSNextKeyView" ref="978069830"/>
+										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<object class="NSCustomResource" key="IBUIImage">
@@ -335,6 +343,7 @@
 								<string key="NSFrameSize">{300, 118}</string>
 								<reference key="NSSuperview" ref="328263122"/>
 								<reference key="NSNextKeyView" ref="961400433"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="983337954"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -361,7 +370,7 @@
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<array class="NSMutableArray" key="connectionRecords">
+			<array key="connectionRecords">
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">chatCell</string>
@@ -618,10 +627,6 @@
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">NO</bool>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1536" key="NS.object.0"/>
-		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
 			<integer value="4600" key="NS.object.0"/>
@@ -641,6 +646,5 @@
 			<string key="MSG_bubble_green_right.png">{19, 1}</string>
 			<string key="ico_bookmark.png">{10, 17}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">3733</string>
 	</data>
 </archive>

@@ -100,10 +100,11 @@
     self.duration.text = [NSString stringWithFormat:@"%@:%@", minute, second];
     
     if (playSlider.value >= player.duration) {
-        isPlaying = NO;
-        [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
         playSlider.value = 0.;
         [self duration].text = [[C2CallPhone currentPhone] durationForKey:self.downloadKey];
+        [player stop];
+        isPlaying = NO;
+        [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
         [ptimer invalidate];
     }
 }
@@ -196,6 +197,7 @@
     self.duration.text = [NSString stringWithFormat:@"%@:%@", minute, second];
     
     if (playSlider.value >= player.duration) {
+        [player stop];
         isPlaying = NO;
         [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
         playSlider.value = 0.;
@@ -1932,7 +1934,7 @@ static BOOL isGroup = YES;
             CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
                                         constrainedToSize:maximumLabelSize
                                             lineBreakMode:NSLineBreakByWordWrapping];
-            CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 20, expectedLabelSize.height + 20);
+            CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
             [cell.bubbleView setFrame:frame];
             
             frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);

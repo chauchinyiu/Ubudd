@@ -25,7 +25,7 @@
 @property (nonatomic) int                                   rotate;
 @property (readonly, nonatomic) dispatch_queue_t            openglesQueue;
 @property BOOL                                              reset;
-@property BOOL                                              background;
+@property (atomic) BOOL                                     background;
 @property (nonatomic) CGFloat                               imageAspectReverse;
 @property (nonatomic) CGFloat                               imageAspect;
 @property (nonatomic) unsigned long                         ssrc;

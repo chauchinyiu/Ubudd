@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AdWhirlDelegateProtocol.h"
 #import "C2BlockAction.h"
 
 @interface C2CustomAdView : UIView {

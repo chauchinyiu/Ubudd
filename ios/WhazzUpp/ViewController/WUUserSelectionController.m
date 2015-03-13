@@ -22,7 +22,7 @@
     NSMutableArray* friendList;
     NSMutableArray* selection;
     NSArray* startList;
-    
+    BOOL hideStartList;
 
     BOOL inSearch;
     NSString* searchStr;
@@ -56,7 +56,25 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = NO;
     
-    friendList = [ResponseHandler instance].friendList;
+    friendList = [[NSMutableArray alloc] initWithArray:[ResponseHandler instance].friendList];
+    if (hideStartList) {
+        int i = 0;
+        while (i < friendList.count) {
+            WUAccount *a = [friendList objectAtIndex:i];
+            BOOL hasMatch = false;
+            for (int j = 0; j < startList.count; j++) {
+                NSString* u = [startList objectAtIndex:j];
+                if([u isEqualToString:a.c2CallID]){
+                    [friendList removeObjectAtIndex:i];
+                    hasMatch = true;
+                }
+            }
+            if (!hasMatch) {
+                i++;
+            }
+        }
+    }
+    
     selection = [[NSMutableArray alloc] init];
     for (int i = 0; i < friendList.count; i++) {
         [selection addObject: [NSNumber numberWithBool:NO]];
@@ -64,7 +82,7 @@
         for (int j = 0; j < startList.count; j++) {
             NSString* u = [startList objectAtIndex:j];
             if([u isEqualToString:a.c2CallID]){
-                [selection replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
+                [selection replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:YES]];
             }
         }
     }
@@ -170,6 +188,12 @@
 
 -(void)setSelectedAccount:(NSArray*)users{
     startList = users;
+    hideStartList = false;
+}
+
+-(void)setAndHideSelectedAccount:(NSArray*)users{
+    startList = users;
+    hideStartList = true;
 }
 
 #pragma mark SearchDisplayController Delegate
@@ -193,7 +217,6 @@
 
 -(void) setTextFilterForText:(NSString *) text
 {
-    
     searchStr = text;
 }
 
@@ -245,5 +268,9 @@
 {
 }
 
+- (IBAction)cancel:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 @end

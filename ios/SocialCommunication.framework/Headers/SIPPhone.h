@@ -193,6 +193,10 @@ typedef enum {
  */
 @property(nonatomic) BOOL                             preferMessageEncryption;
 
+/** This option will be automatically set if the callerid of the user is verified
+ */
+@property(nonatomic) BOOL           callerIdVerified;
+
 
 /**---------------------------------------------------------------------------------------
  * @name SIPPhone lifecycle handling
@@ -240,6 +244,12 @@ typedef enum {
  */
 -(void) didBecomeActive;
 
+/** Handles an incoming call while in background
+ 
+ 
+ */
+-(void) didReceiveCallInBackground;
+
 /** Handles the Application Status willTerminate.
  
  The actual SIPPhone willTerminate is handled automatically by C2CallPhone.
@@ -286,6 +296,14 @@ typedef enum {
  */
 -(BOOL) isOnline;
 
+/** Is BackgroundCall running
+ 
+ Indicates whether during background start whether the App has been woken up for a call.
+ 
+ @return YES/NO
+ */
+-(BOOL) isBackgroundCall;
+
 /** Is UDPTunnel over TCP active
  
  In case the firewall is blocking UDP data packet, the client automatically establish a UDP Tunnel over TCP port 80.
@@ -299,6 +317,10 @@ typedef enum {
 /** Force a UDP Tunnel Connection
  */
 -(BOOL) forceTunnel;
+
+/** Return forceCallerIdVerify status
+ */
+-(BOOL) forceCallerIdVerify;
 
 /**---------------------------------------------------------------------------------------
  * @name Call handling methods
@@ -323,6 +345,7 @@ typedef enum {
  @return international number (e.g. +1408123456)
  */
 -(NSString *) normalizeNumber:(NSString *) number;
++(NSString *) normalizeNumber:(NSString *) number;
 
 /** Check whether the given number is a valid phone number
  
@@ -531,6 +554,13 @@ typedef enum {
  */
 -(NSString *) remoteDisplayname;
 
+/** InboundCall line identifier
+ 
+ If a call comes from an external number, this method returns the number which has been called.
+ 
+ @return Inbound Line Number or "VoIP"
+ */
+-(NSString *) inboundLine;
 
 /**---------------------------------------------------------------------------------------
  * @name DTMF Tones
@@ -619,5 +649,27 @@ typedef enum {
  
  */
 +(void) setDisableTunnel:(BOOL) disable;
+
+/** Set this option if you want to allow calls to PSTN / Landline only for verified callerids
+ 
+ In case the user try to call or SMS to a landline or mobile phone number and his callerId has not been verified
+ via PIN SMS / PIN Call, the action will be denied by the API and an NSNotification is posted:
+ 
+    NSNotification: SC_CALLERIDVERFICATION_REQUIRED
+ 
+ You can handle this notification and present a dialog to the user to verify his callerid first.
+ 
+ */
++(void) setForceCallerIdVerify:(BOOL)forceCallerIdVerify;
+
+/** Enable G729 Codec for VoIP Audio
+ 
+ IMPORTANT: Enabling the G729 Codec requires to license it from the patent owner.
+ Default G729 is disabled. 
+ 
+ @param use - Enable / Disable the codec
+ 
+ */
++(void) setUseG729:(BOOL) use;
 
 @end

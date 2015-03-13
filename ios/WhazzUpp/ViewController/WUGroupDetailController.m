@@ -40,6 +40,7 @@
     UIImage* groupImg;
     NSMutableArray* friendList;
     NSMutableArray* memberList;
+    NSMutableArray* newMemberList;
 }
 @property(nonatomic, strong) SCGroup *group;
 @property(nonatomic, strong) NSArray *members;
@@ -56,6 +57,7 @@
     // Do any additional setup after loading the view.
     
     memberList = [[NSMutableArray alloc] init];
+    newMemberList = [[NSMutableArray alloc] init];
     
     self.group = [[SCGroup alloc] initWithGroupid:self.groupid];
     if (self.group.groupImage) {
@@ -157,7 +159,16 @@
         }
         
     }
+    else if(indexPath.section == 1){
+        if (indexPath.row > 0) {
+            NSString * userid = [memberList objectAtIndex:indexPath.row - 1];
+            if([userid isEqualToString:self.group.groupOwner]){
+                return 0;
+            }
+        }
+    }
     return 44;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -229,7 +240,6 @@
                 else{
                     [cell.btnIsPublicEdit setTitle:NSLocalizedString(@"Private", @"") forState:UIControlStateNormal];
                 }
-                
                 NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
                 [cell.lblMemberCntEdit setText:[NSString stringWithFormat:NSLocalizedString(@"Members X OF 200", @""), memberCnt.intValue + 1]];
                 
@@ -263,7 +273,7 @@
                 }
                 
                 NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
-                [cell.lblMemberCnt setText:[NSString stringWithFormat:@"%d OF 200", memberCnt.intValue + 1]];
+                [cell.lblMemberCnt setText:NSLocalizedString(@"Members X OF 200", @"")];
                 
                 [cell.lblHost setText:[groupInfo objectForKey:@"userName"]];
                 
@@ -297,6 +307,7 @@
     
         SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.tag = indexPath.row;
+        [cell setHidden:NO];
         
         NSString *userid;
         if (indexPath.row == 0) {
@@ -304,6 +315,9 @@
         }
         else{
             userid = [memberList objectAtIndex:indexPath.row - 1];
+            if([userid isEqualToString:self.group.groupOwner]){
+                [cell setHidden:YES];
+            }
         }
         NSString *gid = self.group.groupid;
         
@@ -321,7 +335,7 @@
             MOC2CallUser *member = [[SCDataManager instance] userForUserid:userid];
             displayName = [member.displayName copy];
             if (!member) {
-                NSString *user = [self.members objectAtIndex:indexPath.row];
+                NSString *user = [memberList objectAtIndex:indexPath.row - 1];
                 NSString *firstname = [self.group firstnameForGroupMember:user];
                 
                 if (firstname) {
@@ -447,8 +461,10 @@
 {
     if (userType == 1 && indexPath.section == 1) {
         SCUserProfile *userProfile = [SCUserProfile currentUser];
-        
-        if([userProfile.userid isEqualToString:[self.members objectAtIndex:indexPath.row]]){
+        if (indexPath.row == 0) {
+            return NO;
+        }
+        else if([userProfile.userid isEqualToString:[memberList objectAtIndex:indexPath.row - 1]]){
             return NO;
         }
         else{
@@ -629,15 +645,30 @@
         WUMediaController *mv = (WUMediaController *)[segue destinationViewController];
         mv.targetUserid = [self.group groupid];
     }
+    else if ([[segue identifier] isEqualToString:@"AddFriend"]){
+        WUUserSelectionController *cvc = (WUUserSelectionController *)[segue destinationViewController];
+        cvc.delegate = self;
+        if(self.members){
+            [cvc setSelectedAccount:memberList];
+        }
+    }
     else{
         [super prepareForSegue:segue sender:sender];
     }
 }
 
+
+
+
 -(void)saveGroup{
     [self editEnded];
     [self.group setGroupName: [groupInfo objectForKey:@"topic"]];
     [self.group setGroupdata:[groupInfo objectForKey:@"topicDescription"] forKey:@"topicDesc" public:YES];
+    
+    for (int i = 0; i < newMemberList.count; i++) {
+        [self.group addGroupMember:[newMemberList objectAtIndex:i]];
+    }
+    
     [self.group saveGroupWithCompletionHandler:^(BOOL success){
         DataRequest *dataRequest = [[DataRequest alloc] init];
         dataRequest.requestName = @"updateGroupInfo";
@@ -645,6 +676,8 @@
         
         WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
         [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(updateGroupInfo:error:)];
+        
+        
         
     }];
     [self.group setGroupImage:groupImg withCompletionHandler:nil];
@@ -657,6 +690,29 @@
         
     }
     else {
+        if (newMemberList.count > 0) {
+            DataRequest* datRequest = [[DataRequest alloc] init];
+            NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+            
+            for (int i = 0; i < newMemberList.count; i++) {
+                NSDictionary* friendInfo = [[C2CallPhone currentPhone] getUserInfoForUserid:[newMemberList objectAtIndex:i]];
+                NSString* memberid = [friendInfo objectForKey:@"Email"];
+                memberid = [[memberid componentsSeparatedByString:@"@"] objectAtIndex:0];
+                [data setValue:memberid forKey:[NSString stringWithFormat:@"memberID%d", i + 1]];
+            }
+            
+            [data setValue:[NSNumber numberWithInteger:newMemberList.count] forKey:@"memberCnt"];
+            
+            [data setValue:[groupInfo objectForKey:@"groupID"] forKey:@"groupID"];
+            datRequest.values = data;
+            datRequest.requestName = @"addGroupMembers";
+            
+            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+            [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(addGroupUserResponse:error:)];
+            
+        }
+        
+        
         [self.activityView stopAnimating];
         [self.navigationController popViewControllerAnimated:YES];
         
@@ -742,8 +798,6 @@
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readGroupInfo:error:)];
     [self showChatForUserid:self.group.groupid];
-
-
 }
 
 
@@ -915,4 +969,15 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+
+-(void)selectedUsersUpdated:(NSArray*)users{
+    for (int i = 0; i < users.count; i++) {
+        [memberList addObject:[users objectAtIndex:i]];
+        [newMemberList addObject:[users objectAtIndex:i]];
+    }
+    [self.tableView reloadData];
+}
+
+
 @end

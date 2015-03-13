@@ -9,6 +9,7 @@
 #import <SocialCommunication/SocialCommunication.h>
 #import "WUInterestViewController.h"
 #import "WULocationSearchController.h"
+#import "WUUserSelectionController.h"
 #import <SocialCommunication/C2TapImageView.h>
 
 @interface WUGroupDetailCellEdit : UITableViewCell
@@ -51,7 +52,7 @@
 
 
 
-@interface WUGroupDetailController : SCGroupDetailController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WULocationSelectControllerDelegate, UITextFieldDelegate>
+@interface WUGroupDetailController : SCGroupDetailController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, WUInterestViewControllerDelegate, WULocationSelectControllerDelegate, UITextFieldDelegate, WUUserSelectClientDelegate>
 
 - (IBAction)btnPhotoTapped:(id)sender;
 - (IBAction)btnIsPublicTapped:(id)sender;

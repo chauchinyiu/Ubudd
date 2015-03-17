@@ -23,7 +23,6 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
--(IBAction)addToFriend:(id)sender;
 -(IBAction)showFriendInfo:(id)sender;
 
 @end

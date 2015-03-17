@@ -121,7 +121,6 @@ typedef enum : NSUInteger {
     }
     [self.chatboard.tableView reloadData];
     boardTitle = [self.titleButton titleForState:UIControlStateNormal];
-    
 }
 
 
@@ -406,5 +405,8 @@ typedef enum : NSUInteger {
         [self.recordButton setHidden:NO];
     }
 }
+
+
+
 
 @end

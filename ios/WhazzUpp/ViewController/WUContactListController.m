@@ -54,9 +54,21 @@
     return self;
 }
 
+- (void)customizeUI {
+    [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_off"]];
+    [[[self.tabBarController.viewControllers objectAtIndex:1] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_status_icon_off"]];
+    
+    [[[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_off"]];
+    
+    [[[self.tabBarController.viewControllers objectAtIndex:3] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_more_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_more_icon_off"]];
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self customizeUI];
     
     resHandler = [ResponseHandler instance];
     
@@ -223,18 +235,7 @@
             favocell.nameLabel.text = accRecord.name;
         }
         
-        if([[NSUserDefaults standardUserDefaults] boolForKey:accRecord.c2CallID]){
-            favocell.statusLabel.text = NSLocalizedString(@"Added to favorites", @"");
-            [favocell.addButton setHidden:YES];
-            [favocell.addButton2 setHidden:YES];
-        }
-        else{
-            favocell.statusLabel.text = NSLocalizedString(@"Using Ubudd", @"");
-            favocell.addButton.tag = indexPath.row;
-            favocell.addButton2.tag = indexPath.row;
-            [favocell.addButton setHidden:NO];
-            [favocell.addButton2 setHidden:NO];
-        }
+        favocell.statusLabel.text = NSLocalizedString(@"Using Ubudd", @"");
         favocell.userBtn.tag = indexPath.row;
         favocell.userBtn2.tag = indexPath.row;
         
@@ -282,8 +283,6 @@
         //favocell.statusLabel.text = phone;
         favocell.statusLabel.text = @"";
         [favocell.userImg setHidden:YES];
-        [favocell.addButton setHidden:YES];
-        [favocell.addButton2 setHidden:YES];
         [favocell.userBtn setHidden:YES];
     }
     

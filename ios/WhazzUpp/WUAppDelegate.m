@@ -20,7 +20,7 @@
 
 #import "WUFavoritesViewController.h"
 #import "WURegistrationController.h"
-
+#import "WUPhotoViewController.h"
 
 @interface WUAppDelegate ()
 
@@ -163,7 +163,7 @@
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSDate* lastupdate = [[NSUserDefaults standardUserDefaults] objectForKey:@"interestRefreshTime"];
-    int tVersion = [[NSUserDefaults standardUserDefaults] integerForKey:@"RefreshVersion"] ;
+    int tVersion = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"RefreshVersion"] ;
     if (lastupdate == nil || [lastupdate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedAscending || tVersion < kRefreshVersion) {
         [[ResponseHandler instance] readInterests];
         [[NSUserDefaults standardUserDefaults] setInteger:kRefreshVersion forKey:@"RefreshVersion"];
@@ -221,6 +221,64 @@
             [alert show];
         }
     }
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
+    NSUInteger orientations = UIInterfaceOrientationMaskPortrait;
+    
+    
+    
+    if(self.window.rootViewController){
+        UIViewController *vc = [self findBestViewController: self.window.rootViewController];
+        if([vc isKindOfClass:[WUPhotoViewController class]]){
+            orientations = UIInterfaceOrientationMaskAllButUpsideDown;
+        }
+    }
+    
+    return orientations;
+}
+
+-(UIViewController*) findBestViewController:(UIViewController*)vc {
+    
+    if (vc.presentedViewController) {
+        
+        // Return presented view controller
+        return [self findBestViewController:vc.presentedViewController];
+        
+    } else if ([vc isKindOfClass:[UISplitViewController class]]) {
+        
+        // Return right hand side
+        UISplitViewController* svc = (UISplitViewController*) vc;
+        if (svc.viewControllers.count > 0)
+            return [self findBestViewController:svc.viewControllers.lastObject];
+        else
+            return vc;
+        
+    } else if ([vc isKindOfClass:[UINavigationController class]]) {
+        
+        // Return top view
+        UINavigationController* svc = (UINavigationController*) vc;
+        if (svc.viewControllers.count > 0)
+            return [self findBestViewController:svc.topViewController];
+        else
+            return vc;
+        
+    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+        
+        // Return visible view
+        UITabBarController* svc = (UITabBarController*) vc;
+        if (svc.viewControllers.count > 0)
+            return [self findBestViewController:svc.selectedViewController];
+        else
+            return vc;
+        
+    } else {
+        
+        // Unknown view controller type, return last child view controller
+        return vc;
+        
+    }
+    
 }
 
 #pragma mark -

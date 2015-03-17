@@ -121,6 +121,7 @@ typedef enum : NSUInteger {
     }
     [self.chatboard.tableView reloadData];
     boardTitle = [self.titleButton titleForState:UIControlStateNormal];
+    
 }
 
 
@@ -133,6 +134,7 @@ typedef enum : NSUInteger {
         self.chatInputCornerRadius = 8.;
         self.chatInputBorderColor = [UIColor colorWithRed:228./256. green:228./256. blue:228./256. alpha:1.];
         self.dontShowCallEvents = YES;
+        
     }
     return self;
 }
@@ -145,6 +147,7 @@ typedef enum : NSUInteger {
         self.chatInputCornerRadius = 8.;
         self.chatInputBorderColor = [UIColor colorWithRed:228./256. green:228./256. blue:228./256. alpha:1.];
         self.dontShowCallEvents = YES;
+        
     }
     return self;
 }
@@ -184,6 +187,8 @@ typedef enum : NSUInteger {
     }
     
     self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
+    
+    
     [self.submitButton setHidden:YES];
     [self.recordButton setHidden:NO];
     [self.lblRecording setHidden:YES];

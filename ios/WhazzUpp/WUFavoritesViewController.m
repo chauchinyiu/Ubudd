@@ -101,7 +101,7 @@
         [dictionary setValue:a.phoneNo forKey:[NSString stringWithFormat:@"phoneNo%d", i]];
         
     }
-    [dictionary setValue:[NSNumber numberWithInt:[ubuddListSection count]] forKey:@"phoneNoCnt"];
+    [dictionary setValue:[NSNumber numberWithInt:(int)[ubuddListSection count]] forKey:@"phoneNoCnt"];
     
     DataRequest *dataRequest = [[DataRequest alloc] init];
     dataRequest.requestName = @"readUserStatus";
@@ -316,7 +316,7 @@
         else{
             accRecord = [ubuddListSection objectAtIndex:indexPath.row];
         }
-        int favCnt = [[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
+        int favCnt = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
         favCnt--;
         [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:accRecord.c2CallID];

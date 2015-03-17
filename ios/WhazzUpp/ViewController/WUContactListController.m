@@ -299,7 +299,7 @@
     else{
         accRecord = [ubuddListSection objectAtIndex:((UIButton*)sender).tag];
     }
-    int favCnt = [[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
+    int favCnt = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
     favCnt++;
     NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
     [ud setInteger:favCnt forKey:@"FavCount"];

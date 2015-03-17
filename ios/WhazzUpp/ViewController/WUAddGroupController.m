@@ -239,7 +239,7 @@
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
         SCGroupAddMembersCell* c = (SCGroupAddMembersCell*)[super tableView:tableView cellForRowAtIndexPath:indexPath];
-        [c.numMembers setText:[NSString stringWithFormat:@"(%d of 199)", self.members.count]];
+        [c.numMembers setText:[NSString stringWithFormat:@"(%d of 199)", (int)self.members.count]];
         return c;
     }
     else{

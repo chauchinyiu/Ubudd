@@ -21,14 +21,11 @@
 
 
 @implementation WUUserInfoCell
-@synthesize lblGender, lblDateOfBirth, lblInterest, lblSubinterest, lblTelNo;
+@synthesize lblDateOfBirth, lblTelNo;
 @end
 
 @interface WUFriendDetailController(){
-    bool genderFemale;
-    int interestID;
     NSDate* dob;
-    NSString* subInterest;
     NSString* countryCode;
     NSString* phoneNo;
     NSString* status;
@@ -97,10 +94,7 @@ static NSString* currentPhoneNo = @"";
         
     }
     else {
-        interestID = [[res.data objectForKey:@"interestID"] integerValue];
-        subInterest = [res.data objectForKey:@"interestDescription"];
         dob = [res.data objectForKey:@"dob"];
-        genderFemale = [(NSString*)[res.data objectForKey:@"gender"] isEqualToString:@"F"];
         countryCode = [res.data objectForKey:@"countryCode"];
         status = [res.data objectForKey:@"status"];
         
@@ -117,13 +111,9 @@ static NSString* currentPhoneNo = @"";
         else{
             [profileCell.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
             
-            [profileCell.lblGender setText:(genderFemale ? NSLocalizedString(@"Female", @"") : NSLocalizedString(@"Male", @""))];
             [profileCell.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
                                                                      dateStyle:NSDateFormatterMediumStyle
                                                                      timeStyle:NSDateFormatterNoStyle]];
-            [profileCell.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
-            [profileCell.lblSubinterest setText:subInterest];
-            
         }
     }
 }
@@ -201,12 +191,9 @@ static NSString* currentPhoneNo = @"";
         [c.favoriteImage setHidden:YES];
         [c.facebookImage setHidden:YES];
         [c.email setHidden:YES];
-        [c.lblGender setText:(genderFemale ? NSLocalizedString(@"Female", @"") : NSLocalizedString(@"Male", @""))];
         [c.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
                                                                  dateStyle:NSDateFormatterMediumStyle
                                                                  timeStyle:NSDateFormatterNoStyle]];
-        [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
-        [c.lblSubinterest setText:subInterest];
         [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
         profileCell = c;
     }
@@ -233,12 +220,9 @@ static NSString* currentPhoneNo = @"";
         [c.favoriteImage setHidden:YES];
         [c.facebookImage setHidden:YES];
         [c.email setHidden:YES];
-        [c.lblGender setText:(genderFemale ? NSLocalizedString(@"Female", @"") : NSLocalizedString(@"Male", @""))];
         [c.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
                                                                  dateStyle:NSDateFormatterMediumStyle
                                                                  timeStyle:NSDateFormatterNoStyle]];
-        [c.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
-        [c.lblSubinterest setText:subInterest];
         [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
         [c.userStatus setText:status];
         profileCell = c;
@@ -252,7 +236,7 @@ static NSString* currentPhoneNo = @"";
     
 -(IBAction)chat:(id)sender
 {
-    int idx = [self.navigationController.viewControllers indexOfObject:self];
+    int idx = (int)[self.navigationController.viewControllers indexOfObject:self];
     if (idx != NSNotFound && idx > 0) {
         UIViewController *previousController = [self.navigationController.viewControllers objectAtIndex:idx - 1];
         if ([previousController isKindOfClass:[WUChatController class]]) {

@@ -34,7 +34,7 @@
         loc.latitude = [ud floatForKey:@"searchLat"];
         loc.longitude = [ud floatForKey:@"searchLong"];
         locName = [ud stringForKey:@"searchLoc"];
-        searchDist = [ud integerForKey:@"searchDist"];
+        searchDist = (int)[ud integerForKey:@"searchDist"];
     }
     else{
         loc.latitude = 999;
@@ -95,7 +95,7 @@
         default:
             break;
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%dKm", [cell tag]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%dKm", (int)[cell tag]];
     if ([cell tag] == searchDist) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
@@ -107,7 +107,7 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    searchDist = [cell tag];
+    searchDist = (int)[cell tag];
     [self saveSelection];
     [self refreshGUI];
 }

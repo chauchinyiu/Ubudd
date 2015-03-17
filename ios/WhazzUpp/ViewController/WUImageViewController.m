@@ -23,10 +23,17 @@
     imageFrame.maximumZoomScale = 6.0;
     imageFrame.contentSize = imageView.frame.size;
     [imageFrame scrollRectToVisible:imageView.frame animated:NO];
+
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageClicked)];
+    singleTap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:singleTap];
     
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageClicked)];
-    doubleTap.numberOfTapsRequired = 1;
+
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageDblClicked)];
+    doubleTap.numberOfTapsRequired = 2;
     [self.view addGestureRecognizer:doubleTap];
+    
+    [singleTap requireGestureRecognizerToFail:doubleTap];
     
 }
 
@@ -78,6 +85,31 @@
     
     
 }
+
+-(void)imageDblClicked{
+
+    CGSize scrollViewSize = imageFrame.bounds.size;
+    CGFloat w;
+    CGFloat h;
+    CGFloat x;
+    CGFloat y;
+    if (imageFrame.zoomScale > 1.0f) {
+        w = scrollViewSize.width;
+        h = scrollViewSize.height;
+        x = (w / 2.0f);
+        y = (h / 2.0f);
+    }
+    else{
+        
+        w = scrollViewSize.width / 2.0f;
+        h = scrollViewSize.height / 2.0f;
+        x = scrollViewSize.width / 4.0f;
+        y = scrollViewSize.height / 4.0f;
+    }
+    CGRect rectToZoomTo = CGRectMake(x, y, w, h);
+    [imageFrame zoomToRect:rectToZoomTo animated:YES];
+}
+
 
 /*
 #pragma mark - Navigation

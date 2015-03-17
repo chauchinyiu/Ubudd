@@ -75,9 +75,9 @@ static ResponseHandler *myInstance;
     self.friendList = [[NSMutableArray alloc] init];
     NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
     
-    int tVersion = [u integerForKey:@"RefreshVersion"];
+    int tVersion = (int)[u integerForKey:@"RefreshVersion"];
     if (tVersion >= kRefreshVersion) {
-        int friendCnt = [u integerForKey:@"friendCnt"];
+        int friendCnt = (int)[u integerForKey:@"friendCnt"];
         for (int i = 0; i < friendCnt; i++) {
             WUAccount* a = [[WUAccount alloc] init];
             a.c2CallID = [u valueForKey:[NSString stringWithFormat:@"friendID%d", i]];
@@ -189,7 +189,7 @@ static ResponseHandler *myInstance;
     }
     else {
         self.interestList = [[NSMutableArray alloc] init];
-        int rowCnt = [[res.data objectForKey:@"rowCnt"] integerValue];
+        int rowCnt = (int)[[res.data objectForKey:@"rowCnt"] integerValue];
         for (int i = 0; i < rowCnt; i++) {
             interestDat *objint = [[interestDat alloc] init];
             objint.interestID = [(NSNumber*)[res.data objectForKey:[NSString stringWithFormat: @"id%d", i]] intValue];
@@ -286,7 +286,7 @@ static ResponseHandler *myInstance;
     for (int i = 0; i < [phoneArray count]; i++) {
         [dictionary setValue:[phoneArray objectAtIndex:i] forKey:[NSString stringWithFormat:@"phoneNo%d", i]];
     }
-    [dictionary setValue:[NSNumber numberWithInt:[phoneArray count]] forKey:@"phoneNoCnt"];
+    [dictionary setValue:[NSNumber numberWithInt:(int)[phoneArray count]] forKey:@"phoneNoCnt"];
     if (fIndex + 30 < CFArrayGetCount(peopleMutable)) {
         [dictionary setValue:[NSNumber numberWithInt:fIndex + 30] forKey:@"toPhoneNoIndex"];
     }

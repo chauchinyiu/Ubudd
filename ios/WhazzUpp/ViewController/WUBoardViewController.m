@@ -171,7 +171,7 @@
     [fetchRequest setFetchOffset:0];
     
     NSError *error = nil;
-    int numElements = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
+    int numElements = (int)[self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
     int offset = MAX(0, numElements - fetchLimit);
     
     [fetchRequest setFetchLimit:fetchLimit];
@@ -370,11 +370,11 @@
     
     
     @try {
-        int sections = [self.tableView numberOfSections];
+        int sections = (int)[self.tableView numberOfSections];
         if (sections == 0)
             return;
         
-        int rows = [self.tableView numberOfRowsInSection:sections - 1];
+        int rows = (int)[self.tableView numberOfRowsInSection:sections - 1];
         
         if (rows == 0)
             return;
@@ -412,8 +412,8 @@
     double delayInSeconds = 0.05;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        int section = self.tableView.numberOfSections - 1;
-        int row =  [self.tableView numberOfRowsInSection:section] - 1;
+        int section = (int)self.tableView.numberOfSections - 1;
+        int row =  (int)[self.tableView numberOfRowsInSection:section] - 1;
         if (section >= 0 && row >= 0)
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     });
@@ -2519,7 +2519,7 @@
     }
     @catch (NSException * e) {
         [self.tableView reloadData];
-        NSLog(@"2:Exception : cellForRowAtIndexPath %d / %d \n %@", indexPath.section, indexPath.row, e);
+        NSLog(@"2:Exception : cellForRowAtIndexPath %d / %d \n %@", (int)indexPath.section, (int)indexPath.row, e);
         UITableViewCell *dummyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         dummyCell.contentView.hidden = YES;
         return dummyCell;
@@ -2778,7 +2778,7 @@
 
 -(IBAction)previousMessages:(id)sender
 {
-    int fetchedObectsCount = [[self.fetchedResultsController fetchedObjects] count];
+    int fetchedObectsCount = (int)[[self.fetchedResultsController fetchedObjects] count];
     fetchLimit = MAX(fetchedObectsCount, fetchLimit);
     
     fetchLimit += fetchSize;

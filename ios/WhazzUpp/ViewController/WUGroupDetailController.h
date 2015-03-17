@@ -27,7 +27,7 @@
 
 @interface WUGroupDetailCellReadOnly : UITableViewCell
     @property(nonatomic, weak) IBOutlet UIImageView *groupImg;
-    @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic, *lblHost, *lblMemberCnt, *lblJoinStatus;
+    @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic, *lblHost,  *lblJoinStatus;
 @end
 
 @interface WUGroupViewMediaCell : UITableViewCell
@@ -47,6 +47,10 @@
 @end
 
 @interface WUGroupMemberCell : UITableViewCell
+@end
+
+@interface WUGroupMemberCntHeaderCell : UITableViewCell
+@property(nonatomic, weak) IBOutlet UILabel *lblMemberCnt;
 @end
 
 

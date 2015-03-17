@@ -235,7 +235,7 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (fetchResult) {
-        if (((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row ]]).intValue == 4) {
+        if (((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", (int)indexPath.row ]]).intValue == 4) {
             return 0;
         }
     }
@@ -247,11 +247,11 @@
 {
     WUUbuddListCell *favocell = (WUUbuddListCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     
-    if (((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", indexPath.row ]]).intValue == 4) {
+    if (((NSNumber*)[fetchResult objectForKey:[NSString stringWithFormat:@"isMember%d", (int)indexPath.row ]]).intValue == 4) {
         [favocell setHidden:YES];
         return favocell;
     }
-    SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]]];
+    SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", (int)indexPath.row ]]];
     
     favocell.nameLabel.font = [CommonMethods getStdFontType:0];
     favocell.statusLabel.font = [CommonMethods getStdFontType:2];
@@ -260,10 +260,10 @@
     favocell.hostLabel.font = [CommonMethods getStdFontType:2];
     favocell.hostLabel.font = [CommonMethods getStdFontType:2];
             
-    favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", indexPath.row]];
-    favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", indexPath.row]];
-    favocell.hostLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", indexPath.row]];
-    NSNumber* memberCnt = [fetchResult objectForKey:[NSString stringWithFormat:@"memberCnt%d", indexPath.row]];
+    favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]];
+    favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", (int)indexPath.row]];
+    favocell.hostLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)indexPath.row]];
+    NSNumber* memberCnt = [fetchResult objectForKey:[NSString stringWithFormat:@"memberCnt%d", (int)indexPath.row]];
     favocell.memberLabel.text = [NSString stringWithFormat:@"%d OF 200", memberCnt.intValue + 1];
     
     
@@ -288,7 +288,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
     
-    [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
+    [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", (int)indexPath.row]]];
     
     
 }
@@ -297,7 +297,7 @@
 {
     DLog(@"accessoryButtonTappedForRowWithIndexPath : %d / %d", indexPath.section, indexPath.row);
     
-    [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row]]];
+    [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", (int)indexPath.row]]];
 }
 
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -331,7 +331,7 @@
         loc.latitude = [ud floatForKey:@"searchLat"];
         loc.longitude = [ud floatForKey:@"searchLong"];
         locName = [ud stringForKey:@"searchLoc"];
-        searchDist = [ud integerForKey:@"searchDist"];
+        searchDist = (int)[ud integerForKey:@"searchDist"];
     }
     else{
         loc.latitude = 999;

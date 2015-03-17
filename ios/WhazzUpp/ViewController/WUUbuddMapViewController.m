@@ -266,7 +266,7 @@
         loc.latitude = [ud floatForKey:@"searchLat"];
         loc.longitude = [ud floatForKey:@"searchLong"];
         locName = [ud stringForKey:@"searchLoc"];
-        searchDist = [ud integerForKey:@"searchDist"];
+        searchDist = (int)[ud integerForKey:@"searchDist"];
     }
     else{
         loc.latitude = 999;

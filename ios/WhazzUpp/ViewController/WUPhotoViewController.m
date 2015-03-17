@@ -13,6 +13,8 @@
 @interface WUPhotoViewController (){
     NSArray* pages;
     int initPageIndex;
+    UIBarButtonItem* titleLabel;
+    
 }
 @end
 
@@ -26,15 +28,23 @@
     //self.navigationController.navigationBar.shadowImage = [UIImage new];
     //self.navigationController.navigationBar.alpha = 0.5;
     
+    titleLabel = [[UIBarButtonItem alloc] init];
+    titleLabel.tintColor = [UIColor blackColor];
+    self.navigationItem.rightBarButtonItem = titleLabel;
+    
     WUImageViewController *startingPage = [self GetViewControllerForPage:initPageIndex];
     if (startingPage != nil)
     {
         self.dataSource = self;
+        self.delegate = self;
         
         [self setViewControllers:@[startingPage]
                        direction:UIPageViewControllerNavigationDirectionForward
                         animated:NO
                       completion:nil];
+        
+        titleLabel.title = [NSString stringWithFormat:@"%d / %d", initPageIndex + 1, (int)pages.count];
+
     }
 }
 
@@ -46,6 +56,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed{
+    if (completed) {
+        WUImageViewController* vc = [self.viewControllers objectAtIndex:0];
+        titleLabel.title = [NSString stringWithFormat:@"%d / %d", vc.pageID + 1, (int)pages.count];
+        
+    }
 }
 
 /*
@@ -65,6 +83,7 @@
         NSDictionary* info = [pages objectAtIndex:i];
         if ([imageKey isEqualToString:[info objectForKey:@"image"]]) {
             initPageIndex = i;
+
         }
     }
 }
@@ -93,16 +112,18 @@
 
 #pragma mark - UIPageViewControllerDelegate
 
+
+
 - (UIViewController *)pageViewController:(UIPageViewController *)pvc viewControllerBeforeViewController:(WUImageViewController *)vc
 {
     NSUInteger index = vc.pageID;
-    return [self GetViewControllerForPage:(index - 1)];
+    return [self GetViewControllerForPage:((int)index - 1)];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pvc viewControllerAfterViewController:(WUImageViewController *)vc
 {
     NSUInteger index = vc.pageID;
-    return [self GetViewControllerForPage:(index + 1)];
+    return [self GetViewControllerForPage:((int)index + 1)];
 }
 
 @end

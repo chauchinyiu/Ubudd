@@ -130,11 +130,11 @@
     WUJoinRequestListCell *favocell = (WUJoinRequestListCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUJoinRequestListCell"];
     [favocell.userBtn setTag:indexPath.row];
     
-    NSString* requestUserID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", indexPath.row ]];
+    NSString* requestUserID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", (int)indexPath.row ]];
     
     
-    favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", indexPath.row]];
-    favocell.groupLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", indexPath.row]];
+    favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)indexPath.row]];
+    favocell.groupLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]];
    
     NSDictionary* userData = [[C2CallPhone currentPhone] getUserInfoForUserid:requestUserID];
     
@@ -163,15 +163,15 @@
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        NSString* groupID = [fetchResult objectForKey:[NSString stringWithFormat:@"groupC2CallID%d", [alertView tag]]];
-        NSString* userID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", [alertView tag]]];
+        NSString* groupID = [fetchResult objectForKey:[NSString stringWithFormat:@"groupC2CallID%d", (int)[alertView tag]]];
+        NSString* userID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", (int)[alertView tag]]];
         SCGroup *group = [[SCGroup alloc] initWithGroupid:groupID];
         [group addGroupMember:userID];
         [group saveGroupWithCompletionHandler:^(BOOL success){
             DataRequest* datRequest = [[DataRequest alloc] init];
             NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-            [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"msisdn%d", [alertView tag]]] forKey:@"userID"];
-            [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"groupID%d", [alertView tag]]] forKey:@"groupID"];
+            [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"msisdn%d", (int)[alertView tag]]] forKey:@"userID"];
+            [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"groupID%d", (int)[alertView tag]]] forKey:@"groupID"];
             datRequest.values = data;
             datRequest.requestName = @"acceptRequest";
             
@@ -183,8 +183,8 @@
     else if(buttonIndex == 2){
         DataRequest* datRequest = [[DataRequest alloc] init];
         NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-        [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"msisdn%d", [alertView tag]]] forKey:@"userID"];
-        [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"groupID%d", [alertView tag]]] forKey:@"groupID"];
+        [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"msisdn%d", (int)[alertView tag]]] forKey:@"userID"];
+        [data setValue:[fetchResult objectForKey:[NSString stringWithFormat:@"groupID%d", (int)[alertView tag]]] forKey:@"groupID"];
         datRequest.values = data;
         datRequest.requestName = @"rejectRequest";
         
@@ -246,11 +246,11 @@
     if([segue.identifier isEqualToString:@"RequestUserDetail"]) {
         NSMutableDictionary* userData = [[NSMutableDictionary alloc] init];
         
-        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", [sender tag]]] forKey:@"userName"];
-        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"interestID%d", [sender tag]]] forKey:@"interestID"];
-        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"interestDescription%d", [sender tag]]] forKey:@"interestDescription"];
-        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"dob%d", [sender tag]]] forKey:@"dob"];
-        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"gender%d", [sender tag]]] forKey:@"gender"];
+        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)[sender tag]]] forKey:@"userName"];
+        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"interestID%d", (int)[sender tag]]] forKey:@"interestID"];
+        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"interestDescription%d", (int)[sender tag]]] forKey:@"interestDescription"];
+        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"dob%d", (int)[sender tag]]] forKey:@"dob"];
+        [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"gender%d", (int)[sender tag]]] forKey:@"gender"];
         
         WURequestUserDetailController *controller = (WURequestUserDetailController *)segue.destinationViewController;
         controller.userData = userData;

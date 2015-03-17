@@ -133,7 +133,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog([NSString stringWithFormat:@"%@, %d, %d", (hasBroadcast ? @"a" : @"b"), [super tableView:tableView numberOfRowsInSection:section], broadcastIdx]);
+    NSLog([NSString stringWithFormat:@"%@, %d, %d", (hasBroadcast ? @"a" : @"b"), (int)[super tableView:tableView numberOfRowsInSection:section], broadcastIdx]);
     return [super tableView:tableView numberOfRowsInSection:section] + (hasRequest ? 1: 0) + (hasBroadcast ? 1 : 0);
 }
 
@@ -186,7 +186,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog([NSString stringWithFormat:@"%@, row %d, %d", (hasBroadcast ? @"a" : @"b"), indexPath.row, broadcastIdx]);
+    NSLog([NSString stringWithFormat:@"%@, row %d, %d", (hasBroadcast ? @"a" : @"b"), (int)indexPath.row, broadcastIdx]);
 
     
     if (hasRequest && indexPath.row == 0) {
@@ -492,7 +492,7 @@
     if ([ResponseHandler instance].broadcastList.count > 0) {
         hasBroadcast = YES;
         BOOL isEarlier = NO;
-        broadcastIdx = self.fetchedResultsController.fetchedObjects.count;
+        broadcastIdx = (int)self.fetchedResultsController.fetchedObjects.count;
         for (int i = 0; i < self.fetchedResultsController.fetchedObjects.count; i++) {
             if(!isEarlier){
                 MOChatHistory *chathist = [self.fetchedResultsController.fetchedObjects objectAtIndex:i];

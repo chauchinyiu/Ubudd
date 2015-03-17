@@ -1896,6 +1896,13 @@ static BOOL isGroup = YES;
             WUImageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
             
             cell.eventImage.image = [UIImage imageWithData:b.imgData];
+            [cell.progress setHidden:YES];
+            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
+                                                                      locale:[NSLocale currentLocale]];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:formatString];
+            cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:b.postTime]];            
+            
             [cell setTapAction:^{
                 NSMutableArray *imageList = [NSMutableArray array];
                 for (int i = 0; i < [ResponseHandler instance].broadcastList.count; i++) {
@@ -1911,7 +1918,7 @@ static BOOL isGroup = YES;
                 NSString * storyboardName = @"MainStoryboard";
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
                 WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
-                [vc showPhotos:imageList currentPhoto:[NSString stringWithFormat:@"%d", indexPath.row]];
+                [vc showPhotos:imageList currentPhoto:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
                 [self.navigationController pushViewController:vc animated:YES];
                 
             }];

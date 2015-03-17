@@ -33,6 +33,10 @@
 @implementation WUGroupDetailCellReadOnly
 @end
 
+@implementation WUGroupMemberCntHeaderCell
+@end
+
+
 @interface WUGroupDetailController (){
     int userType;
     NSMutableDictionary* groupInfo;
@@ -41,6 +45,7 @@
     NSMutableArray* friendList;
     NSMutableArray* memberList;
     NSMutableArray* newMemberList;
+    NSString* currentAction;
 }
 @property(nonatomic, strong) SCGroup *group;
 @property(nonatomic, strong) NSArray *members;
@@ -144,10 +149,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         if (userType == 1) {
-            return 320;
+            return 290;
         }
         else{
-            return 320;
+            return 290;
         }
     }
     else if(indexPath.section == 2){
@@ -172,9 +177,33 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10;
+    if (section == 0) {
+        return 0.1;
+    }
+    else if (section == 1) {
+        return 30;
+    }
+    else{
+        return 10;
+    }
 }
 
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        WUGroupMemberCntHeaderCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupMemberCntHeaderCell"];
+        NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
+        [cell.lblMemberCnt setText:[NSString stringWithFormat:NSLocalizedString(@"Members X OF 200", @""), memberCnt.intValue + 1]];
+
+        return cell;
+    }
+    else{
+        UIView* v = [super tableView:tableView viewForHeaderInSection:section];
+        [v setHidden:YES];
+        return v;
+    }
+}
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -227,7 +256,7 @@
                 [cell.txtTopicEdit setText:[groupInfo objectForKey:@"topic"]];
                 [cell.txtTopic2Edit setText:[groupInfo objectForKey:@"topicDescription"]];
 
-                int interestID = [[groupInfo objectForKey:@"interestID"] integerValue];
+                int interestID = (int)[[groupInfo objectForKey:@"interestID"] integerValue];
                 [cell.btnInterestEdit setTitle:[[ResponseHandler instance] getInterestNameForID:interestID] forState:UIControlStateNormal];
                 [cell.txtSubInterestEdit setText:[groupInfo objectForKey:@"interestDescription"]];
                 
@@ -240,8 +269,6 @@
                 else{
                     [cell.btnIsPublicEdit setTitle:NSLocalizedString(@"Private", @"") forState:UIControlStateNormal];
                 }
-                NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
-                [cell.lblMemberCntEdit setText:[NSString stringWithFormat:NSLocalizedString(@"Members X OF 200", @""), memberCnt.intValue + 1]];
                 
             }
             editCell = cell;
@@ -258,7 +285,7 @@
                 [cell.lblTopic setText:[groupInfo objectForKey:@"topic"]];
                 [cell.lblTopicDesc setText:[groupInfo objectForKey:@"topicDescription"]];
                 
-                int interestID = [[groupInfo objectForKey:@"interestID"] integerValue];
+                int interestID = (int)[[groupInfo objectForKey:@"interestID"] integerValue];
                 [cell.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
                 [cell.lblSubinterest setText:[groupInfo objectForKey:@"interestDescription"]];
                 
@@ -272,8 +299,6 @@
                     [cell.lblPublic setText:NSLocalizedString(@"Private", @"")];
                 }
                 
-                NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
-                [cell.lblMemberCnt setText:NSLocalizedString(@"Members X OF 200", @"")];
                 
                 [cell.lblHost setText:[groupInfo objectForKey:@"userName"]];
                 
@@ -841,17 +866,13 @@
 }
 
 - (IBAction)btnDeleteTapped:(id)sender{
-    MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.groupid];
-    [[SCDataManager instance] removeDatabaseObject:user];
-    
-    DataRequest* datRequest = [[DataRequest alloc] init];
-    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-    [data setValue:[groupInfo objectForKey:@"groupID"] forKey:@"groupID"];
-    datRequest.values = data;
-    datRequest.requestName = @"deleteGroup";
-    
-    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(deleteGroupResponse:error:)];
+    currentAction = @"Delete Group";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete this group", @"")
+                                                    message:NSLocalizedString(@"Do you really want to delete this group", @"")
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"No", @"")
+                                          otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
+    [alert show];
 }
 
 
@@ -877,6 +898,7 @@
 
 
 - (IBAction)btnBlockMemberTapped:(id)sender{
+    currentAction = @"Block";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Blocking a member", @"")
                                                     message:NSLocalizedString(@"Do you really want to blocked this member", @"")
                                                    delegate:self
@@ -885,25 +907,46 @@
     [alert setTag:((UIButton*)sender).tag];
     [alert show];
 }
+
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) {
-        SCGroup* tGroup = [[SCGroup alloc] initWithGroupid:self.groupid];
-        NSString *userid = [self.members objectAtIndex:[alertView tag]];
-        [tGroup removeMember:userid];
-        [tGroup saveGroupWithCompletionHandler:^(BOOL success){
+    if ([currentAction isEqualToString:@"Block"]) {
+        if (buttonIndex == 1) {
+            SCGroup* tGroup = [[SCGroup alloc] initWithGroupid:self.groupid];
+            NSString *userid = [self.members objectAtIndex:[alertView tag]];
+            [tGroup removeMember:userid];
+            [tGroup saveGroupWithCompletionHandler:^(BOOL success){
+                DataRequest* datRequest = [[DataRequest alloc] init];
+                NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+                [data setValue:userid forKey:@"c2CallID"];
+                datRequest.values = data;
+                datRequest.requestName = @"readUserInfo";
+                
+                WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+                [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(readBlockUserInfo:error:)];
+                
+            }];
+            
+            [self showActivityView];
+        }
+        
+    }
+    else{
+        if (buttonIndex == 1) {
+            MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.groupid];
+            [[SCDataManager instance] removeDatabaseObject:user];
+            
             DataRequest* datRequest = [[DataRequest alloc] init];
             NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-            [data setValue:userid forKey:@"c2CallID"];
+            [data setValue:[groupInfo objectForKey:@"groupID"] forKey:@"groupID"];
             datRequest.values = data;
-            datRequest.requestName = @"readUserInfo";
+            datRequest.requestName = @"deleteGroup";
             
             WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-            [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(readBlockUserInfo:error:)];
-            
-        }];
-        
-        [self showActivityView];
+            [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(deleteGroupResponse:error:)];
+        }
+    
     }
+    
 }
     
 - (void)readBlockUserInfo:(ResponseBase *)response error:(NSError *)error{

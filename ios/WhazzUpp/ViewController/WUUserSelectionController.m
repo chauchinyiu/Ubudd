@@ -160,7 +160,7 @@
         selectedIndex = ((NSNumber*)[searchIndexList objectAtIndex: indexPath.row]).intValue;
     }
     else{
-        selectedIndex = indexPath.row;
+        selectedIndex = (int)indexPath.row;
     }
     if (((NSNumber*)[selection objectAtIndex:selectedIndex]).boolValue) {
         [selection replaceObjectAtIndex:selectedIndex withObject:[NSNumber numberWithBool:NO]];

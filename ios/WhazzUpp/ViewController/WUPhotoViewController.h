@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <SocialCommunication/SocialCommunication.h>
 
-@interface WUPhotoViewController : UIPageViewController<UIPageViewControllerDataSource>
+@interface WUPhotoViewController : UIPageViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+
 
 -(void) showPhotos:(NSArray *) imageList currentPhoto:(NSString *) imageKey;
 

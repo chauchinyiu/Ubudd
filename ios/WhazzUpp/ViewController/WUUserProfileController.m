@@ -13,7 +13,6 @@
 #import "UpdateUserField.h"
 #import "WebServiceHandler.h"
 #import "ResponseHandler.h"
-#import "WUInterestViewController.h"
 #import "WUUserImageController.h"
 
 @interface WUUserProfileController (){
@@ -75,27 +74,7 @@
         [userImage setImage:userProfile.userImage];
         
         //read from user default
-        genderFemale = [self.userDefaults boolForKey:@"userIsFemale"];
-        if (genderFemale) {
-            [btnGender setTitle:NSLocalizedString(@"Female", @"") forState:UIControlStateNormal];
-        }
-        else{
-            [btnGender setTitle:NSLocalizedString(@"Male", @"") forState:UIControlStateNormal];
-        }
         
-        if ([self.userDefaults boolForKey:@"userHasInterest"]) {
-            interestID = [self.userDefaults integerForKey:@"userInterestID"];
-            [btnInterest setTitle:[[ResponseHandler instance] getInterestNameForID:interestID] forState:UIControlStateNormal];
-        }
-        else{
-            interestID = -1;
-            [btnInterest setTitle:@"" forState:UIControlStateNormal];
-        }
-
-        if ([self.userDefaults boolForKey:@"userHasSubInterest"]) {
-            txtSubInterest.text = [self.userDefaults objectForKey:@"userSubInterest"];
-        }
-
         if ([self.userDefaults boolForKey:@"userHasDOB"]) {
             dob = [self.userDefaults objectForKey:@"userDOB"];
             txtDateofBirth.text = [NSDateFormatter localizedStringFromDate:dob
@@ -149,20 +128,6 @@
     self.navigationController.navigationBar.translucent = NO;
 }
 
-- (IBAction)btnGenderTapped{
-    genderFemale = !genderFemale;
-    if (genderFemale) {
-        [btnGender setTitle:NSLocalizedString(@"Female", @"") forState:UIControlStateNormal];
-    }
-    else{
-        [btnGender setTitle:NSLocalizedString(@"Male", @"") forState:UIControlStateNormal];
-    }
-
-}
-
-- (IBAction)txtSubInterestDone{
-    [txtSubInterest resignFirstResponder];
-}
 
 - (void)doneClicked:(id)sender {
     // Write out the date...
@@ -210,15 +175,6 @@
             //save to user default
             self.userDefaults = [NSUserDefaults standardUserDefaults];
 
-            [self.userDefaults setBool:genderFemale forKey:@"userIsFemale"];
-            if (interestID != -1) {
-                [self.userDefaults setBool:YES forKey:@"userHasInterest"];
-                [self.userDefaults setInteger:interestID forKey:@"userInterestID"];
-            }
-            if ([txtSubInterest.text length] > 0) {
-                [self.userDefaults setBool:YES forKey:@"userHasSubInterest"];
-                [self.userDefaults setObject:txtSubInterest.text forKey:@"userSubInterest"];
-            }
             if (dob != nil) {
                 [self.userDefaults setBool:YES forKey:@"userHasDOB"];
                 [self.userDefaults setObject:dob forKey:@"userDOB"];
@@ -238,18 +194,6 @@
             updateUserFieldDTO.field = @"userName";
             updateUserFieldDTO.value = txtDisplayName.text;
             [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
-
-            updateUserFieldDTO.field = @"interestID";
-            updateUserFieldDTO.value = [NSString stringWithFormat:@"%d" , interestID];
-            [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
-
-            updateUserFieldDTO.field = @"interestDescription";
-            updateUserFieldDTO.value = txtSubInterest.text;
-            [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
- 
-            updateUserFieldDTO.field = @"gender";
-            updateUserFieldDTO.value = (genderFemale ? @"F" : @"M");
-            [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
             
             updateUserFieldDTO.field = @"status";
             if([btnStatus titleForState:UIControlStateNormal]){
@@ -263,7 +207,8 @@
             if (dob != nil) {
                 updateUserFieldDTO.field = @"dob";
                 NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:dob];
-                updateUserFieldDTO.value = [NSString stringWithFormat:@"%d-%d-%d", [components year], [components month], [components day]];
+                updateUserFieldDTO.value = [NSString stringWithFormat:@"%d-%d-%d", (int)[components year] , (int)[components month],(int)[components day]];
+                
                 [serviceHandler execute:METHOD_UPDATE_USER_FIELD parameter:updateUserFieldDTO target:self action:@selector(updateUserFieldResponse:error:)];
             }
             
@@ -330,10 +275,6 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"SelectInterest"]) {
-        WUInterestViewController *cvc = (WUInterestViewController *)[segue destinationViewController];
-        cvc.delegate = self;        
-    }
     if ([segue.identifier isEqualToString:@"Status"]) {
         WUStatusSelectController *cvc = (WUStatusSelectController *)[segue destinationViewController];
         cvc.currentStatus = [btnStatus titleForState:UIControlStateNormal];
@@ -341,10 +282,7 @@
     }
 }
 
--(void)selectedInerestID:(int) i withName:(NSString*) name;{
-    interestID = i;
-    [btnInterest setTitle:name forState:UIControlStateNormal];
-}
+
 
 -(void)selectedStatus:(NSString*)status{
     [btnStatus setTitle:status forState:UIControlStateNormal];

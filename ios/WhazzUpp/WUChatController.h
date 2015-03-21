@@ -8,8 +8,9 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 #import <SocialCommunication/SCAudioPlayerController.h>
+#import "SCChatViewController2.h"
 
-@interface WUChatController : SCChatController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UITextViewDelegate>
+@interface WUChatController : SCChatViewController2 <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UITextViewDelegate>
 
 - (IBAction)openProfile:(id)sender;
 - (IBAction)btnCallTapped;

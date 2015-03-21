@@ -11,7 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface WUUbuddListCell : UITableViewCell
-@property(nonatomic, weak) IBOutlet UILabel     *nameLabel, *statusLabel, *hostLabel, *memberLabel, *hostHeaderLabel, *memberHeaderLabel;
+@property(nonatomic, weak) IBOutlet UILabel     *nameLabel, *statusLabel, *memberLabel, *memberHeaderLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *userImg;
 
 @end

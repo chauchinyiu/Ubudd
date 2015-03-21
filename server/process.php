@@ -115,7 +115,7 @@ class MyAPI extends API {
 
 
 	protected function checkPhoneNumbers($args){
-		$stmt = $this->db->conn2->prepare("select c2CallID, email from register where email = ?");
+		$stmt = $this->db->conn2->prepare("select c2CallID, email, status from register where email = ?");
 		$stmt->bind_param('s', $userId);
 		$groupArray = array();
 		$rowCnt = 0;
@@ -127,6 +127,7 @@ class MyAPI extends API {
 			if ($verifyRow['email'] == $userId) {
 				$groupArray['phoneMatch' . $rowCnt] = $args['phoneNo' . $i];
 				$groupArray['c2CallID' . $rowCnt] = $verifyRow['c2CallID'];
+				$groupArray['status' . $rowCnt] = $verifyRow['status'];
 				$rowCnt++;
 			}	
 		}
@@ -139,7 +140,7 @@ class MyAPI extends API {
 	}
 	
 	protected function readUserStatus($args){
-		$stmt = $this->db->conn2->prepare("select userName, status, email from register where email = ?");
+		$stmt = $this->db->conn2->prepare("select status, email from register where email = ?");
 		$stmt->bind_param('s', $userId);
 		$groupArray = array();
 		$rowCnt = 0;
@@ -151,7 +152,6 @@ class MyAPI extends API {
 			if ($verifyRow['email'] == $userId) {
 				$groupArray['phoneMatch' . $rowCnt] = $args['phoneNo' . $i];
 				$groupArray['status' . $rowCnt] = $verifyRow['status'];
-				$groupArray['userName' . $rowCnt] = $verifyRow['userName'];
 				$rowCnt++;
 			}	
 		}

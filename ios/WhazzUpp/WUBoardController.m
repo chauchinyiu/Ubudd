@@ -1982,4 +1982,10 @@ static BOOL isGroup = YES;
         [pasteBoard setData:data forPasteboardType:(NSString*)kUTTypeVCard];
     }
 }
+
+-(IBAction)composeAction:(id)sender
+{
+    [self composeMessage:nil richMessageKey:nil];
+}
+
 @end

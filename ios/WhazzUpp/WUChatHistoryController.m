@@ -89,6 +89,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.tableView reloadData];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -474,7 +475,14 @@
         }
         MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
         [[SCDataManager instance] removeDatabaseObject:chathist];
+        if (tmppath.row < broadcastIdx) {
+            broadcastIdx--;
+        }
+        /*
+        NSError *error = nil;
+        [self.fetchedResultsController performFetch:&error];
         [self.tableView reloadData];
+         */
     }
 }
 

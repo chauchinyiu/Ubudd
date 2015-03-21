@@ -114,6 +114,7 @@ static NSString* currentPhoneNo = @"";
             [profileCell.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
                                                                      dateStyle:NSDateFormatterMediumStyle
                                                                      timeStyle:NSDateFormatterNoStyle]];
+            [profileCell.userStatus setText:status];
         }
     }
 }
@@ -195,6 +196,8 @@ static NSString* currentPhoneNo = @"";
                                                                  dateStyle:NSDateFormatterMediumStyle
                                                                  timeStyle:NSDateFormatterNoStyle]];
         [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
+        [c.userStatus setText:status];
+        
         profileCell = c;
     }
 }

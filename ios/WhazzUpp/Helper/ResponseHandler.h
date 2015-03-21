@@ -22,6 +22,7 @@
 @property NSString* c2CallID;
 @property NSString* status;
 @property NSDate* createTime;
+@property NSMutableAttributedString* attributedName;
 
 @end
 
@@ -44,6 +45,12 @@
 @end
 
 
+@protocol WUReadStatusDelegate <NSObject>
+@required
+-(void)readStatusCompleted;
+@end
+
+
 @interface ResponseHandler : NSObject
 -(void)verifyC2CallID:(NSString*)c2CallID;
 -(void)verifyNewC2CallID;
@@ -51,6 +58,7 @@
 -(BOOL)c2CallIDPassed:(NSString*)c2CallID;
 -(void)readInterests;
 -(void)readGroups;
+-(void)readStatus;
 -(void)readBroadcasts;
 -(void)checkPhoneNumberFromIndex:(int)fIndex;
 -(NSString*)getInterestNameForID:(int) intID;
@@ -61,6 +69,7 @@
 @property (strong, nonatomic) NSMutableArray *groupList;
 @property (strong, nonatomic) NSMutableArray *broadcastList;
 @property (nonatomic,assign)id<WUReadBroadcastDelegate>bcdelegate;
+@property (nonatomic,assign)id<WUReadStatusDelegate>stdelegate;
 @property NSDate* lastBroadcastTime;
 
 

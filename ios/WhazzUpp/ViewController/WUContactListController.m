@@ -7,14 +7,12 @@
 //
 #import <SocialCommunication/UIViewController+SCCustomViewController.h>
 #import "WUContactListController.h"
-#import "WUFavoritesViewController.h"
 #import "WebserviceHandler.h"
 #import "ServiceURL.h"
 #import "ResponseBase.h"
 #import "CommonMethods.h"
 #import "DataResponse.h"
 #import "DataRequest.h"
-#import "ResponseHandler.h"
 #import "WUBoardController.h"
 #import "WUFriendDetailController.h"
 #import "WUContactInfoController.h"
@@ -23,7 +21,13 @@
 
 @implementation WUAddressBookCell
 
-@synthesize nameLabel, statusLabel, addButton, userBtn, addButton2;
+@synthesize nameLabel, statusLabel, userBtn;
+
+@end
+
+@implementation WUAddressBaseCell
+
+@synthesize nameLabel;
 
 @end
 
@@ -77,6 +81,8 @@
     favoritesCellHeight = cell.frame.size.height;
     self.managedObjectContext = [DBHandler context];
     
+    [ResponseHandler instance].stdelegate = self;
+    [[ResponseHandler instance] readStatus];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString*)title atIndex:(NSInteger)index{
@@ -85,7 +91,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0){
-        return NSLocalizedString(@"Ubudd friends", @"");
+        return NSLocalizedString(@"Ubudd", @"");
     }
     else{
         return NSLocalizedString(@"Address book", @"");
@@ -104,6 +110,9 @@
     int favCnt = 0;
     
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
+    if (!addressBook) {
+        return;
+    }
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(kCFAllocatorDefault,
                                                                CFArrayGetCount(allPeople),
@@ -216,11 +225,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
-    favocell.nameLabel.font = [CommonMethods getStdFontType:0];
-    favocell.statusLabel.font = [CommonMethods getStdFontType:2];
-
+    UITableViewCell * cell;
     if (indexPath.section == 0) {
+        WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
+        favocell.statusLabel.font = [CommonMethods getStdFontType:2];
+        
         WUAccount* accRecord;
         if (inSearch) {
             accRecord = [ubuddSearch objectAtIndex:indexPath.row];
@@ -232,10 +241,10 @@
             favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:accRecord.c2CallID];
         }
         else{
-            favocell.nameLabel.text = accRecord.name;
+            favocell.nameLabel.attributedText = accRecord.attributedName;
         }
         
-        favocell.statusLabel.text = NSLocalizedString(@"Using Ubudd", @"");
+        favocell.statusLabel.text = accRecord.status;
         favocell.userBtn.tag = indexPath.row;
         favocell.userBtn2.tag = indexPath.row;
         
@@ -249,8 +258,13 @@
         }
         [favocell.userBtn setHidden:NO];
         
+        cell = favocell;
     }
     else{
+        
+        WUAddressBaseCell *favocell = (WUAddressBaseCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBaseCell"];
+        favocell.nameLabel.font = [CommonMethods getStdFontType:0];
+        
         ABRecordRef record;
         if (inSearch) {
             record = (__bridge ABRecordRef)([addressSearch objectAtIndex:indexPath.row]);
@@ -261,16 +275,28 @@
         NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
         NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
         NSString * fullName;
+        NSMutableAttributedString* attributedName;
+        UIFont* fontBold = [CommonMethods getStdFontType:0];
+        UIFont* fontStd = [CommonMethods getStdFontType:1];
+
         if (lastName == nil) {
             fullName = firstName;
+            attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+            [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, fullName.length)];
         }
         else if (firstName == nil) {
             fullName = lastName;
+            attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+            [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, fullName.length)];
         }
         else{
             fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+            [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, firstName.length)];
+            [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(firstName.length + 1, lastName.length)];
         }
-        favocell.nameLabel.text = fullName;
+        
+        favocell.nameLabel.attributedText = attributedName;
         
         ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
         
@@ -280,42 +306,11 @@
         NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
         phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
         
-        //favocell.statusLabel.text = phone;
-        favocell.statusLabel.text = @"";
-        [favocell.userImg setHidden:YES];
-        [favocell.userBtn setHidden:YES];
+        cell = favocell;
     }
     
     
-    return favocell;
-}
-
--(IBAction)addToFriend:(id)sender{
-    WUAccount* accRecord;
-    if (inSearch) {
-        accRecord = [ubuddSearch objectAtIndex:((UIButton*)sender).tag];
-    }
-    else{
-        accRecord = [ubuddListSection objectAtIndex:((UIButton*)sender).tag];
-    }
-    int favCnt = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"FavCount"];
-    favCnt++;
-    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-    [ud setInteger:favCnt forKey:@"FavCount"];
-    [ud setBool:YES forKey:accRecord.c2CallID];
-    [ud synchronize];
-    
-    WUAddressBookCell *favocell;
-    if(inSearch){
-        favocell= (WUAddressBookCell *)[self.searchDisplayController.searchResultsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
-    }
-    else{
-        favocell= (WUAddressBookCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:((UIButton*)sender).tag inSection:0]];
-    }
-    favocell.statusLabel.text = NSLocalizedString(@"Added to favorites", @"");
-    [favocell.addButton setHidden:YES];
-    [favocell.addButton2 setHidden:YES];
-    [self.tableView reloadData];
+    return cell;
 }
 
 
@@ -482,6 +477,9 @@
 {
 }
 
+-(void)readStatusCompleted{
+    [self.tableView reloadData];
+}
 
 
 @end

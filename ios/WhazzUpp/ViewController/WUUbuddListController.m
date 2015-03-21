@@ -22,7 +22,7 @@
 
 @implementation WUUbuddListCell
 
-@synthesize nameLabel, statusLabel, hostLabel, memberLabel;
+@synthesize nameLabel, statusLabel, memberLabel;
 
 
 @end
@@ -255,14 +255,10 @@
     
     favocell.nameLabel.font = [CommonMethods getStdFontType:0];
     favocell.statusLabel.font = [CommonMethods getStdFontType:2];
-    favocell.hostHeaderLabel.font = [CommonMethods getStdFontType:2];
-    favocell.memberHeaderLabel.font = [CommonMethods getStdFontType:2];
-    favocell.hostLabel.font = [CommonMethods getStdFontType:2];
-    favocell.hostLabel.font = [CommonMethods getStdFontType:2];
-            
+    favocell.memberHeaderLabel.font = [CommonMethods getStdFontType:3];
+    
     favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]];
     favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", (int)indexPath.row]];
-    favocell.hostLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)indexPath.row]];
     NSNumber* memberCnt = [fetchResult objectForKey:[NSString stringWithFormat:@"memberCnt%d", (int)indexPath.row]];
     favocell.memberLabel.text = [NSString stringWithFormat:@"%d OF 200", memberCnt.intValue + 1];
     

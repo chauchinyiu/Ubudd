@@ -192,6 +192,8 @@ typedef enum : NSUInteger {
     [self.recordButton setHidden:NO];
     [self.lblRecording setHidden:YES];
     isRecording = NO;
+    
+    [self resizeToolbar:@"A"];
 }
 
 - (IBAction)btnImageTapped:(id)sender{

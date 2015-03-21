@@ -1045,7 +1045,6 @@
 		945689AB197D031300726C84 /* myshader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 17305F1319277F660018EE25 /* myshader.fsh */; };
 		945689AC197D031300726C84 /* myshader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 17305F1419277F660018EE25 /* myshader.vsh */; };
 		97230C24176F0AEF009E7CE4 /* WULogoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97230C23176F0AEF009E7CE4 /* WULogoutController.m */; };
-		972F3E1E175CA5250006DEF6 /* WUFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F3E1D175CA5250006DEF6 /* WUFavoritesViewController.m */; };
 		972F453E175CB75F0006DEF6 /* WUContactDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F453D175CB75F0006DEF6 /* WUContactDetailController.m */; };
 		972F4541175CBA830006DEF6 /* WUFriendDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972F4540175CBA830006DEF6 /* WUFriendDetailController.m */; };
 		9768A794178D2FD500BB9E01 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9768A793178D2FD500BB9E01 /* Social.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -1118,6 +1117,7 @@
 		CE893C1719E3A18A007AD220 /* WUSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE893C1619E3A18A007AD220 /* WUSettingViewController.m */; };
 		CE8A895B1A43BD99000EE809 /* WUPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8A895A1A43BD99000EE809 /* WUPhotoViewController.m */; };
 		CE8A895E1A43DD54000EE809 /* WUImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8A895D1A43DD54000EE809 /* WUImageViewController.m */; };
+		CE90EA031AB80FB60014905A /* SCChatViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE90EA021AB80FB60014905A /* SCChatViewController2.m */; };
 		CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE978C1619E13C0700A433A8 /* WUBoardViewController.m */; };
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
 		CEA4FDD519EE6F4700A824B3 /* WUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */; };
@@ -2205,8 +2205,6 @@
 		17FD053E195907840061938A /* WUTellFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUTellFriendController.m; sourceTree = "<group>"; };
 		97230C22176F0AEF009E7CE4 /* WULogoutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WULogoutController.h; sourceTree = "<group>"; };
 		97230C23176F0AEF009E7CE4 /* WULogoutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WULogoutController.m; sourceTree = "<group>"; };
-		972F3E1C175CA5250006DEF6 /* WUFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUFavoritesViewController.h; sourceTree = "<group>"; };
-		972F3E1D175CA5250006DEF6 /* WUFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUFavoritesViewController.m; sourceTree = "<group>"; };
 		972F453C175CB75F0006DEF6 /* WUContactDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUContactDetailController.h; sourceTree = "<group>"; };
 		972F453D175CB75F0006DEF6 /* WUContactDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUContactDetailController.m; sourceTree = "<group>"; };
 		972F453F175CBA830006DEF6 /* WUFriendDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUFriendDetailController.h; sourceTree = "<group>"; };
@@ -2312,6 +2310,8 @@
 		CE8A895A1A43BD99000EE809 /* WUPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUPhotoViewController.m; sourceTree = "<group>"; };
 		CE8A895C1A43DD54000EE809 /* WUImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUImageViewController.h; sourceTree = "<group>"; };
 		CE8A895D1A43DD54000EE809 /* WUImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUImageViewController.m; sourceTree = "<group>"; };
+		CE90EA011AB80FB60014905A /* SCChatViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCChatViewController2.h; sourceTree = "<group>"; };
+		CE90EA021AB80FB60014905A /* SCChatViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCChatViewController2.m; sourceTree = "<group>"; };
 		CE978C1519E13C0700A433A8 /* WUBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUBoardViewController.h; sourceTree = "<group>"; };
 		CE978C1619E13C0700A433A8 /* WUBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUBoardViewController.m; sourceTree = "<group>"; };
 		CE9CFF7A19C29E1E004DC699 /* WUInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUInterestViewController.h; sourceTree = "<group>"; };
@@ -3559,6 +3559,8 @@
 				CE8A895A1A43BD99000EE809 /* WUPhotoViewController.m */,
 				CE8A895C1A43DD54000EE809 /* WUImageViewController.h */,
 				CE8A895D1A43DD54000EE809 /* WUImageViewController.m */,
+				CE90EA011AB80FB60014905A /* SCChatViewController2.h */,
+				CE90EA021AB80FB60014905A /* SCChatViewController2.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3683,8 +3685,6 @@
 				97A45CAD175B630B00320AE6 /* WUChatController.m */,
 				97A45CBC175BEBA800320AE6 /* WUChatHistoryController.h */,
 				97A45CBD175BEBA800320AE6 /* WUChatHistoryController.m */,
-				972F3E1C175CA5250006DEF6 /* WUFavoritesViewController.h */,
-				972F3E1D175CA5250006DEF6 /* WUFavoritesViewController.m */,
 				972F453C175CB75F0006DEF6 /* WUContactDetailController.h */,
 				972F453D175CB75F0006DEF6 /* WUContactDetailController.m */,
 				972F453F175CBA830006DEF6 /* WUFriendDetailController.h */,
@@ -4871,7 +4871,6 @@
 				97A45CBE175BEBA800320AE6 /* WUChatHistoryController.m in Sources */,
 				CE6015731A3C2D860064994F /* WUContactInfoController.m in Sources */,
 				CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */,
-				972F3E1E175CA5250006DEF6 /* WUFavoritesViewController.m in Sources */,
 				CE5462251999C96100E91636 /* UpdateAPNSTokenDTO.m in Sources */,
 				1733A09D19366D720064E97A /* RequestBuilder.m in Sources */,
 				CE68543619ED7EB9004AC9AF /* WURequestUserDetailController.m in Sources */,
@@ -4896,6 +4895,7 @@
 				1733A0A319366DCC0064E97A /* ConnectionHandler.m in Sources */,
 				CE787B1019B0277E00A0BD19 /* UpdateUserField.m in Sources */,
 				CE787B1619B030EF00A0BD19 /* DataResponse.m in Sources */,
+				CE90EA031AB80FB60014905A /* SCChatViewController2.m in Sources */,
 				1730630D19277F6B0018EE25 /* myshader.fsh in Sources */,
 				17019C541944E4AE00ABFB90 /* WUAddGroupController.m in Sources */,
 				CE01E46E19B5AC41003A0289 /* WUUserSelectionController.m in Sources */,

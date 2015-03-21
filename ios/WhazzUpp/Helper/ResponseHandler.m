@@ -17,6 +17,7 @@
 #import "DataResponse.h"
 #import "DBHandler.h"
 #import "Constant.h"
+#import "CommonMethods.h"
 
 @implementation interestDat
 @synthesize interestID;
@@ -43,7 +44,7 @@
 @end
 
 @implementation WUAccount
-@synthesize name, phoneNo, c2CallID, status, createTime;
+@synthesize name, phoneNo, c2CallID, status, createTime, attributedName;
 
 - (NSComparisonResult)compare:(WUAccount *)otherObject {
     return [self.name compare:otherObject.name];
@@ -217,6 +218,9 @@ static ResponseHandler *myInstance;
 
 -(void)checkPhoneNumberFromIndex:(int)fIndex{
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
+    if (!addressBook) {
+        return;
+    }
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(kCFAllocatorDefault,
                                                                CFArrayGetCount(allPeople),
@@ -315,9 +319,11 @@ static ResponseHandler *myInstance;
         for (int i = 0; i < [matchCnt intValue]; i++) {
             NSString* phoneNo = [addressbookInfo objectForKey:[NSString stringWithFormat:@"phoneMatch%d", i]];
             NSString* c2CallID = [addressbookInfo objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]];
+            NSString* status = [addressbookInfo objectForKey:[NSString stringWithFormat:@"status%d", i]];
             WUAccount* a = [[WUAccount alloc] init];
             a.c2CallID = c2CallID;
             a.phoneNo = phoneNo;
+            a.status = status;
             [self.friendList addObject:a];
         }
         
@@ -343,6 +349,9 @@ static ResponseHandler *myInstance;
 
 -(void)refreshFriendListNames{
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, nil);
+    if (!addressBook) {
+        return;
+    }
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFMutableArrayRef peopleMutable = CFArrayCreateMutableCopy(kCFAllocatorDefault,
                                                                CFArrayGetCount(allPeople),
@@ -378,16 +387,28 @@ static ResponseHandler *myInstance;
                     NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
                     NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
                     NSString * fullName;
+                    NSMutableAttributedString* attributedName;
+                    UIFont* fontBold = [CommonMethods getStdFontType:0];
+                    UIFont* fontStd = [CommonMethods getStdFontType:1];
+
                     if (lastName == nil) {
                         fullName = firstName;
+                        attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+                        [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, fullName.length)];
                     }
                     else if (firstName == nil) {
                         fullName = lastName;
+                        attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+                        [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, fullName.length)];
                     }
                     else{
                         fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                        attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+                        [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, firstName.length)];
+                        [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(firstName.length + 1, lastName.length)];
                     }
                     a.name = fullName;
+                    a.attributedName = attributedName;
                 }
             }
         }
@@ -426,6 +447,40 @@ static ResponseHandler *myInstance;
         }
     }
 }
+
+-(void)readStatus{
+    DataRequest* datRequest = [[DataRequest alloc] init];
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    for (int i = 0; i < self.friendList.count; i++) {
+        WUAccount* a = [self.friendList objectAtIndex:i];
+        [data setValue:a.phoneNo forKey:[NSString stringWithFormat:@"phoneNo%d", i]];
+    }
+    [data setValue:[NSNumber numberWithInt:self.friendList.count] forKey:@"phoneNoCnt"];
+    
+    
+    datRequest.values = data;
+    datRequest.requestName = @"readUserStatus";
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readStatusResponse:error:)];
+}
+
+- (void)readStatusResponse:(ResponseBase *)response error:(NSError *)error{
+    NSDictionary* fetchResult = ((DataResponse*)response).data;
+    
+    int cnt = ((NSNumber*)[fetchResult objectForKey:@"matchCnt"]).intValue;
+    for (int i = 0; i < cnt; i++) {
+        for (int j = 0; j < self.friendList.count; j++) {
+            WUAccount* a = [self.friendList objectAtIndex:j];
+            if ([a.phoneNo isEqualToString:[fetchResult objectForKey:[NSString stringWithFormat:@"phoneMatch%d", i]]]) {
+                a.status = [fetchResult objectForKey:[NSString stringWithFormat:@"status%d", i]];
+            }
+        }
+    }
+    if([ResponseHandler instance].stdelegate){
+        [[ResponseHandler instance].stdelegate readStatusCompleted];
+    }
+}
+
 
 -(void)readBroadcasts{
     if(!readingBroadcast){

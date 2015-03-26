@@ -82,6 +82,46 @@ class MyAPI extends API {
             return array('error' => 0, 'message' => 'Signup successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
         }
     }
+    
+    protected function sendVerification($args) {
+        if ($args['msisdn'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+
+		$stmt = $this->db->conn2->prepare("select email from register where email = ?");
+		$stmt->bind_param('s', $userId);
+		$userId = $args['msisdn'] . "@mobifyi.com";
+		$stmt->execute();
+		$stmt->bind_result($verifyEmailRes);
+
+
+        $account_sid = 'AC5cf3e259d9f0842517d370885e914aff';
+        $auth_token = '6573f29127cac058d60422c565e5d32e';
+        $client = new Services_Twilio($account_sid, $auth_token);
+        if($args['model'] == 'Simulator'){
+        	$rand = 123456;
+        }
+        else{
+        	$rand = rand(100000, 999999);
+		}
+        $message = $client->account->messages->create(array(
+            'To' => $args['msisdn'],
+            'From' => "+19063563715",
+            'Body' => "Your verification code for login into Ubudd: " . $rand,
+        ));
+        
+
+        if ($stmt->fetch()) {
+	        $stmt->close();
+			$stmt = $this->db->conn2->prepare("update register set ver_number = ? where msisdn = ?");
+			$stmt->bind_param('ss', $rand, $userId);
+			$userId = $args['msisdn'];
+			$stmt->execute();
+			$stmt->close();
+
+            return array('error' => 0, 'message' => 'Login successful', 'data' => array('email' => $args['msisdn'] . "@mobifyi.com", 'password' => $args['msisdn']));
+        }
+    }    
 
     protected function verifyUser($args) {
 

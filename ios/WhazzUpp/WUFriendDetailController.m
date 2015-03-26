@@ -21,7 +21,7 @@
 
 
 @implementation WUUserInfoCell
-@synthesize lblDateOfBirth, lblTelNo;
+@synthesize lblName, lblTelNo, lblStatus, userImage;
 @end
 
 @interface WUFriendDetailController(){
@@ -41,10 +41,7 @@ static NSString* currentPhoneNo = @"";
 #pragma mark - UIViewController Delegate
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.userInfoCell.userImage.layer.cornerRadius = 0.0;
-    self.userInfoCell.userImage.layer.masksToBounds = YES;
+    //[super viewDidLoad];
 
     NSMutableArray* acclist = [ResponseHandler instance].friendList;
     if ([[self.fetchedResultsController fetchedObjects] count] == 0){
@@ -94,7 +91,9 @@ static NSString* currentPhoneNo = @"";
         
     }
     else {
-        dob = [res.data objectForKey:@"dob"];
+        NSDateFormatter *dateFormatRead = [[NSDateFormatter alloc] init];
+        [dateFormatRead setDateFormat:@"yyyy-MM-d"];
+        dob = [dateFormatRead dateFromString:[res.data objectForKey:@"dob"]];
         countryCode = [res.data objectForKey:@"countryCode"];
         status = [res.data objectForKey:@"status"];
         
@@ -111,48 +110,25 @@ static NSString* currentPhoneNo = @"";
         else{
             [profileCell.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
             
-            [profileCell.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
-                                                                     dateStyle:NSDateFormatterMediumStyle
-                                                                     timeStyle:NSDateFormatterNoStyle]];
-            [profileCell.userStatus setText:status];
+            [profileCell.lblStatus setText:status];
         }
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [super numberOfSectionsInTableView:tableView];
-    return 3;
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    MOC2CallUser *elem = self.currentUser;
-    switch (section) {
-        case 0:
-            return 1;
-        case 1:
-            return 1;
-        case 2:
-            if ([elem.friendNumbers count] > 0)
-                return [elem.friendNumbers count];
-            return [elem.contactNumbers count];
-        case 3:
-            return [elem.contactNumbers count];
-        default:
-            break;
-    }
-    return 0;
+    return 1;
 }
 
 
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 1) {
-        return 20;
-    }
     return 0;
 }
 
@@ -165,39 +141,36 @@ static NSString* currentPhoneNo = @"";
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        return 237;
-    }
-    else{
-        return 100;
-    }
+    return 275;
 }
 
 
 
 -(void) configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    [super configureCell:cell atIndexPath:indexPath];
     if ([cell isKindOfClass:[WUUserInfoCell class]]) {
         WUUserInfoCell* c = (WUUserInfoCell*)cell;
+
+        UIImage *userImage = [[C2CallPhone currentPhone] userimageForUserid:c2CallID];
+        
+        if (userImage) {
+            c.userImage.image = userImage;
+            [c.userImage setTapAction:^{
+                [self showUserImageForUserid:c2CallID];
+            }];
+        }
         
         NSMutableArray* acclist = [ResponseHandler instance].friendList;
         for (int i = 0; i < acclist.count; i++) {
             WUAccount* a = [acclist objectAtIndex:i];
             if ([a.c2CallID isEqualToString:c2CallID] && a.name) {
-                c.displayName.text = a.name;
+                [c.lblName setText:a.name];
             }
         }
         
-        [c.favoriteImage setHidden:YES];
-        [c.facebookImage setHidden:YES];
-        [c.email setHidden:YES];
-        [c.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
-                                                                 dateStyle:NSDateFormatterMediumStyle
-                                                                 timeStyle:NSDateFormatterNoStyle]];
+
         [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
-        [c.userStatus setText:status];
-        
+        [c.lblStatus setText:status];
         profileCell = c;
     }
 }
@@ -205,35 +178,30 @@ static NSString* currentPhoneNo = @"";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        
-        
-        WUUserInfoCell *c;
-        
-        c = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-        
-        NSMutableArray* acclist = [ResponseHandler instance].friendList;
-        for (int i = 0; i < acclist.count; i++) {
-            WUAccount* a = [acclist objectAtIndex:i];
-            if ([a.c2CallID isEqualToString:c2CallID] && a.name) {
-                c.displayName.text = a.name;
-            }
+    WUUserInfoCell *c = [self.tableView dequeueReusableCellWithIdentifier:@"WUUserInfoCell"];
+    
+    UIImage *userImage = [[C2CallPhone currentPhone] userimageForUserid:c2CallID];
+    
+    if (userImage) {
+        c.userImage.image = userImage;
+        [c.userImage setTapAction:^{
+            [self showUserImageForUserid:c2CallID];
+        }];
+    }
+    
+    NSMutableArray* acclist = [ResponseHandler instance].friendList;
+    for (int i = 0; i < acclist.count; i++) {
+        WUAccount* a = [acclist objectAtIndex:i];
+        if ([a.c2CallID isEqualToString:c2CallID] && a.name) {
+            c.lblName.text = a.name;
         }
-        
-        [c.favoriteImage setHidden:YES];
-        [c.facebookImage setHidden:YES];
-        [c.email setHidden:YES];
-        [c.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:dob
-                                                                 dateStyle:NSDateFormatterMediumStyle
-                                                                 timeStyle:NSDateFormatterNoStyle]];
-        [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
-        [c.userStatus setText:status];
-        profileCell = c;
-        return c;
     }
-    else{
-        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    }
+    
+
+    [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
+    [c.lblStatus setText:status];
+    profileCell = c;
+    return c;
 }
 
     

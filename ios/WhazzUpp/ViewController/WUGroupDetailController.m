@@ -149,18 +149,21 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         if (userType == 1) {
-            return 290;
+            return 300;
         }
         else{
-            return 290;
+            return 376;
         }
     }
     else if(indexPath.section == 2){
         if (userType == 1) {
-            return 120;
+            return 116;
         }
-        else{
-            return 80;
+        else if (userType == 2) {
+            return 78;
+        }
+        else {
+            return 40;
         }
         
     }
@@ -172,7 +175,7 @@
             }
         }
     }
-    return 44;
+    return 46;
     
 }
 
@@ -181,10 +184,10 @@
         return 0.1;
     }
     else if (section == 1) {
-        return 30;
+        return 40;
     }
     else{
-        return 10;
+        return 1;
     }
 }
 

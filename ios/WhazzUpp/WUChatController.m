@@ -182,6 +182,7 @@ typedef enum : NSUInteger {
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
     
     if (image) {
+        [[self.imageBtn imageView] setContentMode:UIViewContentModeScaleAspectFill];
         [self.imageBtn setImage:image forState:UIControlStateNormal];
     }
     
@@ -194,6 +195,14 @@ typedef enum : NSUInteger {
     isRecording = NO;
     
     [self resizeToolbar:@"A"];
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 - (IBAction)btnImageTapped:(id)sender{
@@ -409,6 +418,18 @@ typedef enum : NSUInteger {
 }
 
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    [self.view endEditing:YES];
+    return NO; // handle the touch
+}
+
+-(void)hidekeybord
+{
+    
+}
 
 
 @end

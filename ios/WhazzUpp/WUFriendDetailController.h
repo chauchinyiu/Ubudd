@@ -9,8 +9,9 @@
 #import <SocialCommunication/SocialCommunication.h>
 #import <SocialCommunication/UDUserInfoCell.h>
 
-@interface WUUserInfoCell : UDUserInfoCell
-@property(nonatomic, weak) IBOutlet UILabel *lblDateOfBirth, *lblTelNo;
+@interface WUUserInfoCell : UITableViewCell
+@property(nonatomic, weak) IBOutlet UILabel *lblName, *lblTelNo, *lblStatus;
+@property(nonatomic, weak) IBOutlet C2TapImageView* userImage;
 @end
 
 @interface WUFriendDetailController : SCFriendDetailController

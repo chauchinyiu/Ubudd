@@ -71,15 +71,18 @@
     if ([self.userDefaults boolForKey:kUserDefault_isWelcomeComplete]) {
         SCUserProfile *userProfile = [SCUserProfile currentUser];
         txtDisplayName.text = userProfile.firstname;
-        [userImage setImage:userProfile.userImage];
-        
+        if(userProfile.userImage){
+            [userImage setImage:userProfile.userImage];
+        }
         //read from user default
         
         if ([self.userDefaults boolForKey:@"userHasDOB"]) {
             dob = [self.userDefaults objectForKey:@"userDOB"];
-            txtDateofBirth.text = [NSDateFormatter localizedStringFromDate:dob
-                                                                 dateStyle:NSDateFormatterMediumStyle
-                                                                 timeStyle:NSDateFormatterNoStyle];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+            [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+            txtDateofBirth.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:dob]];
+
         }
         else{
             dob = nil;

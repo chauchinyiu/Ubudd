@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WUVerificationController : UITableViewController {
+@interface WUVerificationController : UITableViewController<UIGestureRecognizerDelegate> {
     IBOutlet UITextField *txtCode;
 }
 
+- (IBAction)btnResendTapped;
 @end

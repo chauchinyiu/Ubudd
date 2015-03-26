@@ -15,6 +15,9 @@
 #import "VerifyUser.h"
 #import "VerifyUserDTO.h"
 #import "ResponseHandler.h"
+#import "DataRequest.h"
+#import "DataResponse.h"
+
 
 @implementation WUVerificationController
 
@@ -35,6 +38,12 @@
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"VerifyComplete"]){
         [self performSegueWithIdentifier:@"WUUserProfileControllerSegue" sender:nil];
     }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
 
 }
 
@@ -86,5 +95,46 @@
     }
 }
 
+- (IBAction)btnResendTapped{
+    NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
 
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    [dictionary setObject:msdin forKey:@"msisdn"];
+    
+    DataRequest *dataRequest = [[DataRequest alloc] init];
+    dataRequest.requestName = @"sendVerification";
+    dataRequest.values = dictionary;
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(sendVerification:error:)];
+
+}
+
+- (void)sendVerification:(ResponseBase *)response error:(NSError *)error {
+    if (error){
+        
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Resend verification code"
+                                                        message:@"Verification code sent"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    [self.view endEditing:YES];
+    return NO; // handle the touch
+}
+
+-(void)hidekeybord
+{
+    
+}
 @end

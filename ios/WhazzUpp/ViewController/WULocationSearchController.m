@@ -120,6 +120,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     else{
+        [locationManager requestWhenInUseAuthorization];
         [locationManager startUpdatingLocation];    
     }
 }

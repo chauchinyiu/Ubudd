@@ -74,19 +74,6 @@
         if(userProfile.userImage){
             [userImage setImage:userProfile.userImage];
         }
-        //read from user default
-        
-        if ([self.userDefaults boolForKey:@"userHasDOB"]) {
-            dob = [self.userDefaults objectForKey:@"userDOB"];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-            [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-            txtDateofBirth.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:dob]];
-
-        }
-        else{
-            dob = nil;
-        }
         
         
     }
@@ -94,13 +81,6 @@
         self.navigationItem.hidesBackButton = YES;
     
     
-    UIDatePicker* pickerView = [[UIDatePicker alloc] init];
-    [pickerView sizeToFit];
-    pickerView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    pickerView.datePickerMode = UIDatePickerModeDate;
-    pickerView.maximumDate = [NSDate date];
-    
-    txtDateofBirth.inputView = pickerView;
     
     UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
     keyboardDoneButtonView.barStyle = UIBarStyleDefault;
@@ -113,9 +93,6 @@
         style:UIBarButtonItemStyleDone target:self
         action:@selector(doneClicked:)];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
-    
-    // Plug the keyboardDoneButtonView into the text field...
-    txtDateofBirth.inputAccessoryView = keyboardDoneButtonView;
     
     [btnStatus setTitle:[SCUserProfile currentUser].userStatus forState:UIControlStateNormal];
     
@@ -132,14 +109,6 @@
 }
 
 
-- (void)doneClicked:(id)sender {
-    // Write out the date...
-    dob = [(UIDatePicker*)txtDateofBirth.inputView date];
-    txtDateofBirth.text = [NSDateFormatter localizedStringFromDate:dob
-                                                         dateStyle:NSDateFormatterMediumStyle
-                                                         timeStyle:NSDateFormatterNoStyle];
-    [txtDateofBirth resignFirstResponder];
-}
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 3;

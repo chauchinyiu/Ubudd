@@ -20,21 +20,19 @@
 @property(nonatomic, weak) IBOutlet UITextField *txtSubInterestEdit;
 @property(nonatomic, weak) IBOutlet UIButton *btnLocationEdit;
 @property(nonatomic, weak) IBOutlet UIButton *btnIsPublicEdit;
-@property(nonatomic, weak) IBOutlet UILabel *lblMemberCntEdit;
 @property(nonatomic, weak) IBOutlet C2TapImageView *btnPhoto;
 
 @end
 
 @interface WUGroupDetailCellReadOnly : UITableViewCell
     @property(nonatomic, weak) IBOutlet UIImageView *groupImg;
-    @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic, *lblHost,  *lblJoinStatus;
+    @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic,  *lblJoinStatus;
 @end
 
 @interface WUGroupViewMediaCell : UITableViewCell
 @end
 
 @interface WUGroupAdminActionCell : UITableViewCell
-    @property(nonatomic, weak) IBOutlet UIButton *btnBlockUser;
 @end
 
 @interface WUGroupMemberActionCell : UITableViewCell

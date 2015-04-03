@@ -787,6 +787,22 @@ static BOOL isGroup = YES;
             }];
             [menulist addObject:item];
             
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Email", @"MenuItem") action:@selector(retransmitAction:)];
+            [cell setRetransmitAction:^{
+                if ([MFMailComposeViewController canSendMail]) {
+                    
+                    MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
+                    UIImage *myImage = [[C2CallPhone currentPhone] imageForKey:text];
+                    NSData *imageData = UIImagePNGRepresentation(myImage);
+                    
+                    [emailController addAttachmentData:imageData mimeType:@"image/png" fileName:@"image"];
+                    emailController.mailComposeDelegate = self;
+                    [self presentViewController:emailController animated:YES completion:nil];
+                }                
+            }];
+            [menulist addObject:item];
+            
+            
             menu.menuItems = menulist;
             CGRect rect = cell.bubbleView.frame;
             rect = [cell convertRect:rect fromView:cell.bubbleView];
@@ -901,6 +917,22 @@ static BOOL isGroup = YES;
             item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", @"MenuItem") action:@selector(answerAction:)];
             [cell setAnswerAction:^{
                 [[SCDataManager instance] removeDatabaseObject:elem];
+            }];
+            [menulist addObject:item];
+            
+            
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Email", @"MenuItem") action:@selector(retransmitAction:)];
+            [cell setRetransmitAction:^{
+                if ([MFMailComposeViewController canSendMail]) {
+                    
+                    MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
+                    UIImage *myImage = [[C2CallPhone currentPhone] imageForKey:text];
+                    NSData *imageData = UIImageJPEGRepresentation(myImage, 0.95);
+                    
+                    [emailController addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"image"];
+                    emailController.mailComposeDelegate = self;
+                    [self presentViewController:emailController animated:YES completion:nil];
+                }
             }];
             [menulist addObject:item];
             
@@ -1986,6 +2018,10 @@ static BOOL isGroup = YES;
 -(IBAction)composeAction:(id)sender
 {
     [self composeMessage:nil richMessageKey:nil];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

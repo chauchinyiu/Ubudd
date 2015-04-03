@@ -121,7 +121,7 @@
     CFArraySortValues(peopleMutable,
                       CFRangeMake(0, CFArrayGetCount(peopleMutable)),
                       (CFComparatorFunction) ABPersonComparePeopleByName,
-                      kABPersonSortByFirstName);
+                      kABPersonSortByLastName);
     ubuddListSection = [ResponseHandler instance].friendList;
     addressListSection = [[NSMutableArray alloc] init];
     NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
@@ -280,9 +280,14 @@
         UIFont* fontStd = [CommonMethods getStdFontType:1];
 
         if (lastName == nil) {
-            fullName = firstName;
-            attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
-            [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, fullName.length)];
+            if (firstName == nil) {
+                attributedName = nil;
+            }
+            else{
+                fullName = firstName;
+                attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+                [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, fullName.length)];
+            }
         }
         else if (firstName == nil) {
             fullName = lastName;

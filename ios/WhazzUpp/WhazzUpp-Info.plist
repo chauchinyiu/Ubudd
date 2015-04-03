@@ -25,7 +25,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>15.3.12</string>
+	<string>15.3.13</string>
 	<key>FacebookAppID</key>
 	<string>512494882156828</string>
 	<key>FacebookDisplayName</key>
@@ -34,6 +34,8 @@
 	<true/>
 	<key>NSLocationUsageDescription</key>
 	<string>Using Geocoding</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location is required to search for groups around your area</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

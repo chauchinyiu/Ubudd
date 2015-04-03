@@ -123,7 +123,19 @@ typedef enum : NSUInteger {
     boardTitle = [self.titleButton titleForState:UIControlStateNormal];
 }
 
-
+-(void)viewDidAppear:(BOOL)animated{
+    if(!self.audioView){
+        SCAudioRecorderController* newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SCAudioRecorderController"];
+        [newVC setSubmitAction:^(NSString *key) {
+            [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
+        }];
+        newVC.view.frame = self.audioContainer.bounds;
+        [self.audioContainer addSubview:newVC.view];
+        [self addChildViewController:newVC];
+        [newVC didMoveToParentViewController:self];
+        self.audioView = newVC;
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -296,21 +308,35 @@ typedef enum : NSUInteger {
 // This method is called when an image has been chosen from the library or taken from the camera.
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-
-     [[C2CallPhone currentPhone] submitImage:image withQuality:UIImagePickerControllerQualityTypeMedium andMessage:nil toTarget:self.targetUserid withCompletionHandler:^(BOOL success, NSString *richMediaKey, NSError *error) {
-         //TODO MingKei, please take care of the error handling and successful
-         
-         if(success)
-         {
-             NSLog(@"success");
-         }
-         else
-         {
-            NSLog(@"error");
-         }
-          [self dismissViewControllerAnimated:YES completion:NULL];
-     }];
+    NSString* mediaType = [info valueForKey:UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:@"public.image"]){
+        UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+        
+        [[C2CallPhone currentPhone] submitImage:image withQuality:UIImagePickerControllerQualityTypeHigh andMessage:nil toTarget:self.targetUserid withCompletionHandler:^(BOOL success, NSString *richMediaKey, NSError *error) {
+            //TODO MingKei, please take care of the error handling and successful
+            
+            if(success){
+                NSLog(@"success");
+            }
+            else{
+                NSLog(@"error");
+            }
+            [self dismissViewControllerAnimated:YES completion:NULL];
+        }];
+    }
+    else if ([mediaType isEqualToString:@"public.movie"]){
+        NSURL* u = [info valueForKey:UIImagePickerControllerMediaURL];
+        [[C2CallPhone currentPhone] submitVideo:u withMessage:nil toTarget:self.targetUserid withCompletionHandler:^(BOOL success, NSString *richMediaKey, NSError *error) {
+            //TODO MingKei, please take care of the error handling and successful
+            if(success){
+                NSLog(@"success");
+            }
+            else{
+                NSLog(@"error");
+            }
+            [self dismissViewControllerAnimated:YES completion:NULL];
+        }];
+    }
 }
 
 
@@ -418,13 +444,7 @@ typedef enum : NSUInteger {
 }
 
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    NSLog(@"went here ...");
-    
-    [self.view endEditing:YES];
-    return NO; // handle the touch
-}
+
 
 -(void)hidekeybord
 {

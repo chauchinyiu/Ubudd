@@ -133,7 +133,7 @@
             return [memberList count] + 1;
         }
         else{
-            return 0;
+            return 1;
         }
     }
     else{
@@ -152,15 +152,15 @@
             return 300;
         }
         else{
-            return 376;
+            return 336;
         }
     }
     else if(indexPath.section == 2){
         if (userType == 1) {
-            return 116;
+            return 140;
         }
         else if (userType == 2) {
-            return 78;
+            return 90;
         }
         else {
             return 40;
@@ -181,7 +181,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        return 0.1;
+        return 1;
     }
     else if (section == 1) {
         return 40;
@@ -194,6 +194,7 @@
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
     if (section == 1) {
         WUGroupMemberCntHeaderCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupMemberCntHeaderCell"];
         NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
@@ -202,9 +203,7 @@
         return cell;
     }
     else{
-        UIView* v = [super tableView:tableView viewForHeaderInSection:section];
-        [v setHidden:YES];
-        return v;
+        return [self.tableView dequeueReusableCellWithIdentifier:@"blankCell"];
     }
 }
 
@@ -212,7 +211,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.view endEditing:YES];
 
-    if (indexPath.section == 1){
+
+    if (indexPath.section == 1 && (userType == 1 || userType == 2)){
         NSString *userid;
         if (indexPath.row == 0) {
             userid = self.group.groupOwner;
@@ -303,7 +303,6 @@
                 }
                 
                 
-                [cell.lblHost setText:[groupInfo objectForKey:@"userName"]];
                 
                 if (userType == 2) {
                     [cell.lblJoinStatus setText:NSLocalizedString(@"Joined", @"")];
@@ -317,9 +316,7 @@
                         }
                     }
                     
-                    if (userType == 3) {
-                        [cell.lblJoinStatus setText:NSLocalizedString(@"Non member", @"")];
-                    }
+                    [cell.lblJoinStatus setText:NSLocalizedString(@"Non member", @"")];
                 }
                 
             }
@@ -359,13 +356,15 @@
         if ([userid isEqualToString:[SCUserProfile currentUser].userid]) {
             itsMe = YES;
             displayName = [SCUserProfile currentUser].displayname;
-        } else {
+        }
+        else if(indexPath.row == 0){
+            displayName = [groupInfo objectForKey:@"userName"];
+        }
+        else {
             MOC2CallUser *member = [[SCDataManager instance] userForUserid:userid];
             displayName = [member.displayName copy];
             if (!member) {
-                NSString *user = [memberList objectAtIndex:indexPath.row - 1];
-                NSString *firstname = [self.group firstnameForGroupMember:user];
-                
+                NSString *firstname = [self.group nameForGroupMember:userid];
                 if (firstname) {
                     displayName = firstname;
                 }
@@ -454,7 +453,6 @@
             cell.detailTextLabel.textColor = [UIColor lightGrayColor];
         }
         
-        //cell.detailTextLabel.text = [[member elementForName:@"EMail"] stringValue];
         
         UIImage *userpic = [[C2CallPhone currentPhone] userimageForUserid:userid];
         if (userpic) {
@@ -591,7 +589,10 @@
     else {
         groupInfo = [[NSMutableDictionary alloc] initWithDictionary:res.data];
         NSNumber* joinStatus = [groupInfo objectForKey:@"isMember"];
-        if (joinStatus.intValue == 1) {
+        if(joinStatus.intValue == 0){
+            userType = 3;
+        }
+        else if (joinStatus.intValue == 1) {
             userType = 2;
         }
         else if (joinStatus.intValue == 2) {
@@ -634,9 +635,11 @@
 }
 
 - (IBAction)editEnded{
-    [groupInfo setObject:editCell.txtTopicEdit.text forKey:@"topic"];
-    [groupInfo setObject:editCell.txtTopic2Edit.text forKey:@"topicDescription"];
-    [groupInfo setObject:editCell.txtSubInterestEdit.text forKey:@"interestDescription"];
+    if(editCell){
+        [groupInfo setObject:editCell.txtTopicEdit.text forKey:@"topic"];
+        [groupInfo setObject:editCell.txtTopic2Edit.text forKey:@"topicDescription"];
+        [groupInfo setObject:editCell.txtSubInterestEdit.text forKey:@"interestDescription"];
+    }
 }
 
 -(void)selectedInerestID:(int) i withName:(NSString*) name;{

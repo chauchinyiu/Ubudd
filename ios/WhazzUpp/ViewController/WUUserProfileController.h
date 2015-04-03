@@ -15,12 +15,10 @@
     IBOutlet UITextField *txtDisplayName;
     IBOutlet UIButton *btnProfileImage;
     IBOutlet C2TapImageView *userImage;
-    IBOutlet UITextField *txtDateofBirth;
     IBOutlet UIButton *btnStatus;
     IBOutlet UILabel *lblTelNo;
 }
 
 - (IBAction)btnSaveTapped;
 - (IBAction)btnProfileImageTapped;
-- (void)doneClicked:(id)sender;
 @end

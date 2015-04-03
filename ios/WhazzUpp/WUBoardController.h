@@ -144,7 +144,7 @@
 @end
 
 
-@interface WUBoardController : SCBoardController<WUReadBroadcastDelegate>
+@interface WUBoardController : SCBoardController<WUReadBroadcastDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 +(void)setIsGroup:(BOOL)b;
 

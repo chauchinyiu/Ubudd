@@ -22,7 +22,7 @@
 
 @implementation WUUbuddListCell
 
-@synthesize nameLabel, statusLabel, memberLabel;
+@synthesize nameLabel, statusLabel, memberLabel, hosetedByLabel;
 
 
 @end
@@ -258,9 +258,13 @@
     favocell.memberHeaderLabel.font = [CommonMethods getStdFontType:3];
     
     favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]];
-    favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", (int)indexPath.row]];
+    
+    int interestID = (int)[[fetchResult objectForKey:[NSString stringWithFormat:@"interestID%d", (int)indexPath.row]] integerValue];
+    favocell.statusLabel.text = [[ResponseHandler instance] getInterestNameForID:interestID];
+    //favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", (int)indexPath.row]];
     NSNumber* memberCnt = [fetchResult objectForKey:[NSString stringWithFormat:@"memberCnt%d", (int)indexPath.row]];
-    favocell.memberLabel.text = [NSString stringWithFormat:@"%d OF 200", memberCnt.intValue + 1];
+    favocell.memberLabel.text = [NSString stringWithFormat:@"%d / 200", memberCnt.intValue + 1];
+    favocell.hosetedByLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)indexPath.row]];
     
     
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:group.groupid];

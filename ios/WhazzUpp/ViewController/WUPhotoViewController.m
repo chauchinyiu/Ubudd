@@ -14,6 +14,7 @@
     NSArray* pages;
     int initPageIndex;
     UIBarButtonItem* titleLabel;
+    UIColor* oldColor;
     
 }
 @end
@@ -24,12 +25,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    //self.navigationController.navigationBar.shadowImage = [UIImage new];
-    //self.navigationController.navigationBar.alpha = 0.5;
     
     titleLabel = [[UIBarButtonItem alloc] init];
-    titleLabel.tintColor = [UIColor blackColor];
+    titleLabel.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = titleLabel;
     
     WUImageViewController *startingPage = [self GetViewControllerForPage:initPageIndex];
@@ -48,9 +46,29 @@
     }
 }
 
+
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBar.translucent = NO;
+    oldColor = self.navigationController.navigationBar.barTintColor;
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+    self.navigationController.navigationBar.alpha = 0.5;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
 }
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barTintColor = oldColor;
+    self.navigationController.navigationBar.alpha = 1.0;
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning {

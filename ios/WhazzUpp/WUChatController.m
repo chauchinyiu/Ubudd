@@ -31,7 +31,7 @@ typedef enum : NSUInteger {
     BOOL isRecording;
     double accumulatedTime;
     NSTimer* timer;
-    NSString* boardTitle;
+    NSAttributedString* boardTitle;
 }
 
 @property (nonatomic, assign) CFAbsoluteTime lastTypeEventReceived;
@@ -95,7 +95,7 @@ typedef enum : NSUInteger {
     for (int i = 0; i < friends.count; i++) {
         WUAccount* a = [friends objectAtIndex:i];
         if([a.c2CallID isEqualToString:self.targetUserid] && a.name != nil){
-            [self.titleButton setTitle:a.name forState:UIControlStateNormal];
+            [self.titleButton setAttributedTitle:[[NSAttributedString alloc] initWithString:a.name] forState:UIControlStateNormal];
             UIBarButtonItem *newBackButton =
             [[UIBarButtonItem alloc] initWithTitle:a.name
                                              style:UIBarButtonItemStyleBordered
@@ -109,7 +109,7 @@ typedef enum : NSUInteger {
     for (int i = 0; i < groups.count; i++) {
         WUAccount* a = [groups objectAtIndex:i];
         if([a.c2CallID isEqualToString:self.targetUserid] && a.name != nil){
-            [self.titleButton setTitle:a.name forState:UIControlStateNormal];
+            [self.titleButton setAttributedTitle:[[NSAttributedString alloc] initWithString:a.name] forState:UIControlStateNormal];
             UIBarButtonItem *newBackButton =
             [[UIBarButtonItem alloc] initWithTitle:a.name
                                              style:UIBarButtonItemStyleBordered
@@ -120,7 +120,7 @@ typedef enum : NSUInteger {
         }
     }
     [self.chatboard.tableView reloadData];
-    boardTitle = [self.titleButton titleForState:UIControlStateNormal];
+    boardTitle = [self.titleButton attributedTitleForState:UIControlStateNormal];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -189,7 +189,7 @@ typedef enum : NSUInteger {
 
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
     if(user){
-        [self.titleButton setTitle:user.displayName forState:UIControlStateNormal];
+        [self.titleButton setAttributedTitle:[[NSAttributedString alloc] initWithString:user.displayName] forState:UIControlStateNormal];
     }
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
     
@@ -248,9 +248,15 @@ typedef enum : NSUInteger {
     // Typing Event for this chat?
     if ([fromUserid isEqualToString:self.targetUserid]) {
         self.lastTypeEventReceived = CFAbsoluteTimeGetCurrent();
+
+        NSMutableAttributedString* atitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ \nis typing...", [boardTitle string]]];
+
+        UIFont* fontStd = [CommonMethods getStdFontType:3];
+        [atitle addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(boardTitle.length, atitle.length - boardTitle.length)];
+        [atitle addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(boardTitle.length, atitle.length - boardTitle.length)];
         
         // Show prompt
-        [self.titleButton setTitle:[NSString stringWithFormat:@"%@ is typing...", boardTitle] forState:UIControlStateNormal];
+        [self.titleButton setAttributedTitle:atitle forState:UIControlStateNormal];
         
         double delayInSeconds = 2.5;
         
@@ -258,7 +264,7 @@ typedef enum : NSUInteger {
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             if (CFAbsoluteTimeGetCurrent() - self.lastTypeEventReceived > 2.4) {
-                [self.titleButton setTitle:boardTitle forState:UIControlStateNormal];;
+                [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];;
             }
         });
     }

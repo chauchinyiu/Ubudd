@@ -727,6 +727,29 @@ static BOOL isGroup = YES;
     }
 }
 
+
+- (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // Hide Keyboard in SCChatController on touch
+    if ([self.parentViewController respondsToSelector:@selector(hideKeyboard:)]) {
+        [self.parentViewController performSelector:@selector(hideKeyboard:) withObject:nil];
+    }
+    
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.reuseIdentifier isEqualToString:@"SCNoFilterResultsCell"]) {
+        [self removeAllFilter:self];
+        return;
+    }
+    if ([cell.reuseIdentifier isEqualToString:@"SCNoMessagesCell"]) {
+        return;
+    }
+    
+    if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
+        return;
+    }
+    
+}
+
 +(void)setIsGroup:(BOOL)b{
     isGroup = b;
 }

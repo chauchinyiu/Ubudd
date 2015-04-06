@@ -10,7 +10,6 @@
 
 @interface WUImageViewController (){
     float standardScale;
-    UIColor* oldColor;
 }
 @end
 
@@ -29,6 +28,7 @@
     imageFrame.maximumZoomScale = 6.0;
     imageFrame.zoomScale = standardScale;
     
+    
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageClicked)];
     singleTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:singleTap];
@@ -39,33 +39,7 @@
     [self.view addGestureRecognizer:doubleTap];
     
     [singleTap requireGestureRecognizerToFail:doubleTap];
-    
 }
-/*
--(void)viewWillAppear:(BOOL)animated{
-    oldColor = self.navigationController.navigationBar.barTintColor;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                             forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    [self.navigationController.navigationBar setTranslucent:YES];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
-    [[UINavigationBar appearance] setTranslucent:YES];
-    
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
-    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]];
-    
-    [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
- }
-
--(void)viewWillDisappear:(BOOL)animated{
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barTintColor = oldColor;
-    [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
-
-}
- */
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -83,20 +57,7 @@
 }
 
 -(void)imageClicked{
-    /*
-    if (imageFrame.zoomScale != 1.0f) {
-        CGSize scrollViewSize = imageFrame.bounds.size;
-        
-        CGFloat w = scrollViewSize.width;
-        CGFloat h = scrollViewSize.height;
-        CGFloat x = (w / 2.0f);
-        CGFloat y = (h / 2.0f);
-        
-        CGRect rectToZoomTo = CGRectMake(x, y, w, h);
-        [imageFrame zoomToRect:rectToZoomTo animated:YES];
-        
-    }
-     */
+
     
     //toggle navigation bar
     if (self.navigationController.navigationBar.hidden == NO)
@@ -109,9 +70,15 @@
     {
         // Show the Navigation Bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
+        self.navigationController.navigationBar.translucent = YES;
+        self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationController.navigationBar.alpha = 0.5;
+        [self.navigationController.navigationBar
+         setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     }
     
-    
+    imageFrame.contentOffset = CGPointMake(0, 0);
 }
 
 -(void)imageDblClicked{

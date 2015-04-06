@@ -46,7 +46,6 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF endswith[c] %@", @".sqlite"];
         self.coreDataFile = [files filteredArrayUsingPredicate:predicate].firstObject;
         
-        [[ResponseHandler instance] readInterests];
     }
 }
 
@@ -127,6 +126,7 @@
     
     }
 
+    [[ResponseHandler instance] readInterests];
     
     self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];

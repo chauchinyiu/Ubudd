@@ -12,7 +12,7 @@
 #import <SocialCommunication/debug.h>
 
 @implementation WURequestUserInfoCell
-@synthesize displayName, lblDateOfBirth, userPhoto;
+@synthesize displayName, userPhoto;
 @end
 
 @interface WURequestUserDetailController ()
@@ -64,15 +64,6 @@
     
     // Configure the cell...
     [cell.displayName setText:[userData objectForKey:@"userName"]];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    cell.lblDateOfBirth.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[userData objectForKey:@"dob"]]];
-    
-    
-    [cell.lblDateOfBirth setText:[NSDateFormatter localizedStringFromDate:[userData objectForKey:@"dob"]
-                                                             dateStyle:NSDateFormatterMediumStyle
-                                                             timeStyle:NSDateFormatterNoStyle]];
     
     NSDictionary* userProfile = [[C2CallPhone currentPhone] getUserInfoForUserid:[userData objectForKey:@"c2CallID"]];
     

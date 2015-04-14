@@ -264,7 +264,10 @@
     
     NSLog(@"went here ...");
     
-    [self.view endEditing:YES];
+    if((![touch.view isKindOfClass:[UITextView class]])
+       && (![touch.view isKindOfClass:[UITextField class]])){
+        [self.view endEditing:YES];
+    }
     return NO; // handle the touch
 }
 

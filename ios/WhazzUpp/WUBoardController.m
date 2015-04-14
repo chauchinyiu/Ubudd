@@ -744,6 +744,12 @@ static BOOL isGroup = YES;
         return;
     }
     
+    //don't know why setTapAction doesn't work
+    if ([cell.reuseIdentifier isEqualToString:@"VideoCellInStream"]) {
+        [self showVideo:((VideoCellInStream*)cell).downloadKey];
+        return;
+    }
+    
     if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
         return;
     }
@@ -1050,10 +1056,8 @@ static BOOL isGroup = YES;
     [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
 
     // Textfield size
-    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
-    CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
-                                constrainedToSize:maximumLabelSize
-                                    lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 120 withFont:[CommonMethods getStdFontType:1] ];
+    
     CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
     [cell.bubbleView setFrame:frame];
     
@@ -1097,9 +1101,6 @@ static BOOL isGroup = YES;
         [cell becomeFirstResponder];
         [menu setMenuVisible:YES animated:YES];
     }];
-    
-
-    
 }
 
 
@@ -1110,28 +1111,33 @@ static BOOL isGroup = YES;
     [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
     
     // Textfield size
-    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
-    CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
-                                constrainedToSize:maximumLabelSize
-                                    lineBreakMode:NSLineBreakByWordWrapping];
-    CGRect frame = CGRectMake(self.view.frame.size.width - expectedLabelSize.width - 90, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 120 withFont:[CommonMethods getStdFontType:1]];
+    
+    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 120 withFont:[CommonMethods getStdFontType:1]];
+    
+    //bubble
+    CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 10, 8, contentSize.width + 12, contentSize.height + 6);
     [cell.bubbleView setFrame:frame];
     
-    frame = CGRectMake(8, 8, expectedLabelSize.width, expectedLabelSize.height);
+    //text
+    frame = CGRectMake(4, 3, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
     
-    frame = CGRectMake(self.view.frame.size.width - expectedLabelSize.width - 90 + 8, expectedLabelSize.height, expectedLabelSize.width + 74, 30);
+    //shadow
+    frame = CGRectMake(self.view.frame.size.width - contentSize.width - 10 + 8, contentSize.height - 10, contentSize.width - 4, 26);
     [cell.shadowImage setFrame:frame];
 
+    //time
     NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
                                                               locale:[NSLocale currentLocale]];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:formatString];
     cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-    frame = CGRectMake(expectedLabelSize.width + 6, expectedLabelSize.height - 6, 64, 21);
+    frame = CGRectMake(contentSize.width - 64, contentSize.height - 15, 64, 21);
     [cell.timeLabel setFrame:frame];
     
-    frame = CGRectMake(expectedLabelSize.width + 90 - 14 - 6, expectedLabelSize.height - 2, 14, 14);
+    //icon
+    frame = CGRectMake(contentSize.width + 10 - 14 - 6, contentSize.height - 14, 14, 14);
     [cell.iconSubmitted setFrame:frame];
     
     [cell setLongpressAction:^{
@@ -1167,6 +1173,116 @@ static BOOL isGroup = YES;
     }];
     
     [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+    
+}
+
+-(void) configureVideoCellIn:(__weak VideoCellInStream *) cell forEvent:(MOC2CallEvent *) elem atIndexPath:(NSIndexPath *) indexPath
+{
+    NSString *text = elem.text;
+    
+    cell.headline.text = elem.senderName?elem.senderName : [[C2CallPhone currentPhone] nameForUserid:elem.contact];
+    cell.userImage.image = [self imageForElement:elem];
+    [self setUserImageAction:cell.userImage forElement:elem];
+    cell.imageNewIndicator.hidden = ![elem.missedDisplay boolValue];
+    cell.downloadKey = text;
+    
+    BOOL failed = NO;
+    if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
+        cell.messageImage.image = [[C2CallPhone currentPhone] thumbnailForKey:text];
+        cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
+        
+        [cell.progress setHidden:YES];
+    } else {
+        UIImage *thumb = [[C2CallPhone currentPhone] thumbnailForKey:text];
+        
+        if (thumb) {
+            cell.messageImage.image = thumb;
+            cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
+        }
+        
+        
+        
+        if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
+            [cell.downloadButton setHidden:YES];
+            [cell monitorDownloadForKey:text];
+        } else if ([[C2CallPhone currentPhone] failedDownloadStatusForKey:text]) {
+            // We need a broken link image here and a download button
+            cell.messageImage.image = [UIImage imageNamed:@"ico_broken_video.png"];
+            [cell.downloadButton setHidden:YES];
+            [cell setLongpressAction:^{
+                UIMenuController *menu = [UIMenuController sharedMenuController];
+                NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+                
+                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
+                [cell setRetransmitAction:^{
+                    [cell download:nil];
+                }];
+                [menulist addObject:item];
+                
+                
+                menu.menuItems = menulist;
+                
+                CGRect rect = cell.messageImage.frame;
+                rect = [cell convertRect:rect fromView:cell.messageImage];
+                [menu setTargetRect:rect inView:cell];
+                [cell becomeFirstResponder];
+                [menu setMenuVisible:YES animated:YES];
+            }];
+            failed = YES;
+        } else {
+            if (!thumb) {
+                [cell retrieveVideoThumbnailForKey:text];
+            } else {
+                [cell.downloadButton setHidden:NO];
+            }
+            [cell.progress setHidden:YES];
+        }
+    }
+    
+    if (!failed) {
+        [cell setTapAction:^{
+            [self showVideo:text];
+        }];
+        
+        [cell setLongpressAction:^{
+            UIMenuController *menu = [UIMenuController sharedMenuController];
+            NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+            
+            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Share", @"MenuItem") action:@selector(shareAction:)];
+            [cell setShareAction:^{
+                [self shareRichMessageForKey:text];
+            }];
+            [menulist addObject:item];
+            
+            
+            /*
+             item = [[UIMenuItem alloc] initWithTitle:@"Copy" action:@selector(copyAction:)];
+             [cell setCopyAction:^{
+             [self copyMovieForKey:text];
+             }];
+             [menulist addObject:item];
+             
+             */
+            
+            item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Save", @"MenuItem") action:@selector(saveAction:)];
+            [cell setSaveAction:^{
+                [[C2CallAppDelegate appDelegate] waitIndicatorWithTitle:NSLocalizedString(@"Saving Video to Photo Album", @"Title") andWaitMessage:nil];
+                
+                [[C2CallPhone currentPhone] saveToAlbum:text withCompletionHandler:^(NSURL *assetURL, NSError *error) {
+                    [[C2CallAppDelegate appDelegate] waitIndicatorStop];
+                }];
+            }];
+            [menulist addObject:item];
+            
+            
+            menu.menuItems = menulist;
+            CGRect rect = cell.messageImage.frame;
+            rect = [cell convertRect:rect fromView:cell.messageImage];
+            [menu setTargetRect:rect inView:cell];
+            [cell becomeFirstResponder];
+            [menu setMenuVisible:YES animated:YES];
+        }];
+    }
     
 }
 
@@ -1864,18 +1980,8 @@ static BOOL isGroup = YES;
 
 -(CGFloat) messageCellOutHeight:(MOC2CallEvent *) elem font:(UIFont *) font
 {
-    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
-    
-    CGSize expectedLabelSize = [elem.text sizeWithFont:[CommonMethods getStdFontType:1]
-                                     constrainedToSize:maximumLabelSize
-                                         lineBreakMode:NSLineBreakByWordWrapping];
-    
-    CGFloat sz = expectedLabelSize.height + 34;
-    if (sz < 30)
-        sz = 30;
-    
-    
-    return sz;
+    CGSize sz = [self getContentSizeForText:elem.text withWidth:self.view.frame.size.width - 120 withFont:[CommonMethods getStdFontType:1]];
+    return sz.height + 34;
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -2046,5 +2152,92 @@ static BOOL isGroup = YES;
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
+
+-(NSArray*)getSeparatedLinesFromString:(NSString*)text withWidth:(int)width withFont:(UIFont*)font
+{
+
+    
+    NSMutableArray* lines = [[NSMutableArray alloc] init];
+    
+    NSCharacterSet* wordSeparators = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    
+    NSString* currentLine = text;
+    int textLength = text.length;
+    
+    NSRange rCurrentLine = NSMakeRange(0, textLength);
+    NSRange rWhitespace = NSMakeRange(0,0);
+    NSRange rRemainingText = NSMakeRange(0, textLength);
+    BOOL done = NO;
+    while ( !done )
+    {
+        // determine the next whitespace word separator position
+        rWhitespace.location = rWhitespace.location + rWhitespace.length;
+        rWhitespace.length = textLength - rWhitespace.location;
+        rWhitespace = [text rangeOfCharacterFromSet: wordSeparators options: NSCaseInsensitiveSearch range: rWhitespace];
+        if ( rWhitespace.location == NSNotFound )
+        {
+            rWhitespace.location = textLength;
+            done = YES;
+        }
+        
+        NSRange rTest = NSMakeRange(rRemainingText.location, rWhitespace.location-rRemainingText.location);
+        
+        NSString* textTest = [text substringWithRange: rTest];
+        CGSize sizeTest = [self getSizeForText:textTest withWidth:width + 1024 withFont:font] ;
+
+        if ( sizeTest.width > width )
+        {
+            [lines addObject: [currentLine stringByTrimmingCharactersInSet:wordSeparators]];
+            rRemainingText.location = rCurrentLine.location + rCurrentLine.length;
+            rRemainingText.length = textLength-rRemainingText.location;
+            continue;
+        }
+        
+        rCurrentLine = rTest;
+        currentLine = textTest;
+    }
+
+    NSString* remainingText = [text substringWithRange: rRemainingText];
+    [lines addObject: [remainingText stringByTrimmingCharactersInSet:wordSeparators]];
+    
+    return lines;
+}
+
+
+-(CGSize)getSizeForText:(NSString*)text withWidth:(int)width withFont:(UIFont*)font{
+    CGSize maximumLabelSize = CGSizeMake(width, CGFLOAT_MAX);
+    
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName: font}];
+    CGRect rect = [attributedText boundingRectWithSize:maximumLabelSize
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    CGSize sizeTest = CGSizeMake(ceilf(rect.size.width), ceilf(rect.size.height));
+    return sizeTest;
+}
+
+
+-(CGSize)getContentSizeForText:(NSString*)text withWidth:(int)width withFont:(UIFont*)font{
+    CGSize maximumLabelSize = CGSizeMake(width, CGFLOAT_MAX);
+    
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName: font}];
+    CGRect rect = [attributedText boundingRectWithSize:maximumLabelSize
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    CGSize sizeTest = CGSizeMake(ceilf(rect.size.width), ceilf(rect.size.height));
+    
+    
+    NSArray* lines = [self getSeparatedLinesFromString:text withWidth:width withFont:font];
+    NSString *lastLine=[lines lastObject];
+    CGSize lastSize = [self getSizeForText:lastLine withWidth:width withFont:font];
+    if ((width - lastSize.width) < 64) {
+        sizeTest.height = sizeTest.height + 15;
+    }
+    else if(lines.count == 1){
+        //single line, add width of time label
+        sizeTest.width = sizeTest.width + 64;
+    }
+    return sizeTest;
+}
+
 
 @end

@@ -10,7 +10,7 @@
 #import <SocialCommunication/C2TapImageView.h>
 
 @interface WURequestUserInfoCell : UITableViewCell
-@property(nonatomic, weak) IBOutlet UILabel *displayName, *lblDateOfBirth;
+@property(nonatomic, weak) IBOutlet UILabel *displayName;
 @property(nonatomic, weak) IBOutlet C2TapImageView *userPhoto;
 
 @end

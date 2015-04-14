@@ -355,7 +355,15 @@ typedef enum : NSUInteger {
     
     NSLog(@"went here ...");
     
-    [self.view endEditing:YES];
+    
+    if(![touch.view isKindOfClass:[UITextView class]]){
+        if (touch.view != self.submitButton) {
+            [self.view endEditing:YES];
+        }
+    }
+    
+    
+    
     return NO; // handle the touch
 }
 

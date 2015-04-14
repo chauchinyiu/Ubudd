@@ -122,7 +122,7 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return favoritesCellHeight;
+    return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,6 +151,7 @@
     
     return favocell;
 }
+
 
 
 
@@ -243,7 +244,7 @@
 */
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"RequestUserDetail"]) {
+    if([segue.identifier isEqualToString:@"RequestUserDetail"] || [segue.identifier isEqualToString:@"RequestUserDetail2"]) {
         NSMutableDictionary* userData = [[NSMutableDictionary alloc] init];
         
         [userData setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)[sender tag]]] forKey:@"userName"];

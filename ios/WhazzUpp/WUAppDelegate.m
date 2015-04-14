@@ -65,7 +65,7 @@
         
         [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0]];
     }
-    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor blackColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
 
@@ -95,8 +95,8 @@
     
     self.usePhotoEffects = SC_PHOTO_USERCHOICE;
 
-    [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:225./255. green:255./255. blue:197./255. alpha:1.]];
-    [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:255./255. green:255./255. blue:255./255. alpha:1.]];
+    [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:44./255. green:138./255. blue:251./255. alpha:1.]];
+    [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:231./255. green:230./255. blue:236./255. alpha:1.]];
     [[SCBubbleViewIn appearance] setBubbleTypeIn:SC_BUBBLE_OUT_IOS7];
     [[SCBubbleViewOut appearance] setBubbleTypeOut:SC_BUBBLE_OUT_IOS7];
     

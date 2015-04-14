@@ -90,6 +90,13 @@
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readGroupInfo:error:)];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hidekeybord)];
+    [tap setDelegate:self];
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -315,8 +322,15 @@
                             [groups removeObjectAtIndex:i];
                         }
                     }
-                    
-                    [cell.lblJoinStatus setText:NSLocalizedString(@"Non member", @"")];
+                    if (userType == 3){
+                        [cell.lblJoinStatus setText:NSLocalizedString(@"Non member", @"")];
+                    }
+                    if (userType == 4){
+                        [cell.lblJoinStatus setText:@"Request pending"];
+                    }
+                    if (userType == 5){
+                        [cell.lblJoinStatus setText:@"Closed"];
+                    }
                 }
                 
             }
@@ -385,7 +399,7 @@
         
         
         if ([self.group.groupOwner isEqualToString:userid]) {
-            cell.textLabel.textColor = [UIColor blueColor];
+            cell.textLabel.textColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] ;
             [cell.textLabel setText:[cell.textLabel.text stringByAppendingString:NSLocalizedString(@"Group Admin", @"")]];
         } else {
             cell.textLabel.textColor = [UIColor darkTextColor];
@@ -590,16 +604,19 @@
         groupInfo = [[NSMutableDictionary alloc] initWithDictionary:res.data];
         NSNumber* joinStatus = [groupInfo objectForKey:@"isMember"];
         if(joinStatus.intValue == 0){
-            userType = 3;
+            userType = 3; //none
         }
         else if (joinStatus.intValue == 1) {
-            userType = 2;
+            userType = 2; //accepted
         }
         else if (joinStatus.intValue == 2) {
-            userType = 1;
+            userType = 1; //admin
+        }
+        else if (joinStatus.intValue == 3) {
+            userType = 4; //request pending
         }
         else{
-            userType = 4;
+            userType = 5; //request rejected
         }
         [self.tableView reloadData];
         
@@ -1027,6 +1044,19 @@
     }
     [self.tableView reloadData];
 }
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    NSLog(@"went here ...");
+    
+    if((![touch.view isKindOfClass:[UITextView class]])
+       && (![touch.view isKindOfClass:[UITextField class]])){
+        [self.view endEditing:YES];
+    }
+    
+    return NO; // handle the touch
+}
+
 
 
 @end

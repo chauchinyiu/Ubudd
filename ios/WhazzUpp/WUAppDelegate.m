@@ -21,6 +21,7 @@
 #import "WUFavoritesViewController.h"
 #import "WURegistrationController.h"
 #import "WUPhotoViewController.h"
+#import "WUChatHistoryController.h"
 
 @interface WUAppDelegate ()
 
@@ -219,6 +220,12 @@
         else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Announcement", @"") message:[message objectForKey:@"alert"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
+        }
+        
+        UIViewController* mainController = self.window.rootViewController;
+        if ([mainController isKindOfClass:[WUChatHistoryController class]]) {
+            WUChatHistoryController* chatController = (WUChatHistoryController*)mainController;
+            [chatController reloadPage];
         }
     }
 }

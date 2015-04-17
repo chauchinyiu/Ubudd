@@ -9,6 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "Constant.h"
 
+@interface WUListEntry : NSObject
+
+@property NSMutableString* source;
+@property NSMutableDictionary* data;
+@property NSIndexPath* sourcePath;
+@property NSIndexPath* mapToPath;
+
+@end
+
+
+
 @interface CommonMethods : NSObject
 
 + (float)osVersion;

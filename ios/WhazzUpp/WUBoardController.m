@@ -30,21 +30,34 @@
 #import <SocialCommunication/C2TapImageView.h>
 #import <SocialCommunication/FCLocation.h>
 
-#import "CommonMethods.h"
 #import "WUPhotoViewController.h"
+#import "DataRequest.h"
+#import "WebserviceHandler.h"
+#import "ResponseBase.h"
+#import "DataResponse.h"
+#import "CommonMethods.h"
+
+
+@implementation WUMessageTimeCell
+@synthesize timeLabel;
+@end
+
+@implementation WUMemberJoinCell
+@synthesize timeLabel;
+@end
 
 
 @implementation WUCreateGroupCell
-@synthesize nameLabel, timeLabel, sectiontimeLabel, sectiontimeview, showPreviousMsgView, createGroupView;
+@synthesize nameLabel, timeLabel, showPreviousMsgView, createGroupView;
 @end
 
 
 @implementation WUMessageInCell
-@synthesize textLabel, timeLabel, shadowImage;
+@synthesize textLabel;
 @end
 
 @implementation WUMessageOutCell
-@synthesize textLabel, timeLabel, shadowImage;
+@synthesize textLabel;
 @end
 
 @implementation WUImageInCell
@@ -52,16 +65,15 @@
 @end
 
 @implementation WUImageOutCell
-@synthesize eventImage, shadowImage;
+@synthesize eventImage;
 @end
 
 @implementation WULocationInCell
-@synthesize timeLabel;
 @end
 
 
 @implementation WUAudioInCell
-@synthesize timeLabel, playButton, playSlider, playView, isPlaying, timer, player;
+@synthesize playButton, playSlider, playView, isPlaying, timer, player;
 
 - (IBAction)playBtnPress:(id)sender{
     if (!isPlaying) {
@@ -138,27 +150,22 @@
 @end
 
 @implementation WUVideoInCell
-@synthesize timeLabel;
 @end
 
 @implementation WUContactInCell
-@synthesize timeLabel;
 @end
 
 @implementation WUFriendInCell
-@synthesize timeLabel;
 @end
 
 @implementation WUCallInCell
-@synthesize timeLabel;
 @end
 
 @implementation WULocationOutCell
-@synthesize shadowImage;
 @end
 
 @implementation WUAudioOutCell
-@synthesize shadowImage, playButton, playSlider, playView, isPlaying, timer, player;
+@synthesize playButton, playSlider, playView, isPlaying, timer, player;
 
 - (IBAction)playBtnPress:(id)sender{
     if (!isPlaying) {
@@ -236,19 +243,15 @@
 @end
 
 @implementation WUVideoOutCell
-@synthesize shadowImage;
 @end
 
 @implementation WUContactOutCell
-@synthesize shadowImage;
 @end
 
 @implementation WUFriendOutCell
-@synthesize shadowImage;
 @end
 
 @implementation WUCallOutCell
-@synthesize shadowImage;
 @end
 
 
@@ -257,6 +260,11 @@
     int groupHeadType;
     NSMutableArray* friendList;
     BOOL isVisible;
+    
+    NSMutableArray* headers;
+    NSMutableArray* entries;
+    NSMutableArray* memberJoinList;
+    NSMutableArray* sectionSize;
 }
 
 @property (nonatomic, strong) NSMutableDictionary  *smallImageCache;
@@ -293,12 +301,20 @@ static BOOL isGroup = YES;
     }
     groupHeadType = 0;
     friendList = [ResponseHandler instance].friendList;
-    
+    memberJoinList = [[NSMutableArray alloc] init];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.translucent = NO;
     isVisible = YES;
+    if(self.targetUserid){
+        if(isGroup){
+            [self readGroupMemberJoin];
+        }
+        else{
+            [self rebuildListEntries];
+        }
+    }
     [self.tableView reloadData];
 }
 
@@ -320,61 +336,49 @@ static BOOL isGroup = YES;
 {
  
     NSInteger lastSection = self.tableView.numberOfSections - 1 ;
-    NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:([self.tableView numberOfRowsInSection:lastSection] - 1) inSection:lastSection];
-    [[self tableView] scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    NSInteger rowCnt = [self.tableView numberOfRowsInSection:lastSection];
+    if (rowCnt > 0) {
+        NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:([self.tableView numberOfRowsInSection:lastSection] - 1) inSection:lastSection];
+        [[self tableView] scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 
 }
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (self.targetUserid && [[self.fetchedResultsController fetchedObjects] count] > 0) {
-        return [[self.fetchedResultsController sections] count];
+    if (self.targetUserid) {
+        return [sectionSize count];
     }
     else{
         return 1;
     }
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.targetUserid) {
-        if (groupHeadType == 2 && section == 0) {
-            return 0;
-        }
-        else{
-            if ([self.fetchedResultsController fetchedObjects].count == 0) {
-                return 1;
-            }
-            
-            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-            return [sectionInfo numberOfObjects];
-        }
-    }
-    else{
-        return [ResponseHandler instance].broadcastList.count;
-    }
-}
-
-
-
-
-
-
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    [super tableView:tableView heightForHeaderInSection:section];
     if(self.targetUserid){
-        CGFloat h = 0.;
-        if (isGroup && section == 0) {
-            h += 72;
+        WUListEntry* e = [headers objectAtIndex:section];
+        if ([e.source isEqualToString:@"InitHeader"]) {
+            
+            //call super to set previousMessagesButton
+            [super tableView:tableView heightForHeaderInSection:section];
+            
+            CGFloat h = 0.;
+            if (isGroup && section == 0) {
+                h += 72;
+            }
+            if (section == 0 && !self.previousMessagesButton.hidden) {
+                h += 40;
+            }
+            return h;
         }
-        if (section == 0 && !self.previousMessagesButton.hidden) {
-            h += 40;
+        else if ([e.source isEqualToString:@"Time"]) {
+            return 35;
         }
-        if ([[self.fetchedResultsController fetchedObjects] count] > 0) {
-            h += 28;
+        else{
+            return 0;
         }
-        return h;
     }
     else{
         return 0;
@@ -385,92 +389,91 @@ static BOOL isGroup = YES;
 {
     
     if(self.targetUserid){
-        WUCreateGroupCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUCreateGroupCell"];
-        CGFloat h = 0;
-        CGRect f;
+        WUListEntry* e = [headers objectAtIndex:section];
+        if ([e.source isEqualToString:@"InitHeader"]) {
         
-        if (isGroup && section == 0) {
-            cell.createGroupView.hidden = NO;
-            MOC2CallGroup* mg = [[SCDataManager instance] groupForGroupid:self.targetUserid];
-            NSString* ownerName;
-            NSDictionary* d = [[C2CallPhone currentPhone] getUserInfoForUserid:mg.groupOwner];
-            ownerName = [d objectForKey:@"Firstname"];
-            for (int i = 0; i < friendList.count; i++) {
-                WUAccount* a = [friendList objectAtIndex:i];
-                if ([a.c2CallID isEqualToString:mg.groupOwner]) {
-                    ownerName = a.name;
+            WUCreateGroupCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUCreateGroupCell"];
+            CGFloat h = 0;
+            CGRect f;
+            
+            if (isGroup && section == 0) {
+                cell.createGroupView.hidden = NO;
+                MOC2CallGroup* mg = [[SCDataManager instance] groupForGroupid:self.targetUserid];
+                NSString* ownerName;
+                NSDictionary* d = [[C2CallPhone currentPhone] getUserInfoForUserid:mg.groupOwner];
+                ownerName = [d objectForKey:@"Firstname"];
+                for (int i = 0; i < friendList.count; i++) {
+                    WUAccount* a = [friendList objectAtIndex:i];
+                    if ([a.c2CallID isEqualToString:mg.groupOwner]) {
+                        ownerName = a.name;
+                    }
                 }
-            }
-            NSString* groupName = mg.groupName;
-            NSDate* createTime;
-            NSMutableArray* groups = [[ResponseHandler instance] groupList];
-            for (int i = 0; i < groups.count; i++) {
-                WUAccount* a = [groups objectAtIndex:i];
-                if ([a.c2CallID isEqualToString:self.targetUserid]) {
-                    groupName = a.name;
-                    createTime = a.createTime;
+                NSString* groupName = mg.groupName;
+                NSDate* createTime;
+                NSMutableArray* groups = [[ResponseHandler instance] groupList];
+                for (int i = 0; i < groups.count; i++) {
+                    WUAccount* a = [groups objectAtIndex:i];
+                    if ([a.c2CallID isEqualToString:self.targetUserid]) {
+                        groupName = a.name;
+                        createTime = a.createTime;
+                    }
                 }
+                
+                if (createTime) {
+                    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
+                                                                              locale:[NSLocale currentLocale]];
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+                    [dateFormatter setDateFormat:formatString];
+                    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:createTime]];
+                }
+                
+                cell.nameLabel.text = [NSString stringWithFormat:@"%@ created a group %@", ownerName, groupName];
+                
+                f = cell.createGroupView.frame;
+                f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+                cell.createGroupView.frame = f;
+                
+                h += 72.;
+            }
+            else{
+                cell.createGroupView.hidden = YES;
             }
             
-            if (createTime) {
-                NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
-                                                                          locale:[NSLocale currentLocale]];
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
-                [dateFormatter setDateFormat:formatString];
-                cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:createTime]];
+            if (section == 0 && !self.previousMessagesButton.hidden) {
+                cell.showPreviousMsgView.hidden = NO;
+                f = cell.showPreviousMsgView.frame;
+                f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+                f.origin.y = h;
+                cell.showPreviousMsgView.frame = f;
+                h += 40.;
             }
+            else{
+                cell.showPreviousMsgView.hidden = YES;
+            }
+            return cell;
+        }
+        else if ([e.source isEqualToString:@"Time"]) {
+            WUMessageTimeCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageTimeCell"];
+
+            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
+                                                                      locale:[NSLocale currentLocale]];
             
-            cell.nameLabel.text = [NSString stringWithFormat:@"%@ created a group %@", ownerName, groupName];
-            
-            f = cell.createGroupView.frame;
-            f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
-            cell.createGroupView.frame = f;
-            
-            h += 72.;
-        }
-        else{
-            cell.createGroupView.hidden = YES;
-        }
-        
-        if (section == 0 && !self.previousMessagesButton.hidden) {
-            cell.showPreviousMsgView.hidden = NO;
-            f = cell.showPreviousMsgView.frame;
-            f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
-            f.origin.y = h;
-            cell.showPreviousMsgView.frame = f;
-            h += 40.;
-        }
-        else{
-            cell.showPreviousMsgView.hidden = YES;
-        }
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-        MOC2CallEvent *elem = nil;
-        @try {
-            elem = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        }
-        @catch (NSException *exception) {
-        }
-        
-        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
-                                                                  locale:[NSLocale currentLocale]];
-        if (elem) {
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:formatString];
-            cell.sectiontimeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-            cell.sectiontimeview.hidden = NO;
+            cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[e.data objectForKey:@"Time"]]];
             
-            f = cell.sectiontimeview.frame;
+            CGRect f;
+            f = cell.timeLabel.frame;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
-            f.origin.y = h;
-            cell.sectiontimeview.frame = f;
+            f.origin.y = 16;
+            cell.timeLabel.frame = f;
+            
+            return cell;
         }
         else{
-            cell.sectiontimeview.hidden = YES;
+            return nil;
         }
-        return cell;
-        
         
     }
     else{
@@ -478,57 +481,232 @@ static BOOL isGroup = YES;
     }
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.targetUserid) {
+        return ((NSNumber*)[sectionSize objectAtIndex:section]).integerValue;
+    }
+    else{
+        return [ResponseHandler instance].broadcastList.count;
+    }
+}
+
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.targetUserid) {
+        UITableViewCell* cell;
+        for (int i = 0; i < entries.count; i++) {
+            WUListEntry* e = [entries objectAtIndex:i];
+            if (e.mapToPath.row == indexPath.row && e.mapToPath.section == indexPath.section) {
+                if ([e.source isEqualToString:@"MemberJoin"]) {
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMemberJoinCell"];
+                    
+                    NSString* displayName;
+                    NSString* memberID = [e.data objectForKey:@"memberID"];
+                    SCGroup *group = [[SCGroup alloc] initWithGroupid:self.targetUserid];
+                    MOC2CallUser *member = [[SCDataManager instance] userForUserid:memberID];
+                    if (!member) {
+                        
+                        NSString *firstname = [group nameForGroupMember:memberID];
+                        if (firstname) {
+                            displayName = firstname;
+                        }
+                    }
+                    else {
+                        displayName = [member.displayName copy];
+                    }
+                    for (int i = 0; i < friendList.count; i++) {
+                        WUAccount* a = [friendList objectAtIndex:i];
+                        if ([a.c2CallID isEqualToString:memberID]) {
+                            displayName = a.name;
+                        }
+                    }
+                    ((WUMemberJoinCell*)cell).timeLabel.text = [NSString stringWithFormat:@"%@ added %@", group.groupName, displayName];
+                }
+
+                if ([e.source isEqualToString:@"Message"]) {
+                    
+                    MOC2CallEvent *elem = [self.fetchedResultsController objectAtIndexPath:e.sourcePath];
+                    NSString *eventType = elem.eventType;
+                    NSString *text = elem.text;
+                    
+                    if ([eventType isEqualToString:@"MessageIn"]) {
+                        if ([text hasPrefix:@"image://"]){
+                            cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
+                            [self configureImageCellIn:cell forEvent:elem atIndexPath:e.sourcePath];
+                        }
+                        else if([text hasPrefix:@"video://"] ||
+                                [text hasPrefix:@"audio://"] ||
+                                [text hasPrefix:@"file://"] ||
+                                [text hasPrefix:@"loc://"] ||
+                                [text hasPrefix:@"BEGIN:VCARD"] ||
+                                [text hasPrefix:@"vcard://"] ||
+                                [text hasPrefix:@"friend://"]) {
+                            cell = [super tableView:tableView cellForRowAtIndexPath:e.sourcePath];
+                        }
+                        else{
+                            cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageInCell"];
+                            [self configureMessageCellIn:cell forEvent:elem atIndexPath:e.sourcePath];
+                        }
+                    }
+                    else{
+                        if ([text hasPrefix:@"image://"]){
+                            cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageOutCell"];
+                            [self configureImageCellOut:cell forEvent:elem atIndexPath:e.sourcePath];
+                        }
+                        else if([text hasPrefix:@"video://"] ||
+                                [text hasPrefix:@"audio://"] ||
+                                [text hasPrefix:@"file://"] ||
+                                [text hasPrefix:@"loc://"] ||
+                                [text hasPrefix:@"BEGIN:VCARD"] ||
+                                [text hasPrefix:@"vcard://"] ||
+                                [text hasPrefix:@"friend://"]) {
+                            cell = [super tableView:tableView cellForRowAtIndexPath:e.sourcePath];
+                        }
+                        else{
+                            cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageOutCell"];
+                            [self configureMessageCellOut:cell forEvent:elem atIndexPath:e.sourcePath];
+                        }
+                        
+                    }
+                    
+                    @try {
+                        
+                        [[SCDataManager instance] markAsRead:elem];
+                    }
+                    @catch (NSException *exception) {
+                    }
+            
+                }
+                else if ([e.source isEqualToString:@"NoMessage"]) {
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"SCNoMessagesCell"];
+                }
+                return cell;
+            }
+        }
+    }
+    else{
+        WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
+        if(b.isImage){
+            
+            WUImageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
+            
+            cell.eventImage.image = [UIImage imageWithData:b.imgData];
+            [cell.progress setHidden:YES];
+            
+            [cell setTapAction:^{
+                NSMutableArray *imageList = [NSMutableArray array];
+                for (int i = 0; i < [ResponseHandler instance].broadcastList.count; i++) {
+                    WUBroadcast *c = [[ResponseHandler instance].broadcastList objectAtIndex:i];
+                    if (c.isImage) {
+                        NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
+                        [info setValue:@"YES" forKey:@"IsBroadcast"];
+                        [info setObject:[NSString stringWithFormat:@"%d", i] forKey:@"image"];
+                        [imageList addObject:info];
+                    }
+                }
+                
+                NSString * storyboardName = @"MainStoryboard";
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+                [vc showPhotos:imageList currentPhoto:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }];
+            
+            if (!b.imgData) {
+                [ResponseHandler instance].bcdelegate = self;
+            }
+            
+            return cell;
+        }
+        else{
+            WUMessageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageInCell"];
+            
+            NSString *text = b.message;
+            [cell.textLabel setText:text];
+            [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
+            
+            // Textfield size
+            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
+            CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
+                                        constrainedToSize:maximumLabelSize
+                                            lineBreakMode:NSLineBreakByWordWrapping];
+            CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
+            [cell.bubbleView setFrame:frame];
+            
+            frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);
+            [cell.textLabel setFrame:frame];
+            return cell;
+        }
+    }
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.targetUserid) {
         UITableViewCell* cell;
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+        for (int i = 0; i < entries.count; i++) {
+            WUListEntry* e = [entries objectAtIndex:i];
+            if (e.mapToPath.row == indexPath.row && e.mapToPath.section == indexPath.section) {
+                if ([e.source isEqualToString:@"MemberJoin"]) {
+                    return 40;
+                }
+                cell = [self cellForElement:[self.fetchedResultsController objectAtIndexPath:e.sourcePath]];
+                if ([cell isKindOfClass:[ImageCellInStream class]]) {
+                    return 212;
+                }
+                if ([cell isKindOfClass:[ImageCellOutStream class]]) {
+                    return 212;
+                }
+                if ([cell isKindOfClass:[LocationCellIn class]]) {
+                    return 118;
+                }
+                if ([cell isKindOfClass:[LocationCellOut class]]) {
+                    return 118;
+                }
+                if ([cell isKindOfClass:[AudioCellIn class]]) {
+                    return 92;
+                }
+                if ([cell isKindOfClass:[AudioCellOut class]]) {
+                    return 92;
+                }
+                if ([cell isKindOfClass:[VideoCellIn class]]) {
+                    return 120;
+                }
+                if ([cell isKindOfClass:[VideoCellOut class]]) {
+                    return 120;
+                }
+                if ([cell isKindOfClass:[FriendCellIn class]]) {
+                    return 77;
+                }
+                if ([cell isKindOfClass:[FriendCellOut class]]) {
+                    return 77;
+                }
+                if ([cell isKindOfClass:[ContactCellIn class]]) {
+                    return 77;
+                }
+                if ([cell isKindOfClass:[ContactCellOut class]]) {
+                    return 77;
+                }
+                if ([cell isKindOfClass:[CallCellIn class]]) {
+                    return 105;
+                }
+                if ([cell isKindOfClass:[CallCellOut class]]) {
+                    return 105;
+                }
+                if ([cell isKindOfClass:[MessageCellInStream class]]) {
+                    return [self messageCellInHeight:[self.fetchedResultsController objectAtIndexPath:e.sourcePath] font:nil];
+                }
+                if ([cell isKindOfClass:[MessageCellOutStream class]]) {
+                    return [self messageCellOutHeight:[self.fetchedResultsController objectAtIndexPath:e.sourcePath] font:nil];
+                }
+                
+                
+                return 0;
+                
+            }
+        }
         
-        cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-        if ([cell isKindOfClass:[ImageCellInStream class]]) {
-            return 228;
-        }
-        if ([cell isKindOfClass:[ImageCellOutStream class]]) {
-            return 228;
-        }
-        if ([cell isKindOfClass:[LocationCellIn class]]) {
-            return 152;
-        }
-        if ([cell isKindOfClass:[LocationCellOut class]]) {
-            return 152;
-        }
-        if ([cell isKindOfClass:[AudioCellIn class]]) {
-            return 101;
-        }
-        if ([cell isKindOfClass:[AudioCellOut class]]) {
-            return 101;
-        }
-        if ([cell isKindOfClass:[VideoCellIn class]]) {
-            return 133;
-        }
-        if ([cell isKindOfClass:[VideoCellOut class]]) {
-            return 133;
-        }
-        if ([cell isKindOfClass:[FriendCellIn class]]) {
-            return 121;
-        }
-        if ([cell isKindOfClass:[FriendCellOut class]]) {
-            return 121;
-        }
-        if ([cell isKindOfClass:[ContactCellIn class]]) {
-            return 111;
-        }
-        if ([cell isKindOfClass:[ContactCellOut class]]) {
-            return 111;
-        }
-        if ([cell isKindOfClass:[CallCellIn class]]) {
-            return 105;
-        }
-        if ([cell isKindOfClass:[CallCellOut class]]) {
-            return 105;
-        }
-        
-        return [super tableView:tableView heightForRowAtIndexPath:ip];
     }
     else{
         WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
@@ -559,11 +737,6 @@ static BOOL isGroup = YES;
     [super configureCell:cell atIndexPath:ip];
     
     
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
-                                                              locale:[NSLocale currentLocale]];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:formatString];
-    
     if ([cell isKindOfClass:[WULocationOutCell class]]) {
         WULocationOutCell *c = (WULocationOutCell*)cell;
         [c.headline setHidden:YES];
@@ -576,10 +749,6 @@ static BOOL isGroup = YES;
         frame.origin.x = self.view.frame.size.width - frame.size.width;
         [c.bubbleView setFrame:frame];
         
-        frame = c.shadowImage.frame;
-        frame.origin.x = c.bubbleView.frame.origin.x + 8;
-        [c.shadowImage setFrame:frame];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
     else if ([cell isKindOfClass:[WUAudioOutCell class]]) {
@@ -590,11 +759,6 @@ static BOOL isGroup = YES;
         frame.origin.x = self.view.frame.size.width - frame.size.width;
         [c.bubbleView setFrame:frame];
         
-        frame = c.shadowImage.frame;
-        frame.origin.x = c.bubbleView.frame.origin.x + 8;
-        [c.shadowImage setFrame:frame];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-        
     }
     else if ([cell isKindOfClass:[WUVideoOutCell class]]) {
         WUVideoOutCell *c = (WUVideoOutCell*)cell;
@@ -603,11 +767,6 @@ static BOOL isGroup = YES;
         CGRect frame = c.bubbleView.frame;
         frame.origin.x = self.view.frame.size.width - frame.size.width;
         [c.bubbleView setFrame:frame];
-        
-        frame = c.shadowImage.frame;
-        frame.origin.x = c.bubbleView.frame.origin.x + 8;
-        [c.shadowImage setFrame:frame];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
     else if ([cell isKindOfClass:[WUFriendOutCell class]]) {
@@ -618,11 +777,6 @@ static BOOL isGroup = YES;
         frame.origin.x = self.view.frame.size.width - frame.size.width;
         [c.bubbleView setFrame:frame];
         
-        frame = c.shadowImage.frame;
-        frame.origin.x = c.bubbleView.frame.origin.x + 8;
-        [c.shadowImage setFrame:frame];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-        
     }
     else if ([cell isKindOfClass:[WUContactOutCell class]]) {
         WUContactOutCell *c = (WUContactOutCell*)cell;
@@ -632,11 +786,6 @@ static BOOL isGroup = YES;
         frame.origin.x = self.view.frame.size.width - frame.size.width;
         [c.bubbleView setFrame:frame];
         
-        frame = c.shadowImage.frame;
-        frame.origin.x = c.bubbleView.frame.origin.x + 8;
-        [c.shadowImage setFrame:frame];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-        
     }
     else if ([cell isKindOfClass:[WUCallOutCell class]]) {
         WUCallOutCell *c = (WUCallOutCell*)cell;
@@ -645,11 +794,6 @@ static BOOL isGroup = YES;
         CGRect frame = c.bubbleView.frame;
         frame.origin.x = self.view.frame.size.width - frame.size.width;
         [c.bubbleView setFrame:frame];
-        
-        frame = c.shadowImage.frame;
-        frame.origin.x = c.bubbleView.frame.origin.x + 8;
-        [c.shadowImage setFrame:frame];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
         
     }
     else if ([cell isKindOfClass:[WULocationInCell class]]) {
@@ -664,7 +808,6 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
     else if ([cell isKindOfClass:[WUAudioInCell class]]) {
         WUAudioInCell *c = (WUAudioInCell*)cell;
@@ -679,7 +822,6 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
     else if ([cell isKindOfClass:[WUVideoInCell class]]) {
         WUVideoInCell *c = (WUVideoInCell*)cell;
@@ -690,7 +832,6 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
     else if ([cell isKindOfClass:[WUFriendInCell class]]) {
         WUFriendInCell *c = (WUFriendInCell*)cell;
@@ -701,7 +842,6 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
     else if ([cell isKindOfClass:[WUContactInCell class]]) {
         WUContactInCell *c = (WUContactInCell*)cell;
@@ -712,7 +852,6 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
     else if ([cell isKindOfClass:[WUCallInCell class]]) {
         WUCallInCell *c = (WUCallInCell*)cell;
@@ -723,7 +862,6 @@ static BOOL isGroup = YES;
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
         c.headline.attributedText = [[NSAttributedString alloc] initWithString:c.headline.text
                                                                     attributes:underlineAttribute];
-        c.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     }
 }
 
@@ -776,11 +914,6 @@ static BOOL isGroup = YES;
 {
     NSString *text = elem.text;
     
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
-                                                              locale:[NSLocale currentLocale]];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:formatString];
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
     
     if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
         cell.eventImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
@@ -879,17 +1012,6 @@ static BOOL isGroup = YES;
     CGRect frame = cell.bubbleView.frame;
     frame.origin.x = self.view.frame.size.width - frame.size.width;
     [cell.bubbleView setFrame:frame];
-    
-    frame = cell.shadowImage.frame;
-    frame.origin.x = cell.bubbleView.frame.origin.x + 8;
-    [cell.shadowImage setFrame:frame];
-    
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
-                                                              locale:[NSLocale currentLocale]];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:formatString];
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-    
     
     if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
         cell.eventImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
@@ -1054,28 +1176,17 @@ static BOOL isGroup = YES;
     NSString *text = elem.text;
     [cell.textLabel setText:text];
     [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
-
-    // Textfield size
-    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 120 withFont:[CommonMethods getStdFontType:1] ];
     
-    CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
+    // Textfield size
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
+    
+    //bubble
+    CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 17, expectedLabelSize.height + 6);
     [cell.bubbleView setFrame:frame];
     
-    frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);
+    //text
+    frame = CGRectMake(12, 3, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
-
-    frame = CGRectMake(12, expectedLabelSize.height, expectedLabelSize.width + 74, 30);
-    [cell.shadowImage setFrame:frame];
-
-    
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
-                                                              locale:[NSLocale currentLocale]];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:formatString];
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-    frame = CGRectMake(expectedLabelSize.width + 10, expectedLabelSize.height - 6, 64, 21);
-    [cell.timeLabel setFrame:frame];
-    
     
     [cell setLongpressAction:^{
         UIMenuController *menu = [UIMenuController sharedMenuController];
@@ -1111,30 +1222,18 @@ static BOOL isGroup = YES;
     [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
     
     // Textfield size
-    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 120 withFont:[CommonMethods getStdFontType:1]];
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
-    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 120 withFont:[CommonMethods getStdFontType:1]];
+    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
     //bubble
-    CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 10, 8, contentSize.width + 12, contentSize.height + 6);
+    CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 10, 0, contentSize.width + 12, contentSize.height + 6);
     [cell.bubbleView setFrame:frame];
     
     //text
-    frame = CGRectMake(4, 3, expectedLabelSize.width, expectedLabelSize.height);
+    frame = CGRectMake(6, 3, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
     
-    //shadow
-    frame = CGRectMake(self.view.frame.size.width - contentSize.width - 10 + 8, contentSize.height - 10, contentSize.width - 4, 26);
-    [cell.shadowImage setFrame:frame];
-
-    //time
-    NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
-                                                              locale:[NSLocale currentLocale]];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:formatString];
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:elem.timeStamp]];
-    frame = CGRectMake(contentSize.width - 64, contentSize.height - 15, 64, 21);
-    [cell.timeLabel setFrame:frame];
     
     //icon
     frame = CGRectMake(contentSize.width + 10 - 14 - 6, contentSize.height - 14, 14, 14);
@@ -1965,163 +2064,15 @@ static BOOL isGroup = YES;
 
 -(CGFloat) messageCellInHeight:(MOC2CallEvent *) elem font:(UIFont *) font
 {
-    CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
+    CGSize sz = [self getSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
-    CGSize expectedLabelSize = [elem.text sizeWithFont:[CommonMethods getStdFontType:1]
-                                     constrainedToSize:maximumLabelSize
-                                         lineBreakMode:NSLineBreakByWordWrapping];
-    
-    CGFloat sz = expectedLabelSize.height + 34;
-    if (sz < 30)
-        sz = 30;
-    
-    return sz;
+    return sz.height + 22;
 }
 
 -(CGFloat) messageCellOutHeight:(MOC2CallEvent *) elem font:(UIFont *) font
 {
-    CGSize sz = [self getContentSizeForText:elem.text withWidth:self.view.frame.size.width - 120 withFont:[CommonMethods getStdFontType:1]];
-    return sz.height + 34;
-}
-
--(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    if (self.targetUserid) {
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
-        
-        UITableViewCell* cell;
-        
-        if ([self.fetchedResultsController fetchedObjects].count == 0) {
-            cell = [self.tableView dequeueReusableCellWithIdentifier:@"SCNoMessagesCell"];
-        }
-        else{
-            MOC2CallEvent *elem = [self.fetchedResultsController objectAtIndexPath:ip];
-            NSString *eventType = elem.eventType;
-            NSString *text = elem.text;
-            
-            if ([eventType isEqualToString:@"MessageIn"]) {
-                if ([text hasPrefix:@"image://"]){
-                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
-                    [self configureImageCellIn:cell forEvent:elem atIndexPath:ip];
-                }
-                else if([text hasPrefix:@"video://"] ||
-                    [text hasPrefix:@"audio://"] ||
-                    [text hasPrefix:@"file://"] ||
-                    [text hasPrefix:@"loc://"] ||
-                    [text hasPrefix:@"BEGIN:VCARD"] ||
-                    [text hasPrefix:@"vcard://"] ||
-                    [text hasPrefix:@"friend://"]) {
-                    cell = [super tableView:tableView cellForRowAtIndexPath:ip];
-                }
-                else{
-                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageInCell"];
-                    [self configureMessageCellIn:cell forEvent:elem atIndexPath:ip];
-                }
-            }
-            else{
-                if ([text hasPrefix:@"image://"]){
-                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageOutCell"];
-                    [self configureImageCellOut:cell forEvent:elem atIndexPath:ip];
-                }
-                else if([text hasPrefix:@"video://"] ||
-                        [text hasPrefix:@"audio://"] ||
-                        [text hasPrefix:@"file://"] ||
-                        [text hasPrefix:@"loc://"] ||
-                        [text hasPrefix:@"BEGIN:VCARD"] ||
-                        [text hasPrefix:@"vcard://"] ||
-                        [text hasPrefix:@"friend://"]) {
-                    cell = [super tableView:tableView cellForRowAtIndexPath:ip];
-                }
-                else{
-                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageOutCell"];
-                    [self configureMessageCellOut:cell forEvent:elem atIndexPath:ip];
-                }
-                
-            }
-            
-            @try {
-                
-                [[SCDataManager instance] markAsRead:elem];
-            }
-            @catch (NSException *exception) {
-            }
-        }
-        return cell;
-
-    }
-    else{
-        WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
-        if(b.isImage){
-            
-            WUImageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
-            
-            cell.eventImage.image = [UIImage imageWithData:b.imgData];
-            [cell.progress setHidden:YES];
-            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
-                                                                      locale:[NSLocale currentLocale]];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:formatString];
-            cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:b.postTime]];            
-            
-            [cell setTapAction:^{
-                NSMutableArray *imageList = [NSMutableArray array];
-                for (int i = 0; i < [ResponseHandler instance].broadcastList.count; i++) {
-                    WUBroadcast *c = [[ResponseHandler instance].broadcastList objectAtIndex:i];
-                    if (c.isImage) {
-                        NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
-                        [info setValue:@"YES" forKey:@"IsBroadcast"];
-                        [info setObject:[NSString stringWithFormat:@"%d", i] forKey:@"image"];
-                        [imageList addObject:info];
-                    }
-                }
-                
-                NSString * storyboardName = @"MainStoryboard";
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
-                [vc showPhotos:imageList currentPhoto:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
-                [self.navigationController pushViewController:vc animated:YES];
-                
-            }];
-            
-            if (!b.imgData) {
-                [ResponseHandler instance].bcdelegate = self;
-            }
-            
-            return cell;
-        }
-        else{
-            WUMessageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageInCell"];
-
-            NSString *text = b.message;
-            [cell.textLabel setText:text];
-            [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
-            
-            // Textfield size
-            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
-            CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
-                                        constrainedToSize:maximumLabelSize
-                                            lineBreakMode:NSLineBreakByWordWrapping];
-            CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
-            [cell.bubbleView setFrame:frame];
-            
-            frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);
-            [cell.textLabel setFrame:frame];
-
-            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"hh:mm a" options:0
-                                                                      locale:[NSLocale currentLocale]];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:formatString];
-            cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:b.postTime]];
-            frame = CGRectMake(expectedLabelSize.width + 10, expectedLabelSize.height - 6, 64, 21);
-            [cell.timeLabel setFrame:frame];
-            
-            frame = CGRectMake(12, expectedLabelSize.height, expectedLabelSize.width + 74, 30);
-            [cell.shadowImage setFrame:frame];
-            
-            return cell;
-        }
-    }
+    CGSize sz = [self getContentSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
+    return sz.height + 22;
 }
 
 
@@ -2229,15 +2180,265 @@ static BOOL isGroup = YES;
     NSArray* lines = [self getSeparatedLinesFromString:text withWidth:width withFont:font];
     NSString *lastLine=[lines lastObject];
     CGSize lastSize = [self getSizeForText:lastLine withWidth:width withFont:font];
-    if ((width - lastSize.width) < 64) {
+    if ((width - lastSize.width) < 20) {
         sizeTest.height = sizeTest.height + 15;
     }
     else if(lines.count == 1){
         //single line, add width of time label
-        sizeTest.width = sizeTest.width + 64;
+        sizeTest.width = sizeTest.width + 20;
     }
     return sizeTest;
 }
 
+-(void)readGroupMemberJoin{
+    DataRequest* datRequest = [[DataRequest alloc] init];
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    [data setValue:self.targetUserid forKey:@"groupID"];
+    datRequest.values = data;
+    datRequest.requestName = @"readGroupMemberJoin";
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readGroupMemberJoinResponse:error:)];
+    
+}
+
+- (void)readGroupMemberJoinResponse:(ResponseBase *)response error:(NSError *)error{
+    NSDictionary* fetchResult = ((DataResponse*)response).data;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"EST"];
+    [dateFormat setTimeZone:gmt];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    [memberJoinList removeAllObjects];
+    int memberCnt = ((NSNumber*)[fetchResult objectForKey:@"rowCnt"]).intValue;
+    for (int i = 0; i < memberCnt; i++) {
+        NSMutableDictionary* memberDat = [[NSMutableDictionary alloc] init];
+        [memberDat setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"memberID%d", i]] forKey:@"memberID"];
+
+        [memberDat setObject:[dateFormat dateFromString:[fetchResult objectForKey:[NSString stringWithFormat:@"joinTime%d", i]]] forKey:@"joinTime"];
+        [memberJoinList addObject:memberDat];
+    }
+    
+    [self rebuildListEntries];
+    [self.tableView reloadData];
+}
+
+-(void)rebuildListEntries{
+    headers = [[NSMutableArray alloc] init];
+    entries = [[NSMutableArray alloc] init];
+    sectionSize = [[NSMutableArray alloc] init];
+    NSString* lastID = @"";
+    NSDate* lastDateLabel = [NSDate dateWithTimeIntervalSince1970:0];
+    
+    if(self.targetUserid){
+        
+        WUListEntry* e = [[WUListEntry alloc] init];
+        e.source = [NSMutableString stringWithString:@"InitHeader"];
+        [headers addObject:e];
+        [sectionSize addObject:[NSNumber numberWithInt:0]];
+
+        NSDate* newJoinFrom;
+        NSDate* newJoinTo;
+        //a join detail until the first message
+        if (isGroup) {
+            if ([self.fetchedResultsController fetchedObjects].count == 0) {
+                //add all join detail for empty group
+                //get group create time
+                NSMutableArray* groups = [[ResponseHandler instance] groupList];
+                for (int i = 0; i < groups.count; i++) {
+                    WUAccount* a = [groups objectAtIndex:i];
+                    if ([a.c2CallID isEqualToString:self.targetUserid]) {
+                        newJoinFrom = a.createTime;
+                    }
+                }
+                
+                newJoinTo = [NSDate dateWithTimeIntervalSinceNow:0];
+                [self addJoinEntryFrom:newJoinFrom to:newJoinTo];
+            }
+        }
+        
+        for (int runSect = 0; runSect < [[self.fetchedResultsController sections] count]; runSect++) {
+            id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:runSect];
+            int rowCnt = [sectionInfo numberOfObjects];
+            for (int runRow = 0; runRow < rowCnt; runRow++) {
+                MOC2CallEvent *elem = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:runRow inSection:runSect]];
+                NSString* newID;
+                
+                if ([elem.eventType isEqualToString:@"MessageOut"] || [elem.eventType isEqualToString:@"MessageSubmit"]) {
+                    newID = @"";
+                }
+                else{
+                    newID = elem.senderName;
+                }
+                if((runRow == 0 && runSect == 0)
+                   || [elem.timeStamp compare:[NSDate dateWithTimeInterval:900 sinceDate:lastDateLabel]] == NSOrderedDescending
+                   || ![newID isEqualToString:lastID]){
+                    WUListEntry* e = [[WUListEntry alloc] init];
+                    e.source = [NSMutableString stringWithString:@"Time"];
+                    e.data = [[NSMutableDictionary alloc] init];
+                    [e.data setValue:elem.timeStamp forKey:@"Time"];
+                    [headers addObject:e];
+                    [sectionSize addObject:[NSNumber numberWithInt:0]];
+                    
+                }
+                lastDateLabel = elem.timeStamp;
+                lastID = newID;
+                
+                //add join detail before this message
+                if (isGroup) {
+                    if (runRow == 0 && runSect == 0) {
+                        newJoinFrom = [NSDate  dateWithTimeInterval:-259200 sinceDate:elem.timeStamp ];
+                    }
+                    newJoinTo = elem.timeStamp;
+                    [self addJoinEntryFrom:newJoinFrom to:newJoinTo];
+                    
+                    newJoinFrom = newJoinTo;
+                }
+                
+                //add message
+                WUListEntry* e = [[WUListEntry alloc] init];
+                e.source = [NSMutableString stringWithString:@"Message"];
+                e.sourcePath = [NSIndexPath indexPathForRow:runRow inSection:runSect];
+                [self addEntry:e];
+                
+                if (runRow == rowCnt -1 && runSect == [[self.fetchedResultsController sections] count] - 1) {
+                    if (isGroup) {
+                        //add remaining join detail
+                        newJoinTo = [NSDate dateWithTimeIntervalSinceNow:0];
+                        [self addJoinEntryFrom:newJoinFrom to:newJoinTo];
+                    }
+                }
+            }
+        }
+    }
+}
+
+-(void)addJoinEntryFrom:(NSDate*)pDateF to:(NSDate*)pDateT{
+    for (int i = 0; i < memberJoinList.count; i++) {
+        if ([pDateF compare:[[memberJoinList objectAtIndex:i] objectForKey:@"joinTime"]] == NSOrderedDescending
+            && [pDateT compare:[[memberJoinList objectAtIndex:i] objectForKey:@"joinTime"]] == NSOrderedAscending) {
+            
+            WUListEntry* e = [[WUListEntry alloc] init];
+            e.source = [NSMutableString stringWithString:@"MemberJoin"];
+            e.data = [[NSMutableDictionary alloc] initWithDictionary:[memberJoinList objectAtIndex:i] copyItems:YES];
+            [self addEntry:e];
+        }
+    }
+}
+
+-(void)addEntry:(WUListEntry*)e{
+    int currentSectionLen  = ((NSNumber*)[sectionSize objectAtIndex:sectionSize.count - 1]).intValue;
+    e.mapToPath = [NSIndexPath indexPathForRow:currentSectionLen inSection:sectionSize.count - 1 ];
+    
+    
+    [entries addObject:e];
+    
+    [sectionSize replaceObjectAtIndex:sectionSize.count - 1 withObject:[NSNumber numberWithInt:currentSectionLen + 1]];
+    
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self rebuildListEntries];
+    [super controllerDidChangeContent:controller];
+}
+
+
+- (UITableViewCell *)cellForElement:(MOC2CallEvent *)elem {
+
+    MessageCell *cell = nil;
+    @try {
+        // Handle Section HeaderCell
+        NSString *cellIdentifier = nil;
+        NSString *eventType = elem.eventType;
+        NSString *text = elem.text;
+        BOOL isInbound = NO;
+        BOOL isMessage = NO;
+        
+        if ([eventType isEqualToString:@"CallIn"]) {
+            cellIdentifier = @"CallCellInStream";
+            isInbound = YES;
+        } else if ([eventType isEqualToString:@"CallOut"]) {
+            cellIdentifier = @"CallCellOutStream";
+        } else if ([eventType isEqualToString:@"MessageOut"] || [eventType isEqualToString:@"MessageSubmit"]) {
+            isMessage = YES;
+            cellIdentifier = @"WUMessageOutCell";
+            
+            if ([text hasPrefix:@"image://"]) {
+                cellIdentifier = @"WUImageOutCell";
+            }
+            if ([text hasPrefix:@"video://"]) {
+                cellIdentifier = @"VideoCellOutStream";
+            }
+            if ([text hasPrefix:@"audio://"]) {
+                cellIdentifier = @"AudioCellOutStream";
+            }
+            if ([text hasPrefix:@"file://"]) {
+                cellIdentifier = @"FileCellOutStream";
+            }
+            if ([text hasPrefix:@"loc://"]) {
+                cellIdentifier = @"LocationCellOutStream";
+            }
+            if ([text hasPrefix:@"BEGIN:VCARD"]) {
+                cellIdentifier = @"ContactCellOutStream";
+            }
+            if ([text hasPrefix:@"vcard://"]) {
+                cellIdentifier = @"ContactCellOutStream";
+            }
+            if ([text hasPrefix:@"friend://"]) {
+                cellIdentifier = @"FriendCellOutStream";
+            }
+        } else {
+            isInbound = YES;
+            isMessage = YES;
+            cellIdentifier = @"WUMessageInCell";
+            
+            if ([text hasPrefix:@"image://"]) {
+                cellIdentifier = @"WUImageInCell";
+            }
+            if ([text hasPrefix:@"video://"]) {
+                cellIdentifier = @"VideoCellInStream";
+            }
+            if ([text hasPrefix:@"audio://"]) {
+                cellIdentifier = @"AudioCellInStream";
+            }
+            if ([text hasPrefix:@"file://"]) {
+                cellIdentifier = @"FileCellInStream";
+            }
+            if ([text hasPrefix:@"loc://"]) {
+                cellIdentifier = @"LocationCellInStream";
+            }
+            if ([text hasPrefix:@"BEGIN:VCARD"]) {
+                cellIdentifier = @"ContactCellInStream";
+            }
+            if ([text hasPrefix:@"vcard://"]) {
+                cellIdentifier = @"ContactCellInStream";
+            }
+            if ([text hasPrefix:@"friend://"]) {
+                cellIdentifier = @"FriendCellInStream";
+            }
+        }
+        
+        cell = (MessageCell *) [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    }
+    @catch (NSException * e) {
+        [self.tableView reloadData];
+        UITableViewCell *dummyCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        dummyCell.contentView.hidden = YES;
+        return dummyCell;
+    }
+    @finally {
+    }
+    return cell;
+    
+}
+
+
+-(IBAction)previousMessages:(id)sender
+{
+    [super previousMessages:sender];
+    [self rebuildListEntries];
+}
 
 @end

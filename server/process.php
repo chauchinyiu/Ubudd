@@ -318,11 +318,12 @@ class MyAPI extends API {
 			$stmt->close();
 			
 			//save initial members
-			$stmt = $this->db->conn2->prepare("insert into groupMember (groupID, memberID, requestAccepted) values (?, ?, 1)");
-			$stmt->bind_param('ss', $pgroupID, $memberID);
+			$stmt = $this->db->conn2->prepare("insert into groupMember (groupID, memberID, requestAccepted, joinTime) values (?, ?, 1, ?)");
+			$stmt->bind_param('sss', $pgroupID, $memberID, $joinTime);
 			$pgroupID = $groupID;
 			for($i = 1; $i <= $args['memberCnt']; $i++){
 				$memberID = $args['memberID'.$i];
+				$joinTime = date('Y-m-d H:i:s');
 				$stmt->execute();
 			}
 			$stmt->close();
@@ -336,11 +337,13 @@ class MyAPI extends API {
         if ($args['groupID'] == '' || $args['memberID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
             
-		$stmt = $this->db->conn2->prepare("insert into groupMember (groupID, memberID, requestAccepted) values (?, ?, 1)");
-		$stmt->bind_param('ss', $groupID, $memberID);
+		$stmt = $this->db->conn2->prepare("insert into groupMember (groupID, memberID, requestAccepted, joinTime) values (?, ?, 1, ?)");
+		$stmt->bind_param('sss', $groupID, $memberID, $joinTime);
 
 		$groupID = $args['groupID'];
 		$memberID = $args['memberID'];
+		$joinTime = date('Y-m-d H:i:s');
+		
 		$stmt->execute();
 				
 		return array('error' => 0, 'message' => 'Insert Successfully');
@@ -351,11 +354,12 @@ class MyAPI extends API {
             return array('error' => 1, 'message' => 'Mandatory field missing');
             
 		//save members
-		$stmt = $this->db->conn2->prepare("insert into groupMember (groupID, memberID, requestAccepted) values (?, ?, 1)");
-		$stmt->bind_param('ss', $groupID, $memberID);
+		$stmt = $this->db->conn2->prepare("insert into groupMember (groupID, memberID, requestAccepted, joinTime) values (?, ?, 1, ?)");
+		$stmt->bind_param('sss', $groupID, $memberID, $joinTime);
 		$groupID = $args['groupID'];
 		for($i = 1; $i <= $args['memberCnt']; $i++){
 			$memberID = $args['memberID'.$i];
+			$joinTime = date('Y-m-d H:i:s');
 			$stmt->execute();
 		}
 		$stmt->close();
@@ -669,8 +673,9 @@ class MyAPI extends API {
         if ($args['userID'] == '' || $args['groupID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 	
-		$stmt = $this->db->conn2->prepare("update groupMember set requestAccepted = 1 where groupID = ? and memberID = ?");
-		$stmt->bind_param('ss', $groupID, $userId);
+		$stmt = $this->db->conn2->prepare("update groupMember set requestAccepted = 1, joinTime = ? where groupID = ? and memberID = ?");
+		$stmt->bind_param('sss', $joinTime, $groupID, $userId);
+		$joinTime = date('Y-m-d H:i:s');
 		$groupID = $args['groupID'];
 		$userId = $args['userID'];
 		$stmt->execute();
@@ -762,6 +767,33 @@ class MyAPI extends API {
         }
     }
     
+    protected function readGroupMemberJoin($args) {
+
+        if ($args['c2CallID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("select register.c2CallID, groupMember.joinTime from chatGroup "
+										."inner join groupMember on chatGroup.id = groupMember.groupID and groupMember.requestAccepted = 1 "
+										."inner join register on groupMember.memberID = register.msisdn "
+										."where chatGroup.c2CallID = ? ORDER BY groupMember.joinTime");
+
+		$stmt->bind_param('s', $c2CallID);
+		$c2CallID = $args['c2CallID'];
+		$stmt->execute();
+		$verifyRes = $stmt->get_result();
+
+		$rowCnt = 0;
+		while($row = mysqli_fetch_assoc($verifyRes)){
+			$groupArray['memberID' . $rowCnt] = $row['c2CallID'];						
+			$groupArray['joinTime' . $rowCnt] = $row['joinTime'];						
+			$rowCnt++;
+		}
+		$groupArray['rowCnt'] = $rowCnt;
+		$groupArray['error'] = 0;
+		$groupArray['resultCode'] = 1;
+		$groupArray['message'] = 'Loaded Successfully';
+		return $groupArray;
+    }
     
 
     protected function readInterest($args) {

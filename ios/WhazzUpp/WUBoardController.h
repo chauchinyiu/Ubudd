@@ -29,49 +29,48 @@
 @class MOC2CallUser, MessageCell, MOC2CallEvent, C2TapImageView;
 
 
+
+@interface WUMessageTimeCell : UITableViewCell
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@end
+
+@interface WUMemberJoinCell : UITableViewCell
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@end
+
+
 @interface WUCreateGroupCell : UITableViewCell
 
 @property(nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UILabel *sectiontimeLabel;
 @property(nonatomic, weak) IBOutlet UIView *createGroupView;
 @property(nonatomic, weak) IBOutlet UIView *showPreviousMsgView;
-@property(nonatomic, weak) IBOutlet UIView *sectiontimeview;
 
 @end
 
 
 @interface WUMessageInCell : MessageCellInStream
 @property(nonatomic, weak) IBOutlet UILabel *textLabel;
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUMessageOutCell : MessageCellOutStream
 @property(nonatomic, weak) IBOutlet UILabel *textLabel;
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 
 @interface WUImageInCell : ImageCellInStream
 @property(nonatomic, weak) IBOutlet UIImageView *eventImage;
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @end
 
 
 @interface WUImageOutCell : ImageCellOutStream
 @property(nonatomic, weak) IBOutlet UIImageView *eventImage;
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WULocationInCell : LocationCellInStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @end
 
 @interface WUAudioInCell : AudioCellInStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIButton *playButton;
 @property(nonatomic, weak) IBOutlet UISlider *playSlider;
 @property(nonatomic, weak) IBOutlet UIView *playView;
@@ -86,29 +85,21 @@
 @end
 
 @interface WUVideoInCell : VideoCellInStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @end
 
 @interface WUFriendInCell : FriendCellInStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @end
 
 @interface WUContactInCell : ContactCellInStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @end
 
 @interface WUCallInCell : CallCellInStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @end
 
 @interface WULocationOutCell : LocationCellOutStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUAudioOutCell : AudioCellOutStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @property(nonatomic, weak) IBOutlet UIButton *playButton;
 @property(nonatomic, weak) IBOutlet UISlider *playSlider;
 @property(nonatomic, weak) IBOutlet UIView *playView;
@@ -124,23 +115,15 @@
 @end
 
 @interface WUVideoOutCell : VideoCellOutStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUFriendOutCell : FriendCellOutStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUContactOutCell : ContactCellOutStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 @interface WUCallOutCell : CallCellOutStream
-@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UIImageView *shadowImage;
 @end
 
 

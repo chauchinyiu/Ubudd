@@ -8,15 +8,55 @@
         <scene sceneID="m3f-h6-lsN">
             <objects>
                 <tableViewController storyboardIdentifier="SCBoardController" extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CMh-MN-Hov" customClass="WUBoardController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="sQe-rg-7yh">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="sQe-rg-7yh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.96078431369999995" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="sectionIndexBackgroundColor" red="0.96078431369999995" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUCreateGroupCell" rowHeight="140" id="BuM-qj-Nhc" customClass="WUCreateGroupCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUMemberJoinCell" rowHeight="44" id="7zT-Vu-p14" customClass="WUMemberJoinCell">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7zT-Vu-p14" id="EnE-WT-hxD">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lby-Qu-2Sa">
+                                            <rect key="frame" x="0.0" y="14" width="320" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.70196078429999997" green="0.70196078429999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="timeLabel" destination="Lby-Qu-2Sa" id="8b0-FQ-RNC"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUMessageTimeCell" rowHeight="35" id="CqV-Ov-lXs" customClass="WUMessageTimeCell">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CqV-Ov-lXs" id="1aZ-2j-zK5">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HQG-4r-iu3">
+                                            <rect key="frame" x="0.0" y="19" width="320" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="timeLabel" destination="HQG-4r-iu3" id="0Zu-Id-Ns2"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUCreateGroupCell" rowHeight="115" id="BuM-qj-Nhc" customClass="WUCreateGroupCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BuM-qj-Nhc" id="IbI-4a-I39">
@@ -73,32 +113,12 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" id="FvV-V2-6h2">
-                                            <rect key="frame" x="0.0" y="112" width="320" height="28"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_timestamp.png" id="Onw-Gg-Mk0">
-                                                    <rect key="frame" x="98" y="4" width="124" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="04.06.2012 16:24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="IS1-fy-AmF">
-                                                    <rect key="frame" x="108" y="4" width="105" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="createGroupView" destination="lEg-ps-1vS" id="n33-qg-Gl0"/>
                                     <outlet property="nameLabel" destination="iAj-7t-XTS" id="kfV-Dz-r0z"/>
-                                    <outlet property="sectiontimeLabel" destination="IS1-fy-AmF" id="3S2-cw-XlT"/>
-                                    <outlet property="sectiontimeview" destination="FvV-V2-6h2" id="5Y8-UO-dMw"/>
                                     <outlet property="showPreviousMsgView" destination="s8j-1X-hI2" id="Pae-pl-Z4z"/>
                                     <outlet property="timeLabel" destination="guC-JU-TJA" id="jXN-50-2Wf"/>
                                 </connections>
@@ -110,10 +130,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="yi8-wU-cPL">
-                                            <rect key="frame" x="80" y="20" width="160" height="40"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="eE0-m5-Cct" customClass="SCBubbleViewIn">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="80"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -122,12 +138,6 @@
                                                     <rect key="frame" x="8" y="8" width="224" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2GT-Gc-Jxc">
-                                                    <rect key="frame" x="176" y="59" width="64" height="19"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -143,9 +153,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="bubbleView" destination="eE0-m5-Cct" id="bi1-zF-aWe"/>
-                                    <outlet property="shadowImage" destination="yi8-wU-cPL" id="Xxs-Fz-Wc9"/>
                                     <outlet property="textLabel" destination="8mw-dv-rNa" id="Z0C-XQ-Pnl"/>
-                                    <outlet property="timeLabel" destination="2GT-Gc-Jxc" id="G2g-Xr-ycs"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WUImageInCell" rowHeight="200" id="NUC-gL-ldc" customClass="WUImageInCell">
@@ -155,20 +163,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="LsH-Q5-4Kk">
-                                            <rect key="frame" x="12" y="180" width="254" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="fy7-Ef-umG" customClass="SCBubbleViewIn">
-                                            <rect key="frame" x="0.0" y="8" width="270" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="196"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bOa-rK-poZ">
-                                                    <rect key="frame" x="190" y="174" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="IyC-jO-Lia">
                                                     <rect key="frame" x="12" y="8" width="180" height="180"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -194,7 +192,6 @@
                                     <outlet property="bubbleView" destination="fy7-Ef-umG" id="4Gv-BC-1yz"/>
                                     <outlet property="eventImage" destination="IyC-jO-Lia" id="brs-0M-hiZ"/>
                                     <outlet property="progress" destination="PV0-Hm-MMA" id="zRI-rB-iYs"/>
-                                    <outlet property="timeLabel" destination="bOa-rK-poZ" id="ruw-j7-uCb"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="VideoCellInStream" rowHeight="105" id="zFa-Lg-D2d" customClass="WUVideoInCell">
@@ -204,20 +201,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="C7h-Rr-MCm">
-                                            <rect key="frame" x="12" y="85" width="164" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="Jy5-F9-O0O" customClass="SCBubbleViewIn">
-                                            <rect key="frame" x="0.0" y="8" width="180" height="105"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="112" height="104"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GRL-db-Tdp">
-                                                    <rect key="frame" x="100" y="79" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="d5F-xr-k2A">
                                                     <rect key="frame" x="45" y="31" width="37" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -228,7 +215,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" lineBreakMode="tailTruncation" minimumFontSize="10" id="qLH-iz-GnS" userLabel="labelSenderName">
-                                                    <rect key="frame" x="8" y="0.0" width="120" height="16"/>
+                                                    <rect key="frame" x="8" y="0.0" width="99" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -236,7 +223,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" id="dc4-9k-y6U">
-                                                    <rect key="frame" x="19" y="6" width="88" height="88"/>
+                                                    <rect key="frame" x="12" y="8" width="88" height="88"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" id="HEj-kH-yq5">
@@ -266,12 +253,8 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <progressView opaque="NO" contentMode="scaleToFill" id="xs1-wo-FTj">
-                                            <rect key="frame" x="180" y="45" width="120" height="2"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </progressView>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1E5-t0-uKq">
-                                            <rect key="frame" x="196" y="33" width="88" height="34"/>
+                                            <rect key="frame" x="125" y="36" width="88" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <state key="normal" title="Download" backgroundImage="btn_send_message_grey.png">
@@ -289,6 +272,10 @@
                                             <rect key="frame" x="3" y="67" width="35" height="35"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <progressView opaque="NO" contentMode="scaleToFill" id="xs1-wo-FTj">
+                                            <rect key="frame" x="125" y="52" width="88" height="2"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </progressView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -302,7 +289,6 @@
                                     <outlet property="messageImage" destination="fPd-n0-QpU" id="RVg-jX-J0I"/>
                                     <outlet property="messageImageView" destination="dc4-9k-y6U" id="hAg-z5-YLl"/>
                                     <outlet property="progress" destination="xs1-wo-FTj" id="qJb-h7-jOz"/>
-                                    <outlet property="timeLabel" destination="GRL-db-Tdp" id="kwR-km-vmB"/>
                                     <outlet property="userImage" destination="Z4Y-Lw-ihA" id="CnT-MZ-iNX"/>
                                     <outlet property="videoBanner" destination="HEj-kH-yq5" id="DU5-Iq-qNL"/>
                                 </connections>
@@ -314,16 +300,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="FGN-ae-deG">
-                                            <rect key="frame" x="12" y="104" width="244" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="ano-hC-4IK" customClass="SCBubbleViewIn">
-                                            <rect key="frame" x="0.0" y="8" width="260" height="124"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="260" height="102"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" lineBreakMode="tailTruncation" minimumFontSize="10" id="EVT-yj-6aO" userLabel="labelSenderName">
-                                                    <rect key="frame" x="8" y="0.0" width="222" height="17"/>
+                                                    <rect key="frame" x="110" y="0.0" width="140" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -331,16 +313,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="lRl-u2-H0t">
-                                                    <rect key="frame" x="17" y="20" width="88" height="88"/>
+                                                    <rect key="frame" x="12" y="8" width="88" height="88"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="DW8-Cx-PmN">
-                                                    <rect key="frame" x="40" y="44" width="37" height="37"/>
+                                                    <rect key="frame" x="42" y="35" width="37" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </activityIndicatorView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="Tzs-1r-j8a" userLabel="btnLocationTitle">
-                                                    <rect key="frame" x="110" y="20" width="144" height="20"/>
+                                                    <rect key="frame" x="110" y="41" width="139" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <state key="normal" title="Title Text">
@@ -355,7 +337,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="10" id="JFm-AZ-j6y" userLabel="labelLocationDetails">
-                                                    <rect key="frame" x="110" y="32" width="138" height="79"/>
+                                                    <rect key="frame" x="110" y="66" width="138" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <string key="text">Test
 testtest
@@ -369,12 +351,6 @@ test</string>
                                                     <rect key="frame" x="241" y="0.0" width="10" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MKP-sR-SZv">
-                                                    <rect key="frame" x="180" y="98" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
@@ -396,7 +372,6 @@ test</string>
                                     <outlet property="locationAddress" destination="JFm-AZ-j6y" id="aQX-Mm-N4g"/>
                                     <outlet property="locationTitle" destination="Tzs-1r-j8a" id="z0O-5R-GgD"/>
                                     <outlet property="messageImage" destination="lRl-u2-H0t" id="wLd-jN-LUi"/>
-                                    <outlet property="timeLabel" destination="MKP-sR-SZv" id="Pzd-jh-xAx"/>
                                     <outlet property="userImage" destination="Oux-BY-WBY" id="TK6-zZ-QzE"/>
                                 </connections>
                             </tableViewCell>
@@ -407,12 +382,8 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="RWs-7p-cUB">
-                                            <rect key="frame" x="12" y="53" width="254" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="MKg-eA-jUo" customClass="SCBubbleViewIn">
-                                            <rect key="frame" x="0.0" y="8" width="270" height="73"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="270" height="76"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="K4t-XM-XCU">
@@ -431,7 +402,7 @@ test</string>
                                                     </connections>
                                                 </button>
                                                 <view hidden="YES" contentMode="scaleToFill" id="acl-4U-U2b">
-                                                    <rect key="frame" x="70" y="10" width="180" height="40"/>
+                                                    <rect key="frame" x="70" y="18" width="180" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oDW-Ml-afn">
@@ -458,7 +429,7 @@ test</string>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" lineBreakMode="tailTruncation" minimumFontSize="10" id="QI4-hP-e0W" userLabel="labelSenderName">
-                                                    <rect key="frame" x="8" y="0.0" width="120" height="16"/>
+                                                    <rect key="frame" x="66" y="0.0" width="140" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -466,7 +437,7 @@ test</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" id="WxQ-NJ-Z7j">
-                                                    <rect key="frame" x="18" y="6" width="52" height="59"/>
+                                                    <rect key="frame" x="12" y="8" width="52" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ico_voice_msg.png" id="Tsq-48-fTk">
@@ -474,7 +445,7 @@ test</string>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" id="ewT-l4-Vxl">
-                                                            <rect key="frame" x="0.0" y="41" width="50" height="21"/>
+                                                            <rect key="frame" x="1" y="41" width="48" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="RlE-cw-Y6s">
@@ -495,12 +466,6 @@ test</string>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T9A-PK-suf">
-                                                    <rect key="frame" x="190" y="47" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <progressView opaque="NO" contentMode="scaleToFill" id="teF-Yx-lb2">
                                                     <rect key="frame" x="124" y="36" width="88" height="2"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -532,7 +497,6 @@ test</string>
                                     <outlet property="playSlider" destination="Izg-i3-at5" id="EtP-C4-l7v"/>
                                     <outlet property="playView" destination="acl-4U-U2b" id="m9N-iA-3Ev"/>
                                     <outlet property="progress" destination="teF-Yx-lb2" id="BdU-LL-GoB"/>
-                                    <outlet property="timeLabel" destination="T9A-PK-suf" id="zfB-aP-cWo"/>
                                     <outlet property="userImage" destination="UUm-Ea-xUH" id="gyP-xE-Gmn"/>
                                 </connections>
                             </tableViewCell>
@@ -543,20 +507,16 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="b7i-aO-JJh">
-                                            <rect key="frame" x="12" y="73" width="214" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <imageView hidden="YES" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="redraw" id="rVR-2x-KQ2" customClass="C2TapImageView">
                                             <rect key="frame" x="3" y="55" width="35" height="35"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" id="yrD-bN-UJz" customClass="SCBubbleViewIn">
-                                            <rect key="frame" x="0.0" y="8" width="230" height="93"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="230" height="61"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" lineBreakMode="tailTruncation" minimumFontSize="10" id="Fko-cN-xmg" userLabel="labelSenderName">
-                                                    <rect key="frame" x="8" y="0.0" width="192" height="17"/>
+                                                    <rect key="frame" x="66" y="0.0" width="140" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -564,14 +524,14 @@ test</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="CyD-D9-Icc" userLabel="labelFriendName">
-                                                    <rect key="frame" x="66" y="23" width="150" height="15"/>
+                                                    <rect key="frame" x="67" y="10" width="133" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gr9-rE-VAK">
-                                                    <rect key="frame" x="70" y="43" width="139" height="30"/>
+                                                    <rect key="frame" x="70" y="32" width="139" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                                     <state key="normal" title="Add as Friend">
@@ -597,15 +557,9 @@ test</string>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="AddContact2-24x24.png" id="8DQ-sQ-Vg6">
-                                                    <rect key="frame" x="17" y="23" width="45" height="45"/>
+                                                    <rect key="frame" x="12" y="8" width="45" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xy3-sM-Gxc">
-                                                    <rect key="frame" x="150" y="67" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
@@ -623,7 +577,6 @@ test</string>
                                     <outlet property="headline" destination="Fko-cN-xmg" id="bpj-aj-GgQ"/>
                                     <outlet property="imageNewIndicator" destination="gHL-fl-O6s" id="vjS-O0-Eit"/>
                                     <outlet property="messageImage" destination="8DQ-sQ-Vg6" id="XJo-ir-jeY"/>
-                                    <outlet property="timeLabel" destination="Xy3-sM-Gxc" id="O7i-D3-4Hj"/>
                                     <outlet property="userImage" destination="rVR-2x-KQ2" id="VnH-Dy-iib"/>
                                 </connections>
                             </tableViewCell>
@@ -634,41 +587,31 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="1rq-fM-yiD">
-                                            <rect key="frame" x="12" y="63" width="214" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="sGc-EM-8dt" customClass="SCBubbleViewIn">
-                                            <rect key="frame" x="0.0" y="8" width="230" height="83"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="230" height="61"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" lineBreakMode="tailTruncation" minimumFontSize="10" id="wpF-ZS-9Nu" userLabel="labelSenderName">
-                                                    <rect key="frame" x="8" y="0.0" width="192" height="17"/>
+                                                    <rect key="frame" x="66" y="0.0" width="140" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="1OP-9f-Cwc" userLabel="labelContactName">
-                                                    <rect key="frame" x="72" y="19" width="144" height="45"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="1OP-9f-Cwc" userLabel="labelContactName">
+                                                    <rect key="frame" x="75" y="22" width="133" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="A3U-f6-zPd" userLabel="imageContact">
-                                                    <rect key="frame" x="17" y="20" width="45" height="45"/>
+                                                    <rect key="frame" x="12" y="8" width="45" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_bookmark.png" id="YT2-ow-2Yg">
                                                     <rect key="frame" x="211" y="0.0" width="10" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8nr-wN-INn">
-                                                    <rect key="frame" x="150" y="57" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
@@ -688,7 +631,6 @@ test</string>
                                     <outlet property="headline" destination="wpF-ZS-9Nu" id="tVs-QQ-OVJ"/>
                                     <outlet property="imageNewIndicator" destination="YT2-ow-2Yg" id="tg7-Nu-tmQ"/>
                                     <outlet property="messageImage" destination="A3U-f6-zPd" id="1B7-UI-tdE"/>
-                                    <outlet property="timeLabel" destination="8nr-wN-INn" id="Vt2-cK-m3B"/>
                                     <outlet property="userImage" destination="kER-Mf-ikW" id="Ui3-K3-ftY"/>
                                 </connections>
                             </tableViewCell>
@@ -699,12 +641,8 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="A5e-70-cmL">
-                                            <rect key="frame" x="12" y="57" width="180" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="azb-p6-peP" customClass="SCBubbleViewIn">
-                                            <rect key="frame" x="0.0" y="8" width="196" height="77"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="196" height="77"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VC9-Ym-olb" userLabel="btnCall" customClass="C2ActionButton">
@@ -779,12 +717,6 @@ test</string>
                                                     <rect key="frame" x="177" y="2" width="10" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3bf-Jc-3R0">
-                                                    <rect key="frame" x="116" y="51" width="64" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
@@ -806,7 +738,6 @@ test</string>
                                     <outlet property="headline" destination="oXA-sV-LEz" id="KL5-RL-4Uu"/>
                                     <outlet property="iconCallStatus" destination="xm0-wd-STa" id="fyk-X7-E8z"/>
                                     <outlet property="imageNewIndicator" destination="Evc-tJ-RB6" id="qDD-go-5qv"/>
-                                    <outlet property="timeLabel" destination="3bf-Jc-3R0" id="2Bt-da-5uU"/>
                                     <outlet property="userImage" destination="TIP-zZ-i2O" id="Flm-ve-vN1"/>
                                 </connections>
                             </tableViewCell>
@@ -817,12 +748,8 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="deL-ii-KD4">
-                                            <rect key="frame" x="68" y="25" width="184" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="7D3-gO-nbU" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="95" y="5" width="225" height="37"/>
+                                            <rect key="frame" x="95" y="0.0" width="225" height="37"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_deliverd.png" id="zkA-cz-mNF">
@@ -835,12 +762,6 @@ test</string>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bXF-HT-c4u">
-                                                    <rect key="frame" x="80" y="8" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -857,9 +778,7 @@ test</string>
                                 <connections>
                                     <outlet property="bubbleView" destination="7D3-gO-nbU" id="vcP-k8-TtP"/>
                                     <outlet property="iconSubmitted" destination="zkA-cz-mNF" id="PAV-or-LlU"/>
-                                    <outlet property="shadowImage" destination="deL-ii-KD4" id="RCz-nm-VoP"/>
                                     <outlet property="textLabel" destination="xy5-JC-ZNd" id="6sm-cR-fZv"/>
-                                    <outlet property="timeLabel" destination="bXF-HT-c4u" id="O57-of-mOg"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationCellOutStream" rowHeight="124" id="dID-P9-bPx" customClass="WULocationOutCell">
@@ -869,16 +788,12 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="6Sj-Ey-01Y">
-                                            <rect key="frame" x="12" y="104" width="244" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="GQ9-WD-Jfk" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="60" y="8" width="260" height="124"/>
+                                            <rect key="frame" x="60" y="0.0" width="260" height="102"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_read.png" id="yo9-qa-Yss">
-                                                    <rect key="frame" x="240" y="102" width="14" height="14"/>
+                                                    <rect key="frame" x="240" y="80" width="14" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
@@ -891,11 +806,11 @@ test</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="5Lg-Ym-3fx">
-                                                    <rect key="frame" x="12" y="21" width="88" height="88"/>
+                                                    <rect key="frame" x="8" y="8" width="88" height="88"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="leT-RE-TaZ">
-                                                    <rect key="frame" x="105" y="22" width="127" height="20"/>
+                                                    <rect key="frame" x="105" y="41" width="139" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="14"/>
                                                     <state key="normal">
@@ -914,12 +829,6 @@ test</string>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
                                                     <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lo9-oM-8Gg">
-                                                    <rect key="frame" x="176" y="98" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -942,8 +851,6 @@ test</string>
                                     <outlet property="locationAddress" destination="VmV-MC-MwY" id="spq-tv-iIh"/>
                                     <outlet property="locationTitle" destination="leT-RE-TaZ" id="v5h-pm-exo"/>
                                     <outlet property="messageImage" destination="5Lg-Ym-3fx" id="iis-ln-Pll"/>
-                                    <outlet property="shadowImage" destination="6Sj-Ey-01Y" id="YLD-0c-OIy"/>
-                                    <outlet property="timeLabel" destination="lo9-oM-8Gg" id="wHF-JV-P5Y"/>
                                     <outlet property="userImage" destination="fay-LR-2ZG" id="tzV-wh-uLp"/>
                                 </connections>
                             </tableViewCell>
@@ -954,20 +861,16 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="Qa6-4r-hdw">
-                                            <rect key="frame" x="128" y="180" width="254" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="OML-PV-Iy8" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="50" y="8" width="270" height="200"/>
+                                            <rect key="frame" x="120" y="0.0" width="200" height="196"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="gVC-gO-omA">
-                                                    <rect key="frame" x="10" y="10" width="180" height="180"/>
+                                                    <rect key="frame" x="8" y="8" width="180" height="180"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_read.png" id="hrz-9W-c6u">
-                                                    <rect key="frame" x="250" y="178" width="14" height="14"/>
+                                                    <rect key="frame" x="181" y="178" width="14" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
@@ -975,12 +878,6 @@ test</string>
                                                     <rect key="frame" x="54" y="99" width="93" height="2"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </progressView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sS3-mR-ix1">
-                                                    <rect key="frame" x="186" y="174" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -992,8 +889,6 @@ test</string>
                                     <outlet property="eventImage" destination="gVC-gO-omA" id="kUy-Im-rcE"/>
                                     <outlet property="iconSubmitted" destination="hrz-9W-c6u" id="iho-eG-TRc"/>
                                     <outlet property="progress" destination="qnh-Np-Kui" id="n6U-iW-W23"/>
-                                    <outlet property="shadowImage" destination="Qa6-4r-hdw" id="6zC-MD-6X1"/>
-                                    <outlet property="timeLabel" destination="sS3-mR-ix1" id="69H-Br-iIJ"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AudioCellOutStream" rowHeight="104" id="pYU-6S-hS8" customClass="WUAudioOutCell">
@@ -1003,16 +898,12 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="tZP-MK-pS2">
-                                            <rect key="frame" x="38" y="53" width="254" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="19d-hA-YMs" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="50" y="8" width="270" height="73"/>
+                                            <rect key="frame" x="50" y="0.0" width="270" height="76"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" id="fm0-2t-2LJ">
-                                                    <rect key="frame" x="14" y="6" width="52" height="59"/>
+                                                    <rect key="frame" x="8" y="8" width="52" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ico_voice_msg.png" id="TKo-9b-1ST">
@@ -1020,7 +911,7 @@ test</string>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" id="roN-u5-PRw">
-                                                            <rect key="frame" x="0.0" y="41" width="50" height="21"/>
+                                                            <rect key="frame" x="1" y="41" width="48" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="qq0-GL-s05">
@@ -1036,18 +927,12 @@ test</string>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mOm-3U-RL2">
-                                                    <rect key="frame" x="186" y="47" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <progressView opaque="NO" contentMode="scaleToFill" id="aq9-yO-kJb">
                                                     <rect key="frame" x="105" y="35" width="122" height="2"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </progressView>
                                                 <view hidden="YES" contentMode="scaleToFill" id="LZJ-VB-4PN">
-                                                    <rect key="frame" x="66" y="10" width="180" height="40"/>
+                                                    <rect key="frame" x="66" y="18" width="180" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1HB-yY-o40">
@@ -1107,8 +992,6 @@ test</string>
                                     <outlet property="playSlider" destination="WHt-WG-GqX" id="Mir-qx-s2A"/>
                                     <outlet property="playView" destination="LZJ-VB-4PN" id="7HM-Ba-iv3"/>
                                     <outlet property="progress" destination="aq9-yO-kJb" id="RMW-1q-qBM"/>
-                                    <outlet property="shadowImage" destination="tZP-MK-pS2" id="SWJ-4z-OLh"/>
-                                    <outlet property="timeLabel" destination="mOm-3U-RL2" id="ovj-9d-l5c"/>
                                     <outlet property="userImage" destination="GcP-Dm-eim" id="Zfh-V6-rrg"/>
                                 </connections>
                             </tableViewCell>
@@ -1119,21 +1002,12 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="eaA-VG-tll">
-                                            <rect key="frame" x="108" y="85" width="184" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="2Gs-WE-nrn" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="120" y="8" width="200" height="105"/>
+                                            <rect key="frame" x="208" y="0.0" width="112" height="104"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_read.png" id="lYK-po-wlx">
-                                                    <rect key="frame" x="180" y="78" width="14" height="14"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </imageView>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" id="nZy-eB-A3C">
-                                                    <rect key="frame" x="17" y="6" width="88" height="88"/>
+                                                    <rect key="frame" x="8" y="8" width="88" height="88"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="gg1-kF-lxl">
@@ -1161,19 +1035,14 @@ test</string>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aaF-pC-Dwm">
-                                                    <rect key="frame" x="116" y="74" width="64" height="21"/>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_read.png" id="lYK-po-wlx">
+                                                    <rect key="frame" x="91" y="82" width="14" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <progressView opaque="NO" contentMode="scaleToFill" id="4cI-KW-yV1">
-                                            <rect key="frame" x="20" y="52" width="122" height="2"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </progressView>
                                         <imageView hidden="YES" autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="redraw" id="RK5-oL-Gp2" customClass="C2TapImageView">
                                             <rect key="frame" x="282" y="69" width="35" height="35"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1186,6 +1055,10 @@ test</string>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <progressView opaque="NO" contentMode="scaleToFill" id="4cI-KW-yV1">
+                                            <rect key="frame" x="105" y="53" width="99" height="2"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </progressView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1197,8 +1070,6 @@ test</string>
                                     <outlet property="messageImage" destination="gg1-kF-lxl" id="sck-Sa-dx1"/>
                                     <outlet property="messageImageView" destination="nZy-eB-A3C" id="YCv-f4-Rcz"/>
                                     <outlet property="progress" destination="4cI-KW-yV1" id="WVt-Ti-O1F"/>
-                                    <outlet property="shadowImage" destination="eaA-VG-tll" id="Z9d-XH-DCF"/>
-                                    <outlet property="timeLabel" destination="aaF-pC-Dwm" id="TiK-iV-UBh"/>
                                     <outlet property="userImage" destination="RK5-oL-Gp2" id="TE5-Gh-t8B"/>
                                     <outlet property="videoBanner" destination="o1k-YR-lIo" id="bVK-2U-sd2"/>
                                 </connections>
@@ -1210,16 +1081,12 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="yDu-hv-Icr">
-                                            <rect key="frame" x="53" y="73" width="214" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="AX2-CO-WyA" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="90" y="8" width="230" height="93"/>
+                                            <rect key="frame" x="90" y="0.0" width="230" height="61"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_read.png" id="Ehw-YY-HTS">
-                                                    <rect key="frame" x="210" y="71" width="14" height="14"/>
+                                                    <rect key="frame" x="210" y="39" width="14" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
@@ -1232,32 +1099,26 @@ test</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="btn_ico_avatar.png" id="rbP-Gd-BXk">
-                                                    <rect key="frame" x="12" y="22" width="45" height="45"/>
+                                                    <rect key="frame" x="8" y="8" width="45" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="M9M-d1-iqW" userLabel="labelFriendName">
-                                                    <rect key="frame" x="71" y="36" width="133" height="17"/>
+                                                    <rect key="frame" x="71" y="10" width="133" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T9K-gi-n3K">
-                                                    <rect key="frame" x="146" y="67" width="64" height="21"/>
+                                                <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="redraw" id="OzA-JO-c4o" customClass="C2TapImageView">
+                                                    <rect key="frame" x="187" y="13" width="35" height="35"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="separatorLine" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <imageView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="redraw" id="OzA-JO-c4o" customClass="C2TapImageView">
-                                            <rect key="frame" x="285" y="45" width="35" height="35"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1267,8 +1128,6 @@ test</string>
                                     <outlet property="headline" destination="7MD-GK-uYs" id="LfO-75-ZeS"/>
                                     <outlet property="iconSubmitted" destination="Ehw-YY-HTS" id="0c7-jP-Vsc"/>
                                     <outlet property="messageImage" destination="rbP-Gd-BXk" id="ua2-3T-iBJ"/>
-                                    <outlet property="shadowImage" destination="yDu-hv-Icr" id="CG7-gd-cgl"/>
-                                    <outlet property="timeLabel" destination="T9K-gi-n3K" id="mHD-rl-Jzm"/>
                                     <outlet property="userImage" destination="OzA-JO-c4o" id="IfJ-wI-Hc8"/>
                                 </connections>
                             </tableViewCell>
@@ -1279,12 +1138,8 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="Dw2-rH-ZnQ">
-                                            <rect key="frame" x="53" y="63" width="214" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="tsV-0e-pJg" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="90" y="8" width="230" height="83"/>
+                                            <rect key="frame" x="90" y="0.0" width="230" height="61"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Michael Knecht" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="b3L-P6-zje" userLabel="labelSenderName">
@@ -1296,24 +1151,18 @@ test</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_read.png" id="4GB-wg-WHS">
-                                                    <rect key="frame" x="210" y="61" width="14" height="14"/>
+                                                    <rect key="frame" x="210" y="39" width="14" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" image="ico_vcard.png" id="ecS-Tx-UeN">
-                                                    <rect key="frame" x="12" y="19" width="45" height="45"/>
+                                                    <rect key="frame" x="8" y="8" width="45" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Ex8-ng-WkB" userLabel="labelContactName">
-                                                    <rect key="frame" x="66" y="22" width="150" height="40"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Ex8-ng-WkB" userLabel="labelContactName">
+                                                    <rect key="frame" x="71" y="22" width="133" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jSm-bn-0aE">
-                                                    <rect key="frame" x="146" y="57" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1335,8 +1184,6 @@ test</string>
                                     <outlet property="headline" destination="b3L-P6-zje" id="JWy-5k-ywn"/>
                                     <outlet property="iconSubmitted" destination="4GB-wg-WHS" id="AWm-kR-1jH"/>
                                     <outlet property="messageImage" destination="ecS-Tx-UeN" id="1fh-5B-pBf"/>
-                                    <outlet property="shadowImage" destination="Dw2-rH-ZnQ" id="5z0-oG-Agz"/>
-                                    <outlet property="timeLabel" destination="jSm-bn-0aE" id="L6J-ny-dKo"/>
                                     <outlet property="userImage" destination="AN3-nw-YKj" id="ibZ-O4-Ymf"/>
                                 </connections>
                             </tableViewCell>
@@ -1347,12 +1194,8 @@ test</string>
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow.png" id="V4a-i2-Gic">
-                                            <rect key="frame" x="70" y="57" width="180" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <view contentMode="scaleToFill" id="3gf-im-hjb" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="124" y="8" width="196" height="77"/>
+                                            <rect key="frame" x="124" y="0.0" width="196" height="77"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dRY-vi-GGD" userLabel="btnCall" customClass="C2ActionButton">
@@ -1432,12 +1275,6 @@ test</string>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88:88 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AeD-rV-Ns6">
-                                                    <rect key="frame" x="112" y="51" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -1457,8 +1294,6 @@ test</string>
                                     <outlet property="iconCallStatus" destination="DTh-6k-9VD" id="GC7-H3-3LI"/>
                                     <outlet property="iconSubmitted" destination="wul-iN-Nxq" id="TsA-tl-L97"/>
                                     <outlet property="messageImage" destination="98v-Es-iM9" id="F55-ze-ca8"/>
-                                    <outlet property="shadowImage" destination="V4a-i2-Gic" id="tgz-xO-uxN"/>
-                                    <outlet property="timeLabel" destination="AeD-rV-Ns6" id="Ilb-OK-4lx"/>
                                     <outlet property="userImage" destination="D9S-sZ-ecD" id="gBU-Na-faN"/>
                                 </connections>
                             </tableViewCell>
@@ -1644,7 +1479,6 @@ Remove search filter?</string>
         <image name="ico_vcard.png" width="65" height="65"/>
         <image name="ico_voice_msg.png" width="65" height="65"/>
         <image name="play_unpress.png" width="80" height="80"/>
-        <image name="shadow.png" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

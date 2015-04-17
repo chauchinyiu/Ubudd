@@ -82,14 +82,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.translucent = NO;
-    [[ResponseHandler instance] readGroups];
-    [ResponseHandler instance].bcdelegate = self;
-    [[ResponseHandler instance] readBroadcasts];
+    [self reloadPage];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [self.tableView reloadData];
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -102,7 +99,7 @@
         
         chatController.targetUserid = [sender objectForKey:@"userid"];
         chatController.startEdit = [[sender objectForKey:@"startEdit"] boolValue];
-        chatController.sendWelcomeText = [[sender objectForKey:@"sendWelcomeText"] boolValue];;
+        chatController.sendWelcomeText = [[sender objectForKey:@"sendWelcomeText"] boolValue];
     }
 }
 
@@ -110,16 +107,6 @@
 
 -(NSFetchRequest *) fetchRequest
 {
-    DataRequest* datRequest = [[DataRequest alloc] init];
-    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-    [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
-    datRequest.values = data;
-    datRequest.requestName = @"readOutStandingCount";
-    
-    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readOutStandingRequestResponse:error:)];
-    
-    
     return [[SCDataManager instance] fetchRequestForChatHistory:NO];
 }
 
@@ -518,5 +505,23 @@
 }
 
 -(void)readBroadcastImgCompleted{
+}
+
+-(void)readRequest{
+    DataRequest* datRequest = [[DataRequest alloc] init];
+    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+    [data setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"] forKey:@"userID"];
+    datRequest.values = data;
+    datRequest.requestName = @"readOutStandingCount";
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readOutStandingRequestResponse:error:)];
+}
+
+-(void)reloadPage{
+    [self readRequest];
+    [[ResponseHandler instance] readGroups];
+    [ResponseHandler instance].bcdelegate = self;
+    [[ResponseHandler instance] readBroadcasts];
 }
 @end

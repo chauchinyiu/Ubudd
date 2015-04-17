@@ -9,6 +9,10 @@
 #import "CommonMethods.h"
 #import <SocialCommunication/C2WaitMessage.h>
 
+@implementation WUListEntry
+@synthesize source, data, sourcePath, mapToPath;
+@end
+
 @implementation CommonMethods
 
 + (float)osVersion {

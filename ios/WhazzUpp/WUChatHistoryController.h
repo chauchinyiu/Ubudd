@@ -26,4 +26,6 @@
 
 -(IBAction)toggleEditing:(id)sender;
 
+-(void)reloadPage;
+
 @end

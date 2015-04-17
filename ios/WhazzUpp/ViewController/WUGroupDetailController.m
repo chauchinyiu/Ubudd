@@ -583,11 +583,11 @@
     NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
     if(isPublic.intValue == 1){
         isPublic = [NSNumber numberWithInt:0];
-        [editCell.btnIsPublicEdit setTitle:NSLocalizedString(@"Public", @"") forState:UIControlStateNormal];
+        [editCell.btnIsPublicEdit setTitle:NSLocalizedString(@"Private", @"") forState:UIControlStateNormal];
     }
     else{
         isPublic = [NSNumber numberWithInt:1];
-        [editCell.btnIsPublicEdit setTitle:NSLocalizedString(@"Private", @"") forState:UIControlStateNormal];
+        [editCell.btnIsPublicEdit setTitle:NSLocalizedString(@"Public", @"") forState:UIControlStateNormal];
     }
     [groupInfo setObject:isPublic forKey:@"isPublic"];
    
@@ -845,7 +845,6 @@
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readGroupInfo:error:)];
-    [self showChatForUserid:self.group.groupid];
 }
 
 

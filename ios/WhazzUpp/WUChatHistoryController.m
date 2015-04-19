@@ -17,6 +17,7 @@
 #import "ResponseBase.h"
 #import "DataResponse.h"
 #import "CommonMethods.h"
+#import "DBHandler.h"
 
 @implementation WUChatHistoryCell
 
@@ -396,6 +397,16 @@
             histcell.nameLabel.text = @"";
             histcell.missedEvents.hidden = YES;
             histcell.userImage.image = nil;
+        }
+        //clear unread messages
+        NSFetchRequest *fetchRequest = [[SCDataManager instance] fetchRequestForEventHistory:nil sort:YES];
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"contact == %@", chathist.contact];
+        [fetchRequest setPredicate:predicate];
+        NSFetchedResultsController* ubuddUsers = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[DBHandler context] sectionNameKeyPath:nil cacheName:nil];
+        [ubuddUsers performFetch:nil];
+        for (int j = 0; j < [[[[ubuddUsers sections] objectAtIndex:0] objects] count]; j++) {
+            MOC2CallEvent *event = [[[[ubuddUsers sections] objectAtIndex:0] objects] objectAtIndex:j];
+            [[SCDataManager instance] markAsRead:event];
         }
     }
 

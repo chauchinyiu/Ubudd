@@ -23,7 +23,7 @@
 @property NSString* status;
 @property NSDate* createTime;
 @property NSMutableAttributedString* attributedName;
-
+@property NSString* lastName;
 @end
 
 @interface WUBroadcast : NSObject

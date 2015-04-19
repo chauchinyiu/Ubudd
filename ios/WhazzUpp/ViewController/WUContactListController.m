@@ -20,17 +20,16 @@
 #import "DBHandler.h"
 
 @implementation WUAddressBookCell
-
 @synthesize nameLabel, statusLabel, userBtn;
-
 @end
 
 @implementation WUAddressBaseCell
-
 @synthesize nameLabel;
-
 @end
 
+@implementation WUNameGroupCell
+@synthesize nameLabel;
+@end
 
 @interface WUContactListController (){
     CGFloat favoritesCellHeight;
@@ -43,6 +42,11 @@
     
     NSMutableArray *ubuddSearch;
     NSMutableArray *ubuddListSection;
+    
+    NSMutableArray* headers;
+    NSMutableArray* entries;
+    NSMutableArray* sectionSize;
+    
 }
 @end
 
@@ -174,6 +178,8 @@
     [[NSUserDefaults standardUserDefaults] setInteger:favCnt forKey:@"FavCount"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    [self rebuildEntries];
+    
 }
 
 
@@ -195,125 +201,119 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    /*
-    if (section == 0 && ubuddUsers != nil) {
-        return [[[[ubuddUsers sections] objectAtIndex:0] objects] count];
-    }*/
-    if(section == 0){
-        if (inSearch) {
-            return ubuddSearch.count;
-        }
-        else{
-            return ubuddListSection.count;
-        }
-    }
-    else{
-        if (inSearch) {
-            return addressSearch.count;
-        }
-        else{
-            return addressListSection.count;
-        }
-    }
+    return ((NSNumber*)[sectionSize objectAtIndex:section]).integerValue;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return favoritesCellHeight;
-    
+    for (int i = 0; i < entries.count; i++) {
+        WUListEntry* e = [entries objectAtIndex:i];
+        if (e.mapToPath.row == indexPath.row && e.mapToPath.section == indexPath.section) {
+            if ([e.source isEqualToString:@"NameHeader"]) {
+                return 22;
+            }
+            else{
+                return favoritesCellHeight;
+            }
+        }
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell;
-    if (indexPath.section == 0) {
-        WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
-        favocell.statusLabel.font = [CommonMethods getStdFontType:2];
-        
-        WUAccount* accRecord;
-        if (inSearch) {
-            accRecord = [ubuddSearch objectAtIndex:indexPath.row];
-        }
-        else{
-            accRecord = [ubuddListSection objectAtIndex:indexPath.row];
-        }
-        if ([accRecord.name isEqualToString:@""]) {
-            favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:accRecord.c2CallID];
-        }
-        else{
-            favocell.nameLabel.attributedText = accRecord.attributedName;
-        }
-        
-        favocell.statusLabel.text = accRecord.status;
-        favocell.userBtn.tag = indexPath.row;
-        favocell.userBtn2.tag = indexPath.row;
-        
-        
-        UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:accRecord.c2CallID];
-        
-        if (image) {
-            favocell.userImg.image = image;
-            favocell.userImg.layer.cornerRadius = 0.0;
-            favocell.userImg.layer.masksToBounds = YES;
-        }
-        [favocell.userBtn setHidden:NO];
-        
-        cell = favocell;
-    }
-    else{
-        
-        WUAddressBaseCell *favocell = (WUAddressBaseCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBaseCell"];
-        favocell.nameLabel.font = [CommonMethods getStdFontType:0];
-        
-        ABRecordRef record;
-        if (inSearch) {
-            record = (__bridge ABRecordRef)([addressSearch objectAtIndex:indexPath.row]);
-        }
-        else{
-            record = (__bridge ABRecordRef)([addressListSection objectAtIndex:indexPath.row]);
-        }
-        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
-        NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
-        NSString * fullName;
-        NSMutableAttributedString* attributedName;
-        UIFont* fontBold = [CommonMethods getStdFontType:0];
-        UIFont* fontStd = [CommonMethods getStdFontType:1];
-
-        if (lastName == nil) {
-            if (firstName == nil) {
-                attributedName = nil;
+    for (int i = 0; i < entries.count; i++) {
+        WUListEntry* e = [entries objectAtIndex:i];
+        if (e.mapToPath.row == indexPath.row && e.mapToPath.section == indexPath.section) {
+            if ([e.source isEqualToString:@"NameHeader"]) {
+                cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUNameGroupCell"];
+                ((WUNameGroupCell *)cell).nameLabel.text = [e.data valueForKey:@"nameChar"];
             }
-            else{
-                fullName = firstName;
-                attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
-                [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, fullName.length)];
+            else if ([e.source isEqualToString:@"Friend"]) {
+                WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
+                favocell.statusLabel.font = [CommonMethods getStdFontType:2];
+                
+                WUAccount* accRecord = [e.data valueForKey:@"Friend"];
+                if ([accRecord.name isEqualToString:@""]) {
+                    favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:accRecord.c2CallID];
+                }
+                else{
+                    favocell.nameLabel.attributedText = accRecord.attributedName;
+                }
+                
+                favocell.statusLabel.text = accRecord.status;
+                favocell.userBtn.tag = indexPath.row;
+                favocell.userBtn2.tag = indexPath.row;
+                
+                
+                UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:accRecord.c2CallID];
+                
+                if (image) {
+                    favocell.userImg.image = image;
+                    favocell.userImg.layer.cornerRadius = 0.0;
+                    favocell.userImg.layer.masksToBounds = YES;
+                }
+                [favocell.userBtn setHidden:NO];
+                
+                cell = favocell;
+                
+            }
+            else if ([e.source isEqualToString:@"Address"]) {
+                WUAddressBaseCell *favocell = (WUAddressBaseCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBaseCell"];
+                favocell.nameLabel.font = [CommonMethods getStdFontType:0];
+                
+                ABRecordRef record;
+                if (inSearch) {
+                    record = (__bridge ABRecordRef)([addressSearch objectAtIndex:e.sourcePath.row]);
+                }
+                else{
+                    record = (__bridge ABRecordRef)([addressListSection objectAtIndex:e.sourcePath.row]);
+                }
+                NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+                NSString * fullName;
+                NSMutableAttributedString* attributedName;
+                UIFont* fontBold = [CommonMethods getStdFontType:0];
+                UIFont* fontStd = [CommonMethods getStdFontType:1];
+                
+                if (lastName == nil) {
+                    if (firstName == nil) {
+                        attributedName = nil;
+                    }
+                    else{
+                        fullName = firstName;
+                        attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+                        [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, fullName.length)];
+                    }
+                }
+                else if (firstName == nil) {
+                    fullName = lastName;
+                    attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+                    [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, fullName.length)];
+                }
+                else{
+                    fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                    attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
+                    [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, firstName.length)];
+                    [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(firstName.length + 1, lastName.length)];
+                }
+                
+                favocell.nameLabel.attributedText = attributedName;
+                
+                ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
+                
+                NSString *phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
+                
+                // Remove all formatting symbols that might be in both phone number being compared
+                NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
+                phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
+                
+                cell = favocell;
+                
             }
         }
-        else if (firstName == nil) {
-            fullName = lastName;
-            attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
-            [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, fullName.length)];
-        }
-        else{
-            fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-            attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
-            [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, firstName.length)];
-            [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(firstName.length + 1, lastName.length)];
-        }
-        
-        favocell.nameLabel.attributedText = attributedName;
-        
-        ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
-        
-        NSString *phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
-        
-        // Remove all formatting symbols that might be in both phone number being compared
-        NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
-        phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
-        
-        cell = favocell;
     }
-    
     
     return cell;
 }
@@ -322,69 +322,66 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
-    {
-        WUAccount* accRecord;
-        if (inSearch) {
-            accRecord = [ubuddSearch objectAtIndex:indexPath.row];
+    for (int i = 0; i < entries.count; i++) {
+        WUListEntry* e = [entries objectAtIndex:i];
+        if (e.mapToPath.row == indexPath.row && e.mapToPath.section == indexPath.section) {
+            if ([e.source isEqualToString:@"Friend"]) {
+                WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
+                favocell.statusLabel.font = [CommonMethods getStdFontType:2];
+                
+                WUAccount* accRecord = [e.data valueForKey:@"Friend"];
+                [WUBoardController setIsGroup:NO];
+                [self showChatForUserid:accRecord.c2CallID];
+            }
+            else if ([e.source isEqualToString:@"Address"]) {
+                ABRecordRef record;
+                if (inSearch) {
+                    record = (__bridge ABRecordRef)([addressSearch objectAtIndex:e.sourcePath.row]);
+                }
+                else{
+                    record = (__bridge ABRecordRef)([addressListSection objectAtIndex:e.sourcePath.row]);
+                }
+                NSString * storyboardName = @"MainStoryboard";
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                WUContactInfoController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUContactInfoController"];
+                
+                NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
+                NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+                NSString * fullName;
+                if (lastName == nil) {
+                    fullName = firstName;
+                }
+                else if (firstName == nil) {
+                    fullName = lastName;
+                }
+                else{
+                    fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                }
+                
+                NSString *phone;
+                ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
+                if(ABMultiValueGetCount(phoneNumbers) > 0){
+                    phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
+                }
+                [vc setContactName:fullName Tel:phone];
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }
         }
-        else{
-            accRecord = [ubuddListSection objectAtIndex:indexPath.row];
-        }
-        [WUBoardController setIsGroup:NO];
-        [self showChatForUserid:accRecord.c2CallID];
-    
     }
-    else
-    {
-        // TODO : add the contact page
-        ABRecordRef record;
-        if (inSearch) {
-            record = (__bridge ABRecordRef)([addressSearch objectAtIndex:indexPath.row]);
-        }
-        else{
-            record = (__bridge ABRecordRef)([addressListSection objectAtIndex:indexPath.row]);
-        }
-        
-        NSString * storyboardName = @"MainStoryboard";
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-        WUContactInfoController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUContactInfoController"];
-        
-        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
-        NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
-        NSString * fullName;
-        if (lastName == nil) {
-            fullName = firstName;
-        }
-        else if (firstName == nil) {
-            fullName = lastName;
-        }
-        else{
-            fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-        }
-        
-        NSString *phone;
-        ABMultiValueRef phoneNumbers = ABRecordCopyValue(record, kABPersonPhoneProperty);
-        if(ABMultiValueGetCount(phoneNumbers) > 0){
-            phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
-        }
-        [vc setContactName:fullName Tel:phone];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
-        
 }
 
 -(IBAction)showFriendInfo:(id)sender{
     WUAccount* accRecord;
-    if (inSearch) {
-        accRecord = [ubuddSearch objectAtIndex:((UIButton*)sender).tag];
+    
+    for (int i = 0; i < entries.count; i++) {
+        WUListEntry* e = [entries objectAtIndex:i];
+        if (e.mapToPath.row == ((UIButton*)sender).tag && e.mapToPath.section == 0) {
+            accRecord = [e.data valueForKey:@"Friend"];
+            [WUFriendDetailController setPhoneNo:accRecord.phoneNo];
+            [self showFriendDetailForUserid:accRecord.c2CallID];
+        }
     }
-    else{
-        accRecord = [ubuddListSection objectAtIndex:((UIButton*)sender).tag];
-    }
-    [WUFriendDetailController setPhoneNo:accRecord.phoneNo];
-    [self showFriendDetailForUserid:accRecord.c2CallID];
 }
 
 
@@ -424,8 +421,8 @@
             [addressSearch addObject:[addressListSection objectAtIndex:i]];
         }
     }
+    [self rebuildEntries];
     [self.tableView reloadData];
-    
 }
 
 -(void) setTextFilterForText:(NSString *) text
@@ -484,6 +481,152 @@
 
 -(void)readStatusCompleted{
     [self.tableView reloadData];
+}
+
+
+-(void)rebuildEntries{
+    NSString* lastNameChar;
+    NSString* oldLastNameChar;
+    
+    headers = [[NSMutableArray alloc] init];
+    entries = [[NSMutableArray alloc] init];
+    sectionSize = [[NSMutableArray alloc] init];
+    
+    
+    WUListEntry* e;
+    e = [[WUListEntry alloc] init];
+    e.source = [NSMutableString stringWithString:@"FriendHeader"];
+    [headers addObject:e];
+    [sectionSize addObject:[NSNumber numberWithInt:0]];
+    
+    oldLastNameChar = @"";
+    
+    if (inSearch) {
+        for (int i = 0; i < ubuddSearch.count; i++) {
+            WUAccount* a = [ubuddSearch objectAtIndex:i];
+            if (a.lastName) {
+                if (a.lastName.length > 0) {
+                    lastNameChar = [[a.lastName substringToIndex:1] uppercaseString];
+                    if (![oldLastNameChar isEqualToString:lastNameChar]) {
+                        WUListEntry* e;
+                        e = [[WUListEntry alloc] init];
+                        e.source = [NSMutableString stringWithString:@"NameHeader"];
+                        e.data = [[NSMutableDictionary alloc] init];
+                        [e.data setValue:lastNameChar forKey:@"nameChar"];
+                        [self addEntry:e];
+                        oldLastNameChar = lastNameChar;
+                    }
+                }
+            }
+            WUListEntry* e;
+            e = [[WUListEntry alloc] init];
+            e.source = [NSMutableString stringWithString:@"Friend"];
+            e.data = [[NSMutableDictionary alloc] init];
+            [e.data setValue:a forKey:@"Friend"];
+            [self addEntry:e];
+        }
+    }
+    else{
+        
+        for (int i = 0; i < ubuddListSection.count; i++) {
+            WUAccount* a = [ubuddListSection objectAtIndex:i];
+            if (a.lastName) {
+                if (a.lastName.length > 0) {
+                    lastNameChar = [[a.lastName substringToIndex:1] uppercaseString];
+                    if (![oldLastNameChar isEqualToString:lastNameChar]) {
+                        WUListEntry* e;
+                        e = [[WUListEntry alloc] init];
+                        e.source = [NSMutableString stringWithString:@"NameHeader"];
+                        e.data = [[NSMutableDictionary alloc] init];
+                        [e.data setValue:lastNameChar forKey:@"nameChar"];
+                        [self addEntry:e];
+                        oldLastNameChar = lastNameChar;
+                    }
+                }
+            }
+            WUListEntry* e;
+            e = [[WUListEntry alloc] init];
+            e.source = [NSMutableString stringWithString:@"Friend"];
+            e.data = [[NSMutableDictionary alloc] init];
+            [e.data setValue:a forKey:@"Friend"];
+            [self addEntry:e];
+        }
+    }
+    
+    e = [[WUListEntry alloc] init];
+    e.source = [NSMutableString stringWithString:@"AddressHeader"];
+    [headers addObject:e];
+    [sectionSize addObject:[NSNumber numberWithInt:0]];
+    
+    oldLastNameChar = @"";
+    
+    if (inSearch) {
+
+        for (int i = 0; i < addressSearch.count; i++) {
+            ABRecordRef record = (__bridge ABRecordRef)([addressSearch objectAtIndex:i]);
+            NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+            
+            if (!lastName) {
+                lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty ));
+            }
+            if (lastName.length > 0) {
+                lastNameChar = [[lastName substringToIndex:1] uppercaseString];
+                if (![oldLastNameChar isEqualToString:lastNameChar]) {
+                    WUListEntry* e;
+                    e = [[WUListEntry alloc] init];
+                    e.source = [NSMutableString stringWithString:@"NameHeader"];
+                    e.data = [[NSMutableDictionary alloc] init];
+                    [e.data setValue:lastNameChar forKey:@"nameChar"];
+                    [self addEntry:e];
+                    oldLastNameChar = lastNameChar;
+                }
+            }
+            
+            WUListEntry* e;
+            e = [[WUListEntry alloc] init];
+            e.source = [NSMutableString stringWithString:@"Address"];
+            e.sourcePath = [NSIndexPath indexPathForRow:i inSection:1];
+            [self addEntry:e];
+        }
+    }
+    else{
+        for (int i = 0; i < addressListSection.count; i++) {
+            ABRecordRef record = (__bridge ABRecordRef)([addressListSection objectAtIndex:i]);
+            NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
+            
+            if (!lastName) {
+                lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty ));
+            }
+            if (lastName.length > 0) {
+               lastNameChar = [[lastName substringToIndex:1] uppercaseString];
+                if (![oldLastNameChar isEqualToString:lastNameChar]) {
+                    WUListEntry* e;
+                    e = [[WUListEntry alloc] init];
+                    e.source = [NSMutableString stringWithString:@"NameHeader"];
+                    e.data = [[NSMutableDictionary alloc] init];
+                    [e.data setValue:lastNameChar forKey:@"nameChar"];
+                    [self addEntry:e];
+                    oldLastNameChar = lastNameChar;
+                }
+            }
+            WUListEntry* e;
+            e = [[WUListEntry alloc] init];
+            e.source = [NSMutableString stringWithString:@"Address"];
+            e.sourcePath = [NSIndexPath indexPathForRow:i inSection:1];
+            [self addEntry:e];
+        }
+    }
+}
+
+-(void)addEntry:(WUListEntry*)e{
+    int currentSectionLen  = ((NSNumber*)[sectionSize objectAtIndex:sectionSize.count - 1]).intValue;
+    e.mapToPath = [NSIndexPath indexPathForRow:currentSectionLen inSection:sectionSize.count - 1 ];
+    
+    
+    [entries addObject:e];
+    
+    [sectionSize replaceObjectAtIndex:sectionSize.count - 1 withObject:[NSNumber numberWithInt:currentSectionLen + 1]];
+    
 }
 
 

@@ -19,11 +19,12 @@
 @end
 
 @interface WUAddressBaseCell : UITableViewCell
-
 @property(nonatomic, weak) IBOutlet UILabel *nameLabel;
-
 @end
 
+@interface WUNameGroupCell : UITableViewCell
+@property(nonatomic, weak) IBOutlet UILabel *nameLabel;
+@end
 
 
 @interface WUContactListController : UITableViewController<WUReadStatusDelegate>

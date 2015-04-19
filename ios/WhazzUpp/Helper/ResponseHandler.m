@@ -44,10 +44,13 @@
 @end
 
 @implementation WUAccount
-@synthesize name, phoneNo, c2CallID, status, createTime, attributedName;
+@synthesize name, phoneNo, c2CallID, status, createTime, attributedName, lastName;
 
 - (NSComparisonResult)compare:(WUAccount *)otherObject {
-    return [self.name compare:otherObject.name];
+    if ([self.lastName compare:otherObject.lastName] == NSOrderedSame) {
+        return [self.name compare:otherObject.name];
+    }
+    return [self.lastName compare:otherObject.lastName];
 }
 
 @end
@@ -327,8 +330,6 @@ static ResponseHandler *myInstance;
             [self.friendList addObject:a];
         }
         
-        self.friendList = [NSMutableArray arrayWithArray:[self.friendList sortedArrayUsingSelector:@selector(compare:)]];
-
         for (int j = 0; j < self.friendList.count; j++) {
             WUAccount* a = [self.friendList objectAtIndex:j];
             [u setValue:a.c2CallID forKey:[NSString stringWithFormat:@"friendID%d", j]];
@@ -366,6 +367,22 @@ static ResponseHandler *myInstance;
     //refresh name
     for (int j = 0; j < self.friendList.count; j++) {
         WUAccount* a = [self.friendList objectAtIndex:j];
+        MOC2CallUser *user = [[SCDataManager instance] userForUserid:a.c2CallID];
+        
+        NSMutableAttributedString* attributedName;
+        UIFont* fontBold = [CommonMethods getStdFontType:0];
+        UIFont* fontStd = [CommonMethods getStdFontType:1];
+
+        if (user) {
+            a.name = user.name;
+            a.lastName = user.name;
+            attributedName = [[NSMutableAttributedString alloc] initWithString:user.name];
+            [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, user.name.length)];
+            a.attributedName = attributedName;
+        }
+        
+
+        
         for (CFIndex loop = 0; loop < CFArrayGetCount(peopleMutable); loop++){
             ABRecordRef record = CFArrayGetValueAtIndex(peopleMutable, loop); // get address book record
             
@@ -387,14 +404,12 @@ static ResponseHandler *myInstance;
                     NSString *firstName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonFirstNameProperty));
                     NSString *lastName = CFBridgingRelease(ABRecordCopyValue(record, kABPersonLastNameProperty));
                     NSString * fullName;
-                    NSMutableAttributedString* attributedName;
-                    UIFont* fontBold = [CommonMethods getStdFontType:0];
-                    UIFont* fontStd = [CommonMethods getStdFontType:1];
 
                     if (lastName == nil) {
                         fullName = firstName;
+                        lastName = firstName;
                         attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
-                        [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, fullName.length)];
+                        [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, fullName.length)];
                     }
                     else if (firstName == nil) {
                         fullName = lastName;
@@ -409,10 +424,12 @@ static ResponseHandler *myInstance;
                     }
                     a.name = fullName;
                     a.attributedName = attributedName;
+                    a.lastName = lastName;
                 }
             }
         }
     }
+    self.friendList = [NSMutableArray arrayWithArray:[self.friendList sortedArrayUsingSelector:@selector(compare:)]];
 
 }
 

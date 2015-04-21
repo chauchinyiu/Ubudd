@@ -35,7 +35,7 @@
                                     <outlet property="timeLabel" destination="Lby-Qu-2Sa" id="8b0-FQ-RNC"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUMessageTimeCell" rowHeight="35" id="CqV-Ov-lXs" customClass="WUMessageTimeCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WUMessageTimeCell" rowHeight="35" id="CqV-Ov-lXs" customClass="WUMessageTimeCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CqV-Ov-lXs" id="1aZ-2j-zK5">

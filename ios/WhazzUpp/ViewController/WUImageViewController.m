@@ -24,7 +24,7 @@
     standardScale = MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
 
     
-    imageFrame.minimumZoomScale = 0.5;
+    imageFrame.minimumZoomScale = MIN(0.5, standardScale);
     imageFrame.maximumZoomScale = 6.0;
     imageFrame.zoomScale = standardScale;
     

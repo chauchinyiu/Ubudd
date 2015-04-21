@@ -382,8 +382,10 @@
             if ([chathist.missedEvents intValue] > 0) {
                 histcell.missedEvents.hidden = NO;
                 histcell.missedEvents.text = [NSString stringWithFormat:@"%@", chathist.missedEvents];
+                histcell.timeLabel.textColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
             } else {
                 histcell.missedEvents.hidden = YES;
+                histcell.timeLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
             }
         }
     }

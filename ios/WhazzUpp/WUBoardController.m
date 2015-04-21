@@ -336,12 +336,13 @@ static BOOL isGroup = YES;
 {
  
     NSInteger lastSection = self.tableView.numberOfSections - 1 ;
-    NSInteger rowCnt = [self.tableView numberOfRowsInSection:lastSection];
-    if (rowCnt > 0) {
-        NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:([self.tableView numberOfRowsInSection:lastSection] - 1) inSection:lastSection];
-        [[self tableView] scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    if(lastSection >= 0){
+        NSInteger rowCnt = [self.tableView numberOfRowsInSection:lastSection];
+        if (rowCnt > 0) {
+            NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:([self.tableView numberOfRowsInSection:lastSection] - 1) inSection:lastSection];
+            [[self tableView] scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
     }
-
 }
 
 
@@ -566,7 +567,20 @@ static BOOL isGroup = YES;
                             cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageOutCell"];
                             [self configureMessageCellOut:cell forEvent:elem atIndexPath:e.sourcePath];
                         }
-                        
+                        if([elem.status intValue] == 3){
+                            MessageCell* msgcell = cell;
+                            [msgcell setLongpressAction:^{
+                                UIMenuController *menu = [UIMenuController sharedMenuController];
+                                NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+                                
+                                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
+                                [msgcell setRetransmitAction:^{
+                                    //[msgcell ];
+                                }];
+                                [menulist addObject:item];
+                                
+                            }];
+                        }
                     }
                     
                     @try {
@@ -2193,7 +2207,7 @@ static BOOL isGroup = YES;
 -(void)readGroupMemberJoin{
     DataRequest* datRequest = [[DataRequest alloc] init];
     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-    [data setValue:self.targetUserid forKey:@"groupID"];
+    [data setValue:self.targetUserid forKey:@"c2CallID"];
     datRequest.values = data;
     datRequest.requestName = @"readGroupMemberJoin";
     
@@ -2316,8 +2330,8 @@ static BOOL isGroup = YES;
 
 -(void)addJoinEntryFrom:(NSDate*)pDateF to:(NSDate*)pDateT{
     for (int i = 0; i < memberJoinList.count; i++) {
-        if ([pDateF compare:[[memberJoinList objectAtIndex:i] objectForKey:@"joinTime"]] == NSOrderedDescending
-            && [pDateT compare:[[memberJoinList objectAtIndex:i] objectForKey:@"joinTime"]] == NSOrderedAscending) {
+        if ([pDateF compare:[[memberJoinList objectAtIndex:i] objectForKey:@"joinTime"]] == NSOrderedAscending
+            && [pDateT compare:[[memberJoinList objectAtIndex:i] objectForKey:@"joinTime"]] == NSOrderedDescending) {
             
             WUListEntry* e = [[WUListEntry alloc] init];
             e.source = [NSMutableString stringWithString:@"MemberJoin"];

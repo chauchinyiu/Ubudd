@@ -390,6 +390,9 @@
 
 -(void) refetchResults
 {
+    if (!searchStr) {
+        searchStr = @"";
+    }
     ubuddSearch = [[NSMutableArray alloc] init];
     for (int i = 0; i < ubuddListSection.count; i++) {
         WUAccount* accRecord = [ubuddListSection objectAtIndex:i];

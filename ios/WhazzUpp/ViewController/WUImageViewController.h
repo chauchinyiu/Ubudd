@@ -13,6 +13,8 @@
 @property(nonatomic, weak) IBOutlet UIScrollView *imageFrame;
 @property(nonatomic, strong) UIImage* viewImage;
 @property int pageID;
+@property NSDictionary* info;
+
 
 -(void)imageClicked;
 

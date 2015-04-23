@@ -131,4 +131,5 @@
 
 +(void)setIsGroup:(BOOL)b;
 
+@property NSString* chatTitle;
 @end

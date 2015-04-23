@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <SocialCommunication/SocialCommunication.h>
 
+
 @interface WUPhotoViewController : UIPageViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
+@property NSString* chatTitle;
 
 -(void) showPhotos:(NSArray *) imageList currentPhoto:(NSString *) imageKey;
 

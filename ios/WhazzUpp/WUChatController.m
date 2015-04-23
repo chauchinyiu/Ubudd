@@ -13,7 +13,7 @@
 #import "ResponseHandler.h"
 #import "WUFriendDetailController.h"
 #import "WUBoardController.h"
-
+#import "WUPhotoViewController.h"
 
 //#define kRichMessage_ChoosePhotoOrVideo @"Choose Photo or Video"
 //#define kRichMessage_TakePhotoOrVideo @"Take Photo or Video"
@@ -92,35 +92,31 @@ typedef enum : NSUInteger {
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.translucent = NO;
     NSMutableArray* friends = [ResponseHandler instance].friendList;
+    
     for (int i = 0; i < friends.count; i++) {
         WUAccount* a = [friends objectAtIndex:i];
         if([a.c2CallID isEqualToString:self.targetUserid] && a.name != nil){
-            [self.titleButton setAttributedTitle:[[NSAttributedString alloc] initWithString:a.name] forState:UIControlStateNormal];
-            UIBarButtonItem *newBackButton =
-            [[UIBarButtonItem alloc] initWithTitle:a.name
-                                             style:UIBarButtonItemStyleBordered
-                                            target:nil
-                                            action:nil];
-            [[self navigationItem] setBackBarButtonItem:newBackButton];
-            
+            boardTitle = [[NSMutableAttributedString alloc] initWithString:a.name];
         }
     }
     NSMutableArray* groups = [ResponseHandler instance].groupList;
     for (int i = 0; i < groups.count; i++) {
         WUAccount* a = [groups objectAtIndex:i];
         if([a.c2CallID isEqualToString:self.targetUserid] && a.name != nil){
-            [self.titleButton setAttributedTitle:[[NSAttributedString alloc] initWithString:a.name] forState:UIControlStateNormal];
-            UIBarButtonItem *newBackButton =
-            [[UIBarButtonItem alloc] initWithTitle:a.name
-                                             style:UIBarButtonItemStyleBordered
-                                            target:nil
-                                            action:nil];
-            [[self navigationItem] setBackBarButtonItem:newBackButton];
-            
+            boardTitle = [[NSMutableAttributedString alloc] initWithString:a.name];
         }
     }
+    
+    
+    UIBarButtonItem *newBackButton =[[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    [[self navigationItem] setBackBarButtonItem:newBackButton];
+    
+    ((WUBoardController*)self.chatboard).chatTitle = [boardTitle string];
     [self.chatboard.tableView reloadData];
-    boardTitle = [self.titleButton attributedTitleForState:UIControlStateNormal];
+    [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -189,7 +185,8 @@ typedef enum : NSUInteger {
 
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
     if(user){
-        [self.titleButton setAttributedTitle:[[NSAttributedString alloc] initWithString:user.displayName] forState:UIControlStateNormal];
+        boardTitle = [[NSMutableAttributedString alloc] initWithString:user.displayName];
+        [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];
     }
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
     
@@ -218,7 +215,21 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)btnImageTapped:(id)sender{
-    [self showUserImageForUserid:self.targetUserid];
+    //[self showUserImageForUserid:self.targetUserid];
+    NSMutableArray *imageList = [NSMutableArray array];
+    NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
+    [info setObject:@"YES" forKey:@"SingleImage"];
+    [info setObject:[[C2CallPhone currentPhone] userimageForUserid:self.targetUserid] forKey:@"image"];
+    [imageList addObject:info];
+    
+    NSString * storyboardName = @"MainStoryboard";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    
+    WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+    
+    vc.chatTitle = [boardTitle string];
+    [vc showPhotos:imageList currentPhoto:@"0"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

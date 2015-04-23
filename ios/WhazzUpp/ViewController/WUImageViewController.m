@@ -14,18 +14,21 @@
 @end
 
 @implementation WUImageViewController
-@synthesize viewImage, pageID, imageView, imageFrame;
+@synthesize viewImage, pageID, imageView, imageFrame, info;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [imageView setImage:viewImage];
     
-    standardScale = MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
+    standardScale = 1.01 * MAX(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
 
+    if (standardScale > 1.01) {
+        standardScale = 1.01;
+    }
     
-    imageFrame.minimumZoomScale = MIN(0.5, standardScale);
-    imageFrame.maximumZoomScale = 6.0;
+    imageFrame.minimumZoomScale = MIN(0.5, standardScale / 2);
+    imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
     imageFrame.zoomScale = standardScale;
     
     
@@ -64,18 +67,30 @@
     {
         // hide the Navigation Bar
         [self.navigationController setNavigationBarHidden:YES animated:YES];
+        
+        if ([info objectForKey:@"SingleImage"]) {
+        }
+        else if ([info objectForKey:@"IsBroadcast"]) {
+        }
+        else{
+            [self.navigationController setToolbarHidden:YES animated:YES];
+        }
+        
+
     }
-    // if Navigation Bar is already hidden
     else if (self.navigationController.navigationBar.hidden == YES)
     {
+        // if Navigation Bar is already hidden
         // Show the Navigation Bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        self.navigationController.navigationBar.translucent = YES;
-        self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-        self.navigationController.navigationBar.alpha = 0.5;
-        [self.navigationController.navigationBar
-         setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+        
+        if ([info objectForKey:@"SingleImage"]) {
+        }
+        else if ([info objectForKey:@"IsBroadcast"]) {
+        }
+        else{
+            [self.navigationController setToolbarHidden:NO animated:YES];
+        }        
     }
     
     imageFrame.contentOffset = CGPointMake(0, 0);

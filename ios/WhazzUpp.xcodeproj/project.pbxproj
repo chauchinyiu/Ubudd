@@ -1121,6 +1121,7 @@
 		CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE978C1619E13C0700A433A8 /* WUBoardViewController.m */; };
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
 		CEA4FDD519EE6F4700A824B3 /* WUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */; };
+		CEA7B8071AE8B71300D9DBCA /* blackbar.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA7B8061AE8B71300D9DBCA /* blackbar.png */; };
 		CEA80FEF1A774D1F00A89782 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA80FEE1A774D1F00A89782 /* shadow.png */; };
 		CEA8677C1AE5FE6500324485 /* ico_notdelivered.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA8677B1AE5FE6500324485 /* ico_notdelivered.png */; };
 		CEB04F3D1A8D99AD003CA784 /* chatboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB04F3C1A8D99AD003CA784 /* chatboard.storyboard */; };
@@ -2323,6 +2324,7 @@
 		CE9E53CE19F0B44D007B7CAC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CEA4FDD319EE6F4700A824B3 /* WUMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUMapViewController.h; sourceTree = "<group>"; };
 		CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUMapViewController.m; sourceTree = "<group>"; };
+		CEA7B8061AE8B71300D9DBCA /* blackbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackbar.png; sourceTree = "<group>"; };
 		CEA80FEE1A774D1F00A89782 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
 		CEA8677B1AE5FE6500324485 /* ico_notdelivered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_notdelivered.png; sourceTree = "<group>"; };
 		CEB04F3C1A8D99AD003CA784 /* chatboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = chatboard.storyboard; sourceTree = "<group>"; };
@@ -3588,6 +3590,7 @@
 			isa = PBXGroup;
 			children = (
 				CEA8677B1AE5FE6500324485 /* ico_notdelivered.png */,
+				CEA7B8061AE8B71300D9DBCA /* blackbar.png */,
 				CEF0B9621AA40A00006AF677 /* pause_press.png */,
 				CEF0B9631AA40A00006AF677 /* pause_unpress.png */,
 				CEF0B9641AA40A00006AF677 /* play_press.png */,
@@ -4095,6 +4098,7 @@
 				1730629E19277F6B0018EE25 /* ico_voice_hover.png in Resources */,
 				173061F819277F6B0018EE25 /* ico_arrow_right.png in Resources */,
 				1730631B19277F6B0018EE25 /* np-225.xml in Resources */,
+				CEA7B8071AE8B71300D9DBCA /* blackbar.png in Resources */,
 				173062E019277F6B0018EE25 /* Message Tone.wav in Resources */,
 				1730614519277F6B0018EE25 /* flag253.png in Resources */,
 				1730619D19277F6B0018EE25 /* flag592.png in Resources */,

@@ -280,9 +280,12 @@ static NSString * const reuseIdentifier = @"Cell";
         
         NSString * storyboardName = @"MainStoryboard";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-        WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+        
+        WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+        
         [vc showPhotos:imageList currentPhoto:key];
         [self.navigationController pushViewController:vc animated:YES];
+        
     }
     @catch (NSException *exception) {
         

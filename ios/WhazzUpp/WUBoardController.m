@@ -273,7 +273,7 @@
 
 
 @implementation WUBoardController
-@synthesize smallImageCache, textFieldInFont, textFieldOutFont, headerFieldInFont, headerFieldOutFont;
+@synthesize smallImageCache, textFieldInFont, textFieldOutFont, headerFieldInFont, headerFieldOutFont, chatTitle;
 
 static BOOL isGroup = YES;
 
@@ -628,7 +628,9 @@ static BOOL isGroup = YES;
                 
                 NSString * storyboardName = @"MainStoryboard";
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+                
+                WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+                
                 [vc showPhotos:imageList currentPhoto:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
                 [self.navigationController pushViewController:vc animated:YES];
                 
@@ -1997,17 +1999,19 @@ static BOOL isGroup = YES;
         
         NSString * storyboardName = @"MainStoryboard";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-        WUPhotoViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+        
+        WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+
+        vc.chatTitle = chatTitle;
         [vc showPhotos:imageList currentPhoto:key];
         [self.navigationController pushViewController:vc animated:YES];
-        
-        //[self showPhotos:imageList currentPhoto:key];
-        
+                
     }
     @catch (NSException *exception) {
         
     }
 }
+
 
 -(UIImage *) ownUserImage
 {

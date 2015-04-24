@@ -7,6 +7,8 @@
 //
 
 #import "CommonMethods.h"
+#import "WUPhotoViewController.h"
+#import "WUMovieViewController.h"
 #import <SocialCommunication/C2WaitMessage.h>
 
 @implementation WUListEntry
@@ -63,4 +65,36 @@
     }
     return f;
 }
+
++(void)showSinglePhoto:(UIImage*)image title:(NSString*) title onNavigationController:(UINavigationController*) nc{
+    //[self showUserImageForUserid:self.targetUserid];
+    NSMutableArray *imageList = [NSMutableArray array];
+    NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
+    [info setObject:@"YES" forKey:@"SingleImage"];
+    [info setObject:image forKey:@"image"];
+    [imageList addObject:info];
+    
+    NSString * storyboardName = @"MainStoryboard";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    
+    WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+    vc.hidesBottomBarWhenPushed = YES;
+    
+    vc.chatTitle = title;
+    [vc showPhotos:imageList currentPhoto:@"0"];
+    [nc pushViewController:vc animated:YES];
+
+}
+
++(void)showMovie:(NSString*)movie onNavigationController:(UINavigationController*) nc{
+    NSString * storyboardName = @"MainStoryboard";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    
+    WUMovieViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUMovieViewController"];
+    vc.hidesBottomBarWhenPushed = YES;
+    
+    [vc showMovie:movie];
+    [nc pushViewController:vc animated:YES];
+}
+
 @end

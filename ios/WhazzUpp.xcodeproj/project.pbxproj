@@ -1120,6 +1120,8 @@
 		CE90EA031AB80FB60014905A /* SCChatViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE90EA021AB80FB60014905A /* SCChatViewController2.m */; };
 		CE978C1719E13C0700A433A8 /* WUBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE978C1619E13C0700A433A8 /* WUBoardViewController.m */; };
 		CE9CFF7C19C29E1E004DC699 /* WUInterestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */; };
+		CEA092C11AEA35610070508A /* WUMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA092C01AEA35610070508A /* WUMovieViewController.m */; };
+		CEA092C31AEA37130070508A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA092C21AEA37130070508A /* MediaPlayer.framework */; };
 		CEA4FDD519EE6F4700A824B3 /* WUMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */; };
 		CEA7B8071AE8B71300D9DBCA /* blackbar.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA7B8061AE8B71300D9DBCA /* blackbar.png */; };
 		CEA80FEF1A774D1F00A89782 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA80FEE1A774D1F00A89782 /* shadow.png */; };
@@ -2322,6 +2324,9 @@
 		CE9E53CC19F0B44B007B7CAC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Country.strings"; sourceTree = "<group>"; };
 		CE9E53CD19F0B44C007B7CAC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CE9E53CE19F0B44D007B7CAC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CEA092BF1AEA35610070508A /* WUMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUMovieViewController.h; sourceTree = "<group>"; };
+		CEA092C01AEA35610070508A /* WUMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUMovieViewController.m; sourceTree = "<group>"; };
+		CEA092C21AEA37130070508A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		CEA4FDD319EE6F4700A824B3 /* WUMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUMapViewController.h; sourceTree = "<group>"; };
 		CEA4FDD419EE6F4700A824B3 /* WUMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUMapViewController.m; sourceTree = "<group>"; };
 		CEA7B8061AE8B71300D9DBCA /* blackbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackbar.png; sourceTree = "<group>"; };
@@ -2373,6 +2378,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA092C31AEA37130070508A /* MediaPlayer.framework in Frameworks */,
 				978172D01770947D003067F0 /* MobileCoreServices.framework in Frameworks */,
 				9768A794178D2FD500BB9E01 /* Social.framework in Frameworks */,
 				979953F5175B5587001F2D52 /* UIKit.framework in Frameworks */,
@@ -3565,6 +3571,8 @@
 				CE8A895D1A43DD54000EE809 /* WUImageViewController.m */,
 				CE90EA011AB80FB60014905A /* SCChatViewController2.h */,
 				CE90EA021AB80FB60014905A /* SCChatViewController2.m */,
+				CEA092BF1AEA35610070508A /* WUMovieViewController.h */,
+				CEA092C01AEA35610070508A /* WUMovieViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -3670,6 +3678,7 @@
 		979953F3175B5587001F2D52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEA092C21AEA37130070508A /* MediaPlayer.framework */,
 				CE30D1801AA89408001D2C28 /* SocialCommunication.framework */,
 				978172B11770946C003067F0 /* SDK-Frameworks */,
 				979953F4175B5587001F2D52 /* UIKit.framework */,
@@ -4876,6 +4885,7 @@
 				CE787B1919B032FD00A0BD19 /* DataRequest.m in Sources */,
 				17FD053F195907840061938A /* WUTellFriendController.m in Sources */,
 				CE61BD5D1A17601E001E63D8 /* WUMediaController.m in Sources */,
+				CEA092C11AEA35610070508A /* WUMovieViewController.m in Sources */,
 				97A45CBE175BEBA800320AE6 /* WUChatHistoryController.m in Sources */,
 				CE6015731A3C2D860064994F /* WUContactInfoController.m in Sources */,
 				CE885CD319CBE1A800F8004C /* WULocationSearchController.m in Sources */,

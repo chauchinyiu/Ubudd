@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <SocialCommunication/SocialCommunication.h>
+#import "WUNewChatViewController.h"
 
-
-@interface WUPhotoViewController : UIPageViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface WUPhotoViewController : UIPageViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate, WUTargetSelectControllerDelegate>
 
 @property NSString* chatTitle;
 

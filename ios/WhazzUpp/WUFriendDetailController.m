@@ -18,6 +18,7 @@
 #import "WebserviceHandler.h"
 #import "ResponseHandler.h"
 #import "WUMediaController.h"
+#import "CommonMethods.h"
 
 
 @implementation WUUserInfoCell
@@ -151,14 +152,6 @@ static NSString* currentPhoneNo = @"";
     if ([cell isKindOfClass:[WUUserInfoCell class]]) {
         WUUserInfoCell* c = (WUUserInfoCell*)cell;
 
-        UIImage *userImage = [[C2CallPhone currentPhone] userimageForUserid:c2CallID];
-        
-        if (userImage) {
-            c.userImage.image = userImage;
-            [c.userImage setTapAction:^{
-                [self showUserImageForUserid:c2CallID];
-            }];
-        }
         
         NSMutableArray* acclist = [ResponseHandler instance].friendList;
         for (int i = 0; i < acclist.count; i++) {
@@ -167,6 +160,16 @@ static NSString* currentPhoneNo = @"";
                 [c.lblName setText:a.name];
             }
         }
+        
+        UIImage *userImage = [[C2CallPhone currentPhone] userimageForUserid:c2CallID];
+        
+        if (userImage) {
+            c.userImage.image = userImage;
+            [c.userImage setTapAction:^{
+                [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] userimageForUserid:c2CallID] title:c.lblName.text onNavigationController:self.navigationController];
+            }];
+        }
+        
         
 
         [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
@@ -179,16 +182,7 @@ static NSString* currentPhoneNo = @"";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WUUserInfoCell *c = [self.tableView dequeueReusableCellWithIdentifier:@"WUUserInfoCell"];
-    
-    UIImage *userImage = [[C2CallPhone currentPhone] userimageForUserid:c2CallID];
-    
-    if (userImage) {
-        c.userImage.image = userImage;
-        [c.userImage setTapAction:^{
-            [self showUserImageForUserid:c2CallID];
-        }];
-    }
-    
+
     NSMutableArray* acclist = [ResponseHandler instance].friendList;
     for (int i = 0; i < acclist.count; i++) {
         WUAccount* a = [acclist objectAtIndex:i];
@@ -196,6 +190,16 @@ static NSString* currentPhoneNo = @"";
             c.lblName.text = a.name;
         }
     }
+
+    UIImage *userImage = [[C2CallPhone currentPhone] userimageForUserid:c2CallID];
+    
+    if (userImage) {
+        c.userImage.image = userImage;
+        [c.userImage setTapAction:^{
+            [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] userimageForUserid:c2CallID] title:c.lblName.text onNavigationController:self.navigationController];
+        }];
+    }
+    
     
 
     [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];

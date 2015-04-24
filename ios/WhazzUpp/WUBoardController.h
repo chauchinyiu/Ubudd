@@ -26,6 +26,8 @@
 #import "SocialCommunication/ContactCellOutStream.h"
 #import "SocialCommunication/CallCellOutStream.h"
 
+#import "WUNewChatViewController.h"
+
 @class MOC2CallUser, MessageCell, MOC2CallEvent, C2TapImageView;
 
 
@@ -127,7 +129,7 @@
 @end
 
 
-@interface WUBoardController : SCBoardController<WUReadBroadcastDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
+@interface WUBoardController : SCBoardController<WUReadBroadcastDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, WUTargetSelectControllerDelegate>
 
 +(void)setIsGroup:(BOOL)b;
 

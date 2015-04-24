@@ -4537,6 +4537,25 @@
             </objects>
             <point key="canvasLocation" x="2920" y="-107"/>
         </scene>
+        <!--Movie View Controller-->
+        <scene sceneID="x4s-4H-WxC">
+            <objects>
+                <viewController storyboardIdentifier="WUMovieViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D6r-N1-XcA" customClass="WUMovieViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xPv-Gy-UhH"/>
+                        <viewControllerLayoutGuide type="bottom" id="mxK-hx-nZp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DsA-rC-Anc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rHG-se-Nez" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3216" y="-220"/>
+        </scene>
         <!--Welcome Controller-->
         <scene sceneID="Ipo-hv-Lpp">
             <objects>

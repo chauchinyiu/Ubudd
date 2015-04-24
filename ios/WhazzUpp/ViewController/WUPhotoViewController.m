@@ -12,12 +12,12 @@
 #import "CommonMethods.h"
 
 @interface WUPhotoViewController (){
-    NSArray* pages;
+    NSMutableArray* pages;
     int initPageIndex;
     UIColor* oldColor;
     UILabel* custLabel;
     NSMutableAttributedString* atitle;
-    NSDictionary* info;
+    
 }
 @end
 
@@ -45,16 +45,16 @@
         
     }
     
-    if ([info objectForKey:@"SingleImage"]) {
+    if ([[pages objectAtIndex:0] objectForKey:@"SingleImage"]) {
     }
-    else if ([info objectForKey:@"IsBroadcast"]) {
+    else if ([[pages objectAtIndex:0] objectForKey:@"IsBroadcast"]) {
     }
     else{
         [self.navigationController setToolbarHidden:NO animated:NO];
         
         
         NSMutableArray *items = [[NSMutableArray alloc] init];
-        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:nil action:nil]];
+        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showMenu)]];
         
         [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
         
@@ -76,11 +76,9 @@
         
         [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
         
-        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:nil action:nil]];
+        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deletePhoto)]];
         [self setToolbarItems:items animated:NO];
     }
-    
-
 }
 
 
@@ -99,6 +97,16 @@
     [self.navigationController.toolbar setBackgroundImage:[UIImage imageNamed:@"blackbar"] forToolbarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefault];
     self.navigationController.toolbar.tintColor = [UIColor whiteColor];
     
+    
+    if ([[pages objectAtIndex:0] objectForKey:@"SingleImage"]) {
+    }
+    else if ([[pages objectAtIndex:0] objectForKey:@"IsBroadcast"]) {
+    }
+    else if(!self.navigationController.navigationBarHidden) {
+        [self.navigationController setToolbarHidden:NO animated:NO];
+    }
+    
+    [self refreshLabel];
 }
 
 
@@ -117,6 +125,7 @@
 
 
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -124,9 +133,7 @@
 
 -(void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed{
     if (completed) {
-        WUImageViewController* vc = [self.viewControllers objectAtIndex:0];
-        self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", vc.pageID + 1, (int)pages.count];
-        
+        [self refreshLabel];
     }
 }
 
@@ -141,23 +148,19 @@
 */
 
 -(void) showPhotos:(NSArray *) imageList currentPhoto:(NSString *) imageKey{
-    pages = imageList;
+    pages =  [[NSMutableArray alloc] initWithArray:imageList];
     initPageIndex = 0;
     for (int i = 0; i < imageList.count; i++) {
-        info = [pages objectAtIndex:i];
+         NSDictionary* info = [pages objectAtIndex:i];
         if ([imageKey isEqualToString:[info objectForKey:@"image"]]) {
             initPageIndex = i;
-
         }
     }
-    
-    
-
 }
 
 -(WUImageViewController*) GetViewControllerForPage:(int) pageIdx{
     if (pageIdx >= 0 && pageIdx < pages.count) {
-        info = [pages objectAtIndex:pageIdx];
+        NSDictionary* info = [pages objectAtIndex:pageIdx];
         NSString * storyboardName = @"MainStoryboard";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
         WUImageViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUImageViewController"];
@@ -171,23 +174,6 @@
         }
         else{
             image = [[C2CallPhone currentPhone] imageForKey:[info objectForKey:@"image"]];
-            
-            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
-                                                                      locale:[NSLocale currentLocale]];
-            
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:formatString];
-            NSString* photoTime = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[info objectForKey:@"timeStamp"]]];
-            
-            
-            atitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", chatTitle, photoTime]];
-            
-            UIFont* fontStd = [CommonMethods getStdFontType:3];
-            [atitle addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(chatTitle.length, atitle.length - chatTitle.length)];
-            
-            if (custLabel) {
-                [custLabel setAttributedText:atitle];
-            }
         }
         vc.viewImage = image;
         vc.pageID = pageIdx;
@@ -198,6 +184,162 @@
         return nil;
     }
 }
+
+
+-(void)deletePhoto{
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Photo", @"") message:@"Do you wish to delete this photo?" delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
+    [alert show];
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        WUImageViewController* vc = [self.viewControllers objectAtIndex:0];
+        NSDictionary* info = vc.info;
+        [[SCDataManager instance] removeDatabaseObject:[info objectForKey:@"eventObject"]];
+        [pages removeObjectAtIndex:vc.pageID];
+        WUImageViewController* newVC;
+        if (pages.count > vc.pageID) {
+            newVC = [self GetViewControllerForPage:vc.pageID];
+        }
+        else{
+            newVC = [self GetViewControllerForPage:vc.pageID - 1];
+        }
+        NSArray* newPage = [[NSMutableArray alloc] initWithObjects:newVC, nil];
+        [self setViewControllers:newPage direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:Nil];
+        [self refreshLabel];
+    }
+}
+
+
+-(void)showMenu{
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+    UIMenuItem* item;
+    
+    item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Save", @"MenuItem") action:@selector(savePhoto:)];
+    [menulist addObject:item];
+    
+    item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Email", @"MenuItem") action:@selector(emailPhoto:)];
+    [menulist addObject:item];
+    
+    item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardPhoto:)];
+    [menulist addObject:item];
+    
+    menu.menuItems = menulist;
+    
+
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Photo Action", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Save", @"")];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Email", @"")];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Forward", @"")];
+    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"")];
+    actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
+    
+    [actionSheet showFromToolbar:self.navigationController.toolbar];
+}
+
+#pragma mark - UIActionSheet Delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Save", @"")]) {
+        [self savePhoto];
+    }
+    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Email", @"")]) {
+        [self emailPhoto];
+    }
+    else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Forward", @"")]) {
+        [self forwardPhoto];
+    }
+}
+
+
+-(void)savePhoto{
+    [[C2CallAppDelegate appDelegate] waitIndicatorWithTitle:NSLocalizedString(@"Saving Image to Photo Album", @"Title") andWaitMessage:nil];
+    
+    WUImageViewController* vc = [self.viewControllers objectAtIndex:0];
+    NSDictionary* info = vc.info;
+
+    [[C2CallPhone currentPhone] saveToAlbum:[info
+                                              objectForKey:@"image"] withCompletionHandler:^(NSURL *assetURL, NSError *error) {
+        [[C2CallAppDelegate appDelegate] waitIndicatorStop];
+    }];
+}
+
+-(void)emailPhoto{
+    if ([MFMailComposeViewController canSendMail]) {
+        
+        MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
+        WUImageViewController* vc = [self.viewControllers objectAtIndex:0];
+        NSDictionary* info = vc.info;
+
+        UIImage *myImage = [[C2CallPhone currentPhone] imageForKey:[info
+                                                                    objectForKey:@"image"]];
+        NSData *imageData = UIImageJPEGRepresentation(myImage, 0.95);
+        
+        [emailController addAttachmentData:imageData mimeType:@"image/jpeg" fileName:@"image"];
+        emailController.mailComposeDelegate = self;
+        [self presentViewController:emailController animated:YES completion:nil];
+    }
+}
+
+-(void)forwardPhoto{
+    NSString * storyboardName = @"MainStoryboard";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    WUNewChatViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUNewChatViewController"];
+
+    [vc switchToSelectionMode:self];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+-(void)selectTarget:(NSString*)c2callID{
+    WUImageViewController* vc = [self.viewControllers objectAtIndex:0];
+    NSDictionary* info = vc.info;
+    UIImage *myImage = [[C2CallPhone currentPhone] imageForKey:[info
+                                                                objectForKey:@"image"]];
+    [[C2CallPhone currentPhone] submitImage:myImage withQuality:UIImagePickerControllerQualityTypeHigh andMessage:nil toTarget:c2callID withCompletionHandler:nil];
+}
+
+
+-(void)refreshLabel{
+    WUImageViewController* vc = [self.viewControllers objectAtIndex:0];
+    self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", vc.pageID + 1, (int)pages.count];
+    
+    NSDictionary* info = vc.info;
+    if ([info objectForKey:@"SingleImage"]) {
+    }
+    else if ([info objectForKey:@"IsBroadcast"]) {
+    }
+    else{
+        NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
+                                                                  locale:[NSLocale currentLocale]];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:formatString];
+        NSString* photoTime = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:[info objectForKey:@"timeStamp"]]];
+        
+        
+        atitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@", chatTitle, photoTime]];
+        
+        UIFont* fontStd = [CommonMethods getStdFontType:3];
+        [atitle addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(chatTitle.length, atitle.length - chatTitle.length)];
+        
+        if (custLabel) {
+            [custLabel setAttributedText:atitle];
+        }
+    }
+    
+}
+
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 #pragma mark - UIPageViewControllerDelegate
 

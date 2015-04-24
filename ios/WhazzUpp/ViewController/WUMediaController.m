@@ -15,6 +15,7 @@
 
 #import <SocialCommunication/debug.h>
 #import "WUPhotoViewController.h"
+#import "CommonMethods.h"
 
 @implementation WUMediaCell
 @synthesize userImage, mediaID;
@@ -255,7 +256,14 @@ static NSString * const reuseIdentifier = @"Cell";
 -(void) configureCell:(WUMediaCell *) cell atIndexPath:(NSIndexPath *) indexPath;
 {
     MOC2CallEvent *elem = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.userImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
+    
+    if([elem.text hasPrefix:@"video://"]){
+        cell.userImage.image = [[C2CallPhone currentPhone] thumbnailForKey:elem.text];
+    }
+    else{
+        cell.userImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
+    }
+    
     cell.mediaID = elem.text;
     cell.btnImage.tag = indexPath.item;
 }
@@ -282,7 +290,7 @@ static NSString * const reuseIdentifier = @"Cell";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
         
         WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
-        
+        vc.hidesBottomBarWhenPushed = YES;
         [vc showPhotos:imageList currentPhoto:key];
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -302,7 +310,7 @@ static NSString * const reuseIdentifier = @"Cell";
         [self showImage:elem.text];
     }
     if ([elem.text hasPrefix:@"video://"]) {
-        [self showVideo:elem.text];
+        [CommonMethods showMovie:elem.text onNavigationController:self.navigationController];
     }
 }
 

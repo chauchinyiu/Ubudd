@@ -265,6 +265,8 @@
     NSMutableArray* entries;
     NSMutableArray* memberJoinList;
     NSMutableArray* sectionSize;
+    
+    UIImage* forwardImage;
 }
 
 @property (nonatomic, strong) NSMutableDictionary  *smallImageCache;
@@ -573,20 +575,6 @@ static BOOL isGroup = YES;
                         else{
                             cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageOutCell"];
                             [self configureMessageCellOut:cell forEvent:elem atIndexPath:e.sourcePath];
-                        }
-                        if([elem.status intValue] == 3){
-                            MessageCell* msgcell = cell;
-                            [msgcell setLongpressAction:^{
-                                UIMenuController *menu = [UIMenuController sharedMenuController];
-                                NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
-                                
-                                UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
-                                [msgcell setRetransmitAction:^{
-                                    //[msgcell ];
-                                }];
-                                [menulist addObject:item];
-                                
-                            }];
                         }
                     }
                     
@@ -907,7 +895,7 @@ static BOOL isGroup = YES;
     
     //don't know why setTapAction doesn't work
     if ([cell.reuseIdentifier isEqualToString:@"VideoCellInStream"]) {
-        [self showVideo:((VideoCellInStream*)cell).downloadKey];
+        [CommonMethods showMovie:((VideoCellInStream*)cell).downloadKey onNavigationController:self.navigationController];
         return;
     }
     
@@ -950,9 +938,9 @@ static BOOL isGroup = YES;
             UIMenuController *menu = [UIMenuController sharedMenuController];
             NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
             
-            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Share", @"MenuItem") action:@selector(shareAction:)];
+            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(shareAction:)];
             [cell setShareAction:^{
-                [self shareRichMessageForKey:text];
+                [self forwardPhoto:[[C2CallPhone currentPhone] imageForKey:elem.text]];
             }];
             [menulist addObject:item];
             
@@ -1066,9 +1054,9 @@ static BOOL isGroup = YES;
             UIMenuController *menu = [UIMenuController sharedMenuController];
             NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
             
-            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Share", @"MenuItem") action:@selector(shareAction:)];
+            UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(shareAction:)];
             [cell setShareAction:^{
-                [self shareRichMessageForKey:text];
+                [self forwardPhoto:[[C2CallPhone currentPhone] imageForKey:elem.text]];
             }];
             [menulist addObject:item];
             
@@ -1262,6 +1250,19 @@ static BOOL isGroup = YES;
     frame = CGRectMake(contentSize.width + 10 - 14 - 6, contentSize.height - 14, 14, 14);
     [cell.iconSubmitted setFrame:frame];
     
+    
+    int status = [elem.status intValue];
+    if (status == 3) {
+        cell.iconSubmitted.image = [UIImage imageNamed:@"ico_notdelivered.png"];
+        [cell.iconSubmitted setHidden:NO];
+        
+        [cell setLongpressAction:^{
+            [self setRetransmitActionForCell:cell withKey:elem.text andUserid:elem.contact];
+        }];
+        
+        return;
+    }
+    
     [cell setLongpressAction:^{
         UIMenuController *menu = [UIMenuController sharedMenuController];
         NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
@@ -1363,7 +1364,7 @@ static BOOL isGroup = YES;
     
     if (!failed) {
         [cell setTapAction:^{
-            [self showVideo:text];
+            [CommonMethods showMovie:text onNavigationController:self.navigationController];
         }];
         
         [cell setLongpressAction:^{
@@ -1502,7 +1503,7 @@ static BOOL isGroup = YES;
     
     if (!failed) {
         [cell setTapAction:^{
-            [self showVideo:text];
+            [CommonMethods showMovie:text onNavigationController:self.navigationController];
         }];
         
         [cell setLongpressAction:^{
@@ -1590,6 +1591,20 @@ static BOOL isGroup = YES;
     [cell setTapAction:^{
         [self showLocation:text forUser:NSLocalizedString(@"Me", "Title")];
     }];
+    
+    
+    int status = [elem.status intValue];
+    if (status == 3) {
+        cell.iconSubmitted.image = [UIImage imageNamed:@"ico_notdelivered.png"];
+        [cell.iconSubmitted setHidden:NO];
+        
+        [cell setLongpressAction:^{
+            [self setRetransmitActionForCell:cell withKey:elem.text andUserid:elem.contact];
+        }];
+        
+        return;
+    }
+    
     
     [cell setLongpressAction:^{
         UIMenuController *menu = [UIMenuController sharedMenuController];
@@ -1796,6 +1811,19 @@ static BOOL isGroup = YES;
     [cell setTapAction:^{
     }];
     
+    int status = [elem.status intValue];
+    if (status == 3) {
+        cell.iconSubmitted.image = [UIImage imageNamed:@"ico_notdelivered.png"];
+        [cell.iconSubmitted setHidden:NO];
+        
+        [cell setLongpressAction:^{
+            [self setRetransmitActionForCell:cell withKey:elem.text andUserid:elem.contact];
+        }];
+        
+        return;
+    }
+    
+    
     [cell setLongpressAction:^{
         UIMenuController *menu = [UIMenuController sharedMenuController];
         NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
@@ -1840,6 +1868,19 @@ static BOOL isGroup = YES;
     [cell setTapAction:^{
         [self showContact:text];
     }];
+    
+    int status = [elem.status intValue];
+    if (status == 3) {
+        cell.iconSubmitted.image = [UIImage imageNamed:@"ico_notdelivered.png"];
+        [cell.iconSubmitted setHidden:NO];
+        
+        [cell setLongpressAction:^{
+            [self setRetransmitActionForCell:cell withKey:elem.text andUserid:elem.contact];
+        }];
+        
+        return;
+    }
+    
     
     [cell setLongpressAction:^{
         UIMenuController *menu = [UIMenuController sharedMenuController];
@@ -1990,6 +2031,7 @@ static BOOL isGroup = YES;
                 [info setObject:elem.eventId forKey:@"eventId"];
                 [info setObject:elem.timeStamp forKey:@"timeStamp"];
                 [info setObject:elem.eventType forKey:@"eventType"];
+                [info setObject:elem forKey:@"eventObject"];
                 if (elem.senderName)
                     [info setObject:elem.senderName forKey:@"senderName"];
                 
@@ -2464,6 +2506,41 @@ static BOOL isGroup = YES;
 {
     [super previousMessages:sender];
     [self rebuildListEntries];
+}
+
+-(void)forwardPhoto:(UIImage*)image{
+    forwardImage = image;
+    NSString * storyboardName = @"MainStoryboard";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    WUNewChatViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUNewChatViewController"];
+    
+    [vc switchToSelectionMode:self];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+-(void)selectTarget:(NSString*)c2callID{
+    [[C2CallPhone currentPhone] submitImage:forwardImage withQuality:UIImagePickerControllerQualityTypeHigh andMessage:nil toTarget:c2callID withCompletionHandler:nil];
+}
+
+-(void) setRetransmitActionForCell:(MessageCell *) cell withKey:(NSString *) key andUserid:(NSString *) userid
+{
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
+    
+    UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Retransmit", @"MenuItem") action:@selector(retransmitAction:)];
+    [cell setRetransmitAction:^{
+        [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:userid];
+    }];
+    [menulist addObject:item];
+    menu.menuItems = menulist;
+    
+    CGRect rect = cell.bubbleView.frame;
+    rect = [cell convertRect:rect fromView:cell.bubbleView];
+    [menu setTargetRect:rect inView:cell];
+    [cell becomeFirstResponder];
+    [menu setMenuVisible:YES animated:YES];
+    
 }
 
 @end

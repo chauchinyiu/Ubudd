@@ -22,6 +22,7 @@
 #import "WURegistrationController.h"
 #import "WUPhotoViewController.h"
 #import "WUChatHistoryController.h"
+#import "WUMovieViewController.h"
 
 @interface WUAppDelegate ()
 
@@ -238,6 +239,9 @@
     if(self.window.rootViewController){
         UIViewController *vc = [self findBestViewController: self.window.rootViewController];
         if([vc isKindOfClass:[WUPhotoViewController class]]){
+            orientations = UIInterfaceOrientationMaskAllButUpsideDown;
+        }
+        if([vc isKindOfClass:[WUMovieViewController class]]){
             orientations = UIInterfaceOrientationMaskAllButUpsideDown;
         }
     }

@@ -32,4 +32,10 @@
 + (void)showLoading:(BOOL)value title:(NSString *)title message:(NSString *)message;
 
 + (UIFont*) getStdFontType:(int)type;
+
+
++(void)showSinglePhoto:(UIImage*)image title:(NSString*) title onNavigationController:(UINavigationController*) nc;
+
++(void)showMovie:(NSString*)movie onNavigationController:(UINavigationController*) nc;
+
 @end

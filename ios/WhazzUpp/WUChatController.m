@@ -215,21 +215,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)btnImageTapped:(id)sender{
-    //[self showUserImageForUserid:self.targetUserid];
-    NSMutableArray *imageList = [NSMutableArray array];
-    NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
-    [info setObject:@"YES" forKey:@"SingleImage"];
-    [info setObject:[[C2CallPhone currentPhone] userimageForUserid:self.targetUserid] forKey:@"image"];
-    [imageList addObject:info];
-    
-    NSString * storyboardName = @"MainStoryboard";
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-    
-    WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
-    
-    vc.chatTitle = [boardTitle string];
-    [vc showPhotos:imageList currentPhoto:@"0"];
-    [self.navigationController pushViewController:vc animated:YES];
+    [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] userimageForUserid:self.targetUserid] title:[boardTitle string] onNavigationController:self.navigationController];
 }
 
 

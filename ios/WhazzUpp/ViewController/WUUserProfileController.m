@@ -58,11 +58,7 @@
     [userImage setTapAction:^{
         SCUserProfile *userProfile = [SCUserProfile currentUser];
         if(hasPhoto){
-            NSString * storyboardName = @"MainStoryboard";
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-            WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
-            vc.viewImage = userImage.image;
-            [self.navigationController pushViewController:vc animated:YES];
+            [CommonMethods showSinglePhoto:userImage.image title:@"" onNavigationController:self.navigationController];
         }
         else{
             [self btnProfileImageTapped];

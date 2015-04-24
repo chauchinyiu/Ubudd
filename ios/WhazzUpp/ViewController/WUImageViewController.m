@@ -105,6 +105,34 @@
     }
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    // Code here will execute before the rotation begins.
+    // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        
+        // Place code here to perform animations during the rotation.
+        // You can pass nil or leave this block empty if not necessary.
+        
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        
+        // Code here will execute after the rotation has finished.
+        // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
+        standardScale = 1.01 * MAX(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
+        
+        if (standardScale > 1.01) {
+            standardScale = 1.01;
+        }
+        
+        imageFrame.minimumZoomScale = MIN(0.5, standardScale / 2);
+        imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
+        imageFrame.zoomScale = standardScale;
+        
+    }];
+}
 
 /*
 #pragma mark - Navigation

@@ -33,7 +33,8 @@
 
     BOOL inSearch;
     NSString* searchStr;
-
+    
+    id<WUTargetSelectControllerDelegate> myDelegate;
 }
 
 @end
@@ -189,13 +190,18 @@
         }
     }
 
-    
-    if (isGroup) {
-        [WUBoardController setIsGroup:YES];
-    } else {
-        [WUBoardController setIsGroup:NO];
+    if (myDelegate) {
+        [myDelegate selectTarget:accRecord.c2CallID];
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    [self showChatForUserid:accRecord.c2CallID];
+    else{
+        if (isGroup) {
+            [WUBoardController setIsGroup:YES];
+        } else {
+            [WUBoardController setIsGroup:NO];
+        }
+        [self showChatForUserid:accRecord.c2CallID];
+    }
 }
 
 -(IBAction)showFriendInfo:(id)sender{
@@ -313,6 +319,9 @@
 {
 }
 
+-(void)switchToSelectionMode:(id<WUTargetSelectControllerDelegate>)delegate{
+    myDelegate = delegate;
+}
 
 
 @end

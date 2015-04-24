@@ -8,6 +8,12 @@
 
 #import <SocialCommunication/SocialCommunication.h>
 
+@protocol WUTargetSelectControllerDelegate <NSObject>
+@required
+-(void)selectTarget:(NSString*)c2callID;
+@end
+
+
 @interface WUNewChatCell : UITableViewCell
 
 @property(nonatomic, weak) IBOutlet UILabel     *nameLabel, *statusLabel, *onlineLabel;
@@ -19,5 +25,7 @@
 
 @interface WUNewChatViewController : UITableViewController
 -(IBAction)showFriendInfo:(id)sender;
+
+-(void)switchToSelectionMode:(id<WUTargetSelectControllerDelegate>)delegate;
 
 @end

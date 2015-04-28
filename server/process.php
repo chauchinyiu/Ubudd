@@ -772,7 +772,7 @@ class MyAPI extends API {
         if ($args['c2CallID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
 
-		$stmt = $this->db->conn2->prepare("select register.c2CallID, groupMember.joinTime from chatGroup "
+		$stmt = $this->db->conn2->prepare("select register.c2CallID, groupMember.joinTime, register.userName from chatGroup "
 										."inner join groupMember on chatGroup.id = groupMember.groupID and groupMember.requestAccepted = 1 "
 										."inner join register on groupMember.memberID = register.msisdn "
 										."where chatGroup.c2CallID = ? ORDER BY groupMember.joinTime");
@@ -786,6 +786,7 @@ class MyAPI extends API {
 		while($row = mysqli_fetch_assoc($verifyRes)){
 			$groupArray['memberID' . $rowCnt] = $row['c2CallID'];						
 			$groupArray['joinTime' . $rowCnt] = $row['joinTime'];						
+			$groupArray['userName' . $rowCnt] = $row['userName'];						
 			$rowCnt++;
 		}
 		$groupArray['rowCnt'] = $rowCnt;

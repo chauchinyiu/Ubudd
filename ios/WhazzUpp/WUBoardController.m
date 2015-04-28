@@ -267,6 +267,8 @@
     NSMutableArray* sectionSize;
     
     UIImage* forwardImage;
+    
+    MOC2CallEvent* forwardElem;
 }
 
 @property (nonatomic, strong) NSMutableDictionary  *smallImageCache;
@@ -515,7 +517,6 @@ static BOOL isGroup = YES;
                     SCGroup *group = [[SCGroup alloc] initWithGroupid:self.targetUserid];
                     MOC2CallUser *member = [[SCDataManager instance] userForUserid:memberID];
                     if (!member) {
-                        
                         NSString *firstname = [group nameForGroupMember:memberID];
                         if (firstname) {
                             displayName = firstname;
@@ -530,6 +531,10 @@ static BOOL isGroup = YES;
                             displayName = a.name;
                         }
                     }
+                    if (!displayName) {
+                        
+                    }
+                    
                     ((WUMemberJoinCell*)cell).timeLabel.text = [NSString stringWithFormat:@"%@ added %@", group.groupName, displayName];
                 }
 
@@ -1322,9 +1327,6 @@ static BOOL isGroup = YES;
             cell.messageImage.image = thumb;
             cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
         }
-        
-        
-        
         if ([[C2CallPhone currentPhone] downloadStatusForKey:text]) {
             [cell.downloadButton setHidden:YES];
             [cell monitorDownloadForKey:text];
@@ -2284,6 +2286,9 @@ static BOOL isGroup = YES;
         [memberDat setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"memberID%d", i]] forKey:@"memberID"];
 
         [memberDat setObject:[dateFormat dateFromString:[fetchResult objectForKey:[NSString stringWithFormat:@"joinTime%d", i]]] forKey:@"joinTime"];
+
+        [memberDat setObject:[fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", i]] forKey:@"userName"];
+        
         [memberJoinList addObject:memberDat];
     }
     
@@ -2519,8 +2524,37 @@ static BOOL isGroup = YES;
     
 }
 
+-(void)forwardEvent:(MOC2CallEvent*)elem{
+    forwardElem = elem;
+    NSString * storyboardName = @"MainStoryboard";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    WUNewChatViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"WUNewChatViewController"];
+    
+    [vc switchToSelectionMode:self];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 -(void)selectTarget:(NSString*)c2callID{
+    if ([forwardElem.text hasPrefix:@"image://"]){
+        [[C2CallPhone currentPhone] submitImage:[[C2CallPhone currentPhone] imageForKey:forwardElem.text] withQuality:UIImagePickerControllerQualityTypeHigh andMessage:nil toTarget:c2callID withCompletionHandler:nil];
+    }
+    else if ([forwardElem.text hasPrefix:@"video://"]){
+        [[C2CallPhone currentPhone] submitVideo:[[C2CallPhone currentPhone] mediaUrlForKey:forwardElem.text] withMessage:nil toTarget:c2callID withCompletionHandler:nil];
+    }
+    else if ([forwardElem.text hasPrefix:@"audio://"]){
+        [[C2CallPhone currentPhone] submitAudio:[[C2CallPhone currentPhone] mediaUrlForKey:forwardElem.text] withMessage:nil toTarget:c2callID withCompletionHandler:nil];
+    }
+    /*
+    if ([forwardElem hasPrefix:@"image://"] || [forwardElem hasPrefix:@"video://"] ||[forwardElem hasPrefix:@"audio://"] ||[forwardElem hasPrefix:@"vcard://"] ||[forwardElem hasPrefix:@"loc://"] ||[forwardElem hasPrefix:@"friend://"] || [forwardElem hasPrefix:@"file://"] ) {
+        [self composeMessage:nil richMessageKey:message];
+    } else {
+        [self composeMessage:message richMessageKey:nil];
+    }
+    
+
     [[C2CallPhone currentPhone] submitImage:forwardImage withQuality:UIImagePickerControllerQualityTypeHigh andMessage:nil toTarget:c2callID withCompletionHandler:nil];
+     */
 }
 
 -(void) setRetransmitActionForCell:(MessageCell *) cell withKey:(NSString *) key andUserid:(NSString *) userid

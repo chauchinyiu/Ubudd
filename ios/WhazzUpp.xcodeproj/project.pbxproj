@@ -1144,6 +1144,7 @@
 		CEF0B9671AA40A00006AF677 /* pause_unpress.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF0B9631AA40A00006AF677 /* pause_unpress.png */; };
 		CEF0B9681AA40A00006AF677 /* play_press.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF0B9641AA40A00006AF677 /* play_press.png */; };
 		CEF0B9691AA40A00006AF677 /* play_unpress.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF0B9651AA40A00006AF677 /* play_unpress.png */; };
+		CEF6252B1AEB48CD000F87E9 /* WUTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF6252A1AEB48CC000F87E9 /* WUTabBar.m */; };
 		CEF9E8C919CECDED00A864A6 /* WUGroupDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF9E8C819CECDED00A864A6 /* WUGroupDetailController.m */; };
 		CEFDE7AF19D50DBC00FCC7D5 /* WUStatusSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDE7AE19D50DBC00FCC7D5 /* WUStatusSelectController.m */; };
 		CEFF45931A3FFC2B00003EF2 /* ubudd_ico@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFF45921A3FFC2B00003EF2 /* ubudd_ico@2x.png */; };
@@ -2365,6 +2366,8 @@
 		CEF0B9631AA40A00006AF677 /* pause_unpress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_unpress.png; sourceTree = "<group>"; };
 		CEF0B9641AA40A00006AF677 /* play_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_press.png; sourceTree = "<group>"; };
 		CEF0B9651AA40A00006AF677 /* play_unpress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_unpress.png; sourceTree = "<group>"; };
+		CEF625291AEB48CC000F87E9 /* WUTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUTabBar.h; sourceTree = "<group>"; };
+		CEF6252A1AEB48CC000F87E9 /* WUTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUTabBar.m; sourceTree = "<group>"; };
 		CEF9E8C719CECDED00A864A6 /* WUGroupDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUGroupDetailController.h; sourceTree = "<group>"; };
 		CEF9E8C819CECDED00A864A6 /* WUGroupDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUGroupDetailController.m; sourceTree = "<group>"; };
 		CEFDE7AD19D50DBC00FCC7D5 /* WUStatusSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUStatusSelectController.h; sourceTree = "<group>"; };
@@ -3708,6 +3711,8 @@
 				97230C23176F0AEF009E7CE4 /* WULogoutController.m */,
 				CEEFF0FA19B19EE000B59179 /* WUBoardController.h */,
 				CEEFF0FB19B19EE000B59179 /* WUBoardController.m */,
+				CEF625291AEB48CC000F87E9 /* WUTabBar.h */,
+				CEF6252A1AEB48CC000F87E9 /* WUTabBar.m */,
 				9799540C175B5588001F2D52 /* MainStoryboard.storyboard */,
 				CEB04F3C1A8D99AD003CA784 /* chatboard.storyboard */,
 				17A1D6901927EDB300B28792 /* Images.xcassets */,
@@ -4876,6 +4881,7 @@
 				CE7194BF19AF7F2A001B28A0 /* WUContactListController.m in Sources */,
 				1733A0B9193677050064E97A /* RegisterUserDTO.m in Sources */,
 				170C61F91937D3CD00E25EC7 /* WURegistrationController.m in Sources */,
+				CEF6252B1AEB48CD000F87E9 /* WUTabBar.m in Sources */,
 				CED5F1C319B5560900DF8772 /* VerifyC2CallIDDTO.m in Sources */,
 				1733A09A19366BC60064E97A /* WebserviceHandler.m in Sources */,
 				CE871B4F19C58BFF006B05B6 /* AddChatGroupDTO.m in Sources */,

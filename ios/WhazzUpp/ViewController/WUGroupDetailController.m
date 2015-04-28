@@ -140,7 +140,7 @@
             return [memberList count] + 1;
         }
         else{
-            return 1;
+            return 2;
         }
     }
     else{
@@ -156,33 +156,37 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         if (userType == 1) {
-            return 300;
+            return 264;
         }
         else{
-            return 336;
+            return 305;
         }
     }
     else if(indexPath.section == 2){
         if (userType == 1) {
-            return 140;
+            return 122;
         }
         else if (userType == 2) {
-            return 90;
+            return 78;
         }
         else {
-            return 40;
+            return 34;
         }
         
     }
     else if(indexPath.section == 1){
         if (indexPath.row > 0) {
-            NSString * userid = [memberList objectAtIndex:indexPath.row - 1];
-            if([userid isEqualToString:self.group.groupOwner]){
-                return 0;
+            NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
+            
+            if (userType == 1 || userType == 2 || isPublic.intValue == 1) {
+                NSString * userid = [memberList objectAtIndex:indexPath.row - 1];
+                if([userid isEqualToString:self.group.groupOwner]){
+                    return 0;
+                }
             }
         }
     }
-    return 46;
+    return 34;
     
 }
 
@@ -191,7 +195,7 @@
         return 1;
     }
     else if (section == 1) {
-        return 40;
+        return 34;
     }
     else{
         return 1;
@@ -347,6 +351,14 @@
         SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.tag = indexPath.row;
         [cell setHidden:NO];
+        
+        if (indexPath.row == 1 && !(userType == 1 || userType == 2 || isPublic.intValue == 1)) {
+            [cell.inviteButton setHidden:YES];
+            cell.textLabel.text = @"Other group members are hidden due to privacy";
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.detailTextLabel.text = @"";
+            return cell;
+        }
         
         NSString *userid;
         if (indexPath.row == 0) {

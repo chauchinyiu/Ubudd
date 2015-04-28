@@ -263,7 +263,7 @@
     favocell.statusLabel.text = [[ResponseHandler instance] getInterestNameForID:interestID];
     //favocell.statusLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topicDescription%d", (int)indexPath.row]];
     NSNumber* memberCnt = [fetchResult objectForKey:[NSString stringWithFormat:@"memberCnt%d", (int)indexPath.row]];
-    favocell.memberLabel.text = [NSString stringWithFormat:@"%d / 200", memberCnt.intValue + 1];
+    favocell.memberLabel.text = [NSString stringWithFormat:@"%d", memberCnt.intValue + 1];
     favocell.hosetedByLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)indexPath.row]];
     
     

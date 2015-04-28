@@ -31,14 +31,14 @@
 @synthesize nameLabel;
 @end
 
-@interface WUContactListController (){
+@interface WUContactListController ()<UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
+{
     CGFloat favoritesCellHeight;
     NSMutableArray *addressListSection;
     NSMutableArray *addressSearch;
     NSFetchedResultsController *ubuddUsers;
     ResponseHandler *resHandler;
     BOOL inSearch;
-    NSString* searchStr;
     
     NSMutableArray *ubuddSearch;
     NSMutableArray *ubuddListSection;
@@ -48,6 +48,7 @@
     NSMutableArray* sectionSize;
     
 }
+@property (nonatomic, strong) UISearchController *searchController;
 @end
 
 @implementation WUContactListController
@@ -62,14 +63,15 @@
     return self;
 }
 
-- (void)customizeUI {
-    [[[self.tabBarController.viewControllers objectAtIndex:0] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_off"]];
-    [[[self.tabBarController.viewControllers objectAtIndex:1] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_status_icon_off"]];
+- (void)customizeUI
+{
+
     
-    [[[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_off"]];
-    
-    [[[self.tabBarController.viewControllers objectAtIndex:3] tabBarItem]setFinishedSelectedImage:[UIImage imageNamed:@"contacscreen_more_icon_on"] withFinishedUnselectedImage:[UIImage imageNamed:@"contacscreen_more_icon_off"]];
-    
+    [[self.tabBarController.viewControllers objectAtIndex:0] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Contacts", @"") image:[UIImage imageNamed:@"contacscreen_contacts_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"]]];
+    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"UBudd List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_on"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
+    [[self.tabBarController.viewControllers objectAtIndex:2] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Chats", @"") image:[UIImage imageNamed:@"contacscreen_chat_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_on"]]];
+    [[self.tabBarController.viewControllers objectAtIndex:3] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"More", @"") image:[UIImage imageNamed:@"contacscreen_more_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_more_icon_on"]]];
+
 }
 
 - (void)viewDidLoad
@@ -102,11 +104,67 @@
     }
 }
 
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated
+{
+    
     [super viewWillAppear:animated];
+    //set up search bar
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    // we want to be the delegate for our filtered table so didSelectRowAtIndexPath is called for both tables
+    self.tableView.delegate = self;
+    self.searchController.delegate = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO; // default is YES
+    self.searchController.searchBar.delegate = self; // so we can monitor text changes + others
+    
+    // Search is now just presenting a view controller. As such, normal view controller
+    // presentation semantics apply. Namely that presentation will walk up the view controller
+    // hierarchy until it finds the root view controller or one that defines a presentation context.
+    //
+    self.definesPresentationContext = YES;
+    
     self.navigationController.navigationBar.translucent = NO;
     [self refreshList];
     [self.tableView reloadData];
+}
+
+
+
+
+
+#pragma mark - UISearchControllerDelegate
+
+// Called after the search controller's search bar has agreed to begin editing or when
+// 'active' is set to YES.
+// If you choose not to present the controller yourself or do not implement this method,
+// a default presentation is performed on your behalf.
+//
+// Implement this method if the default presentation is not adequate for your purposes.
+//
+- (void)presentSearchController:(UISearchController *)searchController {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)willPresentSearchController:(UISearchController *)searchController {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)didPresentSearchController:(UISearchController *)searchController {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+    inSearch = YES;
+}
+
+- (void)willDismissSearchController:(UISearchController *)searchController
+{
+   NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+- (void)didDismissSearchController:(UISearchController *)searchController {
+   NSLog(@"%@", NSStringFromSelector(_cmd));
+   inSearch = NO;
 }
 
 -(void)refreshList{
@@ -388,17 +446,18 @@
 
 #pragma mark SearchDisplayController Delegate
 
--(void) refetchResults
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    if (!searchStr) {
-        searchStr = @"";
+    
+    if (!searchController.searchBar.text) {
+        searchController.searchBar.text = @"";
     }
     ubuddSearch = [[NSMutableArray alloc] init];
     for (int i = 0; i < ubuddListSection.count; i++) {
         WUAccount* accRecord = [ubuddListSection objectAtIndex:i];
-        if ([accRecord.name rangeOfString:searchStr options:NSCaseInsensitiveSearch].location == NSNotFound) {
-        }
-        else{
+        if ([accRecord.name rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound)
+        {
+
             [ubuddSearch addObject:[ubuddListSection objectAtIndex:i]];
         }
     }
@@ -418,74 +477,31 @@
         else{
             fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         }
-        if ([fullName rangeOfString:searchStr options:NSCaseInsensitiveSearch].location == NSNotFound) {
-        }
-        else{
+        if ([fullName rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound)
+        {
+
             [addressSearch addObject:[addressListSection objectAtIndex:i]];
         }
     }
     [self rebuildEntries];
     [self.tableView reloadData];
 }
-
--(void) setTextFilterForText:(NSString *) text
-{
-    
-    searchStr = text;
-}
-
--(void) removeTextFilter
-{
-    //NSFetchRequest *fetch = [ubuddUsers fetchRequest];
-    //[fetch setPredicate:nil];
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self setTextFilterForText:searchString];
-    [self refetchResults];
-    
-    // Return NO, as the search will be done in the background
-    return YES;
-}
-
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
-{
-    [self setTextFilterForText:[self.searchDisplayController.searchBar text]];
-    [self refetchResults];
-    
-    // Return NO, as the search will be done in the background
-    return YES;
-}
-
-- (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     inSearch = YES;
+    [searchBar resignFirstResponder];
 }
-
-- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     inSearch = NO;
-    
-    [self removeTextFilter];
-    [self refetchResults];
-    
-    
-    return;
-}
-- (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
-{
+    [searchBar resignFirstResponder];
 }
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)_tableView
-{
-}
+
 
 -(void)readStatusCompleted{
     [self.tableView reloadData];
 }
-
 
 -(void)rebuildEntries{
     NSString* lastNameChar;

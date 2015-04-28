@@ -1933,14 +1933,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="eyu-YO-41x">
-                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="fQ6-Hd-NR4" id="K4d-Bj-IAF"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUAddressBookCell" rowHeight="44" id="xG0-mS-oHv" customClass="WUAddressBookCell">
                                 <rect key="frame" x="0.0" y="130" width="320" height="44"/>
@@ -2110,8 +2102,8 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="fQ6-Hd-NR4" id="2jT-FX-xKr"/>
-                            <outlet property="delegate" destination="fQ6-Hd-NR4" id="C6q-Rv-Wan"/>
+                            <outlet property="dataSource" destination="fQ6-Hd-NR4" id="C56-Em-KBY"/>
+                            <outlet property="delegate" destination="fQ6-Hd-NR4" id="bHA-bd-t9j"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contact" id="qee-nZ-dq6"/>
@@ -2123,7 +2115,6 @@
                 <searchDisplayController id="2yP-XE-LBT">
                     <connections>
                         <outlet property="delegate" destination="fQ6-Hd-NR4" id="Ww6-Xp-7gY"/>
-                        <outlet property="searchBar" destination="eyu-YO-41x" id="3Op-KK-pfi"/>
                         <outlet property="searchContentsController" destination="fQ6-Hd-NR4" id="Wsl-AL-giR"/>
                         <outlet property="searchResultsDataSource" destination="fQ6-Hd-NR4" id="eba-WU-KFi"/>
                         <outlet property="searchResultsDelegate" destination="fQ6-Hd-NR4" id="080-jI-ggR"/>

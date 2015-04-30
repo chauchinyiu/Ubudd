@@ -40,9 +40,11 @@
     lblHelp.font = [CommonMethods getStdFontType:1];
     if (appDelegate.loginCompleted) {
         [lblConnectionStatus setText:NSLocalizedString(@"Connected", @"")];
+        [lblConnectionStatus setTextColor:[UIColor greenColor]];
     }
     else{
         [lblConnectionStatus setText:NSLocalizedString(@"Not connected", @"")];
+        [lblConnectionStatus setTextColor:[UIColor redColor]];
     }
 }
 

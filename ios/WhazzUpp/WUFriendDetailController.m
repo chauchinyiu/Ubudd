@@ -38,22 +38,26 @@
 @implementation WUFriendDetailController
 
 static NSString* currentPhoneNo = @"";
+static NSString* currentC2CallID = @"";
 
 #pragma mark - UIViewController Delegate
 
 - (void)viewDidLoad {
     //[super viewDidLoad];
-
-    NSMutableArray* acclist = [ResponseHandler instance].friendList;
-    if ([[self.fetchedResultsController fetchedObjects] count] == 0){
-        for (int i = 0; i < acclist.count; i++) {
-            WUAccount* a = [acclist objectAtIndex:i];
-            if ([a.phoneNo isEqualToString:currentPhoneNo]) {
-                c2CallID = a.c2CallID;
+    if (currentC2CallID) {
+        c2CallID = currentC2CallID;
+    }
+    else if(currentPhoneNo){
+        NSMutableArray* acclist = [ResponseHandler instance].friendList;
+        if ([[self.fetchedResultsController fetchedObjects] count] == 0){
+            for (int i = 0; i < acclist.count; i++) {
+                WUAccount* a = [acclist objectAtIndex:i];
+                if ([a.phoneNo isEqualToString:currentPhoneNo]) {
+                    c2CallID = a.c2CallID;
+                }
             }
         }
     }
-    
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     //read from server
@@ -61,15 +65,16 @@ static NSString* currentPhoneNo = @"";
         c2CallID = self.currentUser.userid;
     }
 
-    [dictionary setObject:c2CallID forKey:@"c2CallID"];
+    if(c2CallID){
+        [dictionary setObject:c2CallID forKey:@"c2CallID"];
 
-    DataRequest *dataRequest = [[DataRequest alloc] init];
-    dataRequest.requestName = @"readUserInfo";
-    dataRequest.values = dictionary;
-    
-    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readFriendInfo:error:)];
- 
+        DataRequest *dataRequest = [[DataRequest alloc] init];
+        dataRequest.requestName = @"readUserInfo";
+        dataRequest.values = dictionary;
+        
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readFriendInfo:error:)];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -234,7 +239,14 @@ static NSString* currentPhoneNo = @"";
 
 +(void)setPhoneNo:(NSString*)p{
     currentPhoneNo = p;
+    currentC2CallID = nil;
 }
+
++(void)setC2CallID:(NSString*)p{
+    currentC2CallID = p;
+    currentPhoneNo = nil;
+}
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"ViewMedia"]) {

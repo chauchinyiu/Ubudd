@@ -14,6 +14,7 @@
 #import "ResponseHandler.h"
 #import "WUMediaController.h"
 #import "WUUserImageController.h"
+#import "WUFriendDetailController.h"
 
 @implementation WUGroupNonMemberActionCell
 @end
@@ -235,6 +236,7 @@
         if ([userid isEqualToString:[SCUserProfile currentUser].userid]) {
             
         } else {
+            [WUFriendDetailController setC2CallID: userid];
             [self showFriendDetailForUserid:userid];
         }
     }

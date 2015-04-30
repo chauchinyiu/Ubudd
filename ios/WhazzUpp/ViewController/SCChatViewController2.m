@@ -110,10 +110,6 @@
     CGRect tvframe = chatInput.frame;
     CGRect svframe = toolbarView.toolbarView.frame;
     
-    
-    if ([self.chatInput respondsToSelector:@selector(textContainerInset)]) {
-    }
-    
     if ([self.chatInput respondsToSelector:@selector(textContainer)]) {
         self.chatInput.textContainer.heightTracksTextView = YES;
     }
@@ -352,10 +348,6 @@
     
     CGFloat sz = expectedTextSize.height;
     sz += 16;
-    if ([newtext hasSuffix:@"\n"]) {
-        //  sz += 16;
-    }
-    
     
     if (sz < maximumLabelSize.height) {
         textView.scrollEnabled = YES;
@@ -376,12 +368,6 @@
     
     if (sz < minToolbarHeight)
         sz = minToolbarHeight;
-    
-    
-    //dispatch_async(dispatch_get_main_queue(), ^{
-    if ([self.toolbarView resizeToolbar:sz]) {
-    }
-    //});
     
     if (isSMS) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -475,18 +461,14 @@
         if (self.toolbarBottomContraint) {
             DLog(@"keyboardWillShow : %f", diff);
             self.toolbarBottomContraint.constant += diff;
-            [self.toolbarView setNeedsUpdateConstraints];
-            [UIView animateWithDuration:0.22 delay:0.03 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                [self.toolbarView layoutIfNeeded];
-            } completion:^(BOOL finished) {
-            }];
-        } else {
-            [UIView animateWithDuration:0.22 delay:0.03 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                self.toolbarView.frame = frame;
-            } completion:^(BOOL finished) {
-            }];
+            //[self.toolbarView setNeedsUpdateConstraints];
+            [self.toolbarView layoutIfNeeded];
         }
-        
+        else
+        {
+            self.toolbarView.frame = frame;
+        }
+      
     }
     if ([[notification name] isEqualToString:@"UIKeyboardWillHideNotification"]) {
         if (currentKeyboardSize == 0)
@@ -511,16 +493,11 @@
             DLog(@"keyboardWillHide : %f", kbHeight);
             self.toolbarBottomContraint.constant -= kbHeight;
             [self.toolbarView setNeedsUpdateConstraints];
-            [UIView animateWithDuration:0.25 delay:0.03 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                //self.toolbarView.frame = frame;
-                [self.toolbarView layoutIfNeeded];
-            } completion:^(BOOL finished) {
-            }];
+             [self.toolbarView layoutIfNeeded];
+
         } else {
-            [UIView animateWithDuration:0.25 delay:0.03 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                self.toolbarView.frame = frame;
-            } completion:^(BOOL finished) {
-            }];
+              self.toolbarView.frame = frame;
+
         }
     }
     
@@ -610,7 +587,7 @@
             [self captureMediaFromImagePicker:imagePicker andCompleteAction:^(NSString *key) {
                 [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
             }];
-            //[self presentModalViewController:imagePicker animated:YES];
+        
         }];
     }
     
@@ -653,15 +630,7 @@
             }];
         }
     }
-    
-    /*
-     if (!isSMS) {
-     [cv addChoiceWithName:NSLocalizedString(@"Share Friends", @"Choice Title") andSubTitle:NSLocalizedString(@"Share one or more friends", @"Button") andIcon:[UIImage imageNamed:@"ico_share_friend.png"] andCompletion:^{
-     // TODO - SCChatController - ShareFriends
-     //[self shareFriends:numberOrUserid];
-     }];
-     }
-     */
+
     
     if ([IOS iosVersion] >= 5.0) {
         [cv addChoiceWithName:NSLocalizedString(@"Send Contact", @"Choice Title") andSubTitle:NSLocalizedString(@"Send a contact from address book", @"Button") andIcon:[UIImage imageNamed:@"ico_apple_mail.png"] andCompletion:^{

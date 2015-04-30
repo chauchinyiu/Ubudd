@@ -247,6 +247,11 @@ static NSString* currentC2CallID = @"";
     currentPhoneNo = nil;
 }
 
+-(IBAction)clearChat:(id)sender
+{
+    NSLog(@"Clear all chat");
+    // TODO clear all chat history
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"ViewMedia"]) {

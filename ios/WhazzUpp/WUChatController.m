@@ -242,9 +242,6 @@ typedef enum : NSUInteger {
     
     NSError *error = nil;
     
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord
-                        error:nil];
     
     audioRecorder = [[AVAudioRecorder alloc]
                       initWithURL:soundFileURL
@@ -426,6 +423,10 @@ typedef enum : NSUInteger {
 
 - (IBAction)recordBtnPress:(id)sender{
     if (!isRecording) {
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setCategory:AVAudioSessionCategoryRecord
+                            error:nil];
+        
         [audioRecorder record];
         //[self.audioView toogleRecording:self.audioView.btnRecord];
         [self.recordButton setImage:[UIImage imageNamed:@"Mic_press.png"] forState:UIControlStateHighlighted];
@@ -457,6 +458,10 @@ typedef enum : NSUInteger {
 - (IBAction)recordBtnUnpress:(id)sender{
     if(isRecording){
         [audioRecorder stop];
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setCategory:AVAudioSessionCategoryPlayback
+                            error:nil];
+        
         //[self.audioView toogleRecording:self.audioView.btnRecord];
         isRecording = NO;
         [self.lblRecording setHidden:YES];

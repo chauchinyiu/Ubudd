@@ -18,9 +18,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageClicked)];
+    singleTap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:singleTap];
+    
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageDblClicked)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:doubleTap];
+    
+    [singleTap requireGestureRecognizerToFail:doubleTap];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     // Do any additional setup after loading the view.
     [imageView setImage:viewImage];
-    
+    [self setupImageFrame];
+}
+- (void)setupImageFrame
+{
     standardScale = 1.01 * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
     
     CGFloat top = 0, left = 0;
@@ -31,18 +51,6 @@
     imageFrame.minimumZoomScale = standardScale;
     imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
     imageFrame.zoomScale = standardScale;
-    
-    
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageClicked)];
-    singleTap.numberOfTapsRequired = 1;
-    [self.view addGestureRecognizer:singleTap];
-    
-
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(imageDblClicked)];
-    doubleTap.numberOfTapsRequired = 2;
-    [self.view addGestureRecognizer:doubleTap];
-    
-    [singleTap requireGestureRecognizerToFail:doubleTap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,12 +76,10 @@
     {
         // hide the Navigation Bar
         [self.navigationController setNavigationBarHidden:YES animated:YES];
-        
-        if ([info objectForKey:@"SingleImage"]) {
-        }
-        else if ([info objectForKey:@"IsBroadcast"]) {
-        }
-        else{
+
+        if([info objectForKey:@"SingleImage"] == nil
+           && [info objectForKey:@"IsBroadcast"] == nil)
+        {
             [self.navigationController setToolbarHidden:YES animated:YES];
         }
         
@@ -84,17 +90,14 @@
         // if Navigation Bar is already hidden
         // Show the Navigation Bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        
-        if ([info objectForKey:@"SingleImage"]) {
-        }
-        else if ([info objectForKey:@"IsBroadcast"]) {
-        }
-        else{
+
+        if([info objectForKey:@"SingleImage"] == nil
+           && [info objectForKey:@"IsBroadcast"] == nil)
+        {
             [self.navigationController setToolbarHidden:NO animated:YES];
         }        
     }
-    
-    imageFrame.contentOffset = CGPointMake(0, 0);
+
 }
 
 -(void)imageDblClicked{
@@ -119,20 +122,7 @@
         // You can pass nil or leave this block empty if not necessary.
         
     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        
-        // Code here will execute after the rotation has finished.
-        // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
-        standardScale = 1.01 * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
-        
-        CGFloat top = 0, left = 0;
-        left = (self.view.bounds.size.width - self.imageView.image.size.width * standardScale) * 0.5f;
-        top = (self.view.bounds.size.height - self.imageView.image.size.height * standardScale) * 0.5f;
-        imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
-        
-        imageFrame.minimumZoomScale = standardScale;
-        imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
-        imageFrame.zoomScale = standardScale;
-        
+        [self setupImageFrame];
     }];
 }
 

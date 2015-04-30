@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1934,7 +1934,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUAddressBookCell" rowHeight="44" id="xG0-mS-oHv" customClass="WUAddressBookCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUAddressBookCell" rowHeight="42" id="xG0-mS-oHv" customClass="WUAddressBookCell">
                                 <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xG0-mS-oHv" id="pWA-TU-EUs">
@@ -1980,6 +1980,7 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="Q1Q-I6-mwb" firstAttribute="leading" secondItem="QNK-9g-EhY" secondAttribute="trailing" constant="8" id="6Mr-8h-PCF"/>
+                                                <constraint firstItem="QNK-9g-EhY" firstAttribute="leading" secondItem="Mea-sq-Jzi" secondAttribute="leading" constant="7" id="Fro-ep-1Pc"/>
                                                 <constraint firstItem="Tbb-6I-evR" firstAttribute="leading" secondItem="QNK-9g-EhY" secondAttribute="trailing" constant="8" id="S7T-Ci-yzp"/>
                                                 <constraint firstItem="Q1Q-I6-mwb" firstAttribute="top" secondItem="Mea-sq-Jzi" secondAttribute="top" constant="22" id="eIP-V6-KKg"/>
                                                 <constraint firstItem="QNK-9g-EhY" firstAttribute="top" secondItem="Mea-sq-Jzi" secondAttribute="top" constant="8" id="ftz-4o-AXh"/>
@@ -2031,7 +2032,7 @@
                                     <outlet property="userImg" destination="QNK-9g-EhY" id="zD6-gx-2Ut"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUAddressBaseCell" rowHeight="44" id="Avj-LG-rnE" customClass="WUAddressBaseCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WUAddressBaseCell" rowHeight="42" id="Avj-LG-rnE" customClass="WUAddressBaseCell">
                                 <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Avj-LG-rnE" id="AGk-FZ-B7a">
@@ -2081,20 +2082,28 @@
                                     <outlet property="nameLabel" destination="v1R-kL-5zV" id="Rzd-oF-Qwr"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUNameGroupCell" rowHeight="25" id="g99-Hx-kNK" customClass="WUNameGroupCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUNameGroupCell" rowHeight="17" id="g99-Hx-kNK" customClass="WUNameGroupCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g99-Hx-kNK" id="pmH-oH-F9p">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cwp-xs-p0F">
-                                            <rect key="frame" x="8" y="2" width="131" height="21"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="125" translatesAutoresizingMaskIntoConstraints="NO" id="Cwp-xs-p0F">
+                                            <rect key="frame" x="8" y="0.0" width="131" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="16" id="753-xD-CwL"/>
+                                                <constraint firstAttribute="width" constant="131" id="Kii-eh-2ei"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="Cwp-xs-p0F" firstAttribute="top" secondItem="pmH-oH-F9p" secondAttribute="topMargin" constant="-8" id="Tie-It-qAU"/>
+                                        <constraint firstItem="Cwp-xs-p0F" firstAttribute="leading" secondItem="pmH-oH-F9p" secondAttribute="leadingMargin" id="UZZ-lE-1Xw"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="Cwp-xs-p0F" id="RGk-ZR-gOf"/>

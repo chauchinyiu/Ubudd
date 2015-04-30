@@ -21,13 +21,14 @@
     // Do any additional setup after loading the view.
     [imageView setImage:viewImage];
     
-    standardScale = 1.01 * MAX(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
-
-    if (standardScale > 1.01) {
-        standardScale = 1.01;
-    }
+    standardScale = 1.01 * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
     
-    imageFrame.minimumZoomScale = MIN(0.5, standardScale / 2);
+    CGFloat top = 0, left = 0;
+    left = (self.view.bounds.size.width - self.imageView.image.size.width * standardScale) * 0.5f;
+    top = (self.view.bounds.size.height - self.imageView.image.size.height * standardScale) * 0.5f;
+    imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
+    
+    imageFrame.minimumZoomScale = standardScale;
     imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
     imageFrame.zoomScale = standardScale;
     
@@ -121,13 +122,14 @@
         
         // Code here will execute after the rotation has finished.
         // Equivalent to placing it in the deprecated method -[didRotateFromInterfaceOrientation:]
-        standardScale = 1.01 * MAX(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
+        standardScale = 1.01 * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
         
-        if (standardScale > 1.01) {
-            standardScale = 1.01;
-        }
+        CGFloat top = 0, left = 0;
+        left = (self.view.bounds.size.width - self.imageView.image.size.width * standardScale) * 0.5f;
+        top = (self.view.bounds.size.height - self.imageView.image.size.height * standardScale) * 0.5f;
+        imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
         
-        imageFrame.minimumZoomScale = MIN(0.5, standardScale / 2);
+        imageFrame.minimumZoomScale = standardScale;
         imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
         imageFrame.zoomScale = standardScale;
         

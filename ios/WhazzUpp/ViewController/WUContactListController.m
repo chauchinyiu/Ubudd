@@ -82,9 +82,7 @@
     
     resHandler = [ResponseHandler instance];
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                   reuseIdentifier:@"WUAddressBookCell"];
-    favoritesCellHeight = cell.frame.size.height;
+    favoritesCellHeight = 41;
     self.managedObjectContext = [DBHandler context];
     
     [ResponseHandler instance].stdelegate = self;
@@ -268,7 +266,7 @@
         WUListEntry* e = [entries objectAtIndex:i];
         if (e.mapToPath.row == indexPath.row && e.mapToPath.section == indexPath.section) {
             if ([e.source isEqualToString:@"NameHeader"]) {
-                return 22;
+                return 17;
             }
             else{
                 return favoritesCellHeight;

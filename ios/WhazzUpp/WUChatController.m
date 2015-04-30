@@ -32,6 +32,7 @@ typedef enum : NSUInteger {
     double accumulatedTime;
     NSTimer* timer;
     NSAttributedString* boardTitle;
+    AVAudioRecorder *audioRecorder;
 }
 
 @property (nonatomic, assign) CFAbsoluteTime lastTypeEventReceived;
@@ -120,6 +121,7 @@ typedef enum : NSUInteger {
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    /*
     if(!self.audioView){
         SCAudioRecorderController* newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SCAudioRecorderController"];
         [newVC setSubmitAction:^(NSString *key) {
@@ -131,6 +133,7 @@ typedef enum : NSUInteger {
         [newVC didMoveToParentViewController:self];
         self.audioView = newVC;
     }
+     */
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -211,6 +214,49 @@ typedef enum : NSUInteger {
                                    action:@selector(hidekeybord)];
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
+    
+    
+    NSArray *dirPaths;
+    NSString *docsDir;
+    
+    dirPaths = NSSearchPathForDirectoriesInDomains(
+                                                   NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir = dirPaths[0];
+    
+    NSString *soundFilePath = [docsDir
+                               stringByAppendingPathComponent:@"sound.caf"];
+    
+    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    
+    NSDictionary *recordSettings = [NSDictionary
+                                    dictionaryWithObjectsAndKeys:
+                                    [NSNumber numberWithInt:AVAudioQualityMin],
+                                    AVEncoderAudioQualityKey,
+                                    [NSNumber numberWithInt:16],
+                                    AVEncoderBitRateKey,
+                                    [NSNumber numberWithInt: 2],
+                                    AVNumberOfChannelsKey,
+                                    [NSNumber numberWithFloat:44100.0],
+                                    AVSampleRateKey,
+                                    nil];
+    
+    NSError *error = nil;
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord
+                        error:nil];
+    
+    audioRecorder = [[AVAudioRecorder alloc]
+                      initWithURL:soundFileURL
+                      settings:recordSettings
+                      error:&error];
+    
+    if (error)
+    {
+    } else {
+        [audioRecorder prepareToRecord];
+    }
+    
     
 }
 
@@ -380,14 +426,14 @@ typedef enum : NSUInteger {
 
 - (IBAction)recordBtnPress:(id)sender{
     if (!isRecording) {
-        [self.audioView toogleRecording:self.audioView.btnRecord];
+        [audioRecorder record];
+        //[self.audioView toogleRecording:self.audioView.btnRecord];
         [self.recordButton setImage:[UIImage imageNamed:@"Mic_press.png"] forState:UIControlStateHighlighted];
         isRecording = YES;
         [self.lblRecording setHidden:NO];
         accumulatedTime = 0;
         timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
         self.lblRecording.text = @"00:00";
-        
     }
 }
 
@@ -410,7 +456,8 @@ typedef enum : NSUInteger {
 
 - (IBAction)recordBtnUnpress:(id)sender{
     if(isRecording){
-        [self.audioView toogleRecording:self.audioView.btnRecord];
+        [audioRecorder stop];
+        //[self.audioView toogleRecording:self.audioView.btnRecord];
         isRecording = NO;
         [self.lblRecording setHidden:YES];
         [timer invalidate];
@@ -428,8 +475,10 @@ typedef enum : NSUInteger {
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        [self.audioView submitMessage:self.audioView.btnSubmit];
+        [[C2CallPhone currentPhone] submitAudio:audioRecorder.url withMessage:nil toTarget:self.targetUserid withCompletionHandler:nil];
+        //[self.audioView submitMessage:self.audioView.btnSubmit];
     }
+    /*
     SCAudioRecorderController* newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SCAudioRecorderController"];
     [newVC setSubmitAction:^(NSString *key) {
         [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
@@ -439,6 +488,7 @@ typedef enum : NSUInteger {
     [self addChildViewController:newVC];
     [newVC didMoveToParentViewController:self];
     self.audioView = newVC;
+     */
 
 }
 

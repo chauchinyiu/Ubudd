@@ -251,20 +251,38 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath;
 {
-    if (hasRequest && indexPath.row == 0) {
-        return;
+    NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row + (hasBroadcast && indexPath.row >= broadcastIdx ? 1 : 0) inSection:indexPath.section];
+    tmppath = [NSIndexPath indexPathForRow:tmppath.row + (hasRequest ? 1 : 0) inSection:tmppath.section];
+    
+    NSIndexPath* newtmppath;
+    
+    if (newIndexPath) {
+        newtmppath = [NSIndexPath indexPathForRow:newIndexPath.row + (hasBroadcast && newIndexPath.row >= broadcastIdx ? 1 : 0) inSection:newIndexPath.section];
+        newtmppath = [NSIndexPath indexPathForRow:newtmppath.row + (hasRequest ? 1 : 0) inSection:newtmppath.section];
     }
     
-    else{
-        
-        NSIndexPath* tmppath = [NSIndexPath indexPathForRow:indexPath.row - (hasRequest ? 1 : 0) inSection:indexPath.section];
-        if (hasBroadcast && tmppath.row == broadcastIdx) {
-            return;
-        }
-        else{
-            tmppath = [NSIndexPath indexPathForRow:tmppath.row - (hasBroadcast && tmppath.row > broadcastIdx ? 1 : 0) inSection:tmppath.section];
-            [super controller:controller didChangeObject:anObject atIndexPath:tmppath forChangeType:type newIndexPath:newIndexPath];
-        }
+    UITableView *tableView = self.tableView;
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newtmppath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[tmppath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            if (tmppath.row < broadcastIdx) {
+                broadcastIdx--;
+            }
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [tableView reloadRowsAtIndexPaths:@[tmppath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[tmppath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView insertRowsAtIndexPaths:@[newtmppath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
     }
 
 }
@@ -475,14 +493,6 @@
         }
         MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
         [[SCDataManager instance] removeDatabaseObject:chathist];
-        if (tmppath.row < broadcastIdx) {
-            broadcastIdx--;
-        }
-        /*
-        NSError *error = nil;
-        [self.fetchedResultsController performFetch:&error];
-        [self.tableView reloadData];
-         */
     }
 }
 

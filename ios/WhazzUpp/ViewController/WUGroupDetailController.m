@@ -356,7 +356,7 @@
         
         if (indexPath.row == 1 && !(userType == 1 || userType == 2 || isPublic.intValue == 1)) {
             [cell.inviteButton setHidden:YES];
-            cell.textLabel.text = @"Other group members are hidden due to privacy";
+            cell.textLabel.text = @"Members are hidden due to privacy issues";
             cell.backgroundColor = [UIColor whiteColor];
             cell.detailTextLabel.text = @"";
             return cell;

@@ -1223,7 +1223,7 @@
                                                 <constraint firstAttribute="width" constant="30" id="ktv-La-pak"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zR5-br-nRg">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" lineBreakMode="tailTruncation" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="zR5-br-nRg">
                                             <rect key="frame" x="50" y="0.0" width="200" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="wV0-21-QnL"/>

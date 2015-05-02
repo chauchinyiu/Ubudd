@@ -89,6 +89,7 @@
     [[ResponseHandler instance] readStatus];
 }
 
+/*
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString*)title atIndex:(NSInteger)index{
     return index;
 }
@@ -100,6 +101,23 @@
     else{
         return NSLocalizedString(@"Address book", @"");
     }
+}
+
+*/
+
+-(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    WUNameGroupCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUNameGroupCell"];
+    if(section == 0){
+        cell.nameLabel.text = NSLocalizedString(@"Ubudd", @"");
+    }
+    else{
+        cell.nameLabel.text = NSLocalizedString(@"Address book", @"");
+    }
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 17;
 }
 
 -(void)viewWillAppear:(BOOL)animated

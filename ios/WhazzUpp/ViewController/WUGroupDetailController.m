@@ -830,6 +830,7 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
+        userType = 4;
         [self.tableView reloadData];
     }
     else{

@@ -681,10 +681,10 @@ static BOOL isGroup = YES;
                     return 118;
                 }
                 if ([cell isKindOfClass:[AudioCellIn class]]) {
-                    return 92;
+                    return 65;
                 }
                 if ([cell isKindOfClass:[AudioCellOut class]]) {
-                    return 92;
+                    return 65;
                 }
                 if ([cell isKindOfClass:[VideoCellIn class]]) {
                     return 120;

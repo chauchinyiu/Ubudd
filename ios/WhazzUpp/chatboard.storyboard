@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Board-->
@@ -17,9 +17,10 @@
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUMemberJoinCell" rowHeight="44" id="7zT-Vu-p14" customClass="WUMemberJoinCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7zT-Vu-p14" id="EnE-WT-hxD">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lby-Qu-2Sa">
@@ -36,9 +37,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WUMessageTimeCell" rowHeight="35" id="CqV-Ov-lXs" customClass="WUMessageTimeCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="35"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CqV-Ov-lXs" id="1aZ-2j-zK5">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HQG-4r-iu3">
@@ -57,9 +59,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WUCreateGroupCell" rowHeight="115" id="BuM-qj-Nhc" customClass="WUCreateGroupCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="101" width="320" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BuM-qj-Nhc" id="IbI-4a-I39">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" id="lEg-ps-1vS">
@@ -124,10 +127,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WUMessageInCell" rowHeight="80" id="duP-GR-p1G" customClass="WUMessageInCell">
-                                <rect key="frame" x="0.0" y="55" width="320" height="46"/>
+                                <rect key="frame" x="0.0" y="216" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="duP-GR-p1G" id="2un-gj-JRc">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="eE0-m5-Cct" customClass="SCBubbleViewIn">
@@ -157,10 +160,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WUImageInCell" rowHeight="200" id="NUC-gL-ldc" customClass="WUImageInCell">
-                                <rect key="frame" x="0.0" y="101" width="320" height="105"/>
+                                <rect key="frame" x="0.0" y="296" width="320" height="200"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NUC-gL-ldc" id="Eer-Xv-klM">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="fy7-Ef-umG" customClass="SCBubbleViewIn">
@@ -195,7 +198,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="VideoCellInStream" rowHeight="105" id="zFa-Lg-D2d" customClass="WUVideoInCell">
-                                <rect key="frame" x="0.0" y="206" width="320" height="105"/>
+                                <rect key="frame" x="0.0" y="496" width="320" height="105"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zFa-Lg-D2d" id="8XV-uF-Xyy">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
@@ -294,7 +297,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationCellInStream" rowHeight="124" id="Goe-QL-wth" customClass="WULocationInCell">
-                                <rect key="frame" x="0.0" y="311" width="320" height="124"/>
+                                <rect key="frame" x="0.0" y="601" width="320" height="124"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Goe-QL-wth" id="kbj-JP-muo">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
@@ -375,19 +378,19 @@ test</string>
                                     <outlet property="userImage" destination="Oux-BY-WBY" id="TK6-zZ-QzE"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AudioCellInStream" rowHeight="73" id="Br3-C8-iQK" customClass="WUAudioInCell">
-                                <rect key="frame" x="0.0" y="435" width="320" height="104"/>
+                            <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AudioCellInStream" rowHeight="60" id="Br3-C8-iQK" customClass="WUAudioInCell">
+                                <rect key="frame" x="0.0" y="725" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Br3-C8-iQK" id="Nj4-i1-O4v">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="MKg-eA-jUo" customClass="SCBubbleViewIn">
-                                            <rect key="frame" x="0.0" y="0.0" width="270" height="76"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="55"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="K4t-XM-XCU">
-                                                    <rect key="frame" x="124" y="20" width="88" height="34"/>
+                                                    <rect key="frame" x="91" y="14" width="88" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" title="Download" backgroundImage="btn_send_message_grey.png">
@@ -402,24 +405,11 @@ test</string>
                                                     </connections>
                                                 </button>
                                                 <view hidden="YES" contentMode="scaleToFill" id="acl-4U-U2b">
-                                                    <rect key="frame" x="70" y="18" width="180" height="40"/>
+                                                    <rect key="frame" x="77" y="14" width="124" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oDW-Ml-afn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" image="play_unpress.png">
-                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="playBtnDown:" destination="Br3-C8-iQK" eventType="touchDown" id="xVx-AA-A7Z"/>
-                                                                <action selector="playBtnPress:" destination="Br3-C8-iQK" eventType="touchUpInside" id="NQC-G3-iul"/>
-                                                                <action selector="playBtnUp:" destination="Br3-C8-iQK" eventType="touchUpOutside" id="JeK-tK-Vme"/>
-                                                                <action selector="playBtnUp:" destination="Br3-C8-iQK" eventType="touchCancel" id="ad8-6m-OFR"/>
-                                                            </connections>
-                                                        </button>
                                                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="Izg-i3-at5">
-                                                            <rect key="frame" x="36" y="5" width="146" height="31"/>
+                                                            <rect key="frame" x="6" y="0.0" width="105" height="31"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <connections>
                                                                 <action selector="sliderMove:" destination="Br3-C8-iQK" eventType="valueChanged" id="cxt-ep-JTP"/>
@@ -437,21 +427,21 @@ test</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" id="WxQ-NJ-Z7j">
-                                                    <rect key="frame" x="12" y="8" width="52" height="60"/>
+                                                    <rect key="frame" x="12" y="8" width="63" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ico_voice_msg.png" id="Tsq-48-fTk">
-                                                            <rect key="frame" x="6" y="1" width="38" height="38"/>
+                                                            <rect key="frame" x="1" y="1" width="25" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" id="ewT-l4-Vxl">
-                                                            <rect key="frame" x="1" y="41" width="48" height="21"/>
+                                                            <rect key="frame" x="1" y="26" width="25" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="RlE-cw-Y6s">
-                                                                    <rect key="frame" x="8" y="0.0" width="34" height="21"/>
+                                                                    <rect key="frame" x="-4" y="-2" width="34" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -459,15 +449,28 @@ test</string>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
                                                         </view>
                                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="gxG-Mh-O3T">
-                                                            <rect key="frame" x="6" y="2" width="37" height="37"/>
+                                                            <rect key="frame" x="1" y="2" width="37" height="37"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         </activityIndicatorView>
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oDW-Ml-afn">
+                                                            <rect key="frame" x="34" y="6" width="30" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" image="play_unpress.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="playBtnDown:" destination="Br3-C8-iQK" eventType="touchDown" id="xVx-AA-A7Z"/>
+                                                                <action selector="playBtnPress:" destination="Br3-C8-iQK" eventType="touchUpInside" id="NQC-G3-iul"/>
+                                                                <action selector="playBtnUp:" destination="Br3-C8-iQK" eventType="touchUpOutside" id="JeK-tK-Vme"/>
+                                                                <action selector="playBtnUp:" destination="Br3-C8-iQK" eventType="touchCancel" id="ad8-6m-OFR"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <progressView opaque="NO" contentMode="scaleToFill" id="teF-Yx-lb2">
-                                                    <rect key="frame" x="124" y="36" width="88" height="2"/>
+                                                    <rect key="frame" x="90" y="29" width="88" height="2"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </progressView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_bookmark.png" id="oSc-vQ-s6H">
@@ -501,7 +504,7 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendCellInStream" rowHeight="93" id="zq3-ZX-9fa" customClass="WUFriendInCell">
-                                <rect key="frame" x="0.0" y="539" width="320" height="93"/>
+                                <rect key="frame" x="0.0" y="785" width="320" height="93"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zq3-ZX-9fa" id="MVf-7h-XLR">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
@@ -581,7 +584,7 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContactCellInStream" rowHeight="83" id="hQE-E7-JbX" customClass="WUContactInCell">
-                                <rect key="frame" x="0.0" y="632" width="320" height="83"/>
+                                <rect key="frame" x="0.0" y="878" width="320" height="83"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hQE-E7-JbX" id="0Kf-85-SzV">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
@@ -635,7 +638,7 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CallCellInStream" rowHeight="77" id="qgV-cs-5BD" customClass="WUCallInCell">
-                                <rect key="frame" x="0.0" y="715" width="320" height="77"/>
+                                <rect key="frame" x="0.0" y="961" width="320" height="77"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qgV-cs-5BD" id="yGn-vh-yHe">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
@@ -742,10 +745,10 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WUMessageOutCell" rowHeight="80" id="AoQ-2S-yjl" customClass="WUMessageOutCell">
-                                <rect key="frame" x="0.0" y="792" width="320" height="47"/>
+                                <rect key="frame" x="0.0" y="1038" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AoQ-2S-yjl" id="O2u-3W-T4h">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="7D3-gO-nbU" customClass="SCBubbleViewOut">
@@ -782,10 +785,10 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LocationCellOutStream" rowHeight="124" id="dID-P9-bPx" customClass="WULocationOutCell">
-                                <rect key="frame" x="0.0" y="944" width="320" height="125"/>
+                                <rect key="frame" x="0.0" y="1118" width="320" height="124"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dID-P9-bPx" id="ka8-Yy-M6n">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="GQ9-WD-Jfk" customClass="SCBubbleViewOut">
@@ -855,10 +858,10 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WUImageOutCell" rowHeight="200" id="ml0-97-Opa" customClass="WUImageOutCell">
-                                <rect key="frame" x="0.0" y="839" width="320" height="105"/>
+                                <rect key="frame" x="0.0" y="1242" width="320" height="200"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ml0-97-Opa" id="LuZ-2F-fyt">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="OML-PV-Iy8" customClass="SCBubbleViewOut">
@@ -891,52 +894,23 @@ test</string>
                                     <outlet property="progress" destination="qnh-Np-Kui" id="n6U-iW-W23"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AudioCellOutStream" rowHeight="104" id="pYU-6S-hS8" customClass="WUAudioOutCell">
-                                <rect key="frame" x="0.0" y="1069" width="320" height="108"/>
+                            <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AudioCellOutStream" rowHeight="60" id="pYU-6S-hS8" customClass="WUAudioOutCell">
+                                <rect key="frame" x="0.0" y="1442" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pYU-6S-hS8" id="Qdg-8L-Nh6">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="19d-hA-YMs" customClass="SCBubbleViewOut">
-                                            <rect key="frame" x="50" y="0.0" width="270" height="76"/>
+                                            <rect key="frame" x="120" y="0.0" width="200" height="55"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" id="fm0-2t-2LJ">
-                                                    <rect key="frame" x="8" y="8" width="52" height="60"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ico_voice_msg.png" id="TKo-9b-1ST">
-                                                            <rect key="frame" x="6" y="1" width="38" height="38"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
-                                                        <view contentMode="scaleToFill" id="roN-u5-PRw">
-                                                            <rect key="frame" x="1" y="41" width="48" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="qq0-GL-s05">
-                                                                    <rect key="frame" x="8" y="0.0" width="34" height="21"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
-                                                        </view>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <progressView opaque="NO" contentMode="scaleToFill" id="aq9-yO-kJb">
-                                                    <rect key="frame" x="105" y="35" width="122" height="2"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </progressView>
-                                                <view hidden="YES" contentMode="scaleToFill" id="LZJ-VB-4PN">
-                                                    <rect key="frame" x="66" y="18" width="180" height="40"/>
+                                                    <rect key="frame" x="8" y="8" width="63" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1HB-yY-o40">
-                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                            <rect key="frame" x="34" y="6" width="30" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" image="play_unpress.png">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -948,8 +922,37 @@ test</string>
                                                                 <action selector="playBtnUp:" destination="pYU-6S-hS8" eventType="touchUpOutside" id="uVb-fE-mJD"/>
                                                             </connections>
                                                         </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ico_voice_msg.png" id="TKo-9b-1ST">
+                                                            <rect key="frame" x="1" y="1" width="25" height="25"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <view contentMode="scaleToFill" id="roN-u5-PRw">
+                                                            <rect key="frame" x="1" y="26" width="25" height="14"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="qq0-GL-s05">
+                                                                    <rect key="frame" x="-4" y="-2" width="34" height="18"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="calibratedRGB"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <progressView opaque="NO" contentMode="scaleToFill" id="aq9-yO-kJb">
+                                                    <rect key="frame" x="86" y="29" width="88" height="2"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </progressView>
+                                                <view hidden="YES" contentMode="scaleToFill" id="LZJ-VB-4PN">
+                                                    <rect key="frame" x="73" y="14" width="124" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
                                                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="WHt-WG-GqX">
-                                                            <rect key="frame" x="36" y="5" width="146" height="31"/>
+                                                            <rect key="frame" x="6" y="0.0" width="105" height="31"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <connections>
                                                                 <action selector="sliderMove:" destination="pYU-6S-hS8" eventType="valueChanged" id="km6-vh-thY"/>
@@ -996,7 +999,7 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="VideoCellOutStream" rowHeight="107" id="WVr-V3-BQ2" customClass="WUVideoOutCell">
-                                <rect key="frame" x="0.0" y="1177" width="320" height="107"/>
+                                <rect key="frame" x="0.0" y="1502" width="320" height="107"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WVr-V3-BQ2" id="feY-K2-MpK">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
@@ -1075,10 +1078,10 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FriendCellOutStream" rowHeight="93" id="bu9-tL-tZr" customClass="WUFriendOutCell">
-                                <rect key="frame" x="0.0" y="1284" width="320" height="85"/>
+                                <rect key="frame" x="0.0" y="1609" width="320" height="93"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bu9-tL-tZr" id="Fnm-8e-6Ce">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="AX2-CO-WyA" customClass="SCBubbleViewOut">
@@ -1132,10 +1135,10 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContactCellOutStream" rowHeight="83" id="66i-xu-haB" customClass="WUContactOutCell">
-                                <rect key="frame" x="0.0" y="1369" width="320" height="76"/>
+                                <rect key="frame" x="0.0" y="1702" width="320" height="83"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="66i-xu-haB" id="yDz-i5-cJA">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" id="tsV-0e-pJg" customClass="SCBubbleViewOut">
@@ -1188,7 +1191,7 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CallCellOutStream" rowHeight="77" id="vmd-qP-1XX" customClass="WUCallOutCell">
-                                <rect key="frame" x="0.0" y="1445" width="320" height="77"/>
+                                <rect key="frame" x="0.0" y="1785" width="320" height="77"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vmd-qP-1XX" id="7A3-d3-N96">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
@@ -1298,7 +1301,7 @@ test</string>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SCNoMessagesCell" textLabel="Ef4-rL-6Gm" rowHeight="307" style="IBUITableViewCellStyleDefault" id="sQl-fT-NnP">
-                                <rect key="frame" x="0.0" y="1522" width="320" height="307"/>
+                                <rect key="frame" x="0.0" y="1862" width="320" height="307"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sQl-fT-NnP" id="MlQ-xv-MQ6">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="307"/>
@@ -1316,7 +1319,7 @@ test</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SCNoFilterResultsCell" textLabel="UyH-Tu-aCE" rowHeight="307" style="IBUITableViewCellStyleDefault" id="w4J-BX-EwA">
-                                <rect key="frame" x="0.0" y="1829" width="320" height="307"/>
+                                <rect key="frame" x="0.0" y="2169" width="320" height="307"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w4J-BX-EwA" id="ZwT-C7-MH3">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="307"/>

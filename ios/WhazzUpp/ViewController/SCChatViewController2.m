@@ -369,6 +369,8 @@
     if (sz < minToolbarHeight)
         sz = minToolbarHeight;
     
+    [self.toolbarView resizeToolbar:sz];
+    
     if (isSMS) {
         dispatch_async(dispatch_get_main_queue(), ^{
             CGRect nf = numChars.frame;
@@ -458,6 +460,7 @@
         
         currentKeyboardSize = keyboardSize;
         
+        
         if (self.toolbarBottomContraint) {
             DLog(@"keyboardWillShow : %f", diff);
             self.toolbarBottomContraint.constant += diff;
@@ -468,6 +471,7 @@
         {
             self.toolbarView.frame = frame;
         }
+         
       
     }
     if ([[notification name] isEqualToString:@"UIKeyboardWillHideNotification"]) {

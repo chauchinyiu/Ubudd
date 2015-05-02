@@ -19,6 +19,8 @@
 #import "ResponseHandler.h"
 #import "WUMediaController.h"
 #import "CommonMethods.h"
+#import "DBHandler.h"
+
 
 
 @implementation WUUserInfoCell
@@ -251,6 +253,17 @@ static NSString* currentC2CallID = @"";
 {
     NSLog(@"Clear all chat");
     // TODO clear all chat history
+    NSArray* result = [DBHandler dataFromTable:@"MOChatHistory" condition:[NSString stringWithFormat:@"contact = '%@'", c2CallID] orderBy:nil ascending:false];
+    if (result.count > 0) {
+        [[SCDataManager instance] removeDatabaseObject:[result objectAtIndex:0]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Chat cleared", @"")
+                                                        message:NSLocalizedString(@"You cleared the chat history", @"")
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

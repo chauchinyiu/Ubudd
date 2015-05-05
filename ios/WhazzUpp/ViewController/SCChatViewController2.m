@@ -539,7 +539,7 @@
 {
     if ([fromUserid isEqualToString:self.targetUserid]) {
         lastTypeEventReceived = CFAbsoluteTimeGetCurrent();
-        self.navigationItem.prompt = NSLocalizedString(@"is typing...", "TypingEvent Title");
+        self.navigationItem.prompt = NSLocalizedString(@"is typing", "TypingEvent Title");
         double delayInSeconds = 2.5;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -573,7 +573,7 @@
 
 
 #pragma mark Rich Message
-
+/*
 -(IBAction)selectRichMessage:(id)sender
 {
     SCPopupMenu *cv = [SCPopupMenu popupMenu:self];
@@ -648,7 +648,7 @@
     [cv showMenu];
     
 }
-
+*/
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {

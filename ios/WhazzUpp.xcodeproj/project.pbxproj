@@ -2277,7 +2277,6 @@
 		CE30C006198C8D7000D22BFE /* VerifyUserDTO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerifyUserDTO.h; sourceTree = "<group>"; };
 		CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyUserDTO.m; sourceTree = "<group>"; };
 		CE30D1801AA89408001D2C28 /* SocialCommunication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocialCommunication.framework; sourceTree = "<group>"; };
-		CE50E7EB1A7C8AD600A095C9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		CE5462201999C86000E91636 /* UpdateAPNSToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAPNSToken.h; sourceTree = "<group>"; };
 		CE5462211999C86000E91636 /* UpdateAPNSToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAPNSToken.m; sourceTree = "<group>"; };
 		CE5462231999C96000E91636 /* UpdateAPNSTokenDTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAPNSTokenDTO.h; sourceTree = "<group>"; };
@@ -2308,7 +2307,6 @@
 		CE885CD119CBE1A800F8004C /* WULocationSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WULocationSearchController.h; sourceTree = "<group>"; };
 		CE885CD219CBE1A800F8004C /* WULocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WULocationSearchController.m; sourceTree = "<group>"; };
 		CE88BC351A760057008814E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CE88BC371A76005D008814E9 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CE893C1519E3A18A007AD220 /* WUSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUSettingViewController.h; sourceTree = "<group>"; };
 		CE893C1619E3A18A007AD220 /* WUSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUSettingViewController.m; sourceTree = "<group>"; };
 		CE8A89591A43BD99000EE809 /* WUPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUPhotoViewController.h; sourceTree = "<group>"; };
@@ -2322,9 +2320,6 @@
 		CE9CFF7A19C29E1E004DC699 /* WUInterestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUInterestViewController.h; sourceTree = "<group>"; };
 		CE9CFF7B19C29E1E004DC699 /* WUInterestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUInterestViewController.m; sourceTree = "<group>"; };
 		CE9E53CA19F0B371007B7CAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		CE9E53CC19F0B44B007B7CAC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Country.strings"; sourceTree = "<group>"; };
-		CE9E53CD19F0B44C007B7CAC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		CE9E53CE19F0B44D007B7CAC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CEA092BF1AEA35610070508A /* WUMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUMovieViewController.h; sourceTree = "<group>"; };
 		CEA092C01AEA35610070508A /* WUMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUMovieViewController.m; sourceTree = "<group>"; };
 		CEA092C21AEA37130070508A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -2336,6 +2331,10 @@
 		CEB04F3C1A8D99AD003CA784 /* chatboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = chatboard.storyboard; sourceTree = "<group>"; };
 		CEB0506B1A73773D001BDD35 /* Mic_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mic_press.png; sourceTree = "<group>"; };
 		CEB0506D1A737745001BDD35 /* Mic_unpress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mic_unpress.png; sourceTree = "<group>"; };
+		CEB40A001AF7196900FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
+		CEB40A011AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CEB40A021AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Country.strings"; sourceTree = "<group>"; };
+		CEB40A031AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CEBA822F19ECD55500B3F109 /* WUJoinRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUJoinRequestController.h; sourceTree = "<group>"; };
 		CEBA823019ECD55500B3F109 /* WUJoinRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUJoinRequestController.m; sourceTree = "<group>"; };
 		CECA86BB1AA610AA0096571F /* C2CallDataModel 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "C2CallDataModel 11.xcdatamodel"; sourceTree = "<group>"; };
@@ -4936,7 +4935,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				17305CFC19277F610018EE25 /* en */,
-				CE9E53CC19F0B44B007B7CAC /* zh-Hant */,
+				CEB40A021AF7196A00FE13C7 /* zh-Hant */,
 			);
 			name = Country.strings;
 			sourceTree = "<group>";
@@ -4945,7 +4944,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				17305CFD19277F610018EE25 /* en */,
-				CE9E53CD19F0B44C007B7CAC /* zh-Hant */,
+				CEB40A031AF7196A00FE13C7 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -4954,7 +4953,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				979953FE175B5587001F2D52 /* en */,
-				CE9E53CE19F0B44D007B7CAC /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -4963,7 +4961,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE9E53CA19F0B371007B7CAC /* Base */,
-				CE50E7EB1A7C8AD600A095C9 /* zh-Hant */,
+				CEB40A001AF7196900FE13C7 /* zh-Hant */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -4972,8 +4970,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE88BC351A760057008814E9 /* Base */,
-				CE88BC371A76005D008814E9 /* zh-Hant */,
 				CE041BF71AB1585500875207 /* en */,
+				CEB40A011AF7196A00FE13C7 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

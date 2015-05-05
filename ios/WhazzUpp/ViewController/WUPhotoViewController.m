@@ -41,7 +41,7 @@
                         animated:NO
                       completion:nil];
         
-        self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", initPageIndex + 1, (int)pages.count];
+        self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"XOfY",  @"%d of %d"), initPageIndex + 1, (int)pages.count];
         
     }
     
@@ -66,6 +66,8 @@
         [custLabel setTextColor:[UIColor whiteColor]];
         [custLabel setTextAlignment:NSTextAlignmentCenter];
         custLabel.numberOfLines = 2;
+        custLabel.adjustsFontSizeToFitWidth = YES;
+        custLabel.minimumScaleFactor = 0.2;
         
         
         if (atitle) {
@@ -188,7 +190,7 @@
 
 -(void)deletePhoto{
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Photo", @"") message:@"Do you wish to delete this photo?" delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Photo", @"") message: NSLocalizedString(@"Do you wish to delete this photo", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"") otherButtonTitles: NSLocalizedString(@"Yes", @""), nil];
     [alert show];
 }
 
@@ -305,7 +307,7 @@
 
 -(void)refreshLabel{
     WUImageViewController* vc = [self.viewControllers objectAtIndex:0];
-    self.navigationItem.title = [NSString stringWithFormat:@"%d of %d", vc.pageID + 1, (int)pages.count];
+    self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"XOfY", @"%d of %d"), vc.pageID + 1, (int)pages.count];
     
     NSDictionary* info = vc.info;
     if ([info objectForKey:@"SingleImage"]) {

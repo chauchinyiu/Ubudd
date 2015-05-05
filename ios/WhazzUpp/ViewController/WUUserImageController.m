@@ -28,7 +28,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.navigationItem.title = @"Profile Pic";
+    self.navigationItem.title = NSLocalizedString(@"Profile Pic", @"");
     if (viewImage) {
         [self.userimageView setImage:viewImage];
     }

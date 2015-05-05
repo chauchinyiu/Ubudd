@@ -109,7 +109,7 @@ typedef enum : NSUInteger {
     }
     
     
-    UIBarButtonItem *newBackButton =[[UIBarButtonItem alloc] initWithTitle:@"Back"
+    UIBarButtonItem *newBackButton =[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"")
                                      style:UIBarButtonItemStylePlain
                                     target:nil
                                     action:nil];
@@ -289,7 +289,7 @@ typedef enum : NSUInteger {
     if ([fromUserid isEqualToString:self.targetUserid]) {
         self.lastTypeEventReceived = CFAbsoluteTimeGetCurrent();
 
-        NSMutableAttributedString* atitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ \nis typing...", [boardTitle string]]];
+        NSMutableAttributedString* atitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"is typeing", @"%@ \nis typing..."), [boardTitle string]]];
 
         UIFont* fontStd = [CommonMethods getStdFontType:3];
         [atitle addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(boardTitle.length, atitle.length - boardTitle.length)];

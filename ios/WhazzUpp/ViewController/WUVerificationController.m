@@ -82,9 +82,9 @@
     VerifyUser *user = (VerifyUser *)response;
     
     if (error)
-        [CommonMethods showAlertWithTitle:@"Registration Error" message:[error localizedDescription] delegate:nil];
+        [CommonMethods showAlertWithTitle:NSLocalizedString(@"Registration Error", @"") message:[error localizedDescription] delegate:nil];
     else if (user.errorCode == 1)
-        [CommonMethods showAlertWithTitle:@"Registration Error" message:user.message delegate:nil];
+        [CommonMethods showAlertWithTitle:NSLocalizedString(@"Registration Error", @"") message:user.message delegate:nil];
     else {
         NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setBool:false forKey:kUserDefault_isWelcomeComplete];
@@ -115,10 +115,10 @@
         
     }
     else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Resend verification code"
-                                                        message:@"Verification code sent"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Resend verification code", @"")
+                                                        message:NSLocalizedString(@"Verification code sent", @"")
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                               otherButtonTitles:nil];
         [alert show];
 

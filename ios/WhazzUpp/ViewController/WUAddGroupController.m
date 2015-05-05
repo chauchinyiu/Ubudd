@@ -117,7 +117,7 @@
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
 
-    [self setTitle:@"New Group"];
+    [self setTitle:NSLocalizedString(@"New Group", @"")];
     friendList = [[ResponseHandler instance] friendList];
 }
 
@@ -239,7 +239,7 @@
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
         SCGroupAddMembersCell* c = (SCGroupAddMembersCell*)[super tableView:tableView cellForRowAtIndexPath:indexPath];
-        [c.numMembers setText:[NSString stringWithFormat:@"(%d of 199)", (int)self.members.count]];
+        [c.numMembers setText:[NSString stringWithFormat:NSLocalizedString(@"memberOutOf", @""), (int)self.members.count]];
         return c;
     }
     else{

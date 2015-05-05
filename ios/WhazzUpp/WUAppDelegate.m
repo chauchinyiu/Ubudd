@@ -215,11 +215,11 @@
     else{
         NSString* noteType = [custval objectForKey:@"type"];
         if([noteType isEqualToString:@"join request"]){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Join Request", @"") message:[message objectForKey:@"alert"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Join Request", @"") message:[message objectForKey:@"alert"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
             [alert show];
         }
         else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Announcement", @"") message:[message objectForKey:@"alert"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Announcement", @"") message:[message objectForKey:@"alert"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles: nil];
             [alert show];
         }
         
@@ -296,10 +296,10 @@
 - (void)showHint:(NSString *) message withNotificationType:(SCNotificationType) notificationType
 {
     if (notificationType == SC_NOTIFICATIONTYPE_REWARD) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Reward", @"") message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Reward", @"") message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", @"") message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Info", @"") message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
     }
 }

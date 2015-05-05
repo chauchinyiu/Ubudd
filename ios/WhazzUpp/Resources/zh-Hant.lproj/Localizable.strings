@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  WhazzUpp
-
-  Created by Ming Kei Wong on 26/1/15.
-  Copyright (c) 2015年 3Embed Technologies. All rights reserved.
-*/
+/*
+ Localizable.strings
+ WhazzUpp
+ 
+ Created by Ming Kei Wong on 26/1/15.
+ Copyright (c) 2015年 3Embed Technologies. All rights reserved.
+ */
 "Tel No" = "電話號碼: %@ %@";
 "Select photo" = "選擇照片";
 "Select from Camera Roll" = "從照片簿中選擇";
@@ -83,12 +83,34 @@
 "You have requests" = "你有%d個請求";
 "Tell Friend SMS" = "查看Ubudd. 今天就從APPSTORE_LINK_URL下載";
 "First post from my iPhone app" = "我從Ubudd上發的第一個Post";
-"First post from my iPhone app" = "First post from my iPhone app";
 "Tell Friend Email" = "喂,\n\n我剛剛下載了Ubudd.";
 "Download" = "下載";
-"Delete this group" = "Delete this group";
-"Do you really want to delete this group" = "Do you really want to delete this group";
+"Delete this group" = "刪除這個群組";
+"Do you really want to delete this group" = "你是否真的要刪除這個群組？";
 "Contacts" = "聯絡";
 "UBudd List" = "UBudd 名單";
 "Chat" = "對話";
 "More" = "更多";
+"is typing" = "%@ \n正在鍵入⋯⋯";
+"New Group" = "新群組";
+"memberOutOf" = "(199 之 %d)";
+"createdagroup" = "%@ 新增了群組 %@";
+"groupAddedMember" = "%@ 加入了成員 %@";
+"Request pending" = "請求待批";
+"Closed" = "已關閉";
+"Members are hidden due to privacy issues" = "因私隱關係不會顯示其他成員";
+"How will you handle the request" = "你會如何處理這個請求？";
+"Later" = "暫不決定";
+"Accept" = "接受";
+"Reject" = "不接受";
+"Ubudd group" = "Ubudd群組";
+"XOfY" = "%d / %d";
+"Do you wish to delete this photo" = "你要刪除這張照片嗎？";
+"Loading" = "載入中";
+"Failed to register Please try again" = "登記失敗。請再嘗試";
+"Profile Pic" = "個人照片";
+"Done" = "完成";
+"Registration Error" = "登記錯誤";
+"Resend verification code" = "再發送驗證碼";
+"Verification code sent" = "已發送驗證碼";
+"OK" = "確定";

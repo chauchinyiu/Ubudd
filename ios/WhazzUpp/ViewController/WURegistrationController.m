@@ -118,7 +118,7 @@
 
 #pragma mark - Webservice Request
 - (void)registerUserRequest:(RegisterUserDTO *)registerUserDTO {
-    [CommonMethods showLoading:YES title:nil message:@"Loading"];
+    [CommonMethods showLoading:YES title:nil message: NSLocalizedString(@"Loading", @"")];
     
     WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
     [serviceHandler execute:METHOD__REGISTER parameter:registerUserDTO target:self action:@selector(registerUserResponse:error:)];

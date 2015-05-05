@@ -233,7 +233,7 @@
             WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:[ResponseHandler instance].broadcastList.count -1];
             
             if (b.isImage) {
-                hCell.textLabel.text = @"Picture Message";
+                hCell.textLabel.text = NSLocalizedString(@"Picture Message", @"");
             }
             else{
                 hCell.textLabel.text = b.message;

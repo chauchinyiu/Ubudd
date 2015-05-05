@@ -33,7 +33,7 @@
                               initWithTitle:title
                               message:message
                               delegate:delegate
-                              cancelButtonTitle:@"OK"
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
                               otherButtonTitles:nil];
     [alertView show];
 }

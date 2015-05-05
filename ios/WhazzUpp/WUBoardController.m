@@ -440,7 +440,7 @@ static BOOL isGroup = YES;
                     cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:createTime]];
                 }
                 
-                cell.nameLabel.text = [NSString stringWithFormat:@"%@ created a group %@", ownerName, groupName];
+                cell.nameLabel.text = [NSString stringWithFormat:NSLocalizedString(@"createdagroup", @""), ownerName, groupName];
                 
                 f = cell.createGroupView.frame;
                 f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
@@ -535,7 +535,7 @@ static BOOL isGroup = YES;
                         
                     }
                     
-                    ((WUMemberJoinCell*)cell).timeLabel.text = [NSString stringWithFormat:@"%@ added %@", group.groupName, displayName];
+                    ((WUMemberJoinCell*)cell).timeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"groupAddedMember", @"%@ added %@"), group.groupName, displayName];
                 }
 
                 if ([e.source isEqualToString:@"Message"]) {

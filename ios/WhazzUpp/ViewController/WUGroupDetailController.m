@@ -332,10 +332,10 @@
                         [cell.lblJoinStatus setText:NSLocalizedString(@"Non member", @"")];
                     }
                     if (userType == 4){
-                        [cell.lblJoinStatus setText:@"Request pending"];
+                        [cell.lblJoinStatus setText:NSLocalizedString(@"Request pending", @"")];
                     }
                     if (userType == 5){
-                        [cell.lblJoinStatus setText:@"Closed"];
+                        [cell.lblJoinStatus setText:NSLocalizedString(@"Closed", @"")];
                     }
                 }
                 
@@ -356,7 +356,7 @@
         
         if (indexPath.row == 1 && !(userType == 1 || userType == 2 || isPublic.intValue == 1)) {
             [cell.inviteButton setHidden:YES];
-            cell.textLabel.text = @"Members are hidden due to privacy issues";
+            cell.textLabel.text = NSLocalizedString(@"Members are hidden due to privacy issues", @"");
             cell.backgroundColor = [UIColor whiteColor];
             cell.detailTextLabel.text = @"";
             return cell;
@@ -827,7 +827,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Request submitted", @"")
                                                         message:NSLocalizedString(@"Your request is submitted and is waiting for approval", @"")
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                               otherButtonTitles:nil];
         [alert show];
         userType = 4;
@@ -837,7 +837,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Submittion failed", @"")
                                                         message:NSLocalizedString(@"Unable to submit your request", @"")
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                               otherButtonTitles:nil];
         [alert show];
         
@@ -884,7 +884,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Leave Group", @"")
                                                     message:NSLocalizedString(@"You left the group", @"")
                                                    delegate:nil
-                                          cancelButtonTitle:@"OK"
+                                          cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                           otherButtonTitles:nil];
     [alert show];
     NSMutableArray* groups = [[ResponseHandler instance] groupList];
@@ -918,7 +918,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Group", @"")
                                                     message:NSLocalizedString(@"You deleted the group", @"")
                                                    delegate:nil
-                                          cancelButtonTitle:@"OK"
+                                          cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                           otherButtonTitles:nil];
     [alert show];
     NSMutableArray* groups = [[ResponseHandler instance] groupList];
@@ -1016,7 +1016,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Member Blocked", @"")
                                                         message:NSLocalizedString(@"You blocked the member", @"")
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                               otherButtonTitles:nil];
     [alert show];
     

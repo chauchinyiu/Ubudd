@@ -159,7 +159,7 @@
 {
     NSString* groupName = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:groupName message:@"How will you handle the request?" delegate:self cancelButtonTitle:@"Later" otherButtonTitles: @"Accept", @"Reject", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:groupName message:NSLocalizedString(@"How will you handle the request", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"Later", @"") otherButtonTitles: NSLocalizedString(@"Accept", @""), NSLocalizedString(@"Reject", @""), nil];
     [alert setTag:indexPath.row];
     [alert show];
 }

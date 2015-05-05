@@ -259,7 +259,7 @@ static NSString* currentC2CallID = @"";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Chat cleared", @"")
                                                         message:NSLocalizedString(@"You cleared the chat history", @"")
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                               otherButtonTitles:nil];
         [alert show];
         

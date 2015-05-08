@@ -1094,6 +1094,7 @@
 		CE049FC11A368E0C006D5C25 /* bg_newgroup.png in Resources */ = {isa = PBXBuildFile; fileRef = CE049FBF1A368E0C006D5C25 /* bg_newgroup.png */; };
 		CE049FC21A368E0C006D5C25 /* bg_newgroup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE049FC01A368E0C006D5C25 /* bg_newgroup@2x.png */; };
 		CE0919A319D6529C00865665 /* WUUbuddListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0919A219D6529C00865665 /* WUUbuddListController.m */; };
+		CE1430301AFC75B50083B13F /* chatboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1430321AFC75B50083B13F /* chatboard.storyboard */; };
 		CE2AC7F519FD36BB00A3D093 /* WUPhotoViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */; };
 		CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C003198C8D3500D22BFE /* VerifyUser.m */; };
 		CE30C008198C8D7700D22BFE /* VerifyUserDTO.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C007198C8D7700D22BFE /* VerifyUserDTO.m */; };
@@ -1126,7 +1127,6 @@
 		CEA7B8071AE8B71300D9DBCA /* blackbar.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA7B8061AE8B71300D9DBCA /* blackbar.png */; };
 		CEA80FEF1A774D1F00A89782 /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA80FEE1A774D1F00A89782 /* shadow.png */; };
 		CEA8677C1AE5FE6500324485 /* ico_notdelivered.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA8677B1AE5FE6500324485 /* ico_notdelivered.png */; };
-		CEB04F3D1A8D99AD003CA784 /* chatboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB04F3C1A8D99AD003CA784 /* chatboard.storyboard */; };
 		CEB0506C1A73773D001BDD35 /* Mic_press.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0506B1A73773D001BDD35 /* Mic_press.png */; };
 		CEB0506E1A737745001BDD35 /* Mic_unpress.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0506D1A737745001BDD35 /* Mic_unpress.png */; };
 		CEBA823119ECD55500B3F109 /* WUJoinRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA823019ECD55500B3F109 /* WUJoinRequestController.m */; };
@@ -2270,6 +2270,9 @@
 		CE049FC01A368E0C006D5C25 /* bg_newgroup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_newgroup@2x.png"; sourceTree = "<group>"; };
 		CE0919A119D6529C00865665 /* WUUbuddListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUUbuddListController.h; sourceTree = "<group>"; };
 		CE0919A219D6529C00865665 /* WUUbuddListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUUbuddListController.m; sourceTree = "<group>"; };
+		CE1430311AFC75B50083B13F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/chatboard.storyboard; sourceTree = "<group>"; };
+		CE1430341AFC75BD0083B13F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/chatboard.strings"; sourceTree = "<group>"; };
+		CE1430361AFC79ED0083B13F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		CE2AC7F319FD36BB00A3D093 /* WUPhotoViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUPhotoViewerController.h; sourceTree = "<group>"; };
 		CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUPhotoViewerController.m; sourceTree = "<group>"; };
 		CE30C003198C8D3500D22BFE /* VerifyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyUser.m; sourceTree = "<group>"; };
@@ -2328,10 +2331,8 @@
 		CEA7B8061AE8B71300D9DBCA /* blackbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackbar.png; sourceTree = "<group>"; };
 		CEA80FEE1A774D1F00A89782 /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
 		CEA8677B1AE5FE6500324485 /* ico_notdelivered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_notdelivered.png; sourceTree = "<group>"; };
-		CEB04F3C1A8D99AD003CA784 /* chatboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = chatboard.storyboard; sourceTree = "<group>"; };
 		CEB0506B1A73773D001BDD35 /* Mic_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mic_press.png; sourceTree = "<group>"; };
 		CEB0506D1A737745001BDD35 /* Mic_unpress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mic_unpress.png; sourceTree = "<group>"; };
-		CEB40A001AF7196900FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		CEB40A011AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CEB40A021AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Country.strings"; sourceTree = "<group>"; };
 		CEB40A031AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -3713,7 +3714,7 @@
 				CEF625291AEB48CC000F87E9 /* WUTabBar.h */,
 				CEF6252A1AEB48CC000F87E9 /* WUTabBar.m */,
 				9799540C175B5588001F2D52 /* MainStoryboard.storyboard */,
-				CEB04F3C1A8D99AD003CA784 /* chatboard.storyboard */,
+				CE1430321AFC75B50083B13F /* chatboard.storyboard */,
 				17A1D6901927EDB300B28792 /* Images.xcassets */,
 				979953FB175B5587001F2D52 /* Supporting Files */,
 			);
@@ -4532,7 +4533,7 @@
 				173060FE19277F6B0018EE25 /* error.wav in Resources */,
 				1730628E19277F6B0018EE25 /* ico_stop.png in Resources */,
 				1730641819277F6B0018EE25 /* ziffer_plus_h.png in Resources */,
-				CEB04F3D1A8D99AD003CA784 /* chatboard.storyboard in Resources */,
+				CE1430301AFC75B50083B13F /* chatboard.storyboard in Resources */,
 				173061BB19277F6B0018EE25 /* flag689.png in Resources */,
 				1730637519277F6B0018EE25 /* np-43.xml in Resources */,
 				1730634719277F6B0018EE25 /* np-27.xml in Resources */,
@@ -4961,9 +4962,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE9E53CA19F0B371007B7CAC /* Base */,
-				CEB40A001AF7196900FE13C7 /* zh-Hant */,
+				CE1430361AFC79ED0083B13F /* zh-Hant */,
 			);
 			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		CE1430321AFC75B50083B13F /* chatboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE1430311AFC75B50083B13F /* Base */,
+				CE1430341AFC75BD0083B13F /* zh-Hant */,
+			);
+			name = chatboard.storyboard;
 			sourceTree = "<group>";
 		};
 		CE88BC361A760057008814E9 /* Localizable.strings */ = {

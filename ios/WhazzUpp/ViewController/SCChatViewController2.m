@@ -660,7 +660,7 @@
         DLog(@"mediaUrl : %@", [mediaUrl absoluteString]);
         
         @autoreleasepool {
-            SCWaitIndicatorController *pleaseWait = [SCWaitIndicatorController controllerWithTitle:NSLocalizedString(@"Exporting Video...", @"Title") andWaitMessage:nil];
+            SCWaitIndicatorController *pleaseWait = [SCWaitIndicatorController controllerWithTitle:NSLocalizedString(@"Exporting Video", @"Exporting Video...") andWaitMessage:nil];
             pleaseWait.autoHide = NO;
             [pleaseWait show:[[UIApplication sharedApplication] keyWindow]];
             
@@ -673,7 +673,7 @@
     } else {
         UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         
-        SCWaitIndicatorController *pleaseWait = [SCWaitIndicatorController controllerWithTitle:NSLocalizedString(@"Exporting Image...", @"Title") andWaitMessage:nil];
+        SCWaitIndicatorController *pleaseWait = [SCWaitIndicatorController controllerWithTitle:NSLocalizedString(@"Exporting Image", @"Exporting Image...") andWaitMessage:nil];
         [pleaseWait show:[[UIApplication sharedApplication] keyWindow]];
         
         [[C2CallPhone currentPhone] submitImage:originalImage withQuality:UIImagePickerControllerQualityTypeMedium andMessage:nil toTarget:self.targetUserid withCompletionHandler:^(BOOL success, NSString *richMediaKey, NSError *error) {

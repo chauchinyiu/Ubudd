@@ -449,19 +449,19 @@
                     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
                     break;
                 case OS_AWAY:
-                    cell.detailTextLabel.text = NSLocalizedString(@"offline (away)", @"Cell Label");
+                    cell.detailTextLabel.text = NSLocalizedString(@"offline away", @"offline (away)");
                     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
                     break;
                 case OS_BUSY:
-                    cell.detailTextLabel.text = NSLocalizedString(@"offline (busy)", @"Cell Label");
+                    cell.detailTextLabel.text = NSLocalizedString(@"offline busy", @"offline (busy)");
                     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
                     break;
                 case OS_CALLME:
-                    cell.detailTextLabel.text = NSLocalizedString(@"online (call me)", @"Cell Label");
+                    cell.detailTextLabel.text = NSLocalizedString(@"online call me", @"online (call me)");
                     cell.detailTextLabel.textColor = [UIColor blackColor];
                     break;
                 case OS_ONLINEVIDEO:
-                    cell.detailTextLabel.text = NSLocalizedString(@"online (active)", @"Cell Label");
+                    cell.detailTextLabel.text = NSLocalizedString(@"online active", @"online (active)");
                     break;
                 case OS_IPUSH:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
@@ -834,7 +834,7 @@
         [self.tableView reloadData];
     }
     else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Submittion failed", @"")
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Submission failed", @"")
                                                         message:NSLocalizedString(@"Unable to submit your request", @"")
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"OK", @"")

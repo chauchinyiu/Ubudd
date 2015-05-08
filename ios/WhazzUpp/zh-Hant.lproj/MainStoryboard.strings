@@ -1,21 +1,21 @@
 
 /* Class = "UIButton"; normalTitle = "Record"; ObjectID = "0RE-fK-ghm"; */
-"0RE-fK-ghm.normalTitle" = "Record";
+"0RE-fK-ghm.normalTitle" = "錄製";
 
 /* Class = "UIButton"; selectedTitle = "Stop"; ObjectID = "0RE-fK-ghm"; */
-"0RE-fK-ghm.selectedTitle" = "Stop";
+"0RE-fK-ghm.selectedTitle" = "停止";
 
 /* Class = "UIBarButtonItem"; title = "Next"; ObjectID = "0fN-0a-TV7"; */
-"0fN-0a-TV7.title" = "Next";
+"0fN-0a-TV7.title" = "下一頁";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "0pa-ic-Tfb"; */
 "0pa-ic-Tfb.text" = "Label";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "13e-ss-guZ"; */
-"13e-ss-guZ.title" = "Back";
+"13e-ss-guZ.title" = "返回";
 
 /* Class = "UINavigationItem"; title = "Contact Info"; ObjectID = "16q-Dc-C01"; */
-"16q-Dc-C01.title" = "Contact Info";
+"16q-Dc-C01.title" = "聯繫資料";
 
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "1F8-fv-DOF"; */
 "1F8-fv-DOF.text" = "Subtitle";
@@ -30,13 +30,13 @@
 "2eV-zX-qap.text" = "Label";
 
 /* Class = "UILabel"; text = "Hosted by:"; ObjectID = "31f-JC-1j9"; */
-"31f-JC-1j9.text" = "Hosted by:";
+"31f-JC-1j9.text" = "管理人:";
 
 /* Class = "UINavigationItem"; title = "Select Friends"; ObjectID = "3Sk-AV-rh8"; */
 "3Sk-AV-rh8.title" = "選擇朋友";
 
 /* Class = "UIButton"; normalTitle = "Clear Chat"; ObjectID = "3hR-jn-1Nq"; */
-"3hR-jn-1Nq.normalTitle" = "Clear Chat";
+"3hR-jn-1Nq.normalTitle" = "刪除對話";
 
 /* Class = "UITextField"; placeholder = "Display name"; ObjectID = "3sr-8y-vUF"; */
 "3sr-8y-vUF.placeholder" = "顯示名稱";
@@ -69,7 +69,7 @@
 "8YH-Xn-8mJ.text" = "幫助／ 常見問題";
 
 /* Class = "UILabel"; text = "My Status "; ObjectID = "8dI-Xd-2A5"; */
-"8dI-Xd-2A5.text" = "My Status ";
+"8dI-Xd-2A5.text" = "我的狀況";
 
 /* Class = "UISearchBar"; placeholder = "Search for topic or interest (art, hobby etc)"; ObjectID = "8jQ-O0-6pb"; */
 "8jQ-O0-6pb.placeholder" = "搜索群組題目或興趣（藝術，興趣等）";
@@ -90,7 +90,7 @@
 "Cjn-Lk-GTf.text" = "狀態:";
 
 /* Class = "UILabel"; text = "Contact Us"; ObjectID = "Cp3-do-iAm"; */
-"Cp3-do-iAm.text" = "Contact Us";
+"Cp3-do-iAm.text" = "聯絡我們";
 
 /* Class = "UILabel"; text = "USA"; ObjectID = "Cvp-7b-4EI"; */
 "Cvp-7b-4EI.text" = "USA";
@@ -99,10 +99,10 @@
 "Cwp-xs-p0F.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Play"; ObjectID = "Cwq-ck-43d"; */
-"Cwq-ck-43d.normalTitle" = "Play";
+"Cwq-ck-43d.normalTitle" = "播放";
 
 /* Class = "UIButton"; selectedTitle = "Stop"; ObjectID = "Cwq-ck-43d"; */
-"Cwq-ck-43d.selectedTitle" = "Stop";
+"Cwq-ck-43d.selectedTitle" = "停止";
 
 /* Class = "UILabel"; text = "Within"; ObjectID = "EKT-dA-rgW"; */
 "EKT-dA-rgW.text" = "Within";
@@ -153,7 +153,7 @@
 "K4L-Le-Jh7.title" = "Ubudd 地圖";
 
 /* Class = "UILabel"; text = "My Status "; ObjectID = "KMK-qa-R6L"; */
-"KMK-qa-R6L.text" = "My Status ";
+"KMK-qa-R6L.text" = "我的狀況";
 
 /* Class = "UILabel"; text = "Michael K. (C2Call)"; ObjectID = "KRJ-Ux-uFN"; */
 "KRJ-Ux-uFN.text" = "Michael K. (C2Call)";
@@ -195,7 +195,7 @@
 "PTN-1u-lDh.title" = "條款和細則";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "PaY-Bf-qYY"; */
-"PaY-Bf-qYY.placeholder" = "Password";
+"PaY-Bf-qYY.placeholder" = "密碼";
 
 /* Class = "UILabel"; text = "Enter the verification code you have received through SMS on your mobile"; ObjectID = "PkT-87-2C6"; */
 "PkT-87-2C6.text" = "輸入您已通過短信您的手機上收到的驗證碼";
@@ -210,7 +210,7 @@
 "R0d-MG-1nd.text" = "主題介紹";
 
 /* Class = "UINavigationItem"; title = "Select Country"; ObjectID = "R8V-4z-2pi"; */
-"R8V-4z-2pi.title" = "Select Country";
+"R8V-4z-2pi.title" = "選擇國家";
 
 /* Class = "UILabel"; text = "Private"; ObjectID = "RG5-Cf-dkP"; */
 "RG5-Cf-dkP.text" = "Private";
@@ -225,7 +225,7 @@
 "Snh-em-nDl.normalTitle" = "Button";
 
 /* Class = "UINavigationItem"; title = "Select Friend"; ObjectID = "T4m-MR-Ji6"; */
-"T4m-MR-Ji6.title" = "Select Friend";
+"T4m-MR-Ji6.title" = "選擇朋友";
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "T8q-p6-NQW"; */
 "T8q-p6-NQW.title" = "Item";
@@ -237,13 +237,13 @@
 "UXX-Pd-xh5.text" = "0/160";
 
 /* Class = "UIButton"; normalTitle = "Add Members"; ObjectID = "UYT-TD-XM5"; */
-"UYT-TD-XM5.normalTitle" = "Add Members";
+"UYT-TD-XM5.normalTitle" = "加入會員";
 
 /* Class = "UIButton"; normalTitle = "Play"; ObjectID = "UcG-bt-Nvc"; */
-"UcG-bt-Nvc.normalTitle" = "Play";
+"UcG-bt-Nvc.normalTitle" = "播放";
 
 /* Class = "UIButton"; selectedTitle = "Stop"; ObjectID = "UcG-bt-Nvc"; */
-"UcG-bt-Nvc.selectedTitle" = "Stop";
+"UcG-bt-Nvc.selectedTitle" = "停止";
 
 /* Class = "UILabel"; text = "Email"; ObjectID = "Ugg-cO-ZXC"; */
 "Ugg-cO-ZXC.text" = "電郵";
@@ -270,7 +270,7 @@
 "WRG-CL-uuY.text" = "興趣:";
 
 /* Class = "UIButton"; normalTitle = "Resend verification code"; ObjectID = "Wx0-0W-o2I"; */
-"Wx0-0W-o2I.normalTitle" = "Resend verification code";
+"Wx0-0W-o2I.normalTitle" = "再發送驗證碼";
 
 /* Class = "UINavigationItem"; title = "Group Profile"; ObjectID = "X8a-6o-fLx"; */
 "X8a-6o-fLx.title" = "群組資料";
@@ -315,16 +315,16 @@
 "aPJ-CB-6s0.normalTitle" = "編輯";
 
 /* Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "aWG-XO-gud"; */
-"aWG-XO-gud.placeholder" = "Confirm Password";
+"aWG-XO-gud.placeholder" = "確認密碼";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "aXS-wK-JK0"; */
 "aXS-wK-JK0.text" = "Label";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "abm-G7-Z6v"; */
-"abm-G7-Z6v.title" = "Back";
+"abm-G7-Z6v.title" = "返回";
 
 /* Class = "UINavigationItem"; title = "Request User Info"; ObjectID = "aiD-xR-hJc"; */
-"aiD-xR-hJc.title" = "Request User Info";
+"aiD-xR-hJc.title" = "請求人資料";
 
 /* Class = "UILabel"; text = "Label line 1 test test Label line 2 test test Lable line 3 test test"; ObjectID = "ap7-Es-dMy"; */
 "ap7-Es-dMy.text" = "Label line 1 test test Label line 2 test test Lable line 3 test test";
@@ -345,13 +345,13 @@
 "cG8-Eq-v8j.text" = "告訴朋友";
 
 /* Class = "UIPageViewController"; title = "Photos"; ObjectID = "cIY-ki-hEI"; */
-"cIY-ki-hEI.title" = "Photos";
+"cIY-ki-hEI.title" = "照片";
 
 /* Class = "UINavigationItem"; title = "Video"; ObjectID = "cPn-BE-3y5"; */
-"cPn-BE-3y5.title" = "Video";
+"cPn-BE-3y5.title" = "視頻";
 
 /* Class = "UILabel"; text = "Join status:"; ObjectID = "dhW-jQ-m04"; */
-"dhW-jQ-m04.text" = "Join status:";
+"dhW-jQ-m04.text" = "加入狀況:";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "e16-81-ZYw"; */
 "e16-81-ZYw.text" = "Label";
@@ -381,16 +381,16 @@
 "h7p-t8-6oY.title" = "登記";
 
 /* Class = "UINavigationItem"; title = "Your Location"; ObjectID = "i6O-sW-ICi"; */
-"i6O-sW-ICi.title" = "你的位置";
+"i6O-sW-ICi.title" = "您的位置";
 
 /* Class = "UIButton"; normalTitle = "Enter Chat"; ObjectID = "iKw-BW-rps"; */
 "iKw-BW-rps.normalTitle" = "進入對話";
 
 /* Class = "UITextField"; placeholder = "Phone Number"; ObjectID = "jY1-8q-VVR"; */
-"jY1-8q-VVR.placeholder" = "Phone Number";
+"jY1-8q-VVR.placeholder" = "電話號碼";
 
 /* Class = "UITextField"; placeholder = "Your current status"; ObjectID = "kTQ-8p-KXY"; */
-"kTQ-8p-KXY.placeholder" = "Your current status";
+"kTQ-8p-KXY.placeholder" = "您現在的狀況";
 
 /* Class = "UILabel"; text = "Sub-interest:"; ObjectID = "kaO-6x-kuy"; */
 "kaO-6x-kuy.text" = "興趣 (詳細):";
@@ -417,10 +417,10 @@
 "m5U-BQ-xEB.text" = "選擇新的状態:";
 
 /* Class = "UIButton"; normalTitle = "Record"; ObjectID = "mAL-8V-7IO"; */
-"mAL-8V-7IO.normalTitle" = "Record";
+"mAL-8V-7IO.normalTitle" = "錄製";
 
 /* Class = "UIButton"; selectedTitle = "Stop"; ObjectID = "mAL-8V-7IO"; */
-"mAL-8V-7IO.selectedTitle" = "Stop";
+"mAL-8V-7IO.selectedTitle" = "停止";
 
 /* Class = "UILabel"; text = "00:00"; ObjectID = "ma3-9A-pfp"; */
 "ma3-9A-pfp.text" = "00:00";
@@ -453,7 +453,7 @@
 "opW-Sn-73N.title" = "字體大小";
 
 /* Class = "UIButton"; normalTitle = "Send Message"; ObjectID = "or3-m6-ScR"; */
-"or3-m6-ScR.normalTitle" = "Send Message";
+"or3-m6-ScR.normalTitle" = "發送信息";
 
 /* Class = "UILabel"; text = "00:00"; ObjectID = "osw-gW-zl8"; */
 "osw-gW-zl8.text" = "00:00";
@@ -468,10 +468,10 @@
 "pe0-Cl-pxG.title" = "Ubudd 地圖";
 
 /* Class = "UILabel"; text = "Add Phone Number"; ObjectID = "pjZ-EZ-yoo"; */
-"pjZ-EZ-yoo.text" = "Add Phone Number";
+"pjZ-EZ-yoo.text" = "新增電話號碼";
 
 /* Class = "UILabel"; text = "Add Phone Number"; ObjectID = "pn3-qu-eLM"; */
-"pn3-qu-eLM.text" = "Add Phone Number";
+"pn3-qu-eLM.text" = "新增電話號碼";
 
 /* Class = "UILabel"; text = "Put your welcome text here "; ObjectID = "q7H-1R-ajT"; */
 "q7H-1R-ajT.text" = "Put your welcome text here ";
@@ -486,7 +486,7 @@
 "qee-nZ-dq6.title" = "聯絡";
 
 /* Class = "UILabel"; text = "By continuing, you are indicating that you agree to the Privacy Policy and Terms and Conditions."; ObjectID = "qfb-eT-bPP"; */
-"qfb-eT-bPP.text" = "By continuing, you are indicating that you agree to the Privacy Policy and Terms and Conditions.";
+"qfb-eT-bPP.text" = "繼續下一步表示您同意私隱政策和使用條款";
 
 /* Class = "UIButton"; normalTitle = "Enter Chat"; ObjectID = "r1u-Ct-hFt"; */
 "r1u-Ct-hFt.normalTitle" = "進入對話";
@@ -504,7 +504,7 @@
 "s9J-gj-oaH.text" = "Title";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "sNF-xd-ktD"; */
-"sNF-xd-ktD.title" = "Back";
+"sNF-xd-ktD.title" = "返回";
 
 /* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "sPc-jU-DGW"; */
 "sPc-jU-DGW.title" = "Root View Controller";
@@ -516,7 +516,7 @@
 "tFZ-yH-e6C.text" = "Label";
 
 /* Class = "UITableViewController"; title = "New Group"; ObjectID = "tY9-Si-6JS"; */
-"tY9-Si-6JS.title" = "New Group";
+"tY9-Si-6JS.title" = "新群組";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "ttM-hq-EA7"; */
 "ttM-hq-EA7.text" = "Label";
@@ -525,7 +525,7 @@
 "tzh-DT-0rK.normalTitle" = "Submit";
 
 /* Class = "UIButton"; selectedTitle = "Stop"; ObjectID = "tzh-DT-0rK"; */
-"tzh-DT-0rK.selectedTitle" = "Stop";
+"tzh-DT-0rK.selectedTitle" = "停止";
 
 /* Class = "UILabel"; text = "Name:"; ObjectID = "uCc-cx-9iy"; */
 "uCc-cx-9iy.text" = "名字:";
@@ -537,22 +537,22 @@
 "uPx-05-wk4.title" = "當前狀態";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "uhg-fb-Wdq"; */
-"uhg-fb-Wdq.title" = "Back";
+"uhg-fb-Wdq.title" = "返回";
 
 /* Class = "UILabel"; text = "Register"; ObjectID = "uqX-Gg-4po"; */
 "uqX-Gg-4po.text" = "登記";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "uwr-Xc-mFP"; */
-"uwr-Xc-mFP.title" = "Back";
+"uwr-Xc-mFP.title" = "返回";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "v6b-vZ-4Z1"; */
-"v6b-vZ-4Z1.text" = "Detail";
+"v6b-vZ-4Z1.text" = "內容";
 
 /* Class = "UINavigationItem"; title = "More"; ObjectID = "vHC-n3-jrK"; */
 "vHC-n3-jrK.title" = "更多";
 
 /* Class = "UIBarButtonItem"; title = "List"; ObjectID = "viQ-jq-Sqd"; */
-"viQ-jq-Sqd.title" = "List";
+"viQ-jq-Sqd.title" = "列表";
 
 /* Class = "UILabel"; text = "+1"; ObjectID = "w0R-y5-IqE"; */
 "w0R-y5-IqE.text" = "+1";
@@ -561,10 +561,10 @@
 "w1S-DR-dpN.text" = "--:--";
 
 /* Class = "UINavigationItem"; title = "Browser"; ObjectID = "wKv-25-O9H"; */
-"wKv-25-O9H.title" = "Browser";
+"wKv-25-O9H.title" = "瀏覽器";
 
 /* Class = "UINavigationItem"; title = "New Group"; ObjectID = "wYQ-JA-FDT"; */
-"wYQ-JA-FDT.title" = "New Group";
+"wYQ-JA-FDT.title" = "新群組";
 
 /* Class = "UILabel"; text = "Michael K. (C2Call)"; ObjectID = "x3D-md-bu8"; */
 "x3D-md-bu8.text" = "Michael K. (C2Call)";
@@ -579,16 +579,16 @@
 "yFr-N1-7Nf.title" = "選擇興趣";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "yR3-dC-IZ5"; */
-"yR3-dC-IZ5.normalTitle" = "Continue";
+"yR3-dC-IZ5.normalTitle" = "繼續";
 
 /* Class = "UILabel"; text = "My Profile"; ObjectID = "yXU-fp-bXf"; */
 "yXU-fp-bXf.text" = "我的個人資料";
 
 /* Class = "UIButton"; normalTitle = "Join Group"; ObjectID = "ya1-Yp-K1d"; */
-"ya1-Yp-K1d.normalTitle" = "Join Group";
+"ya1-Yp-K1d.normalTitle" = "加入群組";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "ymA-vR-1QD"; */
-"ymA-vR-1QD.title" = "Back";
+"ymA-vR-1QD.title" = "返回";
 
 /* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "yvF-2Q-nOD"; */
 "yvF-2Q-nOD.normalTitle" = "編輯";

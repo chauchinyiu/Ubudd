@@ -61,7 +61,7 @@
         custLabel = [[UILabel alloc] init];
         [custLabel setText:chatTitle];
         
-        custLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0 , 0.0f, 100.0f, 44.0f)];
+        custLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0 , 0.0f, 200.0f, 44.0f)];
         [custLabel setBackgroundColor:[UIColor clearColor]];
         [custLabel setTextColor:[UIColor whiteColor]];
         [custLabel setTextAlignment:NSTextAlignmentCenter];

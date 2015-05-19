@@ -149,14 +149,20 @@
             MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:tmppath];
             MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
             if(user){
-                NSMutableArray* groups = [[ResponseHandler instance] groupList];
-                for (int i = 0; i < groups.count; i++) {
-                    WUAccount* a = [groups objectAtIndex:i];
-                    if ([a.c2CallID isEqualToString:chathist.contact]) {
-                        NSLog(@"h");
-                        return chatHistoryCellHeight;
+                if ([user.userType intValue] == 2) {
+                    NSMutableArray* groups = [[ResponseHandler instance] groupList];
+                    for (int i = 0; i < groups.count; i++) {
+                        WUAccount* a = [groups objectAtIndex:i];
+                        if ([a.c2CallID isEqualToString:chathist.contact]) {
+                            NSLog(@"h");
+                            return chatHistoryCellHeight;
+                        }
                     }
+                } else {
+                    return chatHistoryCellHeight;
                 }
+                
+                /*
                 NSMutableArray* friends = [[ResponseHandler instance] friendList];
                 for (int i = 0; i < friends.count; i++) {
                     WUAccount* a = [friends objectAtIndex:i];
@@ -165,6 +171,7 @@
                         return chatHistoryCellHeight;
                     }
                 }
+                 */
             }
             NSLog(@"0");
 
@@ -294,13 +301,19 @@
     MOChatHistory *chathist = [self.fetchedResultsController objectAtIndexPath:indexPath];
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:chathist.contact];
     BOOL hasRelation = false;
-    NSMutableArray* groups = [[ResponseHandler instance] groupList];
-    for (int i = 0; i < groups.count; i++) {
-        WUAccount* a = [groups objectAtIndex:i];
-        if ([a.c2CallID isEqualToString:chathist.contact]) {
-            hasRelation = true;
+    if ([user.userType intValue] == 2) {
+        NSMutableArray* groups = [[ResponseHandler instance] groupList];
+        for (int i = 0; i < groups.count; i++) {
+            WUAccount* a = [groups objectAtIndex:i];
+            if ([a.c2CallID isEqualToString:chathist.contact]) {
+                hasRelation = true;
+            }
         }
     }
+    else{
+        hasRelation = true;
+    }
+    /*
     NSMutableArray* friends = [[ResponseHandler instance] friendList];
     for (int i = 0; i < friends.count; i++) {
         WUAccount* a = [friends objectAtIndex:i];
@@ -308,6 +321,7 @@
             hasRelation = true;
         }
     }
+     */
     
     if(user && hasRelation){
         [cell setHidden:NO];
@@ -318,22 +332,24 @@
             histcell.textLabel.font = [CommonMethods getStdFontType:2];
             histcell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:chathist.contact];
             
-            NSMutableArray* friends = [ResponseHandler instance].friendList;
-            for (int i = 0; i < friends.count; i++) {
-                WUAccount* a = [friends objectAtIndex:i];
-                if([a.c2CallID isEqualToString:chathist.contact] && a.name != nil){
-                    histcell.nameLabel.text= a.name;
+            if ([user.userType intValue] == 2) {
+                NSMutableArray* groups = [ResponseHandler instance].groupList;
+                for (int i = 0; i < groups.count; i++) {
+                    WUAccount* a = [groups objectAtIndex:i];
+                    if([a.c2CallID isEqualToString:chathist.contact] && a.name != nil){
+                        histcell.nameLabel.text= a.name;
+                    }
                 }
             }
-            
-            NSMutableArray* groups = [ResponseHandler instance].groupList;
-            for (int i = 0; i < groups.count; i++) {
-                WUAccount* a = [groups objectAtIndex:i];
-                if([a.c2CallID isEqualToString:chathist.contact] && a.name != nil){
-                    histcell.nameLabel.text= a.name;
+            else{
+                NSMutableArray* friends = [ResponseHandler instance].friendList;
+                for (int i = 0; i < friends.count; i++) {
+                    WUAccount* a = [friends objectAtIndex:i];
+                    if([a.c2CallID isEqualToString:chathist.contact] && a.name != nil){
+                        histcell.nameLabel.text= a.name;
+                    }
                 }
             }
-            
             
             NSDate *today = [NSDate date];
             

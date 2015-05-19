@@ -118,6 +118,7 @@ typedef enum : NSUInteger {
     ((WUBoardController*)self.chatboard).chatTitle = [boardTitle string];
     [self.chatboard.tableView reloadData];
     [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];
+    self.chatInput.font = [CommonMethods getStdFontType:2];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -258,7 +259,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)btnImageTapped:(id)sender{
-    [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] userimageForUserid:self.targetUserid] title:[boardTitle string] onNavigationController:self.navigationController];
+    [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] largeUserImageForUserid:self.targetUserid] title:[boardTitle string] onNavigationController:self.navigationController];
 }
 
 

@@ -43,14 +43,54 @@
 {
     standardScale = 1.01 * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
     
-    CGFloat top = 0, left = 0;
-    left = (self.view.bounds.size.width - self.imageView.image.size.width * standardScale) * 0.5f;
-    top = (self.view.bounds.size.height - self.imageView.image.size.height * standardScale) * 0.5f;
-    imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
+    if (standardScale > 1) {
+        CGFloat top = 0, left = 0;
+
+        if(self.view.bounds.size.width < self.view.bounds.size.height){
+            standardScale = 1.01;
+            left = (self.view.bounds.size.width - imageFrame.bounds.size.width) * 0.5f;
+            top = (self.view.bounds.size.height - imageFrame.bounds.size.height) * 0.5f;
+        }
+        else{
+            if((self.imageView.image.size.height / self.imageView.image.size.width) > (self.view.bounds.size.width / self.view.bounds.size.height)){
+                standardScale = 1.01 * self.view.bounds.size.height / self.view.bounds.size.width;
+                left = (self.view.bounds.size.width - (self.view.bounds.size.height * standardScale)) * 0.5f;
+                
+            }
+            else if((self.imageView.image.size.width / self.imageView.image.size.height) > (self.view.bounds.size.width / self.view.bounds.size.height)){
+                standardScale = 1.01 * self.view.bounds.size.width / self.view.bounds.size.height;
+                top = ((self.view.bounds.size.width * standardScale) - self.view.bounds.size.height) * -0.5f;
+                
+            }
+            else{
+                standardScale = 1.01 * self.imageView.image.size.width / self.imageView.image.size.height;
+                top = ((self.view.bounds.size.width * standardScale) - self.view.bounds.size.height) * -0.5f;
+                left = (self.view.bounds.size.width - (self.view.bounds.size.height * standardScale)) * 0.5f;
+                
+            
+            }
+
+        }
+        
+        imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
+        
+        imageFrame.minimumZoomScale = standardScale;
+        imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
+        [imageFrame setZoomScale:standardScale animated:NO];
+        
+    }
+    else{
+        CGFloat top = 0, left = 0;
+        left = (self.view.bounds.size.width - self.imageView.image.size.width * standardScale) * 0.5f;
+        top = (self.view.bounds.size.height - self.imageView.image.size.height * standardScale) * 0.5f;
+        imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
+        
+        imageFrame.minimumZoomScale = standardScale;
+        imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
+        [imageFrame setZoomScale:standardScale animated:NO];
     
-    imageFrame.minimumZoomScale = standardScale;
-    imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
-    imageFrame.zoomScale = standardScale;
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

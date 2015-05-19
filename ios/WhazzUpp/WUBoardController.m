@@ -498,7 +498,7 @@ static BOOL isGroup = YES;
         return ((NSNumber*)[sectionSize objectAtIndex:section]).integerValue;
     }
     else{
-        return [ResponseHandler instance].broadcastList.count;
+        return [ResponseHandler instance].broadcastList.count * 2;
     }
 }
 
@@ -530,6 +530,9 @@ static BOOL isGroup = YES;
                         if ([a.c2CallID isEqualToString:memberID]) {
                             displayName = a.name;
                         }
+                    }
+                    if ([memberID isEqualToString:[SCUserProfile currentUser].userid]) {
+                        displayName = [SCUserProfile currentUser].displayname;
                     }
                     if (!displayName) {
                         
@@ -599,60 +602,84 @@ static BOOL isGroup = YES;
         }
     }
     else{
-        WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
-        if(b.isImage){
-            
-            WUImageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
-            
-            cell.eventImage.image = [UIImage imageWithData:b.imgData];
-            [cell.progress setHidden:YES];
-            
-            [cell setTapAction:^{
-                NSMutableArray *imageList = [NSMutableArray array];
-                for (int i = 0; i < [ResponseHandler instance].broadcastList.count; i++) {
-                    WUBroadcast *c = [[ResponseHandler instance].broadcastList objectAtIndex:i];
-                    if (c.isImage) {
-                        NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
-                        [info setValue:@"YES" forKey:@"IsBroadcast"];
-                        [info setObject:[NSString stringWithFormat:@"%d", i] forKey:@"image"];
-                        [imageList addObject:info];
+        int useRow = (int)(indexPath.row / 2) ;
+        WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:useRow];
+        if(indexPath.row % 2){
+            if(b.isImage){
+                
+                WUImageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
+                
+                cell.eventImage.image = [UIImage imageWithData:b.imgData];
+                [cell.progress setHidden:YES];
+                
+                [cell setTapAction:^{
+                    NSMutableArray *imageList = [NSMutableArray array];
+                    for (int i = 0; i < [ResponseHandler instance].broadcastList.count; i++) {
+                        WUBroadcast *c = [[ResponseHandler instance].broadcastList objectAtIndex:i];
+                        if (c.isImage) {
+                            NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
+                            [info setValue:@"YES" forKey:@"IsBroadcast"];
+                            [info setObject:[NSString stringWithFormat:@"%d", i] forKey:@"image"];
+                            
+                            [info setObject:[UIImage imageWithData:((WUBroadcast*)[[ResponseHandler instance].broadcastList objectAtIndex:((NSNumber*)[info objectForKey:@"image"]).intValue]).imgData] forKey:@"rawData"];
+                            [imageList addObject:info];
+                        }
                     }
+                    
+                    NSString * storyboardName = @"MainStoryboard";
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                    
+                    WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+                    
+                    [vc showPhotos:imageList currentPhoto:[NSString stringWithFormat:@"%d", useRow]];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                }];
+                
+                if (!b.imgData) {
+                    [ResponseHandler instance].bcdelegate = self;
                 }
                 
-                NSString * storyboardName = @"MainStoryboard";
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                
-                WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
-                
-                [vc showPhotos:imageList currentPhoto:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
-                [self.navigationController pushViewController:vc animated:YES];
-                
-            }];
-            
-            if (!b.imgData) {
-                [ResponseHandler instance].bcdelegate = self;
+                return cell;
             }
-            
-            return cell;
+            else{
+                WUMessageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageInCell"];
+                
+                NSString *text = b.message;
+                [cell.textLabel setText:text];
+                [cell.textLabel setFont:[CommonMethods getStdFontType:2]];
+                
+                // Textfield size
+                CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
+                CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:2]
+                                            constrainedToSize:maximumLabelSize
+                                                lineBreakMode:NSLineBreakByWordWrapping];
+                CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
+                [cell.bubbleView setFrame:frame];
+                
+                frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);
+                [cell.textLabel setFrame:frame];
+                return cell;
+            }
         }
         else{
-            WUMessageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageInCell"];
+            WUMessageTimeCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageTimeCell"];
             
-            NSString *text = b.message;
-            [cell.textLabel setText:text];
-            [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
+            NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
+                                                                      locale:[NSLocale currentLocale]];
             
-            // Textfield size
-            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
-            CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:1]
-                                        constrainedToSize:maximumLabelSize
-                                            lineBreakMode:NSLineBreakByWordWrapping];
-            CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
-            [cell.bubbleView setFrame:frame];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:formatString];
+            cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:b.postTime]];
             
-            frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);
-            [cell.textLabel setFrame:frame];
+            CGRect f;
+            f = cell.timeLabel.frame;
+            f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+            f.origin.y = 16;
+            cell.timeLabel.frame = f;
+            
             return cell;
+        
         }
     }
 }
@@ -725,19 +752,24 @@ static BOOL isGroup = YES;
         
     }
     else{
-        WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:indexPath.row];
-                             
-        if(b.isImage){
-            return 228;
+        int useRow = (int)(indexPath.row / 2) ;
+        WUBroadcast* b = [[ResponseHandler instance].broadcastList objectAtIndex:useRow];
+        if(indexPath.row % 2){
+            if(b.isImage){
+                return 228;
+            }
+            else{
+                CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
+                CGSize expectedLabelSize = [b.message sizeWithFont:[CommonMethods getStdFontType:2]
+                                                 constrainedToSize:maximumLabelSize
+                                                     lineBreakMode:NSLineBreakByWordWrapping];
+                
+                CGFloat sz = expectedLabelSize.height + 48;
+                return sz;
+            }
         }
         else{
-            CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
-            CGSize expectedLabelSize = [b.message sizeWithFont:[CommonMethods getStdFontType:1]
-                                             constrainedToSize:maximumLabelSize
-                                                 lineBreakMode:NSLineBreakByWordWrapping];
-            
-            CGFloat sz = expectedLabelSize.height + 48;
-            return sz;
+            return 35;
         }
     }
 }
@@ -1191,17 +1223,17 @@ static BOOL isGroup = YES;
 {
     NSString *text = elem.text;
     [cell.textLabel setText:text];
-    [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
+    [cell.textLabel setFont:[CommonMethods getStdFontType:2]];
     
     // Textfield size
-    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
     
     //bubble
-    CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 17, expectedLabelSize.height + 6);
+    CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 21, expectedLabelSize.height + 10);
     [cell.bubbleView setFrame:frame];
     
     //text
-    frame = CGRectMake(12, 3, expectedLabelSize.width, expectedLabelSize.height);
+    frame = CGRectMake(14, 5, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
     
     [cell setLongpressAction:^{
@@ -1211,7 +1243,7 @@ static BOOL isGroup = YES;
         UIMenuItem *item = nil;
         item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
         [cell setForwardAction:^{
-            [self forwardMessage:text];
+            [self forwardEvent:elem];
         }];
         [menulist addObject:item];
         
@@ -1235,19 +1267,19 @@ static BOOL isGroup = YES;
 {
     NSString *text = elem.text;
     [cell.textLabel setText:text];
-    [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
+    [cell.textLabel setFont:[CommonMethods getStdFontType:2]];
     
     // Textfield size
-    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
     
-    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
+    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
     
     //bubble
-    CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 10, 0, contentSize.width + 12, contentSize.height + 6);
+    CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 14, 0, contentSize.width + 16, contentSize.height + 10);
     [cell.bubbleView setFrame:frame];
     
     //text
-    frame = CGRectMake(6, 3, expectedLabelSize.width, expectedLabelSize.height);
+    frame = CGRectMake(8, 5, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
     
     
@@ -1275,7 +1307,7 @@ static BOOL isGroup = YES;
         UIMenuItem *item = nil;
         item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
         [cell setForwardAction:^{
-            [self forwardMessage:text];
+            [self forwardEvent:elem];
         }];
         [menulist addObject:item];
         
@@ -1614,7 +1646,7 @@ static BOOL isGroup = YES;
         
         UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
         [cell setForwardAction:^{
-            [self forwardMessage:text];
+            [self forwardEvent:elem];
         }];
         [menulist addObject:item];
         
@@ -1761,7 +1793,7 @@ static BOOL isGroup = YES;
             item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
             if (hasAudio) {
                 [cell setForwardAction:^{
-                    [self forwardMessage:text];
+                    [self forwardEvent:elem];
                 }];
                 [menulist addObject:item];
                 
@@ -1832,7 +1864,7 @@ static BOOL isGroup = YES;
         
         UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
         [cell setForwardAction:^{
-            [self forwardMessage:text];
+            [self forwardEvent:elem];
         }];
         [menulist addObject:item];
         
@@ -1890,7 +1922,7 @@ static BOOL isGroup = YES;
         
         UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
         [cell setForwardAction:^{
-            [self forwardMessage:text];
+            [self forwardEvent:elem];
         }];
         [menulist addObject:item];
         
@@ -1931,6 +1963,7 @@ static BOOL isGroup = YES;
         
         [cell.progress setHidden:YES];
         [cell.playView setHidden:NO];
+        [cell.downloadButton setHidden:YES];
         [cell.playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
         
         NSString *durStr = [[C2CallPhone currentPhone] durationForKey:text];
@@ -2004,7 +2037,7 @@ static BOOL isGroup = YES;
             
             UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"Forward", @"MenuItem") action:@selector(forwardAction:)];
             [cell setForwardAction:^{
-                [self forwardMessage:text];
+                [self forwardEvent:elem];
             }];
             [menulist addObject:item];
             
@@ -2034,6 +2067,7 @@ static BOOL isGroup = YES;
                 [info setObject:elem.timeStamp forKey:@"timeStamp"];
                 [info setObject:elem.eventType forKey:@"eventType"];
                 [info setObject:elem forKey:@"eventObject"];
+                [info setObject:[[C2CallPhone currentPhone] imageForKey:elem.text] forKey:@"rawData"];
                 if (elem.senderName)
                     [info setObject:elem.senderName forKey:@"senderName"];
                 
@@ -2133,14 +2167,14 @@ static BOOL isGroup = YES;
 
 -(CGFloat) messageCellInHeight:(MOC2CallEvent *) elem font:(UIFont *) font
 {
-    CGSize sz = [self getSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
+    CGSize sz = [self getSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
     
     return sz.height + 22;
 }
 
 -(CGFloat) messageCellOutHeight:(MOC2CallEvent *) elem font:(UIFont *) font
 {
-    CGSize sz = [self getContentSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
+    CGSize sz = [self getContentSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
     return sz.height + 22;
 }
 
@@ -2343,6 +2377,19 @@ static BOOL isGroup = YES;
                 else{
                     newID = elem.senderName;
                 }
+
+                
+                //add join detail before this message
+                if (isGroup) {
+                    if (runRow == 0 && runSect == 0) {
+                        newJoinFrom = [NSDate  dateWithTimeInterval:-259200 sinceDate:elem.timeStamp ];
+                    }
+                    newJoinTo = elem.timeStamp;
+                    [self addJoinEntryFrom:newJoinFrom to:newJoinTo];
+                    
+                    newJoinFrom = newJoinTo;
+                }
+                
                 if((runRow == 0 && runSect == 0)
                    || [elem.timeStamp compare:[NSDate dateWithTimeInterval:900 sinceDate:lastDateLabel]] == NSOrderedDescending
                    || ![newID isEqualToString:lastID]){
@@ -2356,17 +2403,6 @@ static BOOL isGroup = YES;
                 }
                 lastDateLabel = elem.timeStamp;
                 lastID = newID;
-                
-                //add join detail before this message
-                if (isGroup) {
-                    if (runRow == 0 && runSect == 0) {
-                        newJoinFrom = [NSDate  dateWithTimeInterval:-259200 sinceDate:elem.timeStamp ];
-                    }
-                    newJoinTo = elem.timeStamp;
-                    [self addJoinEntryFrom:newJoinFrom to:newJoinTo];
-                    
-                    newJoinFrom = newJoinTo;
-                }
                 
                 //add message
                 WUListEntry* e = [[WUListEntry alloc] init];
@@ -2545,6 +2581,22 @@ static BOOL isGroup = YES;
     else if ([forwardElem.text hasPrefix:@"audio://"]){
         [[C2CallPhone currentPhone] submitAudio:[[C2CallPhone currentPhone] mediaUrlForKey:forwardElem.text] withMessage:nil toTarget:c2callID withCompletionHandler:nil];
     }
+    else if ([forwardElem.text hasPrefix:@"vcard://"]){
+        [[C2CallPhone currentPhone] submitRichMessage:forwardElem.text message:nil toTarget:c2callID];
+    }
+    else if ([forwardElem.text hasPrefix:@"loc://"]){
+        [[C2CallPhone currentPhone] submitRichMessage:forwardElem.text message:nil toTarget:c2callID];
+    }
+    else if ([forwardElem.text hasPrefix:@"friend://"]){
+        [[C2CallPhone currentPhone] submitRichMessage:forwardElem.text message:nil toTarget:c2callID];
+    }
+    else if ([forwardElem.text hasPrefix:@"file://"]){
+        [[C2CallPhone currentPhone] submitRichMessage:forwardElem.text message:nil toTarget:c2callID];
+    }
+    else {
+        [[C2CallPhone currentPhone] submitMessage:forwardElem.text toUser:c2callID];
+    }
+
     /*
     if ([forwardElem hasPrefix:@"image://"] || [forwardElem hasPrefix:@"video://"] ||[forwardElem hasPrefix:@"audio://"] ||[forwardElem hasPrefix:@"vcard://"] ||[forwardElem hasPrefix:@"loc://"] ||[forwardElem hasPrefix:@"friend://"] || [forwardElem hasPrefix:@"file://"] ) {
         [self composeMessage:nil richMessageKey:message];
@@ -2576,5 +2628,6 @@ static BOOL isGroup = YES;
     [menu setMenuVisible:YES animated:YES];
     
 }
+
 
 @end

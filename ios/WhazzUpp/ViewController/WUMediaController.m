@@ -16,6 +16,7 @@
 #import <SocialCommunication/debug.h>
 #import "WUPhotoViewController.h"
 #import "CommonMethods.h"
+#import "ResponseHandler.h"
 
 @implementation WUMediaCell
 @synthesize userImage, mediaID;
@@ -281,6 +282,7 @@ static NSString * const reuseIdentifier = @"Cell";
                 [info setObject:elem.eventType forKey:@"eventType"];
                 if (elem.senderName)
                     [info setObject:elem.senderName forKey:@"senderName"];
+                [info setObject:[[C2CallPhone currentPhone] imageForKey:elem.text] forKey:@"rawData"];
                 
                 [imageList addObject:info];
             }
@@ -291,6 +293,23 @@ static NSString * const reuseIdentifier = @"Cell";
         
         WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
         vc.hidesBottomBarWhenPushed = YES;
+        
+        NSString* chatTitle;
+        
+        MOC2CallUser *user = [[SCDataManager instance] userForUserid:targetUserid];
+        chatTitle = [[C2CallPhone currentPhone] nameForUserid:targetUserid];
+        if ([user.userType intValue] != 2) {
+            NSMutableArray* friends = [[ResponseHandler instance] friendList];
+            for (int i = 0; i < friends.count; i++) {
+                WUAccount* a = [friends objectAtIndex:i];
+                if ([a.c2CallID isEqualToString:targetUserid]) {
+                    chatTitle = a.name;
+                }
+            }
+        }
+        
+        vc.chatTitle = chatTitle;
+
         [vc showPhotos:imageList currentPhoto:key];
         [self.navigationController pushViewController:vc animated:YES];
         

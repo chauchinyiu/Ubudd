@@ -15,6 +15,7 @@
 #import "WUMediaController.h"
 #import "WUUserImageController.h"
 #import "WUFriendDetailController.h"
+#import "CommonMethods.h"
 
 @implementation WUGroupNonMemberActionCell
 @end
@@ -157,7 +158,8 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         if (userType == 1) {
-            return 264;
+            return 272
+            ;
         }
         else{
             return 305;
@@ -165,10 +167,10 @@
     }
     else if(indexPath.section == 2){
         if (userType == 1) {
-            return 122;
+            return 170;
         }
         else if (userType == 2) {
-            return 78;
+            return 102;
         }
         else {
             return 34;
@@ -254,11 +256,8 @@
                 cell.btnPhoto.layer.masksToBounds = YES;                
                 [cell.btnPhoto setTapAction:^{
                     if (groupImg) {
-                        NSString * storyboardName = @"MainStoryboard";
-                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                        WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
-                        vc.viewImage = cell.btnPhoto.image;
-                        [self.navigationController pushViewController:vc animated:YES];
+                        [CommonMethods showSinglePhoto:cell.btnPhoto.image title:@"" onNavigationController:self.navigationController];
+                        
                     }
                     else{
                         [self btnPhotoTapped:cell.btnPhoto];
@@ -294,10 +293,19 @@
         else{
             WUGroupDetailCellReadOnly *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellReadOnly"];
             if (groupInfo) {
+                cell.groupImg.layer.cornerRadius = 0.0;
+                cell.groupImg.layer.masksToBounds = YES;
+                [cell.groupImg setTapAction:^{
+                    if (groupImg) {
+                        [CommonMethods showSinglePhoto:cell.groupImg.image title:@"" onNavigationController:self.navigationController];
+                    }
+                }];
                 
-                if (groupImg) {
+                if(groupImg){
                     [cell.groupImg setImage:groupImg];
                 }
+
+                    
                 [cell.lblTopic setText:[groupInfo objectForKey:@"topic"]];
                 [cell.lblTopicDesc setText:[groupInfo objectForKey:@"topicDescription"]];
                 
@@ -1070,7 +1078,6 @@
     
     return NO; // handle the touch
 }
-
 
 
 @end

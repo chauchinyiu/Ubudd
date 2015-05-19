@@ -143,6 +143,8 @@
     self.definesPresentationContext = YES;
     
     self.navigationController.navigationBar.translucent = NO;
+    
+    
     [self refreshList];
     [self.tableView reloadData];
 }

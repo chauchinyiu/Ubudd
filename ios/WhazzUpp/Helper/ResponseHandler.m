@@ -417,10 +417,10 @@ static ResponseHandler *myInstance;
                         [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, fullName.length)];
                     }
                     else{
-                        fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                        fullName = [NSString stringWithFormat:@"%@ %@", lastName, firstName];
                         attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
-                        [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, firstName.length)];
-                        [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(firstName.length + 1, lastName.length)];
+                        [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, lastName.length)];
+                        [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(lastName.length + 1, firstName.length)];
                     }
                     a.name = fullName;
                     a.attributedName = attributedName;

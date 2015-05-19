@@ -52,13 +52,13 @@
         f = [UIFont fontWithName:@"HelveticaNeue-Bold" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize];
     }
     else if (type == 1) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 3, 1)];
     }
     else if (type == 2) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 1)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 5), 1)];
     }
     else if (type == 3) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 2)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 7), 1)];
     }
     else{
         
@@ -67,22 +67,25 @@
 }
 
 +(void)showSinglePhoto:(UIImage*)image title:(NSString*) title onNavigationController:(UINavigationController*) nc{
-    //[self showUserImageForUserid:self.targetUserid];
-    NSMutableArray *imageList = [NSMutableArray array];
-    NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
-    [info setObject:@"YES" forKey:@"SingleImage"];
-    [info setObject:image forKey:@"image"];
-    [imageList addObject:info];
-    
-    NSString * storyboardName = @"MainStoryboard";
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-    
-    WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
-    vc.hidesBottomBarWhenPushed = YES;
-    
-    vc.chatTitle = title;
-    [vc showPhotos:imageList currentPhoto:@"0"];
-    [nc pushViewController:vc animated:YES];
+    if (image) {
+        //[self showUserImageForUserid:self.targetUserid];
+        NSMutableArray *imageList = [NSMutableArray array];
+        NSMutableDictionary *info = [NSMutableDictionary dictionaryWithCapacity:3];
+        [info setObject:@"YES" forKey:@"SingleImage"];
+        [info setObject:image forKey:@"image"];
+        [imageList addObject:info];
+        
+        NSString * storyboardName = @"MainStoryboard";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+        
+        WUPhotoViewController* vc = [storyboard instantiateViewControllerWithIdentifier:@"WUPhotoViewController"];
+        vc.hidesBottomBarWhenPushed = YES;
+        
+        vc.chatTitle = title;
+        [vc showPhotos:imageList currentPhoto:@"0"];
+        [nc pushViewController:vc animated:YES];
+    }
+
 
 }
 

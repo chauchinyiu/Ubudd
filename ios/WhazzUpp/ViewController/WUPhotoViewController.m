@@ -172,10 +172,10 @@
             image = [info objectForKey:@"image"];
         }
         else if ([info objectForKey:@"IsBroadcast"]) {
-            image = [UIImage imageWithData:((WUBroadcast*)[[ResponseHandler instance].broadcastList objectAtIndex:((NSNumber*)[info objectForKey:@"image"]).intValue]).imgData];
+            image = [info objectForKey:@"rawData"];
         }
         else{
-            image = [[C2CallPhone currentPhone] imageForKey:[info objectForKey:@"image"]];
+            image = [info objectForKey:@"rawData"];
         }
         vc.viewImage = image;
         vc.pageID = pageIdx;

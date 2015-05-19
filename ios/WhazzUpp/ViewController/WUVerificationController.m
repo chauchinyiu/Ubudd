@@ -19,7 +19,10 @@
 #import "DataResponse.h"
 
 
-@implementation WUVerificationController
+@implementation WUVerificationController{
+    BOOL requestingResend;
+
+}
 
 #pragma mark - UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -30,6 +33,7 @@
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad {
     [super viewDidLoad];
+    requestingResend = false;
     self.navigationItem.hidesBackButton = YES;
     
     [txtCode becomeFirstResponder];
@@ -96,18 +100,23 @@
 }
 
 - (IBAction)btnResendTapped{
-    NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
-
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    [dictionary setObject:msdin forKey:@"msisdn"];
-    
-    DataRequest *dataRequest = [[DataRequest alloc] init];
-    dataRequest.requestName = @"sendVerification";
-    dataRequest.values = dictionary;
-    
-    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(sendVerification:error:)];
-
+    if (requestingResend) {
+        return;
+    }
+    else{
+        requestingResend = true;
+        NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
+        
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        [dictionary setObject:msdin forKey:@"msisdn"];
+        
+        DataRequest *dataRequest = [[DataRequest alloc] init];
+        dataRequest.requestName = @"sendVerification";
+        dataRequest.values = dictionary;
+        
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(sendVerification:error:)];
+    }
 }
 
 - (void)sendVerification:(ResponseBase *)response error:(NSError *)error {
@@ -123,6 +132,7 @@
         [alert show];
 
     }
+    requestingResend = false;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {

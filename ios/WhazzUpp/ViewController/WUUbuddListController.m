@@ -22,7 +22,7 @@
 
 @implementation WUUbuddListCell
 
-@synthesize nameLabel, statusLabel, memberLabel, hosetedByLabel;
+@synthesize nameLabel, statusLabel, memberLabel, hosetedByLabel, hostedByHeaderLabel;
 
 
 @end
@@ -256,6 +256,9 @@
     favocell.nameLabel.font = [CommonMethods getStdFontType:0];
     favocell.statusLabel.font = [CommonMethods getStdFontType:2];
     favocell.memberHeaderLabel.font = [CommonMethods getStdFontType:3];
+    favocell.memberLabel.font = [CommonMethods getStdFontType:3];
+    favocell.hostedByHeaderLabel.font = [CommonMethods getStdFontType:3];
+    favocell.hosetedByLabel.font = [CommonMethods getStdFontType:3];
     
     favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]];
     

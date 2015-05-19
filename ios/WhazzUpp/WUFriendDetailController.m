@@ -173,7 +173,7 @@ static NSString* currentC2CallID = @"";
         if (userImage) {
             c.userImage.image = userImage;
             [c.userImage setTapAction:^{
-                [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] userimageForUserid:c2CallID] title:c.lblName.text onNavigationController:self.navigationController];
+                [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] largeUserImageForUserid:c2CallID] title:c.lblName.text onNavigationController:self.navigationController];
             }];
         }
         
@@ -203,7 +203,7 @@ static NSString* currentC2CallID = @"";
     if (userImage) {
         c.userImage.image = userImage;
         [c.userImage setTapAction:^{
-            [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] userimageForUserid:c2CallID] title:c.lblName.text onNavigationController:self.navigationController];
+            [CommonMethods showSinglePhoto:[[C2CallPhone currentPhone] largeUserImageForUserid:c2CallID] title:c.lblName.text onNavigationController:self.navigationController];
         }];
     }
     

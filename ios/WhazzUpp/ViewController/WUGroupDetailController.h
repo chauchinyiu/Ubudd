@@ -25,7 +25,7 @@
 @end
 
 @interface WUGroupDetailCellReadOnly : UITableViewCell
-    @property(nonatomic, weak) IBOutlet UIImageView *groupImg;
+    @property(nonatomic, weak) IBOutlet C2TapImageView *groupImg;
     @property(nonatomic, weak) IBOutlet UILabel *lblTopic, *lblTopicDesc, *lblLocation, *lblInterest, *lblSubinterest, *lblPublic,  *lblJoinStatus;
 @end
 

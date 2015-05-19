@@ -16,6 +16,7 @@
 #import "ResponseHandler.h"
 #import "WUFriendDetailController.h"
 #import "WUUserImageController.h"
+#import "CommonMethods.h"
 
 @interface WUAddGroupController (){
     int interestID;
@@ -37,11 +38,7 @@
     btnPhoto.layer.masksToBounds = YES;
     [btnPhoto setTapAction:^{
         if(hasImage){
-            NSString * storyboardName = @"MainStoryboard";
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-            WUUserImageController * vc = [storyboard instantiateViewControllerWithIdentifier:@"SCUserImageController"];
-            vc.viewImage = btnPhoto.image;
-            [self.navigationController pushViewController:vc animated:YES];
+            [CommonMethods showSinglePhoto:btnPhoto.image title:@"" onNavigationController:self.navigationController];
         }
         else{
             [self btnPhotoTapped:btnPhoto];

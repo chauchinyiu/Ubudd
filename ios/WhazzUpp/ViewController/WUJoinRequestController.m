@@ -134,7 +134,7 @@
     
     
     favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)indexPath.row]];
-    favocell.groupLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]];
+    favocell.groupLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Requests to join", @"Requests to join %@"),  [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]]];
    
     NSDictionary* userData = [[C2CallPhone currentPhone] getUserInfoForUserid:requestUserID];
     

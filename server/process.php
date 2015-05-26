@@ -599,6 +599,20 @@ class MyAPI extends API {
 		return array('error' => 0, 'message' => 'Group updated');
     }
 
+    protected function updateGroupPhoto($args) {
+
+        if ($args['c2CallID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("update chatGroup set pic = ? "
+											." where c2CallID = ?");
+		$stmt->bind_param('bs', $null, $c2CallID);
+		$stmt->send_long_data(0, $args['pic']);
+		$c2CallID = $args['c2CallID'];
+		$stmt->execute();
+		$stmt->close();
+		return array('error' => 0, 'message' => 'Group updated');
+    }
 
 	protected function readOutStandingRequest($args){
         if ($args['userID'] == '')
@@ -695,6 +709,38 @@ class MyAPI extends API {
 		$stmt->close();
 		return array('error' => 0, 'message' => 'Request Rejected Successfully');
 	}
+	
+    protected function readGroupPhoto($args) {
+
+        if ($args['c2CallID'] == '')
+            return array('error' => 1, 'message' => 'Mandatory field missing');
+
+		$stmt = $this->db->conn2->prepare("select chatGroup.c2CallID, chatGroup.pic from chatGroup "
+											."where chatGroup.c2CallID = ?");
+
+		$stmt->bind_param('s', $c2CallID);
+		$c2CallID = $args['c2CallID'];
+		$stmt->execute();
+		$verifyRes = $stmt->get_result();
+
+        $verifyRow = mysqli_fetch_assoc($verifyRes);
+
+        if ($verifyRow['c2CallID'] == $args['c2CallID']) {
+        
+			$groupArray = array();
+			$groupArray['pic'] = $verifyRow['pic'];
+			$groupArray['c2CallID'] = $verifyRow['c2CallID'];
+			$stmt->close();
+
+			$groupArray['error'] = 0;
+			$groupArray['resultCode'] = 1;
+			$groupArray['message'] = 'Loaded Successfully';
+	        return $groupArray;
+			
+        } else {
+            return array('error' => 1, 'message' => 'Read failed', 'resultCode' => 0);
+        }
+    }	
 	
     protected function readGroupInfo($args) {
 

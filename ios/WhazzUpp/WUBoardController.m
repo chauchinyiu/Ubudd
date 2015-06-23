@@ -478,7 +478,6 @@ static BOOL isGroup = YES;
             CGRect f;
             f = cell.timeLabel.frame;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
-            f.origin.y = 16;
             cell.timeLabel.frame = f;
             
             return cell;
@@ -788,9 +787,9 @@ static BOOL isGroup = YES;
     if ([cell isKindOfClass:[WULocationOutCell class]]) {
         WULocationOutCell *c = (WULocationOutCell*)cell;
         [c.headline setHidden:YES];
-        [c.locationAddress setTextColor:[UIColor blackColor]];
-        [c.contactName setTextColor:[UIColor blackColor]];
-        [c.info setTextColor:[UIColor blackColor]];
+        [c.locationAddress setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
+        [c.contactName setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
+        [c.info setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
         [c.locationTitle setTitle:NSLocalizedString(@"Current location", @"") forState:UIControlStateNormal];
         
         CGRect frame = c.bubbleView.frame;
@@ -847,10 +846,10 @@ static BOOL isGroup = YES;
     else if ([cell isKindOfClass:[WULocationInCell class]]) {
         WULocationInCell *c = (WULocationInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
-        [c.headline setTextColor:[UIColor blackColor]];
+        [c.headline setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
         c.headline.font = [CommonMethods getStdFontType:3];
-        [c.locationAddress setTextColor:[UIColor blackColor]];
-        [c.locationTitle  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [c.locationAddress setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
+        [c.locationTitle  setTitleColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0] forState:UIControlStateNormal];
         [c.locationTitle setTitle:NSLocalizedString(@"Current location", @"") forState:UIControlStateNormal];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
@@ -860,11 +859,11 @@ static BOOL isGroup = YES;
     else if ([cell isKindOfClass:[WUAudioInCell class]]) {
         WUAudioInCell *c = (WUAudioInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
-        [c.headline setTextColor:[UIColor blackColor]];
+        [c.headline setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
         c.headline.font = [CommonMethods getStdFontType:3];
-        [c.locationAddress setTextColor:[UIColor blackColor]];
-        [c.contactName setTextColor:[UIColor blackColor]];
-        [c.info setTextColor:[UIColor blackColor]];
+        [c.locationAddress setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
+        [c.contactName setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
+        [c.info setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
         [c.headline setHidden:!isGroup];
         [c.downloadButton setTitle:NSLocalizedString(@"Download", @"") forState:UIControlStateNormal];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
@@ -874,7 +873,7 @@ static BOOL isGroup = YES;
     else if ([cell isKindOfClass:[WUVideoInCell class]]) {
         WUVideoInCell *c = (WUVideoInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
-        [c.headline setTextColor:[UIColor blackColor]];
+        [c.headline setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
         c.headline.font = [CommonMethods getStdFontType:3];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
@@ -884,7 +883,7 @@ static BOOL isGroup = YES;
     else if ([cell isKindOfClass:[WUFriendInCell class]]) {
         WUFriendInCell *c = (WUFriendInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
-        [c.headline setTextColor:[UIColor blackColor]];
+        [c.headline setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
         c.headline.font = [CommonMethods getStdFontType:3];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
@@ -894,7 +893,7 @@ static BOOL isGroup = YES;
     else if ([cell isKindOfClass:[WUContactInCell class]]) {
         WUContactInCell *c = (WUContactInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
-        [c.headline setTextColor:[UIColor blackColor]];
+        [c.headline setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
         c.headline.font = [CommonMethods getStdFontType:3];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
@@ -904,7 +903,7 @@ static BOOL isGroup = YES;
     else if ([cell isKindOfClass:[WUCallInCell class]]) {
         WUCallInCell *c = (WUCallInCell*)cell;
         [c.imageNewIndicator setHidden:YES];
-        [c.headline setTextColor:[UIColor blackColor]];
+        [c.headline setTextColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
         c.headline.font = [CommonMethods getStdFontType:3];
         [c.headline setHidden:!isGroup];
         NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};

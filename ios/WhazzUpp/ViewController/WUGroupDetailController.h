@@ -64,5 +64,6 @@
 - (IBAction)btnDeleteTapped:(id)sender;
 - (IBAction)btnChatTapped:(id)sender;
 - (IBAction)btnBlockMemberTapped:(id)sender;
+- (IBAction)btnClearChatTapped:(id)sender;
 
 @end

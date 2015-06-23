@@ -17,6 +17,7 @@
 #import "WUFriendDetailController.h"
 #import "WUUserImageController.h"
 #import "CommonMethods.h"
+#import "DataRequest.h"
 
 @interface WUAddGroupController (){
     int interestID;
@@ -26,6 +27,8 @@
     BOOL hasImage;
     NSMutableArray* friendList;
     BOOL hasNoMember;
+    NSString* newID;
+    UIImage* newImage;
 }
 @end
 
@@ -34,7 +37,7 @@
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad {
     [super viewDidLoad];
-    btnPhoto.layer.cornerRadius = 0.0;
+    //btnPhoto.layer.cornerRadius = 0.0;
     btnPhoto.layer.masksToBounds = YES;
     [btnPhoto setTapAction:^{
         if(hasImage){
@@ -90,7 +93,8 @@
             addChatGroupDTO.longCoord = loc.longitude;
             addChatGroupDTO.topic = txtTopic.text;
             addChatGroupDTO.isPublic = isPublic;
-            
+            newID = [NSString stringWithString:groupid];
+            newImage = btnPhoto.image;
             if (!hasNoMember) {
                 for (int i = 0; i < self.members.count; i++) {
                     NSDictionary* friendInfo = [[C2CallPhone currentPhone] getUserInfoForUserid:[self.members objectAtIndex:i]];
@@ -131,6 +135,25 @@
 
 
 - (void)addChatGroupResponse:(ResponseBase *)response error:(NSError *)error{
+    
+    if (hasImage) {
+        DataRequest* datRequest = [[DataRequest alloc] init];
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        
+        [data setValue:newID forKey:@"c2CallID"];
+        [data setValue:[UIImagePNGRepresentation(newImage) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength] forKey:@"pic"];
+        
+        datRequest.values = data;
+        datRequest.requestName = @"updateGroupPhoto";
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(updateGroupPhoto:error:)];
+        
+    }
+    
+}
+
+- (void)updateGroupPhoto:(ResponseBase *)response error:(NSError *)error{
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

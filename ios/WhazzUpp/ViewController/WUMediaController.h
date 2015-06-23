@@ -14,6 +14,8 @@
 @property(nonatomic, weak) IBOutlet UIImageView *userImage;
 @property(nonatomic, weak) IBOutlet UIButton *btnImage;
 @property(nonatomic, strong) NSString       *mediaID;
+@property(nonatomic, weak) IBOutlet UIImageView *videoIcon;
+@property(nonatomic, weak) IBOutlet UILabel *videoTime;
 
 @end
 

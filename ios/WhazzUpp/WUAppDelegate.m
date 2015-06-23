@@ -67,14 +67,23 @@
         
         [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0]];
     }
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]}];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
-
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0]} forState:UIControlStateNormal];
 }
 
 - (void)registerPushNotifications {
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings =
+    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    
+    /*
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+     */
 }
 
 -(void) c2callLoginSuccess
@@ -131,8 +140,8 @@
     [[ResponseHandler instance] readInterests];
     
     self.window.rootViewController = viewController;
-    [self.window makeKeyAndVisible];
-   
+    [self.window makeKeyAndVisible];    
+    
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 
 }
@@ -228,7 +237,20 @@
             WUChatHistoryController* chatController = (WUChatHistoryController*)mainController;
             [chatController reloadPage];
         }
+        
+        
     }
+    
+    int missedEvents = [[SCDataManager instance] totalMissedCalls] + [[SCDataManager instance] totalMissedMessages];
+    
+    UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+    UITabBarItem *item = [[tabController.viewControllers objectAtIndex:2] tabBarItem];
+    
+    if (missedEvents == 0)
+        item.badgeValue = nil;
+    else
+        item.badgeValue = [NSString stringWithFormat:@"%d", missedEvents];
+    
 }
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{

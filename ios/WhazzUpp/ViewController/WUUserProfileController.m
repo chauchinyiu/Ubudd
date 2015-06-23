@@ -53,7 +53,7 @@
         hasPhoto = NO;
     }
     
-    userImage.layer.cornerRadius = 0.0;
+    //userImage.layer.cornerRadius = 0.0;
     userImage.layer.masksToBounds = YES;
     [userImage setTapAction:^{
         SCUserProfile *userProfile = [SCUserProfile currentUser];

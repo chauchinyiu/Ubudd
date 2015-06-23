@@ -68,14 +68,16 @@ static NSString* currentC2CallID = @"";
     }
 
     if(c2CallID){
-        [dictionary setObject:c2CallID forKey:@"c2CallID"];
+        if (c2CallID.length > 0) {
+            [dictionary setObject:c2CallID forKey:@"c2CallID"];
 
-        DataRequest *dataRequest = [[DataRequest alloc] init];
-        dataRequest.requestName = @"readUserInfo";
-        dataRequest.values = dictionary;
-        
-        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-        [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readFriendInfo:error:)];
+            DataRequest *dataRequest = [[DataRequest alloc] init];
+            dataRequest.requestName = @"readUserInfo";
+            dataRequest.values = dictionary;
+            
+            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+            [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(readFriendInfo:error:)];
+        }
     }
 }
 
@@ -190,6 +192,9 @@ static NSString* currentC2CallID = @"";
 {
     WUUserInfoCell *c = [self.tableView dequeueReusableCellWithIdentifier:@"WUUserInfoCell"];
 
+    MOC2CallUser *user = [[SCDataManager instance] userForUserid:c2CallID];
+    [c.lblName setText:user.displayName];
+    
     NSMutableArray* acclist = [ResponseHandler instance].friendList;
     for (int i = 0; i < acclist.count; i++) {
         WUAccount* a = [acclist objectAtIndex:i];

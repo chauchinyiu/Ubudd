@@ -19,7 +19,7 @@
 #import "ResponseHandler.h"
 
 @implementation WUMediaCell
-@synthesize userImage, mediaID;
+@synthesize userImage, mediaID, videoIcon, videoTime;
 @end
 
 @interface WUMediaController ()
@@ -260,9 +260,15 @@ static NSString * const reuseIdentifier = @"Cell";
     
     if([elem.text hasPrefix:@"video://"]){
         cell.userImage.image = [[C2CallPhone currentPhone] thumbnailForKey:elem.text];
+        cell.videoTime.hidden = false;
+        cell.videoIcon.hidden = false;
+        cell.videoTime.text = [[C2CallPhone currentPhone] durationForKey:elem.text];
+        
     }
     else{
         cell.userImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
+        cell.videoTime.hidden = true;
+        cell.videoIcon.hidden = true;
     }
     
     cell.mediaID = elem.text;

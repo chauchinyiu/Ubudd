@@ -493,9 +493,10 @@ class MyAPI extends API {
 	}
 	
 	protected function searchGroup($args){
-        if ($args['searchString'] == '' || $args['userID'] == '')
+        if ($args['userID'] == '')
             return array('error' => 1, 'message' => 'Mandatory field missing');
-
+            
+        
 		$sqlStr = "select distinct chatGroup.id, chatGroup.c2CallID, chatGroup.interestID, chatGroup.interestDescription, chatGroup.locationLag, chatGroup.locationLong, "
 				."chatGroup.topicDescription, chatGroup.locationName, chatGroup.isPublic, groupMember.requestAccepted, chatGroup.groupAdmin, memberCnt, chatGroup.topic, register.userName from chatGroup "
 				."inner join register on register.msisdn = chatGroup.groupAdmin "
@@ -508,7 +509,7 @@ class MyAPI extends API {
 				."OR chatGroup.interestDescription like ? "
 				."OR interestBase.interestName like ? "
 				."OR interestCat.displayText like ? "
-				."OR chatGroup.locationName like ?) "
+				."OR chatGroup.locationName like ? OR ? = '') "
 				."AND (chatGroup.locationLag between ? AND ?) "
 				."AND (chatGroup.locationLong between ? AND ? "
 				."OR chatGroup.locationLong between ? AND ? "
@@ -517,7 +518,7 @@ class MyAPI extends API {
 
 		$stmt = $this->db->conn2->prepare($sqlStr);
 
-		$stmt->bind_param('sssssssssssssss', $userID, $str1, $str2, $str3, $str4, $str5, $str6, $latFrom, $latTo, $longFrom1, $longTo1, $longFrom2, $longTo2, $longFrom3, $longTo3);      
+		$stmt->bind_param('ssssssssssssssss', $userID, $str1, $str2, $str3, $str4, $str5, $str6, $str7, $latFrom, $latTo, $longFrom1, $longTo1, $longFrom2, $longTo2, $longFrom3, $longTo3);      
 		$userID = $args['userID'];
 		$str1 = "%" . $args['searchString'] . "%";
 		$str2 = $str1;
@@ -525,6 +526,7 @@ class MyAPI extends API {
 		$str4 = $str1;
 		$str5 = $str1;
 		$str6 = $str1;
+		$str7 = $args['searchString'];
 		$latFrom = $args['latFrom'];
 		$latTo = $args['latTo'];
 		$longFrom1 = $args['longFrom'];

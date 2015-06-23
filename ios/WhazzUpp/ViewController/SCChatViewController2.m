@@ -46,7 +46,7 @@
 @end
 
 @implementation SCChatViewController2
-@synthesize chatboard, numChars, numSMS, smsCosts, targetUserid, toolbarView, chatInput, submitButton;
+@synthesize chatboard, targetUserid, toolbarView, chatInput, submitButton;
 @synthesize chatInputBorderColor, chatInputBorderWidth, chatInputCornerRadius, startEdit, dontShowCallEvents, toolbarBottomContraint;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -131,32 +131,15 @@
     self.title = name;
     
     isGroupChat = NO;
-    if ([self isPhoneNumber:self.targetUserid]) {
-        isSMS = YES;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification:) name:@"PriceInfoEvent" object:nil];
-        [[C2CallPhone currentPhone] queryPriceForNumber:self.targetUserid isSMS:YES];
-        self.smsCosts.hidden = NO;
-    } else {
-        isSMS = NO;
-        self.smsCosts.hidden = YES;
-        if ([SCDataManager instance].isDataInitialized) {
-            MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
-            isGroupChat = [user.userType intValue] == 2;
-        }
+
+    isSMS = NO;
+    if ([SCDataManager instance].isDataInitialized) {
+        MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
+        isGroupChat = [user.userType intValue] == 2;
     }
     
     if (startEdit) {
         [self.chatInput becomeFirstResponder];
-    }
-    
-    [self refreshSecureMessageButton];
-    if ([IOS iosVersion] >= 7.) {
-        CGFloat inset =[self encryptButtonInset];
-        UIEdgeInsets edges = self.chatInput.textContainerInset;
-        edges.right += inset;
-        self.chatInput.textContainerInset = edges;
-    } else {
-        
     }
 }
 
@@ -214,24 +197,6 @@
 
 #pragma mark TextView Delegate
 
--(CGFloat) encryptButtonInset
-{
-    if (!self.encryptMessageButton || self.encryptMessageButton.hidden)
-        return 0.;
-    
-    CGRect ef = self.encryptMessageButton.frame;
-    CGRect f = self.chatInput.frame;
-    
-    CGFloat w1 = f.origin.x + f.size.width;
-    w1 = w1 - ef.origin.x;
-    
-    if (w1 <= 0.)
-        return 0;
-    
-    w1 += 4;
-    return w1 - 8;
-}
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     @try {
@@ -257,10 +222,6 @@
         
         if ([newtext length] > 1500) {
             return NO;
-        }
-        
-        if (isSMS) {
-            [self updateSMSCount:newtext];
         }
         
         if ([newtext length] > 0) {
@@ -298,9 +259,6 @@
 
 -(void) textViewDidChange:(UITextView *)textView
 {
-    if ([textView respondsToSelector:@selector(textContainer)]) {
-        //textView.textContainer.size = textView.frame.size;
-    }
     
     if(![textView.text hasSuffix:@"\n"] && hasMaxToolbarSize && [IOS iosVersion] >= 7.) {
         int pos = textView.selectedRange.location;
@@ -320,24 +278,6 @@
     NSRange range = textView.selectedRange;
     DLog(@"scrollRangeToVisible: %d/%d", range.location, range.length);
     [textView scrollRangeToVisible:range];
-    
-}
-
--(void) updateSMSCount:(NSString *) text
-{
-    int currentLength = 0;
-    int smsLength = 160;
-    if ([text canBeConvertedToEncoding:NSISOLatin1StringEncoding]) {
-        currentLength = [text length];
-    } else {
-        // Binary SMS have 2 Bytes (8-Bit UTF16 Encoding)
-        smsLength = 70;
-        currentLength = [text length];
-    }
-    
-    int anz = (currentLength / smsLength) + 1;
-    numChars.text = [NSString stringWithFormat:@"%d/%d", currentLength, smsLength];
-    numSMS.text = [NSString stringWithFormat:@"%d SMS", anz];
     
 }
 
@@ -370,29 +310,6 @@
         sz = minToolbarHeight;
     
     [self.toolbarView resizeToolbar:sz];
-    
-    if (isSMS) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            CGRect nf = numChars.frame;
-            CGRect sf = submitButton.frame;
-            if ((nf.origin.y + nf.size.height + 3) < sf.origin.y) {
-                [numChars setHidden:NO];
-            } else {
-                [numChars setHidden:YES];
-            }
-            
-            CGRect nsf = numSMS.frame;
-            if ((nsf.origin.y + nsf.size.height + 3) < sf.origin.y) {
-                [numSMS setHidden:NO];
-            } else {
-                [numSMS setHidden:YES];
-            }
-        });
-    } else {
-        [numChars setHidden:YES];
-        [numSMS setHidden:YES];
-    }
-    
 }
 
 -(void) resizeToolbar:(NSString *) newtext{
@@ -409,8 +326,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         self.chatInput.text = nil;
         [self.toolbarView resizeToolbar:minToolbarHeight];
-        [numChars setHidden:YES];
-        [numSMS setHidden:YES];
     });
 }
 
@@ -530,10 +445,6 @@
     
 }
 
--(void) updateSMSPriceInfo:(NSString *) priceInfo
-{
-    self.smsCosts.text = priceInfo;
-}
 
 -(void) handleTypingEvent:(NSString *) fromUserid
 {
@@ -572,83 +483,6 @@
 }
 
 
-#pragma mark Rich Message
-/*
--(IBAction)selectRichMessage:(id)sender
-{
-    SCPopupMenu *cv = [SCPopupMenu popupMenu:self];
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        [cv addChoiceWithName:NSLocalizedString(@"Choose Photo or Video", @"Choice Title") andSubTitle:NSLocalizedString(@"Select from Camera Roll", @"Button") andIcon:[UIImage imageNamed:@"ico_image.png"] andCompletion:^{
-            
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-            imagePicker.delegate = self;
-            imagePicker.allowsEditing = NO;
-            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, kUTTypeMovie, nil];
-            imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-            
-            [self captureMediaFromImagePicker:imagePicker andCompleteAction:^(NSString *key) {
-                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-            }];
-        
-        }];
-    }
-    
-    if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [cv addChoiceWithName:NSLocalizedString(@"Take Photo or Video", @"Choice Title") andSubTitle:NSLocalizedString(@"Use Camera", @"Button") andIcon:[UIImage imageNamed:@"ico_cam-24x24.png"] andCompletion:^{
-                
-                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-                imagePicker.delegate = self;
-                imagePicker.allowsEditing = NO;
-                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeImage, kUTTypeMovie, nil];
-                imagePicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-                [self captureMediaFromImagePicker:imagePicker andCompleteAction:^(NSString *key) {
-                    [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-                }];
-            }];
-        }
-    }
-    
-    if ([CLLocationManager locationServicesEnabled]) {
-        [cv addChoiceWithName:NSLocalizedString(@"Submit Location", @"Choice Title") andSubTitle:NSLocalizedString(@"Submit your current location", @"Button") andIcon:[UIImage imageNamed:@"ico_geolocation-24x24.png"] andCompletion:^{
-            
-            [self requestLocation:^(NSString *key) {
-                DLog(@"submitLocation: %@ / %@", key, self.targetUserid);
-                [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-            }];
-        }];
-        
-    }
-    
-    if ([SIPPhone currentPhone].callStatus == SCCallStatusNone) {
-        if ([[AVAudioSession sharedInstance] inputIsAvailable]) {
-            [cv addChoiceWithName:NSLocalizedString(@"Submit Voice Mail", @"Choice Title") andSubTitle:NSLocalizedString(@"Record a voice message", @"Button") andIcon:[UIImage imageNamed:@"ico_mic.png"] andCompletion:^{
-                
-                [self recordVoiceMail:^(NSString *key) {
-                    DLog(@"submitVoiceMail: %@ / %@", key, self.targetUserid);
-                    [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-                }];
-            }];
-        }
-    }
-
-    
-    if ([IOS iosVersion] >= 5.0) {
-        [cv addChoiceWithName:NSLocalizedString(@"Send Contact", @"Choice Title") andSubTitle:NSLocalizedString(@"Send a contact from address book", @"Button") andIcon:[UIImage imageNamed:@"ico_apple_mail.png"] andCompletion:^{
-            [self showPicker:nil];
-        }];
-    }
-    
-    [cv addCancelWithName:NSLocalizedString(@"Cancel", @"Choice Title") andCompletion:^{
-    }];
-    
-    [cv showMenu];
-    
-}
-*/
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -727,31 +561,7 @@
 
 #pragma mark Actions
 
--(IBAction)toggleSecureMessageButton:(id)sender
-{
-    self.encryptMessageButton.selected = !self.encryptMessageButton.selected;
-}
 
--(void) refreshSecureMessageButton
-{
-    NSString *targetContact = self.targetUserid;
-    if (isSMS) {
-        self.encryptMessageButton.hidden = YES;
-        self.encryptMessageButton.selected = NO;
-        self.encryptMessageButton.enabled = NO;
-        return;
-    }
-    
-    if ([[C2CallPhone currentPhone] canEncryptMessageForTarget:targetContact]) {
-        self.encryptMessageButton.selected = [C2CallPhone currentPhone].preferMessageEncryption;
-        self.encryptMessageButton.hidden = NO;
-        self.encryptMessageButton.enabled = YES;
-    } else {
-        self.encryptMessageButton.selected = NO;
-        self.encryptMessageButton.hidden = YES;
-        self.encryptMessageButton.enabled = NO;
-    }
-}
 
 - (IBAction)showPicker:(id)sender
 {
@@ -766,20 +576,10 @@
 {
     NSString *text = [chatInput.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if (isSMS) {
-        [[SCUserProfile currentUser] refreshUserCredits];
-    }
-    
     if (!text || [text length] == 0) {
         [AlertUtil showPleaseEnterText];
         return;
     }
-    
-    if (isSMS && ![SCUserProfile currentUser].isCalleridVerified && ![SCUserProfile currentUser].didnumber) {
-        // TODO - SCChatController : VerifyNumberController for SMS
-        return;
-    }
-    
     
     [self resetTextInput];
     [[SIPPhone currentPhone] submitMessage:text toUser:self.targetUserid preferEncryption:self.encryptMessageButton.selected];

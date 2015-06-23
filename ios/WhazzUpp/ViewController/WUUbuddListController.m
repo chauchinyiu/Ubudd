@@ -22,7 +22,7 @@
 
 @implementation WUUbuddListCell
 
-@synthesize nameLabel, statusLabel, memberLabel, hosetedByLabel, hostedByHeaderLabel;
+@synthesize nameLabel, statusLabel, memberLabel, hosetedByLabel, hostedByHeaderLabel, detailView;
 
 
 @end
@@ -90,7 +90,7 @@
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -240,7 +240,7 @@
         }
     }
     
-    return 105;
+    return 208;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -251,6 +251,13 @@
         [favocell setHidden:YES];
         return favocell;
     }
+    
+    favocell.detailView.layer.cornerRadius = 10;
+    favocell.detailView.layer.masksToBounds = YES;
+    favocell.detailView.layer.borderWidth = 1;
+    favocell.detailView.layer.borderColor = [[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0] CGColor];
+    
+    
     SCGroup *group = [[SCGroup alloc] initWithGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", (int)indexPath.row ]]];
     
     favocell.nameLabel.font = [CommonMethods getStdFontType:0];
@@ -270,18 +277,67 @@
     favocell.hosetedByLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)indexPath.row]];
     
     
-    UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:group.groupid];
+    UIImage *image = [[C2CallPhone currentPhone] largeUserImageForUserid:group.groupid];
     
     if (image) {
         favocell.userImg.image = image;
     }
     else{
-        favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
+        image = group.groupImage;
+        if (image) {
+            favocell.userImg.image = image;
+        }
+        else{
+            favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
+            
+            BOOL needRead = YES;
+            NSString *imagePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@.png", group.groupid]];
+
+            if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+                NSDictionary* fileAttribute = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil];
+                NSDate* fileDate = [fileAttribute objectForKey:NSFileModificationDate];
+                if ([fileDate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedDescending) {
+                    NSData *data = [[NSData alloc] initWithContentsOfFile:imagePath];
+                    image = [UIImage imageWithData:data];
+                    favocell.userImg.image = image;
+                    needRead = NO;
+                }
+            }
+            
+            if (needRead) {
+                DataRequest* datRequest = [[DataRequest alloc] init];
+                NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+                
+                [data setValue:group.groupid forKey:@"c2CallID"];
+                
+                datRequest.values = data;
+                datRequest.requestName = @"readGroupPhoto";
+                WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+                [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(readGroupPhoto:error:)];
+            }
+        }
     }
     
     return favocell;
 }
 
+
+- (void)readGroupPhoto:(ResponseBase *)response error:(NSError *)error{
+    if (!error){
+        DataResponse *res = (DataResponse *)response;
+        NSMutableDictionary* photoDat = [[NSMutableDictionary alloc] initWithDictionary:res.data];
+        if ([photoDat objectForKey:@"pic"]){
+            if ([[photoDat objectForKey:@"pic"] length] > 0) {
+                NSData *data = [[NSData alloc]initWithBase64EncodedString:[photoDat objectForKey:@"pic"] options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                
+                NSString *imagePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@.png", [photoDat objectForKey:@"c2CallID"]]];
+                [data writeToFile:imagePath atomically:YES];
+                
+                [self.tableView reloadData];
+            }
+        }
+    }
+}
 
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -311,6 +367,7 @@
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+/*
     if ([searchBar.text isEqualToString:@""]) {
         inSearch = false;
         [self readUserGroup];
@@ -319,6 +376,9 @@
         inSearch = true;
         [self searchUserGroup:searchBar.text];
     }
+ */
+    inSearch = true;
+    [self searchUserGroup:searchBar.text];
     
 }
 
@@ -385,11 +445,31 @@
     fetchResult = [NSDictionary dictionaryWithDictionary:result];
 }
 
+/*
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
     if ([searchBar.text isEqualToString:@""]) {
         inSearch = false;
         [self readUserGroup];
     }
+}
+ */
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+    UITextField *searchBarTextField = nil;
+    for (UIView *mainview in searchBar.subviews)
+    {
+        for (UIView *subview in mainview.subviews) {
+            if ([subview isKindOfClass:[UITextField class]])
+            {
+                searchBarTextField = (UITextField *)subview;
+                break;
+            }
+            
+        }
+    }
+    searchBarTextField.enablesReturnKeyAutomatically = NO;
 }
 
 @end

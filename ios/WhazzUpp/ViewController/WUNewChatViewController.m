@@ -157,7 +157,7 @@
             favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
         }
     }
-    favocell.userImg.layer.cornerRadius = 0.0;
+    //favocell.userImg.layer.cornerRadius = 0.0;
     favocell.userImg.layer.masksToBounds = YES;
     favocell.infoBtn.tag = indexPath.row;
     

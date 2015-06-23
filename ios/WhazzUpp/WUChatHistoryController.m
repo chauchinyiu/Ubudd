@@ -208,6 +208,9 @@
             hCell.textLabel.text = @"";
             hCell.missedEvents.hidden = YES;
             hCell.userImage.image = [UIImage imageNamed:@"ubudd_ico.png"];
+            hCell.userImage.layer.cornerRadius = 5.0;
+            hCell.userImage.layer.masksToBounds = YES;
+            
             
             NSDate *today = [NSDate date];
             NSDate *bcDate = [ResponseHandler instance].lastBroadcastTime;
@@ -411,7 +414,8 @@
                     histcell.userImage.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
                 }
             }
-            
+            histcell.userImage.layer.cornerRadius = 5.0;
+            histcell.userImage.layer.masksToBounds = YES;
             
             if ([chathist.missedEvents intValue] > 0) {
                 histcell.missedEvents.hidden = NO;

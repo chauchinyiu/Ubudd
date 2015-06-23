@@ -16,6 +16,7 @@
 #import "WUUserImageController.h"
 #import "WUFriendDetailController.h"
 #import "CommonMethods.h"
+#import "DBHandler.h"
 
 @implementation WUGroupNonMemberActionCell
 @end
@@ -167,10 +168,10 @@
     }
     else if(indexPath.section == 2){
         if (userType == 1) {
-            return 170;
+            return 204;
         }
         else if (userType == 2) {
-            return 102;
+            return 136;
         }
         else {
             return 34;
@@ -252,7 +253,7 @@
         if (userType == 1) {
             WUGroupDetailCellEdit *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellEdit"];
             if (groupInfo) {
-                cell.btnPhoto.layer.cornerRadius = 0.0;
+                //cell.btnPhoto.layer.cornerRadius = 0.0;
                 cell.btnPhoto.layer.masksToBounds = YES;                
                 [cell.btnPhoto setTapAction:^{
                     if (groupImg) {
@@ -293,7 +294,7 @@
         else{
             WUGroupDetailCellReadOnly *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupDetailCellReadOnly"];
             if (groupInfo) {
-                cell.groupImg.layer.cornerRadius = 0.0;
+                //cell.groupImg.layer.cornerRadius = 0.0;
                 cell.groupImg.layer.masksToBounds = YES;
                 [cell.groupImg setTapAction:^{
                     if (groupImg) {
@@ -303,6 +304,19 @@
                 
                 if(groupImg){
                     [cell.groupImg setImage:groupImg];
+                }
+                else{
+                    NSString *imagePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@.png", self.group.groupid]];
+                    
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+                        NSDictionary* fileAttribute = [[NSFileManager defaultManager] attributesOfItemAtPath:imagePath error:nil];
+                        NSDate* fileDate = [fileAttribute objectForKey:NSFileModificationDate];
+                        if ([fileDate compare:[NSDate dateWithTimeIntervalSinceNow:-86400]] == NSOrderedDescending) {
+                            NSData *data = [[NSData alloc] initWithContentsOfFile:imagePath];
+                            groupImg = [UIImage imageWithData:data];
+                            [cell.groupImg setImage:groupImg];
+                        }
+                    }
                 }
 
                     
@@ -446,11 +460,11 @@
             switch (online) {
                 case OS_ONLINE:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
                     break;
                 case OS_FORWARDED:
                     cell.detailTextLabel.text = NSLocalizedString(@"Call forward", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
                     break;
                 case OS_INVISIBLE:
                     cell.detailTextLabel.text = NSLocalizedString(@"offline", @"Cell Label");
@@ -466,18 +480,18 @@
                     break;
                 case OS_CALLME:
                     cell.detailTextLabel.text = NSLocalizedString(@"online call me", @"online (call me)");
-                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
                     break;
                 case OS_ONLINEVIDEO:
                     cell.detailTextLabel.text = NSLocalizedString(@"online active", @"online (active)");
                     break;
                 case OS_IPUSH:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
                     break;
                 case OS_IPUSHCALL:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor blackColor];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
                     break;
                 case OS_GROUPCALL:
                     cell.detailTextLabel.text = NSLocalizedString(@"in conference", @"Cell Label");
@@ -748,6 +762,20 @@
         [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(updateGroupInfo:error:)];
         
         
+        if (groupImg) {
+            DataRequest* datRequest = [[DataRequest alloc] init];
+            NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+            
+            [data setValue:[self.group groupid] forKey:@"c2CallID"];
+            [data setValue:[UIImagePNGRepresentation(groupImg) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength] forKey:@"pic"];
+            
+            
+            datRequest.values = data;
+            datRequest.requestName = @"updateGroupPhoto";
+            WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+            [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(updateGroupPhoto:error:)];
+            
+        }
         
     }];
     [self.group setGroupImage:groupImg withCompletionHandler:nil];
@@ -755,7 +783,16 @@
     [self showActivityView];
 }
 
-- (void)updateGroupInfo:(ResponseBase *)response error:(NSError *)error {    
+
+
+- (void)updateGroupPhoto:(ResponseBase *)response error:(NSError *)error{
+    if (error){
+        
+    }
+
+}
+
+- (void)updateGroupInfo:(ResponseBase *)response error:(NSError *)error {
     if (error){
         
     }
@@ -1079,5 +1116,21 @@
     return NO; // handle the touch
 }
 
+- (IBAction)btnClearChatTapped:(id)sender{
+    NSLog(@"Clear all chat");
+    // TODO clear all chat history
+    NSArray* result = [DBHandler dataFromTable:@"MOChatHistory" condition:[NSString stringWithFormat:@"contact = '%@'", self.groupid] orderBy:nil ascending:false];
+    if (result.count > 0) {
+        [[SCDataManager instance] removeDatabaseObject:[result objectAtIndex:0]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Chat cleared", @"")
+                                                        message:NSLocalizedString(@"You cleared the chat history", @"")
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+    }
+
+}
 
 @end

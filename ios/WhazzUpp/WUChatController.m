@@ -118,24 +118,9 @@ typedef enum : NSUInteger {
     ((WUBoardController*)self.chatboard).chatTitle = [boardTitle string];
     [self.chatboard.tableView reloadData];
     [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];
-    self.chatInput.font = [CommonMethods getStdFontType:2];
-}
+    self.chatInput.font = [CommonMethods getStdFontType:1];
+    [self resizeToolbar:@"A"];}
 
--(void)viewDidAppear:(BOOL)animated{
-    /*
-    if(!self.audioView){
-        SCAudioRecorderController* newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SCAudioRecorderController"];
-        [newVC setSubmitAction:^(NSString *key) {
-            [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-        }];
-        newVC.view.frame = self.audioContainer.bounds;
-        [self.audioContainer addSubview:newVC.view];
-        [self addChildViewController:newVC];
-        [newVC didMoveToParentViewController:self];
-        self.audioView = newVC;
-    }
-     */
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -193,13 +178,25 @@ typedef enum : NSUInteger {
         [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];
     }
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
-    
+
+    [[self.imageBtn imageView] setContentMode:UIViewContentModeScaleAspectFill];
     if (image) {
-        [[self.imageBtn imageView] setContentMode:UIViewContentModeScaleAspectFill];
         [self.imageBtn setImage:image forState:UIControlStateNormal];
     }
+    else{
+        if ([user.userType intValue] == 2) {
+            [self.imageBtn setImage:[UIImage imageNamed:@"btn_ico_avatar_group.png"] forState:UIControlStateNormal];
+        }
+        else{
+            [self.imageBtn setImage:[UIImage imageNamed:@"btn_ico_avatar.png"] forState:UIControlStateNormal];
+        }
+    }
+    self.imageBtn.layer.cornerRadius = 5;
+    self.imageBtn.clipsToBounds = YES;
     
-    self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 14];
+
+    
+    self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 12];
     
     
     [self.submitButton setHidden:YES];
@@ -207,7 +204,7 @@ typedef enum : NSUInteger {
     [self.lblRecording setHidden:YES];
     isRecording = NO;
     
-    [self resizeToolbar:@"A"];
+
     
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
@@ -272,6 +269,7 @@ typedef enum : NSUInteger {
         [self showGroupDetailForGroupid:self.targetUserid];
     } else {
         NSMutableArray* friendList = [[ResponseHandler instance] friendList];
+        [WUFriendDetailController setC2CallID:self.targetUserid];
         for (int i = 0; i < friendList.count; i++) {
             WUAccount* a = [friendList objectAtIndex:i];
             if ([a.c2CallID isEqualToString:self.targetUserid]) {
@@ -429,7 +427,6 @@ typedef enum : NSUInteger {
                             error:nil];
         
         [audioRecorder record];
-        //[self.audioView toogleRecording:self.audioView.btnRecord];
         [self.recordButton setImage:[UIImage imageNamed:@"Mic_press.png"] forState:UIControlStateHighlighted];
         isRecording = YES;
         [self.lblRecording setHidden:NO];
@@ -482,20 +479,7 @@ typedef enum : NSUInteger {
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         [[C2CallPhone currentPhone] submitAudio:audioRecorder.url withMessage:nil toTarget:self.targetUserid withCompletionHandler:nil];
-        //[self.audioView submitMessage:self.audioView.btnSubmit];
     }
-    /*
-    SCAudioRecorderController* newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SCAudioRecorderController"];
-    [newVC setSubmitAction:^(NSString *key) {
-        [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-    }];
-    newVC.view.frame = self.audioContainer.bounds;
-    [self.audioContainer addSubview:newVC.view];
-    [self addChildViewController:newVC];
-    [newVC didMoveToParentViewController:self];
-    self.audioView = newVC;
-     */
-
 }
 
 -(void)textViewDidChange:(UITextView *)textView

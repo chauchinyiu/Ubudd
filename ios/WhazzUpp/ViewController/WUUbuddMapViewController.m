@@ -186,6 +186,7 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+/*
     if ([searchBar.text isEqualToString:@""]) {
         inSearch = false;
         [self readUserGroup];
@@ -194,6 +195,9 @@
         inSearch = true;
         [self searchUserGroup:searchBar.text];
     }
+ */
+    inSearch = true;
+    [self searchUserGroup:searchBar.text];
     
 }
 
@@ -304,11 +308,32 @@
     [self.view endEditing:YES];
 }
 
+/*
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
     if ([searchBar.text isEqualToString:@""]) {
         inSearch = false;
         [self readUserGroup];
     }
 }
+*/
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+    UITextField *searchBarTextField = nil;
+    for (UIView *mainview in searchBar.subviews)
+    {
+        for (UIView *subview in mainview.subviews) {
+            if ([subview isKindOfClass:[UITextField class]])
+            {
+                searchBarTextField = (UITextField *)subview;
+                break;
+            }
+            
+        }
+    }
+    searchBarTextField.enablesReturnKeyAutomatically = NO;
+}
+
 
 @end

@@ -46,6 +46,12 @@
     }
     
     if ([[pages objectAtIndex:0] objectForKey:@"SingleImage"]) {
+        for (UIView *view in self.view.subviews ) {
+            if ([view isKindOfClass:[UIScrollView class]]) {
+                UIScrollView *scroll = (UIScrollView *)view;
+                scroll.bounces = NO;
+            }
+        }
     }
     else if ([[pages objectAtIndex:0] objectForKey:@"IsBroadcast"]) {
     }
@@ -381,5 +387,7 @@
     NSUInteger index = vc.pageID;
     return [self GetViewControllerForPage:((int)index + 1)];
 }
+
+
 
 @end

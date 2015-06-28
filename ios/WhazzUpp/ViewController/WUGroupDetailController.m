@@ -460,11 +460,11 @@
             switch (online) {
                 case OS_ONLINE:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_FORWARDED:
                     cell.detailTextLabel.text = NSLocalizedString(@"Call forward", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_INVISIBLE:
                     cell.detailTextLabel.text = NSLocalizedString(@"offline", @"Cell Label");
@@ -480,18 +480,18 @@
                     break;
                 case OS_CALLME:
                     cell.detailTextLabel.text = NSLocalizedString(@"online call me", @"online (call me)");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_ONLINEVIDEO:
                     cell.detailTextLabel.text = NSLocalizedString(@"online active", @"online (active)");
                     break;
                 case OS_IPUSH:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_IPUSHCALL:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0];
+                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_GROUPCALL:
                     cell.detailTextLabel.text = NSLocalizedString(@"in conference", @"Cell Label");

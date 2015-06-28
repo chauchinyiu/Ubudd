@@ -1094,6 +1094,7 @@
 		CE049FC11A368E0C006D5C25 /* bg_newgroup.png in Resources */ = {isa = PBXBuildFile; fileRef = CE049FBF1A368E0C006D5C25 /* bg_newgroup.png */; };
 		CE049FC21A368E0C006D5C25 /* bg_newgroup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE049FC01A368E0C006D5C25 /* bg_newgroup@2x.png */; };
 		CE0919A319D6529C00865665 /* WUUbuddListController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0919A219D6529C00865665 /* WUUbuddListController.m */; };
+		CE0A41BC1B3FE28700DBD970 /* ubuddicon.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A41BB1B3FE28700DBD970 /* ubuddicon.png */; };
 		CE1430301AFC75B50083B13F /* chatboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1430321AFC75B50083B13F /* chatboard.storyboard */; };
 		CE2AC7F519FD36BB00A3D093 /* WUPhotoViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AC7F419FD36BB00A3D093 /* WUPhotoViewerController.m */; };
 		CE30C004198C8D3500D22BFE /* VerifyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30C003198C8D3500D22BFE /* VerifyUser.m */; };
@@ -2271,6 +2272,7 @@
 		CE049FC01A368E0C006D5C25 /* bg_newgroup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_newgroup@2x.png"; sourceTree = "<group>"; };
 		CE0919A119D6529C00865665 /* WUUbuddListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUUbuddListController.h; sourceTree = "<group>"; };
 		CE0919A219D6529C00865665 /* WUUbuddListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUUbuddListController.m; sourceTree = "<group>"; };
+		CE0A41BB1B3FE28700DBD970 /* ubuddicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ubuddicon.png; sourceTree = "<group>"; };
 		CE1430311AFC75B50083B13F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/chatboard.storyboard; sourceTree = "<group>"; };
 		CE1430341AFC75BD0083B13F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/chatboard.strings"; sourceTree = "<group>"; };
 		CE1430361AFC79ED0083B13F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
@@ -3603,6 +3605,7 @@
 		17FC6643194DC89D0080A2D5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE0A41BB1B3FE28700DBD970 /* ubuddicon.png */,
 				CEA8677B1AE5FE6500324485 /* ico_notdelivered.png */,
 				CEA7B8061AE8B71300D9DBCA /* blackbar.png */,
 				CEF0B9621AA40A00006AF677 /* pause_press.png */,
@@ -4706,6 +4709,7 @@
 				1730614A19277F6B0018EE25 /* flag258.png in Resources */,
 				173063BC19277F6B0018EE25 /* np-852.xml in Resources */,
 				CEFF45951A3FFC5B00003EF2 /* ubudd_ico.png in Resources */,
+				CE0A41BC1B3FE28700DBD970 /* ubuddicon.png in Resources */,
 				173061DC19277F6B0018EE25 /* flag973.png in Resources */,
 				173061E819277F6B0018EE25 /* FriendCellIn.nib in Resources */,
 				1730617119277F6B0018EE25 /* flag376.png in Resources */,

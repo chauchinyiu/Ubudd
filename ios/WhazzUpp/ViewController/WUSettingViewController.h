@@ -18,6 +18,5 @@
 @property(nonatomic, weak) IBOutlet UILabel *lblFontSizeSetting;
 @property(nonatomic, weak) IBOutlet UILabel *lblContactUs;
 @property(nonatomic, weak) IBOutlet UILabel *lblHelp;
-@property(nonatomic, weak) IBOutlet UILabel *lblPrivacy;
 
 @end

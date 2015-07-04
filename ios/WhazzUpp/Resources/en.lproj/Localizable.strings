@@ -145,3 +145,4 @@
 "in conference" = "in conference";
 "Photo Action" = "Photo Action";
 "Requests to join" = "Requests to join %@";
+"webString" = "<div style='font-family:Helvetica Neue'>By continuing, you are indicating that you agree to <a href='a'>the Privacy Policy</a> and <a href='b'>Terms and Conditions</a>.</div>";

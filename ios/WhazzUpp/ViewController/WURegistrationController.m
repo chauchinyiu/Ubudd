@@ -46,6 +46,8 @@
                                    action:@selector(hidekeybord)];
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
+    
+    [webView loadHTMLString:NSLocalizedString(@"webString", @"") baseURL:NULL];
 
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -216,6 +218,21 @@
 -(void)hidekeybord
 {
     [self.view endEditing:YES];
+}
+
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        if ([request.URL.absoluteString  hasSuffix:@"a"]) {
+            [self performSegueWithIdentifier:@"privacypolicy" sender:self];
+            
+        }
+        else{
+            [self performSegueWithIdentifier:@"termsandconditions" sender:self];
+
+        
+        }
+    }
+    return YES;
 }
 
 @end

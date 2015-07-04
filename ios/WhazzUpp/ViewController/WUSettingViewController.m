@@ -16,7 +16,7 @@
 @end
 
 @implementation WUSettingViewController
-@synthesize lblConnectionStatus, lblAboutUbudd, lblConnectionStatusHeader, lblFontSizeSetting, lblMyProfile, lblTellAFriend, lblContactUs, lblHelp, lblPrivacy;
+@synthesize lblConnectionStatus, lblAboutUbudd, lblConnectionStatusHeader, lblFontSizeSetting, lblMyProfile, lblTellAFriend, lblContactUs, lblHelp;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +38,6 @@
     lblTellAFriend.font = [CommonMethods getStdFontType:1];
     lblContactUs.font = [CommonMethods getStdFontType:1];
     lblHelp.font = [CommonMethods getStdFontType:1];
-    lblPrivacy.font = [CommonMethods getStdFontType:1];
     if (appDelegate.loginCompleted) {
         [lblConnectionStatus setText:NSLocalizedString(@"Connected", @"")];
         [lblConnectionStatus setTextColor:[UIColor greenColor]];
@@ -63,12 +62,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 8;
+    if (section == 0) {
+        return 1;
+    }
+    return 2;
 }
 
 

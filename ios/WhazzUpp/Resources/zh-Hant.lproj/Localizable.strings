@@ -144,3 +144,4 @@
 "in conference" = "會議中";
 "Photo Action" = "照片選項";
 "Requests to join" = "請求加入%@";
+"webString" = "<div  style='font-family:Helvetica Neue'>繼續下一步表示您同意<a href='a'>私隱政策</a>和<a href='b'>使用條款</a></div>";

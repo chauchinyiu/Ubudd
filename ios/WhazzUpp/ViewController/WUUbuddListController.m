@@ -288,7 +288,7 @@
             favocell.userImg.image = image;
         }
         else{
-            favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
+            favocell.userImg.image = [UIImage imageNamed:@"newgroupavatar.png"];
             
             BOOL needRead = YES;
             NSString *imagePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@.png", group.groupid]];

@@ -109,6 +109,7 @@ typedef enum : NSUInteger {
     }
     
     
+    
     UIBarButtonItem *newBackButton =[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"")
                                      style:UIBarButtonItemStylePlain
                                     target:nil
@@ -119,7 +120,13 @@ typedef enum : NSUInteger {
     [self.chatboard.tableView reloadData];
     [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];
     self.chatInput.font = [CommonMethods getStdFontType:1];
-    [self resizeToolbar:@"A"];}
+    [self resizeToolbar:@"A"];
+
+    [self.recordButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [self.attachButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+
+
+}
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

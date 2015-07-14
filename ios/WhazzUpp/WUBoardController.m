@@ -313,10 +313,13 @@ static BOOL isGroup = YES;
     UIView *dummyView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, dummyViewHeight)];
     self.tableView.tableHeaderView = dummyView;
     self.tableView.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
+    
+    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"sliderbutton.png"] forState:UIControlStateNormal];    
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.translucent = NO;
+
     isVisible = YES;
     if(self.targetUserid){
         if(isGroup){
@@ -1282,7 +1285,7 @@ static BOOL isGroup = YES;
     
     
     //icon
-    frame = CGRectMake(contentSize.width + 10 - 14 - 6, contentSize.height - 14, 14, 14);
+    frame = CGRectMake(contentSize.width + 10 - 14 - 6, contentSize.height - 8, 14, 14);
     [cell.iconSubmitted setFrame:frame];
     
     
@@ -1707,7 +1710,6 @@ static BOOL isGroup = YES;
         cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
         
         [cell.progress setHidden:YES];
-        [cell.progress setHidden:YES];
         [cell.playView setHidden:NO];
         [cell.playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
         
@@ -1737,6 +1739,7 @@ static BOOL isGroup = YES;
         [cell.playSlider setMaximumValue:durSec];
         [cell.playSlider setMinimumValue:0.0];
         [cell.playSlider setValue:0.0];
+        
 
     } else {
         

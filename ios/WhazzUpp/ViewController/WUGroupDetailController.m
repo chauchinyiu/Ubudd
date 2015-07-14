@@ -75,6 +75,7 @@
         //owner
         userType = 1;
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", @"") style:UIBarButtonItemStylePlain target:self action:@selector(saveGroup)];
+        
         [self.navigationItem.rightBarButtonItem setEnabled:YES];
     }
     else{
@@ -926,8 +927,8 @@
 }
 
 - (void)removeGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Leave Group", @"")
-                                                    message:NSLocalizedString(@"You left the group", @"")
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Leave Event", @"")
+                                                    message:NSLocalizedString(@"You left the event", @"")
                                                    delegate:nil
                                           cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                           otherButtonTitles:nil];
@@ -948,9 +949,9 @@
 }
 
 - (IBAction)btnDeleteTapped:(id)sender{
-    currentAction = @"Delete Group";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete this group", @"")
-                                                    message:NSLocalizedString(@"Do you really want to delete this group", @"")
+    currentAction = @"Delete Event";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete this event", @"")
+                                                    message:NSLocalizedString(@"Do you really want to delete this event", @"")
                                                    delegate:self
                                           cancelButtonTitle:NSLocalizedString(@"No", @"")
                                           otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
@@ -960,8 +961,8 @@
 
 
 - (void)deleteGroupResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Group", @"")
-                                                    message:NSLocalizedString(@"You deleted the group", @"")
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Event", @"")
+                                                    message:NSLocalizedString(@"You deleted the event", @"")
                                                    delegate:nil
                                           cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                           otherButtonTitles:nil];

@@ -64,9 +64,6 @@
         
         [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]];
         
-        custLabel = [[UILabel alloc] init];
-        [custLabel setText:chatTitle];
-        
         custLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0 , 0.0f, 200.0f, 44.0f)];
         [custLabel setBackgroundColor:[UIColor clearColor]];
         [custLabel setTextColor:[UIColor whiteColor]];
@@ -75,7 +72,7 @@
         custLabel.adjustsFontSizeToFitWidth = YES;
         custLabel.minimumScaleFactor = 0.2;
         
-        
+
         if (atitle) {
             [custLabel setAttributedText:atitle];
         }

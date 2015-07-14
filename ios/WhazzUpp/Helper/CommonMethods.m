@@ -49,16 +49,16 @@
     
     UIFont* f;
     if (type == 0) {
-        f = [UIFont fontWithName:@"HelveticaNeue-Bold" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize];
+        f = [UIFont fontWithName:@"HelveticaNeue-Bold" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 3, 9)];
     }
     else if (type == 1) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 3, 1)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 3, 9)];
     }
     else if (type == 2) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 5), 1)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 6), 8)];
     }
     else if (type == 3) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 7), 1)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 8), 7)];
     }
     else{
         

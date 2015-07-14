@@ -114,7 +114,7 @@
         self.chatInput.textContainer.heightTracksTextView = YES;
     }
     
-    resizeOffset = svframe.size.height - tvframe.size.height;
+    resizeOffset = svframe.size.height - tvframe.size.height - 3;
     minToolbarHeight = svframe.size.height;
     
     DLog(@"minToolbarHeight : %f / %f", minToolbarHeight, resizeOffset);
@@ -314,9 +314,16 @@
 
 -(void) resizeToolbar:(NSString *) newtext{
     CGRect frame1 = chatInput.frame;
+    NSString* useText;
+    if ([newtext isEqualToString:@""]) {
+        useText = @"A";
+    }
+    else{
+        useText = newtext;
+    }
     CGSize maximumLabelSize = [@"\n \n \n \n \n \n \n " sizeWithFont:chatInput.font constrainedToSize:CGSizeMake(frame1.size.width - 16, 999.)];
     maximumLabelSize.width = frame1.size.width - 16;
-    [self resizeToolbar:newtext textView:chatInput maxLabelSize:maximumLabelSize];
+    [self resizeToolbar:useText textView:chatInput maxLabelSize:maximumLabelSize];
 
 }
 

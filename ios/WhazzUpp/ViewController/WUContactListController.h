@@ -15,11 +15,18 @@
 @property(nonatomic, weak) IBOutlet UILabel *nameLabel, *statusLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *userImg;
 @property (nonatomic, weak) IBOutlet UIButton *userBtn, *userBtn2;
+@property (nonatomic, weak) IBOutlet UIView *cellLine;
+
 
 @end
 
+
+
+
 @interface WUAddressBaseCell : UITableViewCell
 @property(nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UIView *cellLine;
+
 @end
 
 @interface WUNameGroupCell : UITableViewCell

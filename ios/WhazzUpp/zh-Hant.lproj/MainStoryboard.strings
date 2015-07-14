@@ -263,7 +263,7 @@
 "VZM-hH-PBm.title" = "告訴朋友";
 
 /* Class = "UILabel"; text = "To change the text size, go to:\niPhone Settings > General > Text Size"; ObjectID = "Vys-dq-O0R"; */
-"Vys-dq-O0R.text" = "要更改文字大小，請到：\niPhone 設定>一般>顯示器與亮度>文字大小";
+"Vys-dq-O0R.text" = "要更改文字大小，請到：\niPhone 設定>一般>輔助使用>放大文字";
 
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "WMt-Tk-m0z"; */
 "WMt-Tk-m0z.normalTitle" = "發送";
@@ -274,7 +274,7 @@
 /* Class = "UIButton"; normalTitle = "Resend verification code"; ObjectID = "Wx0-0W-o2I"; */
 "Wx0-0W-o2I.normalTitle" = "再發送驗證碼";
 
-/* Class = "UINavigationItem"; title = "Group Profile"; ObjectID = "X8a-6o-fLx"; */
+/* Class = "UINavigationItem"; title = "Event Profile"; ObjectID = "X8a-6o-fLx"; */
 "X8a-6o-fLx.title" = "群組資料";
 
 /* Class = "UITabBarItem"; title = "Contacts"; ObjectID = "XGi-85-d26"; */
@@ -295,7 +295,7 @@
 /* Class = "UILabel"; text = "1 SMS"; ObjectID = "YAV-t5-s5d"; */
 "YAV-t5-s5d.text" = "1 SMS";
 
-/* Class = "UITableViewController"; title = "Group Profile"; ObjectID = "Ydp-b9-UdG"; */
+/* Class = "UITableViewController"; title = "Event Profile"; ObjectID = "Ydp-b9-UdG"; */
 "Ydp-b9-UdG.title" = "群組資料";
 
 /* Class = "UILabel"; text = "Status:"; ObjectID = "ZJz-oB-aJ8"; */
@@ -307,7 +307,7 @@
 /* Class = "UINavigationItem"; title = "Verification"; ObjectID = "ZcC-2N-0qr"; */
 "ZcC-2N-0qr.title" = "驗證";
 
-/* Class = "UITabBarItem"; title = "UBudd List"; ObjectID = "a1Q-qS-O8I"; */
+/* Class = "UITabBarItem"; title = "Ubudd List"; ObjectID = "a1Q-qS-O8I"; */
 "a1Q-qS-O8I.title" = "Ubudd 名單";
 
 /* Class = "UITextField"; placeholder = "Your phone number"; ObjectID = "aJX-zn-zHw"; */
@@ -361,7 +361,7 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "e16-81-ZYw"; */
 "e16-81-ZYw.text" = "Label";
 
-/* Class = "UIButton"; normalTitle = "Delete Group"; ObjectID = "eVf-O3-r4B"; */
+/* Class = "UIButton"; normalTitle = "Delete Event"; ObjectID = "eVf-O3-r4B"; */
 "eVf-O3-r4B.normalTitle" = "刪除群組";
 
 /* Class = "UIButton"; normalTitle = "Private"; ObjectID = "eYB-pJ-7ea"; */
@@ -439,7 +439,7 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "noa-5e-T8c"; */
 "noa-5e-T8c.text" = "Label";
 
-/* Class = "UIButton"; normalTitle = "Leave Group"; ObjectID = "np7-tl-CBn"; */
+/* Class = "UIButton"; normalTitle = "Leave Event"; ObjectID = "np7-tl-CBn"; */
 "np7-tl-CBn.normalTitle" = "離開群組";
 
 /* Class = "UITextField"; placeholder = "verification code"; ObjectID = "oKd-qU-XXj"; */
@@ -520,7 +520,7 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "tFZ-yH-e6C"; */
 "tFZ-yH-e6C.text" = "Label";
 
-/* Class = "UITableViewController"; title = "New Group"; ObjectID = "tY9-Si-6JS"; */
+/* Class = "UITableViewController"; title = "New Event"; ObjectID = "tY9-Si-6JS"; */
 "tY9-Si-6JS.title" = "新群組";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "ttM-hq-EA7"; */
@@ -568,7 +568,7 @@
 /* Class = "UINavigationItem"; title = "Browser"; ObjectID = "wKv-25-O9H"; */
 "wKv-25-O9H.title" = "瀏覽器";
 
-/* Class = "UINavigationItem"; title = "New Group"; ObjectID = "wYQ-JA-FDT"; */
+/* Class = "UINavigationItem"; title = "New Event"; ObjectID = "wYQ-JA-FDT"; */
 "wYQ-JA-FDT.title" = "新群組";
 
 /* Class = "UILabel"; text = "Michael K. (C2Call)"; ObjectID = "x3D-md-bu8"; */
@@ -589,7 +589,7 @@
 /* Class = "UILabel"; text = "My Profile"; ObjectID = "yXU-fp-bXf"; */
 "yXU-fp-bXf.text" = "我的個人資料";
 
-/* Class = "UIButton"; normalTitle = "Join Group"; ObjectID = "ya1-Yp-K1d"; */
+/* Class = "UIButton"; normalTitle = "Join Event"; ObjectID = "ya1-Yp-K1d"; */
 "ya1-Yp-K1d.normalTitle" = "加入群組";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "ymA-vR-1QD"; */

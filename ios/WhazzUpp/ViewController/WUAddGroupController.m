@@ -118,7 +118,7 @@
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
 
-    [self setTitle:NSLocalizedString(@"New Group", @"")];
+    [self setTitle:NSLocalizedString(@"New Event", @"")];
     friendList = [[ResponseHandler instance] friendList];
 }
 

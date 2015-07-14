@@ -88,6 +88,7 @@
     UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"")
         style:UIBarButtonItemStyleDone target:self
         action:@selector(doneClicked:)];
+    
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
     
     [btnStatus setTitle:[SCUserProfile currentUser].userStatus forState:UIControlStateNormal];

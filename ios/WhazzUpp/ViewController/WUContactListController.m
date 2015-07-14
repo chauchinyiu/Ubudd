@@ -23,6 +23,8 @@
 @synthesize nameLabel, statusLabel, userBtn;
 @end
 
+
+
 @implementation WUAddressBaseCell
 @synthesize nameLabel;
 @end
@@ -68,7 +70,7 @@
 
     
     [[self.tabBarController.viewControllers objectAtIndex:0] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Contacts", @"") image:[UIImage imageNamed:@"contacscreen_contacts_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"]]];
-    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"UBudd List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_on"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
+    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Ubudd List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_on"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
     [[self.tabBarController.viewControllers objectAtIndex:2] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Chats", @"") image:[UIImage imageNamed:@"contacscreen_chat_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_on"]]];
     [[self.tabBarController.viewControllers objectAtIndex:3] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"More", @"") image:[UIImage imageNamed:@"contacscreen_more_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_more_icon_on"]]];
     
@@ -92,7 +94,7 @@
     
     resHandler = [ResponseHandler instance];
     
-    favoritesCellHeight = 41;
+    favoritesCellHeight = 45;
     self.managedObjectContext = [DBHandler context];
     
     [ResponseHandler instance].stdelegate = self;
@@ -317,10 +319,21 @@
                 ((WUNameGroupCell *)cell).nameLabel.text = [e.data valueForKey:@"nameChar"];
             }
             else if ([e.source isEqualToString:@"Friend"]) {
-                WUAddressBookCell *favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
-                favocell.statusLabel.font = [CommonMethods getStdFontType:2];
+
+                WUAddressBookCell *favocell;
+                favocell.statusLabel.font = [CommonMethods getStdFontType:3];
                 
                 WUAccount* accRecord = [e.data valueForKey:@"Friend"];
+                
+                if ([accRecord.status isEqualToString:@""]) {
+                    favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell2"];
+                    
+                }
+                else{
+                    favocell = (WUAddressBookCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUAddressBookCell"];
+                
+                }
+                
                 if ([accRecord.name isEqualToString:@""]) {
                     favocell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:accRecord.c2CallID];
                 }
@@ -341,6 +354,19 @@
                     favocell.userImg.layer.masksToBounds = YES;
                 }
                 [favocell.userBtn setHidden:NO];
+                
+                
+                [favocell.cellLine setHidden:NO];
+                if (i == entries.count - 1){
+                    [favocell.cellLine setHidden:YES];
+                }
+                else{
+                    WUListEntry* f = [entries objectAtIndex:i + 1];
+                    if ([f.source isEqualToString:@"NameHeader"]) {
+                        [favocell.cellLine setHidden:YES];
+                    }
+                }
+
                 
                 cell = favocell;
                 
@@ -379,10 +405,10 @@
                     [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, fullName.length)];
                 }
                 else{
-                    fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                    fullName = [NSString stringWithFormat:@"%@ %@", lastName, firstName];
                     attributedName = [[NSMutableAttributedString alloc] initWithString:fullName];
-                    [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(0, firstName.length)];
-                    [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(firstName.length + 1, lastName.length)];
+                    [attributedName addAttribute:NSFontAttributeName value:fontBold range:NSMakeRange(0, lastName.length)];
+                    [attributedName addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(lastName.length + 1, firstName.length)];
                 }
                 
                 favocell.nameLabel.attributedText = attributedName;
@@ -394,6 +420,18 @@
                 // Remove all formatting symbols that might be in both phone number being compared
                 NSCharacterSet *toExclude = [NSCharacterSet characterSetWithCharactersInString:@"/.()- "];
                 phone = [[phone componentsSeparatedByCharactersInSet:toExclude] componentsJoinedByString: @""];
+                
+                [favocell.cellLine setHidden:NO];
+                
+                if (i == entries.count - 1){
+                    [favocell.cellLine setHidden:YES];
+                }
+                else{
+                    WUListEntry* f = [entries objectAtIndex:i + 1];
+                    if ([f.source isEqualToString:@"NameHeader"]) {
+                        [favocell.cellLine setHidden:YES];
+                    }
+                }
                 
                 cell = favocell;
                 
@@ -441,7 +479,7 @@
                     fullName = lastName;
                 }
                 else{
-                    fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                    fullName = [NSString stringWithFormat:@"%@ %@", lastName, firstName];
                 }
                 
                 NSString *phone;
@@ -503,7 +541,7 @@
             fullName = lastName;
         }
         else{
-            fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            fullName = [NSString stringWithFormat:@"%@ %@", lastName, firstName];
         }
         if ([fullName rangeOfString:searchController.searchBar.text options:NSCaseInsensitiveSearch].location != NSNotFound)
         {

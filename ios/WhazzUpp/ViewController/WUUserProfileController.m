@@ -44,7 +44,7 @@
     }
     
     
-    [lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), [self.userDefaults objectForKey:@"countryCode"], stringts]];
+    [lblTelNo setText:[NSString stringWithFormat:@"%@ %@", [self.userDefaults objectForKey:@"countryCode"], stringts]];
     SCUserProfile *userProfile = [SCUserProfile currentUser];
     if (userProfile.userImage) {
         hasPhoto = YES;

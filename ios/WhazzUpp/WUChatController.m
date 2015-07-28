@@ -88,6 +88,9 @@ typedef enum : NSUInteger {
 
 - (IBAction)btnSendTapped:(id)sender{
     [self submit:sender];
+    [self.submitButton setHidden:YES];
+    [self.recordButton setHidden:NO];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -125,7 +128,7 @@ typedef enum : NSUInteger {
     [self.recordButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [self.attachButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
 
-
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13.0]} forState:UIControlStateNormal];
 }
 
 

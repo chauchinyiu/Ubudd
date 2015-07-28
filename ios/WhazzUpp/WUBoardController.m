@@ -39,11 +39,11 @@
 
 
 @implementation WUMessageTimeCell
-@synthesize timeLabel;
+@synthesize timeLabel, bgView;
 @end
 
 @implementation WUMemberJoinCell
-@synthesize timeLabel;
+@synthesize timeLabel, bgView;
 @end
 
 
@@ -73,7 +73,7 @@
 
 
 @implementation WUAudioInCell
-@synthesize playButton, playSlider, playView, isPlaying, timer, player;
+@synthesize playButton, playSlider, isPlaying, timer, player;
 
 - (IBAction)playBtnPress:(id)sender{
     if (!isPlaying) {
@@ -165,7 +165,7 @@
 @end
 
 @implementation WUAudioOutCell
-@synthesize playButton, playSlider, playView, isPlaying, timer, player;
+@synthesize playButton, playSlider, isPlaying, timer, player;
 
 - (IBAction)playBtnPress:(id)sender{
     if (!isPlaying) {
@@ -483,6 +483,16 @@ static BOOL isGroup = YES;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
             cell.timeLabel.frame = f;
             
+            CGSize expectedLabelSize = [self getSizeForText:cell.timeLabel.text withWidth:f.size.width withFont:cell.timeLabel.font];
+            
+            f = cell.timeLabel.frame;
+            f.size.width = expectedLabelSize.width;
+            f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+            cell.bgView.frame = f;
+            
+            cell.bgView.layer.cornerRadius = 9;
+            cell.bgView.layer.masksToBounds = YES;
+            
             return cell;
         }
         else{
@@ -651,21 +661,25 @@ static BOOL isGroup = YES;
                 [cell.textLabel setText:text];
                 [cell.textLabel setFont:[CommonMethods getStdFontType:2]];
                 
+                
                 // Textfield size
-                CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
-                CGSize expectedLabelSize = [text sizeWithFont:[CommonMethods getStdFontType:2]
-                                            constrainedToSize:maximumLabelSize
-                                                lineBreakMode:NSLineBreakByWordWrapping];
-                CGRect frame = CGRectMake(0, 8, expectedLabelSize.width + 90, expectedLabelSize.height + 20);
+                CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
+                
+                //bubble
+                CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 21, expectedLabelSize.height + 10);
                 [cell.bubbleView setFrame:frame];
                 
-                frame = CGRectMake(12, 8, expectedLabelSize.width, expectedLabelSize.height);
+                //text
+                frame = CGRectMake(14, 5, expectedLabelSize.width, expectedLabelSize.height);
                 [cell.textLabel setFrame:frame];
+                
                 return cell;
             }
         }
         else{
             WUMessageTimeCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageTimeCell"];
+            
+            
             
             NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"MMMM d HH:mm" options:0
                                                                       locale:[NSLocale currentLocale]];
@@ -678,6 +692,17 @@ static BOOL isGroup = YES;
             f = cell.timeLabel.frame;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
             cell.timeLabel.frame = f;
+            
+            CGSize expectedLabelSize = [self getSizeForText:cell.timeLabel.text withWidth:f.size.width withFont:cell.timeLabel.font];
+            
+            f = cell.timeLabel.frame;
+            f.size.width = expectedLabelSize.width;
+            f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+            cell.bgView.frame = f;
+            
+            cell.bgView.layer.cornerRadius = 9;
+            cell.bgView.layer.masksToBounds = YES;
+
             
             return cell;
         
@@ -709,10 +734,10 @@ static BOOL isGroup = YES;
                     return 118;
                 }
                 if ([cell isKindOfClass:[AudioCellIn class]]) {
-                    return 65;
+                    return 55;
                 }
                 if ([cell isKindOfClass:[AudioCellOut class]]) {
-                    return 65;
+                    return 55;
                 }
                 if ([cell isKindOfClass:[VideoCellIn class]]) {
                     return 120;
@@ -760,13 +785,8 @@ static BOOL isGroup = YES;
                 return 228;
             }
             else{
-                CGSize maximumLabelSize = CGSizeMake(self.view.frame.size.width - 120,9999);
-                CGSize expectedLabelSize = [b.message sizeWithFont:[CommonMethods getStdFontType:2]
-                                                 constrainedToSize:maximumLabelSize
-                                                     lineBreakMode:NSLineBreakByWordWrapping];
-                
-                CGFloat sz = expectedLabelSize.height + 48;
-                return sz;
+                CGSize sz = [self getContentSizeForText:b.message withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
+                return sz.height + 22;
             }
         }
         else{
@@ -1681,6 +1701,8 @@ static BOOL isGroup = YES;
 
     NSString *text = elem.text;
     cell.downloadKey = text;
+
+    cell.messageImage.image = [UIImage imageNamed:@"Mic_unpress.png"];
     
     // Special Handling for current submissions
     if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
@@ -1710,7 +1732,6 @@ static BOOL isGroup = YES;
         cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
         
         [cell.progress setHidden:YES];
-        [cell.playView setHidden:NO];
         [cell.playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
         
         NSString *durStr = [[C2CallPhone currentPhone] durationForKey:text];
@@ -1958,13 +1979,17 @@ static BOOL isGroup = YES;
     BOOL failed = NO;
 
     cell.downloadKey = text;
+
+    cell.messageImage.image = [UIImage imageNamed:@"Mic_unpress.png"];
     
     if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
         cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
         
         [cell.progress setHidden:YES];
-        [cell.playView setHidden:NO];
         [cell.downloadButton setHidden:YES];
+        [cell.playSlider setHidden:NO];
+        [cell.duration setHidden:NO];
+        
         [cell.playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
         
         NSString *durStr = [[C2CallPhone currentPhone] durationForKey:text];
@@ -2002,6 +2027,9 @@ static BOOL isGroup = YES;
             // We need a broken link image here and a download button
             cell.messageImage.image = [UIImage imageNamed:@"ico_broken_video.png"];
             [cell.downloadButton setHidden:YES];
+            [cell.playSlider setHidden:YES];
+            [cell.duration setHidden:YES];
+            
             [cell setLongpressAction:^{
                 UIMenuController *menu = [UIMenuController sharedMenuController];
                 NSMutableArray *menulist = [NSMutableArray arrayWithCapacity:5];
@@ -2025,6 +2053,9 @@ static BOOL isGroup = YES;
         } else {
             [cell.downloadButton setHidden:NO];
             [cell.progress setHidden:YES];
+            [cell.playSlider setHidden:YES];
+            [cell.duration setHidden:YES];
+            
             [cell setTapAction:^{
                 [cell download:cell.downloadButton];
             }];

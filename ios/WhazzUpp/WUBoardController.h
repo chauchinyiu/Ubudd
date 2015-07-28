@@ -34,10 +34,12 @@
 
 @interface WUMessageTimeCell : UITableViewCell
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property(nonatomic, weak) IBOutlet UIView *bgView;
 @end
 
 @interface WUMemberJoinCell : UITableViewCell
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property(nonatomic, weak) IBOutlet UIView *bgView;
 @end
 
 
@@ -75,7 +77,6 @@
 @interface WUAudioInCell : AudioCellInStream
 @property(nonatomic, weak) IBOutlet UIButton *playButton;
 @property(nonatomic, weak) IBOutlet UISlider *playSlider;
-@property(nonatomic, weak) IBOutlet UIView *playView;
 @property BOOL isPlaying;
 @property NSTimer *timer;
 @property AVAudioPlayer *player;
@@ -104,7 +105,6 @@
 @interface WUAudioOutCell : AudioCellOutStream
 @property(nonatomic, weak) IBOutlet UIButton *playButton;
 @property(nonatomic, weak) IBOutlet UISlider *playSlider;
-@property(nonatomic, weak) IBOutlet UIView *playView;
 @property BOOL isPlaying;
 @property NSTimer *timer;
 @property AVAudioPlayer *player;

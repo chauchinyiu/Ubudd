@@ -5,7 +5,6 @@
  Created by Ming Kei Wong on 26/1/15.
  Copyright (c) 2015年 3Embed Technologies. All rights reserved.
  */
-"Tel No" = "Tel No.: %@ %@";
 "Select photo" = "Select photo";
 "Select from Camera Roll" = "Select from Camera Roll";
 "Cancel" = "Cancel";
@@ -28,7 +27,7 @@
 "Save" = "Save";
 "Private" = "Private";
 "Public" = "Public";
-"Event Admin" = "(Event Admin)";
+"Group Admin" = "(Group Admin)";
 "online" = "online";
 "offline" = "offline";
 "Voice Mails" = "Voice Mails";
@@ -41,7 +40,7 @@
 "Connected" = "Connected";
 "Not connected" = "Not connected";
 "Share Location" = "Share Location";
-"Delete Event" = "Delete Event";
+"Delete Group" = "Delete Group";
 "Members X OF 200" = "%d OF 200";
 "Current location" = "Current location";
 "Female" = "Female";
@@ -51,11 +50,11 @@
 "Saving" = "Saving";
 "Profile updated" = "Profile updated";
 "Use Camera" = "Use Camera";
-"created an event" = "%@ created an event %@";
+"created a group" = "%@ created a group %@";
 "Join Request" = "Join Request";
-"You deleted the event" = "You deleted the event.";
-"Leave Event" = "Leave Event";
-"You left the event" = "You left the event.";
+"You deleted the group" = "You deleted the group.";
+"Leave Group" = "Leave Group";
+"You left the group" = "You left the group.";
 "Blocking a member" = "Blocking a member";
 "Do you really want to blocked this member" = "Do you really want to blocked this member?";
 "Member Blocked" = "Member Blocked";
@@ -85,17 +84,17 @@
 "First post from my iPhone app" = "First post from my iPhone app";
 "Tell Friend Email" = "Hey,\n\nI just downloaded Ubudd.";
 "Download" = "Download";
-"Delete this event" = "Delete this event";
-"Do you really want to delete this event" = "Do you really want to delete this event?";
+"Delete this group" = "Delete this group";
+"Do you really want to delete this group" = "Do you really want to delete this group?";
 "Contacts" = "Contacts";
 "Ubudd List" = "Ubudd List";
 "Chat" = "Chat";
 "Chats" = "Chats";
 "More" = "More";
 "is typing" = "%@ \nis typing...";
-"New Event" = "New Event";
+"New Group" = "New Group";
 "memberOutOf" = "(%d of 199)";
-"createdagroup" = "%@ created an event %@";
+"createdagroup" = "%@ created an group %@";
 "groupAddedMember" = "%@ added %@";
 "Request pending" = "Request pending";
 "Closed" = "Closed";
@@ -104,7 +103,7 @@
 "Later" = "Later";
 "Accept" = "Accept";
 "Reject" = "Reject";
-"Ubudd event" = "Ubudd event";
+"Ubudd group" = "Ubudd group";
 "XOfY" = "%d of %d";
 "Do you wish to delete this photo" = "Do you wish to delete this photo?";
 "Loading" = "Loading";

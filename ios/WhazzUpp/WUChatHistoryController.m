@@ -201,8 +201,8 @@
         if (hasBroadcast && tmppath.row == broadcastIdx) {
             NSLog(@"a");
             hCell.nameLabel.font = [CommonMethods getStdFontType:0];
-            hCell.timeLabel.font = [CommonMethods getStdFontType:2];
-            hCell.textLabel.font = [CommonMethods getStdFontType:2];
+            hCell.timeLabel.font = [CommonMethods getStdFontType:3];
+            hCell.textLabel.font = [CommonMethods getStdFontType:3];
             hCell.nameLabel.text = NSLocalizedString(@"Admin messages", @"");
             hCell.timeLabel.text = @"";
             hCell.textLabel.text = @"";
@@ -331,8 +331,8 @@
         if ([cell isKindOfClass:[WUChatHistoryCell class]]) {
             WUChatHistoryCell *histcell = (WUChatHistoryCell *) cell;
             histcell.nameLabel.font = [CommonMethods getStdFontType:0];
-            histcell.timeLabel.font = [CommonMethods getStdFontType:2];
-            histcell.textLabel.font = [CommonMethods getStdFontType:2];
+            histcell.timeLabel.font = [CommonMethods getStdFontType:3];
+            histcell.textLabel.font = [CommonMethods getStdFontType:3];
             histcell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:chathist.contact];
             
             if ([user.userType intValue] == 2) {

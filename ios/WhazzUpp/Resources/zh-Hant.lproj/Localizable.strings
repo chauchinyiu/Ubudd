@@ -5,7 +5,6 @@
  Created by Ming Kei Wong on 26/1/15.
  Copyright (c) 2015年 3Embed Technologies. All rights reserved.
  */
-"Tel No" = "電話號碼: %@ %@";
 "Select photo" = "選擇照片";
 "Select from Camera Roll" = "從照片簿中選擇";
 "Cancel" = "取消";
@@ -28,7 +27,7 @@
 "Save" = "保存";
 "Private" = "私人";
 "Public" = "公共";
-"Event Admin" = "(管理員)";
+"Group Admin" = "(管理員)";
 "online" = "在線";
 "offline" = "離線";
 "Voice Mails" = "錄音";
@@ -41,7 +40,7 @@
 "Connected" = "已連接";
 "Not connected" = "未連接";
 "Share Location" = "分享位置";
-"Delete Event" = "刪除群組";
+"Delete Group" = "刪除群組";
 "Members X OF 200" = "%d OF 200";
 "Current location" = "現在位置";
 "Female" = "女性";
@@ -51,11 +50,11 @@
 "Saving" = "儲存中";
 "Profile updated" = "資料已更新";
 "Use Camera" = "使用相機";
-"created an event" = "%@ 建立群組 %@";
+"created a group" = "%@ 建立群組 %@";
 "Join Request" = "要求加入";
-"You deleted the event" = "您已刪除群組";
-"Leave Event" = "離開群組";
-"You left the event" = "您已離開群組";
+"You deleted the group" = "您已刪除群組";
+"Leave Group" = "離開群組";
+"You left the group" = "您已離開群組";
 "Blocking a member" = "正在剔除成員";
 "Do you really want to blocked this member" = "您真的希望從群組中剔除這名會員嗎？";
 "Member Blocked" = "會員已被剔除";
@@ -85,15 +84,15 @@
 "First post from my iPhone app" = "我從Ubudd上發的第一個Post";
 "Tell Friend Email" = "喂,\n\n我剛剛下載了Ubudd.";
 "Download" = "下載";
-"Delete this event" = "刪除這個群組";
-"Do you really want to delete this event" = "您是否真的要刪除這個群組？";
+"Delete this group" = "刪除這個群組";
+"Do you really want to delete this group" = "您是否真的要刪除這個群組？";
 "Contacts" = "聯絡";
 "Ubudd List" = "Ubudd 名單";
 "Chat" = "對話";
 "Chats" = "對話";
 "More" = "更多";
 "is typing" = "%@ \n正在鍵入⋯⋯";
-"New Event" = "新群組";
+"New Group" = "新群組";
 "memberOutOf" = "(199 之 %d)";
 "createdagroup" = "%@ 新增了群組 %@";
 "groupAddedMember" = "%@ 加入了成員 %@";
@@ -104,7 +103,7 @@
 "Later" = "暫不決定";
 "Accept" = "接受";
 "Reject" = "不接受";
-"Ubudd event" = "Ubudd群組";
+"Ubudd group" = "Ubudd群組";
 "XOfY" = "%d / %d";
 "Do you wish to delete this photo" = "您要刪除這張照片嗎？";
 "Loading" = "載入中";

@@ -66,7 +66,6 @@
                 [group setGroupImage:btnPhoto.image withCompletionHandler:nil];
             }
             SCGroup *group = [[SCGroup alloc] initWithGroupid:groupid];
-            [group setGroupdata:txtTopic2.text forKey:@"topicDesc" public:YES];
             [group makePublic:YES];
             [group saveGroupWithCompletionHandler:^(BOOL success) {
                 
@@ -83,7 +82,6 @@
             NSString *msdin = [[NSUserDefaults standardUserDefaults] objectForKey:@"msidn"];
             
             AddChatGroupDTO *addChatGroupDTO = [[AddChatGroupDTO alloc] init];
-            addChatGroupDTO.topicDescription = txtTopic2.text;
             addChatGroupDTO.groupAdmin = msdin;
             addChatGroupDTO.interestID = [NSString stringWithFormat:@"%d", interestID];
             addChatGroupDTO.interestDescription = txtSubInterest.text;
@@ -118,7 +116,7 @@
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
 
-    [self setTitle:NSLocalizedString(@"New Event", @"")];
+    [self setTitle:NSLocalizedString(@"New Group", @"")];
     friendList = [[ResponseHandler instance] friendList];
 }
 

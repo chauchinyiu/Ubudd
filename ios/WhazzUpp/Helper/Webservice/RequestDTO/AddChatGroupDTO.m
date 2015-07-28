@@ -18,7 +18,7 @@
 
 - (NSDictionary *)dictionaryRepresentation {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    [dictionary setObject:topicDescription forKey:@"topicDescription"];
+    [dictionary setObject:@"" forKey:@"topicDescription"];
     [dictionary setObject:groupAdmin forKey:@"groupAdmin"];
     [dictionary setObject:interestID forKey:@"interestID"];
     [dictionary setObject:interestDescription forKey:@"interestDescription"];

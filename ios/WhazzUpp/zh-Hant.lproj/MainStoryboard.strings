@@ -44,7 +44,7 @@
 "4rz-K7-tPY.text" = "--";
 
 /* Class = "UILabel"; text = "Font size setting"; ObjectID = "4zY-uW-cdB"; */
-"4zY-uW-cdB.text" = "設定字體大小";
+"Sh7-Wo-t1G.text" = "設定字體大小";
 
 /* Class = "UITextField"; placeholder = "Topic Description"; ObjectID = "59Q-Ql-IBL"; */
 "59Q-Ql-IBL.placeholder" = "主題介紹";
@@ -65,7 +65,7 @@
 "82u-DS-meh.normalTitle" = "興趣";
 
 /* Class = "UILabel"; text = "Help / FAQ"; ObjectID = "8YH-Xn-8mJ"; */
-"8YH-Xn-8mJ.text" = "幫助／ 常見問題";
+"kO4-kG-1De.text" = "幫助／ 常見問題";
 
 /* Class = "UILabel"; text = "My Status "; ObjectID = "8dI-Xd-2A5"; */
 "8dI-Xd-2A5.text" = "我的狀況";
@@ -92,7 +92,7 @@
 "Cjn-Lk-GTf.text" = "狀態:";
 
 /* Class = "UILabel"; text = "Contact Us"; ObjectID = "Cp3-do-iAm"; */
-"Cp3-do-iAm.text" = "聯絡我們";
+"ct5-uE-j4I.text" = "聯絡我們";
 
 /* Class = "UILabel"; text = "USA"; ObjectID = "Cvp-7b-4EI"; */
 "Cvp-7b-4EI.text" = "USA";
@@ -344,7 +344,7 @@
 "cAp-Lk-NKp.title" = "Title";
 
 /* Class = "UILabel"; text = "Tell A Friend"; ObjectID = "cG8-Eq-v8j"; */
-"cG8-Eq-v8j.text" = "告訴朋友";
+"OKd-Aq-k6o.text" = "告訴朋友";
 
 /* Class = "UIPageViewController"; title = "Photos"; ObjectID = "cIY-ki-hEI"; */
 "cIY-ki-hEI.title" = "照片";
@@ -401,10 +401,10 @@
 "kaO-6x-kuy.text" = "興趣 (詳細):";
 
 /* Class = "UILabel"; text = "About Ubudd"; ObjectID = "kzQ-3s-9Yu"; */
-"kzQ-3s-9Yu.text" = "關於Ubudd";
+"FaZ-zX-xuf.text" = "關於Ubudd";
 
 /* Class = "UILabel"; text = "Connection Status"; ObjectID = "lRd-9b-iZf"; */
-"lRd-9b-iZf.text" = "連接狀態";
+"aGj-vW-vgS.text" = "連接狀態";
 
 /* Class = "UILabel"; text = "Location:"; ObjectID = "lTY-O4-5Cj"; */
 "lTY-O4-5Cj.text" = "位置:";
@@ -607,3 +607,7 @@
 "rNu-Ma-N5v.normalTitle" = "刪除對話";
 
 "1ZH-eR-gAS.normalTitle" = "刪除對話";
+
+"2fh-gw-0Ok.text" = "電話號碼: ";
+
+"6d7-JR-fXC.text" = "請輸入您的姓名並選擇性的加入一張人頭像";

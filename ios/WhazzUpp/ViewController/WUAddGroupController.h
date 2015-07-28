@@ -17,7 +17,6 @@
     IBOutlet UIButton *btnGroupImage;
     
     IBOutlet UITextField *txtTopic;
-    IBOutlet UITextField *txtTopic2;
     IBOutlet UIButton *btnInterest;
     IBOutlet UITextField *txtSubInterest;
     IBOutlet UIButton *btnLocation;

@@ -160,11 +160,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         if (userType == 1) {
-            return 272
-            ;
+            return 238;
         }
         else{
-            return 305;
+            return 271;
         }
     }
     else if(indexPath.section == 2){
@@ -271,7 +270,6 @@
                 }
 
                 [cell.txtTopicEdit setText:[groupInfo objectForKey:@"topic"]];
-                [cell.txtTopic2Edit setText:[groupInfo objectForKey:@"topicDescription"]];
 
                 int interestID = (int)[[groupInfo objectForKey:@"interestID"] integerValue];
                 [cell.btnInterestEdit setTitle:[[ResponseHandler instance] getInterestNameForID:interestID] forState:UIControlStateNormal];
@@ -691,7 +689,6 @@
 - (IBAction)editEnded{
     if(editCell){
         [groupInfo setObject:editCell.txtTopicEdit.text forKey:@"topic"];
-        [groupInfo setObject:editCell.txtTopic2Edit.text forKey:@"topicDescription"];
         [groupInfo setObject:editCell.txtSubInterestEdit.text forKey:@"interestDescription"];
     }
 }
@@ -927,8 +924,8 @@
 }
 
 - (void)removeGroupUserResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Leave Event", @"")
-                                                    message:NSLocalizedString(@"You left the event", @"")
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Leave Group", @"")
+                                                    message:NSLocalizedString(@"You left the group", @"")
                                                    delegate:nil
                                           cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                           otherButtonTitles:nil];
@@ -949,9 +946,9 @@
 }
 
 - (IBAction)btnDeleteTapped:(id)sender{
-    currentAction = @"Delete Event";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete this event", @"")
-                                                    message:NSLocalizedString(@"Do you really want to delete this event", @"")
+    currentAction = @"Delete Group";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete this group", @"")
+                                                    message:NSLocalizedString(@"Do you really want to delete this group", @"")
                                                    delegate:self
                                           cancelButtonTitle:NSLocalizedString(@"No", @"")
                                           otherButtonTitles:NSLocalizedString(@"Yes", @""), nil];
@@ -961,8 +958,8 @@
 
 
 - (void)deleteGroupResponse:(ResponseBase *)response error:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Event", @"")
-                                                    message:NSLocalizedString(@"You deleted the event", @"")
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete Group", @"")
+                                                    message:NSLocalizedString(@"You deleted the group", @"")
                                                    delegate:nil
                                           cancelButtonTitle:NSLocalizedString(@"OK", @"")
                                           otherButtonTitles:nil];

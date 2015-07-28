@@ -55,7 +55,7 @@
         f = [UIFont fontWithName:@"HelveticaNeue" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 3, 9)];
     }
     else if (type == 2) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 6), 8)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 5), 8)];
     }
     else if (type == 3) {
         f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 8), 7)];
@@ -63,6 +63,23 @@
     else{
         
     }
+    /*
+    if (type == 0) {
+        f = [UIFont fontWithName:@"HelveticaNeue-Bold" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleBody].pointSize, 9)];
+    }
+    else if (type == 1) {
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleBody].pointSize, 9)];
+    }
+    else if (type == 2) {
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleCaption1].pointSize), 8)];
+    }
+    else if (type == 3) {
+        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleCaption2].pointSize), 7)];
+    }
+    else{
+        
+    }
+     */
     return f;
 }
 

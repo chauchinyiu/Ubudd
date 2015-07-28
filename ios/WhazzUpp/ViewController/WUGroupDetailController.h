@@ -15,7 +15,6 @@
 @interface WUGroupDetailCellEdit : UITableViewCell
 @property(nonatomic, weak) IBOutlet UIButton *btnGroupImageEdit;
 @property(nonatomic, weak) IBOutlet UITextField *txtTopicEdit;
-@property(nonatomic, weak) IBOutlet UITextField *txtTopic2Edit;
 @property(nonatomic, weak) IBOutlet UIButton *btnInterestEdit;
 @property(nonatomic, weak) IBOutlet UITextField *txtSubInterestEdit;
 @property(nonatomic, weak) IBOutlet UIButton *btnLocationEdit;

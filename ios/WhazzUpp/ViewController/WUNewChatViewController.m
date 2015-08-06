@@ -62,9 +62,8 @@
     resHandler = [ResponseHandler instance];
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUNewChatCell"];
-    favoritesCellHeight = cell.frame.size.height;
     
-    
+    favoritesCellHeight = 36;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -109,8 +108,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WUNewChatCell *favocell = (WUNewChatCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUNewChatCell"];
-    favocell.nameLabel.font = [CommonMethods getStdFontType:0];
-    favocell.statusLabel.font = [CommonMethods getStdFontType:2];
+    //favocell.nameLabel.font = [CommonMethods getStdFontType:0];
+    //favocell.statusLabel.font = [CommonMethods getStdFontType:2];
     
     WUAccount* accRecord;
     BOOL isGroup;
@@ -141,10 +140,10 @@
         favocell.nameLabel.text = accRecord.name;
     }
     if (isGroup) {
-        favocell.statusLabel.text = NSLocalizedString(@"Ubudd group", @"");
+        favocell.statusLabel.text = NSLocalizedString(@"UBudd group", @"");
     }
     else{
-        favocell.statusLabel.text = NSLocalizedString(@"Ubudd user", @"");
+        favocell.statusLabel.text = NSLocalizedString(@"UBudd user", @"");
     }
     
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:accRecord.c2CallID];
@@ -155,6 +154,9 @@
     else{
         if(isGroup){
             favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar_group2.png"];
+        }
+        else{
+            favocell.userImg.image = [UIImage imageNamed:@"btn_ico_avatar.png"];
         }
     }
     //favocell.userImg.layer.cornerRadius = 0.0;

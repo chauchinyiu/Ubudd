@@ -12,6 +12,11 @@
 #import "WUUserSelectionController.h"
 #import <SocialCommunication/C2TapImageView.h>
 
+@interface WUGroupMemberCell : UITableViewCell
+    @property(nonatomic, weak) IBOutlet UILabel *nameLabel;
+    @property (nonatomic, weak) IBOutlet UIImageView *userImg;
+@end
+
 @interface WUAddGroupController : SCAddGroupController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     WUInterestViewControllerDelegate, WULocationSelectControllerDelegate, UIGestureRecognizerDelegate, WUUserSelectClientDelegate> {
     IBOutlet UIButton *btnGroupImage;

@@ -30,6 +30,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     WUAppDelegate *appDelegate = (WUAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     lblAboutUbudd.font = [CommonMethods getStdFontType:1];
     lblConnectionStatus.font = [CommonMethods getStdFontType:1];
     lblConnectionStatusHeader.font = [CommonMethods getStdFontType:1];
@@ -38,6 +39,7 @@
     lblTellAFriend.font = [CommonMethods getStdFontType:1];
     lblContactUs.font = [CommonMethods getStdFontType:1];
     lblHelp.font = [CommonMethods getStdFontType:1];
+    
     if (appDelegate.loginCompleted) {
         [lblConnectionStatus setText:NSLocalizedString(@"Connected", @"")];
         [lblConnectionStatus setTextColor:[UIColor colorWithRed:76.0/255.0 green:217.0/255.0 blue:100.0/255.0 alpha:1.0]];
@@ -62,15 +64,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 4;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (section == 0) {
-        return 1;
-    }
-    return 2;
+    return 10;
 }
 
 

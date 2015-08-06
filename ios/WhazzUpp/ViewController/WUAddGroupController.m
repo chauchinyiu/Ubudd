@@ -19,6 +19,10 @@
 #import "CommonMethods.h"
 #import "DataRequest.h"
 
+@implementation WUGroupMemberCell
+    @synthesize nameLabel, userImg;
+@end
+
 @interface WUAddGroupController (){
     int interestID;
     CLLocationCoordinate2D loc;
@@ -210,8 +214,11 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         return 0;
     }
+    else if (indexPath.section == 0 && indexPath.row == 1) {
+        return 42;
+    }
     else{
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        return 36;
     }
 }
 
@@ -262,15 +269,37 @@
     }
     else{
         [self checkFilled];
-        UITableViewCell* t = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        WUGroupMemberCell* t = (WUGroupMemberCell *)[self.tableView dequeueReusableCellWithIdentifier:@"GroupMemberCell"];
         NSString* memberID = [self.members objectAtIndex:indexPath.row];
         for (int i = 0; i < friendList.count; i++) {
             WUAccount* a = [friendList objectAtIndex:i];
             if ([a.c2CallID isEqualToString:memberID]) {
-                [t.textLabel setText:a.name];
+                [t.nameLabel setText:a.name];
+                
+                UIImage* image = [[C2CallPhone currentPhone] userimageForUserid:a.c2CallID];
+                if(image){
+                    [t.userImg setImage:image];
+                }
+                else{
+                    NSDictionary* userInfo = [[C2CallPhone currentPhone] getUserInfoForUserid:a.c2CallID];
+                    NSString* imageName = [userInfo objectForKey:@"ImageLarge"];
+                    if(imageName){
+                        image = [[C2CallPhone currentPhone] imageForKey:imageName];
+                        if(image){
+                            [t.userImg setImage:image];
+                        }
+                        else{
+                            image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+                            [t.userImg setImage:image];
+                        }
+                    }
+                }
+                
             }
         }
-        [t.detailTextLabel setText:@""];
+        
+
+        
         return t;
     }
 }

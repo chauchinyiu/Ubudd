@@ -126,6 +126,10 @@
                 [cell.photo setImage:image];
             }
         }
+        else{
+            image = [UIImage imageNamed:@"btn_ico_avatar.png"];
+            [cell.photo setImage:image];        
+        }
     }
     NSNumber* selected;
     if (inSearch) {
@@ -153,7 +157,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
+    return 36;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

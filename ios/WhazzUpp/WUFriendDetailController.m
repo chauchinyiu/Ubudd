@@ -118,7 +118,7 @@ static NSString* currentC2CallID = @"";
             [self.tableView reloadData];
         }
         else{
-            [profileCell.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
+            [profileCell.lblTelNo setText:[NSString stringWithFormat:@"%@ %@", countryCode, phoneNo]];
             
             [profileCell.lblStatus setText:status];
         }
@@ -151,7 +151,7 @@ static NSString* currentC2CallID = @"";
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 275;
+    return 383;
 }
 
 
@@ -181,7 +181,7 @@ static NSString* currentC2CallID = @"";
         
         
 
-        [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
+        [c.lblTelNo setText:[NSString stringWithFormat:@"%@ %@", countryCode, phoneNo]];
         [c.lblStatus setText:status];
         profileCell = c;
     }
@@ -214,7 +214,7 @@ static NSString* currentC2CallID = @"";
     
     
 
-    [c.lblTelNo setText:[NSString stringWithFormat:NSLocalizedString(@"Tel No", @""), countryCode, phoneNo]];
+    [c.lblTelNo setText:[NSString stringWithFormat:@"%@ %@", countryCode, phoneNo]];
     [c.lblStatus setText:status];
     profileCell = c;
     return c;

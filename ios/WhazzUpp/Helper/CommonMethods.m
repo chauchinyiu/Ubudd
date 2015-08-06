@@ -47,18 +47,23 @@
 
 + (UIFont*) getStdFontType:(int)type{
     
+    
+    int i = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize;
     UIFont* f;
     if (type == 0) {
-        f = [UIFont fontWithName:@"HelveticaNeue-Bold" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 3, 9)];
+        f = [UIFont fontWithName:@"HelveticaNeue-Medium" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 13 / 17];
     }
     else if (type == 1) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 3, 9)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 13 / 17];
     }
     else if (type == 2) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 5), 8)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 11 / 17];
     }
     else if (type == 3) {
-        f = [UIFont fontWithName:@"HelveticaNeue" size:MAX(([UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize - 8), 7)];
+        f = [UIFont fontWithName:@"HelveticaNeue" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 9 / 17];
+    }
+    else if (type == 4) {
+        f = [UIFont fontWithName:@"HelveticaNeue" size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 12 / 17];
     }
     else{
         

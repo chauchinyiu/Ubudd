@@ -160,18 +160,21 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         if (userType == 1) {
-            return 238;
+            return 305;
         }
         else{
-            return 271;
+            return 339;
         }
+    }
+    else if (indexPath.section == 0 && indexPath.row == 1) {
+        return 102;
     }
     else if(indexPath.section == 2){
         if (userType == 1) {
-            return 204;
+            return 170;
         }
         else if (userType == 2) {
-            return 136;
+            return 102;
         }
         else {
             return 34;
@@ -190,7 +193,7 @@
             }
         }
     }
-    return 34;
+    return 36;
     
 }
 
@@ -199,7 +202,7 @@
         return 1;
     }
     else if (section == 1) {
-        return 34;
+        return 42;
     }
     else{
         return 1;
@@ -215,7 +218,10 @@
         NSNumber* memberCnt = [groupInfo objectForKey:@"memberCnt"];
         [cell.lblMemberCnt setText:[NSString stringWithFormat:NSLocalizedString(@"Members X OF 200", @""), memberCnt.intValue + 1]];
 
-        return cell;
+        while (cell.contentView.gestureRecognizers.count) {
+            [cell.contentView removeGestureRecognizer:[cell.contentView.gestureRecognizers objectAtIndex:0]];
+        }
+        return cell.contentView;
     }
     else{
         return [self.tableView dequeueReusableCellWithIdentifier:@"blankCell"];
@@ -459,43 +465,45 @@
             switch (online) {
                 case OS_ONLINE:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+                    //cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_FORWARDED:
                     cell.detailTextLabel.text = NSLocalizedString(@"Call forward", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+                    //cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_INVISIBLE:
                     cell.detailTextLabel.text = NSLocalizedString(@"offline", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+                    //cell.detailTextLabel.textColor = [UIColor lightGrayColor];
                     break;
                 case OS_AWAY:
                     cell.detailTextLabel.text = NSLocalizedString(@"offline away", @"offline (away)");
-                    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+                    //cell.detailTextLabel.textColor = [UIColor lightGrayColor];
                     break;
                 case OS_BUSY:
                     cell.detailTextLabel.text = NSLocalizedString(@"offline busy", @"offline (busy)");
-                    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+                    //cell.detailTextLabel.textColor = [UIColor lightGrayColor];
                     break;
                 case OS_CALLME:
                     cell.detailTextLabel.text = NSLocalizedString(@"online call me", @"online (call me)");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+                    //cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_ONLINEVIDEO:
                     cell.detailTextLabel.text = NSLocalizedString(@"online active", @"online (active)");
                     break;
                 case OS_IPUSH:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+                    //cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_IPUSHCALL:
                     cell.detailTextLabel.text = NSLocalizedString(@"online", @"Cell Label");
-                    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+                    //cell.detailTextLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
                     break;
                 case OS_GROUPCALL:
                     cell.detailTextLabel.text = NSLocalizedString(@"in conference", @"Cell Label");
                     break;
             }
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            
             
         } else {
             cell.detailTextLabel.text = NSLocalizedString(@"offline", @"Cell Label");
@@ -1095,9 +1103,20 @@
 
 
 -(void)selectedUsersUpdated:(NSArray*)users{
+    NSString* photoName;
+    bool hasRepeat;
     for (int i = 0; i < users.count; i++) {
-        [memberList addObject:[users objectAtIndex:i]];
-        [newMemberList addObject:[users objectAtIndex:i]];
+        hasRepeat = false;
+        photoName = [users objectAtIndex:i];
+        for (int j = 0; j < memberList.count; j++) {
+            if ([[memberList objectAtIndex:j] isEqualToString:photoName]) {
+                hasRepeat = true;
+            }
+        }
+        if(!hasRepeat){
+            [memberList addObject:[users objectAtIndex:i]];
+            [newMemberList addObject:[users objectAtIndex:i]];
+        }
     }
     [self.tableView reloadData];
 }

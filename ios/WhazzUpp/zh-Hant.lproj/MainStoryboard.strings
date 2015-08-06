@@ -21,6 +21,9 @@
 
 /* Class = "UILabel"; text = "Tel No.:"; ObjectID = "1Tr-eb-8Tt"; */
 "1Tr-eb-8Tt.text" = "電話號碼:";
+"lWG-X8-Kpq.text" = "電話號碼:";
+"s5e-Eh-Py9.text" = "電話號碼:";
+
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "2Ox-le-SOf"; */
 "2Ox-le-SOf.text" = "Label";
@@ -44,7 +47,7 @@
 "4rz-K7-tPY.text" = "--";
 
 /* Class = "UILabel"; text = "Font size setting"; ObjectID = "4zY-uW-cdB"; */
-"Sh7-Wo-t1G.text" = "設定字體大小";
+"R2P-da-Nm2.text" = "設定字體大小";
 
 /* Class = "UITextField"; placeholder = "Topic Description"; ObjectID = "59Q-Ql-IBL"; */
 "59Q-Ql-IBL.placeholder" = "主題介紹";
@@ -65,7 +68,7 @@
 "82u-DS-meh.normalTitle" = "興趣";
 
 /* Class = "UILabel"; text = "Help / FAQ"; ObjectID = "8YH-Xn-8mJ"; */
-"kO4-kG-1De.text" = "幫助／ 常見問題";
+"xIw-p4-0Dm.text" = "幫助／ 常見問題";
 
 /* Class = "UILabel"; text = "My Status "; ObjectID = "8dI-Xd-2A5"; */
 "8dI-Xd-2A5.text" = "我的狀況";
@@ -90,9 +93,10 @@
 
 /* Class = "UILabel"; text = "Status:"; ObjectID = "Cjn-Lk-GTf"; */
 "Cjn-Lk-GTf.text" = "狀態:";
+"aWg-nd-hL9.text" = "狀態:";
 
 /* Class = "UILabel"; text = "Contact Us"; ObjectID = "Cp3-do-iAm"; */
-"ct5-uE-j4I.text" = "聯絡我們";
+"Lgw-Tc-9Oy.text" = "聯絡我們";
 
 /* Class = "UILabel"; text = "USA"; ObjectID = "Cvp-7b-4EI"; */
 "Cvp-7b-4EI.text" = "USA";
@@ -112,8 +116,8 @@
 /* Class = "UILabel"; text = "Copyright 2015\nAll rights reserved"; ObjectID = "EKj-9r-8a1"; */
 "EKj-9r-8a1.text" = "2015年版權所有";
 
-/* Class = "UINavigationItem"; title = "Ubudd"; ObjectID = "EU1-8E-5cb"; */
-"EU1-8E-5cb.title" = "Ubudd";
+/* Class = "UINavigationItem"; title = "UBudd"; ObjectID = "EU1-8E-5cb"; */
+"EU1-8E-5cb.title" = "UBudd";
 
 /* Class = "UILabel"; text = "12"; ObjectID = "EZe-uG-RhL"; */
 "EZe-uG-RhL.text" = "12";
@@ -151,8 +155,8 @@
 /* Class = "UILabel"; text = "00:00"; ObjectID = "JQ8-Y0-RaJ"; */
 "JQ8-Y0-RaJ.text" = "00:00";
 
-/* Class = "UIViewController"; title = "Ubudd Map"; ObjectID = "K4L-Le-Jh7"; */
-"K4L-Le-Jh7.title" = "Ubudd 地圖";
+/* Class = "UIViewController"; title = "UBudd Map"; ObjectID = "K4L-Le-Jh7"; */
+"K4L-Le-Jh7.title" = "UBudd 地圖";
 
 /* Class = "UILabel"; text = "My Status "; ObjectID = "KMK-qa-R6L"; */
 "KMK-qa-R6L.text" = "我的狀況";
@@ -307,8 +311,8 @@
 /* Class = "UINavigationItem"; title = "Verification"; ObjectID = "ZcC-2N-0qr"; */
 "ZcC-2N-0qr.title" = "驗證";
 
-/* Class = "UITabBarItem"; title = "Ubudd List"; ObjectID = "a1Q-qS-O8I"; */
-"a1Q-qS-O8I.title" = "Ubudd 名單";
+/* Class = "UITabBarItem"; title = "UBudd List"; ObjectID = "a1Q-qS-O8I"; */
+"a1Q-qS-O8I.title" = "UBudd 名單";
 
 /* Class = "UITextField"; placeholder = "Your phone number"; ObjectID = "aJX-zn-zHw"; */
 "aJX-zn-zHw.placeholder" = "您的電話號碼";
@@ -344,7 +348,7 @@
 "cAp-Lk-NKp.title" = "Title";
 
 /* Class = "UILabel"; text = "Tell A Friend"; ObjectID = "cG8-Eq-v8j"; */
-"OKd-Aq-k6o.text" = "告訴朋友";
+"Fby-5K-WVQ.text" = "告訴朋友";
 
 /* Class = "UIPageViewController"; title = "Photos"; ObjectID = "cIY-ki-hEI"; */
 "cIY-ki-hEI.title" = "照片";
@@ -400,8 +404,8 @@
 /* Class = "UILabel"; text = "Sub-interest:"; ObjectID = "kaO-6x-kuy"; */
 "kaO-6x-kuy.text" = "興趣 (詳細):";
 
-/* Class = "UILabel"; text = "About Ubudd"; ObjectID = "kzQ-3s-9Yu"; */
-"FaZ-zX-xuf.text" = "關於Ubudd";
+/* Class = "UILabel"; text = "About UBudd"; ObjectID = "kzQ-3s-9Yu"; */
+"kQT-AI-f08.text" = "關於UBudd";
 
 /* Class = "UILabel"; text = "Connection Status"; ObjectID = "lRd-9b-iZf"; */
 "aGj-vW-vgS.text" = "連接狀態";
@@ -469,8 +473,8 @@
 /* Class = "UILabel"; text = "SMS"; ObjectID = "pQL-M4-N1h"; */
 "pQL-M4-N1h.text" = "SMS";
 
-/* Class = "UINavigationItem"; title = "Ubudd Map"; ObjectID = "pe0-Cl-pxG"; */
-"pe0-Cl-pxG.title" = "Ubudd 地圖";
+/* Class = "UINavigationItem"; title = "UBudd Map"; ObjectID = "pe0-Cl-pxG"; */
+"pe0-Cl-pxG.title" = "UBudd 地圖";
 
 /* Class = "UILabel"; text = "Add Phone Number"; ObjectID = "pjZ-EZ-yoo"; */
 "pjZ-EZ-yoo.text" = "新增電話號碼";
@@ -495,6 +499,7 @@
 
 /* Class = "UIButton"; normalTitle = "Enter Chat"; ObjectID = "r1u-Ct-hFt"; */
 "r1u-Ct-hFt.normalTitle" = "進入對話";
+"wzT-wm-4Hp.normalTitle" = "進入對話";
 
 /* Class = "UILabel"; text = "00:00"; ObjectID = "rWo-3o-fiK"; */
 "rWo-3o-fiK.text" = "00:00";
@@ -586,8 +591,8 @@
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "yR3-dC-IZ5"; */
 "yR3-dC-IZ5.normalTitle" = "繼續";
 
-/* Class = "UILabel"; text = "My Profile"; ObjectID = "yXU-fp-bXf"; */
-"yXU-fp-bXf.text" = "我的個人資料";
+/* Class = "UILabel"; text = "My Profile"; ObjectID = "WQh-Jh-nYi"; */
+"WQh-Jh-nYi.text" = "我的個人資料";
 
 /* Class = "UIButton"; normalTitle = "Join Event"; ObjectID = "ya1-Yp-K1d"; */
 "ya1-Yp-K1d.normalTitle" = "加入群組";
@@ -611,3 +616,12 @@
 "2fh-gw-0Ok.text" = "電話號碼: ";
 
 "6d7-JR-fXC.text" = "請輸入您的姓名並選擇性的加入一張人頭像";
+
+"t1S-Uj-8fx.text" = "位置";
+"E16-m6-gbJ.text" = "位置";
+"j7i-DY-eFh.text" = "位置";
+
+"RdU-mL-k4v.text" = "群組性質";
+"09x-do-3We.text" = "群組性質";
+"yCX-Xi-hFD.text" = "群組性質";
+

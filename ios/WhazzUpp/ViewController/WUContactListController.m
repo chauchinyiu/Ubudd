@@ -70,7 +70,7 @@
 
     
     [[self.tabBarController.viewControllers objectAtIndex:0] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Contacts", @"") image:[UIImage imageNamed:@"contacscreen_contacts_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"]]];
-    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Ubudd List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_on"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
+    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"UBudd List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_on"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
     [[self.tabBarController.viewControllers objectAtIndex:2] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Chats", @"") image:[UIImage imageNamed:@"contacscreen_chat_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_on"]]];
     [[self.tabBarController.viewControllers objectAtIndex:3] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"More", @"") image:[UIImage imageNamed:@"contacscreen_more_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_more_icon_on"]]];
     
@@ -94,7 +94,7 @@
     
     resHandler = [ResponseHandler instance];
     
-    favoritesCellHeight = 45;
+    favoritesCellHeight = 35;
     self.managedObjectContext = [DBHandler context];
     
     [ResponseHandler instance].stdelegate = self;
@@ -108,7 +108,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0){
-        return NSLocalizedString(@"Ubudd", @"");
+        return NSLocalizedString(@"UBudd", @"");
     }
     else{
         return NSLocalizedString(@"Address book", @"");
@@ -120,7 +120,7 @@
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     WUNameGroupCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUNameGroupCell"];
     if(section == 0){
-        cell.nameLabel.text = NSLocalizedString(@"Ubudd", @"");
+        cell.nameLabel.text = NSLocalizedString(@"UBudd", @"");
     }
     else{
         cell.nameLabel.text = NSLocalizedString(@"Address book", @"");
@@ -301,7 +301,7 @@
                 return 17;
             }
             else{
-                return favoritesCellHeight;
+                return MAX(favoritesCellHeight * [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize / 17, favoritesCellHeight);
             }
         }
     }

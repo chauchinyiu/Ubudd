@@ -20,9 +20,9 @@
 "Sleeping" = "Sleeping";
 "Only urgent matters" = "Only urgent matters";
 "Im bored please talk to me" = "I'm bored, please talk to me...";
-"Ubudd friends" = "Ubudd friends";
+"UBudd friends" = "UBudd friends";
 "Address book" = "Address book";
-"Using Ubudd" = "Using Ubudd";
+"Using UBudd" = "Using UBudd";
 "Within Km radius in" = "Within %dKm radius in";
 "Save" = "Save";
 "Private" = "Private";
@@ -33,7 +33,7 @@
 "Voice Mails" = "Voice Mails";
 "Voice Mail" = "Voice Mail";
 "Picture Message" = "Picture Message";
-"Ubudd user" = "Ubudd user";
+"UBudd user" = "UBudd user";
 "Select an option" = "Select an option";
 "Choose Photo or Video" = "Choose Photo or Video";
 "Send Contact" = "Send Contact";
@@ -80,14 +80,14 @@
 "Admin" = "Admin";
 "Admin messages" = "Admin messages";
 "You have requests" = "You have %d requests";
-"Tell Friend SMS" = "Check out Ubudd for your smartphone. Download it today from APPSTORE_LINK_URL";
+"Tell Friend SMS" = "Check out UBudd for your smartphone. Download it today from APPSTORE_LINK_URL";
 "First post from my iPhone app" = "First post from my iPhone app";
-"Tell Friend Email" = "Hey,\n\nI just downloaded Ubudd.";
+"Tell Friend Email" = "Hey,\n\nI just downloaded UBudd.";
 "Download" = "Download";
 "Delete this group" = "Delete this group";
 "Do you really want to delete this group" = "Do you really want to delete this group?";
 "Contacts" = "Contacts";
-"Ubudd List" = "Ubudd List";
+"UBudd List" = "UBudd List";
 "Chat" = "Chat";
 "Chats" = "Chats";
 "More" = "More";
@@ -103,7 +103,7 @@
 "Later" = "Later";
 "Accept" = "Accept";
 "Reject" = "Reject";
-"Ubudd group" = "Ubudd group";
+"UBudd group" = "UBudd group";
 "XOfY" = "%d of %d";
 "Do you wish to delete this photo" = "Do you wish to delete this photo?";
 "Loading" = "Loading";
@@ -144,4 +144,4 @@
 "in conference" = "in conference";
 "Photo Action" = "Photo Action";
 "Requests to join" = "Requests to join %@";
-"webString" = "<div style='font-family:Helvetica Neue'>By continuing, you are indicating that you agree to <a href='a'>the Privacy Policy</a> and <a href='b'>Terms and Conditions</a>.</div>";
+"webString" = "<div style='font-family:Helvetica Neue; font-size:13px'>By continuing, you are indicating that you agree to <a href='a'>the Privacy Policy</a> and <a href='b'>Terms and Conditions</a>.</div>";

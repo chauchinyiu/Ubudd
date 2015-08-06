@@ -48,7 +48,8 @@
     [self.view addGestureRecognizer:tap];
     
     [webView loadHTMLString:NSLocalizedString(@"webString", @"") baseURL:NULL];
-
+    NSString* jsString = [[NSString alloc] initWithFormat: @"document.getElementsByTagName('div')[0].style.webkitTextSizeAdjust='%d%%'", 13 * 100 / 20];
+    [webView stringByEvaluatingJavaScriptFromString:jsString];
 }
 - (void)viewWillAppear:(BOOL)animated {
     lblCountryCode.text = [self countryCode];

@@ -1133,9 +1133,11 @@
 		CEA8677C1AE5FE6500324485 /* ico_notdelivered.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA8677B1AE5FE6500324485 /* ico_notdelivered.png */; };
 		CEB0506C1A73773D001BDD35 /* Mic_press.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0506B1A73773D001BDD35 /* Mic_press.png */; };
 		CEB0506E1A737745001BDD35 /* Mic_unpress.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB0506D1A737745001BDD35 /* Mic_unpress.png */; };
+		CEB274901B70959A009840D0 /* WUHairLine.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2748F1B70959A009840D0 /* WUHairLine.m */; };
 		CEBA823119ECD55500B3F109 /* WUJoinRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA823019ECD55500B3F109 /* WUJoinRequestController.m */; };
 		CEBD095D1B394BD2001925C6 /* WUNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD095C1B394BD1001925C6 /* WUNavigationBar.m */; };
 		CEC4991D1B53A62B00D45C29 /* sliderbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC4991C1B53A62B00D45C29 /* sliderbutton.png */; };
+		CEC6577C1B712A560072DC97 /* phoneIcon80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC6577B1B712A560072DC97 /* phoneIcon80x80.png */; };
 		CECA86C51AA610AA0096571F /* C2CallDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CECA86BA1AA610AA0096571F /* C2CallDataModel.xcdatamodeld */; };
 		CECA9E481A035501007B9FE7 /* btn_ico_avatar_group2.png in Resources */ = {isa = PBXBuildFile; fileRef = CECA9E471A035501007B9FE7 /* btn_ico_avatar_group2.png */; };
 		CECA9E4A1A03550B007B9FE7 /* btn_ico_avatar_group2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CECA9E491A03550B007B9FE7 /* btn_ico_avatar_group2@2x.png */; };
@@ -2343,6 +2345,8 @@
 		CEA8677B1AE5FE6500324485 /* ico_notdelivered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_notdelivered.png; sourceTree = "<group>"; };
 		CEB0506B1A73773D001BDD35 /* Mic_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mic_press.png; sourceTree = "<group>"; };
 		CEB0506D1A737745001BDD35 /* Mic_unpress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mic_unpress.png; sourceTree = "<group>"; };
+		CEB2748E1B70959A009840D0 /* WUHairLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUHairLine.h; sourceTree = "<group>"; };
+		CEB2748F1B70959A009840D0 /* WUHairLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUHairLine.m; sourceTree = "<group>"; };
 		CEB40A011AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CEB40A021AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Country.strings"; sourceTree = "<group>"; };
 		CEB40A031AF7196A00FE13C7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -2351,6 +2355,7 @@
 		CEBD095B1B394BD1001925C6 /* WUNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WUNavigationBar.h; sourceTree = "<group>"; };
 		CEBD095C1B394BD1001925C6 /* WUNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WUNavigationBar.m; sourceTree = "<group>"; };
 		CEC4991C1B53A62B00D45C29 /* sliderbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sliderbutton.png; sourceTree = "<group>"; };
+		CEC6577B1B712A560072DC97 /* phoneIcon80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phoneIcon80x80.png; sourceTree = "<group>"; };
 		CECA86BB1AA610AA0096571F /* C2CallDataModel 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "C2CallDataModel 11.xcdatamodel"; sourceTree = "<group>"; };
 		CECA86BC1AA610AA0096571F /* C2CallDataModel 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "C2CallDataModel 12.xcdatamodel"; sourceTree = "<group>"; };
 		CECA86BD1AA610AA0096571F /* C2CallDataModel 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "C2CallDataModel 13.xcdatamodel"; sourceTree = "<group>"; };
@@ -3613,6 +3618,7 @@
 		17FC6643194DC89D0080A2D5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CEC6577B1B712A560072DC97 /* phoneIcon80x80.png */,
 				CE1DCC8C1B5AA21E00703121 /* backarrow.png */,
 				CE1DCC8E1B5AA22B00703121 /* backarrow@2x.png */,
 				CEC4991C1B53A62B00D45C29 /* sliderbutton.png */,
@@ -3733,6 +3739,8 @@
 				CEEFF0FB19B19EE000B59179 /* WUBoardController.m */,
 				CEF625291AEB48CC000F87E9 /* WUTabBar.h */,
 				CEF6252A1AEB48CC000F87E9 /* WUTabBar.m */,
+				CEB2748E1B70959A009840D0 /* WUHairLine.h */,
+				CEB2748F1B70959A009840D0 /* WUHairLine.m */,
 				9799540C175B5588001F2D52 /* MainStoryboard.storyboard */,
 				CE1430321AFC75B50083B13F /* chatboard.storyboard */,
 				17A1D6901927EDB300B28792 /* Images.xcassets */,
@@ -4554,6 +4562,7 @@
 				173063D619277F6B0018EE25 /* np-967.xml in Resources */,
 				173062A219277F6B0018EE25 /* ico_webmail_import.png in Resources */,
 				1730607B19277F6B0018EE25 /* bg_video_groupcall_bar@2x.png in Resources */,
+				CEC6577C1B712A560072DC97 /* phoneIcon80x80.png in Resources */,
 				173060FE19277F6B0018EE25 /* error.wav in Resources */,
 				1730628E19277F6B0018EE25 /* ico_stop.png in Resources */,
 				1730641819277F6B0018EE25 /* ziffer_plus_h.png in Resources */,
@@ -4914,6 +4923,7 @@
 				CE7E964719F8F6F1001C229F /* WUUbuddMapViewController.m in Sources */,
 				CE8A895B1A43BD99000EE809 /* WUPhotoViewController.m in Sources */,
 				CE787B1919B032FD00A0BD19 /* DataRequest.m in Sources */,
+				CEB274901B70959A009840D0 /* WUHairLine.m in Sources */,
 				17FD053F195907840061938A /* WUTellFriendController.m in Sources */,
 				CE61BD5D1A17601E001E63D8 /* WUMediaController.m in Sources */,
 				CEA092C11AEA35610070508A /* WUMovieViewController.m in Sources */,

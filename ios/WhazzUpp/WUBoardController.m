@@ -486,7 +486,7 @@ static BOOL isGroup = YES;
             CGSize expectedLabelSize = [self getSizeForText:cell.timeLabel.text withWidth:f.size.width withFont:cell.timeLabel.font];
             
             f = cell.timeLabel.frame;
-            f.size.width = expectedLabelSize.width;
+            f.size.width = expectedLabelSize.width + 14;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
             cell.bgView.frame = f;
             
@@ -659,11 +659,11 @@ static BOOL isGroup = YES;
                 
                 NSString *text = b.message;
                 [cell.textLabel setText:text];
-                [cell.textLabel setFont:[CommonMethods getStdFontType:2]];
+                [cell.textLabel setFont:[CommonMethods getStdFontType:4]];
                 
                 
                 // Textfield size
-                CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
+                CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:4]];
                 
                 //bubble
                 CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 21, expectedLabelSize.height + 10);
@@ -693,10 +693,12 @@ static BOOL isGroup = YES;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
             cell.timeLabel.frame = f;
             
+            
+            
             CGSize expectedLabelSize = [self getSizeForText:cell.timeLabel.text withWidth:f.size.width withFont:cell.timeLabel.font];
             
             f = cell.timeLabel.frame;
-            f.size.width = expectedLabelSize.width;
+            f.size.width = expectedLabelSize.width + 14;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
             cell.bgView.frame = f;
             
@@ -809,9 +811,6 @@ static BOOL isGroup = YES;
     if ([cell isKindOfClass:[WULocationOutCell class]]) {
         WULocationOutCell *c = (WULocationOutCell*)cell;
         [c.headline setHidden:YES];
-        [c.locationAddress setTextColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0]];
-        [c.contactName setTextColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0]];
-        [c.info setTextColor:[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0]];
         [c.locationTitle setTitle:NSLocalizedString(@"Current location", @"") forState:UIControlStateNormal];
         
         CGRect frame = c.bubbleView.frame;
@@ -1244,10 +1243,10 @@ static BOOL isGroup = YES;
 {
     NSString *text = elem.text;
     [cell.textLabel setText:text];
-    [cell.textLabel setFont:[CommonMethods getStdFontType:2]];
+    [cell.textLabel setFont:[CommonMethods getStdFontType:4]];
     
     // Textfield size
-    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:4]];
     
     //bubble
     CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 21, expectedLabelSize.height + 10);
@@ -1288,12 +1287,12 @@ static BOOL isGroup = YES;
 {
     NSString *text = elem.text;
     [cell.textLabel setText:text];
-    [cell.textLabel setFont:[CommonMethods getStdFontType:2]];
+    [cell.textLabel setFont:[CommonMethods getStdFontType:4]];
     
     // Textfield size
-    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:4]];
     
-    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
+    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:4]];
     
     //bubble
     CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 14, 0, contentSize.width + 16, contentSize.height + 10);
@@ -1693,6 +1692,8 @@ static BOOL isGroup = YES;
     }];
     
     [self setSubmittedStatusIcon:cell forStatus:[elem.status intValue]];
+    [cell.locationAddress setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
+
 }
 
 

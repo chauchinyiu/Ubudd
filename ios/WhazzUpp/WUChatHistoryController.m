@@ -72,10 +72,10 @@
     self.cellIdentifier = @"WUChatHistoryCell";
     
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:self.cellIdentifier];
-    chatHistoryCellHeight = cell.frame.size.height;
+    chatHistoryCellHeight = MAX(58 * [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize / 17, 58);
     
     cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUHistoryRequestCell"];
-    requestCellHeight = cell.frame.size.height;
+    requestCellHeight = 34;
 
     calendar = [NSCalendar currentCalendar];
     hasBroadcast = false;
@@ -161,17 +161,7 @@
                 } else {
                     return chatHistoryCellHeight;
                 }
-                
-                /*
-                NSMutableArray* friends = [[ResponseHandler instance] friendList];
-                for (int i = 0; i < friends.count; i++) {
-                    WUAccount* a = [friends objectAtIndex:i];
-                    if ([a.c2CallID isEqualToString:chathist.contact]) {
-                        NSLog(@"h");
-                        return chatHistoryCellHeight;
-                    }
-                }
-                 */
+
             }
             NSLog(@"0");
 
@@ -201,8 +191,8 @@
         if (hasBroadcast && tmppath.row == broadcastIdx) {
             NSLog(@"a");
             hCell.nameLabel.font = [CommonMethods getStdFontType:0];
-            hCell.timeLabel.font = [CommonMethods getStdFontType:3];
-            hCell.textLabel.font = [CommonMethods getStdFontType:3];
+            hCell.timeLabel.font = [CommonMethods getStdFontType:2];
+            hCell.textLabel.font = [CommonMethods getStdFontType:2];
             hCell.nameLabel.text = NSLocalizedString(@"Admin messages", @"");
             hCell.timeLabel.text = @"";
             hCell.textLabel.text = @"";
@@ -331,8 +321,8 @@
         if ([cell isKindOfClass:[WUChatHistoryCell class]]) {
             WUChatHistoryCell *histcell = (WUChatHistoryCell *) cell;
             histcell.nameLabel.font = [CommonMethods getStdFontType:0];
-            histcell.timeLabel.font = [CommonMethods getStdFontType:3];
-            histcell.textLabel.font = [CommonMethods getStdFontType:3];
+            histcell.timeLabel.font = [CommonMethods getStdFontType:2];
+            histcell.textLabel.font = [CommonMethods getStdFontType:2];
             histcell.nameLabel.text = [[C2CallPhone currentPhone] nameForUserid:chathist.contact];
             
             if ([user.userType intValue] == 2) {
@@ -423,7 +413,7 @@
                 histcell.timeLabel.textColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
             } else {
                 histcell.missedEvents.hidden = YES;
-                histcell.timeLabel.textColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+                histcell.timeLabel.textColor = [UIColor colorWithRed:160.0/255.0 green:160.0/255.0 blue:160.0/255.0 alpha:1.0];
             }
         }
     }

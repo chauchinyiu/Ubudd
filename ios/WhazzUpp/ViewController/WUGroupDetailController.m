@@ -379,6 +379,7 @@
     
         SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.tag = indexPath.row;
+        cell.inviteButton.tag = indexPath.row;
         [cell setHidden:NO];
         
         if (indexPath.row == 1 && !(userType == 1 || userType == 2 || isPublic.intValue == 1)) {

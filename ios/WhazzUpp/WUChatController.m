@@ -31,7 +31,7 @@ typedef enum : NSUInteger {
     BOOL isRecording;
     double accumulatedTime;
     NSTimer* timer;
-    NSAttributedString* boardTitle;
+    NSMutableAttributedString* boardTitle;
     AVAudioRecorder *audioRecorder;
 }
 
@@ -111,6 +111,8 @@ typedef enum : NSUInteger {
         }
     }
     
+    UIFont* fontStdb = [CommonMethods getStdFontType:0];
+    [boardTitle addAttribute:NSFontAttributeName value:fontStdb range:NSMakeRange(0, boardTitle.length)];
     
     
     UIBarButtonItem *newBackButton =[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"")
@@ -122,6 +124,7 @@ typedef enum : NSUInteger {
     ((WUBoardController*)self.chatboard).chatTitle = [boardTitle string];
     [self.chatboard.tableView reloadData];
     [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];
+    
     self.chatInput.font = [CommonMethods getStdFontType:1];
     [self resizeToolbar:@"A"];
 
@@ -185,6 +188,10 @@ typedef enum : NSUInteger {
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:self.targetUserid];
     if(user){
         boardTitle = [[NSMutableAttributedString alloc] initWithString:user.displayName];
+        UIFont* fontStdb = [CommonMethods getStdFontType:0];
+        [boardTitle addAttribute:NSFontAttributeName value:fontStdb range:NSMakeRange(0, boardTitle.length)];
+        
+        
         [self.titleButton setAttributedTitle:boardTitle forState:UIControlStateNormal];
     }
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:self.targetUserid];
@@ -206,7 +213,7 @@ typedef enum : NSUInteger {
     
 
     
-    self.chatInput.font = [UIFont fontWithName:self.chatInput.font.fontName size:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize * 2 - 12];
+    self.chatInput.font = [CommonMethods getStdFontType:1];
     
     
     [self.submitButton setHidden:YES];
@@ -300,6 +307,10 @@ typedef enum : NSUInteger {
 
         NSMutableAttributedString* atitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"is typeing", @"%@ \nis typing..."), [boardTitle string]]];
 
+        UIFont* fontStdb = [CommonMethods getStdFontType:0];
+        [atitle addAttribute:NSFontAttributeName value:fontStdb range:NSMakeRange(0, boardTitle.length)];
+        
+        
         UIFont* fontStd = [CommonMethods getStdFontType:3];
         [atitle addAttribute:NSFontAttributeName value:fontStd range:NSMakeRange(boardTitle.length, atitle.length - boardTitle.length)];
         [atitle addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(boardTitle.length, atitle.length - boardTitle.length)];

@@ -659,11 +659,11 @@ static BOOL isGroup = YES;
                 
                 NSString *text = b.message;
                 [cell.textLabel setText:text];
-                [cell.textLabel setFont:[CommonMethods getStdFontType:4]];
+                [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
                 
                 
                 // Textfield size
-                CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:4]];
+                CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
                 
                 //bubble
                 CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 21, expectedLabelSize.height + 10);
@@ -1243,10 +1243,10 @@ static BOOL isGroup = YES;
 {
     NSString *text = elem.text;
     [cell.textLabel setText:text];
-    [cell.textLabel setFont:[CommonMethods getStdFontType:4]];
+    [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
     
     // Textfield size
-    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:4]];
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
     //bubble
     CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 21, expectedLabelSize.height + 10);
@@ -1287,12 +1287,12 @@ static BOOL isGroup = YES;
 {
     NSString *text = elem.text;
     [cell.textLabel setText:text];
-    [cell.textLabel setFont:[CommonMethods getStdFontType:4]];
+    [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
     
     // Textfield size
-    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:4]];
+    CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
-    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:4]];
+    CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
     //bubble
     CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 14, 0, contentSize.width + 16, contentSize.height + 10);

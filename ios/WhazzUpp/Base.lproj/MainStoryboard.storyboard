@@ -6946,7 +6946,7 @@ All rights reserved.</string>
                                                     <rect key="frame" x="65" y="9" width="190" height="44"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="verification code" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oKd-qU-XXj" customClass="SCTextField">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="verification code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oKd-qU-XXj" customClass="SCTextField">
                                                     <rect key="frame" x="73" y="15" width="174" height="31"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
@@ -8001,14 +8001,14 @@ All rights reserved.</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sk8-fE-Q4T"/>
-        <segue reference="l4c-f0-WTn"/>
         <segue reference="VQ9-8Q-vDt"/>
         <segue reference="TC0-AQ-IeD"/>
+        <segue reference="sk8-fE-Q4T"/>
+        <segue reference="gEM-cP-vpS"/>
         <segue reference="pQ9-cK-UrR"/>
+        <segue reference="wV6-VW-yCP"/>
         <segue reference="4Xm-Dr-ARs"/>
         <segue reference="qEU-4M-V6f"/>
-        <segue reference="wV6-VW-yCP"/>
         <segue reference="CpG-ap-BDD"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

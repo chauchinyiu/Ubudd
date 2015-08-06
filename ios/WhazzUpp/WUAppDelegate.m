@@ -197,7 +197,10 @@
         [[NSUserDefaults standardUserDefaults] setInteger:kRefreshVersion forKey:@"RefreshVersion"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    [[ResponseHandler instance] checkPhoneNumberFromIndex:0];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"phoneNo"]) {
+        [[ResponseHandler instance] checkPhoneNumberFromIndex:0];
+        
+    }
     [[ResponseHandler instance] readBroadcasts];
 }
 

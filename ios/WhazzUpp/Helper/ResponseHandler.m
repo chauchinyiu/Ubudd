@@ -317,17 +317,27 @@ static ResponseHandler *myInstance;
     }
     else {
         NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
+        NSMutableString *stringts;
+        if([u objectForKey:@"phoneNo"]){
+            stringts = [NSMutableString stringWithString:[u objectForKey:@"phoneNo"]];
+        }
+        else{
+            stringts = [NSMutableString stringWithString:@""];
+        }
+        
         NSMutableDictionary* addressbookInfo = [[NSMutableDictionary alloc] initWithDictionary:res.data];
         NSNumber* matchCnt = [addressbookInfo objectForKey:@"matchCnt"];
         for (int i = 0; i < [matchCnt intValue]; i++) {
             NSString* phoneNo = [addressbookInfo objectForKey:[NSString stringWithFormat:@"phoneMatch%d", i]];
             NSString* c2CallID = [addressbookInfo objectForKey:[NSString stringWithFormat:@"c2CallID%d", i]];
             NSString* status = [addressbookInfo objectForKey:[NSString stringWithFormat:@"status%d", i]];
-            WUAccount* a = [[WUAccount alloc] init];
-            a.c2CallID = c2CallID;
-            a.phoneNo = phoneNo;
-            a.status = status;
-            [self.friendList addObject:a];
+            if(![phoneNo isEqualToString:stringts]){
+                WUAccount* a = [[WUAccount alloc] init];
+                a.c2CallID = c2CallID;
+                a.phoneNo = phoneNo;
+                a.status = status;
+                [self.friendList addObject:a];
+            }
         }
         
         for (int j = 0; j < self.friendList.count; j++) {

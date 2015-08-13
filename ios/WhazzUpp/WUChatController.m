@@ -94,6 +94,8 @@ typedef enum : NSUInteger {
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"start chat will appear");
+
     self.navigationController.navigationBar.translucent = NO;
     NSMutableArray* friends = [ResponseHandler instance].friendList;
     
@@ -132,6 +134,8 @@ typedef enum : NSUInteger {
     [self.attachButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
 
     [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13.0]} forState:UIControlStateNormal];
+    NSLog(@"end chat will appear");
+
 }
 
 
@@ -164,6 +168,7 @@ typedef enum : NSUInteger {
 #pragma mark - UIViewController Delegate
 - (void)viewDidLoad
 {
+    NSLog(@"start chat did load");
     
     [super viewDidLoad];
     
@@ -268,7 +273,16 @@ typedef enum : NSUInteger {
     } else {
         [audioRecorder prepareToRecord];
     }
+    NSLog(@"end chat did load");
     
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"start chat did appear");
+    [super viewDidAppear:animated];
+    NSLog(@"end chat did appear");
     
 }
 

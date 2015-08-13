@@ -293,6 +293,7 @@ static BOOL isGroup = YES;
 
 - (void)viewDidLoad
 {
+    NSLog(@"start load");
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -314,10 +315,14 @@ static BOOL isGroup = YES;
     self.tableView.tableHeaderView = dummyView;
     self.tableView.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
     
-    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"sliderbutton.png"] forState:UIControlStateNormal];    
+    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"sliderbutton.png"] forState:UIControlStateNormal];
+    NSLog(@"end load");
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    NSLog(@"start will appear");
+
     self.navigationController.navigationBar.translucent = NO;
 
     isVisible = YES;
@@ -330,6 +335,8 @@ static BOOL isGroup = YES;
         }
     }
     [self.tableView reloadData];
+    NSLog(@"end will appear");
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -338,6 +345,14 @@ static BOOL isGroup = YES;
     isVisible = NO;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"start did appear");
+    [super viewDidAppear:animated];
+    NSLog(@"end did appear");
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -515,7 +530,8 @@ static BOOL isGroup = YES;
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    NSLog(@"start cell for row");
+
     if (self.targetUserid) {
         UITableViewCell* cell;
         for (int i = 0; i < entries.count; i++) {
@@ -609,6 +625,8 @@ static BOOL isGroup = YES;
                 else if ([e.source isEqualToString:@"NoMessage"]) {
                     cell = [self.tableView dequeueReusableCellWithIdentifier:@"SCNoMessagesCell"];
                 }
+                NSLog(@"end cell for row 1");
+
                 return cell;
             }
         }
@@ -651,6 +669,7 @@ static BOOL isGroup = YES;
                 if (!b.imgData) {
                     [ResponseHandler instance].bcdelegate = self;
                 }
+                NSLog(@"end cell for row 2");
                 
                 return cell;
             }
@@ -672,6 +691,7 @@ static BOOL isGroup = YES;
                 //text
                 frame = CGRectMake(14, 5, expectedLabelSize.width, expectedLabelSize.height);
                 [cell.textLabel setFrame:frame];
+                NSLog(@"end cell for row 3");
                 
                 return cell;
             }
@@ -706,10 +726,13 @@ static BOOL isGroup = YES;
             cell.bgView.layer.masksToBounds = YES;
 
             
+            NSLog(@"end cell for row 4");
             return cell;
         
         }
     }
+    
+
 }
 
 
@@ -2364,6 +2387,8 @@ static BOOL isGroup = YES;
 }
 
 -(void)rebuildListEntries{
+    NSLog(@"start rebuild list");
+
     headers = [[NSMutableArray alloc] init];
     entries = [[NSMutableArray alloc] init];
     sectionSize = [[NSMutableArray alloc] init];
@@ -2453,6 +2478,8 @@ static BOOL isGroup = YES;
             }
         }
     }
+    NSLog(@"end rebuild list");
+    
 }
 
 -(void)addJoinEntryFrom:(NSDate*)pDateF to:(NSDate*)pDateT{

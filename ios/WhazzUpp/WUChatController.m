@@ -319,7 +319,7 @@ typedef enum : NSUInteger {
     if ([fromUserid isEqualToString:self.targetUserid]) {
         self.lastTypeEventReceived = CFAbsoluteTimeGetCurrent();
 
-        NSMutableAttributedString* atitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"is typeing", @"%@ \nis typing..."), [boardTitle string]]];
+        NSMutableAttributedString* atitle = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"is typing", @"%@ \nis typing..."), [boardTitle string]]];
 
         UIFont* fontStdb = [CommonMethods getStdFontType:0];
         [atitle addAttribute:NSFontAttributeName value:fontStdb range:NSMakeRange(0, boardTitle.length)];

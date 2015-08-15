@@ -23,7 +23,6 @@
     
     IBOutlet UITextField *txtTopic;
     IBOutlet UIButton *btnInterest;
-    IBOutlet UITextField *txtSubInterest;
     IBOutlet UIButton *btnLocation;
     IBOutlet UIButton *btnIsPublic;
     IBOutlet UIBarButtonItem *btnDone;

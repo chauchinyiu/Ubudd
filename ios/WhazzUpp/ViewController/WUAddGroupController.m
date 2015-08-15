@@ -88,7 +88,6 @@
             AddChatGroupDTO *addChatGroupDTO = [[AddChatGroupDTO alloc] init];
             addChatGroupDTO.groupAdmin = msdin;
             addChatGroupDTO.interestID = [NSString stringWithFormat:@"%d", interestID];
-            addChatGroupDTO.interestDescription = txtSubInterest.text;
             addChatGroupDTO.c2CallID = groupid;
             addChatGroupDTO.location = btnLocation.titleLabel.text;
             addChatGroupDTO.latCoord = loc.latitude;
@@ -122,6 +121,11 @@
 
     [self setTitle:NSLocalizedString(@"New Group", @"")];
     friendList = [[ResponseHandler instance] friendList];
+    
+    [txtTopic setFont:[CommonMethods getStdFontType:1]];
+    [btnInterest.titleLabel setFont:[CommonMethods getStdFontType:1]];
+    [btnLocation.titleLabel setFont:[CommonMethods getStdFontType:1]];
+    [btnIsPublic.titleLabel setFont:[CommonMethods getStdFontType:1]];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -271,6 +275,7 @@
         [self checkFilled];
         WUGroupMemberCell* t = (WUGroupMemberCell *)[self.tableView dequeueReusableCellWithIdentifier:@"GroupMemberCell"];
         NSString* memberID = [self.members objectAtIndex:indexPath.row];
+        [t.nameLabel setFont:[CommonMethods getStdFontType:1]];
         for (int i = 0; i < friendList.count; i++) {
             WUAccount* a = [friendList objectAtIndex:i];
             if ([a.c2CallID isEqualToString:memberID]) {

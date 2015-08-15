@@ -87,6 +87,7 @@
 
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:8.0]} forState:UIControlStateSelected];
 
+    [[UITextField appearance] setTintColor:[UIColor blackColor]];
 }
 
 - (void)registerPushNotifications {

@@ -240,7 +240,7 @@
         }
     }
     
-    return 208;
+    return 180;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -384,7 +384,7 @@
 
 
 -(void)updateLocationSearchGUI{
-    distanceLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Within Km radius in", @""), searchDist];
+    distanceLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Within Km radius of", @""), searchDist];
     locationLabel.text = locName;
 }
 

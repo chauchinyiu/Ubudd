@@ -160,10 +160,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         if (userType == 1) {
-            return 305;
+            return 271;
         }
         else{
-            return 339;
+            return 309;
         }
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
@@ -193,7 +193,8 @@
             }
         }
     }
-    return 36;
+    
+    return MAX(36 * [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize / 17, 36);
     
 }
 
@@ -274,15 +275,17 @@
                 if(groupImg){
                     [cell.btnPhoto setImage:groupImg];
                 }
-
+                [cell.txtTopicEdit setFont:[CommonMethods getStdFontType:1]];
                 [cell.txtTopicEdit setText:[groupInfo objectForKey:@"topic"]];
 
                 int interestID = (int)[[groupInfo objectForKey:@"interestID"] integerValue];
+                [cell.btnInterestEdit.titleLabel setFont:[CommonMethods getStdFontType:1]];
                 [cell.btnInterestEdit setTitle:[[ResponseHandler instance] getInterestNameForID:interestID] forState:UIControlStateNormal];
-                [cell.txtSubInterestEdit setText:[groupInfo objectForKey:@"interestDescription"]];
                 
+                [cell.btnLocationEdit.titleLabel setFont:[CommonMethods getStdFontType:1]];
                 [cell.btnLocationEdit setTitle:[groupInfo objectForKey:@"locationName"] forState:UIControlStateNormal];
 
+                [cell.btnIsPublicEdit.titleLabel setFont:[CommonMethods getStdFontType:1]];
                 NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
                 if(isPublic.intValue == 1){
                     [cell.btnIsPublicEdit setTitle:NSLocalizedString(@"Public", @"") forState:UIControlStateNormal];
@@ -324,16 +327,17 @@
                     }
                 }
 
-                    
+                [cell.lblTopic setFont:[CommonMethods getStdFontType:1]];
                 [cell.lblTopic setText:[groupInfo objectForKey:@"topic"]];
-                [cell.lblTopicDesc setText:[groupInfo objectForKey:@"topicDescription"]];
                 
                 int interestID = (int)[[groupInfo objectForKey:@"interestID"] integerValue];
+                [cell.lblInterest setFont:[CommonMethods getStdFontType:1]];
                 [cell.lblInterest setText:[[ResponseHandler instance] getInterestNameForID:interestID]];
-                [cell.lblSubinterest setText:[groupInfo objectForKey:@"interestDescription"]];
                 
+                [cell.lblLocation setFont:[CommonMethods getStdFontType:1]];
                 [cell.lblLocation setText:[groupInfo objectForKey:@"locationName"]];
                 
+                [cell.lblPublic setFont:[CommonMethods getStdFontType:1]];
                 NSNumber* isPublic = [groupInfo objectForKey:@"isPublic"];
                 if(isPublic.intValue == 1){
                     [cell.lblPublic setText:NSLocalizedString(@"Public", @"")];
@@ -343,7 +347,7 @@
                 }
                 
                 
-                
+                [cell.lblJoinStatus setFont:[CommonMethods getStdFontType:1]];
                 if (userType == 2) {
                     [cell.lblJoinStatus setText:NSLocalizedString(@"Joined", @"")];
                 }
@@ -372,6 +376,8 @@
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
         WUGroupViewMediaCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupViewMediaCell"];
+        [cell.btnViewMedia.titleLabel setFont:[CommonMethods getStdFontType:1]];
+        [cell.btnEnterChat.titleLabel setFont:[CommonMethods getStdFontType:1]];
         return cell;
     }
     else if (indexPath.section == 1){
@@ -380,7 +386,12 @@
         SCGroupMemberCell *cell = (SCGroupMemberCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         cell.tag = indexPath.row;
         cell.inviteButton.tag = indexPath.row;
+        [cell.inviteButton.titleLabel setFont:[CommonMethods getStdFontType:1]];
+        [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
+        [cell.detailTextLabel setFont:[CommonMethods getStdFontType:2]];
+        
         [cell setHidden:NO];
+        
         
         if (indexPath.row == 1 && !(userType == 1 || userType == 2 || isPublic.intValue == 1)) {
             [cell.inviteButton setHidden:YES];
@@ -527,16 +538,27 @@
     }
     else{
         if (userType == 1) {
-            return [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupAdminActionCell"];
+            WUGroupAdminActionCell* t = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupAdminActionCell"];
+            [t.btnAddMember.titleLabel setFont:[CommonMethods getStdFontType:1]];
+            [t.btnClearChat.titleLabel setFont:[CommonMethods getStdFontType:1]];
+            [t.btnDeleteGroup.titleLabel setFont:[CommonMethods getStdFontType:1]];
+            return t;
         }
         else if (userType == 2) {
-            return [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupMemberActionCell"];
+            WUGroupMemberActionCell* t =[self.tableView dequeueReusableCellWithIdentifier:@"WUGroupMemberActionCell"];
+            [t.btnClearChat.titleLabel setFont:[CommonMethods getStdFontType:1]];
+            [t.btnLeaveGroup.titleLabel setFont:[CommonMethods getStdFontType:1]];
+            return t;
         }
         else if (isPublic.intValue == 1) {
-            return [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupPublicActionCell"];
+            WUGroupPublicActionCell* t =[self.tableView dequeueReusableCellWithIdentifier:@"WUGroupPublicActionCell"];
+            [t.btnEnterChat.titleLabel setFont:[CommonMethods getStdFontType:1]];
+            return t;
         }
         else {
-            return [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupNonMemberActionCell"];
+            WUGroupNonMemberActionCell* t = [self.tableView dequeueReusableCellWithIdentifier:@"WUGroupNonMemberActionCell"];
+            [t.btnJoinGroup.titleLabel setFont:[CommonMethods getStdFontType:1]];
+            return t;
         }
     }
 }
@@ -698,7 +720,6 @@
 - (IBAction)editEnded{
     if(editCell){
         [groupInfo setObject:editCell.txtTopicEdit.text forKey:@"topic"];
-        [groupInfo setObject:editCell.txtSubInterestEdit.text forKey:@"interestDescription"];
     }
 }
 

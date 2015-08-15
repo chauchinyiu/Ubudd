@@ -9,6 +9,7 @@
 #import "WUUserSelectionController.h"
 #import "DBHandler.h"
 #import "ResponseHandler.h"
+#import "CommonMethods.h"
 
 @implementation WUUserSelectCell
 
@@ -108,6 +109,7 @@
     else{
         a = [friendList objectAtIndex:indexPath.row];
     }
+    [cell.titleLabel setFont:[CommonMethods getStdFontType:1]];
     cell.titleLabel.text = a.name;
     UIImage* image = [[C2CallPhone currentPhone] userimageForUserid:a.c2CallID];
     if(image){

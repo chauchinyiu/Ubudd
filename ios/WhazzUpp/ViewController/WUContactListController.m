@@ -340,7 +340,7 @@
                 else{
                     favocell.nameLabel.attributedText = accRecord.attributedName;
                 }
-                
+                [favocell.statusLabel setFont:[CommonMethods getStdFontType:3]];
                 favocell.statusLabel.text = accRecord.status;
                 favocell.userBtn.tag = indexPath.row;
                 favocell.userBtn2.tag = indexPath.row;

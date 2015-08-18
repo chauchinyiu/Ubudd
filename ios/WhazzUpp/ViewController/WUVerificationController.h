@@ -10,6 +10,8 @@
 
 @interface WUVerificationController : UITableViewController<UIGestureRecognizerDelegate> {
     IBOutlet UITextField *txtCode;
+    IBOutlet UILabel *lblNote;
+    IBOutlet UIButton *btnResend;
 }
 
 - (IBAction)btnResendTapped;

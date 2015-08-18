@@ -33,6 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [txtDisplayName setFont:[CommonMethods getStdFontType:1]];
+    [lblTelNo setFont:[CommonMethods getStdFontType:1]];
+    [btnStatus.titleLabel setFont:[CommonMethods getStdFontType:1]];
+    
     self.isCameraSupported = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear];
     
     self.userDefaults = [NSUserDefaults standardUserDefaults];

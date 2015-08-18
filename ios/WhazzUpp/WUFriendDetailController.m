@@ -101,6 +101,7 @@ static NSString* currentC2CallID = @"";
         
     }
     else {
+        
         NSDateFormatter *dateFormatRead = [[NSDateFormatter alloc] init];
         [dateFormatRead setDateFormat:@"yyyy-MM-d"];
         dob = [dateFormatRead dateFromString:[res.data objectForKey:@"dob"]];
@@ -191,6 +192,13 @@ static NSString* currentC2CallID = @"";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WUUserInfoCell *c = [self.tableView dequeueReusableCellWithIdentifier:@"WUUserInfoCell"];
+    
+    [c.lblName setFont:[CommonMethods getStdFontType:1]];
+    [c.lblStatus setFont:[CommonMethods getStdFontType:1]];
+    [c.lblTelNo setFont:[CommonMethods getStdFontType:1]];
+    [c.btnClearChat.titleLabel setFont:[CommonMethods getStdFontType:1]];
+    [c.btnSendMessage.titleLabel setFont:[CommonMethods getStdFontType:1]];
+    [c.btnViewMedia.titleLabel setFont:[CommonMethods getStdFontType:1]];
 
     MOC2CallUser *user = [[SCDataManager instance] userForUserid:c2CallID];
     [c.lblName setText:user.displayName];

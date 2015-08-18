@@ -91,7 +91,7 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return favoritesCellHeight;
+    return MAX(favoritesCellHeight * [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize / 17, favoritesCellHeight);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -108,8 +108,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WUNewChatCell *favocell = (WUNewChatCell *)[self.tableView dequeueReusableCellWithIdentifier:@"WUNewChatCell"];
-    //favocell.nameLabel.font = [CommonMethods getStdFontType:0];
-    //favocell.statusLabel.font = [CommonMethods getStdFontType:2];
+    [favocell.nameLabel setFont:[CommonMethods getStdFontType:0]];
+    [favocell.statusLabel setFont:[CommonMethods getStdFontType:2]];
+    
+    
     
     WUAccount* accRecord;
     BOOL isGroup;

@@ -34,8 +34,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [topMessage setFont:[CommonMethods getStdFontType:1]];
+    
     [self.country.contentView sendSubviewToBack:countryBG];
     self.country.textLabel.backgroundColor = [UIColor clearColor];
+    [self.country.textLabel setFont:[CommonMethods getStdFontType:1]];
     
     [self setRegisterDoneAction:^(void){
         [self performSegueWithIdentifier:@"VerificationSegue" sender:self];
@@ -46,10 +49,15 @@
                                    action:@selector(hidekeybord)];
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
-    
-    [webView loadHTMLString:NSLocalizedString(@"webString", @"") baseURL:NULL];
-    NSString* jsString = [[NSString alloc] initWithFormat: @"document.getElementsByTagName('div')[0].style.webkitTextSizeAdjust='%d%%'", 13 * 100 / 20];
+    NSString* jsString = [[NSString alloc] initWithFormat: NSLocalizedString(@"webString", @""), [CommonMethods getStdFontType:1].pointSize];
+    [webView loadHTMLString:jsString baseURL:NULL];
+    /*
+    NSString* jsString = [[NSString alloc] initWithFormat: @"document.getElementsByTagName('div')[0].style.webkitTextSizeAdjust='%d%%'", [ NSNumber numberWithFloat: [CommonMethods getStdFontType:1].pointSize * 100 / 20].intValue];
     [webView stringByEvaluatingJavaScriptFromString:jsString];
+     */
+    [lblCountryCode setFont:[CommonMethods getStdFontType:1]];
+    [self.phoneNumber.textContent setFont:[CommonMethods getStdFontType:1]];
+    
 }
 - (void)viewWillAppear:(BOOL)animated {
     lblCountryCode.text = [self countryCode];

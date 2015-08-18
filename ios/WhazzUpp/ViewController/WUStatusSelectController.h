@@ -16,6 +16,7 @@
 @interface WUStatusSelectController : UITableViewController<UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak) IBOutlet UITextField *userStatus;
+@property(nonatomic, weak) IBOutlet UILabel *lblStatus;
 @property(nonatomic,assign)id<WUStatusSelectControllerDelegate>delegate;
 @property NSString* currentStatus;
 

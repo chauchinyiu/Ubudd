@@ -7,6 +7,7 @@
 //
 
 #import "WUContactInfoController.h"
+#import "CommonMethods.h"
 
 @interface WUContactInfoController (){
     NSString* telNo;
@@ -24,6 +25,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.translucent = NO;
+    [nameLabel setFont:[CommonMethods getStdFontType:1]];
+    [telLabel setFont:[CommonMethods getStdFontType:1]];
+    
     [nameLabel setText:contactName];
     [telLabel setText:telNo];
 }

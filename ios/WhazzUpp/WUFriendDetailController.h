@@ -12,6 +12,7 @@
 @interface WUUserInfoCell : UITableViewCell
 @property(nonatomic, weak) IBOutlet UILabel *lblName, *lblTelNo, *lblStatus;
 @property(nonatomic, weak) IBOutlet C2TapImageView* userImage;
+@property(nonatomic, weak) IBOutlet UIButton *btnSendMessage, *btnViewMedia, *btnClearChat;
 @end
 
 @interface WUFriendDetailController : SCFriendDetailController

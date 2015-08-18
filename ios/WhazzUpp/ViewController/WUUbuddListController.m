@@ -240,7 +240,7 @@
         }
     }
     
-    return 180;
+    return 208;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

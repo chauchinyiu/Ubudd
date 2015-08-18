@@ -315,7 +315,6 @@ static BOOL isGroup = YES;
     self.tableView.tableHeaderView = dummyView;
     self.tableView.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
     
-    [[UISlider appearance] setThumbImage:[UIImage imageNamed:@"sliderbutton.png"] forState:UIControlStateNormal];
     NSLog(@"end load");
     
 }
@@ -458,13 +457,44 @@ static BOOL isGroup = YES;
                     cell.timeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:createTime]];
                 }
                 
+                
+                CGSize expectedLabelSize;
+                
                 cell.nameLabel.text = [NSString stringWithFormat:NSLocalizedString(@"createdagroup", @""), ownerName, groupName];
                 
                 f = cell.createGroupView.frame;
                 f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
                 cell.createGroupView.frame = f;
                 
+                expectedLabelSize = [self getSizeForText:cell.nameLabel.text withWidth:f.size.width withFont:cell.nameLabel.font];
+                
+                f = cell.nameLabel.frame;
+                f.size.width = expectedLabelSize.width + 20;
+                f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+                cell.nameBGView.frame = f;
+                
+                cell.nameBGView.layer.cornerRadius = 9;
+                cell.nameBGView.layer.masksToBounds = YES;
+                
+                
                 h += 72.;
+                
+                f = cell.timeLabel.frame;
+                f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+                cell.timeLabel.frame = f;
+                
+                
+                
+                expectedLabelSize = [self getSizeForText:cell.timeLabel.text withWidth:f.size.width withFont:cell.timeLabel.font];
+                
+                f = cell.timeLabel.frame;
+                f.size.width = expectedLabelSize.width + 20;
+                f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+                cell.timeBGView.frame = f;
+                
+                cell.timeBGView.layer.cornerRadius = 9;
+                cell.timeBGView.layer.masksToBounds = YES;
+                
             }
             else{
                 cell.createGroupView.hidden = YES;
@@ -501,7 +531,7 @@ static BOOL isGroup = YES;
             CGSize expectedLabelSize = [self getSizeForText:cell.timeLabel.text withWidth:f.size.width withFont:cell.timeLabel.font];
             
             f = cell.timeLabel.frame;
-            f.size.width = expectedLabelSize.width + 14;
+            f.size.width = expectedLabelSize.width + 20;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
             cell.bgView.frame = f;
             
@@ -538,7 +568,7 @@ static BOOL isGroup = YES;
             WUListEntry* e = [entries objectAtIndex:i];
             if (e.mapToPath.row == indexPath.row && e.mapToPath.section == indexPath.section) {
                 if ([e.source isEqualToString:@"MemberJoin"]) {
-                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMemberJoinCell"];
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUMessageTimeCell"];
                     
                     NSString* displayName;
                     NSString* memberID = [e.data objectForKey:@"memberID"];
@@ -566,7 +596,25 @@ static BOOL isGroup = YES;
                         
                     }
                     
-                    ((WUMemberJoinCell*)cell).timeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"groupAddedMember", @"%@ added %@"), group.groupName, displayName];
+                    ((WUMessageTimeCell*)cell).timeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"groupAddedMember", @"%@ added %@"), group.groupName, displayName];
+                    
+                    CGRect f;
+                    f = ((WUMessageTimeCell*)cell).timeLabel.frame;
+                    f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+                    ((WUMessageTimeCell*)cell).timeLabel.frame = f;
+                    
+                    
+                    
+                    CGSize expectedLabelSize = [self getSizeForText:((WUMessageTimeCell*)cell).timeLabel.text withWidth:f.size.width withFont:((WUMessageTimeCell*)cell).timeLabel.font];
+                    
+                    f = ((WUMessageTimeCell*)cell).timeLabel.frame;
+                    f.size.width = expectedLabelSize.width + 20;
+                    f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
+                    ((WUMessageTimeCell*)cell).bgView.frame = f;
+                    
+                    ((WUMessageTimeCell*)cell).bgView.layer.cornerRadius = 9;
+                    ((WUMessageTimeCell*)cell).bgView.layer.masksToBounds = YES;
+                    
                 }
 
                 if ([e.source isEqualToString:@"Message"]) {
@@ -718,7 +766,7 @@ static BOOL isGroup = YES;
             CGSize expectedLabelSize = [self getSizeForText:cell.timeLabel.text withWidth:f.size.width withFont:cell.timeLabel.font];
             
             f = cell.timeLabel.frame;
-            f.size.width = expectedLabelSize.width + 14;
+            f.size.width = expectedLabelSize.width + 20;
             f.origin.x = (self.view.frame.size.width - f.size.width) / 2;
             cell.bgView.frame = f;
             
@@ -789,10 +837,10 @@ static BOOL isGroup = YES;
                     return 105;
                 }
                 if ([cell isKindOfClass:[MessageCellInStream class]]) {
-                    return [self messageCellInHeight:[self.fetchedResultsController objectAtIndexPath:e.sourcePath] font:nil];
+                    return [self messageCellInHeight:[self.fetchedResultsController objectAtIndexPath:e.sourcePath]];
                 }
                 if ([cell isKindOfClass:[MessageCellOutStream class]]) {
-                    return [self messageCellOutHeight:[self.fetchedResultsController objectAtIndexPath:e.sourcePath] font:nil];
+                    return [self messageCellOutHeight:[self.fetchedResultsController objectAtIndexPath:e.sourcePath]];
                 }
                 
                 
@@ -1006,8 +1054,11 @@ static BOOL isGroup = YES;
     NSString *text = elem.text;
     
     
+    cell.eventImage.layer.cornerRadius = 8;
+    cell.eventImage.clipsToBounds = YES;
     if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
         cell.eventImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
+        
         
         [cell.progress setHidden:YES];
         [cell setTapAction:^{
@@ -1103,6 +1154,8 @@ static BOOL isGroup = YES;
     CGRect frame = cell.bubbleView.frame;
     frame.origin.x = self.view.frame.size.width - frame.size.width;
     [cell.bubbleView setFrame:frame];
+    cell.eventImage.layer.cornerRadius = 8;
+    cell.eventImage.clipsToBounds = YES;
     
     if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
         cell.eventImage.image = [[C2CallPhone currentPhone] imageForKey:elem.text];
@@ -1272,11 +1325,11 @@ static BOOL isGroup = YES;
     CGSize expectedLabelSize = [self getSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
     //bubble
-    CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 21, expectedLabelSize.height + 10);
+    CGRect frame = CGRectMake(0, 0, expectedLabelSize.width + 22, expectedLabelSize.height + 12);
     [cell.bubbleView setFrame:frame];
     
     //text
-    frame = CGRectMake(14, 5, expectedLabelSize.width, expectedLabelSize.height);
+    frame = CGRectMake(14, 6, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
     
     [cell setLongpressAction:^{
@@ -1318,11 +1371,11 @@ static BOOL isGroup = YES;
     CGSize contentSize = [self getContentSizeForText:text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
     //bubble
-    CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 14, 0, contentSize.width + 16, contentSize.height + 10);
+    CGRect frame = CGRectMake(self.view.frame.size.width - contentSize.width - 22, 0, contentSize.width + 22, contentSize.height + 12);
     [cell.bubbleView setFrame:frame];
     
     //text
-    frame = CGRectMake(8, 5, expectedLabelSize.width, expectedLabelSize.height);
+    frame = CGRectMake(8, 6, expectedLabelSize.width, expectedLabelSize.height);
     [cell.textLabel setFrame:frame];
     
     
@@ -1726,7 +1779,9 @@ static BOOL isGroup = YES;
     NSString *text = elem.text;
     cell.downloadKey = text;
 
-    cell.messageImage.image = [UIImage imageNamed:@"Mic_unpress.png"];
+    cell.messageImage.image = [UIImage imageNamed:@"Mic_unpress_white.png"];
+    
+    [cell.playSlider setThumbImage:[UIImage imageNamed:@"sliderbutton_white.png"] forState:UIControlStateNormal];
     
     // Special Handling for current submissions
     if ([elem.eventType isEqualToString:@"MessageSubmit"]) {
@@ -1756,7 +1811,7 @@ static BOOL isGroup = YES;
         cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
         
         [cell.progress setHidden:YES];
-        [cell.playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        [cell.playButton setImage:[UIImage imageNamed:@"play_unpress_white.png"] forState:UIControlStateNormal];
         
         NSString *durStr = [[C2CallPhone currentPhone] durationForKey:text];
         CGFloat durSec = 0.;
@@ -2005,6 +2060,7 @@ static BOOL isGroup = YES;
     cell.downloadKey = text;
 
     cell.messageImage.image = [UIImage imageNamed:@"Mic_unpress.png"];
+    [cell.playSlider setThumbImage:[UIImage imageNamed:@"sliderbutton.png"] forState:UIControlStateNormal];
     
     if ([[C2CallPhone currentPhone] hasObjectForKey:text]) {
         cell.duration.text = [[C2CallPhone currentPhone] durationForKey:text];
@@ -2221,16 +2277,16 @@ static BOOL isGroup = YES;
     return nil;
 }
 
--(CGFloat) messageCellInHeight:(MOC2CallEvent *) elem font:(UIFont *) font
+-(CGFloat) messageCellInHeight:(MOC2CallEvent *) elem
 {
-    CGSize sz = [self getSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
+    CGSize sz = [self getSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     
     return sz.height + 22;
 }
 
--(CGFloat) messageCellOutHeight:(MOC2CallEvent *) elem font:(UIFont *) font
+-(CGFloat) messageCellOutHeight:(MOC2CallEvent *) elem
 {
-    CGSize sz = [self getContentSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:2]];
+    CGSize sz = [self getContentSizeForText:elem.text withWidth:self.view.frame.size.width - 60 withFont:[CommonMethods getStdFontType:1]];
     return sz.height + 22;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "WUMapViewController.h"
+#import "CommonMethods.h"
 
 @interface WUMapViewController (){
     CLLocationCoordinate2D loc;
@@ -71,7 +72,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MapCell" forIndexPath:indexPath];
-    
+    [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
     // Configure the cell...
     switch (indexPath.row) {
         case 0:
@@ -193,7 +194,9 @@
 -(void)refreshGUI{
     [mapview removeAnnotations:[mapview annotations]];
     [mapview setShowsUserLocation:YES];
-    
+    [lblLocName setFont:[CommonMethods getStdFontType:1]];
+    [self.lblWith setFont:[CommonMethods getStdFontType:1]];
+
     lblLocName.text = locName;
     if (loc.longitude < 999) {
         MKPointAnnotation* pin = [[MKPointAnnotation alloc] init];

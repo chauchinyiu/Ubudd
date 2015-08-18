@@ -36,6 +36,10 @@
     requestingResend = false;
     self.navigationItem.hidesBackButton = YES;
     
+    [txtCode setFont:[CommonMethods getStdFontType:1]];
+    [btnResend.titleLabel setFont:[CommonMethods getStdFontType:1]];
+    [lblNote setFont:[CommonMethods getStdFontType:1]];
+    
     [txtCode becomeFirstResponder];
     [[ResponseHandler instance] readInterests];
     

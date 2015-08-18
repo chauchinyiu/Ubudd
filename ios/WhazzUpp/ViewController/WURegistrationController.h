@@ -13,6 +13,8 @@
     IBOutlet UIImageView *countryBG;
     IBOutlet UIBarButtonItem *btnDone;
     IBOutlet UIWebView *webView;
+    IBOutlet UILabel* topMessage;
+    IBOutlet UILabel* lblCountryName;
 }
 
 - (IBAction)btnDoneTapped;

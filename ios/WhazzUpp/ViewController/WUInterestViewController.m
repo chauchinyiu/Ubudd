@@ -9,6 +9,7 @@
 #import "WUInterestViewController.h"
 #import "DBHandler.h"
 #import "ResponseHandler.h"
+#import "CommonMethods.h"
 
 @implementation WUInterestCell
 
@@ -91,6 +92,7 @@
     WUInterestCell *cell = (WUInterestCell*)[tableView dequeueReusableCellWithIdentifier:@"WUInterestCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    [cell.nameLabel setFont:[CommonMethods getStdFontType:1]];
     [cell.nameLabel setText:((interestDat *)[result objectAtIndex:indexPath.row]).interestName];
 
     /*

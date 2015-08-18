@@ -74,25 +74,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_newgroup.png" id="Bmr-12-oHQ">
-                                                    <rect key="frame" x="40" y="0.0" width="240" height="30"/>
+                                                <view contentMode="scaleToFill" id="aTM-dd-ul4">
+                                                    <rect key="frame" x="44" y="7" width="232" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_newgroup.png" id="vQJ-Ge-RcB">
-                                                    <rect key="frame" x="40" y="38" width="240" height="30"/>
+                                                    <color key="backgroundColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" id="VpT-sI-jU9">
+                                                    <rect key="frame" x="44" y="42" width="232" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
+                                                    <color key="backgroundColor" red="0.74117647060000003" green="0.74117647060000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iAj-7t-XTS">
-                                                    <rect key="frame" x="40" y="0.0" width="240" height="30"/>
+                                                    <rect key="frame" x="0.0" y="7" width="320" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="guC-JU-TJA">
-                                                    <rect key="frame" x="40" y="38" width="240" height="30"/>
+                                                    <rect key="frame" x="0.0" y="42" width="320" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -126,8 +128,10 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="createGroupView" destination="lEg-ps-1vS" id="n33-qg-Gl0"/>
+                                    <outlet property="nameBGView" destination="aTM-dd-ul4" id="nJn-97-AvZ"/>
                                     <outlet property="nameLabel" destination="iAj-7t-XTS" id="kfV-Dz-r0z"/>
                                     <outlet property="showPreviousMsgView" destination="s8j-1X-hI2" id="Pae-pl-Z4z"/>
+                                    <outlet property="timeBGView" destination="VpT-sI-jU9" id="UAC-5T-zDM"/>
                                     <outlet property="timeLabel" destination="guC-JU-TJA" id="jXN-50-2Wf"/>
                                 </connections>
                             </tableViewCell>
@@ -186,7 +190,7 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </progressView>
                                                 <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="IyC-jO-Lia">
-                                                    <rect key="frame" x="11" y="6" width="183" height="183"/>
+                                                    <rect key="frame" x="9" y="3" width="188" height="190"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -839,11 +843,11 @@ test</string>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" id="gVC-gO-omA">
-                                                    <rect key="frame" x="6" y="6" width="183" height="183"/>
+                                                    <rect key="frame" x="3" y="3" width="188" height="190"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="ico_read.png" id="hrz-9W-c6u">
-                                                    <rect key="frame" x="181" y="178" width="14" height="14"/>
+                                                    <rect key="frame" x="177" y="179" width="14" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
@@ -889,14 +893,14 @@ test</string>
                                                         <action selector="sliderMove:" destination="pYU-6S-hS8" eventType="valueChanged" id="km6-vh-thY"/>
                                                     </connections>
                                                 </slider>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Mic_unpress.png" id="TKo-9b-1ST">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Mic_unpress_white.png" id="TKo-9b-1ST">
                                                     <rect key="frame" x="7" y="10" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1HB-yY-o40">
                                                     <rect key="frame" x="39" y="10" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="play_unpress.png">
+                                                    <state key="normal" image="play_unpress_white.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -1406,7 +1410,7 @@ Remove search filter?</string>
     <resources>
         <image name="AddContact2-24x24.png" width="30" height="30"/>
         <image name="Mic_unpress.png" width="76" height="76"/>
-        <image name="bg_newgroup.png" width="240" height="30"/>
+        <image name="Mic_unpress_white.png" width="76" height="76"/>
         <image name="bg_timestamp.png" width="124" height="20"/>
         <image name="btn_grey _big.png" width="220" height="32"/>
         <image name="btn_ico_avatar.png" width="44" height="44"/>
@@ -1424,6 +1428,7 @@ Remove search filter?</string>
         <image name="ico_read.png" width="14" height="14"/>
         <image name="ico_vcard.png" width="65" height="65"/>
         <image name="play_unpress.png" width="80" height="80"/>
+        <image name="play_unpress_white.png" width="80" height="80"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

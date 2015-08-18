@@ -20,6 +20,7 @@
 @interface WUMapViewController : UITableViewController<WULocationSelectControllerDelegate, MKMapViewDelegate>
 @property(nonatomic, weak) IBOutlet MKMapView* mapview;
 @property(nonatomic, weak) IBOutlet UILabel* lblLocName;
+@property(nonatomic, weak) IBOutlet UILabel* lblWith;
 @property(nonatomic,assign)id<WUMapControllerDelegate>delegate;
 
 @end

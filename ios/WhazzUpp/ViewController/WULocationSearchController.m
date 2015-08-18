@@ -7,6 +7,7 @@
 //
 
 #import "WULocationSearchController.h"
+#import "CommonMethods.h"
 
 @implementation WULocationCell
 @synthesize nameLabel;
@@ -85,6 +86,10 @@
     }
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    return 34;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -107,7 +112,7 @@
         cell = [self.tableView dequeueReusableCellWithIdentifier:@"WULocationCell" forIndexPath:indexPath];
         [cell.nameLabel setText: NSLocalizedString(@"Current location", @"")];
     }
-    
+    [cell.nameLabel setFont:[CommonMethods getStdFontType:1]];
     
     return cell;
 }

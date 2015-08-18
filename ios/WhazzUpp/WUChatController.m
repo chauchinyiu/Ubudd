@@ -144,8 +144,8 @@ typedef enum : NSUInteger {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.chatInputBorderWidth = 1.5;
-        self.chatInputCornerRadius = 8.;
-        self.chatInputBorderColor = [UIColor colorWithRed:228./256. green:228./256. blue:228./256. alpha:1.];
+        self.chatInputCornerRadius = 7.;
+        self.chatInputBorderColor = [UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1.];
         self.dontShowCallEvents = YES;
         
     }
@@ -157,8 +157,8 @@ typedef enum : NSUInteger {
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.chatInputBorderWidth = 1.5;
-        self.chatInputCornerRadius = 8.;
-        self.chatInputBorderColor = [UIColor colorWithRed:228./256. green:228./256. blue:228./256. alpha:1.];
+        self.chatInputCornerRadius = 7.;
+        self.chatInputBorderColor = [UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1.];
         self.dontShowCallEvents = YES;
         
     }
@@ -172,9 +172,9 @@ typedef enum : NSUInteger {
     
     [super viewDidLoad];
     
-    self.chatInputBorderWidth = 1.;
-    self.chatInputCornerRadius = 8.;
-    self.chatInputBorderColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.];
+    self.chatInputBorderWidth = 1.5;
+    self.chatInputCornerRadius = 7.;
+    self.chatInputBorderColor = [UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1.];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"chatboard" bundle: nil];
     WUBoardController* newVC = [storyboard instantiateViewControllerWithIdentifier:@"SCBoardController"];
@@ -219,7 +219,7 @@ typedef enum : NSUInteger {
 
     
     self.chatInput.font = [CommonMethods getStdFontType:1];
-    
+    self.chatInput.contentInset = UIEdgeInsetsMake(-4, 0, -4, 0);
     
     [self.submitButton setHidden:YES];
     [self.recordButton setHidden:NO];
@@ -233,8 +233,7 @@ typedef enum : NSUInteger {
                                    initWithTarget:self
                                    action:@selector(hidekeybord)];
     [tap setDelegate:self];
-    [self.view addGestureRecognizer:tap];
-    
+    [self.broadContainer addGestureRecognizer:tap];
     
     NSArray *dirPaths;
     NSString *docsDir;

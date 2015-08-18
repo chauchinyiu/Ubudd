@@ -7,6 +7,7 @@
 //
 
 #import "WUStatusSelectController.h"
+#import "CommonMethods.h"
 
 @interface WUStatusSelectController (){
     NSArray *statusOptions;
@@ -36,7 +37,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     statusOptions = @[NSLocalizedString(@"Available", @""), NSLocalizedString(@"Busy", @""), NSLocalizedString(@"Learning", @""), NSLocalizedString(@"Out with friends", @""), NSLocalizedString(@"Working", @""), NSLocalizedString(@"Low battery", @""), NSLocalizedString(@"No calls please", @""), NSLocalizedString(@"In a meeting", @""), NSLocalizedString(@"Burning calories", @""), NSLocalizedString(@"Sleeping", @""), NSLocalizedString(@"Only urgent matters", @""), NSLocalizedString(@"Im bored please talk to me", @"")];
+    
+    [userStatus setFont:[CommonMethods getStdFontType:1]];
     [userStatus setText:currentStatus];
+    [self.lblStatus setFont:[CommonMethods getStdFontType:1]];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -77,6 +81,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StatusCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    [cell.textLabel setFont:[CommonMethods getStdFontType:1]];
     [cell.textLabel setText:[statusOptions objectAtIndex:indexPath.row]];
     return cell;
 }

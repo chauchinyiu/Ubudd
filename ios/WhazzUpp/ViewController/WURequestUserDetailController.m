@@ -8,6 +8,7 @@
 
 #import "WURequestUserDetailController.h"
 #import "ResponseHandler.h"
+#import "CommonMethods.h"
 #import <SocialCommunication/UIViewController+SCCustomViewController.h>
 #import <SocialCommunication/debug.h>
 
@@ -63,6 +64,7 @@
     WURequestUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WURequestUserInfoCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    [cell.displayName setFont:[CommonMethods getStdFontType:1]];
     [cell.displayName setText:[userData objectForKey:@"userName"]];
     
     NSDictionary* userProfile = [[C2CallPhone currentPhone] getUserInfoForUserid:[userData objectForKey:@"c2CallID"]];

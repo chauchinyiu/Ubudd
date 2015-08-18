@@ -49,6 +49,9 @@
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UIView *createGroupView;
 @property(nonatomic, weak) IBOutlet UIView *showPreviousMsgView;
+@property(nonatomic, weak) IBOutlet UIView *nameBGView;
+@property(nonatomic, weak) IBOutlet UIView *timeBGView;
+
 
 @end
 

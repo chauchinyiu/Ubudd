@@ -14,6 +14,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.translucent = NO;
+    [self.emailLabel setFont:[CommonMethods getStdFontType:1]];
+    [self.smsLabel setFont:[CommonMethods getStdFontType:1]];
+    [self.facebookLabel setFont:[CommonMethods getStdFontType:1]];
 }
 
 

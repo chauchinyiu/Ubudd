@@ -10,5 +10,6 @@
 #import <MessageUI/MessageUI.h>
 
 @interface WUTellFriendController : UITableViewController <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
+    @property(nonatomic, weak) IBOutlet UILabel *emailLabel, *smsLabel, *facebookLabel;
 
 @end

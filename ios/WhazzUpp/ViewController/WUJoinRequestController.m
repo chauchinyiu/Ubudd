@@ -15,6 +15,7 @@
 #import "ResponseBase.h"
 #import "DataResponse.h"
 #import "WURequestUserDetailController.h"
+#import "CommonMethods.h"
 
 
 @implementation WUJoinRequestListCell
@@ -122,7 +123,8 @@
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return MAX(35 * [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline].pointSize / 17, 35);
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,6 +134,8 @@
     
     NSString* requestUserID = [fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", (int)indexPath.row ]];
     
+    [favocell.nameLabel setFont:[CommonMethods getStdFontType:1]];
+    [favocell.groupLabel setFont:[CommonMethods getStdFontType:3]];
     
     favocell.nameLabel.text = [fetchResult objectForKey:[NSString stringWithFormat:@"userName%d", (int)indexPath.row]];
     favocell.groupLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Requests to join", @"Requests to join %@"),  [fetchResult objectForKey:[NSString stringWithFormat:@"topic%d", (int)indexPath.row]]];

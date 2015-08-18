@@ -287,7 +287,7 @@
                                   constrainedToSize:maximumLabelSize];
     
     CGFloat sz = expectedTextSize.height;
-    sz += 16;
+    sz += 12;
     
     if (sz < maximumLabelSize.height) {
         textView.scrollEnabled = YES;

@@ -17,6 +17,7 @@
     IBOutlet C2TapImageView *userImage;
     IBOutlet UIButton *btnStatus;
     IBOutlet UILabel *lblTelNo;
+    IBOutlet UILabel *lblEditName;
 }
 
 - (IBAction)btnSaveTapped;

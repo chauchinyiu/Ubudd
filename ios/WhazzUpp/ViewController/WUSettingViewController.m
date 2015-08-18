@@ -26,6 +26,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preferredContentSizeChanged:) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -70,6 +72,20 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return 10;
+}
+
+- (void)preferredContentSizeChanged:(NSNotification *)aNotification {
+    [self.tableView reloadData];
+    
+    lblAboutUbudd.font = [CommonMethods getStdFontType:1];
+    lblConnectionStatus.font = [CommonMethods getStdFontType:1];
+    lblConnectionStatusHeader.font = [CommonMethods getStdFontType:1];
+    lblFontSizeSetting.font = [CommonMethods getStdFontType:1];
+    lblMyProfile.font = [CommonMethods getStdFontType:1];
+    lblTellAFriend.font = [CommonMethods getStdFontType:1];
+    lblContactUs.font = [CommonMethods getStdFontType:1];
+    lblHelp.font = [CommonMethods getStdFontType:1];
+    
 }
 
 

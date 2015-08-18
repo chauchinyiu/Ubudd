@@ -458,6 +458,17 @@
             cell.textLabel.textColor = [UIColor darkTextColor];
             if (userType == 1) {
                 [cell.inviteButton setHidden:NO];
+                /*
+                bool isNewMember = false;
+                for (int j = 0; j < newMemberList.count; j++) {
+                    if ([[newMemberList objectAtIndex:j] isEqualToString:userid]) {
+                        isNewMember = true;
+                    }
+                }
+                if(!isNewMember){
+                    [cell.inviteButton setHidden:NO];
+                }
+                 */
             }
         }
         
@@ -1021,22 +1032,38 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if ([currentAction isEqualToString:@"Block"]) {
         if (buttonIndex == 1) {
-            SCGroup* tGroup = [[SCGroup alloc] initWithGroupid:self.groupid];
-            NSString *userid = [self.members objectAtIndex:[alertView tag]];
-            [tGroup removeMember:userid];
-            [tGroup saveGroupWithCompletionHandler:^(BOOL success){
-                DataRequest* datRequest = [[DataRequest alloc] init];
-                NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
-                [data setValue:userid forKey:@"c2CallID"];
-                datRequest.values = data;
-                datRequest.requestName = @"readUserInfo";
-                
-                WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
-                [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(readBlockUserInfo:error:)];
-                
-            }];
             
-            [self showActivityView];
+            SCGroup* tGroup = [[SCGroup alloc] initWithGroupid:self.groupid];
+            NSString *userid = [memberList objectAtIndex:[alertView tag] - 1];
+            int deleteIndex;
+            bool isNewMember = false;
+            for (int j = 0; j < newMemberList.count; j++) {
+                if ([[newMemberList objectAtIndex:j] isEqualToString:userid]) {
+                    isNewMember = true;
+                    deleteIndex = j;
+                }
+            }
+            if(!isNewMember){
+                [tGroup removeMember:userid];
+                [tGroup saveGroupWithCompletionHandler:^(BOOL success){
+                    DataRequest* datRequest = [[DataRequest alloc] init];
+                    NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+                    [data setValue:userid forKey:@"c2CallID"];
+                    datRequest.values = data;
+                    datRequest.requestName = @"readUserInfo";
+                    
+                    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+                    [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(readBlockUserInfo:error:)];
+                    
+                }];
+                
+                [self showActivityView];
+            }
+            else{
+                [newMemberList removeObjectAtIndex:deleteIndex];
+                [memberList removeObjectAtIndex:[alertView tag] - 1];
+                [self.tableView reloadData];
+            }
         }
         
     }
@@ -1140,6 +1167,8 @@
             [newMemberList addObject:[users objectAtIndex:i]];
         }
     }
+    
+    
     [self.tableView reloadData];
 }
 

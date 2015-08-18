@@ -80,11 +80,6 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUUbuddListCell"];
     favoritesCellHeight = cell.frame.size.height;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(hidekeybord)];
-    [tap setDelegate:self];
-    [self.view addGestureRecognizer:tap];
     
     locationManager = [CLLocationManager new];
     locationManager.delegate = self;
@@ -401,6 +396,7 @@
         loc.longitude = 999;
         locName = @"";
         searchDist = 2;
+        [locationManager requestWhenInUseAuthorization];
         [locationManager startUpdatingLocation];
     }
     [self updateLocationSearchGUI];
@@ -425,16 +421,7 @@
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    NSLog(@"went here ...");
-    
-    if((![touch.view isKindOfClass:[UITextView class]])
-       && (![touch.view isKindOfClass:[UITextField class]])){
-        [self.view endEditing:YES];
-    }
-    return NO; // handle the touch
-}
+
 
 -(void)hidekeybord
 {
@@ -470,6 +457,14 @@
         }
     }
     searchBarTextField.enablesReturnKeyAutomatically = NO;
+}
+
+
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
 }
 
 @end

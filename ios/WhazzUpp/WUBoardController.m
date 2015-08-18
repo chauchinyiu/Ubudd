@@ -177,12 +177,12 @@
         [player play];
         timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
         isPlaying = YES;
-        [playButton setImage:[UIImage imageNamed:@"pause_unpress.png"] forState:UIControlStateNormal];
+        [playButton setImage:[UIImage imageNamed:@"pause_unpress_white.png"] forState:UIControlStateNormal];
     }
     else{
         [player stop];
         isPlaying = NO;
-        [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        [playButton setImage:[UIImage imageNamed:@"play_unpress_white.png"] forState:UIControlStateNormal];
         [timer invalidate];
     }
 }
@@ -206,7 +206,7 @@
     if (playSlider.value >= player.duration) {
         [player stop];
         isPlaying = NO;
-        [playButton setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        [playButton setImage:[UIImage imageNamed:@"play_unpress_white.png"] forState:UIControlStateNormal];
         playSlider.value = 0.;
         [self duration].text = [[C2CallPhone currentPhone] durationForKey:self.downloadKey];
         [ptimer invalidate];
@@ -225,10 +225,10 @@
 
 - (IBAction)playBtnUp:(id)sender{
     if (isPlaying) {
-        [sender setImage:[UIImage imageNamed:@"pause_unpress.png"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"pause_unpress_white.png"] forState:UIControlStateNormal];
     }
     else{
-        [sender setImage:[UIImage imageNamed:@"play_unpress.png"] forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"play_unpress_white.png"] forState:UIControlStateNormal];
     }
 }
 
@@ -807,10 +807,10 @@ static BOOL isGroup = YES;
                     return 118;
                 }
                 if ([cell isKindOfClass:[AudioCellIn class]]) {
-                    return 55;
+                    return 60;
                 }
                 if ([cell isKindOfClass:[AudioCellOut class]]) {
-                    return 55;
+                    return 60;
                 }
                 if ([cell isKindOfClass:[VideoCellIn class]]) {
                     return 120;

@@ -68,16 +68,18 @@
 - (void)customizeUI
 {
 
+
     
     [[self.tabBarController.viewControllers objectAtIndex:0] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Contacts", @"") image:[UIImage imageNamed:@"contacscreen_contacts_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"]]];
-    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"UBudd List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_on"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
+    
+    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"UBudd List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
     [[self.tabBarController.viewControllers objectAtIndex:2] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Chats", @"") image:[UIImage imageNamed:@"contacscreen_chat_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_on"]]];
     [[self.tabBarController.viewControllers objectAtIndex:3] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"More", @"") image:[UIImage imageNamed:@"contacscreen_more_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_more_icon_on"]]];
     
     int missedEvents = [[SCDataManager instance] totalMissedCalls] + [[SCDataManager instance] totalMissedMessages];
     
     UITabBarItem *item = [[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem];
-    
+
     if (missedEvents == 0)
         item.badgeValue = nil;
     else

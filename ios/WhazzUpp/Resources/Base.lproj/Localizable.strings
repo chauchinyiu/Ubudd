@@ -20,9 +20,9 @@
 "Sleeping" = "Sleeping";
 "Only urgent matters" = "Only urgent matters";
 "Im bored please talk to me" = "I'm bored, please talk to me...";
-"UBudd friends" = "UBudd friends";
+"UpBrink friends" = "UpBrink friends";
 "Address book" = "Address book";
-"Using UBudd" = "Using UBudd";
+"Using UpBrink" = "Using UpBrink";
 "Within Km radius of" = "Within %dKm radius of";
 "Save" = "Save";
 "Private" = "Private";
@@ -33,7 +33,7 @@
 "Voice Mails" = "Voice Mails";
 "Voice Mail" = "Voice Mail";
 "Picture Message" = "Picture Message";
-"UBudd user" = "UBudd user";
+"UpBrink user" = "UpBrink user";
 "Select an option" = "Select an option";
 "Choose Photo or Video" = "Choose Photo or Video";
 "Send Contact" = "Send Contact";
@@ -80,14 +80,14 @@
 "Admin" = "Admin";
 "Admin messages" = "Admin messages";
 "You have requests" = "You have %d requests";
-"Tell Friend SMS" = "Check out UBudd for your smartphone. Download it today from APPSTORE_LINK_URL";
+"Tell Friend SMS" = "Check out UpBrink for your smartphone. Download it today from APPSTORE_LINK_URL";
 "First post from my iPhone app" = "First post from my iPhone app";
-"Tell Friend Email" = "Hey,\n\nI just downloaded UBudd.";
+"Tell Friend Email" = "Hey,\n\nI just downloaded UpBrink.";
 "Download" = "Download";
 "Delete this group" = "Delete this group";
 "Do you really want to delete this group" = "Do you really want to delete this group?";
 "Contacts" = "Contacts";
-"UBudd List" = "UBudd List";
+"UpBrink List" = "UpBrink List";
 "Chat" = "Chat";
 "Chats" = "Chats";
 "More" = "More";
@@ -103,7 +103,7 @@
 "Later" = "Later";
 "Accept" = "Accept";
 "Reject" = "Reject";
-"UBudd group" = "UBudd group";
+"UpBrink group" = "UpBrink group";
 "XOfY" = "%d of %d";
 "Do you wish to delete this photo" = "Do you wish to delete this photo?";
 "Loading" = "Loading";

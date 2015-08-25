@@ -116,8 +116,8 @@
 /* Class = "UILabel"; text = "Copyright 2015\nAll rights reserved"; ObjectID = "EKj-9r-8a1"; */
 "EKj-9r-8a1.text" = "2015年版權所有";
 
-/* Class = "UINavigationItem"; title = "UBudd"; ObjectID = "EU1-8E-5cb"; */
-"EU1-8E-5cb.title" = "UBudd";
+/* Class = "UINavigationItem"; title = "UpBrink"; ObjectID = "EU1-8E-5cb"; */
+"EU1-8E-5cb.title" = "UpBrink";
 
 /* Class = "UILabel"; text = "12"; ObjectID = "EZe-uG-RhL"; */
 "EZe-uG-RhL.text" = "12";
@@ -155,8 +155,8 @@
 /* Class = "UILabel"; text = "00:00"; ObjectID = "JQ8-Y0-RaJ"; */
 "JQ8-Y0-RaJ.text" = "00:00";
 
-/* Class = "UIViewController"; title = "UBudd Map"; ObjectID = "K4L-Le-Jh7"; */
-"K4L-Le-Jh7.title" = "UBudd 地圖";
+/* Class = "UIViewController"; title = "UpBrink Map"; ObjectID = "K4L-Le-Jh7"; */
+"K4L-Le-Jh7.title" = "UpBrink 地圖";
 
 /* Class = "UILabel"; text = "My Status "; ObjectID = "KMK-qa-R6L"; */
 "KMK-qa-R6L.text" = "我的狀況";
@@ -311,8 +311,8 @@
 /* Class = "UINavigationItem"; title = "Verification"; ObjectID = "ZcC-2N-0qr"; */
 "ZcC-2N-0qr.title" = "驗證";
 
-/* Class = "UITabBarItem"; title = "UBudd List"; ObjectID = "a1Q-qS-O8I"; */
-"a1Q-qS-O8I.title" = "UBudd 名單";
+/* Class = "UITabBarItem"; title = "UpBrink List"; ObjectID = "a1Q-qS-O8I"; */
+"a1Q-qS-O8I.title" = "UpBrink 名單";
 
 /* Class = "UITextField"; placeholder = "Your phone number"; ObjectID = "aJX-zn-zHw"; */
 "aJX-zn-zHw.placeholder" = "您的電話號碼";
@@ -404,8 +404,8 @@
 /* Class = "UILabel"; text = "Sub-interest:"; ObjectID = "kaO-6x-kuy"; */
 "kaO-6x-kuy.text" = "興趣 (詳細):";
 
-/* Class = "UILabel"; text = "About UBudd"; ObjectID = "kzQ-3s-9Yu"; */
-"kQT-AI-f08.text" = "關於UBudd";
+/* Class = "UILabel"; text = "About UpBrink"; ObjectID = "kzQ-3s-9Yu"; */
+"kQT-AI-f08.text" = "關於UpBrink";
 
 /* Class = "UILabel"; text = "Connection Status"; ObjectID = "lRd-9b-iZf"; */
 "aGj-vW-vgS.text" = "連接狀態";
@@ -473,8 +473,8 @@
 /* Class = "UILabel"; text = "SMS"; ObjectID = "pQL-M4-N1h"; */
 "pQL-M4-N1h.text" = "SMS";
 
-/* Class = "UINavigationItem"; title = "UBudd Map"; ObjectID = "pe0-Cl-pxG"; */
-"pe0-Cl-pxG.title" = "UBudd 地圖";
+/* Class = "UINavigationItem"; title = "UpBrink Map"; ObjectID = "pe0-Cl-pxG"; */
+"pe0-Cl-pxG.title" = "UpBrink 地圖";
 
 /* Class = "UILabel"; text = "Add Phone Number"; ObjectID = "pjZ-EZ-yoo"; */
 "pjZ-EZ-yoo.text" = "新增電話號碼";

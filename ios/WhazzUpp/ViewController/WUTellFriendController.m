@@ -36,7 +36,7 @@
 - (void)composeEmail {
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
-        [emailController setSubject:@"UBudd: iOS + Android"];
+        [emailController setSubject:@"UpBrink: iOS + Android"];
         [emailController setMessageBody:NSLocalizedString(@"Tell Friend Email", @"") isHTML:NO];
         emailController.mailComposeDelegate = self;
         [self presentViewController:emailController animated:YES completion:nil];

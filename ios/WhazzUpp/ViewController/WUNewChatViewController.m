@@ -142,10 +142,10 @@
         favocell.nameLabel.text = accRecord.name;
     }
     if (isGroup) {
-        favocell.statusLabel.text = NSLocalizedString(@"UBudd group", @"");
+        favocell.statusLabel.text = NSLocalizedString(@"UpBrink group", @"");
     }
     else{
-        favocell.statusLabel.text = NSLocalizedString(@"UBudd user", @"");
+        favocell.statusLabel.text = NSLocalizedString(@"UpBrink user", @"");
     }
     
     UIImage *image = [[C2CallPhone currentPhone] userimageForUserid:accRecord.c2CallID];

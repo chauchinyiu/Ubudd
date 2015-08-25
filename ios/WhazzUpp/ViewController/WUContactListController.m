@@ -72,7 +72,7 @@
     
     [[self.tabBarController.viewControllers objectAtIndex:0] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Contacts", @"") image:[UIImage imageNamed:@"contacscreen_contacts_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_contacts_icon_on"]]];
     
-    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"UBudd List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
+    [[self.tabBarController.viewControllers objectAtIndex:1] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"UpBrink List", @"") image:[UIImage imageNamed:@"contacscreen_status_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_status_icon_on"]]];
     [[self.tabBarController.viewControllers objectAtIndex:2] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Chats", @"") image:[UIImage imageNamed:@"contacscreen_chat_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_chat_icon_on"]]];
     [[self.tabBarController.viewControllers objectAtIndex:3] setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"More", @"") image:[UIImage imageNamed:@"contacscreen_more_icon_off"] selectedImage:[UIImage imageNamed:@"contacscreen_more_icon_on"]]];
     
@@ -110,7 +110,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0){
-        return NSLocalizedString(@"UBudd", @"");
+        return NSLocalizedString(@"UpBrink", @"");
     }
     else{
         return NSLocalizedString(@"Address book", @"");
@@ -122,7 +122,7 @@
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     WUNameGroupCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUNameGroupCell"];
     if(section == 0){
-        cell.nameLabel.text = NSLocalizedString(@"UBudd", @"");
+        cell.nameLabel.text = NSLocalizedString(@"UpBrink", @"");
     }
     else{
         cell.nameLabel.text = NSLocalizedString(@"Address book", @"");

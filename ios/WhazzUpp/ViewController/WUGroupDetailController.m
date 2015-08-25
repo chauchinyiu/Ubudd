@@ -816,11 +816,49 @@
             
         }
         
+        [self.activityView stopAnimating];
+        [self.navigationController popViewControllerAnimated:YES];
+        
     }];
     [self.group setGroupImage:groupImg withCompletionHandler:nil];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
     [self showActivityView];
 }
+
+-(void)saveGroupChanges{
+    [self editEnded];
+    [self.group setGroupName: [groupInfo objectForKey:@"topic"]];
+    [self.group setGroupdata:[groupInfo objectForKey:@"topicDescription"] forKey:@"topicDesc" public:YES];
+    
+    for (int i = 0; i < newMemberList.count; i++) {
+        [self.group addGroupMember:[newMemberList objectAtIndex:i]];
+    }
+    
+    DataRequest *dataRequest = [[DataRequest alloc] init];
+    dataRequest.requestName = @"updateGroupInfo";
+    dataRequest.values = groupInfo;
+    
+    WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+    [serviceHandler execute:METHOD_DATA_REQUEST parameter:dataRequest target:self action:@selector(updateGroupInfo:error:)];
+    
+    
+    if (groupImg) {
+        DataRequest* datRequest = [[DataRequest alloc] init];
+        NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
+        
+        [data setValue:[self.group groupid] forKey:@"c2CallID"];
+        [data setValue:[UIImagePNGRepresentation(groupImg) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength] forKey:@"pic"];
+        
+        
+        datRequest.values = data;
+        datRequest.requestName = @"updateGroupPhoto";
+        WebserviceHandler *serviceHandler = [[WebserviceHandler alloc] init];
+        [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action:@selector(updateGroupPhoto:error:)];
+        
+    }
+}
+
+
 
 
 
@@ -857,10 +895,6 @@
             [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(addGroupUserResponse:error:)];
             
         }
-        
-        
-        [self.activityView stopAnimating];
-        [self.navigationController popViewControllerAnimated:YES];
         
         NSMutableArray* groups = [[ResponseHandler instance] groupList];
         for (int i = 0; i < groups.count; i++) {
@@ -1044,8 +1078,10 @@
                 }
             }
             if(!isNewMember){
-                [tGroup removeMember:userid];
-                [tGroup saveGroupWithCompletionHandler:^(BOOL success){
+                [self saveGroupChanges];
+                
+                [self.group removeMember:userid];
+                [self.group saveGroupWithCompletionHandler:^(BOOL success){
                     DataRequest* datRequest = [[DataRequest alloc] init];
                     NSMutableDictionary* data = [[NSMutableDictionary alloc] init];
                     [data setValue:userid forKey:@"c2CallID"];
@@ -1056,8 +1092,9 @@
                     [serviceHandler execute:METHOD_DATA_REQUEST parameter:datRequest target:self action: @selector(readBlockUserInfo:error:)];
                     
                 }];
-                
-                [self showActivityView];
+                //[newMemberList removeAllObjects];
+                //[self.tableView reloadData];
+                //[self showActivityView];
             }
             else{
                 [newMemberList removeObjectAtIndex:deleteIndex];

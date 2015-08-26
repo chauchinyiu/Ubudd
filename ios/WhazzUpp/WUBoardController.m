@@ -688,6 +688,9 @@ static BOOL isGroup = YES;
                 WUImageInCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"WUImageInCell"];
                 
                 cell.eventImage.image = [UIImage imageWithData:b.imgData];
+                cell.eventImage.layer.cornerRadius = 8;
+                cell.eventImage.clipsToBounds = YES;
+                
                 [cell.progress setHidden:YES];
                 
                 [cell setTapAction:^{

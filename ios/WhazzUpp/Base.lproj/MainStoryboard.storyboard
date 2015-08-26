@@ -3708,7 +3708,7 @@ You authorize us to disclose any information about you to law enforcement or oth
                                                         <constraint firstAttribute="height" constant="28" id="XVT-TS-x9L"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-6I-evR" userLabel="nameLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-6I-evR" userLabel="nameLabel">
                                                     <rect key="frame" x="45" y="5" width="238" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" constant="17" id="OaD-AX-j7R"/>
@@ -3807,7 +3807,7 @@ You authorize us to disclose any information about you to law enforcement or oth
                                         <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c41-Ec-ZJp">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-kL-5zV" userLabel="nameLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-kL-5zV" userLabel="nameLabel">
                                                     <rect key="frame" x="8" y="8" width="282" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" constant="17" id="lBd-AA-Pos"/>
@@ -3901,7 +3901,7 @@ You authorize us to disclose any information about you to law enforcement or oth
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oTz-9I-F9i">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HCk-Vs-zUr" userLabel="nameLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCk-Vs-zUr" userLabel="nameLabel">
                                                     <rect key="frame" x="45" y="10" width="238" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" constant="17" id="XFu-WP-E1Q"/>
@@ -7291,11 +7291,11 @@ All rights reserved.</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vRD-TZ-H61">
                                                     <rect key="frame" x="0.0" y="125" width="320" height="75"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="MEMBERS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1t-eQ-dn1">
-                                                            <rect key="frame" x="8" y="49" width="68" height="26"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" misplaced="YES" text="MEMBERS:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1t-eQ-dn1">
+                                                            <rect key="frame" x="8" y="49" width="30" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="2MA-bq-Nuh"/>
-                                                                <constraint firstAttribute="width" priority="750" constant="68" id="74u-Pg-Q1A"/>
+                                                                <constraint firstAttribute="width" priority="750" constant="30" id="74u-Pg-Q1A"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                             <nil key="highlightedColor"/>
@@ -7340,7 +7340,7 @@ All rights reserved.</string>
                                                     <constraints>
                                                         <constraint firstItem="tFZ-yH-e6C" firstAttribute="leading" secondItem="vRD-TZ-H61" secondAttribute="leading" constant="8" id="8WW-5h-bta"/>
                                                         <constraint firstAttribute="trailing" secondItem="tFZ-yH-e6C" secondAttribute="trailing" id="LlG-x7-N08"/>
-                                                        <constraint firstItem="IKO-5k-mYy" firstAttribute="leading" secondItem="L1t-eQ-dn1" secondAttribute="trailing" constant="1" id="Noo-zd-37K"/>
+                                                        <constraint firstItem="IKO-5k-mYy" firstAttribute="leading" secondItem="L1t-eQ-dn1" secondAttribute="trailing" constant="5" id="Noo-zd-37K"/>
                                                         <constraint firstItem="ap7-Es-dMy" firstAttribute="leading" secondItem="vRD-TZ-H61" secondAttribute="leading" constant="8" id="S3J-IH-hQV"/>
                                                         <constraint firstAttribute="bottom" secondItem="L1t-eQ-dn1" secondAttribute="bottom" id="SOn-OL-fiL"/>
                                                         <constraint firstAttribute="trailing" secondItem="ap7-Es-dMy" secondAttribute="trailing" constant="8" id="Sik-V0-rJZ"/>
@@ -7968,15 +7968,15 @@ All rights reserved.</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sk8-fE-Q4T"/>
-        <segue reference="l4c-f0-WTn"/>
-        <segue reference="JX8-i6-PVw"/>
         <segue reference="VQ9-8Q-vDt"/>
+        <segue reference="JX8-i6-PVw"/>
+        <segue reference="oaM-SS-1lY"/>
+        <segue reference="l4c-f0-WTn"/>
         <segue reference="pQ9-cK-UrR"/>
-        <segue reference="CpG-ap-BDD"/>
         <segue reference="wV6-VW-yCP"/>
-        <segue reference="4Xm-Dr-ARs"/>
+        <segue reference="CpG-ap-BDD"/>
         <segue reference="qEU-4M-V6f"/>
+        <segue reference="4Xm-Dr-ARs"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -94,7 +94,7 @@
 "is typing" = "%@ \nis typing...";
 "New Group" = "New Group";
 "memberOutOf" = "(%d of 199)";
-"createdagroup" = "%@ created an group %@";
+"createdagroup" = "%@ created a group %@";
 "groupAddedMember" = "%@ added %@";
 "Request pending" = "Request pending";
 "Closed" = "Closed";

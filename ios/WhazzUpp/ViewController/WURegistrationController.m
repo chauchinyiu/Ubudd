@@ -49,12 +49,9 @@
                                    action:@selector(hidekeybord)];
     [tap setDelegate:self];
     [self.view addGestureRecognizer:tap];
-    NSString* jsString = [[NSString alloc] initWithFormat: NSLocalizedString(@"webString", @""), [CommonMethods getStdFontType:1].pointSize];
+    int psize = [CommonMethods getStdFontType:1].pointSize;
+    NSString* jsString = [[NSString alloc] initWithFormat: NSLocalizedString(@"webString", @""), psize];
     [webView loadHTMLString:jsString baseURL:NULL];
-    /*
-    NSString* jsString = [[NSString alloc] initWithFormat: @"document.getElementsByTagName('div')[0].style.webkitTextSizeAdjust='%d%%'", [ NSNumber numberWithFloat: [CommonMethods getStdFontType:1].pointSize * 100 / 20].intValue];
-    [webView stringByEvaluatingJavaScriptFromString:jsString];
-     */
     [lblCountryCode setFont:[CommonMethods getStdFontType:1]];
     [self.phoneNumber.textContent setFont:[CommonMethods getStdFontType:1]];
     

@@ -298,7 +298,7 @@ static BOOL isGroup = YES;
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keywordShown:)
-                                                 name:UIKeyboardDidShowNotification
+                                                 name:UIKeyboardWillShowNotification
                                                object:nil];
 
     if (!self.smallImageCache) {

@@ -8,6 +8,7 @@
 
 #import "WUImageViewController.h"
 
+
 @interface WUImageViewController (){
     float standardScale;
 }
@@ -37,11 +38,12 @@
     [super viewWillAppear:animated];
     // Do any additional setup after loading the view.
     [imageView setImage:viewImage];
+ 
     [self setupImageFrame];
 }
 - (void)setupImageFrame
 {
-    standardScale = 1.01 * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
+    standardScale = 1.00 * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
     
     if (standardScale > 1) {
         CGFloat top = 0, left = 0;
@@ -66,14 +68,9 @@
                 standardScale = 1.01 * self.imageView.image.size.width / self.imageView.image.size.height;
                 top = ((self.view.bounds.size.width * standardScale) - self.view.bounds.size.height) * -0.5f;
                 left = (self.view.bounds.size.width - (self.view.bounds.size.height * standardScale)) * 0.5f;
-                
-            
             }
-
         }
-        
         imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
-        
         imageFrame.minimumZoomScale = standardScale;
         imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
         [imageFrame setZoomScale:standardScale animated:NO];
@@ -156,15 +153,15 @@
     // Code here will execute before the rotation begins.
     // Equivalent to placing it in the deprecated method -[willRotateToInterfaceOrientation:duration:]
     
+   __weak typeof(self) weakSelf = self;
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        
         // Place code here to perform animations during the rotation.
         // You can pass nil or leave this block empty if not necessary.
-        
-    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        [self setupImageFrame];
-    }];
+     [weakSelf setupImageFrame];
+    } completion:NULL];
 }
+
+
 
 /*
 #pragma mark - Navigation

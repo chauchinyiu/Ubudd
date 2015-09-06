@@ -43,7 +43,7 @@
 }
 - (void)setupImageFrame
 {
-    standardScale = 1.00 * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
+    standardScale = 1.01f * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
     
     if (standardScale > 1) {
         CGFloat top = 0, left = 0;

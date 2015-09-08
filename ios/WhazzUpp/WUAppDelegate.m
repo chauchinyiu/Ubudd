@@ -103,10 +103,8 @@
     [UIUserNotificationSettings settingsForTypes:types categories:nil];
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
     
-    /*
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-     */
 }
 
 -(void) c2callLoginSuccess
@@ -122,11 +120,7 @@
     self.affiliateid = @"143BF14733A8F380";
     self.secret = @"e883a183dc5ea85b7388319193781c42";
   
-    
-#ifdef __DEBUG
-    self.useSandboxMode = YES;
-#endif
-    
+    self.useSandboxMode = NO;
     self.usePhotoEffects = SC_PHOTO_USERCHOICE;
 
     [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:44./255. green:138./255. blue:251./255. alpha:1.]];
@@ -214,6 +208,10 @@
 {
     [super applicationWillTerminate:application];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+    
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken

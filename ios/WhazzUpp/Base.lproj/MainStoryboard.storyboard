@@ -5515,19 +5515,6 @@ You authorize us to disclose any information about you to law enforcement or oth
                         <rect key="frame" x="0.0" y="44" width="200" height="7"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rjx-ue-vLO">
-                                <rect key="frame" x="0.0" y="47" width="1" height="93"/>
-                            </imageView>
-                            <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" image="bg_audio_bar.png" translatesAutoresizingMaskIntoConstraints="NO" id="sdN-oD-hEp">
-                                <rect key="frame" x="39" y="193" width="244" height="60"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="244" id="GvG-Bc-7w2"/>
-                                    <constraint firstAttribute="height" constant="60" id="QAg-6k-N6E"/>
-                                </constraints>
-                            </imageView>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jhb-U1-PzO" customClass="CALevelMeter">
                                 <rect key="frame" x="45" y="199" width="232" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -5535,15 +5522,12 @@ You authorize us to disclose any information about you to law enforcement or oth
                                     <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
                                 </accessibility>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sKw-wT-EpQ" userLabel="editView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sKw-wT-EpQ" userLabel="editView">
                                 <rect key="frame" x="0.0" y="55" width="1" height="80"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0RE-fK-ghm" userLabel="btnRecordAgain">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0RE-fK-ghm" userLabel="btnRecordAgain">
                                         <rect key="frame" x="4" y="7" width="122" height="30"/>
                                         <color key="backgroundColor" red="0.50588238240000005" green="0.5647059083" blue="0.67058825489999996" alpha="1" colorSpace="deviceRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="wVr-e1-2RB"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                         <inset key="titleEdgeInsets" minX="22" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -5559,13 +5543,9 @@ You authorize us to disclose any information about you to law enforcement or oth
                                             <action selector="recordAgain:" destination="w5g-j3-AON" eventType="touchUpInside" id="cPj-sm-nPG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzh-DT-0rK" userLabel="btnSubmit">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzh-DT-0rK" userLabel="btnSubmit">
                                         <rect key="frame" x="35" y="42" width="250" height="30"/>
                                         <color key="backgroundColor" red="0.44705885649999999" green="0.61960786580000005" blue="0.36862745879999997" alpha="1" colorSpace="deviceRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="249" id="17t-nJ-cZg"/>
-                                            <constraint firstAttribute="height" constant="30" id="sKs-WO-gZ2"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                         <inset key="titleEdgeInsets" minX="22" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -5581,12 +5561,9 @@ You authorize us to disclose any information about you to law enforcement or oth
                                             <action selector="submitMessage:" destination="w5g-j3-AON" eventType="touchUpInside" id="cwP-Os-fXp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcG-bt-Nvc" userLabel="btnPlay">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcG-bt-Nvc" userLabel="btnPlay">
                                         <rect key="frame" x="35" y="7" width="123" height="30"/>
                                         <color key="backgroundColor" red="0.38823533059999998" green="0.55294120309999995" blue="0.76862752440000004" alpha="1" colorSpace="deviceRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="4Z8-Ax-iki"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                         <inset key="titleEdgeInsets" minX="22" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -5604,28 +5581,13 @@ You authorize us to disclose any information about you to law enforcement or oth
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="0RE-fK-ghm" firstAttribute="top" secondItem="sKw-wT-EpQ" secondAttribute="top" constant="7" id="Dnx-qw-4RW"/>
-                                    <constraint firstItem="UcG-bt-Nvc" firstAttribute="top" secondItem="sKw-wT-EpQ" secondAttribute="top" constant="7" id="LHh-Dt-1BG"/>
-                                    <constraint firstItem="0RE-fK-ghm" firstAttribute="leading" secondItem="UcG-bt-Nvc" secondAttribute="trailing" constant="5" id="VnZ-bg-ryA"/>
-                                    <constraint firstAttribute="bottom" secondItem="tzh-DT-0rK" secondAttribute="bottom" constant="8" id="ZAq-oJ-Y2r"/>
-                                    <constraint firstItem="UcG-bt-Nvc" firstAttribute="leading" secondItem="tzh-DT-0rK" secondAttribute="leading" id="aFU-7c-szZ"/>
-                                    <constraint firstAttribute="height" constant="80" id="lvD-Og-Y6z"/>
-                                    <constraint firstItem="UcG-bt-Nvc" firstAttribute="trailing" secondItem="0RE-fK-ghm" secondAttribute="trailing" constant="-127" id="mgk-2X-dOU"/>
-                                    <constraint firstAttribute="centerX" secondItem="tzh-DT-0rK" secondAttribute="centerX" id="svU-fr-SV5"/>
-                                    <constraint firstItem="UcG-bt-Nvc" firstAttribute="width" secondItem="0RE-fK-ghm" secondAttribute="width" id="w1o-5R-1OX"/>
-                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cR2-c6-JUk" userLabel="startView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cR2-c6-JUk" userLabel="startView">
                                 <rect key="frame" x="0.0" y="55" width="1" height="80"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-8V-7IO" userLabel="btnRecord">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-8V-7IO" userLabel="btnRecord">
                                         <rect key="frame" x="-8" y="18" width="217" height="43"/>
                                         <color key="backgroundColor" red="0.50588238240000005" green="0.5647059083" blue="0.67058825489999996" alpha="1" colorSpace="deviceRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="216" id="JJ8-lD-2xL"/>
-                                            <constraint firstAttribute="height" constant="43" id="aBn-N7-cfR"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                         <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Record" image="ico_record.png">
@@ -5642,25 +5604,17 @@ You authorize us to disclose any information about you to law enforcement or oth
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="GUC-qr-mh6"/>
-                                    <constraint firstAttribute="centerY" secondItem="mAL-8V-7IO" secondAttribute="centerY" id="Ilg-Nu-1lr"/>
-                                    <constraint firstAttribute="centerX" secondItem="mAL-8V-7IO" secondAttribute="centerX" id="NND-Lp-WDa"/>
-                                </constraints>
                             </view>
-                            <progressView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xxo-Ky-iE5">
+                            <progressView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xxo-Ky-iE5">
                                 <rect key="frame" x="71" y="269" width="180" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="n8U-th-x2f"/>
-                                </constraints>
                             </progressView>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="00:00" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="osw-gW-zl8" userLabel="labelMaxtime">
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="00:00" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="osw-gW-zl8" userLabel="labelMaxtime">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" misplaced="YES" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JQ8-Y0-RaJ" userLabel="labelTime">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" fixedFrame="YES" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="none" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JQ8-Y0-RaJ" userLabel="labelTime">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5668,16 +5622,6 @@ You authorize us to disclose any information about you to law enforcement or oth
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="osw-gW-zl8" firstAttribute="top" secondItem="GLh-Mz-LOj" secondAttribute="bottom" id="6Sg-90-V1V"/>
-                            <constraint firstItem="osw-gW-zl8" firstAttribute="leading" secondItem="9nv-Zm-9bN" secondAttribute="leadingMargin" constant="-16" id="7of-L0-rfT"/>
-                            <constraint firstItem="sdN-oD-hEp" firstAttribute="top" secondItem="JQ8-Y0-RaJ" secondAttribute="bottom" id="P5O-G1-z6X"/>
-                            <constraint firstItem="JQ8-Y0-RaJ" firstAttribute="leading" secondItem="9nv-Zm-9bN" secondAttribute="leadingMargin" id="XFO-yc-8LT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="JQ8-Y0-RaJ" secondAttribute="trailing" id="d3D-Cc-I8A"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="osw-gW-zl8" secondAttribute="trailing" constant="-16" id="e3g-eT-oBf"/>
-                            <constraint firstItem="sdN-oD-hEp" firstAttribute="top" secondItem="osw-gW-zl8" secondAttribute="bottom" id="iKi-xj-GQv"/>
-                            <constraint firstItem="JQ8-Y0-RaJ" firstAttribute="top" secondItem="GLh-Mz-LOj" secondAttribute="bottom" id="vbr-po-TgF"/>
-                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -5767,9 +5711,6 @@ You authorize us to disclose any information about you to law enforcement or oth
                                                     <action selector="btnSendTapped:" destination="mIK-nM-8TN" eventType="touchUpInside" id="P19-Cw-A1b"/>
                                                 </connections>
                                             </button>
-                                            <containerView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f84-xK-Gug">
-                                                <rect key="frame" x="0.0" y="0.0" width="20" height="36"/>
-                                            </containerView>
                                             <label hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ons-99-XpF">
                                                 <rect key="frame" x="0.0" y="0.0" width="10" height="36"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -5805,16 +5746,12 @@ You authorize us to disclose any information about you to law enforcement or oth
                                             <constraint firstAttribute="trailing" secondItem="S2X-nj-VcX" secondAttribute="trailing" constant="8" id="9r7-sb-Sr5"/>
                                             <constraint firstItem="GEH-kj-NW5" firstAttribute="leading" secondItem="7Xy-sv-Eln" secondAttribute="leading" constant="4" id="9zL-jl-guc"/>
                                             <constraint firstItem="ons-99-XpF" firstAttribute="top" secondItem="7Xy-sv-Eln" secondAttribute="top" id="HiP-Dm-Zx7"/>
-                                            <constraint firstItem="f84-xK-Gug" firstAttribute="top" secondItem="7Xy-sv-Eln" secondAttribute="top" id="JI0-9w-IIc"/>
                                             <constraint firstItem="WMt-Tk-m0z" firstAttribute="top" secondItem="7Xy-sv-Eln" secondAttribute="top" id="P0X-tL-r4F"/>
-                                            <constraint firstAttribute="bottom" secondItem="f84-xK-Gug" secondAttribute="bottom" id="UqU-Uh-WCE"/>
                                             <constraint firstItem="GEH-kj-NW5" firstAttribute="top" secondItem="7Xy-sv-Eln" secondAttribute="top" id="VTW-SZ-pXa"/>
                                             <constraint firstAttribute="trailing" secondItem="cqh-f1-UMx" secondAttribute="trailing" constant="41" id="YKC-2j-QNo"/>
                                             <constraint firstAttribute="trailing" secondItem="WMt-Tk-m0z" secondAttribute="trailing" constant="1" id="aY5-XY-mg3"/>
                                             <constraint firstAttribute="bottom" secondItem="ons-99-XpF" secondAttribute="bottom" id="eHv-u7-yyc"/>
-                                            <constraint firstAttribute="trailing" secondItem="f84-xK-Gug" secondAttribute="trailing" id="jK7-Vp-Lxl"/>
                                             <constraint firstAttribute="bottom" secondItem="WMt-Tk-m0z" secondAttribute="bottom" id="l0p-Zw-G6S"/>
-                                            <constraint firstItem="f84-xK-Gug" firstAttribute="leading" secondItem="7Xy-sv-Eln" secondAttribute="leading" id="p3Q-Wd-m2G"/>
                                             <constraint firstItem="S2X-nj-VcX" firstAttribute="top" secondItem="7Xy-sv-Eln" secondAttribute="top" id="pjq-26-zzd"/>
                                             <constraint firstAttribute="bottom" secondItem="S2X-nj-VcX" secondAttribute="bottom" id="zwF-FP-Ddi"/>
                                         </constraints>
@@ -5896,7 +5833,6 @@ You authorize us to disclose any information about you to law enforcement or oth
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attachButton" destination="GEH-kj-NW5" id="sxV-Pz-2z9"/>
-                        <outlet property="audioContainer" destination="f84-xK-Gug" id="cWA-tP-9EV"/>
                         <outlet property="broadContainer" destination="PUW-an-2rE" id="d1T-bR-ww1"/>
                         <outlet property="chatInput" destination="cqh-f1-UMx" id="Myw-cH-21G"/>
                         <outlet property="imageBtn" destination="boS-vv-xna" id="db6-aQ-Rpw"/>
@@ -7915,6 +7851,24 @@ All rights reserved.</string>
                 </view>
             </objects>
             <point key="canvasLocation" x="1702" y="37"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="g06-BI-Lx8">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="z99-mB-BaZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mAs-ac-aEa"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jjo-VC-E7n"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="FXT-gr-5HD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q4q-fP-Qnq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>

@@ -13,7 +13,6 @@
 @interface WUChatController : SCChatViewController2 <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UITextViewDelegate>
 
 - (IBAction)openProfile:(id)sender;
-- (IBAction)btnCallTapped;
 - (IBAction)btnRichMessageTapped:(id)sender;
 - (IBAction)btnImageTapped:(id)sender;
 - (IBAction)btnSendTapped:(id)sender;
@@ -23,8 +22,6 @@
 @property (nonatomic, assign) bool sendWelcomeText;
 @property(nonatomic, weak) IBOutlet UIButton* titleButton;
 @property(nonatomic, weak) IBOutlet UIButton* imageBtn;
-@property(nonatomic, weak) SCAudioRecorderController *audioView;
-@property(nonatomic, weak) IBOutlet UIView *audioContainer;
 @property(nonatomic, weak) IBOutlet UIButton* recordButton;
 @property(nonatomic, weak) IBOutlet UILabel* lblRecording;
 @property(nonatomic, weak) IBOutlet UIView *broadContainer;

@@ -576,6 +576,7 @@
 
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     if (userType == 1 && indexPath.section == 1) {
         SCUserProfile *userProfile = [SCUserProfile currentUser];
         if (indexPath.row == 0) {
@@ -588,6 +589,7 @@
             return YES;
         }
     }
+     */
     return NO;
 }
 

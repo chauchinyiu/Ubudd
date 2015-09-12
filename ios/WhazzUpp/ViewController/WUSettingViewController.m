@@ -16,7 +16,7 @@
 @end
 
 @implementation WUSettingViewController
-@synthesize lblConnectionStatus, lblAboutUbudd, lblConnectionStatusHeader, lblFontSizeSetting, lblMyProfile, lblTellAFriend, lblContactUs, lblHelp;
+@synthesize lblConnectionStatus, lblAboutUbudd, lblConnectionStatusHeader, lblFontSizeSetting, lblMyProfile, lblTellAFriend, lblContactUs;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,7 +40,6 @@
     lblMyProfile.font = [CommonMethods getStdFontType:1];
     lblTellAFriend.font = [CommonMethods getStdFontType:1];
     lblContactUs.font = [CommonMethods getStdFontType:1];
-    lblHelp.font = [CommonMethods getStdFontType:1];
     
     if (appDelegate.loginCompleted) {
         [lblConnectionStatus setText:NSLocalizedString(@"Connected", @"")];
@@ -84,7 +83,6 @@
     lblMyProfile.font = [CommonMethods getStdFontType:1];
     lblTellAFriend.font = [CommonMethods getStdFontType:1];
     lblContactUs.font = [CommonMethods getStdFontType:1];
-    lblHelp.font = [CommonMethods getStdFontType:1];
     
 }
 

@@ -244,11 +244,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GII-XO-1VM" id="Zqw-MY-F2n">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="Contact Us" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgw-Tc-9Oy">
-                                                    <rect key="frame" x="15" y="0.0" width="270" height="34"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hpr-3e-ehg" customClass="WUHairLine">
                                                     <rect key="frame" x="15" y="33" width="400" height="1"/>
                                                     <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -260,23 +255,7 @@
                                                         <constraint firstAttribute="width" constant="6" id="5w1-7F-Esj"/>
                                                     </constraints>
                                                 </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="34" id="bft-vA-Npr">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bft-vA-Npr" id="Ghu-Gq-6Cf">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="phonenumber_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="d7H-YI-GRE">
-                                                    <rect key="frame" x="290" y="12" width="6" height="10"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="10" id="aIf-5k-i4u"/>
-                                                        <constraint firstAttribute="width" constant="6" id="kJd-jQ-oQf"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="Help / FAQ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIw-p4-0Dm">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" fixedFrame="YES" text="Contact Us / Send Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgw-Tc-9Oy">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="34"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <nil key="highlightedColor"/>
@@ -368,7 +347,6 @@
                         <outlet property="lblConnectionStatusHeader" destination="aGj-vW-vgS" id="T2n-jZ-7s8"/>
                         <outlet property="lblContactUs" destination="Lgw-Tc-9Oy" id="thf-Bf-MyE"/>
                         <outlet property="lblFontSizeSetting" destination="R2P-da-Nm2" id="GcD-7c-KGd"/>
-                        <outlet property="lblHelp" destination="xIw-p4-0Dm" id="JXI-6S-bsx"/>
                         <outlet property="lblMyProfile" destination="WQh-Jh-nYi" id="1L8-p3-XfS"/>
                         <outlet property="lblTellAFriend" destination="Fby-5K-WVQ" id="jao-hb-hJ9"/>
                     </connections>
@@ -956,7 +934,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Effective Date of Terms of Service">
+                                    <fragment content="Effective Date of Terms of Service Agreement">
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
@@ -964,13 +942,12 @@
                                                 <tabStops/>
                                             </paragraphStyle>
                                             <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
+                                        <string key="content">
+September 10, 2015
+
 </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
@@ -979,35 +956,9 @@ Cg
                                                 <tabStops/>
                                             </paragraphStyle>
                                             <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="May 7, 2015">
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Acceptance of Terms of Service ">
+                                    <fragment content="Terms of Service Agreement ">
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
@@ -1021,7 +972,7 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-Please read these Terms of Service collectively with Ubudd Limited Privacy Policy, fully and carefully before using our Website, </string>
+Please read these Terms of Service collectively with UpBrink Limited Privacy Policy at </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
@@ -1032,7 +983,59 @@ Please read these Terms of Service collectively with Ubudd Limited Privacy Polic
                                             <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="www.ubudd.com">
+                                    <fragment content="www.upbrink.com/privacy">
+                                        <attributes>
+                                            <color key="NSColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <url key="NSLink" string="http://www.upbrink.com/privacy"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                            <color key="NSUnderlineColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=", fully and carefully before using our Website, ">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="www.upbrink.com">
+                                        <attributes>
+                                            <color key="NSColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <url key="NSLink" string="http://www.upbrink.com/"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                            <color key="NSUnderlineColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> (the "UpBrink Website”), the UpBrink Service (the "Service"),UpBrink Content (the "Content") and UpBrink Mobile application (the "Mobile Application") offered by UpBrink Limited ("UpBrink","we", "us", or "our"). 
+UpBrink Limited is the owner and operator of the UpBrink Mobile Application, the UpBrink Software and the website </string>
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="www.upbrink.com">
                                         <attributes>
                                             <color key="NSColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
@@ -1047,8 +1050,9 @@ Please read these Terms of Service collectively with Ubudd Limited Privacy Polic
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content"> (the “Ubudd Website”), the Ubudd Service (the "Service"), Ubudd Content (the "Content") and Ubudd Mobile application (the "Mobile Application") offered by Ubudd Limited ("Ubudd","we", "us", or "our").
-Ubudd Limited is the owner and operator of the Ubudd Mobile Application, the Ubudd Software and the website </string>
+                                        <string key="content">, including all UpBrink Content provided by UpBrink's Service.
+This is UpBrink's Terms of Service Agreement between UpBrink Limited and you (“you”, "You"), a user of the UpBrink Service.
+We may update this Terms of Service Agreement at any time. When we do, we will revise the "Effective date" at the top of this Terms of Service Agreement, and you may view the most recent version at </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
@@ -1059,35 +1063,7 @@ Ubudd Limited is the owner and operator of the Ubudd Mobile Application, the Ubu
                                             <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="www.ubudd.com">
-                                        <attributes>
-                                            <color key="NSColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <url key="NSLink" string="http://www.ubudd.com/"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                            <color key="NSUnderlineColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">, including all Ubudd Content provided by Ubudd's Service.
-This is an agreement between Ubudd Limited and you (“you”, "You" ), a user of the Ubudd Service.
-We may update the Agreement at any time. When we do, we will revise the "Effective date" at the top of this Agreement, and you may view the most recent version at </string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="www.ubudd.com/terms">
+                                    <fragment content="www.upbrink.com/terms">
                                         <attributes>
                                             <color key="NSColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
@@ -1103,10 +1079,9 @@ We may update the Agreement at any time. When we do, we will revise the "Effecti
                                     </fragment>
                                     <fragment>
                                         <string key="content">.
-It is your responsibility to review the most recent version of the Agreement frequently and remain informed about any changes to it. By continuing to use the Ubudd Service, you agree to any updates made in this Agreement. 
-By accessing or using the Ubudd Service, you acknowledge and agree to this Terms of Service Agreement and any modifications that Ubudd may make to this Terms of Service Agreement from time to time. 
-If you do not agree to any of these terms of this Agreement, you should not use the Ubudd Service.
-
+It is your responsibility to review the most recent version of this Terms of Service Agreement frequently and remain informed about any changes to it. By continuing to use the UpBrink Service, you agree to any updates made in this Terms of Service Agreement. 
+By accessing or using UpBrink's Service, you acknowledge, accept and agree to UpBrink's Terms of Service and any modifications that UpBrink may make to this Terms of Service Agreement from time to time. 
+If you do not accept and agree to UpBrink's Terms of Service Agreement and UpBrink's Privacy Policy, you should not use UpBrink's Service.
 </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
@@ -1118,7 +1093,9 @@ If you do not agree to any of these terms of this Agreement, you should not use 
                                             <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="This Agreement applies to all users of the Ubudd Service:">
+                                    <fragment>
+                                        <string key="content">
+This Agreement applies to all users of the UpBrink Service:</string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
@@ -1143,7 +1120,7 @@ Cg
                                             <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Subject to your compliance with these Terms of Service, Ubudd hereby grants you permission to use the Service, provided that:">
+                                    <fragment content="Subject to your compliance with these Terms of Service, UpBrink hereby grants you permission to use the Service, provided that:">
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
@@ -1156,30 +1133,19 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-(a) your use of the Service as permitted is solely for your personal use, and you are not permitted to resell or charge others for use of or access to the Service, or in any other manner inconsistent with these Terms of Service; 
-(b) you will not duplicate, transfer, give access to, copy or distribute any part of the Ubudd Service in any way or for any reason without Ubudd's prior written authorization; 
-(c) you will not attempt to modify, alter, or change any part of Ubudd’s Services; 
-(d) you agree that Ubudd will not be liable for your losses caused by any unauthorized use of your account.
-(e) you will otherwise comply with the Terms of Service and Privacy Policy.
+(a) your use of the Service as permitted is solely for your personal use, and you are not permitted to resell or charge others for use of or access to the UpBrink Service, or in any other manner inconsistent with these Terms of Service; 
+(b) you will not duplicate, transfer, give access to, copy or distribute any part of the UpBrink Service in any way or for any reason
+(c) you will not attempt to reverse engineer, hack, disrupt the performance, modify, alter, or change any part of UpBrink Services; 
+(d) you agree that UpBrink will not be responsible and liable for your losses of any kind caused by any unauthorized use of your account.
 
-(f) you agree to comply with all applicable domestic and international laws, statutes, ordinances and regulations regarding your use of our Services, including without limitation your participation in or involvement with Ubudd.
+(e) you agree to comply with all applicable domestic and international laws, statutes, ordinances and regulations regarding your use of our Services, including without limitation your participation in or involvement with UpBrink.
+(f) you shall not sell, license, rent, or otherwise use or exploit any of UpBrink's Content for commercial use or in any way that violates any third party right.
+(g) you shall not reproduce, duplicate, copy, sell, resell or exploit for any commercial purposes, any portion of UpBrink's Services
+(h) you agree any unauthorized use of the UpBrink Service without UpBrink's prior written authorization is strictly prohibited.
+(i) you will otherwise comply with UpBrink's Terms of Service and UpBrink's Privacy Policy.
 </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
@@ -1202,24 +1168,12 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-In order to access and use the features of our Service, you acknowledge and agree that you will have to provide Ubudd with your mobile phone number. You expressly acknowledge and agree that in order to provide the Service, Ubudd may periodically access your contact list and/or address book on your mobile device to find and keep track of mobile phone numbers of other users of the Service. When providing your mobile phone number, you must provide accurate and complete information. You hereby give your express consent to Ubudd to access your contact list and/or address book for mobile phone numbers in order to provide and use the Service. We do not collect names, addresses or email addresses, just mobile phone numbers. You are solely responsible for the status messages that you submit and that are displayed for your mobile phone number on the Ubudd Service. You must notify Ubudd immediately of any breach of security or unauthorized use of your mobile phone. 
+In order to access and use the features of our UpBrink Service, you acknowledge and agree that you will have to provide UpBrink with your mobile phone number. You expressly acknowledge and agree that in order for UpBrink provide the UpBrink Service, UpBrink may periodically access your contact list and/or address book on your mobile device to find and keep track of mobile phone numbers of other users of the UpBrink Service. When providing your mobile phone number, you must provide accurate and complete information. You hereby give your express consent to UpBrink to access your contact list and/or address book for mobile phone numbers in order to provide and use the Service. We do not collect addresses or email addresses, just mobile phone numbers. 
+You are solely responsible for the names, status messages or any other information that you submit and that are displayed for your mobile phone number on the UpBrink Service. You must notify UpBrink staff immediately of any breach of security or unauthorized use of your mobile phone. 
+
 </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
@@ -1243,25 +1197,12 @@ Cg
                                     <fragment>
                                         <string key="content">
 You represent and warrant that you are at least 18 years of age.  
-If you are under 18, please do not use the Ubudd services.  We may, in our sole discretion, refuse to offer the Services to any person or entity and change its eligibility criteria at any time. 
-The services are offered only for your personal use, and not for the use or benefit of any third party.
+If you are under 18, please do not use the UpBrink services.  We may, in our sole discretion, refuse to offer the Services to any person or entity and change its eligibility criteria at any time. 
+Registering your phone number with UpBrink for use of The UpBrink Service is only for your own personal use, and is not for the use or benefit of any affiliated third party.
+
 </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
@@ -1284,24 +1225,11 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-You, and not Ubudd, are entirely responsible for all of your Public Information that you upload, post, email, transmit or otherwise make available via our Ubudd Services.  We do not control your Public Information or the Public Information of or posted by other users and do not guarantee the accuracy, integrity or quality of Your Information or the Information of or posted by other users. Nor do we endorse any opinions expressed by you or other users. You understand that by using our Service, you may be exposed to information that is offensive, indecent or objectionable. We do not have any obligation to monitor, nor do we take responsibility for your information, public Information or information of or posted by other users. 
+You, and not UpBrink, are entirely responsible for all of your Public Information that you upload, post, email, transmit or otherwise make available via our UpBrink Services.  We do not control your Public Information or the Public Information of or posted by other users and do not guarantee the accuracy, integrity or quality of your Information or the Information of or posted by other users. Nor do we endorse any opinions expressed by you or other users. You understand that by using our Service, you may be exposed to information that is offensive, indecent or objectionable. We do not take responsibility for your information, public Information or information of or posted by other users. 
+
 </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
@@ -1324,57 +1252,7 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-We reserve the right to remove, block, edit, or modify any Content in our sole discretion, at any time, without notice to you and for any reason (including, but not limited to upon receipt of claims or allegations from third parties or authorities relating to such Content or if we are concerned that you may have violated these Terms of Service).
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Use License">
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
-
-You agree that:
-
-You shall not sell, license, rent, or otherwise use or exploit any of Ubudd's Content for commercial use or in any way that violates any third party right.
-
-You shall not reproduce, duplicate, copy, sell, resell or exploit for any commercial purposes, any portion of Ubudd's Services 
-
-Content is solely for personal use.  
-
-Any commercial use, or unauthorized use of the Ubudd Service without the prior written consent of Ubudd, is strictly prohibited.
-
+We reserve the right to remove, block, edit, or modify any Content in our sole discretion, at any time, without notice to you and for any reason (including, but not limited to upon receipt of claims or allegations from third parties or authorities relating to such Content or if we are concerned that you may have violated these Terms of Service).
 </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
@@ -1415,8 +1293,9 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-To enable us to use your Public Information and to ensure we do not violate any rights you may have in your Public Information, you grant Ubudd a non-exclusive, worldwide, perpetual, irrevocable, royalty-free, sub-licensable right to exercise, commercialize and exploit the copyright, publicity, and database rights (but no other rights) you have in your Public Information, in any media now known or not currently known, with respect to your Public Information.
+We do not claim ownership of Your Information. By submitting User Content through the UpBrink Services, We will use Your Information only in accordance with our Terms of Service and Privacy Policy. However, to enable us to use your Public Information and to ensure we do not violate any rights you may have in your Public Information, you grant UpBrink a non-exclusive, worldwide, perpetual, irrevocable, royalty-free, sub license-able right to exercise, commercialize and exploit the copyright, publicity, and database rights (but no other rights) you have in your Public Information, in any media now known or not currently known, with respect to your Public Information.
 
+You also hereby do and shall grant each user of UpBrink's Services a non-exclusive license to access your User Content through UpBrink's Services.
 
 </string>
                                         <attributes>
@@ -1444,7 +1323,7 @@ To enable us to use your Public Information and to ensure we do not violate any 
                                     <fragment>
                                         <string key="content">
 
-As a condition of use, you promise not to use the Service for any purpose that is prohibited by these Terms of Service.  You are responsible for all of your activity in connection with the Services.
+As a condition of use, you promise not to use the Service for any purpose that is prohibited by these Terms of Service.  You are responsible for all of your activity in connection with the Services.
 
 In consideration of your use of our Service, you agree that your Information:
 
@@ -1460,11 +1339,11 @@ In consideration of your use of our Service, you agree that your Information:
 
 (f) shall not contain any viruses, Trojan horses, worms, time bombs, cancelbots, easter eggs or other computer programming routines that may damage, detrimentally interfere with, surreptitiously intercept or expropriate any system, data or personal information;
 
-(g) shall not create liability for Ubudd or cause Ubudd to lose (in whole or in part) the services of our ISPs or other suppliers;
+(g) shall not create liability for UpBrink or cause UpBrink to lose (in whole or in part) the services of our ISPs or other suppliers;
 
 (h) shall not link directly or indirectly to any materials to which you do not have a right to link to or include.
 
-(i) shall not impersonate any person or entity, including any of Ubudd's employees or representatives
+(i) shall not impersonate any person or entity, including any of UpBrink's representatives.
 
 (j) shall not include anyone's identification documents or sensitive financial information.
 
@@ -1476,7 +1355,7 @@ You agree that you will not:
 
 (c) take any action that imposes an unreasonable or disproportionately large load on our infrastructure
 
-(d) copy, reproduce, alter, modify, or publicly display any information displayed on our Website (except for Your Information), or create derivative works from our Website, to the extent that such action(s) would constitute copyright infringement or otherwise violate the intellectual property rights of Ubudd or any other third party, without the prior written consent of Ubudd or the appropriate third party.
+(d) copy, reproduce, alter, modify, or publicly display any information displayed on our Website (except for Your Information), or create derivative works from our Website, to the extent that such action(s) would constitute copyright infringement or otherwise violate the intellectual property rights of UpBrink or any other third party, without the prior written consent of UpBrink or the appropriate third party.
 
 </string>
                                         <attributes>
@@ -1522,7 +1401,7 @@ The following types of actions are cause for immediate removal and/or suspension
 
 (a) The use of our Service to harm or intimidate another person in any way, including restricting or inhibiting any other user from using our Service;
 
-(b) impersonating any person or entity,(including Ubudd staff), or falsely state or otherwise misrepresent your affiliation with any person, through the use of similar email addresses, nicknames, or creation of false account(s) or any other method or device;
+(b) impersonating any person or entity,(including UpBrink staff), or falsely state or otherwise misrepresent your affiliation with any person, through the use of similar email addresses, nicknames, or creation of false account(s) or any other method or device;
 
 (c) disguising the origin of any Public Information that is transmitted to any third party;
 
@@ -1540,21 +1419,21 @@ The following types of actions are cause for immediate removal and/or suspension
 
 (j) Anything that is unsolicited or unauthorized advertising, promotional materials, or any other form of solicitation (including, but not limited to, "spam," "junk mail," and "chain letters");
 
-(k) Anything that is inappropriate, created and posted in bad faith to the spirit of any Ubudd Chat;
+(k) Anything that is inappropriate, created and posted in bad faith to the spirit of any UpBrink Chat;
 
 (l) Encouraging others to violate this Agreement;
 
-(m) Refusing to follow Ubudd staff instruction or direction
+(m) Refusing to follow UpBrink's instruction or direction
 
 (n) Violation (intentional or unintentional) of this Agreement, or of any applicable local, national or international law, statute, ordinance or regulation.
 
-(o) Altering or modifying the functionality of Ubudd's Service
+(o) Altering or modifying the functionality of UpBrink's Service
 
-Your posting of other inappropriate actions, Public Information or other materials that violate this agreement may also warrant removal and/or suspension from our Website. Ubudd reserves the right to remove any post or other material without warning or further notice.
+Your posting of other inappropriate actions, Public Information or other materials that violate this agreement may also warrant removal and/or suspension from our Website.  UpBrink reserves the right to remove any post or other material without warning or further notice.
 
 While we prohibit such conduct and content, you understand and agree that you nonetheless may be exposed to such conduct or content and that you use our Service at your own risk.
 
-For purposes of this Agreement, "posting" includes uploading, posting, transmitting or otherwise making available. Ubudd shall have the right to remove any Public Information or other material that violates this Agreement.
+For purposes of this Agreement, "posting" includes uploading, posting, transmitting or otherwise making available. UpBrink shall have the right to remove any Public Information or other material that violates this Agreement.
 
 </string>
                                         <attributes>
@@ -1596,11 +1475,11 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-Ubudd respects the intellectual property of others, and we ask you our users to do the same
+UpBrink respects the intellectual property of others, and we ask you our users to do the same
 
-Ubudd's Trademarks and Service marks, and other Ubudd Logos, Products and Service names, are Trademarks of Ubudd Limited. Except as otherwise permitted by law, you agree not to display or use in any manner of the Ubudd Trademarks without Ubudd's prior written consent. 
+UpBrink's Trademarks and Service marks, and other UpBrink Logos, Products and Service names, are Trademarks of UpBrink Limited. Except as otherwise permitted by law, you agree not to display or use in any manner of the UpBrink Trademarks without UpBrink's prior written consent. 
 
-You acknowledge and agree that our Content, Mobile Application, and Website contains copyright information that is protected by applicable intellectual property and other laws. You also acknowledge and agree that Content contained in sponsor advertisements or information presented to you through our Service or advertisers, is protected by copyrights, trademarks, service marks, patents or other proprietary rights and laws. Except as consented to by Ubudd or advertisers in writing, you agree not to modify, rent, lease, loan, sell, distribute or create derivative works based on our Service, Mobile Application, Content, and Website, in whole or in part.
+You acknowledge and agree that our Content, Mobile Application, and Website contains copyright information that is protected by applicable intellectual property and other laws. You also acknowledge and agree that Content contained in sponsor advertisements or information presented to you through our Service or advertisers, is protected by copyrights, trademarks, service marks, patents or other proprietary rights and laws. Except as consented to by UpBrink or advertisers in writing, you agree not to modify, rent, lease, loan, sell, distribute or create derivative works based on our Service, Mobile Application, Content, and Website, in whole or in part.
 
 </string>
                                         <attributes>
@@ -1642,7 +1521,7 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-You agree that under no circumstances, and in under no event shall Ubudd, nor our directors, officers, shareholders, employees, consultants, agents, advisers, affiliates, subsidiaries, contractors, and third-party partners or content providers of Ubudd be liable in any way whatsoever with respect to our Services provided, including but not limited to:
+You agree that under no circumstances, and in under no event shall UpBrink, nor our directors, officers, shareholders, employees, consultants, agents, advisers, affiliates, subsidiaries, contractors, and third-party partners or content providers of UpBrink be liable in any way whatsoever with respect to our Services provided, including but not limited to:
 
 (a) mistakes, or inaccuracies of our Content
 
@@ -1666,23 +1545,10 @@ You agree that under no circumstances, and in under no event shall Ubudd, nor ou
 
 (k) for any failure to correct or remove information.
 
+
 </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
@@ -1706,10 +1572,9 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-Ubudd, and our directors, employees, agents, suppliers, partners,contractors and content providers DISCLAIM ALL WARRANTIES expressed or suggested in connection with the Ubudd Service and your use of Ubudd’s Service 
+UpBrink and our directors, employees, agents, suppliers, partners,contractors and content providers DISCLAIM ALL WARRANTIES expressed or suggested in connection with the UpBrink Service and your use of UpBrink's Service 
 
-Your use of our Services and Content is at your sole risk. Our Service and Content is provided to you "as is", "as available" and is without warranty of any kind.
-Ubudd assumes NO LIABILITY OR RESPONSIBILITY for, but not limited to:
+Your use of our Services and Content is at your sole risk. Our Service and Content is provided to you "as is", "as available" and is without warranty of any kind.  UpBrink assumes NO LIABILITY OR RESPONSIBILITY for, but not limited to:
 
 (a) any interruption of transmission to and from our Service
 
@@ -1725,15 +1590,17 @@ Ubudd assumes NO LIABILITY OR RESPONSIBILITY for, but not limited to:
 
 (g) any bugs, viruses, trojan horses, or anything similar which may be transmitted to or through our Service by the actions of any third party
 
+UpBrink does not endorse any Status Submission, or any opinion, recommendation, or advice expressed therein, and UpBrink expressly disclaims any and all liability in connection with Status Submissions.
+
 You understand and agree that you download or otherwise obtain Content or data through the use of our Service and Mobile Application at your own discretion and risk.
 
 You agree that we have no responsibility or liability for the storage or the deletion of, or the failure to store or delete, any of Your Information. You acknowledge that we reserve the right to remove users who are inactive for an extended period of time. In addition, you acknowledge that we reserve the right to change these general practices and limits at any time, in our sole discretion, with or without notice.
 
-Ubudd does not warrant, endorse, guarantee, or assume responsibility for any product or service advertised or offered by a third party through the Ubudd Service.
+UpBrink does not warrant, endorse, guarantee, or assume responsibility for any product or service advertised or offered by a third party through the UpBrink Service.
 
-Ubudd is not responsible or liable for any errors in any Content, or for any losses or damages incurred of any kind from the result of the use of any Content posted or otherwise made available through the Ubudd Service.
+UpBrink is not responsible or liable for any errors in any Content, or for any losses or damages incurred of any kind from the result of the use of any Content posted or otherwise made available through the UpBrink Service.
 
-YOU SHOULD USE YOUR BEST JUDGMENT AND EXERCISE CAUTION WHERE APPROPRIATE. AND AGAIN, USE THIS JUST FOR FUN.
+YOU SHOULD USE YOUR BEST JUDGMENT, AND EXERCISE CAUTION WHERE APPROPRIATE. AND AGAIN, USE THIS SERVICE JUST FOR FUN.
 
 </string>
                                         <attributes>
@@ -1775,8 +1642,8 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-You shall defend, indemnify, and hold harmless Ubudd, our affiliates and each of our and their respective employees, contractors, directors, suppliers and representatives from all liabilities, claims, and expenses, including reasonable attorney fees, that arise from or relate to your misuse of, or access to: 
-our Services, Content, or otherwise from your User Content, violation of these Terms of Service, or infringement by you, or any third party using your account or identity in our Services, or of any intellectual property or other right of any person or entity.
+You shall defend, indemnify, and hold harmless UpBrink, our affiliates and each of our and their respective employees, contractors, directors, suppliers and representatives from all liabilities, claims, and expenses, including reasonable attorney fees, that arise from or relate to your misuse of, or access to: 
+our Services, Content, or otherwise from your User Content, violation of these Terms of Service, or infringement by you, or any third party using your account or identity in our Services, or of any intellectual property or other right of any person or entity.
 
 We reserve the right to assume the exclusive defense and control of any matter otherwise subject to indemnification by you, in which event you will assist and cooperate with us in asserting any available defenses.
 
@@ -1820,8 +1687,8 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-These Terms of Service shall be governed by the laws of Hong Kong Special Administrative Region of the People's Republic of China.
-You agree that any dispute arising from or relating to the subject matter of these Terms of Service shall be governed by the exclusive jurisdiction and venue of Hong Kong Special Administrative Region of the People's Republic of China.
+These Terms of Service shall be governed by the laws of Hong Kong Special Administrative Region.
+You agree that any dispute arising from or relating to the subject matter of these Terms of Service shall be governed by the exclusive jurisdiction and venue of Hong Kong Special Administrative Region of the People's Republic of China.
 
 </string>
                                         <attributes>
@@ -1863,11 +1730,11 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-Ubudd reserves the right at any time or times to modify or discontinue, temporarily or permanently, all or any portion of our Services and Content with or without notice. You agree that we shall not be liable to you or to any third party for any modification, suspension or termination from our Services.
+UpBrink reserves the right at any time or times to modify or discontinue, temporarily or permanently, all or any portion of our Services and Content with or without notice. You agree that we shall not be liable to you or to any third party for any modification, suspension or termination from our Services.
 
-It is your responsibility to check these Terms of Service periodically for changes.  Your continued use of the Services following notification of any changes to these Terms of Service constitues acceptance of those changes.
+It is your responsibility to check these Terms of Service periodically for changes.  Your continued use of the Services following notification of any changes to these Terms of Service constitutes acceptance of those changes.
 
-Ubudd reserves the right, in our sole discretion to modify or replace any of these Terms of Service.
+UpBrink reserves the right, in our sole discretion to modify or replace any of these Terms of Service.
 
 </string>
                                         <attributes>
@@ -1982,7 +1849,7 @@ Cg
                                     <fragment>
                                         <string key="content">We may provide, or third parties may provide, links to other websites or resources. Because we have no control over such websites or resources, you acknowledge and agree that we are not responsible for the availability of such websites or resources, and do not endorse and are not responsible or liable for any content, advertising, products, or other materials on or available from such websites or resources. 
 
-You also acknowledge and agree that Ubudd shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such websites or resource.
+You also acknowledge and agree that UpBrink shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such websites or resource.
 
 </string>
                                         <attributes>
@@ -2024,7 +1891,7 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-These Terms of Service, and any rights and licenses granted hereunder, may not be transferred or assigned by you, but may be assigned by Ubudd without restriction.
+These Terms of Service, and any rights and licenses granted hereunder, may not be transferred or assigned by you, but may be assigned by UpBrink Limited without restriction.
 
 </string>
                                         <attributes>
@@ -2066,7 +1933,7 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-Ubudd's failure to enforce any part of these Terms of Service shall not constitute a waiver of our right to later enforce that or any other part of these Terms of Service.
+UpBrink Limited's failure to enforce any part of these Terms of Service shall not constitute a waiver of our right to later enforce that or any other part of these Terms of Service.
 
 </string>
                                         <attributes>
@@ -2108,7 +1975,7 @@ Cg
                                     <fragment>
                                         <string key="content">
 
-By indicating during registration that you have read and agreed to this Agreement, you are agreeing that you have read and understand this Agreement and agree to all of the terms of this Agreement with respect to our Services including the use of our Ubudd website and Ubudd Mobile Application.</string>
+By indicating during registration that you have read and agreed to this Agreement, you are agreeing that you have read and understand this Agreement and agree to all of the terms of this Agreement with respect to our UpBrink Services including the use of our UpBrink website and UpBrink Mobile Application.</string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
@@ -2159,9 +2026,24 @@ By indicating during registration that you have read and agreed to this Agreemen
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Ubudd Privacy Policy">
+                                    <fragment content="Effective Date of Privacy Policy">
                                         <attributes>
-                                            <font key="NSFont" size="18" name="HelveticaNeue-Bold"/>
+                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+September 10, 2015
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
@@ -2171,10 +2053,10 @@ By indicating during registration that you have read and agreed to this Agreemen
                                     </fragment>
                                     <fragment>
                                         <string key="content" base64-UTF8="YES">
-CgoKA
+Cg
 </string>
                                         <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
@@ -2182,7 +2064,7 @@ CgoKA
                                             <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Syncing Contacts">
+                                    <fragment content="UpBrink Privacy Policy">
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
@@ -2197,8 +2079,7 @@ CgoKA
                                     <fragment>
                                         <string key="content">
 
-Ubudd uses phone numbers as unique identifiers.  
-</string>
+We may update our UpBrink Privacy Policy at any time. When we do, we will revise the "Effective date" at the top of this Privacy Policy, and you may view the most recent version at </string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
@@ -2209,116 +2090,12 @@ Ubudd uses phone numbers as unique identifiers.  
                                             <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="We ask your permission before syncing your contacts">
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">.
-
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Messages">
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
-
-Everything you delete is deleted forever. You may have the option of </string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="saving your message histories to your email for safe keeping.">
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cgo
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Deleting your Account">
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">
-
-If you do not agree with our Privacy Policy or Terms of Service, please choose to delete your Ubudd account, uninstall the Ubudd mobile application and discontinue use of the Ubudd Service; your continued usage of the Ubudd Service will signify your acceptance of our Privacy Policy and Terms of Service. 
-
-To protect your privacy and security, we take reasonable steps (such as SMS authentication in certain cases) to verify your identity before registering your mobile phone number and granting you access to the Ubudd Service. Please contact Ubudd via email to support at </string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="ubudd.com">
+                                    <fragment content="www.upbrink.com/privacy">
                                         <attributes>
                                             <color key="NSColor" red="0.086274509803921567" green="0.32156862745098042" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>
-                                            <url key="NSLink" string="http://ubudd.com/"/>
+                                            <url key="NSLink" string="http://www.upbrink.com/privacy"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
                                             </paragraphStyle>
@@ -2328,7 +2105,8 @@ To protect your privacy and security, we take reasonable steps (such as SMS auth
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content"> with any questions or comments about this Privacy Policy
+                                        <string key="content">.
+
 
 </string>
                                         <attributes>
@@ -2341,7 +2119,38 @@ To protect your privacy and security, we take reasonable steps (such as SMS auth
                                             <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Use of Information">
+                                    <fragment content="BY USING OUR SERVICES, YOU AGREE TO THIS PRIVACY POLICY">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+By accessing or using the UpBrink Service, you acknowledge and agree to our Privacy Policy and any changes that we may make to our Privacy Policy from time to time. 
+
+
+To protect your privacy and security, we take reasonable steps (such as SMS authentication in certain cases) to verify your identity before registering your mobile phone number and granting you access to the UpBrink Service. 
+
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Deleting your UpBrink Account">
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
                                             <real key="NSKern" value="0.0"/>
@@ -2356,9 +2165,47 @@ To protect your privacy and security, we take reasonable steps (such as SMS auth
                                     <fragment>
                                         <string key="content">
 
+Your continued usage of the UpBrink Service will signify your acknowledgement and acceptance of our Privacy Policy and Terms of Service.  If you do not agree with our Privacy Policy or Terms of Service, please choose to delete your UpBrink account, uninstall the UpBrink mobile application and discontinue use of the UpBrink Service.  
+
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Use of Your Information">
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
+                                            <real key="NSKern" value="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+
+If you submit Personally Identifiable Information to us through the UpBrink's Service, then we use your personal information to operate, maintain, and provide to you the features and functionality of the UpBrink Website, UpBrink Mobile Application and UpBrink Services. In particular, your mobile phone number is essential to your use of the UpBrink Service.
+
 We use the information we collect about you (including your Personally Identifiable Information) to create a better, more personalized experience for you based on your individual usage habits, improve our marketing and promotional efforts, analyze site usage, improve our content and product offerings, and customize our site's content, layout and Services. These uses improve our site and allow us to better customize it to meet your needs. We also use the information we collect about you to resolve disputes, troubleshoot problems, and enforce our Terms of Service Agreement.
 
-WE DO NOT SELL, RENT OR OTHERWISE SHARE YOUR PERSONALLY IDENTIFIABLE INFORMATION WITH OTHER THIRD PARTIES, UNLESS OTHERWISE REQUIRED AS DESCRIBED BELOW UNDER "REQUIRED DISCLOSURES”
+You may, of course, decline to submit Personally Identifiable Information through the UpBrink Website, UpBrink Mobile Application or any of UpBrink's Services, in which case UpBrink may not be able to provide certain Services to you.
+
+WE DO NOT SELL, RENT OR OTHERWISE SHARE YOUR PERSONALLY IDENTIFIABLE INFORMATION WITH OTHER THIRD PARTIES, UNLESS OTHERWISE REQUIRED AS DESCRIBED BELOW UNDER "REQUIRED DISCLOSURES”.
+
+TO THE EXTENT WE SHARE INFORMATION WITH OUR PARTNERS AND ADVERTISERS, WE SHARE ONLY AGGREGATED OR OTHERWISE NON-PERSONALLY IDENTIFIABLE INFORMATION THAT IS NOT LINKED TO YOUR PERSONALLY IDENTIFIABLE INFORMATION. Aggregated information that we may share with our marketing partners includes, but is not limited to, information showing the relative popularity of one UpBrink Group, or the popularity of certain UpBrink topics.
+
+You should understand that information you provide through the registration process or post to the public areas of our website, or through the use of our Service (including your name (if provided) and location information) may be accessible by and made public through search engines and other similar programs.
+
 
 </string>
                                         <attributes>
@@ -2384,40 +2231,15 @@ WE DO NOT SELL, RENT OR OTHERWISE SHARE YOUR PERSONALLY IDENTIFIABLE INFORMATION
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="HelveticaNeue-Bold"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="NSUnderlineColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">We may collect and release Personally Identifiable Information and/or non-personally-identifiable information if required to do so by law, or in the good-faith belief that such action is necessary to comply with,or where in our reasonable belief, an individual’s physical safety may be at risk or threatened.
+                                        <string key="content">
 
-Though we make every effort to preserve member privacy, we may need to disclose your Personally Identifiable Information when required by law or if we have a good-faith belief that such action is necessary to (a) comply with a current judicial proceeding, a court order or legal process served on our website, (b) enforce this Policy or the Terms of Service Agreement, (c) respond to claims that your Personal Information violates the rights of third parties; or (d) protect the rights, property or personal safety of Ubudd, its members and the public. 
+We may collect and release Personally Identifiable Information and/or non-personally-identifiable information if required to do so by law, or in the good-faith belief that such action is necessary to comply with,or where in our reasonable belief, an individual’s physical safety may be at risk or threatened.
+
+Though we make every effort to preserve member privacy, we may need to disclose your Personally Identifiable Information when required by law or if we have a good-faith belief that such action is necessary to (a) comply with a current judicial proceeding, a court order or legal process served on our website, (b) enforce this Policy or the Terms of Service Agreement, (c) respond to claims that your Personal Information violates the rights of third parties; or (d) protect the rights, property or personal safety of UpBrink, its members and the public. 
 
 You authorize us to disclose any information about you to law enforcement or other government officials as we, in our sole discretion, believe necessary or appropriate, in connection with an investigation of fraud, intellectual property infringements, or other activity that is illegal or may expose us or you to legal liability.
-</string>
+
+It is your responsibility to review the most recent version of the Privacy Policy frequently and remain informed about any changes to it.  By continuing to use the UpBrink Service, you agree to any updates made in this Privacy Policy.</string>
                                         <attributes>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
                                             <real key="NSKern" value="0.0"/>

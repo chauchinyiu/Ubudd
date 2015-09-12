@@ -285,6 +285,15 @@
             break;
     }
 
+    int missedEvents = [[SCDataManager instance] totalMissedCalls] + [[SCDataManager instance] totalMissedMessages];
+    
+    UITabBarItem *item = [[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem];
+    
+    if (missedEvents == 0)
+        item.badgeValue = nil;
+    else
+        item.badgeValue = [NSString stringWithFormat:@"%d", missedEvents];
+
 }
 
 

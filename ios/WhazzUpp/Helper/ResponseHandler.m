@@ -355,6 +355,11 @@ static ResponseHandler *myInstance;
         else{
             [self refreshFriendListNames];
         }
+        
+        if([ResponseHandler instance].stdelegate){
+            [[ResponseHandler instance].stdelegate readStatusCompleted];
+        }
+        
     }
 }
 

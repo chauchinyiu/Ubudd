@@ -296,11 +296,13 @@ static BOOL isGroup = YES;
     NSLog(@"start load");
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    /*
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keywordShown:)
-                                                 name:UIKeyboardDidShowNotification
+                                                 name:UIKeyboardWillShowNotification
                                                object:nil];
-
+*/
     if (!self.smallImageCache) {
         self.smallImageCache = [NSMutableDictionary dictionaryWithCapacity:50];
     }

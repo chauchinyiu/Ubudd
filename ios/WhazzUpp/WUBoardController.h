@@ -138,6 +138,7 @@
 @interface WUBoardController : SCBoardController<WUReadBroadcastDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, WUTargetSelectControllerDelegate>
 
 +(void)setIsGroup:(BOOL)b;
+- (void)keywordShown:(NSNotification *)notification;
 
 @property NSString* chatTitle;
 @end

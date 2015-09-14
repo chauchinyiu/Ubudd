@@ -5,7 +5,7 @@
 //  Created by Michael Knecht on 21.04.13.
 //  Copyright (c) 2013 C2Call GmbH. All rights reserved.
 //
-
+#import "WUBoardController.h"
 #import <UIKit/UIKit.h>
 
 /** Presents the standard C2Call SDK Rich Media/Text Chat Controller.
@@ -39,7 +39,7 @@
 
 /** @name properties */
 /** References to the embedded SCBoardController. */
-@property(nonatomic, weak) SCBoardController                *chatboard;
+@property(nonatomic, weak) WUBoardController                *chatboard;
 
 /** Targets userId or phone number for the chat. */
 @property(nonatomic, strong) NSString                       *targetUserid;

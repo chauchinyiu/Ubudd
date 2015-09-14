@@ -40,16 +40,9 @@ typedef enum : NSUInteger {
 @end
 
 @implementation WUChatController
-@synthesize audioView;
 
 #pragma mark - UIButton Action
-- (IBAction)btnCallTapped {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") destructiveButtonTitle:nil otherButtonTitles:@"Voice Call", @"Video Call", nil];
-    actionSheet.tag = Action_Call;
-    [actionSheet showInView:self.view];
-    
-//    [[C2CallPhone currentPhone] callVoIP:self.targetUserid];
-}
+
 
 - (IBAction)btnRichMessageTapped:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select an option", @"") delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
@@ -235,6 +228,18 @@ typedef enum : NSUInteger {
     [tap setDelegate:self];
     [self.broadContainer addGestureRecognizer:tap];
     
+
+    
+    NSLog(@"end chat did load");
+    
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"start chat did appear");
+    [super viewDidAppear:animated];
+
     NSArray *dirPaths;
     NSString *docsDir;
     
@@ -258,29 +263,20 @@ typedef enum : NSUInteger {
                                     [NSNumber numberWithFloat:44100.0],
                                     AVSampleRateKey,
                                     nil];
-    
     NSError *error = nil;
     
     
     audioRecorder = [[AVAudioRecorder alloc]
-                      initWithURL:soundFileURL
-                      settings:recordSettings
-                      error:&error];
+                     initWithURL:soundFileURL
+                     settings:recordSettings
+                     error:&error];
     
     if (error)
     {
     } else {
         [audioRecorder prepareToRecord];
     }
-    NSLog(@"end chat did load");
-    
-    
-}
 
--(void)viewDidAppear:(BOOL)animated
-{
-    NSLog(@"start chat did appear");
-    [super viewDidAppear:animated];
     NSLog(@"end chat did appear");
     
 }
@@ -442,16 +438,7 @@ typedef enum : NSUInteger {
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
-    if ([segue.identifier isEqualToString:@"audioRecorder"]){
-        self.audioView = (SCAudioRecorderController *)segue.destinationViewController;
-        [self.audioView setSubmitAction:^(NSString *key) {
-            [[C2CallPhone currentPhone] submitRichMessage:key message:nil toTarget:self.targetUserid preferEncrytion:self.encryptMessageButton.selected];
-        }];
-    }
-    else{
-        [super prepareForSegue:segue sender:sender];
-    }
+    [super prepareForSegue:segue sender:sender];
 }
 
 - (IBAction)recordBtnPress:(id)sender{

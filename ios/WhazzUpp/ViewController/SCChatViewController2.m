@@ -394,7 +394,7 @@
             self.toolbarView.frame = frame;
         }
          
-      
+        [self.chatboard keywordShown:notification];
     }
     if ([[notification name] isEqualToString:@"UIKeyboardWillHideNotification"]) {
         if (currentKeyboardSize == 0)

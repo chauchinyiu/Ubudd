@@ -84,8 +84,6 @@
         item.badgeValue = nil;
     else
         item.badgeValue = [NSString stringWithFormat:@"%d", missedEvents];
-    
-
 }
 
 - (void)viewDidLoad
@@ -130,8 +128,14 @@
     return cell;
 }
 
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 17;
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self refreshBadge];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -161,6 +165,8 @@
     
     [self refreshList];
     [self.tableView reloadData];
+    
+    
 }
 
 
@@ -703,6 +709,7 @@
             [self addEntry:e];
         }
     }
+    [self refreshBadge];
 }
 
 -(void)addEntry:(WUListEntry*)e{
@@ -715,6 +722,19 @@
     [sectionSize replaceObjectAtIndex:sectionSize.count - 1 withObject:[NSNumber numberWithInt:currentSectionLen + 1]];
     
 }
+
+-(void)refreshBadge{
+    int missedEvents = [[SCDataManager instance] totalMissedCalls] + [[SCDataManager instance] totalMissedMessages];
+    
+    UITabBarItem *item = [[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem];
+    
+    if (missedEvents == 0)
+        item.badgeValue = nil;
+    else
+        item.badgeValue = [NSString stringWithFormat:@"%d", missedEvents];
+
+}
+
 
 
 @end

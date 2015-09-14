@@ -17,6 +17,5 @@
 @property(nonatomic, weak) IBOutlet UILabel *lblConnectionStatusHeader;
 @property(nonatomic, weak) IBOutlet UILabel *lblFontSizeSetting;
 @property(nonatomic, weak) IBOutlet UILabel *lblContactUs;
-@property(nonatomic, weak) IBOutlet UILabel *lblHelp;
 
 @end

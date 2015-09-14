@@ -85,6 +85,8 @@
         imageFrame.minimumZoomScale = standardScale;
         imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
         [imageFrame setZoomScale:standardScale animated:NO];
+        imageFrame.contentOffset = CGPointMake((imageFrame.contentSize.width/2) - (imageFrame.bounds.size.width/2),  (imageFrame.contentSize.height/2) - (imageFrame.bounds.size.height/2));
+
     
     }
 

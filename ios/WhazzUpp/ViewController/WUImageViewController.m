@@ -41,13 +41,15 @@
  
     [self setupImageFrame];
 }
+
+
+
 - (void)setupImageFrame
 {
     standardScale = 1.01f * MIN(self.view.bounds.size.width / self.imageView.image.size.width, self.view.bounds.size.height / self.imageView.image.size.height);
     
     if (standardScale > 1) {
         CGFloat top = 0, left = 0;
-
         if(self.view.bounds.size.width < self.view.bounds.size.height){
             standardScale = 1.01;
             left = (self.view.bounds.size.width - imageFrame.bounds.size.width) * 0.5f;
@@ -70,6 +72,7 @@
                 left = (self.view.bounds.size.width - (self.view.bounds.size.height * standardScale)) * 0.5f;
             }
         }
+        
         imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
         imageFrame.minimumZoomScale = standardScale;
         imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
@@ -80,11 +83,12 @@
         CGFloat top = 0, left = 0;
         left = (self.view.bounds.size.width - self.imageView.image.size.width * standardScale) * 0.5f;
         top = (self.view.bounds.size.height - self.imageView.image.size.height * standardScale) * 0.5f;
-        imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
         
+        imageFrame.contentInset = UIEdgeInsetsMake(top, left, top, left);
         imageFrame.minimumZoomScale = standardScale;
         imageFrame.maximumZoomScale = MAX(6, standardScale * 2);
         [imageFrame setZoomScale:standardScale animated:NO];
+        
         imageFrame.contentOffset = CGPointMake((imageFrame.contentSize.width/2) - (imageFrame.bounds.size.width/2),  (imageFrame.contentSize.height/2) - (imageFrame.bounds.size.height/2));
 
     

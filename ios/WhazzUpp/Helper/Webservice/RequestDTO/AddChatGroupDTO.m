@@ -21,7 +21,6 @@
     [dictionary setObject:@"" forKey:@"topicDescription"];
     [dictionary setObject:groupAdmin forKey:@"groupAdmin"];
     [dictionary setObject:interestID forKey:@"interestID"];
-    [dictionary setObject:interestDescription forKey:@"interestDescription"];
     [dictionary setObject:c2CallID forKey:@"c2CallID"];
     [dictionary setObject:location forKey:@"location"];
     [dictionary setObject:[NSNumber numberWithFloat:latCoord] forKey:@"latCoord"];

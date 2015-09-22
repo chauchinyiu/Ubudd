@@ -71,6 +71,7 @@
     if (self.group.groupImage) {
         groupImg = self.group.groupImage;
     }
+    NSString* ownerID = self.group.groupOwner;
     if ([self.group.groupOwner isEqualToString:[SCUserProfile currentUser].userid]) {
         //owner
         userType = 1;

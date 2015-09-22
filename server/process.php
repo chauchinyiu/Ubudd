@@ -288,13 +288,11 @@ class MyAPI extends API {
 
 
 		$stmt = $this->db->conn2->prepare("insert into chatGroup " 
-		. "(topicDescription, groupAdmin, interestID, interestDescription, locationLag, locationLong, locationName, Disabled, c2CallID, isPublic, topic) "
-		. "values(?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?)");
-		$stmt->bind_param('ssssssssss', $topicDescription, $groupAdmin, $interestID, $interestDescription, $latCoord, $longCoord, $location, $c2CallID, $isPublic, $topic);
-		$topicDescription = $args['topicDescription'];
+		. "(groupAdmin, interestID, locationLag, locationLong, locationName, Disabled, c2CallID, isPublic, topic) "
+		. "values(?, ?, ?, ?, ?, 0, ?, ?, ?)");
+		$stmt->bind_param('ssssssss', $groupAdmin, $interestID, $latCoord, $longCoord, $location, $c2CallID, $isPublic, $topic);
 		$groupAdmin = $args['groupAdmin'];
 		$interestID = $args['interestID'];
-		$interestDescription = $args['interestDescription'];
 		$latCoord = $args['latCoord'];
 		$longCoord = $args['longCoord'];
 		$location = $args['location'];

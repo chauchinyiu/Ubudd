@@ -71,7 +71,6 @@
     if (self.group.groupImage) {
         groupImg = self.group.groupImage;
     }
-    NSString* ownerID = self.group.groupOwner;
     if ([self.group.groupOwner isEqualToString:[SCUserProfile currentUser].userid]) {
         //owner
         userType = 1;
@@ -1082,7 +1081,6 @@
             }
             if(!isNewMember){
                 [self saveGroupChanges];
-                
                 [self.group removeMember:userid];
                 [self.group saveGroupWithCompletionHandler:^(BOOL success){
                     DataRequest* datRequest = [[DataRequest alloc] init];

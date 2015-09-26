@@ -46,7 +46,7 @@
 @end
 
 @implementation WUUbuddListController
-@synthesize locationLabel, distanceLabel;
+@synthesize locationLabel, distanceLabel, searchB;
 
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -342,6 +342,9 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
     
+    [searchB setShowsCancelButton:NO animated:YES];
+    [searchB resignFirstResponder];
+    
     [self showGroupDetailForGroupid:[fetchResult objectForKey:[NSString stringWithFormat:@"c2CallID%d", (int)indexPath.row]]];
     
     
@@ -403,6 +406,9 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    [searchB setShowsCancelButton:NO animated:YES];
+    [searchB resignFirstResponder];
+    
     if ([[segue identifier] isEqualToString:@"searchLoc"]) {
         WUMapViewController *cvc = (WUMapViewController *)[segue destinationViewController];
         cvc.delegate = self;

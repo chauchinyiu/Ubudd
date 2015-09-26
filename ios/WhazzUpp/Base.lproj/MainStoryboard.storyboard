@@ -7171,6 +7171,7 @@ All rights reserved.</string>
                     <connections>
                         <outlet property="distanceLabel" destination="aXS-wK-JK0" id="eb8-aV-aaN"/>
                         <outlet property="locationLabel" destination="noa-5e-T8c" id="40y-8m-gLt"/>
+                        <outlet property="searchB" destination="5r8-xj-BjT" id="SSv-Ia-m7H"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhn-ir-WeV" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -289,11 +289,14 @@
     
     UITabBarItem *item = [[self.tabBarController.viewControllers objectAtIndex:2] tabBarItem];
     
-    if (missedEvents == 0)
+    if (missedEvents == 0){
         item.badgeValue = nil;
-    else
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    }
+    else{
         item.badgeValue = [NSString stringWithFormat:@"%d", missedEvents];
-
+        [UIApplication sharedApplication].applicationIconBadgeNumber = missedEvents;
+    }
 }
 
 

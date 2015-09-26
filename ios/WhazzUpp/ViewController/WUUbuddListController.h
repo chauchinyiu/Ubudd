@@ -21,6 +21,7 @@
 
 @property(nonatomic, weak) IBOutlet UILabel *locationLabel, *distanceLabel;
 @property (nonatomic, strong) NSString *createdGroupId;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchB;
 
 
 -(void)useResult:(NSDictionary*) result;

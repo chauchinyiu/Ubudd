@@ -48,8 +48,12 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF endswith[c] %@", @".sqlite"];
         self.coreDataFile = [files filteredArrayUsingPredicate:predicate].firstObject;
         
+        
+        
     }
 }
+
+
 
 -(BOOL)useOnlineStatusPrompt
 {
@@ -122,6 +126,7 @@
   
     self.useSandboxMode = NO;
     self.usePhotoEffects = SC_PHOTO_USERCHOICE;
+    self.useApplicationBadge = YES;
 
     [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:44./255. green:138./255. blue:251./255. alpha:1.]];
     [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:231./255. green:230./255. blue:236./255. alpha:1.]];

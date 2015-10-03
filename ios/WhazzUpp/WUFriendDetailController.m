@@ -100,7 +100,7 @@ static NSString* currentC2CallID = @"";
     if (error){
         
     }
-    else {
+    else if([res.data objectForKey:@"phoneNo"]){
         
         NSDateFormatter *dateFormatRead = [[NSDateFormatter alloc] init];
         [dateFormatRead setDateFormat:@"yyyy-MM-d"];
@@ -123,6 +123,9 @@ static NSString* currentC2CallID = @"";
             
             [profileCell.lblStatus setText:status];
         }
+    }
+    else{
+        [[ResponseHandler instance] checkPhoneNumberFromIndex:0];
     }
 }
 

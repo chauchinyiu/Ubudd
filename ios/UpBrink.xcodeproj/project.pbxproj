@@ -3763,7 +3763,6 @@
 				17A1D6901927EDB300B28792 /* Images.xcassets */,
 				979953FB175B5587001F2D52 /* Supporting Files */,
 			);
-			name = UpBrink;
 			path = UpBrink;
 			sourceTree = "<group>";
 		};

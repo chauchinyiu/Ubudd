@@ -243,8 +243,8 @@
     NSLog(@"Failed to get token, error: %@", error);
 }
 
-
--(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+ 
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
     NSLog(@"received notification");
     //handle the notification here
     NSDictionary* message = [userInfo objectForKey:@"aps"];

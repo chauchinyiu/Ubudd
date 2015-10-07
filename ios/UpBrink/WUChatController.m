@@ -275,8 +275,8 @@ typedef enum : NSUInteger {
     {
     } else {
         [audioRecorder prepareToRecord];
-    }
-
+    }    
+    
     NSLog(@"end chat did appear");
     
 }

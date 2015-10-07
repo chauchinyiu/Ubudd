@@ -127,6 +127,7 @@
     self.useSandboxMode = NO;
     self.usePhotoEffects = SC_PHOTO_USERCHOICE;
     self.useApplicationBadge = YES;
+    [C2CallPhone currentPhone].useApplicationBadge = YES;
 
     [[SCBubbleViewOut appearance] setBaseColor:[UIColor colorWithRed:44./255. green:138./255. blue:251./255. alpha:1.]];
     [[SCBubbleViewIn appearance] setBaseColor:[UIColor colorWithRed:231./255. green:230./255. blue:236./255. alpha:1.]];
@@ -166,6 +167,13 @@
     
     [self registerPushNotifications];
     
+    //Remote notification info
+    NSDictionary *remoteNotifiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    //Accept push notification when app is not open
+    if (remoteNotifiInfo) {
+        [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
+    }
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 
@@ -250,6 +258,26 @@
     NSDictionary* message = [userInfo objectForKey:@"aps"];
     NSDictionary* custval = [userInfo objectForKey:@"ubuddcustom"];
     
+    /*
+    NSNumber* badge = [message objectForKey:@"badge"];
+    if (badge) {
+        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Title"
+                                                           message:[NSString stringWithFormat:@"Badge value = %d", badge.intValue]
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [theAlert show];
+    }
+    else{
+        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Title"
+                                                           message:@"No badge values"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [theAlert show];
+    }
+     */
+    
     if (custval == NULL) {
         [super application:application didReceiveRemoteNotification:userInfo];
     }
@@ -273,6 +301,9 @@
         
     }
     
+    
+    
+    
     int missedEvents = [[SCDataManager instance] totalMissedCalls] + [[SCDataManager instance] totalMissedMessages];
     
     UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
@@ -280,13 +311,16 @@
     
     if (missedEvents == 0){
         item.badgeValue = nil;
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     }
     else{
         item.badgeValue = [NSString stringWithFormat:@"%d", missedEvents];
-        [UIApplication sharedApplication].applicationIconBadgeNumber = missedEvents;
     }
+    [[C2CallPhone currentPhone] refreshApplicationBadgeNumber];
     
+}
+
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    [self application:[UIApplication sharedApplication] didReceiveRemoteNotification:userInfo];
 }
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{

@@ -718,12 +718,11 @@
     
     if (missedEvents == 0){
         item.badgeValue = nil;
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     }
     else{
         item.badgeValue = [NSString stringWithFormat:@"%d", missedEvents];
-        [UIApplication sharedApplication].applicationIconBadgeNumber = missedEvents;
     }
+    [[C2CallPhone currentPhone] refreshApplicationBadgeNumber];
 }
 
 

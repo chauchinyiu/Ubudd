@@ -55,7 +55,7 @@ $_SESSION['session'] = time() + 60 * 60;
         <!-- START META SECTION -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Ubudd - Web Dashboard</title>
+        <title>UpBrink - Web Dashboard</title>
         <meta name="author" content="pampersdry.info">
         <meta name="description" content="Adminre is a clean and flat admin theme build with Slim framework and Twig template engine.">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
@@ -286,15 +286,18 @@ $_SESSION['session'] = time() + 60 * 60;
                                         $total = 0;
 
                                         if (isset($_REQUEST['q'])) {
-                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled from register where msisdn like '%" . $_REQUEST['q'] . "%' or  os like '%" . $_REQUEST['q'] . "%' or  Email like '%" . $_REQUEST['q'] . "%'  or  model like '%" . $_REQUEST['q'] . "%' limit " . $start . "," . $size;
+                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled from register where msisdn like '%" . $_REQUEST['q'] . "%' or  os like '%" . $_REQUEST['q'] . "%' or  Email like '%" . $_REQUEST['q'] . "%'  or  model like '%" . $_REQUEST['q'] . "%' ";
                                         } else {
-                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled from register limit " . $start . "," . $size;
+                                            $getUsersQry = "select msisdn,brand,model,email,os,disabled from register ";
                                         }
                                         if (isset($_POST['gid'])) {
-                                            $getUsersQry = "select r.msisdn,r.brand,r.model,r.email,r.os,r.disabled from register r inner join groupMember g on r.msisdn = g.memberID where g.groupID = '" . $_POST['gid'] . "' limit " . $start . "," . $size;                            
+                                            $getUsersQry = "select r.msisdn,r.brand,r.model,r.email,r.os,r.disabled from register r inner join groupMember g on r.msisdn = g.memberID where g.groupID = '" . $_POST['gid'] . "' ";                            
                                         }
                                         $getUsersRes = $db->conn2->query($getUsersQry);
                                         $total = $getUsersRes->num_rows;
+                                        
+                                        $getUsersQry .= "limit " . $start . "," . $size;
+                                        $getUsersRes = $db->conn2->query($getUsersQry);
                                         
                                         while ($user = $getUsersRes->fetch_assoc()) {
                                             ?>
@@ -321,7 +324,7 @@ $_SESSION['session'] = time() + 60 * 60;
 
 
                 <div class="row" style="margin-left: 1%;">
-                    <?php echo pagination($size, $page, '?page=', (int) $total - 10); ?>
+                    <?php echo pagination($size, $page, '?page=', (int) $total); ?>
                 </div>
 
             </div>

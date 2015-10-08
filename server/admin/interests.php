@@ -221,6 +221,10 @@ $_SESSION['session'] = time() + 60 * 60;
                                         $getQry = "select interestID, interestName from interestBase ";
                                         $res = $db->conn2->query($getQry);
                                         $total = $res->num_rows;
+                                        
+                                        $getQry .= " limit " . $start . "," . $size;
+                                        $res = $db->conn2->query($getQry);
+
                                         while ($interest = $res->fetch_assoc()) {
                                             ?>
                                             <tr id="interest<?php echo $interest['interestID']; ?>">
@@ -248,7 +252,7 @@ $_SESSION['session'] = time() + 60 * 60;
 
 
                 <div class="row" style="margin-left: 1%;">
-                    <?php echo pagination($size, $page, '?page=', (int) $total - 10); ?>
+                    <?php echo pagination($size, $page, '?page=', (int) $total); ?>
                 </div>
 
             </div>

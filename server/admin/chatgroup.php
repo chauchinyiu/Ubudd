@@ -240,9 +240,11 @@ $_SESSION['session'] = time() + 60 * 60;
                                         if (isset($_REQUEST['q'])) {
                                             $getQry .= " where groupAdmin like '%" . $_REQUEST['q'] . "%' or  groupName like '%" . $_REQUEST['q'] . "%' or  locationName like '%" . $_REQUEST['q'] . "%'  or  interestName like '%" . $_REQUEST['q'] . "%' ";
                                         }
-                                        $getQry .= "limit " . $start . "," . $size;
                                         $res = $db->conn2->query($getQry);
                                         $total = $res->num_rows;
+                                        
+                                        $getQry .= "limit " . $start . "," . $size;
+                                        $res = $db->conn2->query($getQry);
                                         while ($group = $res->fetch_assoc()) {
                                             ?>
                                             <tr id="group<?php echo $group['id']; ?>">
@@ -275,7 +277,7 @@ $_SESSION['session'] = time() + 60 * 60;
 
 
                 <div class="row" style="margin-left: 1%;">
-                    <?php echo pagination($size, $page, '?page=', (int) $total - 10); ?>
+                    <?php echo pagination($size, $page, '?page=', (int) $total); ?>
                 </div>
 
             </div>

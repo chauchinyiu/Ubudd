@@ -231,11 +231,14 @@ $_SESSION['session'] = time() + 60 * 60;
 
                                         $total = 0;
 
-                                        $getQry = "select id, message, showing, addtime, isImage from broadcast limit " . $start . "," . $size;
+                                        $getQry = "select id, message, showing, addtime, isImage from broadcast ";
                                         
                                         $getRes = $db->conn2->query($getQry);
                                         $total = $getRes->num_rows;
                                         
+                                        $getQry .= "limit " . $start . "," . $size;
+                                        $getRes = $db->conn2->query($getQry);
+       
                                         while ($message = $getRes->fetch_assoc()) {
                                             ?>
                                             <tr id="message<?php echo $message['id']; ?>">
@@ -269,7 +272,7 @@ $_SESSION['session'] = time() + 60 * 60;
 
 
                 <div class="row" style="margin-left: 1%;">
-                    <?php echo pagination($size, $page, '?page=', (int) $total - 10); ?>
+                    <?php echo pagination($size, $page, '?page=', (int) $total); ?>
                 </div>
 
             </div>
